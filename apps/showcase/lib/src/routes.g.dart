@@ -21,6 +21,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/progress/catalog': _buildProgressCatalog,
   '/text-fields/catalog': _buildTextFieldsCatalog,
   '/lists/catalog': _buildListsCatalog,
+  '/top-bars/catalog': _buildTopBarsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -41,20 +42,146 @@ Widget _buildTextFieldsCatalog(BuildContext context) =>
 
 Widget _buildListsCatalog(BuildContext context) => const _ListsRoute();
 
-Widget _buildHome(BuildContext context) {
-  final theme = LiqTheme.of(context);
-  return ColoredBox(
-    color: theme.surfaceColor.resolve(theme.brightness),
-    child: Center(
-      child: Text(
-        'liqkit_ui showcase',
-        style: theme.titleText.toTextStyle().copyWith(
-              color: theme.labelColor.resolve(theme.brightness),
+Widget _buildTopBarsCatalog(BuildContext context) => const _TopBarsRoute();
+
+Widget _buildHome(BuildContext context) => const _HomeRoute();
+
+const List<({String path, String label, String description})> _homeIndex = <({
+  String path,
+  String label,
+  String description,
+})>[
+  (
+    path: '/colors/swatch-grid',
+    label: 'Colors',
+    description: '40 canonical iOS 26 color tokens',
+  ),
+  (
+    path: '/colors/swatch-grid/increased-contrast',
+    label: 'Colors · increased contrast',
+    description: 'Same grid in the iOS 26 accessibility mode',
+  ),
+  (
+    path: '/buttons/catalog',
+    label: 'Buttons',
+    description: '5 styles × 3 sizes × destructive × disabled = 60 cells',
+  ),
+  (
+    path: '/toggles/catalog',
+    label: 'Toggles',
+    description: 'On/off/disabled on light + dark backgrounds',
+  ),
+  (
+    path: '/sliders/catalog',
+    label: 'Sliders',
+    description: 'Track + fill + pill knob, 5 light positions + 1 dark',
+  ),
+  (
+    path: '/steppers/catalog',
+    label: 'Steppers',
+    description: '−/+ pill with bound-aware disabling',
+  ),
+  (
+    path: '/segmented-controls/catalog',
+    label: 'Segmented Controls',
+    description: '2/3/4 segments + disabled',
+  ),
+  (
+    path: '/page-controls/catalog',
+    label: 'Page Controls',
+    description: 'Dot indicator with peripheral fading + dark variant',
+  ),
+  (
+    path: '/progress/catalog',
+    label: 'Progress + Spinners',
+    description: 'Linear bar at 0/25/60/100% + animated spinners',
+  ),
+  (
+    path: '/text-fields/catalog',
+    label: 'Text Fields',
+    description: 'Empty/filled/obscured/disabled + dark surface',
+  ),
+  (
+    path: '/lists/catalog',
+    label: 'Lists',
+    description: 'Settings-style grouped rows + chevrons + dark',
+  ),
+  (
+    path: '/top-bars/catalog',
+    label: 'Top Bars',
+    description: 'Nav title + leading/trailing actions, large-title row',
+  ),
+];
+
+class _HomeRoute extends StatelessWidget {
+  const _HomeRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = LiqTheme.of(context);
+    final titleColor = theme.labelColor.resolve(theme.brightness);
+    return ColoredBox(
+      color: const Color(0xFFF2F2F7),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(16, 28, 16, 28),
+        child: Center(
+          child: SizedBox(
+            width: 720,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  'liqkit_ui showcase',
+                  style: theme.titleText.toTextStyle().copyWith(
+                        color: titleColor,
+                        fontSize: 28,
+                      ),
+                  textDirection: TextDirection.ltr,
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'iOS 26 Liquid Glass — Flutter port. Tap any row to '
+                  'open the live route.',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 15,
+                    color: Color(0x993C3C43),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+                const SizedBox(height: 20),
+                LiqListGroup(
+                  rows: <LiqListRow>[
+                    for (final entry in _homeIndex)
+                      LiqListRow(
+                        title: entry.label,
+                        subtitle: entry.description,
+                        showChevron: true,
+                        onTap: () => Navigator.of(context).pushNamed(entry.path),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  '11 / 37 categories ported (Top Bars in this build). '
+                  'All values sourced from liqkit_ui_design_data '
+                  '(variable-defs + native CSS).',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0x993C3C43),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ],
             ),
-        textDirection: TextDirection.ltr,
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 Widget _buildColorsSwatchGrid(BuildContext context) =>
@@ -970,6 +1097,92 @@ class _ListsRoute extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _TopBarsRoute extends StatelessWidget {
+  const _TopBarsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('plain title'),
+            _TopBarCard(child: LiqTopBar(title: 'Settings')),
+            const SizedBox(height: 16),
+            const _SegLabel('with back + accent action'),
+            _TopBarCard(
+              child: LiqTopBar(
+                title: 'Wi-Fi',
+                leading: LiqTopBarSymbolButton(
+                  glyph: '‹',
+                  onPressed: () {},
+                ),
+                trailing: LiqTopBarAccentButton(
+                  glyph: '+',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('large title'),
+            _TopBarCard(
+              child: LiqTopBar(
+                title: 'Inbox',
+                largeTitle: 'Inbox',
+                trailing: LiqTopBarSymbolButton(
+                  glyph: '⌕',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('dark surface'),
+            _TopBarCard(
+              dark: true,
+              child: LiqTopBar(
+                title: 'Photos',
+                brightness: Brightness.dark,
+                largeTitle: 'Photos',
+                leading: LiqTopBarSymbolButton(
+                  glyph: '‹',
+                  onPressed: () {},
+                  brightness: Brightness.dark,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TopBarCard extends StatelessWidget {
+  const _TopBarCard({required this.child, this.dark = false});
+  final Widget child;
+  final bool dark;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 380,
+      decoration: BoxDecoration(
+        color: dark ? const Color(0xFF1C1C1E) : const Color(0xFFFFFFFF),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        border: Border.all(
+          color: dark ? const Color(0xFF2C2C2E) : const Color(0xFFE6E6E6),
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: child,
     );
   }
 }
