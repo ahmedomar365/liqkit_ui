@@ -1,0 +1,9 @@
+name: liqkit_ui_design_data
+description: Frozen archive of the liqkit iOS 26 design system - figma artifacts, rendered HTML/CSS, manifests, TS sources, and screenshots. Read-only after migration. Never published.
+version: 0.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
