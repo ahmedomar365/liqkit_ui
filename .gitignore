@@ -1,0 +1,38 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Coverage
+coverage/
+
+# Generated / temporary
+.metadata
+*.g.dart.tmp
+tooling/gen/.tokens.json.sha256.tmp
+
+# Node (used only at migration)
+node_modules/
+package-lock.json
+
+# Playwright
+tooling/playwright/__diffs__/
+tooling/playwright/test-results/
+tooling/playwright/playwright-report/
+
+# Local-only
+.env
+.env.local
