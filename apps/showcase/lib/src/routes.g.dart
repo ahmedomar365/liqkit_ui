@@ -17,6 +17,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/sliders/catalog': _buildSlidersCatalog,
   '/steppers/catalog': _buildSteppersCatalog,
   '/segmented-controls/catalog': _buildSegmentedCatalog,
+  '/page-controls/catalog': _buildPageControlsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -26,6 +27,9 @@ Widget _buildSlidersCatalog(BuildContext context) => const _SlidersRoute();
 Widget _buildSteppersCatalog(BuildContext context) => const _SteppersRoute();
 
 Widget _buildSegmentedCatalog(BuildContext context) => const _SegmentedRoute();
+
+Widget _buildPageControlsCatalog(BuildContext context) =>
+    const _PageControlsRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -661,6 +665,80 @@ class _SegLabel extends StatelessWidget {
         ),
         textDirection: TextDirection.ltr,
       ),
+    );
+  }
+}
+
+class _PageControlsRoute extends StatelessWidget {
+  const _PageControlsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('3 dots, page 1 (light)'),
+            _PageControlCard(
+              brightness: LiqPageControlBrightness.light,
+              child: LiqPageControl(count: 3, activeIndex: 0),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('5 dots, page 3 (light)'),
+            _PageControlCard(
+              brightness: LiqPageControlBrightness.light,
+              child: LiqPageControl(count: 5, activeIndex: 2),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('20 dots, page 11 (light)'),
+            _PageControlCard(
+              brightness: LiqPageControlBrightness.light,
+              child: LiqPageControl(count: 20, activeIndex: 10),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('5 dots, page 3 (dark)'),
+            _PageControlCard(
+              brightness: LiqPageControlBrightness.dark,
+              child: LiqPageControl(
+                count: 5,
+                activeIndex: 2,
+                brightness: LiqPageControlBrightness.dark,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PageControlCard extends StatelessWidget {
+  const _PageControlCard({
+    required this.brightness,
+    required this.child,
+  });
+  final LiqPageControlBrightness brightness;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = brightness == LiqPageControlBrightness.dark;
+    return Container(
+      width: 320,
+      height: 60,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: dark ? const Color(0xFF12151C) : const Color(0xFFF6F7F9),
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+        border: Border.all(
+          color: dark ? const Color(0xFF2F3340) : const Color(0xFFD8DCE3),
+        ),
+      ),
+      child: child,
     );
   }
 }
