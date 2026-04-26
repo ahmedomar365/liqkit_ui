@@ -1,0 +1,90 @@
+name: liqkit_ui_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+
+workspace:
+  - packages/liqkit_ui
+  - packages/liqkit_ui_tokens
+  - packages/liqkit_ui_assets
+  - packages/liqkit_ui_design_data
+  - apps/showcase
+  - apps/demo
+  - apps/playground
+
+dev_dependencies:
+  crypto: ^3.0.0
+  melos: any
+  very_good_analysis: ^7.0.0
+
+melos:
+  ide:
+    intellij:
+      enabled: false
+
+  command:
+    version:
+      message: |
+        chore(release): publish
+
+        {new_package_versions}
+
+  scripts:
+    analyze:
+      run: dart analyze --fatal-infos --fatal-warnings
+      exec:
+        concurrency: 4
+      packageFilters:
+        flutter: false
+      description: Static analysis across all workspace packages.
+
+    analyze:flutter:
+      run: flutter analyze --fatal-infos --fatal-warnings
+      exec:
+        concurrency: 2
+      packageFilters:
+        flutter: true
+      description: Static analysis for Flutter packages.
+
+    test:
+      run: flutter test
+      exec:
+        concurrency: 1
+      packageFilters:
+        flutter: true
+        dirExists: test
+      description: Flutter test in every Flutter package with a test/ folder.
+
+    test:dart:
+      run: dart test
+      exec:
+        concurrency: 4
+      packageFilters:
+        flutter: false
+        dirExists: test
+      description: Dart test in every pure-Dart package with a test/ folder.
+
+    gen:tokens:
+      run: dart run tooling/gen/translate_tokens.dart
+      description: Translate tokens.json -> Dart constants. Runs from repo root.
+
+    gen:check:
+      run: dart run tooling/gen/translate_tokens.dart --check
+      description: CI check that generated tokens are up to date. Runs from repo root.
+
+    verify:provenance:
+      run: dart run tooling/scripts/verify_provenance.dart
+      description: Re-hash design_data and assert PROVENANCE.md matches.
+
+    check:no_path_runtime_deps:
+      run: bash tooling/scripts/check_no_path_runtime_deps.sh
+      description: CI check that no published package has a runtime path: dep.
+
+    fmt:
+      run: dart format .
+      description: Format every Dart file in the workspace.
+
+    fmt:check:
+      run: dart format --output=none --set-exit-if-changed .
+      description: CI check that all Dart files are formatted.
