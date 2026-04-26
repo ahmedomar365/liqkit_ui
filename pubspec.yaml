@@ -10,8 +10,8 @@ workspace:
   - packages/liqkit_ui_assets
   - packages/liqkit_ui
   - apps/showcase
+  - apps/demo
   # Added as each app is scaffolded:
-  # - apps/demo
   # - apps/playground
 
 dev_dependencies:

@@ -1,0 +1,23 @@
+name: demo
+description: liqkit_ui demo - real-world screens (Settings, Photos-style gallery, Mail-style list) built from the public component set.
+publish_to: none
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  liqkit_ui:
+    path: ../../packages/liqkit_ui
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: false
