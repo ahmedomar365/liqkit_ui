@@ -14,9 +14,12 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
       _buildColorsSwatchGridIncreasedContrast,
   '/buttons/catalog': _buildButtonsCatalog,
   '/toggles/catalog': _buildTogglesCatalog,
+  '/sliders/catalog': _buildSlidersCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
+
+Widget _buildSlidersCatalog(BuildContext context) => const _SlidersRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -272,6 +275,168 @@ class _Cell extends StatelessWidget {
             ),
             textDirection: TextDirection.ltr,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SlidersRoute extends StatefulWidget {
+  const _SlidersRoute();
+
+  @override
+  State<_SlidersRoute> createState() => _SlidersRouteState();
+}
+
+class _SlidersRouteState extends State<_SlidersRoute> {
+  double _a = 0;
+  double _b = 0.25;
+  double _c = 0.5;
+  double _d = 0.75;
+  double _e = 1;
+  double _dark = 0.5;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Text(
+              'sliders · light',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF101114),
+              ),
+              textDirection: TextDirection.ltr,
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFFFFF),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                border: Border.all(color: const Color(0xFFE6E6E6)),
+              ),
+              child: Column(
+                children: <Widget>[
+                  _SliderRow(
+                    label: '0%',
+                    child: LiqSlider(
+                      value: _a,
+                      onChanged: (double v) => setState(() => _a = v),
+                    ),
+                  ),
+                  _SliderRow(
+                    label: '25%',
+                    child: LiqSlider(
+                      value: _b,
+                      onChanged: (double v) => setState(() => _b = v),
+                    ),
+                  ),
+                  _SliderRow(
+                    label: '50%',
+                    child: LiqSlider(
+                      value: _c,
+                      onChanged: (double v) => setState(() => _c = v),
+                    ),
+                  ),
+                  _SliderRow(
+                    label: '75%',
+                    child: LiqSlider(
+                      value: _d,
+                      onChanged: (double v) => setState(() => _d = v),
+                    ),
+                  ),
+                  _SliderRow(
+                    label: '100%',
+                    child: LiqSlider(
+                      value: _e,
+                      onChanged: (double v) => setState(() => _e = v),
+                    ),
+                  ),
+                  _SliderRow(
+                    label: 'disabled',
+                    child: const LiqSlider(value: 0.4, onChanged: null),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              'sliders · dark',
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF101114),
+              ),
+              textDirection: TextDirection.ltr,
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              decoration: const BoxDecoration(
+                color: Color(0xFF1C1C1E),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(
+                children: <Widget>[
+                  _SliderRow(
+                    label: 'value',
+                    labelLight: false,
+                    child: LiqSlider(
+                      value: _dark,
+                      brightness: Brightness.dark,
+                      onChanged: (double v) => setState(() => _dark = v),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SliderRow extends StatelessWidget {
+  const _SliderRow({
+    required this.label,
+    required this.child,
+    this.labelLight = true,
+  });
+  final String label;
+  final Widget child;
+  final bool labelLight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: 80,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontFamily: 'SF Pro Text',
+                fontSize: 13,
+                color: labelLight
+                    ? const Color(0xFF666A72)
+                    : const Color(0xFFE5E7EB),
+              ),
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+          Expanded(child: child),
         ],
       ),
     );
