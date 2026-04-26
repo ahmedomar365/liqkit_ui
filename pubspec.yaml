@@ -8,8 +8,8 @@ workspace:
   - packages/liqkit_ui_design_data
   - packages/liqkit_ui_tokens
   - packages/liqkit_ui_assets
-  # Added as each package is scaffolded:
-  # - packages/liqkit_ui
+  - packages/liqkit_ui
+  # Added as each app is scaffolded:
   # - apps/showcase
   # - apps/demo
   # - apps/playground

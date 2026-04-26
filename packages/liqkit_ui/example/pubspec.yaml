@@ -1,0 +1,22 @@
+name: liqkit_ui_example
+description: Minimal example showing how to import liqkit_ui.
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  liqkit_ui:
+    path: ..
+
+# Until the companion packages are published to pub.dev (Phase I),
+# point at the workspace siblings so this example can resolve.
+dependency_overrides:
+  liqkit_ui_assets:
+    path: ../../liqkit_ui_assets
+  liqkit_ui_tokens:
+    path: ../../liqkit_ui_tokens
