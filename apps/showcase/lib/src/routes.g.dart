@@ -19,6 +19,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/segmented-controls/catalog': _buildSegmentedCatalog,
   '/page-controls/catalog': _buildPageControlsCatalog,
   '/progress/catalog': _buildProgressCatalog,
+  '/text-fields/catalog': _buildTextFieldsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -33,6 +34,9 @@ Widget _buildPageControlsCatalog(BuildContext context) =>
     const _PageControlsRoute();
 
 Widget _buildProgressCatalog(BuildContext context) => const _ProgressRoute();
+
+Widget _buildTextFieldsCatalog(BuildContext context) =>
+    const _TextFieldsRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -778,6 +782,95 @@ class _ProgressRoute extends StatelessWidget {
                 SizedBox(width: 24),
                 LiqSpinner(size: LiqSpinnerSize.small),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TextFieldsRoute extends StatefulWidget {
+  const _TextFieldsRoute();
+
+  @override
+  State<_TextFieldsRoute> createState() => _TextFieldsRouteState();
+}
+
+class _TextFieldsRouteState extends State<_TextFieldsRoute> {
+  late final TextEditingController _empty = TextEditingController();
+  late final TextEditingController _filled =
+      TextEditingController(text: 'Sample text');
+  late final TextEditingController _password =
+      TextEditingController(text: 'hunter2');
+  late final TextEditingController _disabled =
+      TextEditingController(text: 'Read only');
+  late final TextEditingController _dark =
+      TextEditingController(text: 'Dark surface');
+
+  @override
+  void dispose() {
+    _empty.dispose();
+    _filled.dispose();
+    _password.dispose();
+    _disabled.dispose();
+    _dark.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('empty (placeholder)'),
+            SizedBox(
+              width: 320,
+              child: LiqTextField(
+                controller: _empty,
+                placeholder: 'Enter text…',
+              ),
+            ),
+            const SizedBox(height: 12),
+            const _SegLabel('filled'),
+            SizedBox(
+              width: 320,
+              child: LiqTextField(controller: _filled),
+            ),
+            const SizedBox(height: 12),
+            const _SegLabel('obscured'),
+            SizedBox(
+              width: 320,
+              child: LiqTextField(
+                controller: _password,
+                obscureText: true,
+              ),
+            ),
+            const SizedBox(height: 12),
+            const _SegLabel('disabled'),
+            SizedBox(
+              width: 320,
+              child: LiqTextField(
+                controller: _disabled,
+                enabled: false,
+              ),
+            ),
+            const SizedBox(height: 12),
+            const _SegLabel('dark surface'),
+            ColoredBox(
+              color: const Color(0xFF000000),
+              child: SizedBox(
+                width: 320,
+                child: LiqTextField(
+                  controller: _dark,
+                  brightness: Brightness.dark,
+                ),
+              ),
             ),
           ],
         ),
