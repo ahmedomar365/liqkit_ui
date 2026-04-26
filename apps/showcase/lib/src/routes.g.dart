@@ -13,7 +13,10 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/colors/swatch-grid/increased-contrast':
       _buildColorsSwatchGridIncreasedContrast,
   '/buttons/catalog': _buildButtonsCatalog,
+  '/toggles/catalog': _buildTogglesCatalog,
 };
+
+Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -161,4 +164,116 @@ class _StyleSection extends StatelessWidget {
         LiqButtonSize.medium => 'Medium',
         LiqButtonSize.large => 'Large',
       };
+}
+
+class _TogglesRoute extends StatefulWidget {
+  const _TogglesRoute();
+
+  @override
+  State<_TogglesRoute> createState() => _TogglesRouteState();
+}
+
+class _TogglesRouteState extends State<_TogglesRoute> {
+  bool _light = true;
+  bool _dark = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 16,
+          children: <Widget>[
+            _Cell(
+              label: 'on · light',
+              background: const Color(0xFFF4F4F5),
+              child: LiqToggle(
+                value: _light,
+                onChanged: (bool v) => setState(() => _light = v),
+              ),
+            ),
+            _Cell(
+              label: 'off · light',
+              background: const Color(0xFFF4F4F5),
+              child: const LiqToggle(value: false, onChanged: _noop),
+            ),
+            _Cell(
+              label: 'disabled · light',
+              background: const Color(0xFFF4F4F5),
+              child: const LiqToggle(value: true, onChanged: null),
+            ),
+            _Cell(
+              label: 'on · dark',
+              background: const Color(0xFF060606),
+              labelLight: false,
+              child: LiqToggle(
+                value: _dark,
+                onChanged: (bool v) => setState(() => _dark = v),
+              ),
+            ),
+            _Cell(
+              label: 'off · dark',
+              background: const Color(0xFF060606),
+              labelLight: false,
+              child: const LiqToggle(value: false, onChanged: _noop),
+            ),
+            _Cell(
+              label: 'disabled · dark',
+              background: const Color(0xFF060606),
+              labelLight: false,
+              child: const LiqToggle(value: false, onChanged: null),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static void _noop(bool _) {}
+}
+
+class _Cell extends StatelessWidget {
+  const _Cell({
+    required this.label,
+    required this.background,
+    required this.child,
+    this.labelLight = true,
+  });
+
+  final String label;
+  final Color background;
+  final Widget child;
+  final bool labelLight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 170,
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: const BorderRadius.all(Radius.circular(24)),
+      ),
+      child: Column(
+        children: <Widget>[
+          child,
+          const SizedBox(height: 12),
+          Text(
+            label,
+            style: TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: labelLight
+                  ? const Color(0xFF666A72)
+                  : const Color(0xFFE5E7EB),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ],
+      ),
+    );
+  }
 }
