@@ -1,0 +1,36 @@
+{
+  "_doc": "Per-category SSIM and pixel-diff thresholds for the visual fidelity loop. See tooling/playwright/README.md and the spec §10.5 for rationale. Categories not listed default to non-glass values.",
+  "_defaults": {
+    "ssimMin": 0.95,
+    "diffRatioMax": 0.02,
+    "deviceScaleFactor": 3
+  },
+  "buttons": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "toggles": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "sliders": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "steppers": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "segmented-controls": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "lists": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "page-controls": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "pickers": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "progress-indicators": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "text-fields": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+
+  "sheets": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "action-sheets": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "alerts": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "popovers": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "context-menu": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "menu": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "top-bars": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "toolbars": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "sidebars": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "status-bars": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "notifications": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+  "widgets": { "ssimMin": 0.90, "diffRatioMax": 0.03 },
+
+  "colors": { "ssimMin": 0.97, "diffRatioMax": 0.01 },
+  "text-styles": { "ssimMin": 0.97, "diffRatioMax": 0.01 },
+  "bezels": { "ssimMin": 0.95, "diffRatioMax": 0.02 },
+  "materials": { "ssimMin": 0.90, "diffRatioMax": 0.03 }
+}

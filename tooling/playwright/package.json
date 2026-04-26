@@ -1,0 +1,20 @@
+{
+  "name": "liqkit-ui-fidelity",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Playwright + SSIM visual fidelity tests for liqkit_ui showcase routes.",
+  "license": "MIT",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "show-report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "ssim.js": "^3.5.0",
+    "typescript": "^5.7.0"
+  }
+}
