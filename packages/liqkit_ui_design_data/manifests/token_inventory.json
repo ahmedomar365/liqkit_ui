@@ -1,0 +1,436 @@
+{
+  "generatedAt": "2026-04-26T14:59:48.905449Z",
+  "modes": {
+    "default": {
+      "Backgrounds (Grouped)/Primary": [
+        "#000000"
+      ],
+      "Backgrounds (Grouped)/Secondary": [
+        "#1c1c1e"
+      ],
+      "Backgrounds (Grouped)/Tertiary": [
+        "#2c2c2e"
+      ],
+      "Backgrounds (Grouped)/Primary - Elevated": [
+        "#1c1c1e"
+      ],
+      "Backgrounds (Grouped)/Secondary - Elevated": [
+        "#2c2c2e"
+      ],
+      "Backgrounds (Grouped)/Tertiary - Elevated": [
+        "#3a3a3c"
+      ],
+      "Footnote/Regular": [
+        "Font(family: \"SF Pro\", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066)"
+      ],
+      "Footnote/Emphasized": [
+        "Font(family: \"SF Pro\", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066)"
+      ],
+      "Labels/Primary": [
+        "#ffffff"
+      ],
+      "Labels/Secondary": [
+        "#ebebf5b2"
+      ],
+      "Labels/Tertiary": [
+        "#ebebf54d"
+      ],
+      "Labels/Quaternary": [
+        "#ebebf529"
+      ],
+      "Backgrounds/Primary": [
+        "#000000"
+      ],
+      "Backgrounds/Secondary": [
+        "#1c1c1e"
+      ],
+      "Backgrounds/Tertiary": [
+        "#2c2c2e"
+      ],
+      "Backgrounds/Primary - Elevated": [
+        "#1c1c1e"
+      ],
+      "Backgrounds/Secondary - Elevated": [
+        "#2c2c2e"
+      ],
+      "Backgrounds/Tertiary - Elevated": [
+        "#3a3a3c"
+      ],
+      "Separators/Opaque": [
+        "#38383a"
+      ],
+      "Separators/Non-opaque": [
+        "#ffffff2b"
+      ],
+      "Grays/Black": [
+        "#000000"
+      ],
+      "Grays/Gray": [
+        "#8e8e93"
+      ],
+      "Grays/Gray 2": [
+        "#AEAEB2"
+      ],
+      "Grays/Gray 3": [
+        "#48484a"
+      ],
+      "Grays/Gray 4": [
+        "#3a3a3c"
+      ],
+      "Grays/Gray 5": [
+        "#2c2c2e"
+      ],
+      "Grays/Gray 6": [
+        "#1c1c1e"
+      ],
+      "Grays/White": [
+        "#ffffff"
+      ],
+      "Accents/Red": [
+        "#ff4245"
+      ],
+      "Accents/Orange": [
+        "#ff9230"
+      ],
+      "Accents/Yellow": [
+        "#ffd600"
+      ],
+      "Accents/Green": [
+        "#30d158"
+      ],
+      "Accents/Mint": [
+        "#00dac3"
+      ],
+      "Accents/Teal": [
+        "#00d2e0"
+      ],
+      "Accents/Cyan": [
+        "#3cd3fe"
+      ],
+      "Accents/Blue": [
+        "#0091ff"
+      ],
+      "Accents/Indigo": [
+        "#6d7cff"
+      ],
+      "Accents/Purple": [
+        "#db34f2"
+      ],
+      "Accents/Pink": [
+        "#ff375f"
+      ],
+      "Accents/Brown": [
+        "#b78a66"
+      ],
+      "Section Fill": [
+        "#f5f5f5"
+      ],
+      "Section Stroke": [
+        "#00000066"
+      ]
+    },
+    "increasedContrast": {
+      "Backgrounds (Grouped)/Primary": [
+        "#000000"
+      ],
+      "Backgrounds (Grouped)/Secondary": [
+        "#1c1c1e"
+      ],
+      "Backgrounds (Grouped)/Tertiary": [
+        "#2c2c2e"
+      ],
+      "Backgrounds (Grouped)/Primary - Elevated": [
+        "#1c1c1e"
+      ],
+      "Backgrounds (Grouped)/Secondary - Elevated": [
+        "#2c2c2e"
+      ],
+      "Backgrounds (Grouped)/Tertiary - Elevated": [
+        "#3a3a3c"
+      ],
+      "Footnote/Regular": [
+        "Font(family: \"SF Pro\", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066)"
+      ],
+      "Footnote/Emphasized": [
+        "Font(family: \"SF Pro\", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066)"
+      ],
+      "Labels/Primary": [
+        "#ffffff"
+      ],
+      "Labels/Secondary": [
+        "#ebebf5b2"
+      ],
+      "Labels/Tertiary": [
+        "#ebebf58c"
+      ],
+      "Labels/Quaternary": [
+        "#ebebf566"
+      ],
+      "Backgrounds/Primary": [
+        "#000000"
+      ],
+      "Backgrounds/Secondary": [
+        "#1c1c1e"
+      ],
+      "Backgrounds/Tertiary": [
+        "#2c2c2e"
+      ],
+      "Backgrounds/Primary - Elevated": [
+        "#1c1c1e"
+      ],
+      "Backgrounds/Secondary - Elevated": [
+        "#2c2c2e"
+      ],
+      "Backgrounds/Tertiary - Elevated": [
+        "#3a3a3c"
+      ],
+      "Separators/Opaque": [
+        "#38383a"
+      ],
+      "Separators/Non-opaque": [
+        "#ffffff2b"
+      ],
+      "Grays/Black": [
+        "#000000"
+      ],
+      "Grays/Gray": [
+        "#aeaeb2"
+      ],
+      "Grays/Gray 2": [
+        "#AEAEB2"
+      ],
+      "Grays/Gray 3": [
+        "#444446"
+      ],
+      "Grays/Gray 4": [
+        "#363638"
+      ],
+      "Grays/Gray 5": [
+        "#242426"
+      ],
+      "Grays/Gray 6": [
+        "#000000"
+      ],
+      "Grays/White": [
+        "#ffffff"
+      ],
+      "Accents/Red": [
+        "#ff6165"
+      ],
+      "Accents/Orange": [
+        "#ffa056"
+      ],
+      "Accents/Yellow": [
+        "#fedf43"
+      ],
+      "Accents/Green": [
+        "#4ae968"
+      ],
+      "Accents/Mint": [
+        "#54dfcb"
+      ],
+      "Accents/Teal": [
+        "#3bddec"
+      ],
+      "Accents/Cyan": [
+        "#6dd9ff"
+      ],
+      "Accents/Blue": [
+        "#5cb8ff"
+      ],
+      "Accents/Indigo": [
+        "#a7aaff"
+      ],
+      "Accents/Purple": [
+        "#ea8dff"
+      ],
+      "Accents/Pink": [
+        "#ff8ac4"
+      ],
+      "Accents/Brown": [
+        "#dba679"
+      ],
+      "Section Fill": [
+        "#f5f5f5"
+      ],
+      "Section Stroke": [
+        "#00000066"
+      ]
+    }
+  },
+  "colorKeys": [
+    "Accents/Blue",
+    "Accents/Brown",
+    "Accents/Cyan",
+    "Accents/Green",
+    "Accents/Indigo",
+    "Accents/Mint",
+    "Accents/Orange",
+    "Accents/Pink",
+    "Accents/Purple",
+    "Accents/Red",
+    "Accents/Teal",
+    "Accents/Yellow",
+    "Backgrounds (Grouped)/Primary",
+    "Backgrounds (Grouped)/Primary - Elevated",
+    "Backgrounds (Grouped)/Secondary",
+    "Backgrounds (Grouped)/Secondary - Elevated",
+    "Backgrounds (Grouped)/Tertiary",
+    "Backgrounds (Grouped)/Tertiary - Elevated",
+    "Backgrounds/Primary",
+    "Backgrounds/Primary - Elevated",
+    "Backgrounds/Secondary",
+    "Backgrounds/Secondary - Elevated",
+    "Backgrounds/Tertiary",
+    "Backgrounds/Tertiary - Elevated",
+    "Grays/Black",
+    "Grays/Gray",
+    "Grays/Gray 2",
+    "Grays/Gray 3",
+    "Grays/Gray 4",
+    "Grays/Gray 5",
+    "Grays/Gray 6",
+    "Grays/White",
+    "Labels/Primary",
+    "Labels/Quaternary",
+    "Labels/Secondary",
+    "Labels/Tertiary",
+    "Section Fill",
+    "Section Stroke",
+    "Separators/Non-opaque",
+    "Separators/Opaque"
+  ],
+  "fontKeys": [
+    "Footnote/Emphasized",
+    "Footnote/Regular"
+  ],
+  "otherKeys": [],
+  "keyCategories": {
+    "Backgrounds (Grouped)/Primary": [
+      "colors"
+    ],
+    "Backgrounds (Grouped)/Secondary": [
+      "colors"
+    ],
+    "Backgrounds (Grouped)/Tertiary": [
+      "colors"
+    ],
+    "Backgrounds (Grouped)/Primary - Elevated": [
+      "colors"
+    ],
+    "Backgrounds (Grouped)/Secondary - Elevated": [
+      "colors"
+    ],
+    "Backgrounds (Grouped)/Tertiary - Elevated": [
+      "colors"
+    ],
+    "Footnote/Regular": [
+      "colors"
+    ],
+    "Footnote/Emphasized": [
+      "colors"
+    ],
+    "Labels/Primary": [
+      "colors"
+    ],
+    "Labels/Secondary": [
+      "colors"
+    ],
+    "Labels/Tertiary": [
+      "colors"
+    ],
+    "Labels/Quaternary": [
+      "colors"
+    ],
+    "Backgrounds/Primary": [
+      "colors"
+    ],
+    "Backgrounds/Secondary": [
+      "colors"
+    ],
+    "Backgrounds/Tertiary": [
+      "colors"
+    ],
+    "Backgrounds/Primary - Elevated": [
+      "colors"
+    ],
+    "Backgrounds/Secondary - Elevated": [
+      "colors"
+    ],
+    "Backgrounds/Tertiary - Elevated": [
+      "colors"
+    ],
+    "Separators/Opaque": [
+      "colors"
+    ],
+    "Separators/Non-opaque": [
+      "colors"
+    ],
+    "Grays/Black": [
+      "colors"
+    ],
+    "Grays/Gray": [
+      "colors"
+    ],
+    "Grays/Gray 2": [
+      "colors"
+    ],
+    "Grays/Gray 3": [
+      "colors"
+    ],
+    "Grays/Gray 4": [
+      "colors"
+    ],
+    "Grays/Gray 5": [
+      "colors"
+    ],
+    "Grays/Gray 6": [
+      "colors"
+    ],
+    "Grays/White": [
+      "colors"
+    ],
+    "Accents/Red": [
+      "colors"
+    ],
+    "Accents/Orange": [
+      "colors"
+    ],
+    "Accents/Yellow": [
+      "colors"
+    ],
+    "Accents/Green": [
+      "colors"
+    ],
+    "Accents/Mint": [
+      "colors"
+    ],
+    "Accents/Teal": [
+      "colors"
+    ],
+    "Accents/Cyan": [
+      "colors"
+    ],
+    "Accents/Blue": [
+      "colors"
+    ],
+    "Accents/Indigo": [
+      "colors"
+    ],
+    "Accents/Purple": [
+      "colors"
+    ],
+    "Accents/Pink": [
+      "colors"
+    ],
+    "Accents/Brown": [
+      "colors"
+    ],
+    "Section Fill": [
+      "colors"
+    ],
+    "Section Stroke": [
+      "colors"
+    ]
+  }
+}
