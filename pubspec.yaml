@@ -7,8 +7,8 @@ environment:
 workspace:
   - packages/liqkit_ui_design_data
   - packages/liqkit_ui_tokens
+  - packages/liqkit_ui_assets
   # Added as each package is scaffolded:
-  # - packages/liqkit_ui_assets
   # - packages/liqkit_ui
   # - apps/showcase
   # - apps/demo
