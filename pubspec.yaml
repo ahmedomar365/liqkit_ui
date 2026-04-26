@@ -11,8 +11,7 @@ workspace:
   - packages/liqkit_ui
   - apps/showcase
   - apps/demo
-  # Added as each app is scaffolded:
-  # - apps/playground
+  - apps/playground
 
 dev_dependencies:
   crypto: ^3.0.0
