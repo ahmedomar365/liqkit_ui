@@ -1,6 +1,8 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
+import 'ready_io.dart' if (dart.library.js_interop) 'ready_web.dart';
+
 /// Wraps a child and signals readiness to Playwright once the engine
 /// has had two consecutive post-frame ticks - required because
 /// BackdropFilter save-layers do not finish compositing on the first
@@ -31,21 +33,9 @@ class _ShowcaseReadinessGateState extends State<ShowcaseReadinessGate> {
       WidgetsBinding.instance.addPostFrameCallback(_onFrame);
       return;
     }
-    SchedulerBinding.instance.scheduleTask(_signalReady, Priority.idle);
-  }
-
-  void _signalReady() {
-    setReadyFlag();
+    SchedulerBinding.instance.scheduleTask(setReadyFlag, Priority.idle);
   }
 
   @override
   Widget build(BuildContext context) => widget.child;
-}
-
-/// Sets `window.liqShowcaseReady = true` and dispatches a
-/// `liqshowcase:ready` CustomEvent. Implemented in `ready_web.dart`
-/// for web; this stub is the no-op fallback used in unit tests.
-void setReadyFlag() {
-  // Intentional no-op in this bootstrap. The web-specific implementation
-  // is registered via conditional import in a future plan.
 }

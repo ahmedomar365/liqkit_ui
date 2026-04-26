@@ -24,8 +24,8 @@ class ShowcaseApp extends StatelessWidget {
         pageBuilder: (c, _, _) => builder(c),
       ),
       onGenerateRoute: (settings) {
-        final builder = showcaseRoutes[settings.name ?? '/'];
-        if (builder == null) return null;
+        final builder =
+            showcaseRoutes[settings.name ?? '/'] ?? _fallbackRouteBuilder;
         return PageRouteBuilder<void>(
           settings: settings,
           pageBuilder: (context, _, _) => ShowcaseReadinessGate(
@@ -37,6 +37,19 @@ class ShowcaseApp extends StatelessWidget {
     );
   }
 }
+
+Widget _fallbackRouteBuilder(BuildContext context) => const ColoredBox(
+      color: Color(0x00000000),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(
+          child: Text(
+            showcaseFallbackMarker,
+            style: TextStyle(color: Color(0xFF777777), fontSize: 14),
+          ),
+        ),
+      ),
+    );
 
 /// Marker text rendered when no route matches.
 const String showcaseFallbackMarker = 'liqkit_ui-showcase-empty';
