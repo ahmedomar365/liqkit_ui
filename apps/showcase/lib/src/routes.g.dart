@@ -18,6 +18,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/steppers/catalog': _buildSteppersCatalog,
   '/segmented-controls/catalog': _buildSegmentedCatalog,
   '/page-controls/catalog': _buildPageControlsCatalog,
+  '/progress/catalog': _buildProgressCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -30,6 +31,8 @@ Widget _buildSegmentedCatalog(BuildContext context) => const _SegmentedRoute();
 
 Widget _buildPageControlsCatalog(BuildContext context) =>
     const _PageControlsRoute();
+
+Widget _buildProgressCatalog(BuildContext context) => const _ProgressRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -739,6 +742,46 @@ class _PageControlCard extends StatelessWidget {
         ),
       ),
       child: child,
+    );
+  }
+}
+
+class _ProgressRoute extends StatelessWidget {
+  const _ProgressRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('progress · 0%'),
+            const SizedBox(width: 320, child: LiqProgressBar(value: 0)),
+            const SizedBox(height: 16),
+            const _SegLabel('progress · 25%'),
+            const SizedBox(width: 320, child: LiqProgressBar(value: 0.25)),
+            const SizedBox(height: 16),
+            const _SegLabel('progress · 60%'),
+            const SizedBox(width: 320, child: LiqProgressBar(value: 0.6)),
+            const SizedBox(height: 16),
+            const _SegLabel('progress · 100%'),
+            const SizedBox(width: 320, child: LiqProgressBar(value: 1)),
+            const SizedBox(height: 28),
+            const _SegLabel('spinners · regular + small'),
+            Row(
+              children: const <Widget>[
+                LiqSpinner(),
+                SizedBox(width: 24),
+                LiqSpinner(size: LiqSpinnerSize.small),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

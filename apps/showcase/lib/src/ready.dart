@@ -1,4 +1,3 @@
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 // Conditional imports must use relative URIs - the analyzer evaluates
@@ -8,9 +7,14 @@ import 'package:flutter/widgets.dart';
 import 'ready_io.dart' if (dart.library.js_interop) 'ready_web.dart';
 
 /// Wraps a child and signals readiness to Playwright once the engine
-/// has had two consecutive post-frame ticks - required because
+/// has had two consecutive post-frame ticks — required because
 /// BackdropFilter save-layers do not finish compositing on the first
 /// frame.
+///
+/// We call [setReadyFlag] directly after the second tick rather than
+/// deferring it via `SchedulerBinding.scheduleTask(..., Priority.idle)`
+/// because routes containing repeating animations (spinners, progress
+/// bars, etc.) prevent idle-priority tasks from ever running.
 class ShowcaseReadinessGate extends StatefulWidget {
   /// Creates a readiness gate.
   const ShowcaseReadinessGate({required this.child, super.key});
@@ -37,7 +41,7 @@ class _ShowcaseReadinessGateState extends State<ShowcaseReadinessGate> {
       WidgetsBinding.instance.addPostFrameCallback(_onFrame);
       return;
     }
-    SchedulerBinding.instance.scheduleTask(setReadyFlag, Priority.idle);
+    setReadyFlag();
   }
 
   @override
