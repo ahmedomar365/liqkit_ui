@@ -15,11 +15,14 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/buttons/catalog': _buildButtonsCatalog,
   '/toggles/catalog': _buildTogglesCatalog,
   '/sliders/catalog': _buildSlidersCatalog,
+  '/steppers/catalog': _buildSteppersCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
 
 Widget _buildSlidersCatalog(BuildContext context) => const _SlidersRoute();
+
+Widget _buildSteppersCatalog(BuildContext context) => const _SteppersRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -437,6 +440,120 @@ class _SliderRow extends StatelessWidget {
             ),
           ),
           Expanded(child: child),
+        ],
+      ),
+    );
+  }
+}
+
+class _SteppersRoute extends StatefulWidget {
+  const _SteppersRoute();
+
+  @override
+  State<_SteppersRoute> createState() => _SteppersRouteState();
+}
+
+class _SteppersRouteState extends State<_SteppersRoute> {
+  int _a = 0;
+  int _b = 5;
+  int _c = 10;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 16,
+          children: <Widget>[
+            _StepperCell(
+              label: 'value=0 (min)',
+              child: LiqStepper(
+                value: _a,
+                onChanged: (int v) => setState(() => _a = v),
+              ),
+              currentValue: _a,
+            ),
+            _StepperCell(
+              label: 'value=5',
+              child: LiqStepper(
+                value: _b,
+                onChanged: (int v) => setState(() => _b = v),
+              ),
+              currentValue: _b,
+            ),
+            _StepperCell(
+              label: 'value=10 (max=10)',
+              child: LiqStepper(
+                value: _c,
+                max: 10,
+                onChanged: (int v) => setState(() => _c = v),
+              ),
+              currentValue: _c,
+            ),
+            _StepperCell(
+              label: 'disabled',
+              child: const LiqStepper(value: 7, onChanged: null),
+              currentValue: 7,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StepperCell extends StatelessWidget {
+  const _StepperCell({
+    required this.label,
+    required this.child,
+    required this.currentValue,
+  });
+  final String label;
+  final Widget child;
+  final int currentValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFFFF),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        border: Border.all(color: const Color(0xFFE6E6E6)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            label,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                '$currentValue',
+                style: const TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 17,
+                  color: Color(0xFF000000),
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+              child,
+            ],
+          ),
         ],
       ),
     );
