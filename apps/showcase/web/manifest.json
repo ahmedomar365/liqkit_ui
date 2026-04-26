@@ -1,0 +1,10 @@
+{
+  "name": "liqkit_ui showcase",
+  "short_name": "liqkit_ui",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "description": "Live preview routes for the liqkit_ui Flutter docs site.",
+  "icons": []
+}

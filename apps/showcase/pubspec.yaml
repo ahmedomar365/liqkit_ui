@@ -1,0 +1,27 @@
+name: showcase
+description: liqkit_ui showcase - one route per component example, embedded by the docs site via iframe + postMessage.
+publish_to: none
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  liqkit_ui:
+    path: ../../packages/liqkit_ui
+  liqkit_ui_assets:
+    path: ../../packages/liqkit_ui_assets
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  liqkit_ui_design_data:
+    path: ../../packages/liqkit_ui_design_data
+
+flutter:
+  uses-material-design: false
