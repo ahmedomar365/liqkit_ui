@@ -1,0 +1,1223 @@
+=== NODE 0:1746 (category-root metadata) ===
+source: figma-artifacts/colors/0-1746.metadata.xml
+<canvas id="0:1746" name="Colors" x="0" y="0" width="0" height="0">
+  <symbol id="5532:7800" name="_Swatch Grid" x="600" y="1900" width="659" height="370" />
+  <symbol id="0:4299" name="_Swatch - Light and Dark" x="60" y="1900" width="160" height="160" />
+  <frame id="509:77730" name="_Swatch" x="260" y="1900" width="259" height="330">
+    <symbol id="509:77742" name="Type=Label, Mode=Dark" x="140" y="210" width="100" height="100" />
+    <symbol id="509:77731" name="Type=Color, Mode=Dark" x="20" y="210" width="100" height="100" />
+    <symbol id="509:77740" name="Type=Label, Mode=Light" x="140" y="50" width="100" height="100" />
+    <symbol id="0:4207" name="Type=Color, Mode=Light" x="20" y="50" width="100" height="100" />
+  </frame>
+  <section id="5707:28660" name="Increased Contrast" x="2620" y="0" width="2560" height="1500">
+    <instance id="5735:67114" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+    <instance id="5532:12331" name="Swatches" x="900" y="1030" width="659" height="370" />
+    <instance id="5532:12327" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+    <instance id="5735:67113" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+    <instance id="5532:12329" name="Swatches" x="1900" y="600" width="659" height="370" />
+    <frame id="5532:12332" name="Colors" x="100" y="100" width="2360" height="420">
+      <frame id="5532:12333" name="Grays" x="100" y="360" width="1560" height="160">
+        <instance id="5532:12334" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="5532:12335" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="5532:12336" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="5532:12337" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="5532:12338" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="5532:12339" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="5532:12340" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="5532:12341" name="Swatch" x="1400" y="0" width="160" height="160" />
+      </frame>
+      <frame id="5532:12342" name="Colors" x="100" y="100" width="2360" height="160">
+        <instance id="5532:12343" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="5532:12344" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="5532:12345" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="5532:12346" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="5532:12347" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="5532:12348" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="5532:12349" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="5532:12350" name="Swatch" x="1400" y="0" width="160" height="160" />
+        <instance id="5532:12351" name="Swatch" x="1600" y="0" width="160" height="160" />
+        <instance id="5532:12352" name="Swatch" x="1800" y="0" width="160" height="160" />
+        <instance id="5532:12353" name="Swatch" x="2000" y="0" width="160" height="160" />
+        <instance id="5532:12354" name="Swatch" x="2200" y="0" width="160" height="160" />
+      </frame>
+    </frame>
+  </section>
+  <section id="5707:28659" name="Default" x="0" y="0" width="2560" height="1500">
+    <instance id="5532:8370" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+    <instance id="5532:8407" name="Swatches" x="900" y="1030" width="659" height="370" />
+    <instance id="5532:8406" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+    <instance id="5532:7801" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+    <instance id="5532:8478" name="Swatches" x="1900" y="600" width="659" height="370" />
+    <frame id="0:2049" name="Colors" x="100" y="100" width="2360" height="420">
+      <frame id="509:77595" name="Grays" x="100" y="360" width="1560" height="160">
+        <instance id="509:77588" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="509:77681" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="509:77688" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="509:77695" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="509:77702" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="509:77709" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="509:77716" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="509:77723" name="Swatch" x="1400" y="0" width="160" height="160" />
+      </frame>
+      <frame id="509:77596" name="Colors" x="100" y="100" width="2360" height="160">
+        <instance id="509:77597" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="509:77598" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="509:77599" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="509:77600" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="509:77601" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="509:77602" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="509:77603" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="509:77604" name="Swatch" x="1400" y="0" width="160" height="160" />
+        <instance id="509:77605" name="Swatch" x="1600" y="0" width="160" height="160" />
+        <instance id="509:77606" name="Swatch" x="1800" y="0" width="160" height="160" />
+        <instance id="509:77607" name="Swatch" x="2000" y="0" width="160" height="160" />
+        <instance id="509:77608" name="Swatch" x="2200" y="0" width="160" height="160" />
+      </frame>
+    </frame>
+  </section>
+  <instance id="544:193103" name="_Component Header" x="0" y="-500" width="1800" height="242" />
+  <rounded-rectangle id="8411:637" name="Rectangle 1" x="5646" y="912" width="422" height="332" />
+</canvas>
+
+IMPORTANT: After you call this tool, you MUST call get_design_context if trying to implement the design, since this tool only returns metadata. If you do not call get_design_context, the agent will not be able to implement the design.
+
+=== NODE 0:1746 (category-root) ===
+source: figma-artifacts/raw/0-1746/2026-02-17T22-01-24-375Z.get_design_context.txt
+You currently have nothing selected. You need to select a layer first before using this tool.
+
+Figma Debug UUID: 1a93398e-bc0c-4959-8207-777b06dc9039
+
+=== NODE 5707:28659 (default-section) ===
+source: figma-artifacts/raw/5707-28659/2026-02-17T22-01-24-376Z.get_design_context.txt
+<section id="5707:28659" name="Default" x="0" y="0" width="2560" height="1500">
+  <instance id="5532:8370" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+  <instance id="5532:8407" name="Swatches" x="900" y="1030" width="659" height="370" />
+  <instance id="5532:8406" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+  <instance id="5532:7801" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+  <instance id="5532:8478" name="Swatches" x="1900" y="600" width="659" height="370" />
+  <frame id="0:2049" name="Colors" x="100" y="100" width="2360" height="420">
+    <frame id="509:77595" name="Grays" x="100" y="360" width="1560" height="160">
+      <instance id="509:77588" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="509:77681" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="509:77688" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="509:77695" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="509:77702" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="509:77709" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="509:77716" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="509:77723" name="Swatch" x="1400" y="0" width="160" height="160" />
+    </frame>
+    <frame id="509:77596" name="Colors" x="100" y="100" width="2360" height="160">
+      <instance id="509:77597" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="509:77598" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="509:77599" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="509:77600" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="509:77601" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="509:77602" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="509:77603" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="509:77604" name="Swatch" x="1400" y="0" width="160" height="160" />
+      <instance id="509:77605" name="Swatch" x="1600" y="0" width="160" height="160" />
+      <instance id="509:77606" name="Swatch" x="1800" y="0" width="160" height="160" />
+      <instance id="509:77607" name="Swatch" x="2000" y="0" width="160" height="160" />
+      <instance id="509:77608" name="Swatch" x="2200" y="0" width="160" height="160" />
+    </frame>
+  </frame>
+</section>
+
+IMPORTANT: The user has selected a section node, so you have received a sparse metadata response. You MUST call get_design_context on the nodes or their sublayers individually based on their IDs to implement the design.
+
+=== NODE 5707:28660 (increased-contrast-section) ===
+source: figma-artifacts/raw/5707-28660/2026-02-17T22-01-24-379Z.get_design_context.txt
+<section id="5707:28660" name="Increased Contrast" x="2620" y="0" width="2560" height="1500">
+  <instance id="5735:67114" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+  <instance id="5532:12331" name="Swatches" x="900" y="1030" width="659" height="370" />
+  <instance id="5532:12327" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+  <instance id="5735:67113" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+  <instance id="5532:12329" name="Swatches" x="1900" y="600" width="659" height="370" />
+  <frame id="5532:12332" name="Colors" x="100" y="100" width="2360" height="420">
+    <frame id="5532:12333" name="Grays" x="100" y="360" width="1560" height="160">
+      <instance id="5532:12334" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="5532:12335" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="5532:12336" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="5532:12337" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="5532:12338" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="5532:12339" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="5532:12340" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="5532:12341" name="Swatch" x="1400" y="0" width="160" height="160" />
+    </frame>
+    <frame id="5532:12342" name="Colors" x="100" y="100" width="2360" height="160">
+      <instance id="5532:12343" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="5532:12344" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="5532:12345" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="5532:12346" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="5532:12347" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="5532:12348" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="5532:12349" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="5532:12350" name="Swatch" x="1400" y="0" width="160" height="160" />
+      <instance id="5532:12351" name="Swatch" x="1600" y="0" width="160" height="160" />
+      <instance id="5532:12352" name="Swatch" x="1800" y="0" width="160" height="160" />
+      <instance id="5532:12353" name="Swatch" x="2000" y="0" width="160" height="160" />
+      <instance id="5532:12354" name="Swatch" x="2200" y="0" width="160" height="160" />
+    </frame>
+  </frame>
+</section>
+
+IMPORTANT: The user has selected a section node, so you have received a sparse metadata response. You MUST call get_design_context on the nodes or their sublayers individually based on their IDs to implement the design.
+
+=== NODE 0:2049 (default-colors-frame) ===
+source: figma-artifacts/raw/0-2049/2026-02-17T22-01-24-377Z.get_design_context.txt
+const imgDark = "https://www.figma.com/api/mcp/asset/a8683842-71d0-413d-939b-8d5e6ccc6638";
+
+export default function Colors() {
+  return (
+    <div className="contents relative size-full" data-name="Colors" data-node-id="0:2049">
+      <div className="absolute content-stretch flex gap-[40px] items-start left-0 top-0" data-name="Grays" data-node-id="509:77595">
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77588">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77588;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77588;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77588;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77588;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77588;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77681">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77681;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77681;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77681;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77681;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77681;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77688">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77688;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77688;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77688;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77688;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77688;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77695">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77695;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77695;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77695;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77695;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77695;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77702">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77702;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77702;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77702;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77702;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77702;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77709">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77709;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77709;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77709;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77709;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77709;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77716">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77716;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77716;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77716;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77716;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77716;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77723">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77723;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77723;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77723;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77723;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77723;5532:8268">
+            Label
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[40px] items-start left-0 top-0" data-name="Colors" data-node-id="509:77596">
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77597">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77597;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77597;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77597;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77597;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77597;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77598">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77598;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77598;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77598;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77598;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77598;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77599">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77599;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77599;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77599;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77599;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77599;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77600">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77600;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77600;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77600;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77600;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77600;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77601">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77601;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77601;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77601;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77601;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77601;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77602">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77602;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77602;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77602;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77602;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77602;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77603">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77603;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77603;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77603;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77603;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77603;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77604">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77604;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77604;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77604;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77604;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77604;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77605">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77605;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77605;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77605;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77605;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77605;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77606">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77606;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77606;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77606;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77606;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77606;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77607">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77607;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77607;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77607;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77607;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77607;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="509:77608">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I509:77608;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I509:77608;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I509:77608;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I509:77608;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I509:77608;5532:8268">
+            Label
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Grays/Gray 2: #AEAEB2.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 5532:12332 (increased-colors-frame) ===
+source: figma-artifacts/raw/5532-12332/2026-02-17T22-01-24-377Z.get_design_context.txt
+const imgDark = "https://www.figma.com/api/mcp/asset/c85a17ec-afee-4ca9-bfd5-f958d3909160";
+
+export default function Colors() {
+  return (
+    <div className="contents relative size-full" data-name="Colors" data-node-id="5532:12332">
+      <div className="absolute content-stretch flex gap-[40px] items-start left-0 top-0" data-name="Grays" data-node-id="5532:12333">
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12334">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12334;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12334;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12334;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12334;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12334;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12335">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12335;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12335;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12335;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12335;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12335;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12336">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12336;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12336;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12336;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12336;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12336;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12337">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12337;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12337;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12337;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12337;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12337;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12338">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12338;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12338;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12338;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12338;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12338;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12339">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12339;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12339;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12339;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12339;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12339;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12340">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12340;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12340;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12340;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12340;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12340;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12341">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12341;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12341;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12341;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12341;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12341;5532:8268">
+            Label
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[40px] items-start left-0 top-0" data-name="Colors" data-node-id="5532:12342">
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12343">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12343;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12343;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12343;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12343;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12343;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12344">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12344;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12344;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12344;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12344;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12344;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12345">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12345;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12345;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12345;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12345;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12345;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12346">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12346;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12346;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12346;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12346;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12346;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12347">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12347;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12347;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12347;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12347;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12347;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12348">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12348;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12348;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12348;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12348;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12348;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12349">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12349;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12349;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12349;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12349;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12349;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12350">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12350;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12350;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12350;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12350;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12350;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12351">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12351;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12351;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12351;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12351;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12351;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12352">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12352;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12352;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12352;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12352;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12352;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12353">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12353;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12353;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12353;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12353;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12353;5532:8268">
+            Label
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[160px]" data-name="_Swatch - Light and Dark" data-node-id="5532:12354">
+          <div className="absolute bg-size-[auto_auto,20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-[80px] w-[160px]" data-name="Dark" data-node-id="I5532:12354;5532:10569" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff4245)] h-[60px] left-[20px] rounded-bl-[100px] rounded-br-[100px] top-0 w-[120px]" data-name="Swatch" data-node-id="I5532:12354;5532:10570" />
+          </div>
+          <div className="absolute bg-size-[20px_20px] bg-top-left h-[80px] left-0 overflow-clip top-0 w-[160px]" data-name="Light" data-node-id="I5532:12354;5532:10308" style={{ backgroundImage: `url('${imgDark}')` }}>
+            <div className="absolute bg-[var(--accents\/red,#ff383c)] h-[60px] left-[20px] rounded-tl-[100px] rounded-tr-[100px] top-[20px] w-[120px]" data-name="Swatch" data-node-id="I5532:12354;509:77509" />
+          </div>
+          <p className="absolute bottom-[107.5%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-18.75%] tracking-[-0.08px]" data-node-id="I5532:12354;5532:8268">
+            Label
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Grays/Gray 2: #AEAEB2.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 5532:7800 (default-background-grid) ===
+source: figma-artifacts/raw/5532-7800/2026-02-17T22-01-24-376Z.get_design_context.txt
+const imgSwatch = "https://www.figma.com/api/mcp/asset/2b75dbfe-f5c3-4852-bc32-60cc0392e6cc";
+type SwatchGridProps = {
+  className?: string;
+  group?: string;
+};
+
+export default function SwatchGrid({ className, group = "Backgrounds" }: SwatchGridProps) {
+  return (
+    <div className={className || "h-[370px] relative w-[659px]"} data-name="_Swatch Grid" data-node-id="5532:7800">
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[270px] w-[459px]" data-name="Dark - Base" data-node-id="509:77786">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9490" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9490;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9490;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9491" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9491;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9491;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9492" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9492;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9492;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9493" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9493;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9493;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[150px] w-[459px]" data-name="Dark - Elevated" data-node-id="509:77785">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9247" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9247;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9247;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9248" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9248;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9248;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9249" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9249;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9249;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:9250" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:9250;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:9250;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[30px] w-[459px]" data-name="Light" data-node-id="509:77781">
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:8553" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8553;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8553;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:8832" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8832;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8832;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:8905" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8905;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8905;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="5532:8993" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8993;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8993;5532:8026">
+            Color
+          </p>
+        </div>
+      </div>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[48.65%_85.74%_46.49%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:369">
+        Dark - Elevated
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[78.38%_89.07%_16.76%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:371">
+        Dark - Base
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[18.92%_95.3%_76.22%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:370">
+        Light
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_4.55%_95.14%_84.98%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:294">
+        Quaternary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_26.1%_95.14%_66.77%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5532:7860">
+        Tertiary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_41.58%_95.14%_48.56%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:295">
+        Secondary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_62.52%_95.14%_30.35%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:296">
+        Primary
+      </p>
+      <p className="absolute font-['SF_Pro:Semibold',sans-serif] inset-[0_87.41%_95.14%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="5405:297">
+        {group}
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Footnote/Emphasized: Font(family: "SF Pro", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 5532:8407 (default-fills-grid) ===
+source: figma-artifacts/raw/5532-8407/2026-02-17T22-01-24-376Z.get_design_context.txt
+const imgDarkBase = "https://www.figma.com/api/mcp/asset/17ec910e-65b5-44eb-939f-a570501afc3e";
+
+export default function Swatches() {
+  return (
+    <div className="relative size-full" data-name="_Swatch Grid" data-node-id="5532:8407">
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[270px] w-[459px]" data-name="Dark - Base" data-node-id="I5532:8407;509:77786">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9490" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9490;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9490;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9491" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9491;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9491;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9492" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9492;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9492;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9493" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9493;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9493;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[150px] w-[459px]" data-name="Dark - Elevated" data-node-id="I5532:8407;509:77785">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9247" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9247;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9247;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9248" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9248;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9248;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9249" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9249;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9249;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:9250" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:9250;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:9250;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[30px] w-[459px]" data-name="Light" data-node-id="I5532:8407;509:77781">
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:8553" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:8553;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:8553;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:8832" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:8832;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:8832;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:8905" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:8905;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:8905;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:8407;5532:8993" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:8407;5532:8993;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:8407;5532:8993;5532:8026">
+            Color
+          </p>
+        </div>
+      </div>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[48.65%_85.74%_46.49%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:369">
+        Dark - Elevated
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[78.38%_89.07%_16.76%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:371">
+        Dark - Base
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[18.92%_95.3%_76.22%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:370">
+        Light
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_4.55%_95.14%_84.98%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:294">
+        Quaternary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_26.1%_95.14%_66.77%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5532:7860">
+        Tertiary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_41.58%_95.14%_48.56%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:295">
+        Secondary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_62.52%_95.14%_30.35%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:296">
+        Primary
+      </p>
+      <p className="absolute font-['SF_Pro:Semibold',sans-serif] inset-[0_87.41%_95.14%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:8407;5405:297">
+        Fills
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Footnote/Emphasized: Font(family: "SF Pro", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 5532:12327 (increased-labels-grid) ===
+source: figma-artifacts/raw/5532-12327/2026-02-17T22-01-24-379Z.get_design_context.txt
+const imgSwatch = "https://www.figma.com/api/mcp/asset/894c6ec7-7824-47a7-92a2-f11dac354671";
+
+export default function SwatchGrid() {
+  return (
+    <div className="relative size-full" data-name="_Swatch Grid" data-node-id="5532:12327">
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[270px] w-[459px]" data-name="Dark - Base" data-node-id="I5532:12327;509:77786">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9490" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9490;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9490;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9491" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9491;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9491;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9492" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9492;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9492;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9493" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9493;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9493;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[150px] w-[459px]" data-name="Dark - Elevated" data-node-id="I5532:12327;509:77785">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9247" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9247;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9247;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9248" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9248;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9248;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9249" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9249;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9249;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:9250" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:9250;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:9250;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[30px] w-[459px]" data-name="Light" data-node-id="I5532:12327;509:77781">
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:8553" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:8553;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:8553;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:8832" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:8832;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:8832;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:8905" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:8905;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:8905;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12327;5532:8993" style={{ backgroundImage: `url('${imgSwatch}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12327;5532:8993;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12327;5532:8993;5532:8026">
+            Color
+          </p>
+        </div>
+      </div>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[48.65%_85.74%_46.49%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:369">
+        Dark - Elevated
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[78.38%_89.07%_16.76%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:371">
+        Dark - Base
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[18.92%_95.3%_76.22%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:370">
+        Light
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_4.55%_95.14%_84.98%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:294">
+        Quaternary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_26.1%_95.14%_66.77%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5532:7860">
+        Tertiary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_41.58%_95.14%_48.56%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:295">
+        Secondary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_62.52%_95.14%_30.35%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12327;5405:296">
+        Primary
+      </p>
+      <p className="absolute font-['SF_Pro:Bold',sans-serif] inset-[0_87.41%_95.14%_0] leading-[18px] not-italic text-[13px] text-white tracking-[-0.08px]" data-node-id="I5532:12327;5405:297">
+        Labels
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Footnote/Emphasized: Font(family: "SF Pro", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 5532:12331 (increased-fills-grid) ===
+source: figma-artifacts/raw/5532-12331/2026-02-17T22-01-24-379Z.get_design_context.txt
+const imgDarkBase = "https://www.figma.com/api/mcp/asset/d0d3d951-63ba-400c-995d-b7cf860855ce";
+
+export default function Swatches() {
+  return (
+    <div className="relative size-full" data-name="_Swatch Grid" data-node-id="5532:12331">
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[270px] w-[459px]" data-name="Dark - Base" data-node-id="I5532:12331;509:77786">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9490" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9490;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9490;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9491" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9491;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9491;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9492" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9492;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9492;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9493" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9493;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9493;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[150px] w-[459px]" data-name="Dark - Elevated" data-node-id="I5532:12331;509:77785">
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9247" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9247;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9247;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9248" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9248;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9248;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9249" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9249;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9249;5532:7896">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[auto_auto,20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:9250" style={{ backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff4245)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:9250;509:77732" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:9250;5532:7896">
+            Color
+          </p>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[20px] h-[100px] items-start left-[200px] top-[30px] w-[459px]" data-name="Light" data-node-id="I5532:12331;509:77781">
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:8553" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:8553;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:8553;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:8832" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:8832;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:8832;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:8905" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:8905;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:8905;5532:8026">
+            Color
+          </p>
+        </div>
+        <div className="bg-size-[20px_20px] bg-top-left relative shrink-0 size-[100px]" data-name="_Swatch" data-node-id="I5532:12331;5532:8993" style={{ backgroundImage: `url('${imgDarkBase}')` }}>
+          <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="I5532:12331;5532:8993;509:77507" />
+          <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="I5532:12331;5532:8993;5532:8026">
+            Color
+          </p>
+        </div>
+      </div>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[48.65%_85.74%_46.49%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:369">
+        Dark - Elevated
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[78.38%_89.07%_16.76%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:371">
+        Dark - Base
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[18.92%_95.3%_76.22%_0] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:370">
+        Light
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_4.55%_95.14%_84.98%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:294">
+        Quaternary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_26.1%_95.14%_66.77%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5532:7860">
+        Tertiary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_41.58%_95.14%_48.56%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:295">
+        Secondary
+      </p>
+      <p className="absolute font-['SF_Pro:Regular',sans-serif] inset-[0_62.52%_95.14%_30.35%] leading-[18px] not-italic text-[13px] text-black tracking-[-0.08px]" data-node-id="I5532:12331;5405:296">
+        Primary
+      </p>
+      <p className="absolute font-['SF_Pro:Bold',sans-serif] inset-[0_87.41%_95.14%_0] leading-[18px] not-italic text-[13px] text-white tracking-[-0.08px]" data-node-id="I5532:12331;5405:297">
+        Fills
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066), Footnote/Emphasized: Font(family: "SF Pro", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
+
+=== NODE 0:4207 (swatch-color-mode-light) ===
+source: figma-artifacts/raw/0-4207/2026-02-17T22-01-24-375Z.get_design_context.txt
+const imgTypeColorModeLight = "https://www.figma.com/api/mcp/asset/2645877c-80c7-48e4-b1c7-490a70918b8e";
+type SwatchProps = {
+  className?: string;
+  color?: string;
+};
+
+function Swatch({ className, color = "Color" }: SwatchProps) {
+  return (
+    <div className={className || ""} data-name="_Swatch" data-node-id="509:77730">
+      <div className="bg-size-[20px_20px] bg-top-left relative size-[100px]" data-name="Type=Color, Mode=Light" data-node-id="0:4207" style={{ backgroundImage: `url('${imgTypeColorModeLight}')` }}>
+        <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="509:77507" />
+        <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="5532:8026">
+          {color}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Footnote/Regular: Font(family: "SF Pro", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

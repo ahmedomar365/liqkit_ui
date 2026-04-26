@@ -1,0 +1,68 @@
+.ios26-examples-root {
+  width: min(1024px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-examples-header {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-header h2 {
+  margin: 0;
+  font: 590 52px/56px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -1px;
+  color: #0f172a;
+}
+
+.ios26-examples-header p {
+  margin: 0;
+  max-width: 860px;
+  font: 400 18px/24px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-examples-hig a {
+  color: #1482ff;
+  text-decoration: none;
+  font: 500 34px/40px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-panel {
+  border: 1px solid #d6dbe5;
+  border-radius: 16px;
+  background: #f4f5f7;
+  padding: 22px 22px 18px;
+}
+
+@media (max-width: 1100px) {
+  .ios26-examples-header h2 {
+    font-size: 42px;
+    line-height: 46px;
+  }
+
+  .ios26-examples-hig a {
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-root {
+  width: 1024px;
+}
+
+body.ios26-fidelity-mode .ios26-examples-header {
+  display: none;
+}
+
+body.ios26-fidelity-mode .ios26-examples-panel {
+  border: 1px dashed #7d77ff;
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 10px;
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  gap: 10px;
+}

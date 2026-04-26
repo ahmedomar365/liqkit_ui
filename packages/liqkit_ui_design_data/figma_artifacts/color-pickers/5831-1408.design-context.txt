@@ -1,0 +1,31 @@
+type TitleProps = {
+  className?: string;
+  mode?: "Dark" | "Light";
+};
+
+export default function Title({ className, mode = "Light" }: TitleProps) {
+  const isLight = mode === "Light";
+  return (
+    <div className={className || "content-stretch flex items-center justify-center relative"} id={isLight ? "node-5831_1406" : "node-5831_1407"}>
+      <p className={`font-["SF_Pro:Semibold",sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-center tracking-[-0.43px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? "node-5831_1405" : "node-5831_1404"}>
+        Colors
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Emphasized: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

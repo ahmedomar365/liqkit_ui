@@ -1,0 +1,20 @@
+<canvas id="507:24678" name="Notifications" x="0" y="0" width="2880" height="1600">
+  <section id="544:199441" x="0" y="0" width="1540" height="1100">
+    <symbol id="135:73247" name="Notification - Collapsed/Notification - List" x="560" y="100" width="402" height="378.666015625" />
+    <frame id="135:67787" name="Notification - Collapsed" x="100" y="100" width="430" height="310">
+      <symbol id="5549:4949" name="Stack=3" x="20" y="210" width="386" height="78.33300018310547" />
+      <symbol id="533:5978" name="Stack=2" x="20" y="110" width="386" height="72.33300018310547" />
+      <symbol id="0:11292" name="Stack=1" x="20" y="20" width="386" height="64" />
+    </frame>
+    <symbol id="143:62847" name="Notification - Expanded" x="1060" y="100" width="393" height="443" />
+    <frame id="5551:17755" name="Overlay" x="100" y="450" width="140" height="260">
+      <symbol id="5551:17756" name="Mode=Dark" x="20" y="140" width="100" height="100" />
+      <symbol id="5551:17757" name="Mode=Light" x="20" y="20" width="100" height="100" />
+    </frame>
+    <frame id="533:7109" name="_Time" x="100" y="790" width="100" height="100">
+      <symbol id="533:7110" name="Mode=Dark" x="20" y="60" width="51" height="20" />
+      <symbol id="533:7108" name="Mode=Light" x="20" y="20" width="51" height="20" />
+    </frame>
+  </section>
+  <instance id="544:191882" name="Header" x="5.684341886080802e-14" y="-500" width="1400" height="208" />
+</canvas>

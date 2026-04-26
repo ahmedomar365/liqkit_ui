@@ -1,0 +1,133 @@
+{
+  "category": "top-bars",
+  "generatedAt": "2026-02-19T19:44:19.274Z",
+  "sourceFiles": [
+    "figma-artifacts/top-bars/5661-41970.design-context.txt"
+  ],
+  "totalAssets": 6,
+  "downloaded": 0,
+  "existing": 6,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "1d72a34e-5372-4e96-97ea-a9d7f3ae4dc0",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "1d72a34e-5372-4e96-97ea-a9d7f3ae4dc0.svg",
+      "filePath": "figma-artifacts/assets/top-bars/1d72a34e-5372-4e96-97ea-a9d7f3ae4dc0.svg",
+      "size": 571,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/1d72a34e-5372-4e96-97ea-a9d7f3ae4dc0",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/1d72a34e-5372-4e96-97ea-a9d7f3ae4dc0"
+      ],
+      "constNames": [
+        "imgFrame"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "3b3d78f2-1445-40d3-a09b-5ac2773cd151",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "3b3d78f2-1445-40d3-a09b-5ac2773cd151.svg",
+      "filePath": "figma-artifacts/assets/top-bars/3b3d78f2-1445-40d3-a09b-5ac2773cd151.svg",
+      "size": 1634,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/3b3d78f2-1445-40d3-a09b-5ac2773cd151",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/3b3d78f2-1445-40d3-a09b-5ac2773cd151"
+      ],
+      "constNames": [
+        "imgWifi"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "3e088396-9502-4606-afe2-9318c5f5d336",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "3e088396-9502-4606-afe2-9318c5f5d336.png",
+      "filePath": "figma-artifacts/assets/top-bars/3e088396-9502-4606-afe2-9318c5f5d336.png",
+      "size": 426690,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/3e088396-9502-4606-afe2-9318c5f5d336",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/3e088396-9502-4606-afe2-9318c5f5d336"
+      ],
+      "constNames": [
+        "imgIPhone17ProSilverPortrait"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "a5075a50-0f27-413a-aca4-0ecd8c28e1d8",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "a5075a50-0f27-413a-aca4-0ecd8c28e1d8.svg",
+      "filePath": "figma-artifacts/assets/top-bars/a5075a50-0f27-413a-aca4-0ecd8c28e1d8.svg",
+      "size": 459,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/a5075a50-0f27-413a-aca4-0ecd8c28e1d8",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/a5075a50-0f27-413a-aca4-0ecd8c28e1d8"
+      ],
+      "constNames": [
+        "imgBlur"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "a61e1dfb-8058-4926-8e94-0efee4a53cd4",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "a61e1dfb-8058-4926-8e94-0efee4a53cd4.svg",
+      "filePath": "figma-artifacts/assets/top-bars/a61e1dfb-8058-4926-8e94-0efee4a53cd4.svg",
+      "size": 459,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/a61e1dfb-8058-4926-8e94-0efee4a53cd4",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/a61e1dfb-8058-4926-8e94-0efee4a53cd4"
+      ],
+      "constNames": [
+        "imgBlur1"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "db08f3d0-6dd6-435d-940a-ffdf3715e54d",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "db08f3d0-6dd6-435d-940a-ffdf3715e54d.svg",
+      "filePath": "figma-artifacts/assets/top-bars/db08f3d0-6dd6-435d-940a-ffdf3715e54d.svg",
+      "size": 1183,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/db08f3d0-6dd6-435d-940a-ffdf3715e54d",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/db08f3d0-6dd6-435d-940a-ffdf3715e54d"
+      ],
+      "constNames": [
+        "imgCellularConnection"
+      ],
+      "sources": [
+        "figma-artifacts/top-bars/5661-41970.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

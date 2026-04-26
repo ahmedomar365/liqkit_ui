@@ -1,0 +1,264 @@
+.ios26-text-styles-root {
+  width: min(1320px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-text-styles-panel {
+  border: 1px solid #d9d9de;
+  border-radius: 20px;
+  background: rgba(248, 248, 250, 0.88);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-text-styles-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-text-styles-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.35px;
+  color: #111111;
+}
+
+.ios26-text-styles-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #66666c;
+}
+
+.ios26-text-columns {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-text-columns--dynamic {
+  grid-template-columns: repeat(7, minmax(146px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-columns--accessibility {
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-columns--labels {
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-column {
+  --scale: 1;
+  --tone: #000000;
+  min-width: 0;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  padding: 10px;
+  background: #ffffff;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-text-column h3 {
+  margin: 0;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #66666c;
+  border-bottom: 1px solid #ececf1;
+  padding-bottom: 8px;
+}
+
+.ios26-text-column p {
+  margin: 0;
+  color: var(--tone);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-type-large-title,
+.ios26-type-title-1,
+.ios26-type-title-2,
+.ios26-type-title-3,
+.ios26-type-headline,
+.ios26-type-body,
+.ios26-type-callout,
+.ios26-type-subhead,
+.ios26-type-footnote,
+.ios26-type-caption-1,
+.ios26-type-caption-2 {
+  font-size: calc(var(--base-size) * var(--scale));
+  line-height: calc(var(--base-line) * var(--scale));
+  letter-spacing: calc(var(--base-track) * var(--scale));
+}
+
+.ios26-type-large-title {
+  --base-size: 34px;
+  --base-line: 41px;
+  --base-track: 0.4px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 700;
+}
+
+.ios26-type-title-1 {
+  --base-size: 28px;
+  --base-line: 34px;
+  --base-track: 0.36px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-title-2 {
+  --base-size: 22px;
+  --base-line: 28px;
+  --base-track: 0.35px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-title-3 {
+  --base-size: 20px;
+  --base-line: 25px;
+  --base-track: 0.38px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-headline {
+  --base-size: 17px;
+  --base-line: 22px;
+  --base-track: -0.43px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 600;
+}
+
+.ios26-type-body {
+  --base-size: 17px;
+  --base-line: 22px;
+  --base-track: -0.43px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-callout {
+  --base-size: 16px;
+  --base-line: 21px;
+  --base-track: -0.32px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-subhead {
+  --base-size: 15px;
+  --base-line: 20px;
+  --base-track: -0.24px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-footnote {
+  --base-size: 13px;
+  --base-line: 18px;
+  --base-track: -0.08px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-caption-1 {
+  --base-size: 12px;
+  --base-line: 16px;
+  --base-track: 0;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-caption-2 {
+  --base-size: 11px;
+  --base-line: 13px;
+  --base-track: 0.06px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-scale-xsmall {
+  --scale: 0.9;
+}
+
+.ios26-scale-small {
+  --scale: 0.95;
+}
+
+.ios26-scale-medium {
+  --scale: 0.98;
+}
+
+.ios26-scale-large {
+  --scale: 1;
+}
+
+.ios26-scale-xlarge {
+  --scale: 1.1;
+}
+
+.ios26-scale-xxlarge {
+  --scale: 1.2;
+}
+
+.ios26-scale-xxxlarge {
+  --scale: 1.32;
+}
+
+.ios26-scale-ax1 {
+  --scale: 1.45;
+}
+
+.ios26-scale-ax2 {
+  --scale: 1.65;
+}
+
+.ios26-scale-ax3 {
+  --scale: 1.85;
+}
+
+.ios26-scale-ax4 {
+  --scale: 2.05;
+}
+
+.ios26-scale-ax5 {
+  --scale: 2.25;
+}
+
+.ios26-tone-primary {
+  --tone: #000000;
+}
+
+.ios26-tone-secondary {
+  --tone: #3c3c43;
+}
+
+.ios26-tone-tertiary {
+  --tone: #3c3c43;
+  opacity: 0.62;
+}
+
+.ios26-tone-quaternary {
+  --tone: #3c3c43;
+  opacity: 0.38;
+}
+
+@media (max-width: 980px) {
+  .ios26-text-styles-root {
+    width: 100%;
+  }
+
+  .ios26-text-styles-panel {
+    padding: 14px;
+  }
+}

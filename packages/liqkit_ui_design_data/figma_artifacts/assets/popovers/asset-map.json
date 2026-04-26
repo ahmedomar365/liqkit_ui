@@ -1,0 +1,33 @@
+{
+  "category": "popovers",
+  "generatedAt": "2026-02-19T19:44:19.262Z",
+  "sourceFiles": [
+    "figma-artifacts/popovers/61-65421.design-context.txt"
+  ],
+  "totalAssets": 1,
+  "downloaded": 0,
+  "existing": 1,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a.svg",
+      "filePath": "figma-artifacts/assets/popovers/9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a.svg",
+      "size": 1870,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a"
+      ],
+      "constNames": [
+        "imgMaterial"
+      ],
+      "sources": [
+        "figma-artifacts/popovers/61-65421.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

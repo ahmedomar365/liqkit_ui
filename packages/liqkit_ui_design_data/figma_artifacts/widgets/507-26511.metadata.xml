@@ -1,0 +1,37 @@
+<canvas id="507:26511" name="Widgets" x="0" y="0" width="0" height="0">
+  <section id="544:199447" x="0" y="-100" width="2685" height="1000">
+    <frame id="143:214872" name="Home Screen Widget - iPhone" x="100" y="500" width="960" height="420">
+      <symbol id="0:8901" name="Size=Small" x="770" y="20" width="164" height="164" />
+      <symbol id="0:8933" name="Size=Medium" x="390" y="20" width="349" height="164" />
+      <symbol id="0:8957" name="Size=Large" x="20" y="20" width="349" height="365" />
+    </frame>
+    <symbol id="145:62670" name="Lock Screen Widget / Circular / Open Gauge 2" x="1620" y="540" width="72" height="72" />
+    <symbol id="525:43689" name="Lock Screen Widget / Circular / Closed Gauge" x="2248" y="540" width="72" height="72" />
+    <symbol id="145:62699" name="Lock Screen Widget / Circular / Open Gauge" x="1710" y="540" width="72" height="72" />
+    <symbol id="525:43658" name="Lock Screen Widget / Circular / Open Gauge 3" x="2160" y="540" width="72" height="72" />
+    <symbol id="145:62733" name="Lock Screen Widget / Circular / Stack 3 Rows" x="1800" y="540" width="72" height="72" />
+    <symbol id="525:43588" name="Lock Screen Widget / Circular / Icon" x="1890" y="540" width="72" height="72" />
+    <symbol id="525:43609" name="Lock Screen Widget / Circular / Stack 2 Rows - Icon and Label" x="1980" y="540" width="72" height="72" />
+    <symbol id="525:43610" name="Lock Screen Widget / Circular / Stack 2 Rows - Labels" x="2070" y="540" width="72" height="72" />
+    <symbol id="145:62745" name="Lock Screen Widget - Inline" x="1620" y="660" width="327" height="26" />
+    <symbol id="525:43083" name="Lock Screen Widget - Rectangular with Chart" x="1790" y="400" width="162" height="72" />
+    <symbol id="525:43071" name="Lock Screen Widget - Modular with Bar" x="1980" y="100" width="162" height="72" />
+    <symbol id="525:43106" name="Lock Screen Widget - Rectangular Text Gauge" x="1610" y="400" width="160" height="72" />
+    <symbol id="525:43115" name="Lock Screen Widget - Tall Body with Icon" x="1790" y="300" width="162" height="72" />
+    <symbol id="525:43122" name="Lock Screen Widget - Tall Body" x="1610" y="300" width="162" height="72" />
+    <symbol id="525:43126" name="Lock Screen Widget - Modular Columns" x="1790" y="200" width="162" height="72" />
+    <symbol id="525:43141" name="Lock Screen Widget - Modular Table" x="1610" y="200" width="162" height="72" />
+    <symbol id="525:43148" name="Lock Screen Widget - Modular Standard" x="1790" y="100" width="162" height="72" />
+    <symbol id="525:43156" name="Lock Screen Widget - Modular List" x="1610" y="100" width="162" height="72" />
+    <symbol id="525:43245" name="Lock Screen Widget - Clock" x="2338" y="540" width="72" height="72" />
+    <frame id="144:109471" name="Home Screen Widget - iPad" x="100" y="100" width="1470" height="350">
+      <symbol id="144:109472" name="Size=Small" x="1310" y="20" width="136" height="136" />
+      <symbol id="144:109485" name="Size=Medium" x="990" y="20" width="300" height="136" />
+      <symbol id="144:109498" name="Size=Large" x="670" y="20" width="300" height="300" />
+      <symbol id="144:109524" name="Size=Extra Large" x="20" y="20" width="628" height="300" />
+    </frame>
+    <symbol id="526:38737" name="Lock Screen Widget/2x2/Clock Big (iPad Only)" x="1810" y="730" width="162" height="162" />
+    <symbol id="526:38824" name="Lock Screen Widget/2x2/Date (iPad Only)" x="1620" y="730" width="162" height="162" />
+  </section>
+  <instance id="544:191792" name="Header" x="0" y="-500" width="1400" height="242" />
+</canvas>

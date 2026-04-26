@@ -1,0 +1,389 @@
+type SegmentedControlProps = {
+  className?: string;
+  label1?: string;
+  label2?: string;
+  label3?: string;
+  label4?: string;
+  label5?: string;
+  segments?: "2" | "3" | "4" | "5";
+  selected?: "1" | "2" | "3" | "4" | "5";
+};
+
+export default function SegmentedControl({ className, label1 = "Label", label2 = "Label", label3 = "Label", label4 = "Label", label5 = "Label", segments = "2", selected = "1" }: SegmentedControlProps) {
+  if (segments === "5" && selected === "5") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=5, Selected=5" data-node-id="6:57505">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60630">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60632">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60647">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60649">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60681">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60683">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60664">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60666">
+            {label4}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 5" data-node-id="488:60702">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60703">
+            {label5}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "5" && selected === "4") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=5, Selected=4" data-node-id="488:60807">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60808">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60809">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60811">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60812">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60814">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60815">
+            {label3}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 4" data-node-id="488:60817">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60818">
+            {label4}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 5" data-node-id="488:60820">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60821">
+            {label5}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "5" && selected === "3") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=5, Selected=3" data-node-id="488:60837">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60838">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60839">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60841">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60842">
+            {label2}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 3" data-node-id="488:60844">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60845">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60847">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60848">
+            {label4}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 5" data-node-id="488:60850">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60851">
+            {label5}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "5" && selected === "2") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=5, Selected=2" data-node-id="488:60852">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60853">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60854">
+            {label1}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 2" data-node-id="488:60856">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60857">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60859">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60860">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60862">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60863">
+            {label4}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 5" data-node-id="488:60865">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60866">
+            {label5}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "5" && selected === "1") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=5, Selected=1" data-node-id="488:60882">
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="488:60883">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60884">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60886">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60887">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60889">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60890">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60892">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60893">
+            {label4}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 5" data-node-id="488:60895">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60896">
+            {label5}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "4" && selected === "4") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=4, Selected=4" data-node-id="488:60942">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60943">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60944">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60946">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60947">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60949">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60950">
+            {label3}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 4" data-node-id="488:60952">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60953">
+            {label4}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "4" && selected === "3") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=4, Selected=3" data-node-id="488:60957">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60958">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60959">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:60961">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60962">
+            {label2}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 3" data-node-id="488:60964">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60965">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60967">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60968">
+            {label4}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "4" && selected === "2") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=4, Selected=2" data-node-id="488:60972">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:60973">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60974">
+            {label1}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 2" data-node-id="488:60976">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60977">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:60979">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60980">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:60982">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:60983">
+            {label4}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "4" && selected === "1") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=4, Selected=1" data-node-id="488:61092">
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="488:61093">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61094">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:61096">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61097">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:61099">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61100">
+            {label3}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 4" data-node-id="488:61102">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61103">
+            {label4}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "3" && selected === "3") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=3, Selected=3" data-node-id="488:61017">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:61018">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61019">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:61021">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61022">
+            {label2}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 3" data-node-id="488:61024">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61025">
+            {label3}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "3" && selected === "2") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=3, Selected=2" data-node-id="488:61032">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:61033">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61034">
+            {label1}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 2" data-node-id="488:61036">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61037">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:61039">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61040">
+            {label3}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "3" && selected === "1") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=3, Selected=1" data-node-id="488:61122">
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="488:61123">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61124">
+            {label1}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:61126">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61127">
+            {label2}
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="488:61129">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61130">
+            {label3}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  if (segments === "2" && selected === "2") {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=2, Selected=2" data-node-id="488:61062">
+        <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 1" data-node-id="488:61063">
+          <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61064">
+            {label1}
+          </p>
+        </div>
+        <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 2" data-node-id="488:61066">
+          <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61067">
+            {label2}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] w-[370px]"} data-name="Segments=2, Selected=1" data-node-id="488:61152">
+      <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="488:61153">
+        <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61154">
+          {label1}
+        </p>
+      </div>
+      <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="488:61156">
+        <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="488:61157">
+          {label2}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Segmented control
+**Node ID:** 6:57374
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/segmented-controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

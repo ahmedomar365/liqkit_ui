@@ -1,0 +1,80 @@
+<canvas id="0:1746" name="Colors" x="0" y="0" width="0" height="0">
+  <symbol id="5532:7800" name="_Swatch Grid" x="600" y="1900" width="659" height="370" />
+  <symbol id="0:4299" name="_Swatch - Light and Dark" x="60" y="1900" width="160" height="160" />
+  <frame id="509:77730" name="_Swatch" x="260" y="1900" width="259" height="330">
+    <symbol id="509:77742" name="Type=Label, Mode=Dark" x="140" y="210" width="100" height="100" />
+    <symbol id="509:77731" name="Type=Color, Mode=Dark" x="20" y="210" width="100" height="100" />
+    <symbol id="509:77740" name="Type=Label, Mode=Light" x="140" y="50" width="100" height="100" />
+    <symbol id="0:4207" name="Type=Color, Mode=Light" x="20" y="50" width="100" height="100" />
+  </frame>
+  <section id="5707:28660" name="Increased Contrast" x="2620" y="0" width="2560" height="1500">
+    <instance id="5735:67114" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+    <instance id="5532:12331" name="Swatches" x="900" y="1030" width="659" height="370" />
+    <instance id="5532:12327" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+    <instance id="5735:67113" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+    <instance id="5532:12329" name="Swatches" x="1900" y="600" width="659" height="370" />
+    <frame id="5532:12332" name="Colors" x="100" y="100" width="2360" height="420">
+      <frame id="5532:12333" name="Grays" x="100" y="360" width="1560" height="160">
+        <instance id="5532:12334" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="5532:12335" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="5532:12336" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="5532:12337" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="5532:12338" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="5532:12339" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="5532:12340" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="5532:12341" name="Swatch" x="1400" y="0" width="160" height="160" />
+      </frame>
+      <frame id="5532:12342" name="Colors" x="100" y="100" width="2360" height="160">
+        <instance id="5532:12343" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="5532:12344" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="5532:12345" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="5532:12346" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="5532:12347" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="5532:12348" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="5532:12349" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="5532:12350" name="Swatch" x="1400" y="0" width="160" height="160" />
+        <instance id="5532:12351" name="Swatch" x="1600" y="0" width="160" height="160" />
+        <instance id="5532:12352" name="Swatch" x="1800" y="0" width="160" height="160" />
+        <instance id="5532:12353" name="Swatch" x="2000" y="0" width="160" height="160" />
+        <instance id="5532:12354" name="Swatch" x="2200" y="0" width="160" height="160" />
+      </frame>
+    </frame>
+  </section>
+  <section id="5707:28659" name="Default" x="0" y="0" width="2560" height="1500">
+    <instance id="5532:8370" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+    <instance id="5532:8407" name="Swatches" x="900" y="1030" width="659" height="370" />
+    <instance id="5532:8406" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+    <instance id="5532:7801" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+    <instance id="5532:8478" name="Swatches" x="1900" y="600" width="659" height="370" />
+    <frame id="0:2049" name="Colors" x="100" y="100" width="2360" height="420">
+      <frame id="509:77595" name="Grays" x="100" y="360" width="1560" height="160">
+        <instance id="509:77588" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="509:77681" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="509:77688" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="509:77695" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="509:77702" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="509:77709" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="509:77716" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="509:77723" name="Swatch" x="1400" y="0" width="160" height="160" />
+      </frame>
+      <frame id="509:77596" name="Colors" x="100" y="100" width="2360" height="160">
+        <instance id="509:77597" name="Swatch" x="0" y="0" width="160" height="160" />
+        <instance id="509:77598" name="Swatch" x="200" y="0" width="160" height="160" />
+        <instance id="509:77599" name="Swatch" x="400" y="0" width="160" height="160" />
+        <instance id="509:77600" name="Swatch" x="600" y="0" width="160" height="160" />
+        <instance id="509:77601" name="Swatch" x="800" y="0" width="160" height="160" />
+        <instance id="509:77602" name="Swatch" x="1000" y="0" width="160" height="160" />
+        <instance id="509:77603" name="Swatch" x="1200" y="0" width="160" height="160" />
+        <instance id="509:77604" name="Swatch" x="1400" y="0" width="160" height="160" />
+        <instance id="509:77605" name="Swatch" x="1600" y="0" width="160" height="160" />
+        <instance id="509:77606" name="Swatch" x="1800" y="0" width="160" height="160" />
+        <instance id="509:77607" name="Swatch" x="2000" y="0" width="160" height="160" />
+        <instance id="509:77608" name="Swatch" x="2200" y="0" width="160" height="160" />
+      </frame>
+    </frame>
+  </section>
+  <instance id="544:193103" name="_Component Header" x="0" y="-500" width="1800" height="242" />
+  <rounded-rectangle id="8411:637" name="Rectangle 1" x="5646" y="912" width="422" height="332" />
+</canvas>
+
+IMPORTANT: After you call this tool, you MUST call get_design_context if trying to implement the design, since this tool only returns metadata. If you do not call get_design_context, the agent will not be able to implement the design.

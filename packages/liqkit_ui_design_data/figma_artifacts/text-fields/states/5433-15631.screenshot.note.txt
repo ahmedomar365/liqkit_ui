@@ -1,0 +1,2 @@
+Screenshot captured through Figma MCP on 2026-02-18 for node 5433:15631 (State=Value Entered).
+Rendered appearance: value text without active cursor.

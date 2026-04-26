@@ -1,0 +1,281 @@
+type TrailingProps = {
+  className?: string;
+  detailText?: string;
+  showCheckmark?: boolean;
+  showDrillIn?: boolean;
+  showInfo?: boolean;
+  showSymbol?: boolean;
+};
+
+function Trailing({ className, detailText = "Detail", showCheckmark = true, showDrillIn = true, showInfo = true, showSymbol = true }: TrailingProps) {
+  return (
+    <div className={className || ""} data-name="_Trailing" data-node-id="212:117586">
+      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative text-[17px]" data-name="Type=Default" data-node-id="29:53509">
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="212:117599">
+          <p className="leading-[22px]">{detailText}</p>
+        </div>
+        {showSymbol && (
+          <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+          </div>
+        )}
+        {showInfo && (
+          <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="212:122278" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[20px] whitespace-pre-wrap">􀅴</p>
+          </div>
+        )}
+        {showCheckmark && (
+          <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="212:127130">
+            <p className="leading-[22px] whitespace-pre-wrap">􀆅</p>
+          </div>
+        )}
+        {showDrillIn && (
+          <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+            <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+type SwipeActionsLargeProps = {
+  className?: string;
+  symbol?: string;
+};
+
+function SwipeActionsLarge({ className, symbol = "􀓞" }: SwipeActionsLargeProps) {
+  return (
+    <div className={className || "bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] size-[52px]"} data-name="_Swipe Actions/Large" data-node-id="27:68008">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+        <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+      </div>
+    </div>
+  );
+}
+type SwipeActionsSmallProps = {
+  className?: string;
+  label?: string;
+  symbol?: string;
+};
+
+function SwipeActionsSmall({ className, label = "Delete", symbol = "􀓞" }: SwipeActionsSmallProps) {
+  return (
+    <div className={className || "h-[68px] relative rounded-[100px] w-[50px]"} data-name="_Swipe Actions/Small" data-node-id="27:68007">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="27:68006">
+        <p className="leading-[20px] whitespace-pre-wrap">{label}</p>
+      </div>
+      <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="5532:35793">
+        <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+type RowWithSwipeActionsProps = {
+  className?: string;
+  height?: "Regular" | "Tall";
+  showAction1?: boolean;
+  showAction2?: boolean;
+  showAction3?: boolean;
+  showSubtitle?: boolean;
+  subtitle?: string;
+  swipe?: "Right" | "Left";
+  title?: string;
+};
+
+export default function RowWithSwipeActions({ className, height = "Regular", showAction1 = true, showAction2 = true, showAction3 = true, showSubtitle = true, subtitle = "Subtitle", swipe = "Left", title = "Title" }: RowWithSwipeActionsProps) {
+  const isRegularAndLeft = height === "Regular" && swipe === "Left";
+  const isRegularAndRight = height === "Regular" && swipe === "Right";
+  const isTallAndLeft = height === "Tall" && swipe === "Left";
+  const isTallAndRight = height === "Tall" && swipe === "Right";
+  return (
+    <div className={className || `content-stretch flex gap-[10px] relative w-[402px] ${swipe === "Left" && ["Tall", "Regular"].includes(height) ? "items-center justify-end pr-[16px]" : "items-start pl-[16px]"}`} id={isRegularAndLeft ? "node-550_50415" : isTallAndLeft ? "node-550_50318" : isRegularAndRight ? "node-550_50185" : "node-550_50088"}>
+      {swipe === "Right" && ["Tall", "Regular"].includes(height) && (
+        <div className={`content-stretch flex gap-[10px] items-center relative shrink-0 ${isRegularAndRight ? "" : "self-stretch"}`} data-name="Actions" id={isRegularAndRight ? "node-5532_35841" : "node-5532_35840"}>
+          {isTallAndRight && (
+            <>
+              <SwipeActionsSmall className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" label="Action" />
+              <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8555">
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8555;27:68006">
+                  <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+                </div>
+                <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8555;5532:35793">
+                  <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8555;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                  </div>
+                </div>
+              </div>
+              <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8556">
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8556;27:68006">
+                  <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+                </div>
+                <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8556;5532:35793">
+                  <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8556;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+          {isRegularAndRight && showAction3 && <SwipeActionsLarge className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" />}
+          {isRegularAndRight && showAction2 && (
+            <div className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" data-name="_Swipe Actions/Large" data-node-id="550:50188">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="I550:50188;27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+              </div>
+            </div>
+          )}
+          {isRegularAndRight && showAction1 && (
+            <div className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" data-name="_Swipe Actions/Large" data-node-id="550:50189">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="I550:50189;27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      <div className={`${String.raw`bg-[var(--grays\/gray-5,#e5e5ea)] content-stretch flex items-center px-[16px] relative rounded-[100px] shrink-0 `}${height === "Regular" && ["Right", "Left"].includes(swipe) ? "h-[52px]" : "gap-[4px] h-[68px]"}`} data-name="Contents" id={isRegularAndLeft ? "node-550_50417" : isTallAndLeft ? "node-550_50320" : isRegularAndRight ? "node-550_50190" : "node-550_50093"}>
+        <div className={`${String.raw`border-[var(--separators\/non-opaque,rgba(0,0,0,0.12))] border-b-[0.33px] border-solid content-stretch flex h-full items-center leading-[0] not-italic relative shrink-0 `}${isRegularAndLeft ? "pr-[16px] text-[17px] w-[600px]" : isTallAndLeft ? "w-[588px]" : isRegularAndRight ? "text-[17px] w-[584px]" : "w-[584px]"}`} data-name="Title and Trailing Accessories" id={isRegularAndLeft ? "node-550_50422" : isTallAndLeft ? "node-550_50323" : isRegularAndRight ? "node-550_50195" : "node-550_50096"}>
+          {height === "Tall" && ["Right", "Left"].includes(swipe) && (
+            <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center min-h-px min-w-px relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" id={isTallAndLeft ? "node-550_50324" : "node-550_50097"}>
+              <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="550:50098">
+                <p className="leading-[22px] overflow-hidden">{title}</p>
+              </div>
+              {showSubtitle && (
+                <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="550:50099">
+                  <p className="leading-[20px] overflow-hidden">{subtitle}</p>
+                </div>
+              )}
+            </div>
+          )}
+          {isTallAndRight && <Trailing className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />}
+          {isRegularAndRight && (
+            <>
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center overflow-hidden relative shrink-0 text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-[478px] whitespace-nowrap" data-node-id="550:50197">
+                <p className="leading-[22px] overflow-hidden">{title}</p>
+              </div>
+              <Trailing className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0" showCheckmark={false} showInfo={false} />
+            </>
+          )}
+          {isTallAndLeft && (
+            <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="550:50327">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I550:50327;212:117599">
+                <p className="leading-[22px]">Detail</p>
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I550:50327;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I550:50327;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+              </div>
+            </div>
+          )}
+          {isRegularAndLeft && (
+            <>
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center overflow-hidden relative shrink-0 text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-[494px] whitespace-nowrap" data-node-id="550:50424">
+                <p className="leading-[22px] overflow-hidden">{title}</p>
+              </div>
+              <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0" data-name="_Trailing" data-node-id="550:50426">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I550:50426;212:117599">
+                  <p className="leading-[22px]">Detail</p>
+                </div>
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I550:50426;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                </div>
+                <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I550:50426;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      {isTallAndLeft && (
+        <div className="flex flex-row items-center self-stretch">
+          <div className="content-stretch flex gap-[10px] h-full items-center relative shrink-0" data-name="Actions" data-node-id="5532:35794">
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8399">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8399;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8399;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8399;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8424">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8424;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8424;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8424;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8457">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8457;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8457;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8457;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {isRegularAndLeft && (
+        <div className="content-stretch flex gap-[10px] items-center relative shrink-0" data-name="Actions" data-node-id="5532:35839">
+          {showAction3 && (
+            <div className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" data-name="_Swipe Actions/Large" data-node-id="550:50427">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="I550:50427;27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+              </div>
+            </div>
+          )}
+          {showAction2 && (
+            <div className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" data-name="_Swipe Actions/Large" data-node-id="550:50428">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="I550:50428;27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+              </div>
+            </div>
+          )}
+          {showAction1 && (
+            <div className="bg-[var(--accents\/orange,#ff8d28)] relative rounded-[100px] shrink-0 size-[52px]" data-name="_Swipe Actions/Large" data-node-id="550:50429">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[52px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2" data-node-id="I550:50429;27:68004" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Subheadline/Regular: Font(family: "SF Pro", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513), Colors/Blue: #0088FF.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Row with Swipe Actions
+**Node ID:** 550:49969
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

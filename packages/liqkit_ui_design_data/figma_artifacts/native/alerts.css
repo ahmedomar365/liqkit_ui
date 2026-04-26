@@ -1,0 +1,207 @@
+.ios26-alerts-root {
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+}
+
+.ios26-alerts-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 300px));
+  justify-content: center;
+  gap: 24px;
+}
+
+.ios26-alert {
+  align-content: start;
+}
+
+.ios26-alert--stacked {
+  min-height: 443px;
+}
+
+.ios26-alert--side-by-side {
+  min-height: 327px;
+}
+
+.ios26-alert-fields {
+  background: rgba(120, 120, 128, 0.16);
+  border-radius: 26px;
+  overflow: hidden;
+  padding-bottom: 19px;
+}
+
+.ios26-alert-field {
+  height: 52px;
+  display: grid;
+  align-items: center;
+  padding: 0 16px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.ios26-alert-field:first-child {
+  border-top: 0;
+}
+
+.ios26-alert-field-value {
+  color: #000000;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-alert-field-value.is-placeholder {
+  color: rgba(60, 60, 67, 0.3);
+}
+
+.ios26-alert-actions--split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-alert-actions--split .ios26-dialog-action {
+  width: 100%;
+}
+
+.ios26-alerts-swatches {
+  width: min(670px, 100%);
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.ios26-alert-button-variants {
+  width: 220px;
+  min-height: 210px;
+  border: 1px dashed rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(83px, 83px));
+  column-gap: 20px;
+  align-content: start;
+}
+
+.ios26-alert-button-mode {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-alert-token-button {
+  width: 83px;
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  font: 500 30px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  padding: 13px 16px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+}
+
+.ios26-alert-token-button.is-primary-light {
+  background: #0088ff;
+  color: #ffffff;
+}
+
+.ios26-alert-token-button.is-secondary-light {
+  color: #000000;
+}
+
+.ios26-alert-token-button.is-destructive-light {
+  color: #ff383c;
+}
+
+.ios26-alert-token-button.is-primary-dark {
+  background: rgba(0, 136, 255, 0.78);
+  color: #ffffff;
+}
+
+.ios26-alert-token-button.is-secondary-dark {
+  background: rgba(120, 120, 128, 0.16);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.ios26-alert-token-button.is-destructive-dark {
+  background: rgba(120, 120, 128, 0.16);
+  color: rgba(255, 56, 60, 0.72);
+}
+
+.ios26-alert-field-background-variants {
+  width: 380px;
+  min-height: 90px;
+  border: 1px dashed rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 160px));
+  column-gap: 20px;
+  align-content: start;
+}
+
+.ios26-alert-field-swatch {
+  height: 52px;
+  border-radius: 26px;
+}
+
+.ios26-alert-field-swatch.is-light {
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.ios26-alert-field-swatch.is-dark {
+  background: rgba(118, 118, 128, 0.12);
+}
+
+.ios26-alert-overlay-swatch {
+  width: 160px;
+  height: 160px;
+  border-radius: 28px;
+  background:
+    radial-gradient(130px 130px at 25% 10%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+    rgba(0, 0, 0, 0.26);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.ios26-alerts-header {
+  width: min(670px, 100%);
+  min-height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: inset 0 0 0 1px rgba(16, 18, 24, 0.1);
+  padding: 10px 14px;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-alerts-header h4,
+.ios26-alerts-header p {
+  margin: 0;
+}
+
+.ios26-alerts-header h4 {
+  font: 600 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #15161a;
+}
+
+.ios26-alerts-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #656b78;
+}
+
+@media (max-width: 760px) {
+  .ios26-alerts-pair {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .ios26-alerts-swatches {
+    width: 100%;
+  }
+
+  .ios26-alert-field-background-variants {
+    width: min(380px, 100%);
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+}

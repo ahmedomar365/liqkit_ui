@@ -1,0 +1,494 @@
+.ios26-sidebars-demo {
+  width: 702px;
+  max-width: 100%;
+  display: grid;
+  gap: 24px;
+}
+
+.ios26-sidebars-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-sidebars-tablet-wrap {
+  width: 702px;
+  height: 500px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios26-sidebars-tablet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1320px;
+  height: 940px;
+  transform: scale(0.5318181818);
+  transform-origin: top left;
+}
+
+.ios26-sidebars-shell {
+  position: absolute;
+  inset: 0;
+  border-radius: 52px;
+  background: #050505;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.85);
+}
+
+.ios26-sidebars-shell::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: rgba(68, 95, 151, 0.62);
+}
+
+.ios26-sidebars-screen {
+  position: absolute;
+  left: 55px;
+  top: 53px;
+  width: 1210px;
+  height: 834px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ios26-sidebars-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 32px;
+  padding: 4px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.ios26-sidebars-status-left,
+.ios26-sidebars-status-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #000;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-sidebars-status-right .ios26-status-glyphs {
+  gap: 5px;
+}
+
+.ios26-sidebars-status-right .ios26-status-cell {
+  width: 16px;
+  height: 10px;
+}
+
+.ios26-sidebars-status-right .ios26-status-wifi {
+  width: 14px;
+  height: 10px;
+}
+
+.ios26-sidebars-status-right .ios26-status-battery {
+  width: 26px;
+  height: 12px;
+}
+
+.ios26-sidebars-top-toolbar {
+  position: absolute;
+  left: 330px;
+  right: 10px;
+  top: 32px;
+  height: 54px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  z-index: 4;
+}
+
+.ios26-sidebars-top-leading {
+  justify-self: start;
+}
+
+.ios26-sidebars-top-trailing {
+  justify-self: end;
+  display: inline-flex;
+  gap: 12px;
+}
+
+.ios26-sidebars-icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sidebars-tabs {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 296px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  padding: 4px;
+}
+
+.ios26-sidebars-tab-label,
+.ios26-sidebars-tab-icon {
+  border: 0;
+  background: transparent;
+  height: 36px;
+  color: #1a1a1a;
+  border-radius: 100px;
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sidebars-tab-icon {
+  width: 36px;
+  padding: 0;
+}
+
+.ios26-sidebars-tab-label {
+  min-width: 58px;
+  padding: 0 12px;
+}
+
+.ios26-sidebars-tab-label.is-active {
+  color: #08f;
+  font-weight: 700;
+  background: #ededed;
+}
+
+.ios26-sidebars-page-title {
+  position: absolute;
+  left: 366px;
+  top: 88px;
+  z-index: 4;
+}
+
+.ios26-sidebars-page-title h4 {
+  margin: 0;
+  font: 700 49px/50px "SF Pro Display", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-sidebars-page-title p {
+  margin: 0;
+  font: 500 22px/28px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-sidebar-panel {
+  position: absolute;
+  left: 10px;
+  top: 27px;
+  width: 320px;
+  height: 802px;
+  border-radius: 34px;
+  padding: 11px 16px 10px;
+  box-sizing: border-box;
+  background: rgba(250, 250, 250, 0.7);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  z-index: 4;
+}
+
+.ios26-sidebar-panel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.ios26-window-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ios26-window-bubble {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.ios26-window-bubble.is-red { background: #ff5f57; }
+.ios26-window-bubble.is-yellow { background: #ffbd2e; }
+.ios26-window-bubble.is-green { background: #28c840; }
+
+.ios26-sidebar-edit-btn {
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-search {
+  height: 44px;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  color: #727272;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+}
+
+.ios26-sidebar-search .ios26-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.ios26-sidebar-search input {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  outline: 0;
+}
+
+.ios26-sidebar-list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+}
+
+.ios26-sidebar-row,
+.ios26-sidebar-section-header {
+  min-height: 44px;
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px 0 10px;
+  border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.ios26-sidebar-row.is-selected {
+  background: #ededed;
+}
+
+.ios26-sidebar-row.is-nested {
+  padding-left: 30px;
+}
+
+.ios26-sidebar-row-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #1a1a1a;
+}
+
+.ios26-sidebar-row-icon::before,
+.ios26-sidebar-row-icon::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.ios26-sidebar-row-icon:empty:not([class*="icon-"]) {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(26, 26, 26, 0.8);
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-envelope::before {
+  left: 2px;
+  top: 4px;
+  width: 16px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-envelope::after {
+  left: 4px;
+  top: 7px;
+  width: 12px;
+  height: 6px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.ios26-sidebar-row-icon.icon-inbox-stack::before {
+  left: 3px;
+  top: 3px;
+  width: 13px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-stack::after {
+  left: 5px;
+  top: 7px;
+  width: 13px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-tray::before {
+  left: 2px;
+  top: 5px;
+  width: 16px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-tray::after {
+  left: 5px;
+  top: 8px;
+  width: 10px;
+  height: 4px;
+  border-left: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+}
+
+.ios26-sidebar-row-icon.icon-flag::before {
+  left: 4px;
+  top: 2px;
+  width: 1.5px;
+  height: 15px;
+  background: currentColor;
+}
+
+.ios26-sidebar-row-icon.icon-flag::after {
+  left: 5px;
+  top: 3px;
+  width: 9px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: skewX(-15deg);
+}
+
+.ios26-sidebar-row-icon.icon-paperplane::before {
+  left: 3px;
+  top: 4px;
+  width: 14px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: rotate(25deg);
+}
+
+.ios26-sidebar-row-icon.icon-paperplane::after {
+  left: 8px;
+  top: 10px;
+  width: 7px;
+  height: 1.5px;
+  background: currentColor;
+  transform: rotate(-20deg);
+}
+
+.ios26-sidebar-row-icon.icon-reply::before {
+  left: 3px;
+  top: 8px;
+  width: 10px;
+  height: 7px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  border-radius: 0 0 0 4px;
+}
+
+.ios26-sidebar-row-icon.icon-reply::after {
+  left: 3px;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-left: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.ios26-sidebar-row-icon.icon-folder::before {
+  left: 2px;
+  top: 6px;
+  width: 16px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-folder::after {
+  left: 4px;
+  top: 4px;
+  width: 6px;
+  height: 3px;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 2px 2px 0 0;
+  background: #fff;
+}
+
+.ios26-sidebar-row-title {
+  color: #000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-row-detail,
+.ios26-sidebar-section-header > span:last-child {
+  color: #727272;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-section-header {
+  margin-top: 6px;
+  grid-template-columns: 1fr auto;
+  padding-left: 12px;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.ios26-sidebar-section-header > span:first-child {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.ios26-sidebar-list--mail .ios26-sidebar-row {
+  grid-template-columns: 24px 1fr auto;
+}

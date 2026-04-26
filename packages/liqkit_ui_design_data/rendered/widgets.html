@@ -1,0 +1,1852 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Widgets - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-widgets-root {
+  width: min(1024px, 100%);
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-widgets-panel {
+  border: 1px solid #d6dbe5;
+  border-radius: 16px;
+  background: #f4f5f7;
+  padding: 22px;
+}
+
+.ios26-widgets-phones {
+  margin: 0;
+}
+
+.ios26-widgets-size-gallery {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-widgets-size-panel {
+  border: 1px solid #dce2ec;
+  border-radius: 14px;
+  background: #fff;
+  padding: 12px;
+}
+
+.ios26-widgets-size-panel h4 {
+  margin: 0 0 10px;
+  font: 590 14px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-widgets-size-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-widgets-size-grid--iphone {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.ios26-widgets-size-grid--ipad {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.ios26-widgets-size-card {
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.12) 50%, transparent 58%),
+    linear-gradient(180deg, #5ec6f5 0%, #007aff 100%);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  position: relative;
+  min-height: 58px;
+}
+
+.ios26-widgets-size-card span {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  font: 590 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.ios26-widgets-size-card.is-small {
+  grid-column: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.ios26-widgets-size-card.is-medium {
+  grid-column: span 4;
+  aspect-ratio: 2 / 1;
+}
+
+.ios26-widgets-size-card.is-large {
+  grid-column: span 4;
+  aspect-ratio: 1 / 1.045;
+}
+
+.ios26-widgets-size-card.is-ipad-small {
+  grid-column: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.ios26-widgets-size-card.is-ipad-medium {
+  grid-column: span 4;
+  aspect-ratio: 2.2 / 1;
+}
+
+.ios26-widgets-size-card.is-ipad-large {
+  grid-column: span 4;
+  aspect-ratio: 1 / 1;
+}
+
+.ios26-widgets-size-card.is-ipad-extra-large {
+  grid-column: span 8;
+  aspect-ratio: 2.1 / 1;
+}
+
+body.ios26-fidelity-mode .ios26-widgets-size-gallery {
+  display: none !important;
+}
+
+body.ios26-fidelity-mode .ios26-widgets-root {
+  width: 1024px;
+}
+
+body.ios26-fidelity-mode .ios26-widgets-panel {
+  border: 1px dashed #7d77ff;
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 10px;
+}
+
+body.ios26-fidelity-mode .ios26-widgets-phones {
+  gap: 10px;
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Widgets</h1>
+        <p class="meta">Category Node <code>507:26511</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26511" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#widgets">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (775:13152)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-widgets-root" data-node-id="507:26511" aria-label="Widgets category">
+  <script src="../evidence/figma-artifacts/native/shared-image-hydration.js"></script>
+  <section class="ios26-widgets-panel" data-node-id="775:13152" aria-label="Home Screen Widgets examples">
+    <div class="ios26-examples-phones ios26-widgets-phones" data-node-id="754:62878">
+      <article class="ios26-example-phone is-small" data-node-id="754:64315">
+        <div class="ios26-example-screen">
+          <img class="ios26-example-wallpaper" data-ios26-asset="widgets/45d97c5d-34f5-4353-b321-c7d0f8059246.jpg" alt="" loading="eager" decoding="async" />
+          <div class="ios26-example-status"><span>9:41</span></div>
+          <section class="ios26-example-widget" aria-label="Small widget"><span>Widget Name</span></section>
+          <ul class="ios26-example-icons" aria-label="App grid">
+            <li><img data-ios26-asset="app-icons/69bee2a4-980a-46b9-9115-fb4c0c9f886a.png" alt="" /><span>FaceTime</span></li>
+            <li><img data-ios26-asset="app-icons/d4a05ae8-f560-48f0-9ae0-1283b0b9ced7.png" alt="" /><span>Calendar</span></li>
+            <li><img data-ios26-asset="app-icons/2eac8939-7579-49b7-8293-bd95586c7675.png" alt="" /><span>Photos</span></li>
+            <li><img data-ios26-asset="app-icons/300daeb9-f17e-4715-bcd8-0d538c74e3f6.png" alt="" /><span>Camera</span></li>
+            <li><img data-ios26-asset="app-icons/74905983-7d38-463f-8d47-6431b492a9ea.png" alt="" /><span>Mail</span></li>
+            <li><img data-ios26-asset="app-icons/28e48391-5a42-4bdc-a425-50fa88fdb06a.png" alt="" /><span>Notes</span></li>
+            <li><img data-ios26-asset="app-icons/9263d6b7-a366-42a3-b988-711e84f83ce0.png" alt="" /><span>Reminders</span></li>
+            <li><img data-ios26-asset="app-icons/0ea6ab69-4e5d-4e60-bbee-7fbe96ef53cd.png" alt="" /><span>Clock</span></li>
+            <li><img data-ios26-asset="app-icons/c7101dad-e894-401c-b27c-2e4e6bde143a.png" alt="" /><span>News</span></li>
+            <li><img data-ios26-asset="app-icons/6d247718-a507-4104-8880-58d20ea6a6ee.png" alt="" /><span>TV</span></li>
+            <li><img data-ios26-asset="app-icons/1145bc6f-2b51-4e35-b583-c196f0ee1467.png" alt="" /><span>Games</span></li>
+            <li><img data-ios26-asset="app-icons/a5ab34f1-3b74-4fa7-afd5-28e20f8ad8e2.png" alt="" /><span>App Store</span></li>
+            <li><img data-ios26-asset="app-icons/c3cd7c7a-660f-41cf-8f06-15620b5d4b6c.png" alt="" /><span>Maps</span></li>
+            <li><img data-ios26-asset="app-icons/025b216a-08d8-4fe9-bc37-e1beec091635.png" alt="" /><span>Health</span></li>
+            <li><img data-ios26-asset="app-icons/5fe8de11-8181-4baa-b32c-a2a0a260e220.png" alt="" /><span>Wallet</span></li>
+            <li><img data-ios26-asset="app-icons/f51e93d7-b8bd-4e1d-86d2-e9891e14ffef.png" alt="" /><span>Settings</span></li>
+          </ul>
+          <div class="ios26-example-search">Search</div>
+          <div class="ios26-example-dock" aria-hidden="true">
+            <img data-ios26-asset="app-icons/63f55885-a369-41af-b992-95eac14ce2a9.png" alt="" />
+            <img data-ios26-asset="app-icons/291f177c-1acb-467c-b750-991970bcb876.png" alt="" />
+            <img data-ios26-asset="app-icons/1852c596-63d5-45f5-b37a-70ba4ecbf6b8.png" alt="" />
+            <img data-ios26-asset="app-icons/dfc3ee86-4d52-4da3-b8e8-3d2379b43ad3.png" alt="" />
+          </div>
+        </div>
+        <img class="ios26-example-shell" data-ios26-asset="widgets/3eb90deb-eada-4f2d-8da1-8a99fba683af.png" alt="" aria-hidden="true" />
+      </article>
+
+      <article class="ios26-example-phone is-medium" data-node-id="754:64316">
+        <div class="ios26-example-screen">
+          <img class="ios26-example-wallpaper" data-ios26-asset="widgets/45d97c5d-34f5-4353-b321-c7d0f8059246.jpg" alt="" loading="eager" decoding="async" />
+          <div class="ios26-example-status"><span>9:41</span></div>
+          <section class="ios26-example-widget" aria-label="Medium widget"><span>Widget Name</span></section>
+          <ul class="ios26-example-icons" aria-label="App grid">
+            <li><img data-ios26-asset="app-icons/69bee2a4-980a-46b9-9115-fb4c0c9f886a.png" alt="" /><span>FaceTime</span></li>
+            <li><img data-ios26-asset="app-icons/d4a05ae8-f560-48f0-9ae0-1283b0b9ced7.png" alt="" /><span>Calendar</span></li>
+            <li><img data-ios26-asset="app-icons/2eac8939-7579-49b7-8293-bd95586c7675.png" alt="" /><span>Photos</span></li>
+            <li><img data-ios26-asset="app-icons/300daeb9-f17e-4715-bcd8-0d538c74e3f6.png" alt="" /><span>Camera</span></li>
+            <li><img data-ios26-asset="app-icons/74905983-7d38-463f-8d47-6431b492a9ea.png" alt="" /><span>Mail</span></li>
+            <li><img data-ios26-asset="app-icons/28e48391-5a42-4bdc-a425-50fa88fdb06a.png" alt="" /><span>Notes</span></li>
+            <li><img data-ios26-asset="app-icons/9263d6b7-a366-42a3-b988-711e84f83ce0.png" alt="" /><span>Reminders</span></li>
+            <li><img data-ios26-asset="app-icons/0ea6ab69-4e5d-4e60-bbee-7fbe96ef53cd.png" alt="" /><span>Clock</span></li>
+            <li><img data-ios26-asset="app-icons/c7101dad-e894-401c-b27c-2e4e6bde143a.png" alt="" /><span>News</span></li>
+            <li><img data-ios26-asset="app-icons/6d247718-a507-4104-8880-58d20ea6a6ee.png" alt="" /><span>TV</span></li>
+            <li><img data-ios26-asset="app-icons/1145bc6f-2b51-4e35-b583-c196f0ee1467.png" alt="" /><span>Games</span></li>
+            <li><img data-ios26-asset="app-icons/a5ab34f1-3b74-4fa7-afd5-28e20f8ad8e2.png" alt="" /><span>App Store</span></li>
+            <li><img data-ios26-asset="app-icons/c3cd7c7a-660f-41cf-8f06-15620b5d4b6c.png" alt="" /><span>Maps</span></li>
+            <li><img data-ios26-asset="app-icons/025b216a-08d8-4fe9-bc37-e1beec091635.png" alt="" /><span>Health</span></li>
+            <li><img data-ios26-asset="app-icons/5fe8de11-8181-4baa-b32c-a2a0a260e220.png" alt="" /><span>Wallet</span></li>
+            <li><img data-ios26-asset="app-icons/f51e93d7-b8bd-4e1d-86d2-e9891e14ffef.png" alt="" /><span>Settings</span></li>
+          </ul>
+          <div class="ios26-example-search">Search</div>
+          <div class="ios26-example-dock" aria-hidden="true">
+            <img data-ios26-asset="app-icons/63f55885-a369-41af-b992-95eac14ce2a9.png" alt="" />
+            <img data-ios26-asset="app-icons/291f177c-1acb-467c-b750-991970bcb876.png" alt="" />
+            <img data-ios26-asset="app-icons/1852c596-63d5-45f5-b37a-70ba4ecbf6b8.png" alt="" />
+            <img data-ios26-asset="app-icons/dfc3ee86-4d52-4da3-b8e8-3d2379b43ad3.png" alt="" />
+          </div>
+        </div>
+        <img class="ios26-example-shell" data-ios26-asset="widgets/3eb90deb-eada-4f2d-8da1-8a99fba683af.png" alt="" aria-hidden="true" />
+      </article>
+
+      <article class="ios26-example-phone is-large" data-node-id="754:63000">
+        <div class="ios26-example-screen">
+          <img class="ios26-example-wallpaper" data-ios26-asset="widgets/45d97c5d-34f5-4353-b321-c7d0f8059246.jpg" alt="" loading="eager" decoding="async" />
+          <div class="ios26-example-status"><span>9:41</span></div>
+          <section class="ios26-example-widget" aria-label="Large widget"><span>Widget Name</span></section>
+          <ul class="ios26-example-icons is-compact" aria-label="App grid">
+            <li><img data-ios26-asset="app-icons/69bee2a4-980a-46b9-9115-fb4c0c9f886a.png" alt="" /><span>FaceTime</span></li>
+            <li><img data-ios26-asset="app-icons/d4a05ae8-f560-48f0-9ae0-1283b0b9ced7.png" alt="" /><span>Calendar</span></li>
+            <li><img data-ios26-asset="app-icons/2eac8939-7579-49b7-8293-bd95586c7675.png" alt="" /><span>Photos</span></li>
+            <li><img data-ios26-asset="app-icons/300daeb9-f17e-4715-bcd8-0d538c74e3f6.png" alt="" /><span>Camera</span></li>
+            <li><img data-ios26-asset="app-icons/74905983-7d38-463f-8d47-6431b492a9ea.png" alt="" /><span>Mail</span></li>
+            <li><img data-ios26-asset="app-icons/28e48391-5a42-4bdc-a425-50fa88fdb06a.png" alt="" /><span>Notes</span></li>
+            <li><img data-ios26-asset="app-icons/9263d6b7-a366-42a3-b988-711e84f83ce0.png" alt="" /><span>Reminders</span></li>
+            <li><img data-ios26-asset="app-icons/0ea6ab69-4e5d-4e60-bbee-7fbe96ef53cd.png" alt="" /><span>Clock</span></li>
+          </ul>
+          <div class="ios26-example-search">Search</div>
+          <div class="ios26-example-dock" aria-hidden="true">
+            <img data-ios26-asset="app-icons/63f55885-a369-41af-b992-95eac14ce2a9.png" alt="" />
+            <img data-ios26-asset="app-icons/291f177c-1acb-467c-b750-991970bcb876.png" alt="" />
+            <img data-ios26-asset="app-icons/1852c596-63d5-45f5-b37a-70ba4ecbf6b8.png" alt="" />
+            <img data-ios26-asset="app-icons/dfc3ee86-4d52-4da3-b8e8-3d2379b43ad3.png" alt="" />
+          </div>
+        </div>
+        <img class="ios26-example-shell" data-ios26-asset="widgets/3eb90deb-eada-4f2d-8da1-8a99fba683af.png" alt="" aria-hidden="true" />
+      </article>
+    </div>
+  </section>
+
+  <section class="ios26-widgets-size-gallery" aria-label="Widget size variants" data-fidelity-ignore="true">
+    <article class="ios26-widgets-size-panel">
+      <h4>iPhone Home Screen Widgets</h4>
+      <div class="ios26-widgets-size-grid ios26-widgets-size-grid--iphone">
+        <div class="ios26-widgets-size-card is-small" data-node-id="0:8901" data-node-ref="754:62974"><span>Small</span></div>
+        <div class="ios26-widgets-size-card is-medium" data-node-id="0:8933" data-node-ref="754:62987"><span>Medium</span></div>
+        <div class="ios26-widgets-size-card is-large" data-node-id="0:8957" data-node-ref="754:63000"><span>Large</span></div>
+      </div>
+    </article>
+
+    <article class="ios26-widgets-size-panel">
+      <h4>iPad Home Screen Widgets</h4>
+      <div class="ios26-widgets-size-grid ios26-widgets-size-grid--ipad">
+        <div class="ios26-widgets-size-card is-ipad-small" data-node-id="144:109472"><span>Small</span></div>
+        <div class="ios26-widgets-size-card is-ipad-medium" data-node-id="144:109485"><span>Medium</span></div>
+        <div class="ios26-widgets-size-card is-ipad-large" data-node-id="144:109498"><span>Large</span></div>
+        <div class="ios26-widgets-size-card is-ipad-extra-large" data-node-id="144:109524"><span>Extra Large</span></div>
+      </div>
+    </article>
+  </section>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Widgets metadata coverage supplement" data-node-id="507:26511">
+  <header class="ios26-node-coverage-header">
+    <h3>Widgets Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:26511). Full coverage is persisted; this supplement lists 24 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (24)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="143:214872" data-node-name="Home Screen Widget - iPhone" data-node-reasons="metadata-root-gap">
+      <code>143:214872</code>
+      <span class="ios26-node-coverage-item-name">Home Screen Widget - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:62670" data-node-name="Lock Screen Widget / Circular / Open Gauge 2" data-node-reasons="metadata-root-gap">
+      <code>145:62670</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Open Gauge 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43689" data-node-name="Lock Screen Widget / Circular / Closed Gauge" data-node-reasons="metadata-root-gap">
+      <code>525:43689</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Closed Gauge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:62699" data-node-name="Lock Screen Widget / Circular / Open Gauge" data-node-reasons="metadata-root-gap">
+      <code>145:62699</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Open Gauge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43658" data-node-name="Lock Screen Widget / Circular / Open Gauge 3" data-node-reasons="metadata-root-gap">
+      <code>525:43658</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Open Gauge 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:62733" data-node-name="Lock Screen Widget / Circular / Stack 3 Rows" data-node-reasons="metadata-root-gap">
+      <code>145:62733</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Stack 3 Rows</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43588" data-node-name="Lock Screen Widget / Circular / Icon" data-node-reasons="metadata-root-gap">
+      <code>525:43588</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Icon</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43609" data-node-name="Lock Screen Widget / Circular / Stack 2 Rows - Icon and Label" data-node-reasons="metadata-root-gap">
+      <code>525:43609</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Stack 2 Rows - Icon and Label</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43610" data-node-name="Lock Screen Widget / Circular / Stack 2 Rows - Labels" data-node-reasons="metadata-root-gap">
+      <code>525:43610</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget / Circular / Stack 2 Rows - Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:62745" data-node-name="Lock Screen Widget - Inline" data-node-reasons="metadata-root-gap">
+      <code>145:62745</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Inline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43083" data-node-name="Lock Screen Widget - Rectangular with Chart" data-node-reasons="metadata-root-gap">
+      <code>525:43083</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Rectangular with Chart</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43071" data-node-name="Lock Screen Widget - Modular with Bar" data-node-reasons="metadata-root-gap">
+      <code>525:43071</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Modular with Bar</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43106" data-node-name="Lock Screen Widget - Rectangular Text Gauge" data-node-reasons="metadata-root-gap">
+      <code>525:43106</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Rectangular Text Gauge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43115" data-node-name="Lock Screen Widget - Tall Body with Icon" data-node-reasons="metadata-root-gap">
+      <code>525:43115</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Tall Body with Icon</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43122" data-node-name="Lock Screen Widget - Tall Body" data-node-reasons="metadata-root-gap">
+      <code>525:43122</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Tall Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43126" data-node-name="Lock Screen Widget - Modular Columns" data-node-reasons="metadata-root-gap">
+      <code>525:43126</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Modular Columns</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43141" data-node-name="Lock Screen Widget - Modular Table" data-node-reasons="metadata-root-gap">
+      <code>525:43141</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Modular Table</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43148" data-node-name="Lock Screen Widget - Modular Standard" data-node-reasons="metadata-root-gap">
+      <code>525:43148</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Modular Standard</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43156" data-node-name="Lock Screen Widget - Modular List" data-node-reasons="metadata-root-gap">
+      <code>525:43156</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Modular List</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="525:43245" data-node-name="Lock Screen Widget - Clock" data-node-reasons="metadata-root-gap">
+      <code>525:43245</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget - Clock</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="144:109471" data-node-name="Home Screen Widget - iPad" data-node-reasons="metadata-root-gap">
+      <code>144:109471</code>
+      <span class="ios26-node-coverage-item-name">Home Screen Widget - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="526:38737" data-node-name="Lock Screen Widget/2x2/Clock Big (iPad Only)" data-node-reasons="metadata-root-gap">
+      <code>526:38737</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget/2x2/Clock Big (iPad Only)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="526:38824" data-node-name="Lock Screen Widget/2x2/Date (iPad Only)" data-node-reasons="metadata-root-gap">
+      <code>526:38824</code>
+      <span class="ios26-node-coverage-item-name">Lock Screen Widget/2x2/Date (iPad Only)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191792" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191792</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/widgets/775-13152.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/widgets/775-13152.screenshot.png" alt="Widgets screenshot" />
+        <p><a href="../evidence/figma-artifacts/widgets/775-13152.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/widgets/775-13152.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/widgets.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/widgets.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/widgets.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgIPhone17ProSilverPortrait = &quot;https://www.figma.com/api/mcp/asset/3eb90deb-eada-4f2d-8da1-8a99fba683af&quot;;
+const imgWidgetsSmall = &quot;https://www.figma.com/api/mcp/asset/45d97c5d-34f5-4353-b321-c7d0f8059246&quot;;
+const imgIcon = &quot;https://www.figma.com/api/mcp/asset/b54e8f96-3b28-4081-a33b-2463eac48b21&quot;;
+const imgCellularConnection = &quot;https://www.figma.com/api/mcp/asset/1114c123-8663-4fd3-8ea6-fd19f9178398&quot;;
+const imgWifi = &quot;https://www.figma.com/api/mcp/asset/d3f8c037-abe4-4f9f-8a67-b2a9083a133b&quot;;
+const imgFrame = &quot;https://www.figma.com/api/mcp/asset/f22cba2c-74f5-4c4b-b86c-a6f370cf5717&quot;;
+
+function IPhone17Pro({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;iPhone 17 Pro&quot; data-node-id=&quot;6316:14140&quot;&gt;
+      &lt;div className=&quot;h-[874px] relative w-[402px]&quot; data-name=&quot;Color=Silver&quot; data-node-id=&quot;6316:14148&quot;&gt;
+        &lt;div className=&quot;absolute h-[920px] left-[-24px] top-[-23px] w-[450px]&quot; data-name=&quot;iPhone 17 Pro - Silver - Portrait&quot; data-node-id=&quot;6316:14150&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPhone17ProSilverPortrait} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type HomeScreenWidgetIPhoneProps = {
+  className?: string;
+  showPadding?: boolean;
+  size?: &quot;Large&quot; | &quot;Medium&quot; | &quot;Small&quot;;
+  widgetName?: string;
+};
+
+function HomeScreenWidgetIPhone({ className, showPadding = true, size = &quot;Large&quot;, widgetName = &quot;Widget Name&quot; }: HomeScreenWidgetIPhoneProps) {
+  const isLarge = size === &quot;Large&quot;;
+  const isMedium = size === &quot;Medium&quot;;
+  return (
+    &lt;div className={className || `bg-gradient-to-b from-[#5ec6f5] relative rounded-[28px] to-[#007aff] w-[349px] ${isLarge ? &quot;h-[365px]&quot; : &quot;h-[164px]&quot;}`} id={isLarge ? &quot;node-0_8957&quot; : &quot;node-0_8933&quot;}&gt;
+      {isMedium &amp;&amp; (
+        &lt;p className=&quot;absolute bottom-[-5.33px] font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] left-[calc(50%-38.5px)] not-italic text-[12px] text-white translate-y-full&quot; data-node-id=&quot;0:8934&quot;&gt;
+          {widgetName}
+        &lt;/p&gt;
+      )}
+      {isMedium &amp;&amp; showPadding &amp;&amp; &lt;div className=&quot;absolute border border-black border-dashed inset-[18px] opacity-30 rounded-[11px]&quot; data-name=&quot;Padding Guide&quot; data-node-id=&quot;144:62577&quot; /&gt;}
+      {isLarge &amp;&amp; (
+        &lt;p className=&quot;absolute bottom-[-5.33px] font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] left-[calc(50%-38.5px)] not-italic text-[12px] text-white translate-y-full w-[79px] whitespace-pre-wrap&quot; data-node-id=&quot;0:8958&quot;&gt;
+          {widgetName}
+        &lt;/p&gt;
+      )}
+      {isLarge &amp;&amp; showPadding &amp;&amp; &lt;div className=&quot;absolute border border-black border-dashed inset-[18px] opacity-30 rounded-[11px]&quot; data-name=&quot;Padding Guide&quot; data-node-id=&quot;144:62472&quot; /&gt;}
+    &lt;/div&gt;
+  );
+}
+type HomeScreenIPhoneProps = {
+  className?: string;
+  widgets?: &quot;Large&quot; | &quot;Medium&quot; | &quot;Small&quot;;
+};
+
+function HomeScreenIPhone({ className, widgets = &quot;Large&quot; }: HomeScreenIPhoneProps) {
+  const isLarge = widgets === &quot;Large&quot;;
+  const isMedium = widgets === &quot;Medium&quot;;
+  const isMediumOrLarge = [&quot;Medium&quot;, &quot;Large&quot;].includes(widgets);
+  const isSmall = widgets === &quot;Small&quot;;
+  const isSmallOrMedium = [&quot;Small&quot;, &quot;Medium&quot;].includes(widgets);
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col h-[874px] items-center relative w-[402px]&quot;} id={isLarge ? &quot;node-561_5801&quot; : isMedium ? &quot;node-561_6000&quot; : &quot;node-561_6199&quot;}&gt;
+      &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgWidgetsSmall} /&gt;
+      &lt;div className=&quot;content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative shrink-0 w-[402px]&quot; data-name=&quot;Status bar - iPhone&quot; id={isLarge ? &quot;node-2971_30016&quot; : isMedium ? &quot;node-2971_30185&quot; : &quot;node-2971_30418&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative&quot; data-name=&quot;Time&quot; id={isLarge ? &quot;node-I2971_30016-5465_16808&quot; : isMedium ? &quot;node-I2971_30185-5465_16808&quot; : &quot;node-I2971_30418-5465_16808&quot;}&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; id={isLarge ? &quot;node-I2971_30016-5465_16809&quot; : isMedium ? &quot;node-I2971_30185-5465_16809&quot; : &quot;node-I2971_30418-5465_16809&quot;}&gt;
+            9:41
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative&quot; data-name=&quot;Levels&quot; id={isLarge ? &quot;node-I2971_30016-5465_16811&quot; : isMedium ? &quot;node-I2971_30185-5465_16811&quot; : &quot;node-I2971_30418-5465_16811&quot;}&gt;
+          &lt;div className=&quot;h-[12.226px] relative shrink-0 w-[19.2px]&quot; data-name=&quot;Cellular Connection&quot; id={isLarge ? &quot;node-I2971_30016-5465_16812&quot; : isMedium ? &quot;node-I2971_30185-5465_16812&quot; : &quot;node-I2971_30418-5465_16812&quot;}&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgCellularConnection} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;h-[12.328px] relative shrink-0 w-[17.142px]&quot; data-name=&quot;Wifi&quot; id={isLarge ? &quot;node-I2971_30016-5465_16813&quot; : isMedium ? &quot;node-I2971_30185-5465_16813&quot; : &quot;node-I2971_30418-5465_16813&quot;}&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgWifi} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;h-[13px] relative shrink-0 w-[27.328px]&quot; data-name=&quot;Frame&quot; id={isLarge ? &quot;node-I2971_30016-6325_1760&quot; : isMedium ? &quot;node-I2971_30185-6325_1760&quot; : &quot;node-I2971_30418-6325_1760&quot;}&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgFrame} /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {isMediumOrLarge &amp;&amp; (
+        &lt;div className={`content-stretch flex flex-col items-center pb-[36px] px-[26.666px] relative shrink-0 w-full ${isLarge ? &quot;pt-[27.67px]&quot; : &quot;pt-[26.333px]&quot;}`} data-name=&quot;Frame&quot; id={isLarge ? &quot;node-561_8080&quot; : &quot;node-5593_30565&quot;}&gt;
+          &lt;HomeScreenWidgetIPhone className={`bg-gradient-to-b from-[#5ec6f5] relative rounded-[28px] shrink-0 to-[#007aff] w-full ${isLarge ? &quot;h-[365px]&quot; : &quot;h-[164px]&quot;}`} size={isMedium ? &quot;Medium&quot; : undefined} /&gt;
+        &lt;/div&gt;
+      )}
+      &lt;div className={`content-start flex flex-[1_0_0] flex-wrap items-start justify-between min-h-px min-w-px px-[26px] relative w-[402px] ${isLarge ? &quot;gap-y-[18px]&quot; : isMedium ? &quot;gap-y-[17px] pt-[0.333px]&quot; : &quot;gap-y-[17px] pt-[28px]&quot;}`} data-name=&quot;App Icons&quot; id={isLarge ? &quot;node-561_30402&quot; : isMedium ? &quot;node-561_31648&quot; : &quot;node-561_32420&quot;}&gt;
+        {isMediumOrLarge &amp;&amp; (
+          &lt;&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38289&quot; : &quot;node-5592_38390&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38289-5592_30156&quot; : &quot;node-I5592_38390-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38289-2402_975&quot; : &quot;node-I5592_38390-2402_975&quot;}&gt;
+                FaceTime
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38290&quot; : &quot;node-5592_38391&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38290-5592_30156&quot; : &quot;node-I5592_38391-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38290-2402_975&quot; : &quot;node-I5592_38391-2402_975&quot;}&gt;
+                Calendar
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38291&quot; : &quot;node-5592_38392&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38291-5592_30156&quot; : &quot;node-I5592_38392-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38291-2402_975&quot; : &quot;node-I5592_38392-2402_975&quot;}&gt;
+                Photos
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38292&quot; : &quot;node-5592_38393&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38292-5592_30156&quot; : &quot;node-I5592_38393-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38292-2402_975&quot; : &quot;node-I5592_38393-2402_975&quot;}&gt;
+                Camera
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38293&quot; : &quot;node-5592_38394&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38293-5592_30156&quot; : &quot;node-I5592_38394-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38293-2402_975&quot; : &quot;node-I5592_38394-2402_975&quot;}&gt;
+                Mail
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38294&quot; : &quot;node-5592_38395&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38294-5592_30156&quot; : &quot;node-I5592_38395-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38294-2402_975&quot; : &quot;node-I5592_38395-2402_975&quot;}&gt;
+                Notes
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38295&quot; : &quot;node-5592_38396&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38295-5592_30156&quot; : &quot;node-I5592_38396-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38295-2402_975&quot; : &quot;node-I5592_38396-2402_975&quot;}&gt;
+                Reminders
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-5592_38296&quot; : &quot;node-5592_38397&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I5592_38296-5592_30156&quot; : &quot;node-I5592_38397-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isLarge ? &quot;node-I5592_38296-2402_975&quot; : &quot;node-I5592_38397-2402_975&quot;}&gt;
+                Clock
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/&gt;
+        )}
+        {isSmall &amp;&amp; (
+          &lt;&gt;
+            &lt;div className=&quot;h-[10px] shrink-0 w-[72px]&quot; data-name=&quot;Empty Spot&quot; data-node-id=&quot;2402:24106&quot; /&gt;
+            &lt;div className=&quot;h-[10px] shrink-0 w-[72px]&quot; data-name=&quot;Empty Spot&quot; data-node-id=&quot;2402:24107&quot; /&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38519&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38519;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38519;2402:975&quot;&gt;
+                FaceTime
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38520&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38520;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38520;2402:975&quot;&gt;
+                Calendar
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;h-[10px] shrink-0 w-[72px]&quot; data-name=&quot;Empty Spot&quot; data-node-id=&quot;561:32949&quot; /&gt;
+            &lt;div className=&quot;h-[10px] shrink-0 w-[72px]&quot; data-name=&quot;Empty Spot&quot; data-node-id=&quot;2402:23973&quot; /&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38521&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38521;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38521;2402:975&quot;&gt;
+                Photos
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38522&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38522;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38522;2402:975&quot;&gt;
+                Camera
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38523&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38523;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38523;2402:975&quot;&gt;
+                Mail
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38524&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38524;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38524;2402:975&quot;&gt;
+                Notes
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38525&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38525;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38525;2402:975&quot;&gt;
+                Reminders
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;5592:38526&quot;&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I5592:38526;5592:30156&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I5592:38526;2402:975&quot;&gt;
+                Clock
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/&gt;
+        )}
+        {isSmallOrMedium &amp;&amp; (
+          &lt;&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38398&quot; : &quot;node-5592_38527&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38398-5592_30156&quot; : &quot;node-I5592_38527-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38398-2402_975&quot; : &quot;node-I5592_38527-2402_975&quot;}&gt;
+                News
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38399&quot; : &quot;node-5592_38528&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38399-5592_30156&quot; : &quot;node-I5592_38528-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38399-2402_975&quot; : &quot;node-I5592_38528-2402_975&quot;}&gt;
+                TV
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38400&quot; : &quot;node-5592_38529&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38400-5592_30156&quot; : &quot;node-I5592_38529-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38400-2402_975&quot; : &quot;node-I5592_38529-2402_975&quot;}&gt;
+                Games
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38401&quot; : &quot;node-5592_38530&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38401-5592_30156&quot; : &quot;node-I5592_38530-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38401-2402_975&quot; : &quot;node-I5592_38530-2402_975&quot;}&gt;
+                App Store
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38402&quot; : &quot;node-5592_38531&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38402-5592_30156&quot; : &quot;node-I5592_38531-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38402-2402_975&quot; : &quot;node-I5592_38531-2402_975&quot;}&gt;
+                Maps
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38403&quot; : &quot;node-5592_38532&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38403-5592_30156&quot; : &quot;node-I5592_38532-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38403-2402_975&quot; : &quot;node-I5592_38532-2402_975&quot;}&gt;
+                Health
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38404&quot; : &quot;node-5592_38533&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38404-5592_30156&quot; : &quot;node-I5592_38533-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38404-2402_975&quot; : &quot;node-I5592_38533-2402_975&quot;}&gt;
+                Wallet
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isMedium ? &quot;node-5592_38405&quot; : &quot;node-5592_38534&quot;}&gt;
+              &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isMedium ? &quot;node-I5592_38405-5592_30156&quot; : &quot;node-I5592_38534-5592_30156&quot;}&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; id={isMedium ? &quot;node-I5592_38405-2402_975&quot; : &quot;node-I5592_38534-2402_975&quot;}&gt;
+                Settings
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/&gt;
+        )}
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex gap-[2px] h-[30px] items-start overflow-clip px-[12px] py-[7px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Search Field&quot; id={isLarge ? &quot;node-5593_10525&quot; : isMedium ? &quot;node-5593_10638&quot; : &quot;node-5593_10800&quot;}&gt;
+        &lt;div className=&quot;-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2&quot; data-name=&quot;Blur&quot; id={isLarge ? &quot;node-I5593_10526-5592_52690&quot; : isMedium ? &quot;node-I5593_10639-5592_52690&quot; : &quot;node-I5593_10801-5592_52690&quot;}&gt;
+          &lt;div className=&quot;absolute bg-white inset-[-76px]&quot; data-name=&quot;_Mask - Circle&quot; id={isLarge ? &quot;node-I5593_10526-5592_52691&quot; : isMedium ? &quot;node-I5593_10639-5592_52691&quot; : &quot;node-I5593_10801-5592_52691&quot;}&gt;
+            &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isLarge ? &quot;node-I5593_10526-5592_52691-5575_32354&quot; : isMedium ? &quot;node-I5593_10639-5592_52691-5575_32354&quot; : &quot;node-I5593_10801-5592_52691-5575_32354&quot;} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]&quot; data-name=&quot;Blur&quot; id={isLarge ? &quot;node-I5593_10526-5607_81966&quot; : isMedium ? &quot;node-I5593_10639-5607_81966&quot; : &quot;node-I5593_10801-5607_81966&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]&quot; data-name=&quot;Glass Effect&quot; id={isLarge ? &quot;node-I5593_10526-5607_81713&quot; : isMedium ? &quot;node-I5593_10639-5607_81713&quot; : &quot;node-I5593_10801-5607_81713&quot;} /&gt;
+        &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center&quot; id={isLarge ? &quot;node-5593_10527&quot; : isMedium ? &quot;node-5593_10640&quot; : &quot;node-5593_10802&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+          􀊫
+        &lt;/p&gt;
+        &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center&quot; id={isLarge ? &quot;node-5593_10528&quot; : isMedium ? &quot;node-5593_10641&quot; : &quot;node-5593_10803&quot;}&gt;
+          Search
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex items-center justify-center pb-[17px] pt-[20px] px-[17px] relative shrink-0 w-full&quot; data-name=&quot;_Dock - iPhone&quot; id={isLarge ? &quot;node-561_5823&quot; : isMedium ? &quot;node-561_6022&quot; : &quot;node-561_6221&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center justify-between min-h-px min-w-px pb-[19px] pt-[20px] px-[19px] relative&quot; data-name=&quot;Dock&quot; id={isLarge ? &quot;node-I561_5823-559_4168&quot; : isMedium ? &quot;node-I561_6022-559_4168&quot; : &quot;node-I561_6221-559_4168&quot;}&gt;
+          &lt;div className=&quot;-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2&quot; data-name=&quot;Blur&quot; id={isLarge ? &quot;node-I561_5823-5592_57196-5592_52690&quot; : isMedium ? &quot;node-I561_6022-5592_57196-5592_52690&quot; : &quot;node-I561_6221-5592_57196-5592_52690&quot;}&gt;
+            &lt;div className=&quot;absolute bg-white inset-[-76px]&quot; data-name=&quot;_Mask - Circle&quot; id={isLarge ? &quot;node-I561_5823-5592_57196-5592_52691&quot; : isMedium ? &quot;node-I561_6022-5592_57196-5592_52691&quot; : &quot;node-I561_6221-5592_57196-5592_52691&quot;}&gt;
+              &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isLarge ? &quot;node-I561_5823-5592_57196-5592_52691-5575_32354&quot; : isMedium ? &quot;node-I561_6022-5592_57196-5592_52691-5575_32354&quot; : &quot;node-I561_6221-5592_57196-5592_52691-5575_32354&quot;} /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]&quot; data-name=&quot;Blur&quot; id={isLarge ? &quot;node-I561_5823-5592_57196-5607_81966&quot; : isMedium ? &quot;node-I561_6022-5592_57196-5607_81966&quot; : &quot;node-I561_6221-5592_57196-5607_81966&quot;} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]&quot; data-name=&quot;Glass Effect&quot; id={isLarge ? &quot;node-I561_5823-5592_57196-5607_81713&quot; : isMedium ? &quot;node-I561_6022-5592_57196-5607_81713&quot; : &quot;node-I561_6221-5592_57196-5607_81713&quot;} /&gt;
+          &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-I561_5823-2402_19689&quot; : isMedium ? &quot;node-I561_6022-2402_19689&quot; : &quot;node-I561_6221-2402_19689&quot;}&gt;
+            &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I561_5823-2402_19689-5592_30156&quot; : isMedium ? &quot;node-I561_6022-2402_19689-5592_30156&quot; : &quot;node-I561_6221-2402_19689-5592_30156&quot;}&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-I561_5823-2402_20273&quot; : isMedium ? &quot;node-I561_6022-2402_20273&quot; : &quot;node-I561_6221-2402_20273&quot;}&gt;
+            &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I561_5823-2402_20273-5592_30156&quot; : isMedium ? &quot;node-I561_6022-2402_20273-5592_30156&quot; : &quot;node-I561_6221-2402_20273-5592_30156&quot;}&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-I561_5823-2402_20570&quot; : isMedium ? &quot;node-I561_6022-2402_20570&quot; : &quot;node-I561_6221-2402_20570&quot;}&gt;
+            &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I561_5823-2402_20570-5592_30156&quot; : isMedium ? &quot;node-I561_6022-2402_20570-5592_30156&quot; : &quot;node-I561_6221-2402_20570-5592_30156&quot;}&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; id={isLarge ? &quot;node-I561_5823-2402_20916&quot; : isMedium ? &quot;node-I561_6022-2402_20916&quot; : &quot;node-I561_6221-2402_20916&quot;}&gt;
+            &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; id={isLarge ? &quot;node-I561_5823-2402_20916-5592_30156&quot; : isMedium ? &quot;node-I561_6022-2402_20916-5592_30156&quot; : &quot;node-I561_6221-2402_20916-5592_30156&quot;}&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {isSmall &amp;&amp; (
+        &lt;div className=&quot;absolute bg-gradient-to-b from-[#5ec6f5] left-[26.67px] rounded-[28px] size-[164px] to-[#007aff] top-[90px]&quot; data-name=&quot;Home Screen Widget - iPhone&quot; data-node-id=&quot;5593:32314&quot;&gt;
+          &lt;p className=&quot;absolute bottom-[-5.33px] font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] left-[calc(50%-39px)] not-italic text-[12px] text-white translate-y-full&quot; data-node-id=&quot;I5593:32314;0:8902&quot;&gt;
+            Widget Name
+          &lt;/p&gt;
+          &lt;div className=&quot;absolute border border-black border-dashed inset-[18px] opacity-30 rounded-[11px]&quot; data-name=&quot;Padding Guide&quot; data-node-id=&quot;I5593:32314;144:62629&quot; /&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+type HomeScreenWidgetsProps = {
+  className?: string;
+  size?: &quot;Small&quot; | &quot;Medium&quot; | &quot;Large&quot;;
+};
+
+export default function HomeScreenWidgets({ className, size = &quot;Small&quot; }: HomeScreenWidgetsProps) {
+  const isLarge = size === &quot;Large&quot;;
+  const isMediumOrSmall = [&quot;Medium&quot;, &quot;Small&quot;].includes(size);
+  const isSmall = size === &quot;Small&quot;;
+  return (
+    &lt;div className={className || &quot;h-[874px] relative rounded-[48px] w-[402px]&quot;} id={isSmall ? &quot;node-754_62974&quot; : size === &quot;Medium&quot; ? &quot;node-754_62987&quot; : &quot;node-754_63000&quot;}&gt;
+      {isMediumOrSmall &amp;&amp; (
+        &lt;&gt;
+          &lt;HomeScreenIPhone className=&quot;absolute content-stretch flex flex-col h-[874px] items-center left-0 overflow-clip top-0 w-[402px]&quot; widgets={isSmall ? &quot;Small&quot; : &quot;Medium&quot;} /&gt;
+          &lt;IPhone17Pro className=&quot;absolute h-[874px] left-0 top-0 w-[402px]&quot; /&gt;
+        &lt;/&gt;
+      )}
+      {isLarge &amp;&amp; (
+        &lt;&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col h-[874px] items-center left-0 overflow-clip top-0 w-[402px]&quot; data-name=&quot;Home Screen - iPhone&quot; data-node-id=&quot;754:46598&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgWidgetsSmall} /&gt;
+            &lt;div className=&quot;content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative shrink-0 w-[402px]&quot; data-name=&quot;Status bar - iPhone&quot; data-node-id=&quot;I754:46598;2971:30016&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative&quot; data-name=&quot;Time&quot; data-node-id=&quot;I754:46598;2971:30016;5465:16808&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I754:46598;2971:30016;5465:16809&quot;&gt;
+                  9:41
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative&quot; data-name=&quot;Levels&quot; data-node-id=&quot;I754:46598;2971:30016;5465:16811&quot;&gt;
+                &lt;div className=&quot;h-[12.226px] relative shrink-0 w-[19.2px]&quot; data-name=&quot;Cellular Connection&quot; data-node-id=&quot;I754:46598;2971:30016;5465:16812&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgCellularConnection} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;h-[12.328px] relative shrink-0 w-[17.142px]&quot; data-name=&quot;Wifi&quot; data-node-id=&quot;I754:46598;2971:30016;5465:16813&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgWifi} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;h-[13px] relative shrink-0 w-[27.328px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I754:46598;2971:30016;6325:1760&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgFrame} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col items-center pb-[36px] pt-[27.67px] px-[26.666px] relative shrink-0 w-full&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I754:46598;561:8080&quot;&gt;
+              &lt;HomeScreenWidgetIPhone className=&quot;bg-gradient-to-b from-[#5ec6f5] h-[365px] relative rounded-[28px] shrink-0 to-[#007aff] w-full&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-start flex flex-[1_0_0] flex-wrap gap-y-[18px] items-start justify-between min-h-px min-w-px px-[26px] relative w-[402px]&quot; data-name=&quot;App Icons&quot; data-node-id=&quot;I754:46598;561:30402&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38289&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38289;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38289;2402:975&quot;&gt;
+                  FaceTime
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38290&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38290;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38290;2402:975&quot;&gt;
+                  Calendar
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38291&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38291;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38291;2402:975&quot;&gt;
+                  Photos
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38292&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38292;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38292;2402:975&quot;&gt;
+                  Camera
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38293&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38293;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38293;2402:975&quot;&gt;
+                  Mail
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38294&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38294;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38294;2402:975&quot;&gt;
+                  Notes
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38295&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38295;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38295;2402:975&quot;&gt;
+                  Reminders
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;5592:38296&quot;&gt;
+                &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;5592:38296;5592:30156&quot;&gt;
+                  &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white&quot; data-node-id=&quot;I754:46598;5592:38296;2402:975&quot;&gt;
+                  Clock
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[2px] h-[30px] items-start overflow-clip px-[12px] py-[7px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Search Field&quot; data-node-id=&quot;I754:46598;5593:10525&quot;&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I754:46598;5593:10526;5592:52690&quot;&gt;
+                &lt;div className=&quot;absolute bg-white inset-[-76px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I754:46598;5593:10526;5592:52691&quot;&gt;
+                  &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I754:46598;5593:10526;5592:52691;5575:32354&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I754:46598;5593:10526;5607:81966&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I754:46598;5593:10526;5607:81713&quot; /&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center&quot; data-node-id=&quot;I754:46598;5593:10527&quot; style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+                􀊫
+              &lt;/p&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center&quot; data-node-id=&quot;I754:46598;5593:10528&quot;&gt;
+                Search
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-[17px] pt-[20px] px-[17px] relative shrink-0 w-full&quot; data-name=&quot;_Dock - iPhone&quot; data-node-id=&quot;I754:46598;561:5823&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center justify-between min-h-px min-w-px pb-[19px] pt-[20px] px-[19px] relative&quot; data-name=&quot;Dock&quot; data-node-id=&quot;I754:46598;561:5823;559:4168&quot;&gt;
+                &lt;div className=&quot;-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I754:46598;561:5823;5592:57196;5592:52690&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-76px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I754:46598;561:5823;5592:57196;5592:52691&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I754:46598;561:5823;5592:57196;5592:52691;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I754:46598;561:5823;5592:57196;5607:81966&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I754:46598;561:5823;5592:57196;5607:81713&quot; /&gt;
+                &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;561:5823;2402:19689&quot;&gt;
+                  &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;561:5823;2402:19689;5592:30156&quot;&gt;
+                    &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;561:5823;2402:20273&quot;&gt;
+                  &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;561:5823;2402:20273;5592:30156&quot;&gt;
+                    &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;561:5823;2402:20570&quot;&gt;
+                  &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;561:5823;2402:20570;5592:30156&quot;&gt;
+                    &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex flex-col gap-[5px] items-center relative shrink-0&quot; data-name=&quot;App Icon/iPhone&quot; data-node-id=&quot;I754:46598;561:5823;2402:20916&quot;&gt;
+                  &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;I754:46598;561:5823;2402:20916;5592:30156&quot;&gt;
+                    &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;IPhone17Pro className=&quot;absolute h-[874px] left-0 top-0 w-[402px]&quot; /&gt;
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Home Screen - iPhone
+**Node ID:** 561:5800
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Home Screen Widget - iPhone
+**Node ID:** 143:214872
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

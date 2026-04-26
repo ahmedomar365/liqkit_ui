@@ -1,0 +1,633 @@
+{
+  "sessionPath": "/Users/ahmedomar/.codex/sessions/2026/02/17/rollout-2026-02-17T15-51-13-019c6ba7-9e5a-7881-8d22-642d5dcb55e0.jsonl",
+  "generatedAt": "2026-02-20T00:11:16.184Z",
+  "screenshots": {
+    "0:1746": {
+      "categoryNode": "0:1746",
+      "path": "figma-artifacts/colors/0-1746.screenshot.png",
+      "callId": "call_27tCvwOyGPlnYxJM90hJBMaF"
+    },
+    "215:105157": {
+      "categoryNode": "215:105157",
+      "path": "figma-artifacts/materials/215-105157.screenshot.png",
+      "callId": "call_21msU25k4izhv9KdJCD6t1MU"
+    },
+    "0:2194": {
+      "categoryNode": "0:2194",
+      "path": "figma-artifacts/text-styles/0-3040.screenshot.png",
+      "callId": "call_lrb9DumRfGvS6lApJ1Zbgn4B"
+    },
+    "523:41868": {
+      "categoryNode": "507:24672",
+      "path": "figma-artifacts/bezels/523-41868.screenshot.png",
+      "callId": "call_sSa9gWhMnHQnDjwwe0yYYhHQ"
+    },
+    "106:60032": {
+      "categoryNode": "507:24688",
+      "path": "figma-artifacts/system/106-60032.screenshot.png",
+      "callId": "call_WiXBH5GFMK61uzm4TOieXkFL"
+    },
+    "507:24669": {
+      "categoryNode": "507:24669",
+      "path": "figma-artifacts/action-sheets/5446-10266.screenshot.png",
+      "callId": "call_XLznzgTETSeV9VdHxqj2L3sk"
+    },
+    "3176:15162": {
+      "categoryNode": "507:24670",
+      "path": "figma-artifacts/activity-views/3176-15162.screenshot.png",
+      "callId": "call_bPqlCdkuLuzZEhBOVcyBHVDg"
+    },
+    "507:24668": {
+      "categoryNode": "507:24668",
+      "path": "figma-artifacts/alerts/61-67601.screenshot.png",
+      "callId": "call_KFy02npWBLVRQCIzyRK6xe6X"
+    },
+    "507:24671": {
+      "categoryNode": "507:24671",
+      "path": "figma-artifacts/app-icons/2402-669.screenshot.png",
+      "callId": "call_3LtOBint4N9NDAT1RZibpgkO"
+    },
+    "507:24673": {
+      "categoryNode": "507:24673",
+      "path": "figma-artifacts/buttons/507-24673.screenshot.png",
+      "callId": "call_FjRWlLlRTTVLoG1LKXlAvK5u"
+    },
+    "507:26010": {
+      "categoryNode": "507:26010",
+      "path": "figma-artifacts/color-pickers/0-5275.screenshot.png",
+      "callId": "call_CcXbF6rywqPVeyLupBq6fS3w"
+    },
+    "507:25994": {
+      "categoryNode": "507:25994",
+      "path": "figma-artifacts/context-menu/125-58302.screenshot.png",
+      "callId": "call_rbdczCaVpN0EZy5yAMa5BiJj"
+    },
+    "5583:24435": {
+      "categoryNode": "5518:18111",
+      "path": "figma-artifacts/empty-states/5583-24435.screenshot.png",
+      "callId": "call_HzPgEsfkKQVyDWwNojw5Pqr8"
+    },
+    "123:58202": {
+      "categoryNode": "507:26011",
+      "path": "figma-artifacts/face-id/123-58202.screenshot.png",
+      "callId": "call_vY7tgFPqVZOk1bS4sZnklaWL"
+    },
+    "106:59544": {
+      "categoryNode": "507:24674",
+      "path": "figma-artifacts/keyboards/106-59544.screenshot.png",
+      "callId": "call_Sd7a1VkMAGHTYHhaApfzIkAj"
+    },
+    "550:49969": {
+      "categoryNode": "507:24675",
+      "path": "figma-artifacts/lists/550-49969.screenshot.png",
+      "callId": "call_JPTTpg9W5k46cPXWNkKeI4Yr"
+    },
+    "5908:6487": {
+      "categoryNode": "507:24676",
+      "path": "figma-artifacts/menu/5908-6487.screenshot.png",
+      "callId": "call_G87qidues1iEfEJoED02jVll"
+    },
+    "507:24678": {
+      "categoryNode": "507:24678",
+      "path": "figma-artifacts/notifications/143-62847.screenshot.png",
+      "callId": "call_Mwr7LE8Ohk7RIfVI27m5NVIk"
+    },
+    "488:51848": {
+      "categoryNode": "507:24679",
+      "path": "figma-artifacts/page-controls/488-51848.screenshot.png",
+      "callId": "call_iyThHVSMeO0qkBcy2swRXuTO"
+    },
+    "5442:1885": {
+      "categoryNode": "507:24680",
+      "path": "figma-artifacts/pickers/5442-1885.screenshot.png",
+      "callId": "call_nMV4DYpPF93cEK8eP0zdRdUq"
+    },
+    "61:65421": {
+      "categoryNode": "507:24681",
+      "path": "figma-artifacts/popovers/61-65421.screenshot.png",
+      "callId": "call_LJdEJ15MybcRq8snmJk6Ip9g"
+    },
+    "410:50387": {
+      "categoryNode": "507:26009",
+      "path": "figma-artifacts/popup-buttons/410-50387.screenshot.png",
+      "callId": "call_ApMD5pK7oHKAyUIzEcebKHWI"
+    },
+    "5425:3472": {
+      "categoryNode": "507:24682",
+      "path": "figma-artifacts/progress-indicators/5425-3472.screenshot.png",
+      "callId": "call_6LfOG8FmobVHKtLHkqu0uCH2"
+    },
+    "6:57374": {
+      "categoryNode": "507:24683",
+      "path": "figma-artifacts/segmented-controls/6-57374.screenshot.png",
+      "callId": "call_dk5GUOZJcTYX9mwuTkHwm2mm"
+    },
+    "770:21495": {
+      "categoryNode": "507:24684",
+      "path": "figma-artifacts/sheets/770-21495.screenshot.png",
+      "callId": "call_TKLiBwGe01QmEi0SWx4Nkfg2"
+    },
+    "5726:29555": {
+      "categoryNode": "507:26013",
+      "path": "figma-artifacts/sidebars/5726-29555.screenshot.png",
+      "callId": "call_A49tpSNaHbsxCKnKomv45Cbn"
+    },
+    "5661:43611": {
+      "categoryNode": "507:24685",
+      "path": "figma-artifacts/sliders/5661-43611.screenshot.png",
+      "callId": "call_BKYcgEt1bUwJvgcmwZUB8mqY"
+    },
+    "507:24686": {
+      "categoryNode": "507:24686",
+      "path": "figma-artifacts/status-bars/523-41360.screenshot.png",
+      "callId": "call_bgbHo12oVVoyfwlbCVFDSAyQ"
+    },
+    "5661:43368": {
+      "categoryNode": "507:24687",
+      "path": "figma-artifacts/steppers/5661-43368.screenshot.png",
+      "callId": "call_ItRUWnESsfSFd0TtnrOV2vFK"
+    },
+    "5661:41970": {
+      "categoryNode": "507:24689",
+      "path": "figma-artifacts/top-bars/5661-41970.screenshot.png",
+      "callId": "call_ORudCgqt8oXOlVAKIpKH0Cxh"
+    },
+    "5433:15646": {
+      "categoryNode": "553:22762",
+      "path": "figma-artifacts/text-fields/5433-15646.screenshot.png",
+      "callId": "call_kVneI7L9jQcb1Ije84UEyCTZ"
+    },
+    "27:68905": {
+      "categoryNode": "507:24690",
+      "path": "figma-artifacts/toggles/27-68905.screenshot.png",
+      "callId": "call_Z1YkFz2IGF6XBBRrBrgfPgPI"
+    },
+    "5735:66270": {
+      "categoryNode": "507:25993",
+      "path": "figma-artifacts/toolbars/5735-66270.screenshot.png",
+      "callId": "call_f9z3orCX2BZ3tZYSZBSxmyZj"
+    },
+    "775:13152": {
+      "categoryNode": "507:26511",
+      "path": "figma-artifacts/widgets/775-13152.screenshot.png",
+      "callId": "call_GAEBrMt76OujkIHWkeXd68gd"
+    },
+    "5589:4058": {
+      "categoryNode": "5413:10149",
+      "path": "figma-artifacts/windows/5589-4058.screenshot.png",
+      "callId": "call_zzRqqo9gb02jAeHCjCE5Sr80"
+    },
+    "507:29149": {
+      "categoryNode": "507:29124",
+      "path": "figma-artifacts/kit-helpers/507-29149.screenshot.png",
+      "callId": "call_vtSyhrHl8b4afbXWWxFMgrCe"
+    }
+  },
+  "raw": [
+    {
+      "nodeId": "2401:4",
+      "path": "figma-artifacts/raw/2401-4/2026-02-20T00-11-16-185Z.get_screenshot.png",
+      "callId": "call_0HgXJoAf2ps9R7McpBJVzc1r"
+    },
+    {
+      "nodeId": "221:56229",
+      "path": "figma-artifacts/raw/221-56229/2026-02-20T00-11-16-188Z.get_screenshot.png",
+      "callId": "call_yiYEoWO8B92hUQUGX0XE0AOd"
+    },
+    {
+      "nodeId": "507:24673",
+      "path": "figma-artifacts/raw/507-24673/2026-02-20T00-11-16-192Z.get_screenshot.png",
+      "callId": "call_FjRWlLlRTTVLoG1LKXlAvK5u"
+    },
+    {
+      "nodeId": "0:1746",
+      "path": "figma-artifacts/raw/0-1746/2026-02-20T00-11-16-193Z.get_screenshot.png",
+      "callId": "call_27tCvwOyGPlnYxJM90hJBMaF"
+    },
+    {
+      "nodeId": "0:4207",
+      "path": "figma-artifacts/raw/0-4207/2026-02-20T00-11-16-194Z.get_screenshot.png",
+      "callId": "call_Bxw24OwL4hvy8aPwpQjPYXDF"
+    },
+    {
+      "nodeId": "510:79110",
+      "path": "figma-artifacts/raw/510-79110/2026-02-20T00-11-16-194Z.get_screenshot.png",
+      "callId": "call_6cYekSf1TjyD6vxRLB7zlhl0"
+    },
+    {
+      "nodeId": "0:3040",
+      "path": "figma-artifacts/raw/0-3040/2026-02-20T00-11-16-195Z.get_screenshot.png",
+      "callId": "call_wRCndcSsCnHWBBPP93wHZAjv"
+    },
+    {
+      "nodeId": "2524:24489",
+      "path": "figma-artifacts/raw/2524-24489/2026-02-20T00-11-16-195Z.get_screenshot.png",
+      "callId": "call_8TDfBwceJAbBETX58aaKuN48"
+    },
+    {
+      "nodeId": "106:60032",
+      "path": "figma-artifacts/raw/106-60032/2026-02-20T00-11-16-196Z.get_screenshot.png",
+      "callId": "call_WiXBH5GFMK61uzm4TOieXkFL"
+    },
+    {
+      "nodeId": "5433:15646",
+      "path": "figma-artifacts/raw/5433-15646/2026-02-20T00-11-16-197Z.get_screenshot.png",
+      "callId": "call_kVneI7L9jQcb1Ije84UEyCTZ"
+    },
+    {
+      "nodeId": "27:68905",
+      "path": "figma-artifacts/raw/27-68905/2026-02-20T00-11-16-197Z.get_screenshot.png",
+      "callId": "call_Z1YkFz2IGF6XBBRrBrgfPgPI"
+    },
+    {
+      "nodeId": "40:58690",
+      "path": "figma-artifacts/raw/40-58690/2026-02-20T00-11-16-198Z.get_screenshot.png",
+      "callId": "call_GsG3hDIlVBdkCf8WvKoM8RYX"
+    },
+    {
+      "nodeId": "5532:7800",
+      "path": "figma-artifacts/raw/5532-7800/2026-02-20T00-11-16-200Z.get_screenshot.png",
+      "callId": "call_3cIzKFMQ1etPjt9rpnV0iH90"
+    },
+    {
+      "nodeId": "5532:8407",
+      "path": "figma-artifacts/raw/5532-8407/2026-02-20T00-11-16-201Z.get_screenshot.png",
+      "callId": "call_y7n3XWzsWkaIqrL2vCkGKgZC"
+    },
+    {
+      "nodeId": "0:2049",
+      "path": "figma-artifacts/raw/0-2049/2026-02-20T00-11-16-202Z.get_screenshot.png",
+      "callId": "call_oEuCMXwcXcb8Xn2VEXg3OVAf"
+    },
+    {
+      "nodeId": "5532:12332",
+      "path": "figma-artifacts/raw/5532-12332/2026-02-20T00-11-16-202Z.get_screenshot.png",
+      "callId": "call_0tDgEeLyDtMFDnzPCEoM1Zp9"
+    },
+    {
+      "nodeId": "5707:28659",
+      "path": "figma-artifacts/raw/5707-28659/2026-02-20T00-11-16-203Z.get_screenshot.png",
+      "callId": "call_rOi4389kNOzZYnzlR1Rgm5df"
+    },
+    {
+      "nodeId": "5707:28660",
+      "path": "figma-artifacts/raw/5707-28660/2026-02-20T00-11-16-203Z.get_screenshot.png",
+      "callId": "call_65sHaQs8qPymobN0Ws3QiREn"
+    },
+    {
+      "nodeId": "5532:12331",
+      "path": "figma-artifacts/raw/5532-12331/2026-02-20T00-11-16-203Z.get_screenshot.png",
+      "callId": "call_kM7XN6Lgc8U4ZwPfEliwV3PH"
+    },
+    {
+      "nodeId": "5532:12327",
+      "path": "figma-artifacts/raw/5532-12327/2026-02-20T00-11-16-204Z.get_screenshot.png",
+      "callId": "call_JuUWj7zVR9Q9JDaq9cv2mrfb"
+    },
+    {
+      "nodeId": "775:13152",
+      "path": "figma-artifacts/raw/775-13152/2026-02-20T00-11-16-206Z.get_screenshot.png",
+      "callId": "call_GAEBrMt76OujkIHWkeXd68gd"
+    },
+    {
+      "nodeId": "507:24672",
+      "path": "figma-artifacts/raw/507-24672/2026-02-20T00-11-16-207Z.get_screenshot.png",
+      "callId": "call_lJkp0kDIngK7dehftYtIKMIN"
+    },
+    {
+      "nodeId": "523:41868",
+      "path": "figma-artifacts/raw/523-41868/2026-02-20T00-11-16-209Z.get_screenshot.png",
+      "callId": "call_sSa9gWhMnHQnDjwwe0yYYhHQ"
+    },
+    {
+      "nodeId": "754:62559",
+      "path": "figma-artifacts/raw/754-62559/2026-02-20T00-11-16-210Z.get_screenshot.png",
+      "callId": "call_x5V89HtCj24Yd0XbUiDDRy6f"
+    },
+    {
+      "nodeId": "754:26934",
+      "path": "figma-artifacts/raw/754-26934/2026-02-20T00-11-16-212Z.get_screenshot.png",
+      "callId": "call_v8RWIIXLLWfRqgYFOEN8eHyM"
+    },
+    {
+      "nodeId": "770:21495",
+      "path": "figma-artifacts/raw/770-21495/2026-02-20T00-11-16-212Z.get_screenshot.png",
+      "callId": "call_TKLiBwGe01QmEi0SWx4Nkfg2"
+    },
+    {
+      "nodeId": "507:24669",
+      "path": "figma-artifacts/raw/507-24669/2026-02-20T00-11-16-214Z.get_screenshot.png",
+      "callId": "call_XLznzgTETSeV9VdHxqj2L3sk"
+    },
+    {
+      "nodeId": "5446:10266",
+      "path": "figma-artifacts/raw/5446-10266/2026-02-20T00-11-16-215Z.get_screenshot.png",
+      "callId": "call_aWImvzFuFnURrc3pYAM60fFQ"
+    },
+    {
+      "nodeId": "507:24670",
+      "path": "figma-artifacts/raw/507-24670/2026-02-20T00-11-16-217Z.get_screenshot.png",
+      "callId": "call_cHaH83nIx5qjquU0P3X51OqB"
+    },
+    {
+      "nodeId": "3176:15162",
+      "path": "figma-artifacts/raw/3176-15162/2026-02-20T00-11-16-220Z.get_screenshot.png",
+      "callId": "call_bPqlCdkuLuzZEhBOVcyBHVDg"
+    },
+    {
+      "nodeId": "507:24668",
+      "path": "figma-artifacts/raw/507-24668/2026-02-20T00-11-16-220Z.get_screenshot.png",
+      "callId": "call_KFy02npWBLVRQCIzyRK6xe6X"
+    },
+    {
+      "nodeId": "61:67601",
+      "path": "figma-artifacts/raw/61-67601/2026-02-20T00-11-16-221Z.get_screenshot.png",
+      "callId": "call_TdtQU2YSRsTopMIng6IMgrbX"
+    },
+    {
+      "nodeId": "507:24671",
+      "path": "figma-artifacts/raw/507-24671/2026-02-20T00-11-16-222Z.get_screenshot.png",
+      "callId": "call_3LtOBint4N9NDAT1RZibpgkO"
+    },
+    {
+      "nodeId": "2402:669",
+      "path": "figma-artifacts/raw/2402-669/2026-02-20T00-11-16-222Z.get_screenshot.png",
+      "callId": "call_wviJzrrSG3BTZigKpx0jPqjL"
+    },
+    {
+      "nodeId": "507:26010",
+      "path": "figma-artifacts/raw/507-26010/2026-02-20T00-11-16-223Z.get_screenshot.png",
+      "callId": "call_CcXbF6rywqPVeyLupBq6fS3w"
+    },
+    {
+      "nodeId": "0:5275",
+      "path": "figma-artifacts/raw/0-5275/2026-02-20T00-11-16-223Z.get_screenshot.png",
+      "callId": "call_6aynrwCv3KjNzF90dMCKTEvm"
+    },
+    {
+      "nodeId": "507:25994",
+      "path": "figma-artifacts/raw/507-25994/2026-02-20T00-11-16-224Z.get_screenshot.png",
+      "callId": "call_rbdczCaVpN0EZy5yAMa5BiJj"
+    },
+    {
+      "nodeId": "125:58302",
+      "path": "figma-artifacts/raw/125-58302/2026-02-20T00-11-16-225Z.get_screenshot.png",
+      "callId": "call_9zZ0SEOR0Lz5G1T7OXIvqro1"
+    },
+    {
+      "nodeId": "5583:24435",
+      "path": "figma-artifacts/raw/5583-24435/2026-02-20T00-11-16-225Z.get_screenshot.png",
+      "callId": "call_HzPgEsfkKQVyDWwNojw5Pqr8"
+    },
+    {
+      "nodeId": "123:58202",
+      "path": "figma-artifacts/raw/123-58202/2026-02-20T00-11-16-227Z.get_screenshot.png",
+      "callId": "call_vY7tgFPqVZOk1bS4sZnklaWL"
+    },
+    {
+      "nodeId": "106:59544",
+      "path": "figma-artifacts/raw/106-59544/2026-02-20T00-11-16-228Z.get_screenshot.png",
+      "callId": "call_Sd7a1VkMAGHTYHhaApfzIkAj"
+    },
+    {
+      "nodeId": "550:49969",
+      "path": "figma-artifacts/raw/550-49969/2026-02-20T00-11-16-229Z.get_screenshot.png",
+      "callId": "call_JPTTpg9W5k46cPXWNkKeI4Yr"
+    },
+    {
+      "nodeId": "5908:6487",
+      "path": "figma-artifacts/raw/5908-6487/2026-02-20T00-11-16-230Z.get_screenshot.png",
+      "callId": "call_G87qidues1iEfEJoED02jVll"
+    },
+    {
+      "nodeId": "143:62847",
+      "path": "figma-artifacts/raw/143-62847/2026-02-20T00-11-16-231Z.get_screenshot.png",
+      "callId": "call_OuhnZHOTRKMZx3Gpt4kEy5uz"
+    },
+    {
+      "nodeId": "488:51848",
+      "path": "figma-artifacts/raw/488-51848/2026-02-20T00-11-16-231Z.get_screenshot.png",
+      "callId": "call_iyThHVSMeO0qkBcy2swRXuTO"
+    },
+    {
+      "nodeId": "5442:1885",
+      "path": "figma-artifacts/raw/5442-1885/2026-02-20T00-11-16-232Z.get_screenshot.png",
+      "callId": "call_nMV4DYpPF93cEK8eP0zdRdUq"
+    },
+    {
+      "nodeId": "61:65421",
+      "path": "figma-artifacts/raw/61-65421/2026-02-20T00-11-16-233Z.get_screenshot.png",
+      "callId": "call_LJdEJ15MybcRq8snmJk6Ip9g"
+    },
+    {
+      "nodeId": "410:50387",
+      "path": "figma-artifacts/raw/410-50387/2026-02-20T00-11-16-233Z.get_screenshot.png",
+      "callId": "call_ApMD5pK7oHKAyUIzEcebKHWI"
+    },
+    {
+      "nodeId": "5425:3472",
+      "path": "figma-artifacts/raw/5425-3472/2026-02-20T00-11-16-234Z.get_screenshot.png",
+      "callId": "call_6LfOG8FmobVHKtLHkqu0uCH2"
+    },
+    {
+      "nodeId": "6:57374",
+      "path": "figma-artifacts/raw/6-57374/2026-02-20T00-11-16-234Z.get_screenshot.png",
+      "callId": "call_dk5GUOZJcTYX9mwuTkHwm2mm"
+    },
+    {
+      "nodeId": "770:21908",
+      "path": "figma-artifacts/raw/770-21908/2026-02-20T00-11-16-236Z.get_screenshot.png",
+      "callId": "call_iG8JFAXPfF6DNgckUlskFQpH"
+    },
+    {
+      "nodeId": "5726:29555",
+      "path": "figma-artifacts/raw/5726-29555/2026-02-20T00-11-16-237Z.get_screenshot.png",
+      "callId": "call_A49tpSNaHbsxCKnKomv45Cbn"
+    },
+    {
+      "nodeId": "5661:43611",
+      "path": "figma-artifacts/raw/5661-43611/2026-02-20T00-11-16-238Z.get_screenshot.png",
+      "callId": "call_BKYcgEt1bUwJvgcmwZUB8mqY"
+    },
+    {
+      "nodeId": "507:24686",
+      "path": "figma-artifacts/raw/507-24686/2026-02-20T00-11-16-238Z.get_screenshot.png",
+      "callId": "call_bgbHo12oVVoyfwlbCVFDSAyQ"
+    },
+    {
+      "nodeId": "523:41360",
+      "path": "figma-artifacts/raw/523-41360/2026-02-20T00-11-16-239Z.get_screenshot.png",
+      "callId": "call_4wCPd1v6wtuH69kS5R1u2nPs"
+    },
+    {
+      "nodeId": "5661:43368",
+      "path": "figma-artifacts/raw/5661-43368/2026-02-20T00-11-16-239Z.get_screenshot.png",
+      "callId": "call_ItRUWnESsfSFd0TtnrOV2vFK"
+    },
+    {
+      "nodeId": "5661:41970",
+      "path": "figma-artifacts/raw/5661-41970/2026-02-20T00-11-16-240Z.get_screenshot.png",
+      "callId": "call_ORudCgqt8oXOlVAKIpKH0Cxh"
+    },
+    {
+      "nodeId": "5735:66270",
+      "path": "figma-artifacts/raw/5735-66270/2026-02-20T00-11-16-240Z.get_screenshot.png",
+      "callId": "call_f9z3orCX2BZ3tZYSZBSxmyZj"
+    },
+    {
+      "nodeId": "5589:4058",
+      "path": "figma-artifacts/raw/5589-4058/2026-02-20T00-11-16-241Z.get_screenshot.png",
+      "callId": "call_zzRqqo9gb02jAeHCjCE5Sr80"
+    },
+    {
+      "nodeId": "507:29149",
+      "path": "figma-artifacts/raw/507-29149/2026-02-20T00-11-16-243Z.get_screenshot.png",
+      "callId": "call_vtSyhrHl8b4afbXWWxFMgrCe"
+    },
+    {
+      "nodeId": "40:58696",
+      "path": "figma-artifacts/raw/40-58696/2026-02-20T00-11-16-243Z.get_screenshot.png",
+      "callId": "call_cOl6PcITwtQyGRWoXXifVoZP"
+    },
+    {
+      "nodeId": "5473:20686",
+      "path": "figma-artifacts/raw/5473-20686/2026-02-20T00-11-16-244Z.get_screenshot.png",
+      "callId": "call_CjaxtuF6QmDP5ulwYX5LKPo8"
+    },
+    {
+      "nodeId": "2666:16141",
+      "path": "figma-artifacts/raw/2666-16141/2026-02-20T00-11-16-244Z.get_screenshot.png",
+      "callId": "call_Wh9Ky2Ao7VTX5csYxRoJSuFd"
+    },
+    {
+      "nodeId": "2539:14600",
+      "path": "figma-artifacts/raw/2539-14600/2026-02-20T00-11-16-246Z.get_screenshot.png",
+      "callId": "call_5iYKtz70alU61DnUAg83zkrS"
+    },
+    {
+      "nodeId": "135:67787",
+      "path": "figma-artifacts/raw/135-67787/2026-02-20T00-11-16-246Z.get_screenshot.png",
+      "callId": "call_aSrsb5EZ7rwDSsvMDye6pu9i"
+    },
+    {
+      "nodeId": "135:73247",
+      "path": "figma-artifacts/raw/135-73247/2026-02-20T00-11-16-247Z.get_screenshot.png",
+      "callId": "call_j7CQZzCF4IoKg8bRNBMSObir"
+    },
+    {
+      "nodeId": "507:24678",
+      "path": "figma-artifacts/raw/507-24678/2026-02-20T00-11-16-248Z.get_screenshot.png",
+      "callId": "call_Mwr7LE8Ohk7RIfVI27m5NVIk"
+    },
+    {
+      "nodeId": "5551:17755",
+      "path": "figma-artifacts/raw/5551-17755/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_jt5epWK5NeC0iZANMQHLCVT9"
+    },
+    {
+      "nodeId": "533:7109",
+      "path": "figma-artifacts/raw/533-7109/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_lAzXeOyZefbSQoAvcSqqV7P2"
+    },
+    {
+      "nodeId": "0:11292",
+      "path": "figma-artifacts/raw/0-11292/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_hldJHTGomOBrmmC9NYoIO00n"
+    },
+    {
+      "nodeId": "533:5978",
+      "path": "figma-artifacts/raw/533-5978/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_vsOJslpYYgfwjKMtWwRCLxFz"
+    },
+    {
+      "nodeId": "5549:4949",
+      "path": "figma-artifacts/raw/5549-4949/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_H3FbWXk5XCEArPjsW0Yrlo56"
+    },
+    {
+      "nodeId": "63:57121",
+      "path": "figma-artifacts/raw/63-57121/2026-02-20T00-11-16-249Z.get_screenshot.png",
+      "callId": "call_Q5a79FTx70y246jMfuPMbpTY"
+    },
+    {
+      "nodeId": "5446:6653",
+      "path": "figma-artifacts/raw/5446-6653/2026-02-20T00-11-16-250Z.get_screenshot.png",
+      "callId": "call_5QdQv8Jg8dmWSop60FKgBmzR"
+    },
+    {
+      "nodeId": "5469:8384",
+      "path": "figma-artifacts/raw/5469-8384/2026-02-20T00-11-16-250Z.get_screenshot.png",
+      "callId": "call_OTT587MbMJhB0FqoVXOKBraE"
+    },
+    {
+      "nodeId": "5704:26179",
+      "path": "figma-artifacts/raw/5704-26179/2026-02-20T00-11-16-250Z.get_screenshot.png",
+      "callId": "call_P4okoK7b3xWjbegAgAw3Sk7g"
+    },
+    {
+      "nodeId": "5739:34128",
+      "path": "figma-artifacts/raw/5739-34128/2026-02-20T00-11-16-251Z.get_screenshot.png",
+      "callId": "call_1s9M9VY002kWFV0kZB7Vp1Wb"
+    },
+    {
+      "nodeId": "5831:1408",
+      "path": "figma-artifacts/raw/5831-1408/2026-02-20T00-11-16-251Z.get_screenshot.png",
+      "callId": "call_Y8zW5AyQL1dJKyCTq3FMFysv"
+    },
+    {
+      "nodeId": "5413:10045",
+      "path": "figma-artifacts/raw/5413-10045/2026-02-20T00-11-16-251Z.get_screenshot.png",
+      "callId": "call_SNtXooC2ITyIkSrAfTnrdFBU"
+    },
+    {
+      "nodeId": "540:189865",
+      "path": "figma-artifacts/raw/540-189865/2026-02-20T00-11-16-253Z.get_screenshot.png",
+      "callId": "call_KSVl50jnWjndLbkVGLI7nDOO"
+    },
+    {
+      "nodeId": "5433:19059",
+      "path": "figma-artifacts/raw/5433-19059/2026-02-20T00-11-16-253Z.get_screenshot.png",
+      "callId": "call_p8wVLnEiNOm2EvhqiHqw5XQN"
+    },
+    {
+      "nodeId": "5433:19063",
+      "path": "figma-artifacts/raw/5433-19063/2026-02-20T00-11-16-253Z.get_screenshot.png",
+      "callId": "call_kC33YlDJOMouS9ZE6FaXE6B3"
+    },
+    {
+      "nodeId": "5583:24409",
+      "path": "figma-artifacts/raw/5583-24409/2026-02-20T00-11-16-253Z.get_screenshot.png",
+      "callId": "call_Z2NnIuYlEU21ZqDTdzFza0L8"
+    },
+    {
+      "nodeId": "5583:24421",
+      "path": "figma-artifacts/raw/5583-24421/2026-02-20T00-11-16-254Z.get_screenshot.png",
+      "callId": "call_l8oJf6Tm9Cmz1easYcEEjf4F"
+    },
+    {
+      "nodeId": "125:58750",
+      "path": "figma-artifacts/raw/125-58750/2026-02-20T00-11-16-254Z.get_screenshot.png",
+      "callId": "call_iwDkpRbvTKecyfvlh4aWBTna"
+    },
+    {
+      "nodeId": "128:76929",
+      "path": "figma-artifacts/raw/128-76929/2026-02-20T00-11-16-255Z.get_screenshot.png",
+      "callId": "call_FAEz4tJ6RvUSxjq8G0dGpxA1"
+    },
+    {
+      "nodeId": "215:105157",
+      "path": "figma-artifacts/raw/215-105157/2026-02-20T00-11-16-255Z.get_screenshot.png",
+      "callId": "call_21msU25k4izhv9KdJCD6t1MU"
+    },
+    {
+      "nodeId": "0:2194",
+      "path": "figma-artifacts/raw/0-2194/2026-02-20T00-11-16-257Z.get_screenshot.png",
+      "callId": "call_lrb9DumRfGvS6lApJ1Zbgn4B"
+    },
+    {
+      "nodeId": "507:26511",
+      "path": "figma-artifacts/raw/507-26511/2026-02-20T00-11-16-257Z.get_screenshot.png",
+      "callId": "call_SBWpcWoO7zWbjFz2oCptOeyX"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+.ios26-lists-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-lists-root {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  padding: 16px;
+}
+
+.ios26-list-row {
+  width: 402px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ios26-list-row.is-right {
+  justify-content: flex-start;
+}
+
+.ios26-list-content {
+  flex: 1 1 auto;
+  min-height: 52px;
+  border-radius: 100px;
+  background: #e5e5ea;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  box-shadow: inset 0 -0.33px 0 rgba(0, 0, 0, 0.12);
+}
+
+.ios26-list-row.is-tall .ios26-list-content {
+  min-height: 68px;
+}
+
+.ios26-list-title-wrap {
+  overflow: hidden;
+}
+
+.ios26-list-title-wrap.is-tall {
+  display: grid;
+  gap: 0;
+}
+
+.ios26-list-title {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ios26-list-subtitle {
+  margin: 0;
+  color: rgba(60, 60, 67, 0.6);
+  font: 400 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ios26-list-trailing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.ios26-list-detail {
+  color: rgba(60, 60, 67, 0.6);
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-list-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-list-icon.is-blue {
+  color: #08f;
+}
+
+.ios26-list-chevron {
+  width: 8px;
+  color: rgba(60, 60, 67, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-list-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ios26-list-action {
+  border: 0;
+  background: #ff8d28;
+  color: #ffffff;
+}
+
+.ios26-list-action.is-large {
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+}
+
+.ios26-list-action.is-small {
+  width: 50px;
+  height: 68px;
+  border-radius: 100px;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  align-items: start;
+  justify-items: center;
+  padding: 0;
+  position: relative;
+}
+
+.ios26-list-action.is-small::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background: #ff8d28;
+  grid-row: 1;
+}
+
+.ios26-list-action.is-small span {
+  color: rgba(60, 60, 67, 0.6);
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  grid-row: 2;
+  margin-top: -4px;
+}

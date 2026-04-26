@@ -1,0 +1,2061 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-menu-root {
+  width: min(540px, 100%);
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panels {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  justify-self: center;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-panel--dark {
+  --menu-label-primary: #f5f5f5;
+  --menu-label-secondary: #8a8a8a;
+  --menu-label-tertiary: #404040;
+  --menu-label-quaternary: #262626;
+  --menu-separator: #f5f5f5;
+  --menu-quick-bg: transparent;
+  --menu-quick-active-bg: transparent;
+  --menu-destructive: #ff4245;
+  border: 1px solid rgba(228, 233, 239, 0.44);
+  background:
+    linear-gradient(180deg, rgba(165, 165, 165, 0.56) 0%, rgba(137, 137, 137, 0.78) 100%),
+    linear-gradient(180deg, rgba(16, 16, 16, 0.48) 0%, rgba(10, 10, 10, 0.82) 100%);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.32) inset;
+}
+
+.ios26-menu-panel--dark .ios26-menu-quick-action {
+  background: transparent;
+}
+
+.ios26-menu-panel--dark .ios26-menu-quick-action.is-empty {
+  background: #f5f5f5;
+}
+
+.ios26-menu-quick-action.is-empty .ios26-menu-quick-action-icon,
+.ios26-menu-quick-action.is-empty .ios26-menu-quick-action-label {
+  display: none;
+}
+
+.ios26-menu-panel--dark .ios26-menu-separator {
+  opacity: 0.82;
+}
+
+.ios26-menu-panel--dark .ios26-menu-section-title {
+  color: #f5f5f5;
+  opacity: 0.86;
+}
+
+.ios26-menu-panel--dark .ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: #909090;
+}
+
+.ios26-menu-root .ios26-menu-quick-action-label {
+  max-width: 44px;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline {
+  min-height: 64px;
+  align-items: start;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline .ios26-menu-item-leading {
+  align-items: start;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline .ios26-menu-item-label {
+  white-space: normal;
+  line-height: 20px;
+}
+
+@media (max-width: 620px) {
+  .ios26-menu-root {
+    width: 100%;
+  }
+
+  .ios26-menu-panels {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Menu</h1>
+        <p class="meta">Category Node <code>507:24676</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24676" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#menu">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (5908:6487)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-menu-root" data-node-id="507:24676" aria-label="Menu">
+<svg class="ios26-menu-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-symbol-command" viewBox="0 0 16 16">
+      <path d="M4.8 2.3C3.42 2.3 2.3 3.42 2.3 4.8C2.3 6.18 3.42 7.3 4.8 7.3H6.7V5.4C6.7 4.02 7.82 2.9 9.2 2.9C10.58 2.9 11.7 4.02 11.7 5.4V7.3H13.6C14.98 7.3 16.1 6.18 16.1 4.8C16.1 3.42 14.98 2.3 13.6 2.3C12.22 2.3 11.1 3.42 11.1 4.8V6.7H8.3V4.8C8.3 3.42 7.18 2.3 5.8 2.3H4.8ZM6.7 8.3H4.8C3.42 8.3 2.3 9.42 2.3 10.8C2.3 12.18 3.42 13.3 4.8 13.3C6.18 13.3 7.3 12.18 7.3 10.8V8.9H10.1V10.8C10.1 12.18 11.22 13.3 12.6 13.3C13.98 13.3 15.1 12.18 15.1 10.8C15.1 9.42 13.98 8.3 12.6 8.3H10.7V10.2C10.7 11.03 11.37 11.7 12.2 11.7C13.03 11.7 13.7 11.03 13.7 10.2C13.7 9.37 13.03 8.7 12.2 8.7" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ios26-symbol-star" viewBox="0 0 16 16">
+      <path d="M8 2.1L9.7 5.6L13.5 6.1L10.7 8.8L11.4 12.6L8 10.8L4.6 12.6L5.3 8.8L2.5 6.1L6.3 5.6L8 2.1Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ios26-symbol-dashed-square" viewBox="0 0 16 16">
+      <rect x="2.5" y="2.5" width="11" height="11" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.1 1.8" />
+    </symbol>
+    <symbol id="ios26-symbol-chevron" viewBox="0 0 10 16">
+      <path d="M3 2.5L7 8L3 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </defs>
+</svg>
+  <div class="ios26-menu-panels">
+    <article class="ios26-menu-panel ios26-menu-panel--light" data-mode="light">
+      <div class="ios26-menu-quick-actions" role="group" aria-label="Quick Actions">
+        <button class="ios26-menu-quick-action is-active" type="button">
+          <span class="ios26-menu-quick-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--star"><use href="#ios26-symbol-star" xlink:href="#ios26-symbol-star"></use></svg>
+          </span>
+          <span class="ios26-menu-quick-action-label">Label</span>
+        </button>
+        <button class="ios26-menu-quick-action" type="button">
+          <span class="ios26-menu-quick-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--star"><use href="#ios26-symbol-star" xlink:href="#ios26-symbol-star"></use></svg>
+          </span>
+          <span class="ios26-menu-quick-action-label">Label</span>
+        </button>
+        <button class="ios26-menu-quick-action is-destructive" type="button">
+          <span class="ios26-menu-quick-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--star"><use href="#ios26-symbol-star" xlink:href="#ios26-symbol-star"></use></svg>
+          </span>
+          <span class="ios26-menu-quick-action-label">Destructive</span>
+        </button>
+      </div>
+
+      <div class="ios26-menu-separator" aria-hidden="true"></div>
+
+      <div class="ios26-menu-items" role="menu" aria-label="Menu Items">
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Label</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">A</span>
+</span>
+        </button>
+
+        <button class="ios26-menu-item is-disabled" role="menuitem" type="button" disabled>
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Disabled Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">B</span>
+</span>
+        </button>
+
+        <button class="ios26-menu-item is-destructive is-multiline" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Destructive Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">C</span>
+</span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+
+        <button class="ios26-menu-item is-multiline" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Action</span>
+          </span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+        <p class="ios26-menu-section-title">Section Title</p>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu with a long title</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+        <p class="ios26-menu-section-title">Section Title</p>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">Y</span>
+</span>
+        </button>
+      </div>
+    </article>
+
+    <article class="ios26-menu-panel ios26-menu-panel--dark" data-mode="dark">
+      <div class="ios26-menu-quick-actions" role="group" aria-label="Quick Actions">
+        <button class="ios26-menu-quick-action is-empty" type="button" aria-label="Placeholder"></button>
+        <button class="ios26-menu-quick-action" type="button">
+          <span class="ios26-menu-quick-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--star"><use href="#ios26-symbol-star" xlink:href="#ios26-symbol-star"></use></svg>
+          </span>
+          <span class="ios26-menu-quick-action-label">Label</span>
+        </button>
+        <button class="ios26-menu-quick-action is-destructive" type="button">
+          <span class="ios26-menu-quick-action-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--star"><use href="#ios26-symbol-star" xlink:href="#ios26-symbol-star"></use></svg>
+          </span>
+          <span class="ios26-menu-quick-action-label">Destructive</span>
+        </button>
+      </div>
+
+      <div class="ios26-menu-separator" aria-hidden="true"></div>
+
+      <div class="ios26-menu-items" role="menu" aria-label="Menu Items">
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Label</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">A</span>
+</span>
+        </button>
+
+        <button class="ios26-menu-item is-disabled" role="menuitem" type="button" disabled>
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Disabled Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">B</span>
+</span>
+        </button>
+
+        <button class="ios26-menu-item is-destructive is-multiline" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Destructive Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">C</span>
+</span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+
+        <button class="ios26-menu-item is-multiline" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Action</span>
+          </span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+        <p class="ios26-menu-section-title">Section Title</p>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-label">Submenu with a long title</span>
+          </span>
+          <span class="ios26-menu-item-chevron" aria-hidden="true">
+            <svg viewBox="0 0 10 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--chevron"><use href="#ios26-symbol-chevron" xlink:href="#ios26-symbol-chevron"></use></svg>
+          </span>
+        </button>
+
+        <div class="ios26-menu-separator" aria-hidden="true"></div>
+        <p class="ios26-menu-section-title">Section Title</p>
+
+        <button class="ios26-menu-item" role="menuitem" type="button">
+          <span class="ios26-menu-item-leading">
+            <span class="ios26-menu-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--dashed-square"><use href="#ios26-symbol-dashed-square" xlink:href="#ios26-symbol-dashed-square"></use></svg>
+            </span>
+            <span class="ios26-menu-item-label">Action</span>
+          </span>
+          <span class="ios26-menu-item-shortcut">
+  <span class="ios26-menu-shortcut-command" aria-hidden="true">
+    <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--command"><use href="#ios26-symbol-command" xlink:href="#ios26-symbol-command"></use></svg>
+  </span>
+  <span class="ios26-menu-shortcut-letter">Y</span>
+</span>
+        </button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="ios26-node-coverage-board" aria-label="Menu strict node coverage supplement">
+  <header class="ios26-node-coverage-header">
+    <h3>Menu Node Coverage Supplement</h3>
+    <p>Generated from saved strict node anchors to keep native HTML coverage explicit and persisted.</p>
+  </header>
+  <div class="ios26-node-coverage-grid">
+      <article class="ios26-node-coverage-item" data-node-id="5908:6487" data-node-name="Unnamed node" data-node-reasons="canonical-node">
+        <code>5908:6487</code>
+        <span class="ios26-node-coverage-item-name">Unnamed node</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5509:6385" data-node-name="Light Examples" data-node-reasons="metadata-required">
+        <code>5509:6385</code>
+        <span class="ios26-node-coverage-item-name">Light Examples</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5511:17506" data-node-name="Dark Examples" data-node-reasons="metadata-required">
+        <code>5511:17506</code>
+        <span class="ios26-node-coverage-item-name">Dark Examples</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5853:4743" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5853:4743</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5853:4741" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5853:4741</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5713:49112" data-node-name="Mode=Light, State=Destructive" data-node-reasons="metadata-required">
+        <code>5713:49112</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Destructive</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5713:49121" data-node-name="Mode=Dark, State=Destructive" data-node-reasons="metadata-required">
+        <code>5713:49121</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Destructive</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5713:47504" data-node-name="Mode=Light, State=Default" data-node-reasons="metadata-required">
+        <code>5713:47504</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5713:49124" data-node-name="Mode=Dark, State=Default" data-node-reasons="metadata-required">
+        <code>5713:49124</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5831:53947" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5831:53947</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5831:53945" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5831:53945</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5713:47505" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5713:47505</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:4982" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5855:4982</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="0:10525" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>0:10525</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:5764" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5855:5764</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5498:16580" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5498:16580</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:5790" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5855:5790</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5504:4039" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5504:4039</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:5798" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5855:5798</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5509:4952" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5509:4952</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8771" data-node-name="Mode=Dark, State=Destructive, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5854:8771</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Destructive, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8776" data-node-name="Mode=Dark, State=Disabled, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5854:8776</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8781" data-node-name="Mode=Dark, State=Default, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5854:8781</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8786" data-node-name="Mode=Dark, State=Destructive, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:8786</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Destructive, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8789" data-node-name="Mode=Dark, State=Disabled, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:8789</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:8792" data-node-name="Mode=Dark, State=Default, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:8792</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7321" data-node-name="Mode=Light, State=Destructive, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5714:7321</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Destructive, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7330" data-node-name="Mode=Light, State=Disabled, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5714:7330</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7339" data-node-name="Mode=Light, State=Default, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5714:7339</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7375" data-node-name="Mode=Light, State=Destructive, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5714:7375</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Destructive, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7382" data-node-name="Mode=Light, State=Disabled, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5714:7382</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7389" data-node-name="Mode=Light, State=Default, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5714:7389</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7513" data-node-name="Mode=Dark, State=Destructive, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5714:7513</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Destructive, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7522" data-node-name="Mode=Dark, State=Disabled, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5714:7522</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7531" data-node-name="Mode=Dark, State=Default, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5714:7531</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:14686" data-node-name="Mode=Dark, State=Destructive, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5856:14686</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Destructive, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:14691" data-node-name="Mode=Dark, State=Disabled, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5856:14691</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:14696" data-node-name="Mode=Dark, State=Default, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5856:14696</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7567" data-node-name="Mode=Light, State=Destructive, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5714:7567</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Destructive, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7574" data-node-name="Mode=Light, State=Disabled, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5714:7574</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7581" data-node-name="Mode=Light, State=Default, Menu has selection=False" data-node-reasons="metadata-required">
+        <code>5714:7581</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Menu has selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:15613" data-node-name="Mode=Light, State=Destructive, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5856:15613</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Destructive, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:15616" data-node-name="Mode=Light, State=Disabled, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5856:15616</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:15619" data-node-name="Mode=Light, State=Default, Menu has selection=True" data-node-reasons="metadata-required">
+        <code>5856:15619</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Menu has selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13989" data-node-name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13989</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13992" data-node-name="Mode=Dark, State=Default, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13992</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13995" data-node-name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13995</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13998" data-node-name="Mode=Dark, State=Default, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13998</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:9642" data-node-name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:9642</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:9645" data-node-name="Mode=Dark, State=Default, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:9645</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:9648" data-node-name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:9648</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5854:9651" data-node-name="Mode=Dark, State=Default, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5854:9651</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13977" data-node-name="Mode=Light, State=Disabled, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13977</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13980" data-node-name="Mode=Light, State=Default, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13980</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13983" data-node-name="Mode=Light, State=Disabled, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13983</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:13986" data-node-name="Mode=Light, State=Default, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:13986</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5848:33953" data-node-name="Mode=Light, State=Disabled, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5848:33953</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5848:33956" data-node-name="Mode=Light, State=Default, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5848:33956</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5504:4095" data-node-name="Mode=Light, State=Disabled, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5504:4095</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5504:4101" data-node-name="Mode=Light, State=Default, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5504:4101</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16816" data-node-name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16816</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16819" data-node-name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16819</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16822" data-node-name="Mode=Dark, State=Default, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16822</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16825" data-node-name="Mode=Dark, State=Default, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16825</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16828" data-node-name="Mode=Light, State=Disabled, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16828</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16831" data-node-name="Mode=Light, State=Disabled, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16831</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16834" data-node-name="Mode=Light, State=Default, Open=False, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16834</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=False, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5856:16837" data-node-name="Mode=Light, State=Default, Open=True, Menu has Selection=True" data-node-reasons="metadata-required">
+        <code>5856:16837</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=True, Menu has Selection=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7595" data-node-name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5714:7595</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:6101" data-node-name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5855:6101</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Disabled, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5714:7602" data-node-name="Mode=Dark, State=Default, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5714:7602</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:6105" data-node-name="Mode=Dark, State=Default, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5855:6105</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5509:8226" data-node-name="Mode=Light, State=Disabled, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5509:8226</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:6109" data-node-name="Mode=Light, State=Disabled, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5855:6109</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Disabled, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5509:8232" data-node-name="Mode=Light, State=Default, Open=False, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5509:8232</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=False, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5855:6112" data-node-name="Mode=Light, State=Default, Open=True, Menu has Selection=False" data-node-reasons="metadata-required">
+        <code>5855:6112</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Open=True, Menu has Selection=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5712:39056" data-node-name="Mode=Dark, Destructive=True" data-node-reasons="metadata-required">
+        <code>5712:39056</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Destructive=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5712:39060" data-node-name="Mode=Dark, Destructive=False" data-node-reasons="metadata-required">
+        <code>5712:39060</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Destructive=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5498:16566" data-node-name="Mode=Light, Destructive=True" data-node-reasons="metadata-required">
+        <code>5498:16566</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Destructive=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5498:16162" data-node-name="Mode=Light, Destructive=False" data-node-reasons="metadata-required">
+        <code>5498:16162</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Destructive=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5712:39261" data-node-name="Mode=Dark, Destructive=True" data-node-reasons="metadata-required">
+        <code>5712:39261</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Destructive=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5712:39265" data-node-name="Mode=Dark, Destructive=False" data-node-reasons="metadata-required">
+        <code>5712:39265</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Destructive=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5503:3117" data-node-name="Mode=Light, Destructive=True" data-node-reasons="metadata-required">
+        <code>5503:3117</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Destructive=True</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5503:3121" data-node-name="Mode=Light, Destructive=False" data-node-reasons="metadata-required">
+        <code>5503:3121</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Destructive=False</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5908:6481" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5908:6481</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="492:52296" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>492:52296</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5908:7175" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5908:7175</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5498:16342" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5498:16342</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5908:7169" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5908:7169</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5511:27555" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5511:27555</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+  </div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Menu metadata coverage supplement" data-node-id="507:24676">
+  <header class="ios26-node-coverage-header">
+    <h3>Menu Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24676). Full coverage is persisted; this supplement lists 30 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (30)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5509:12557" data-node-name="Blue" data-node-reasons="metadata-root-gap">
+      <code>5509:12557</code>
+      <span class="ios26-node-coverage-item-name">Blue</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:48205" data-node-name="Edit Menu" data-node-reasons="metadata-root-gap">
+      <code>5713:48205</code>
+      <span class="ios26-node-coverage-item-name">Edit Menu</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:8454" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:8454</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5856:33545" data-node-name="Menu - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5856:33545</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:8673" data-node-name="Menu - iPad - Actions and Submenus" data-node-reasons="metadata-root-gap">
+      <code>5908:8673</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions and Submenus</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:8674" data-node-name="Menu - iPad - Actions" data-node-reasons="metadata-root-gap">
+      <code>5908:8674</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5511:17507" data-node-name="Blue" data-node-reasons="metadata-root-gap">
+      <code>5511:17507</code>
+      <span class="ios26-node-coverage-item-name">Blue</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:48178" data-node-name="Edit Menu" data-node-reasons="metadata-root-gap">
+      <code>5713:48178</code>
+      <span class="ios26-node-coverage-item-name">Edit Menu</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:8470" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:8470</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:8448" data-node-name="Menu - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5908:8448</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:8897" data-node-name="Menu - iPad - Actions and Submenus" data-node-reasons="metadata-root-gap">
+      <code>5908:8897</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions and Submenus</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:8898" data-node-name="Menu - iPad - Actions" data-node-reasons="metadata-root-gap">
+      <code>5908:8898</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5853:4742" data-node-name="_Selection" data-node-reasons="metadata-root-gap">
+      <code>5853:4742</code>
+      <span class="ios26-node-coverage-item-name">_Selection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5711:35414" data-node-name="Text Selection" data-node-reasons="metadata-root-gap">
+      <code>5711:35414</code>
+      <span class="ios26-node-coverage-item-name">Text Selection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:49111" data-node-name="_Edit Menu Item" data-node-reasons="metadata-root-gap">
+      <code>5713:49111</code>
+      <span class="ios26-node-coverage-item-name">_Edit Menu Item</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5831:53946" data-node-name="_Menu Indicator" data-node-reasons="metadata-root-gap">
+      <code>5831:53946</code>
+      <span class="ios26-node-coverage-item-name">_Menu Indicator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:47537" data-node-name="Edit Menu" data-node-reasons="metadata-root-gap">
+      <code>5713:47537</code>
+      <span class="ios26-node-coverage-item-name">Edit Menu</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5855:4981" data-node-name="Section Title - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5855:4981</code>
+      <span class="ios26-node-coverage-item-name">Section Title - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5855:5763" data-node-name="Separator - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5855:5763</code>
+      <span class="ios26-node-coverage-item-name">Separator - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5855:5789" data-node-name="Section Title - iPad" data-node-reasons="metadata-root-gap">
+      <code>5855:5789</code>
+      <span class="ios26-node-coverage-item-name">Section Title - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5855:5797" data-node-name="Separator - iPad" data-node-reasons="metadata-root-gap">
+      <code>5855:5797</code>
+      <span class="ios26-node-coverage-item-name">Separator - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5502:6049" data-node-name="Menu Items - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5502:6049</code>
+      <span class="ios26-node-coverage-item-name">Menu Items - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5503:3165" data-node-name="Menu Items - iPad" data-node-reasons="metadata-root-gap">
+      <code>5503:3165</code>
+      <span class="ios26-node-coverage-item-name">Menu Items - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5848:33925" data-node-name="Menu Items - Submenus - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5848:33925</code>
+      <span class="ios26-node-coverage-item-name">Menu Items - Submenus - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5848:38184" data-node-name="Menu Items - Submenus - iPad" data-node-reasons="metadata-root-gap">
+      <code>5848:38184</code>
+      <span class="ios26-node-coverage-item-name">Menu Items - Submenus - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5498:16565" data-node-name="Quick Action - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5498:16565</code>
+      <span class="ios26-node-coverage-item-name">Quick Action - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5503:3116" data-node-name="Quick Action - iPad" data-node-reasons="metadata-root-gap">
+      <code>5503:3116</code>
+      <span class="ios26-node-coverage-item-name">Quick Action - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:7176" data-node-name="Menu - iPad - Actions" data-node-reasons="metadata-root-gap">
+      <code>5908:7176</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:7177" data-node-name="Menu - iPad - Actions and Submenus" data-node-reasons="metadata-root-gap">
+      <code>5908:7177</code>
+      <span class="ios26-node-coverage-item-name">Menu - iPad - Actions and Submenus</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191897" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191897</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/menu/5908-6487.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/menu/5908-6487.screenshot.png" alt="Menu screenshot" />
+        <p><a href="../evidence/figma-artifacts/menu/5908-6487.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/menu/5908-6487.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/menu.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/menu.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/menu.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>type MenuIPhoneProps = {
+  className?: string;
+  mode?: &quot;Dark&quot; | &quot;Light&quot;;
+};
+
+export default function MenuIPhone({ className, mode = &quot;Light&quot; }: MenuIPhoneProps) {
+  const isLight = mode === &quot;Light&quot;;
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col items-center py-[10px] relative w-[238px]&quot;} id={isLight ? &quot;node-492_52296&quot; : &quot;node-5908_6481&quot;}&gt;
+      &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; id={isLight ? &quot;node-I5707_51032-5584_31830&quot; : &quot;node-I5908_6372-5584_31836&quot;}&gt;
+        &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; id={isLight ? &quot;node-I5707_51032-5584_31831&quot; : &quot;node-I5908_6372-5584_31837&quot;}&gt;
+          &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; id={isLight ? &quot;node-I5707_51032-5584_31831-5584_31864&quot; : &quot;node-I5908_6372-5584_31837-5584_31864&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className={`absolute backdrop-blur-[40px] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px] ${isLight ? &quot;bg-[rgba(0,0,0,0.08)]&quot; : &quot;bg-[rgba(0,0,0,0.1)]&quot;}`} data-name=&quot;Blur&quot; id={isLight ? &quot;node-I5707_51032-5607_81561&quot; : &quot;node-I5908_6372-5607_81626&quot;} /&gt;
+      &lt;/div&gt;
+      &lt;div className={`absolute inset-0 rounded-[34px] ${isLight ? &quot;&quot; : &quot;opacity-67&quot;}`} data-name=&quot;Fill&quot; id={isLight ? &quot;node-I5707_51032-5607_25956&quot; : &quot;node-I5908_6372-5607_25810&quot;}&gt;
+        &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+          &lt;div className={`absolute inset-0 rounded-[34px] ${isLight ? &quot;bg-[#262626] mix-blend-color-dodge&quot; : &quot;bg-[#ccc] mix-blend-color-burn&quot;}`} /&gt;
+          &lt;div className={`absolute inset-0 rounded-[34px] ${isLight ? &quot;bg-[rgba(245,245,245,0.6)]&quot; : &quot;&quot;}`} style={mode === &quot;Dark&quot; ? { backgroundImage: &quot;linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%)&quot; } : undefined} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; id={isLight ? &quot;node-I5707_51032-5607_25843&quot; : &quot;node-I5908_6372-5607_25716&quot;} /&gt;
+      &lt;div className=&quot;content-stretch flex gap-[6px] items-center px-[10px] relative shrink-0 w-full&quot; data-name=&quot;Quick Actions&quot; id={isLight ? &quot;node-5500_7456&quot; : &quot;node-5908_6373&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px overflow-clip px-[4px] py-[6px] relative rounded-[20px]&quot; data-name=&quot;Quick Action - iPhone&quot; id={isLight ? &quot;node-5500_7457&quot; : &quot;node-5908_6374&quot;}&gt;
+          &lt;div className={`absolute inset-0 rounded-[20px] ${isLight ? String.raw`bg-[var(--fills---vibrant\/tertiary,#ededed)]` : String.raw`bg-[var(--fills---vibrant\/tertiary,#121212)] mix-blend-plus-lighter`}`} data-name=&quot;BG&quot; id={isLight ? &quot;node-I5500_7457-5511_39416&quot; : &quot;node-I5908_6374-5712_39061&quot;} /&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-center w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_7457-5498_16160&quot; : &quot;node-I5908_6374-5712_39062&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[15px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;p className={`font-[&quot;SF_Pro:Medium&quot;,sans-serif] leading-[18px] min-w-full not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis w-[min-content] whitespace-nowrap ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_7457-5498_16159&quot; : &quot;node-I5908_6374-5712_39063&quot;}&gt;
+            Label
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className={`content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px not-italic overflow-clip px-[4px] py-[6px] relative rounded-[20px] text-center ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} data-name=&quot;Quick Action - iPhone&quot; id={isLight ? &quot;node-5500_7458&quot; : &quot;node-5908_6375&quot;}&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_7458-5498_16160&quot; : &quot;node-I5908_6375-5712_39062&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[15px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;p className={`font-[&quot;SF_Pro:Medium&quot;,sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_7458-5498_16159&quot; : &quot;node-I5908_6375-5712_39063&quot;}&gt;
+            Label
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className={`content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px not-italic overflow-clip px-[4px] py-[6px] relative rounded-[20px] text-center ${isLight ? String.raw`text-[color:var(--accents\/red,#ff383c)]` : String.raw`text-[color:var(--accents\/red,#ff4245)]`}`} data-name=&quot;Quick Action - iPhone&quot; id={isLight ? &quot;node-5500_7459&quot; : &quot;node-5908_6376&quot;}&gt;
+          &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full&quot; id={isLight ? &quot;node-I5500_7459-5498_16567&quot; : &quot;node-I5908_6376-5712_39058&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[15px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap&quot; id={isLight ? &quot;node-I5500_7459-5498_16568&quot; : &quot;node-I5908_6376-5712_39059&quot;}&gt;
+            Desctructive
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items&quot; id={isLight ? &quot;node-5504_2999&quot; : &quot;node-5908_6377&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Separator - iPhone&quot; id={isLight ? &quot;node-5500_10129&quot; : &quot;node-5908_6378&quot;}&gt;
+          &lt;div className={`h-px shrink-0 w-full ${isLight ? String.raw`bg-[var(--separators\/vibrant,#e6e6e6)]` : String.raw`bg-[var(--separators\/vibrant,#1a1a1a)] mix-blend-plus-lighter`}`} data-name=&quot;Separator&quot; id={isLight ? &quot;node-I5500_10129-5855_5821&quot; : &quot;node-I5908_6378-5855_5820&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - iPhone&quot; id={isLight ? &quot;node-5500_14728&quot; : &quot;node-5908_6379&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_14728-5856_21173&quot; : &quot;node-I5908_6379-5856_21149&quot;}&gt;
+            &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center w-[28px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_14728-5856_21175&quot; : &quot;node-I5908_6379-5856_21151&quot;}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_14728-5856_21176&quot; : &quot;node-I5908_6379-5856_21152&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_14728-5856_21177&quot; : &quot;node-I5908_6379-5856_21153&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`content-stretch flex font-[&quot;SF_Pro:Medium&quot;,sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-center ${isLight ? String.raw`text-[color:var(--labels---vibrant\/secondary,#727272)]` : String.raw`text-[color:var(--labels---vibrant\/secondary,#8a8a8a)]`}`} data-name=&quot;Shortcuts&quot; id={isLight ? &quot;node-I5500_14728-5856_26622&quot; : &quot;node-I5908_6379-5856_26592&quot;}&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_14728-5856_26626&quot; : &quot;node-I5908_6379-5856_26596&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_14728-5856_26627&quot; : &quot;node-I5908_6379-5856_26597&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;A&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - iPhone&quot; id={isLight ? &quot;node-5500_16268&quot; : &quot;node-5908_6380&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_16268-5856_21191&quot; : &quot;node-I5908_6380-5856_21167&quot;}&gt;
+            &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center w-[28px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/tertiary,#404040)]`}`} id={isLight ? &quot;node-I5500_16268-5856_21193&quot; : &quot;node-I5908_6380-5856_21169&quot;}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_16268-5856_21194&quot; : &quot;node-I5908_6380-5856_21170&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/tertiary,#404040)]`}`} id={isLight ? &quot;node-I5500_16268-5856_21195&quot; : &quot;node-I5908_6380-5856_21171&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Disabled Action&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`content-stretch flex font-[&quot;SF_Pro:Medium&quot;,sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-center ${isLight ? String.raw`text-[color:var(--labels---vibrant\/quaternary,#d9d9d9)]` : String.raw`text-[color:var(--labels---vibrant\/quaternary,#262626)]`}`} data-name=&quot;Shortcuts&quot; id={isLight ? &quot;node-I5500_16268-5856_26640&quot; : &quot;node-I5908_6380-5856_26628&quot;}&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_16268-5856_26644&quot; : &quot;node-I5908_6380-5856_26632&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_16268-5856_26645&quot; : &quot;node-I5908_6380-5856_26633&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;B&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - iPhone&quot; id={isLight ? &quot;node-5500_16827&quot; : &quot;node-5908_6381&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_16827-5856_21203&quot; : &quot;node-I5908_6381-5856_21161&quot;}&gt;
+            &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center w-[28px] ${isLight ? String.raw`text-[color:var(--accents\/red,#ff383c)]` : String.raw`mix-blend-plus-lighter text-[color:var(--accents\/red,#ff4245)]`}`} id={isLight ? &quot;node-I5500_16827-5856_21205&quot; : &quot;node-I5908_6381-5856_21163&quot;}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_16827-5856_21206&quot; : &quot;node-I5908_6381-5856_21164&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--accents\/red,#ff383c)]` : String.raw`mix-blend-plus-lighter text-[color:var(--accents\/red,#ff4245)]`}`} id={isLight ? &quot;node-I5500_16827-5856_21207&quot; : &quot;node-I5908_6381-5856_21165&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Destructive Action&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`content-stretch flex font-[&quot;SF_Pro:Medium&quot;,sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-center ${isLight ? String.raw`text-[color:var(--labels---vibrant\/secondary,#727272)]` : String.raw`text-[color:var(--labels---vibrant\/secondary,#8a8a8a)]`}`} data-name=&quot;Shortcuts&quot; id={isLight ? &quot;node-I5500_16827-5856_26610&quot; : &quot;node-I5908_6381-5856_26604&quot;}&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_16827-5856_26614&quot; : &quot;node-I5908_6381-5856_26608&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_16827-5856_26615&quot; : &quot;node-I5908_6381-5856_26609&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;C&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Separator - iPhone&quot; id={isLight ? &quot;node-5500_11252&quot; : &quot;node-5908_6382&quot;}&gt;
+          &lt;div className={`h-px shrink-0 w-full ${isLight ? String.raw`bg-[var(--separators\/vibrant,#e6e6e6)]` : String.raw`bg-[var(--separators\/vibrant,#1a1a1a)] mix-blend-plus-lighter`}`} data-name=&quot;Separator&quot; id={isLight ? &quot;node-I5500_11252-5855_5821&quot; : &quot;node-I5908_6382-5855_5820&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - iPhone&quot; id={isLight ? &quot;node-5500_18448&quot; : &quot;node-5908_6383&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_18448-5856_21173&quot; : &quot;node-I5908_6383-5856_21149&quot;}&gt;
+            &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center w-[28px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_18448-5856_21175&quot; : &quot;node-I5908_6383-5856_21151&quot;}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_18448-5856_21176&quot; : &quot;node-I5908_6383-5856_21152&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_18448-5856_21177&quot; : &quot;node-I5908_6383-5856_21153&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Action&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Separator - iPhone&quot; id={isLight ? &quot;node-5500_11549&quot; : &quot;node-5908_6384&quot;}&gt;
+          &lt;div className={`h-px shrink-0 w-full ${isLight ? String.raw`bg-[var(--separators\/vibrant,#e6e6e6)]` : String.raw`bg-[var(--separators\/vibrant,#1a1a1a)] mix-blend-plus-lighter`}`} data-name=&quot;Separator&quot; id={isLight ? &quot;node-I5500_11549-5855_5821&quot; : &quot;node-I5908_6384-5855_5820&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex items-center pb-[10px] pt-[4px] px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Section Title - iPhone&quot; id={isLight ? &quot;node-5500_25804&quot; : &quot;node-5908_6385&quot;}&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Medium&quot;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[13px] text-ellipsis tracking-[-0.08px] whitespace-nowrap ${isLight ? String.raw`text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/tertiary,#404040)]`}`} id={isLight ? &quot;node-I5500_25804-5855_5952&quot; : &quot;node-I5908_6385-5855_6026&quot;}&gt;
+            &lt;p className=&quot;leading-[15px] overflow-hidden&quot;&gt;Section Title&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - Submenus - iPhone&quot; id={isLight ? &quot;node-5500_18965&quot; : &quot;node-5908_6386&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_18965-5856_23215&quot; : &quot;node-I5908_6386-5856_23227&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_18965-5856_23218&quot; : &quot;node-I5908_6386-5856_23230&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_18965-5856_23219&quot; : &quot;node-I5908_6386-5856_23231&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Submenu&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Bold&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-center w-[14px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_18965-5856_20341&quot; : &quot;node-I5908_6386-5856_20343&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆊&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - Submenus - iPhone&quot; id={isLight ? &quot;node-5500_19524&quot; : &quot;node-5908_6387&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_19524-5856_23215&quot; : &quot;node-I5908_6387-5856_23227&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_19524-5856_23218&quot; : &quot;node-I5908_6387-5856_23230&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_19524-5856_23219&quot; : &quot;node-I5908_6387-5856_23231&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Submenu&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Bold&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-center w-[14px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_19524-5856_20341&quot; : &quot;node-I5908_6387-5856_20343&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆊&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - Submenus - iPhone&quot; id={isLight ? &quot;node-5500_20125&quot; : &quot;node-5908_6388&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_20125-5856_23215&quot; : &quot;node-I5908_6388-5856_23227&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_20125-5856_23218&quot; : &quot;node-I5908_6388-5856_23230&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_20125-5856_23219&quot; : &quot;node-I5908_6388-5856_23231&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Submenu with a long title&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Bold&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-center w-[14px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_20125-5856_20341&quot; : &quot;node-I5908_6388-5856_20343&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+            &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆊&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Separator - iPhone&quot; id={isLight ? &quot;node-5500_11860&quot; : &quot;node-5908_6389&quot;}&gt;
+          &lt;div className={`h-px shrink-0 w-full ${isLight ? String.raw`bg-[var(--separators\/vibrant,#e6e6e6)]` : String.raw`bg-[var(--separators\/vibrant,#1a1a1a)] mix-blend-plus-lighter`}`} data-name=&quot;Separator&quot; id={isLight ? &quot;node-I5500_11860-5855_5821&quot; : &quot;node-I5908_6389-5855_5820&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex items-center pb-[10px] pt-[4px] px-[8px] relative shrink-0 w-full&quot; data-name=&quot;Section Title - iPhone&quot; id={isLight ? &quot;node-5500_26213&quot; : &quot;node-5908_6390&quot;}&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Medium&quot;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[13px] text-ellipsis tracking-[-0.08px] whitespace-nowrap ${isLight ? String.raw`text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/tertiary,#404040)]`}`} id={isLight ? &quot;node-I5500_26213-5855_5952&quot; : &quot;node-I5908_6390-5855_6026&quot;}&gt;
+            &lt;p className=&quot;leading-[15px] overflow-hidden&quot;&gt;Section Title&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Menu Items - iPhone&quot; id={isLight ? &quot;node-5500_21279&quot; : &quot;node-5908_6391&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isLight ? &quot;node-I5500_21279-5856_21173&quot; : &quot;node-I5908_6391-5856_21149&quot;}&gt;
+            &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center w-[28px] ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_21279-5856_21175&quot; : &quot;node-I5908_6391-5856_21151&quot;}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative&quot; data-name=&quot;Label and Subtitle&quot; id={isLight ? &quot;node-I5500_21279-5856_21176&quot; : &quot;node-I5908_6391-5856_21152&quot;}&gt;
+              &lt;div className={`flex flex-col font-[&quot;SF_Pro:Regular&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] w-full ${isLight ? String.raw`text-[color:var(--labels---vibrant\/primary,#1a1a1a)]` : String.raw`mix-blend-plus-lighter text-[color:var(--labels---vibrant\/primary,#f5f5f5)]`}`} id={isLight ? &quot;node-I5500_21279-5856_21177&quot; : &quot;node-I5908_6391-5856_21153&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Action&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className={`content-stretch flex font-[&quot;SF_Pro:Medium&quot;,sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-center ${isLight ? String.raw`text-[color:var(--labels---vibrant\/secondary,#727272)]` : String.raw`text-[color:var(--labels---vibrant\/secondary,#8a8a8a)]`}`} data-name=&quot;Shortcuts&quot; id={isLight ? &quot;node-I5500_21279-5856_26622&quot; : &quot;node-I5908_6391-5856_26592&quot;}&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_21279-5856_26626&quot; : &quot;node-I5908_6391-5856_26596&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;􀆔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className={`flex flex-col justify-center relative shrink-0 w-[14px] ${isLight ? &quot;&quot; : &quot;mix-blend-plus-lighter&quot;}`} id={isLight ? &quot;node-I5500_21279-5856_26627&quot; : &quot;node-I5908_6391-5856_26597&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Y&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

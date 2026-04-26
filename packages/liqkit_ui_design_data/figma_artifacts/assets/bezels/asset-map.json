@@ -1,0 +1,33 @@
+{
+  "category": "bezels",
+  "generatedAt": "2026-02-19T19:44:19.172Z",
+  "sourceFiles": [
+    "figma-artifacts/bezels/523-41868.design-context.txt"
+  ],
+  "totalAssets": 1,
+  "downloaded": 0,
+  "existing": 1,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "21a577e9-d97b-4f02-95da-01c8482af6d8",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "21a577e9-d97b-4f02-95da-01c8482af6d8.png",
+      "filePath": "figma-artifacts/assets/bezels/21a577e9-d97b-4f02-95da-01c8482af6d8.png",
+      "size": 376552,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/21a577e9-d97b-4f02-95da-01c8482af6d8",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/21a577e9-d97b-4f02-95da-01c8482af6d8"
+      ],
+      "constNames": [
+        "imgIPhone16Pro"
+      ],
+      "sources": [
+        "figma-artifacts/bezels/523-41868.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

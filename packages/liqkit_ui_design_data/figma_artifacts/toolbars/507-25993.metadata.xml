@@ -1,0 +1,48 @@
+<canvas id="507:25993" name="Toolbars" x="0" y="0" width="0" height="0">
+  <frame id="5704:38375" name="_Page control" x="0" y="2560" width="1110" height="510">
+    <symbol id="5704:38676" name="Dots=8+, Selection=8" x="910" y="440" width="168" height="48" />
+    <symbol id="5704:38770" name="Dots=8+, Selection=1" x="910" y="20" width="168" height="48" />
+    <symbol id="5704:38783" name="Dots=7, Selection=7" x="720" y="380" width="152" height="48" />
+    <symbol id="5704:38861" name="Dots=6, Selection=6" x="550" y="320" width="136" height="48" />
+    <symbol id="5704:38915" name="Dots=5, Selection=5" x="390" y="260" width="120" height="48" />
+    <symbol id="5704:38955" name="Dots=4, Selection=4" x="250" y="200" width="104" height="48" />
+    <symbol id="5704:38983" name="Dots=3, Selection=3" x="130" y="140" width="88" height="48" />
+    <symbol id="5704:39001" name="Dots=2, Selection=2" x="20" y="80" width="72" height="48" />
+  </frame>
+  <frame id="5431:813" name="_Button - Back" x="1070" y="2220" width="220" height="150">
+    <symbol id="5431:836" name="Mode=Light,State=Default" x="20" y="20" width="78" height="36" />
+    <symbol id="5565:34932" name="Mode=Dark,State=Default" x="109" y="20" width="80" height="36" />
+  </frame>
+  <frame id="5429:6984" name="_Button - Text" x="160" y="2130" width="170" height="230">
+    <symbol id="5429:7007" name="Mode=Light,State=Default" x="20" y="20" width="57" height="36" />
+    <symbol id="5565:34918" name="Mode=Dark, State=Default" x="90" y="20" width="57" height="36" />
+  </frame>
+  <frame id="5426:2003" name="_Button - Symbol" x="0" y="2130" width="130" height="230">
+    <symbol id="5426:2010" name="Mode=Light,State=Default" x="20" y="20" width="36" height="36" />
+    <symbol id="5565:34901" name="Mode=Dark, State=Default" x="70" y="20" width="36" height="36" />
+  </frame>
+  <frame id="5561:41165" name="Toolbar - Top - iPad" x="2050" y="0" width="870" height="1150">
+    <symbol id="5564:41843" name="Style=Title 2 Line, Tab Bar=False" x="20" y="20" width="820" height="54" />
+    <symbol id="5564:42163" name="Style=Large Title, Tab Bar=False" x="20" y="160" width="820" height="131" />
+    <symbol id="5571:23159" name="Style=Title 2 Line Left, Tab Bar=True" x="20" y="600" width="820" height="98" />
+    <symbol id="5572:23773" name="Style=Large Title, Tab Bar=True" x="20" y="780" width="820" height="131" />
+  </frame>
+  <frame id="5726:33474" name="Toolbar - Top - Sheet" x="1070" y="510" width="440" height="530">
+    <symbol id="5726:33526" name="Mode=Light, Style=Default" x="20" y="20" width="402" height="70" />
+    <symbol id="5726:33534" name="Mode=Light, Style=Large Title" x="20" y="290" width="402" height="136" />
+  </frame>
+  <frame id="1:54472" name="Toolbar - Top - iPhone" x="1070" y="0" width="440" height="450">
+    <symbol id="1:54520" name="Style=Default" x="20" y="20" width="402" height="54" />
+    <symbol id="5553:39602" name="Style=Large Title" x="20" y="230" width="402" height="125" />
+  </frame>
+  <frame id="4:55732" name="Toolbar - Bottom" x="0" y="0" width="440" height="620">
+    <symbol id="4:55845" name="Type=Buttons" x="20" y="20" width="402" height="88" />
+    <symbol id="5432:23993" name="Type=Search" x="20" y="120" width="402" height="88" />
+    <symbol id="5704:39190" name="Type=Buttons + Page Dots" x="20" y="520" width="402" height="88" />
+  </frame>
+  <frame id="5811:30646" name="_Page Dots" x="0" y="3120" width="70" height="70">
+    <symbol id="5811:30644" name="Mode=Light,Selected=False" x="20" y="20" width="8" height="8" />
+    <symbol id="5811:30648" name="Mode=Dark,Selected=True" x="40" y="40" width="8" height="8" />
+  </frame>
+  <instance id="544:191807" name="Header" x="7.105427357601002e-15" y="-500" width="1400" height="208" />
+</canvas>

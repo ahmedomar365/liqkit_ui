@@ -1,0 +1,9 @@
+<frame id="770:21899" name="Keyboard" x="10510" y="60" width="2320" height="950">
+  <symbol id="754:63116" name="Type=Find and Replace" x="1880" y="40" width="402" height="874" />
+  <symbol id="5532:28030" name="Type=Find" x="1420" y="40" width="402" height="874" />
+  <symbol id="754:63103" name="Type=Emoji" x="960" y="40" width="402" height="874" />
+  <symbol id="754:63090" name="Type=Numeric" x="500" y="40" width="402" height="874" />
+  <symbol id="754:63077" name="Type=Text" x="40" y="40" width="402" height="874" />
+</frame>
+
+IMPORTANT: The design was too large to fit into context with get_design_context. Instead you have received a sparse metadata response, you MUST call get_design_context on the IDs of the sublayers to get the full code. Split up the calls to ensure the sublayers do not also exceed the context limit.

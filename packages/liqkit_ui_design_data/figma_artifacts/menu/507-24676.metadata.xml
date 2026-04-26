@@ -1,0 +1,143 @@
+<canvas id="507:24676" name="Menus" x="0" y="0" width="0" height="0">
+  <section id="5509:6385" name="Light Examples" x="2500" y="-100" width="980" height="870">
+    <rounded-rectangle id="5509:12557" name="Blue" x="0" y="0" width="980" height="294" />
+    <instance id="5713:48205" name="Edit Menu" x="40" y="740" width="494" height="44" />
+    <instance id="5760:8454" name="Mode" x="916" y="10" width="54" height="19" />
+    <instance id="5856:33545" name="Menu - iPhone" x="40" y="40" width="238" height="578" />
+    <instance id="5908:8673" name="Menu - iPad - Actions and Submenus" x="400" y="40" width="238" height="436" />
+    <instance id="5908:8674" name="Menu - iPad - Actions" x="680" y="40" width="238" height="541" />
+  </section>
+  <section id="5511:17506" name="Dark Examples" x="3500" y="-100" width="980" height="870">
+    <rounded-rectangle id="5511:17507" name="Blue" x="0" y="0" width="980" height="294" />
+    <instance id="5713:48178" name="Edit Menu" x="40" y="740" width="511" height="44" />
+    <instance id="5760:8470" name="Mode" x="916" y="10" width="54" height="19" />
+    <instance id="5908:8448" name="Menu - iPhone" x="40" y="40" width="238" height="578" />
+    <instance id="5908:8897" name="Menu - iPad - Actions and Submenus" x="400" y="40" width="238" height="436" />
+    <instance id="5908:8898" name="Menu - iPad - Actions" x="680" y="40" width="238" height="541" />
+  </section>
+  <section id="5831:54418" x="-100" y="-100" width="2370" height="2570">
+    <frame id="5853:4742" name="_Selection" x="100" y="2350" width="80" height="120">
+      <symbol id="5853:4743" name="Mode=Dark" x="20" y="68" width="40" height="28" />
+      <symbol id="5853:4741" name="Mode=Light" x="20" y="20" width="40" height="28" />
+    </frame>
+    <symbol id="5711:35414" name="Text Selection" x="100" y="2270" width="94" height="22" />
+    <frame id="5713:49111" name="_Edit Menu Item" x="100" y="2030" width="200" height="96">
+      <symbol id="5713:49112" name="Mode=Light, State=Destructive" x="20" y="58" width="63" height="18" />
+      <symbol id="5713:49121" name="Mode=Dark, State=Destructive" x="120" y="58" width="63" height="18" />
+      <symbol id="5713:47504" name="Mode=Light, State=Default" x="20" y="20" width="63" height="18" />
+      <symbol id="5713:49124" name="Mode=Dark, State=Default" x="120" y="20" width="63" height="18" />
+    </frame>
+    <frame id="5831:53946" name="_Menu Indicator" x="350" y="2030" width="76" height="132">
+      <symbol id="5831:53947" name="Mode=Dark" x="20" y="76" width="36" height="36" />
+      <symbol id="5831:53945" name="Mode=Light" x="20" y="20" width="36" height="36" />
+    </frame>
+    <frame id="5713:47537" name="Edit Menu" x="100" y="1890" width="470" height="90">
+      <symbol id="5713:47505" name="Mode=Light" x="20" y="20" width="421" height="44" />
+    </frame>
+    <frame id="5855:4981" name="Section Title - iPhone" x="100" y="1670" width="200" height="118">
+      <symbol id="5855:4982" name="Mode=Dark" x="20" y="69" width="160" height="29" />
+      <symbol id="0:10525" name="Mode=Light" x="20" y="20" width="160" height="29" />
+    </frame>
+    <frame id="5855:5763" name="Separator - iPhone" x="320" y="1670" width="200" height="102">
+      <symbol id="5855:5764" name="Mode=Dark" x="20" y="61" width="160" height="21" />
+      <symbol id="5498:16580" name="Mode=Light" x="20" y="20" width="160" height="21" />
+    </frame>
+    <frame id="5855:5789" name="Section Title - iPad" x="1170" y="1670" width="200" height="114">
+      <symbol id="5855:5790" name="Mode=Dark" x="20" y="67" width="160" height="27" />
+      <symbol id="5504:4039" name="Mode=Light" x="20" y="20" width="160" height="27" />
+    </frame>
+    <frame id="5855:5797" name="Separator - iPad" x="1390" y="1670" width="200" height="102">
+      <symbol id="5855:5798" name="Mode=Dark" x="20" y="61" width="160" height="21" />
+      <symbol id="5509:4952" name="Mode=Light" x="20" y="20" width="160" height="21" />
+    </frame>
+    <frame id="5502:6049" name="Menu Items - iPhone" x="100" y="1040" width="480" height="370">
+      <symbol id="5854:8771" name="Mode=Dark, State=Destructive, Menu has Selection=True" x="250" y="300" width="190" height="40" />
+      <symbol id="5854:8776" name="Mode=Dark, State=Disabled, Menu has Selection=True" x="250" y="250" width="190" height="40" />
+      <symbol id="5854:8781" name="Mode=Dark, State=Default, Menu has Selection=True" x="250" y="200" width="190" height="40" />
+      <symbol id="5854:8786" name="Mode=Dark, State=Destructive, Menu has Selection=False" x="250" y="120" width="190" height="40" />
+      <symbol id="5854:8789" name="Mode=Dark, State=Disabled, Menu has Selection=False" x="250" y="70" width="190" height="40" />
+      <symbol id="5854:8792" name="Mode=Dark, State=Default, Menu has Selection=False" x="250" y="20" width="190" height="40" />
+      <symbol id="5714:7321" name="Mode=Light, State=Destructive, Menu has Selection=True" x="20" y="300" width="190" height="40" />
+      <symbol id="5714:7330" name="Mode=Light, State=Disabled, Menu has Selection=True" x="20" y="250" width="190" height="40" />
+      <symbol id="5714:7339" name="Mode=Light, State=Default, Menu has Selection=True" x="20" y="200" width="190" height="40" />
+      <symbol id="5714:7375" name="Mode=Light, State=Destructive, Menu has Selection=False" x="20" y="120" width="190" height="40" />
+      <symbol id="5714:7382" name="Mode=Light, State=Disabled, Menu has Selection=False" x="20" y="70" width="190" height="40" />
+      <symbol id="5714:7389" name="Mode=Light, State=Default, Menu has Selection=False" x="21" y="20" width="190" height="40" />
+    </frame>
+    <frame id="5503:3165" name="Menu Items - iPad" x="1170" y="1040" width="490" height="370">
+      <symbol id="5714:7513" name="Mode=Dark, State=Destructive, Menu has selection=True" x="260" y="300" width="190" height="40" />
+      <symbol id="5714:7522" name="Mode=Dark, State=Disabled, Menu has selection=True" x="260" y="250" width="190" height="40" />
+      <symbol id="5714:7531" name="Mode=Dark, State=Default, Menu has selection=True" x="260" y="200" width="190" height="40" />
+      <symbol id="5856:14686" name="Mode=Dark, State=Destructive, Menu has selection=False" x="260" y="120" width="190" height="40" />
+      <symbol id="5856:14691" name="Mode=Dark, State=Disabled, Menu has selection=False" x="260" y="70" width="190" height="40" />
+      <symbol id="5856:14696" name="Mode=Dark, State=Default, Menu has selection=False" x="260" y="20" width="190" height="40" />
+      <symbol id="5714:7567" name="Mode=Light, State=Destructive, Menu has selection=False" x="20" y="120" width="190" height="40" />
+      <symbol id="5714:7574" name="Mode=Light, State=Disabled, Menu has selection=False" x="20" y="70" width="190" height="40" />
+      <symbol id="5714:7581" name="Mode=Light, State=Default, Menu has selection=False" x="20" y="20" width="190" height="40" />
+      <symbol id="5856:15613" name="Mode=Light, State=Destructive, Menu has selection=True" x="20" y="300" width="190" height="40" />
+      <symbol id="5856:15616" name="Mode=Light, State=Disabled, Menu has selection=True" x="20" y="250" width="190" height="40" />
+      <symbol id="5856:15619" name="Mode=Light, State=Default, Menu has selection=True" x="20" y="200" width="190" height="40" />
+    </frame>
+    <frame id="5848:33925" name="Menu Items - Submenus - iPhone" x="600" y="1040" width="460" height="460">
+      <symbol id="5856:13989" name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=True" x="240" y="390" width="190" height="40" />
+      <symbol id="5856:13992" name="Mode=Dark, State=Default, Open=True, Menu has Selection=True" x="240" y="340" width="190" height="40" />
+      <symbol id="5856:13995" name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=True" x="240" y="290" width="190" height="40" />
+      <symbol id="5856:13998" name="Mode=Dark, State=Default, Open=False, Menu has Selection=True" x="240" y="240" width="190" height="40" />
+      <symbol id="5854:9642" name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=False" x="240" y="170" width="190" height="40" />
+      <symbol id="5854:9645" name="Mode=Dark, State=Default, Open=True, Menu has Selection=False" x="240" y="120" width="190" height="40" />
+      <symbol id="5854:9648" name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=False" x="240" y="70" width="190" height="40" />
+      <symbol id="5854:9651" name="Mode=Dark, State=Default, Open=False, Menu has Selection=False" x="240" y="20" width="190" height="40" />
+      <symbol id="5856:13977" name="Mode=Light, State=Disabled, Open=True, Menu has Selection=True" x="20" y="390" width="190" height="40" />
+      <symbol id="5856:13980" name="Mode=Light, State=Default, Open=True, Menu has Selection=True" x="20" y="340" width="190" height="40" />
+      <symbol id="5856:13983" name="Mode=Light, State=Disabled, Open=False, Menu has Selection=True" x="20" y="290" width="190" height="40" />
+      <symbol id="5856:13986" name="Mode=Light, State=Default, Open=False, Menu has Selection=True" x="20" y="240" width="190" height="40" />
+      <symbol id="5848:33953" name="Mode=Light, State=Disabled, Open=True, Menu has Selection=False" x="20" y="170" width="190" height="40" />
+      <symbol id="5848:33956" name="Mode=Light, State=Default, Open=True, Menu has Selection=False" x="20" y="120" width="190" height="40" />
+      <symbol id="5504:4095" name="Mode=Light, State=Disabled, Open=False, Menu has Selection=False" x="20" y="70" width="190" height="40" />
+      <symbol id="5504:4101" name="Mode=Light, State=Default, Open=False, Menu has Selection=False" x="20" y="20" width="190" height="40" />
+    </frame>
+    <frame id="5848:38184" name="Menu Items - Submenus - iPad" x="1688" y="1038" width="450" height="462">
+      <symbol id="5856:16816" name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=True" x="240" y="290" width="190" height="40" />
+      <symbol id="5856:16819" name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=True" x="240" y="390" width="190" height="40" />
+      <symbol id="5856:16822" name="Mode=Dark, State=Default, Open=False, Menu has Selection=True" x="240" y="240" width="190" height="40" />
+      <symbol id="5856:16825" name="Mode=Dark, State=Default, Open=True, Menu has Selection=True" x="240" y="340" width="190" height="40" />
+      <symbol id="5856:16828" name="Mode=Light, State=Disabled, Open=False, Menu has Selection=True" x="20" y="290" width="190" height="40" />
+      <symbol id="5856:16831" name="Mode=Light, State=Disabled, Open=True, Menu has Selection=True" x="20" y="390" width="190" height="40" />
+      <symbol id="5856:16834" name="Mode=Light, State=Default, Open=False, Menu has Selection=True" x="20" y="240" width="190" height="40" />
+      <symbol id="5856:16837" name="Mode=Light, State=Default, Open=True, Menu has Selection=True" x="20" y="340" width="190" height="40" />
+      <symbol id="5714:7595" name="Mode=Dark, State=Disabled, Open=False, Menu has Selection=False" x="240" y="70" width="190" height="40" />
+      <symbol id="5855:6101" name="Mode=Dark, State=Disabled, Open=True, Menu has Selection=False" x="240" y="170" width="190" height="40" />
+      <symbol id="5714:7602" name="Mode=Dark, State=Default, Open=False, Menu has Selection=False" x="240" y="20" width="190" height="40" />
+      <symbol id="5855:6105" name="Mode=Dark, State=Default, Open=True, Menu has Selection=False" x="240" y="120" width="190" height="40" />
+      <symbol id="5509:8226" name="Mode=Light, State=Disabled, Open=False, Menu has Selection=False" x="20" y="70" width="190" height="40" />
+      <symbol id="5855:6109" name="Mode=Light, State=Disabled, Open=True, Menu has Selection=False" x="20" y="170" width="190" height="40" />
+      <symbol id="5509:8232" name="Mode=Light, State=Default, Open=False, Menu has Selection=False" x="20" y="20" width="190" height="40" />
+      <symbol id="5855:6112" name="Mode=Light, State=Default, Open=True, Menu has Selection=False" x="20" y="120" width="190" height="40" />
+    </frame>
+    <frame id="5498:16565" name="Quick Action - iPhone" x="100" y="810" width="200" height="170">
+      <symbol id="5712:39056" name="Mode=Dark, Destructive=True" x="110" y="90" width="70" height="57" />
+      <symbol id="5712:39060" name="Mode=Dark, Destructive=False" x="110" y="20" width="70" height="57" />
+      <symbol id="5498:16566" name="Mode=Light, Destructive=True" x="20" y="90" width="70" height="57" />
+      <symbol id="5498:16162" name="Mode=Light, Destructive=False" x="20" y="20" width="70" height="57" />
+    </frame>
+    <frame id="5503:3116" name="Quick Action - iPad" x="1170" y="810" width="200" height="170">
+      <symbol id="5712:39261" name="Mode=Dark, Destructive=True" x="110" y="90" width="70" height="53" />
+      <symbol id="5712:39265" name="Mode=Dark, Destructive=False" x="110" y="20" width="70" height="53" />
+      <symbol id="5503:3117" name="Mode=Light, Destructive=True" x="20" y="90" width="70" height="53" />
+      <symbol id="5503:3121" name="Mode=Light, Destructive=False" x="20" y="20" width="70" height="53" />
+    </frame>
+    <frame id="5908:6487" name="Menu - iPhone" x="100" y="100" width="540" height="618">
+      <symbol id="5908:6481" name="Mode=Dark" x="282" y="20" width="238" height="578" />
+      <symbol id="492:52296" name="Mode=Light" x="20" y="20" width="238" height="578" />
+    </frame>
+    <frame id="5908:7176" name="Menu - iPad - Actions" x="1740" y="100" width="542" height="581">
+      <symbol id="5908:7175" name="Mode=Dark" x="284" y="20" width="238" height="541" />
+      <symbol id="5498:16342" name="Mode=Light" x="20" y="20" width="238" height="541" />
+    </frame>
+    <frame id="5908:7177" name="Menu - iPad - Actions and Submenus" x="1170" y="100" width="542" height="476">
+      <symbol id="5908:7169" name="Mode=Dark" x="284" y="20" width="238" height="436" />
+      <symbol id="5511:27555" name="Mode=Light" x="20" y="20" width="238" height="436" />
+    </frame>
+  </section>
+  <instance id="544:191897" name="Header" x="0" y="-500" width="1400" height="292" />
+</canvas>

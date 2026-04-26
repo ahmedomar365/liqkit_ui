@@ -1,0 +1,19 @@
+<canvas id="507:24690" name="Toggles" x="0" y="0" width="0" height="0">
+  <section id="5433:19063" name="Dark Examples" x="548" y="0" width="170" height="180">
+    <instance id="5433:20196" name="Toggle - Switch" x="50" y="70" width="64" height="28" />
+    <instance id="5433:20197" name="Toggle - Switch" x="50" y="114" width="64" height="28" />
+    <instance id="5760:10532" name="Mode" x="106" y="10" width="54" height="19" />
+  </section>
+  <section id="5433:19059" name="Light Examples" x="344" y="0" width="170" height="180">
+    <instance id="5433:19060" name="Toggle - Switch" x="50" y="70" width="64" height="28" />
+    <instance id="5433:20192" name="Toggle - Switch" x="50" y="114" width="64" height="28" />
+    <instance id="5760:10526" name="Mode" x="106" y="10" width="54" height="19" />
+  </section>
+  <section id="5433:20242" x="1.4210854715202004e-14" y="0" width="304" height="320">
+    <frame id="29:56814" name="Toggle - Switch" x="100" y="100" width="104" height="120">
+      <symbol id="27:68922" name="State=Off" x="20" y="67" width="64" height="28" />
+      <symbol id="27:68905" name="State=On" x="20" y="20" width="64" height="28" />
+    </frame>
+  </section>
+  <instance id="544:191812" name="Header" x="0" y="-500" width="1400" height="242" />
+</canvas>

@@ -1,0 +1,104 @@
+.ios26-menu-root {
+  width: min(540px, 100%);
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panels {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  justify-self: center;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-panel--dark {
+  --menu-label-primary: #f5f5f5;
+  --menu-label-secondary: #8a8a8a;
+  --menu-label-tertiary: #404040;
+  --menu-label-quaternary: #262626;
+  --menu-separator: #f5f5f5;
+  --menu-quick-bg: transparent;
+  --menu-quick-active-bg: transparent;
+  --menu-destructive: #ff4245;
+  border: 1px solid rgba(228, 233, 239, 0.44);
+  background:
+    linear-gradient(180deg, rgba(165, 165, 165, 0.56) 0%, rgba(137, 137, 137, 0.78) 100%),
+    linear-gradient(180deg, rgba(16, 16, 16, 0.48) 0%, rgba(10, 10, 10, 0.82) 100%);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.32) inset;
+}
+
+.ios26-menu-panel--dark .ios26-menu-quick-action {
+  background: transparent;
+}
+
+.ios26-menu-panel--dark .ios26-menu-quick-action.is-empty {
+  background: #f5f5f5;
+}
+
+.ios26-menu-quick-action.is-empty .ios26-menu-quick-action-icon,
+.ios26-menu-quick-action.is-empty .ios26-menu-quick-action-label {
+  display: none;
+}
+
+.ios26-menu-panel--dark .ios26-menu-separator {
+  opacity: 0.82;
+}
+
+.ios26-menu-panel--dark .ios26-menu-section-title {
+  color: #f5f5f5;
+  opacity: 0.86;
+}
+
+.ios26-menu-panel--dark .ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: #909090;
+}
+
+.ios26-menu-root .ios26-menu-quick-action-label {
+  max-width: 44px;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline {
+  min-height: 64px;
+  align-items: start;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline .ios26-menu-item-leading {
+  align-items: start;
+}
+
+.ios26-menu-root .ios26-menu-item.is-multiline .ios26-menu-item-label {
+  white-space: normal;
+  line-height: 20px;
+}
+
+@media (max-width: 620px) {
+  .ios26-menu-root {
+    width: 100%;
+  }
+
+  .ios26-menu-panels {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

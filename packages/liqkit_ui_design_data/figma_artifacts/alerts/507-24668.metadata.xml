@@ -1,0 +1,20 @@
+<canvas id="507:24668" name="Alerts" x="0" y="0" width="0" height="0">
+  <frame id="63:57121" name="Alert" x="0" y="0" width="670" height="480">
+    <symbol id="65:57149" name="Type=Side-by-Side" x="350" y="20" width="300" height="327" />
+    <symbol id="61:67601" name="Type=Stacked" x="20" y="20" width="300" height="443" />
+  </frame>
+  <frame id="5446:6653" name="_Buttons" x="0" y="550" width="220" height="210">
+    <symbol id="5446:6672" name="Mode=Dark, Type=Destructive" x="110" y="140" width="83" height="48" />
+    <symbol id="5446:6674" name="Mode=Dark, Type=Secondary" x="110" y="80" width="83" height="48" />
+    <symbol id="5446:6676" name="Mode=Dark, Type=Primary" x="110" y="20" width="83" height="48" />
+    <symbol id="5446:6664" name="Mode=Light, Type=Destructive" x="20" y="140" width="83" height="48" />
+    <symbol id="5446:6654" name="Mode=Light, Type=Secondary" x="20" y="80" width="83" height="48" />
+    <symbol id="5446:6658" name="Mode=Light, Type=Primary" x="20" y="20" width="83" height="48" />
+  </frame>
+  <frame id="5469:8384" name="_Text Field Background" x="0" y="820" width="380" height="90">
+    <symbol id="5469:8386" name="Mode=Dark" x="200" y="20" width="160" height="52" />
+    <symbol id="5469:8387" name="Mode=Light" x="20" y="20" width="160" height="52" />
+  </frame>
+  <symbol id="5446:7633" name="Overlay - Alerts" x="720" y="0" width="160" height="160" />
+  <instance id="540:190171" name="Header" x="-5.684341886080802e-14" y="-500" width="1400" height="208" />
+</canvas>

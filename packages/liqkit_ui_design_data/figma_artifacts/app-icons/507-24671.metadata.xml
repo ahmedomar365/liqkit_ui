@@ -1,0 +1,152 @@
+<canvas id="507:24671" name="App Icons" x="0" y="0" width="0" height="0">
+  <symbol id="2402:653" name="_Icon Grid" x="0" y="446" width="256" height="256" />
+  <frame id="2402:669" name="_System Icons" x="470" y="0" width="3540" height="260">
+    <symbol id="2402:670" name="Icon=Weather, Mode=Default" x="3380" y="20" width="66" height="66" />
+    <symbol id="5413:6377" name="Icon=Airdrop, Mode=Default" x="3460" y="20" width="66" height="66" />
+    <symbol id="2402:672" name="Icon=Weather, Mode=Dark" x="3380" y="100" width="66" height="66" />
+    <symbol id="5413:6379" name="Icon=Airdrop, Mode=Dark" x="3460" y="100" width="66" height="66" />
+    <symbol id="2402:674" name="Icon=Weather, Mode=Clear Light" x="3380" y="180" width="66" height="66" />
+    <symbol id="5413:6381" name="Icon=Airdrop, Mode=Clear Light" x="3460" y="180" width="66" height="66" />
+    <symbol id="2402:677" name="Icon=Watch, Mode=Default" x="3300" y="20" width="66" height="66" />
+    <symbol id="2402:679" name="Icon=Watch, Mode=Dark" x="3300" y="100" width="66" height="66" />
+    <symbol id="2402:681" name="Icon=Watch, Mode=Clear Light" x="3300" y="180" width="66" height="66" />
+    <symbol id="2402:684" name="Icon=Wallet, Mode=Default" x="3220" y="20" width="66" height="66" />
+    <symbol id="2402:686" name="Icon=Wallet, Mode=Dark" x="3220" y="100" width="66" height="66" />
+    <symbol id="2402:688" name="Icon=Wallet, Mode=Clear Light" x="3220" y="180" width="66" height="66" />
+    <symbol id="2402:691" name="Icon=Voice Memos, Mode=Default" x="3140" y="20" width="66" height="66" />
+    <symbol id="2402:693" name="Icon=Voice Memos, Mode=Dark" x="3140" y="100" width="66" height="66" />
+    <symbol id="2402:695" name="Icon=Voice Memos, Mode=Clear Light" x="3140" y="180" width="66" height="66" />
+    <symbol id="2402:698" name="Icon=TV, Mode=Default" x="3060" y="20" width="66" height="66" />
+    <symbol id="2402:700" name="Icon=TV, Mode=Dark" x="3060" y="100" width="66" height="66" />
+    <symbol id="2402:702" name="Icon=TV, Mode=Clear Light" x="3060" y="180" width="66" height="66" />
+    <symbol id="2402:705" name="Icon=Translate, Mode=Default" x="2980" y="20" width="66" height="66" />
+    <symbol id="2402:707" name="Icon=Translate, Mode=Dark" x="2980" y="100" width="66" height="66" />
+    <symbol id="2402:709" name="Icon=Translate, Mode=Clear Light" x="2980" y="180" width="66" height="66" />
+    <symbol id="2402:712" name="Icon=Tips, Mode=Default" x="2900" y="20" width="66" height="66" />
+    <symbol id="2402:714" name="Icon=Tips, Mode=Dark" x="2900" y="100" width="66" height="66" />
+    <symbol id="2402:716" name="Icon=Tips, Mode=Clear Light" x="2900" y="180" width="66" height="66" />
+    <symbol id="2402:719" name="Icon=Stocks, Mode=Default" x="2820" y="20" width="66" height="66" />
+    <symbol id="2402:721" name="Icon=Stocks, Mode=Dark" x="2820" y="100" width="66" height="66" />
+    <symbol id="2402:723" name="Icon=Stocks, Mode=Clear Light" x="2820" y="180" width="66" height="66" />
+    <symbol id="2402:726" name="Icon=Shortcuts, Mode=Default" x="2740" y="20" width="66" height="66" />
+    <symbol id="2402:728" name="Icon=Shortcuts, Mode=Dark" x="2740" y="100" width="66" height="66" />
+    <symbol id="2402:730" name="Icon=Shortcuts, Mode=Clear Light" x="2740" y="180" width="66" height="66" />
+    <symbol id="2402:733" name="Icon=Settings, Mode=Default" x="2660" y="20" width="66" height="66" />
+    <symbol id="2402:735" name="Icon=Settings, Mode=Dark" x="2660" y="100" width="66" height="66" />
+    <symbol id="2402:737" name="Icon=Settings, Mode=Clear Light" x="2660" y="180" width="66" height="66" />
+    <symbol id="2402:740" name="Icon=Safari, Mode=Default" x="2580" y="20" width="66" height="66" />
+    <symbol id="2402:742" name="Icon=Safari, Mode=Dark" x="2580" y="100" width="66" height="66" />
+    <symbol id="2402:744" name="Icon=Safari, Mode=Clear Light" x="2580" y="180" width="66" height="66" />
+    <symbol id="2402:747" name="Icon=Reminders, Mode=Default" x="2500" y="20" width="66" height="66" />
+    <symbol id="2402:749" name="Icon=Reminders, Mode=Dark" x="2500" y="100" width="66" height="66" />
+    <symbol id="2402:751" name="Icon=Reminders, Mode=Clear Light" x="2500" y="180" width="66" height="66" />
+    <symbol id="5413:6359" name="Icon=Preview, Mode=Default" x="2420" y="20" width="66" height="66" />
+    <symbol id="5413:6361" name="Icon=Preview, Mode=Dark" x="2420" y="100" width="66" height="66" />
+    <symbol id="5413:6363" name="Icon=Preview, Mode=Clear Light" x="2420" y="180" width="66" height="66" />
+    <symbol id="2402:754" name="Icon=Podcasts, Mode=Default" x="2340" y="20" width="66" height="66" />
+    <symbol id="2402:756" name="Icon=Podcasts, Mode=Dark" x="2340" y="100" width="66" height="66" />
+    <symbol id="2402:758" name="Icon=Podcasts, Mode=Clear Light" x="2340" y="180" width="66" height="66" />
+    <symbol id="2402:761" name="Icon=Photos, Mode=Default" x="2260" y="20" width="66" height="66" />
+    <symbol id="2402:763" name="Icon=Photos, Mode=Dark" x="2260" y="100" width="66" height="66" />
+    <symbol id="2402:765" name="Icon=Photos, Mode=Clear Light" x="2260" y="180" width="66" height="66" />
+    <symbol id="2402:768" name="Icon=Phone, Mode=Default" x="2180" y="20" width="66" height="66" />
+    <symbol id="2402:770" name="Icon=Phone, Mode=Dark" x="2180" y="100" width="66" height="66" />
+    <symbol id="2402:772" name="Icon=Phone, Mode=Clear Light" x="2180" y="180" width="66" height="66" />
+    <symbol id="5413:6395" name="Icon=Passwords, Mode=Default" x="2100" y="20" width="66" height="66" />
+    <symbol id="5413:6397" name="Icon=Passwords, Mode=Dark" x="2100" y="100" width="66" height="66" />
+    <symbol id="5413:6399" name="Icon=Passwords, Mode=Clear Light" x="2100" y="180" width="66" height="66" />
+    <symbol id="2402:775" name="Icon=Pages, Mode=Default" x="2020" y="20" width="66" height="66" />
+    <symbol id="2402:777" name="Icon=Pages, Mode=Dark" x="2020" y="100" width="66" height="66" />
+    <symbol id="2402:779" name="Icon=Pages, Mode=Clear Light" x="2020" y="180" width="66" height="66" />
+    <symbol id="2402:782" name="Icon=Number, Mode=Default" x="1940" y="20" width="66" height="66" />
+    <symbol id="2402:784" name="Icon=Number, Mode=Dark" x="1940" y="100" width="66" height="66" />
+    <symbol id="2402:786" name="Icon=Number, Mode=Clear Light" x="1940" y="180" width="66" height="66" />
+    <symbol id="2402:789" name="Icon=Notes, Mode=Default" x="1860" y="20" width="66" height="66" />
+    <symbol id="2402:791" name="Icon=Notes, Mode=Dark" x="1860" y="100" width="66" height="66" />
+    <symbol id="2402:793" name="Icon=Notes, Mode=Clear Light" x="1860" y="180" width="66" height="66" />
+    <symbol id="2402:796" name="Icon=News, Mode=Default" x="1780" y="20" width="66" height="66" />
+    <symbol id="2402:798" name="Icon=News, Mode=Dark" x="1780" y="100" width="66" height="66" />
+    <symbol id="2402:800" name="Icon=News, Mode=Clear Light" x="1780" y="180" width="66" height="66" />
+    <symbol id="2402:803" name="Icon=Music, Mode=Default" x="1700" y="20" width="66" height="66" />
+    <symbol id="2402:805" name="Icon=Music, Mode=Dark" x="1700" y="100" width="66" height="66" />
+    <symbol id="2402:807" name="Icon=Music, Mode=Clear Light" x="1700" y="180" width="66" height="66" />
+    <symbol id="2402:810" name="Icon=Messages, Mode=Default" x="1620" y="20" width="66" height="66" />
+    <symbol id="2402:812" name="Icon=Messages, Mode=Dark" x="1620" y="100" width="66" height="66" />
+    <symbol id="2402:814" name="Icon=Messages, Mode=Clear Light" x="1620" y="180" width="66" height="66" />
+    <symbol id="2402:817" name="Icon=Measure, Mode=Default" x="1540" y="20" width="66" height="66" />
+    <symbol id="2402:819" name="Icon=Measure, Mode=Dark" x="1540" y="100" width="66" height="66" />
+    <symbol id="2402:821" name="Icon=Measure, Mode=Clear Light" x="1540" y="180" width="66" height="66" />
+    <symbol id="2402:824" name="Icon=Maps, Mode=Default" x="1460" y="20" width="66" height="66" />
+    <symbol id="2402:826" name="Icon=Maps, Mode=Dark" x="1460" y="100" width="66" height="66" />
+    <symbol id="2402:828" name="Icon=Maps, Mode=Clear Light" x="1460" y="180" width="66" height="66" />
+    <symbol id="2402:831" name="Icon=Mail, Mode=Default" x="1380" y="20" width="66" height="66" />
+    <symbol id="2402:833" name="Icon=Mail, Mode=Dark" x="1380" y="100" width="66" height="66" />
+    <symbol id="2402:835" name="Icon=Mail, Mode=Clear Light" x="1380" y="180" width="66" height="66" />
+    <symbol id="2402:838" name="Icon=Keynote, Mode=Default" x="1300" y="20" width="66" height="66" />
+    <symbol id="2402:840" name="Icon=Keynote, Mode=Dark" x="1300" y="100" width="66" height="66" />
+    <symbol id="2402:842" name="Icon=Keynote, Mode=Clear Light" x="1300" y="180" width="66" height="66" />
+    <symbol id="2402:845" name="Icon=iTunes Store, Mode=Default" x="1220" y="20" width="66" height="66" />
+    <symbol id="2402:847" name="Icon=iTunes Store, Mode=Dark" x="1220" y="100" width="66" height="66" />
+    <symbol id="2402:849" name="Icon=iTunes Store, Mode=Clear Light" x="1220" y="180" width="66" height="66" />
+    <symbol id="2402:859" name="Icon=Home, Mode=Default" x="1140" y="20" width="66" height="66" />
+    <symbol id="2402:861" name="Icon=Home, Mode=Dark" x="1140" y="100" width="66" height="66" />
+    <symbol id="2402:863" name="Icon=Home, Mode=Clear Light" x="1140" y="180" width="66" height="66" />
+    <symbol id="2402:866" name="Icon=Health, Mode=Default" x="1060" y="20" width="66" height="66" />
+    <symbol id="2402:868" name="Icon=Health, Mode=Dark" x="1060" y="100" width="66" height="66" />
+    <symbol id="2402:870" name="Icon=Health, Mode=Clear Light" x="1060" y="180" width="66" height="66" />
+    <symbol id="2402:873" name="Icon=Games, Mode=Default" x="980" y="20" width="66" height="66" />
+    <symbol id="2402:875" name="Icon=Games, Mode=Dark" x="980" y="100" width="66" height="66" />
+    <symbol id="2402:877" name="Icon=Games, Mode=Clear Light" x="980" y="180" width="66" height="66" />
+    <symbol id="2402:880" name="Icon=Freeform, Mode=Default" x="900" y="20" width="66" height="66" />
+    <symbol id="2402:882" name="Icon=Freeform, Mode=Dark" x="900" y="100" width="66" height="66" />
+    <symbol id="2402:884" name="Icon=Freeform, Mode=Clear Light" x="900" y="180" width="66" height="66" />
+    <symbol id="2402:887" name="Icon=Fitness, Mode=Default" x="820" y="20" width="66" height="66" />
+    <symbol id="2402:889" name="Icon=Fitness, Mode=Dark" x="820" y="100" width="66" height="66" />
+    <symbol id="2402:891" name="Icon=Fitness, Mode=Clear Light" x="820" y="180" width="66" height="66" />
+    <symbol id="2402:894" name="Icon=Find My, Mode=Default" x="740" y="20" width="66" height="66" />
+    <symbol id="2402:896" name="Icon=Find My, Mode=Dark" x="740" y="100" width="66" height="66" />
+    <symbol id="2402:898" name="Icon=Find My, Mode=Clear Light" x="740" y="180" width="66" height="66" />
+    <symbol id="2402:901" name="Icon=Files, Mode=Default" x="660" y="20" width="66" height="66" />
+    <symbol id="2402:903" name="Icon=Files, Mode=Dark" x="660" y="100" width="66" height="66" />
+    <symbol id="2402:905" name="Icon=Files, Mode=Clear Light" x="660" y="180" width="66" height="66" />
+    <symbol id="2402:908" name="Icon=FaceTime, Mode=Default" x="580" y="20" width="66" height="66" />
+    <symbol id="2402:910" name="Icon=FaceTime, Mode=Dark" x="580" y="100" width="66" height="66" />
+    <symbol id="2402:912" name="Icon=FaceTime, Mode=Clear Light" x="580" y="180" width="66" height="66" />
+    <symbol id="2402:915" name="Icon=Contacts, Mode=Default" x="500" y="20" width="66" height="66" />
+    <symbol id="2402:917" name="Icon=Contacts, Mode=Dark" x="500" y="100" width="66" height="66" />
+    <symbol id="2402:919" name="Icon=Contacts, Mode=Clear Light" x="500" y="180" width="66" height="66" />
+    <symbol id="2402:929" name="Icon=Clock, Mode=Default" x="420" y="20" width="66" height="66" />
+    <symbol id="2402:931" name="Icon=Clock, Mode=Dark" x="420" y="100" width="66" height="66" />
+    <symbol id="2402:933" name="Icon=Clock, Mode=Clear Light" x="420" y="180" width="66" height="66" />
+    <symbol id="2402:936" name="Icon=Calculator, Mode=Default" x="340" y="20" width="66" height="66" />
+    <symbol id="2402:938" name="Icon=Calculator, Mode=Dark" x="340" y="100" width="66" height="66" />
+    <symbol id="2402:940" name="Icon=Calculator, Mode=Clear Light" x="340" y="180" width="66" height="66" />
+    <symbol id="2402:943" name="Icon=Camera, Mode=Default" x="260" y="20" width="66" height="66" />
+    <symbol id="2402:945" name="Icon=Camera, Mode=Dark" x="260" y="100" width="66" height="66" />
+    <symbol id="2402:947" name="Icon=Camera, Mode=Clear Light" x="260" y="180" width="66" height="66" />
+    <symbol id="2402:950" name="Icon=Calendar, Mode=Default" x="180" y="20" width="66" height="66" />
+    <symbol id="2402:953" name="Icon=Calendar, Mode=Dark" x="180" y="100" width="66" height="66" />
+    <symbol id="2402:956" name="Icon=Calendar, Mode=Clear Light" x="180" y="180" width="66" height="66" />
+    <symbol id="2402:959" name="Icon=Books, Mode=Default" x="100" y="20" width="66" height="66" />
+    <symbol id="2402:961" name="Icon=Books, Mode=Dark" x="100" y="100" width="66" height="66" />
+    <symbol id="2402:963" name="Icon=Books, Mode=Clear Light" x="100" y="180" width="66" height="66" />
+    <symbol id="2402:966" name="Icon=App Store, Mode=Default" x="20" y="20" width="66" height="66" />
+    <symbol id="2402:968" name="Icon=App Store, Mode=Dark" x="20" y="100" width="66" height="66" />
+    <symbol id="2402:970" name="Icon=App Store, Mode=Clear Light" x="20" y="180" width="66" height="66" />
+  </frame>
+  <frame id="2402:976" name="_Custom Icon" x="341" y="0" width="100" height="260">
+    <symbol id="2402:977" name="Mode=Clear Light" x="20" y="180" width="66" height="66" />
+    <symbol id="2402:979" name="Mode=Dark" x="20" y="100" width="66" height="66" />
+    <symbol id="2402:981" name="Mode=Default" x="20" y="20" width="66" height="66" />
+  </frame>
+  <frame id="2402:17543" name="App Icon/iPhone" x="0" y="0" width="112" height="218">
+    <symbol id="2402:17544" name="Type=Custom" x="20" y="119" width="64" height="83" />
+    <symbol id="2402:973" name="Type=System" x="20" y="20" width="64" height="83" />
+  </frame>
+  <frame id="5592:63202" name="App Icon/iPad" x="140" y="0" width="112" height="218">
+    <symbol id="5592:63203" name="Type=Custom" x="20" y="119" width="68" height="90.5" />
+    <symbol id="5592:63207" name="Type=System" x="20" y="20" width="68" height="90.5" />
+  </frame>
+  <symbol id="5592:39416" name="_Badge" x="0" y="300" width="34" height="24" />
+  <instance id="540:190176" name="Header" x="0" y="-500" width="1400" height="326" />
+</canvas>

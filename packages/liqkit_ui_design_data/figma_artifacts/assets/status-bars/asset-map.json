@@ -1,0 +1,74 @@
+{
+  "category": "status-bars",
+  "generatedAt": "2026-02-19T19:44:19.269Z",
+  "sourceFiles": [
+    "figma-artifacts/status-bars/523-41360.design-context.txt",
+    "figma-artifacts/status-bars/5413-10045.design-context.txt"
+  ],
+  "totalAssets": 3,
+  "downloaded": 0,
+  "existing": 3,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "2709a848-c737-46a4-b408-8718b0ebf56b",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "2709a848-c737-46a4-b408-8718b0ebf56b.svg",
+      "filePath": "figma-artifacts/assets/status-bars/2709a848-c737-46a4-b408-8718b0ebf56b.svg",
+      "size": 11693,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/2709a848-c737-46a4-b408-8718b0ebf56b",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/2709a848-c737-46a4-b408-8718b0ebf56b"
+      ],
+      "constNames": [
+        "imgBatteryIcon"
+      ],
+      "sources": [
+        "figma-artifacts/status-bars/523-41360.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "45da7ff3-fe1d-459f-9bba-6f45b70e7978",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "45da7ff3-fe1d-459f-9bba-6f45b70e7978.svg",
+      "filePath": "figma-artifacts/assets/status-bars/45da7ff3-fe1d-459f-9bba-6f45b70e7978.svg",
+      "size": 2326,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/45da7ff3-fe1d-459f-9bba-6f45b70e7978",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/45da7ff3-fe1d-459f-9bba-6f45b70e7978"
+      ],
+      "constNames": [
+        "imgCombinedShape"
+      ],
+      "sources": [
+        "figma-artifacts/status-bars/523-41360.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "93d64d35-dd2a-48fb-b2bd-1f80caf0ae3b",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "93d64d35-dd2a-48fb-b2bd-1f80caf0ae3b.svg",
+      "filePath": "figma-artifacts/assets/status-bars/93d64d35-dd2a-48fb-b2bd-1f80caf0ae3b.svg",
+      "size": 1422,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/93d64d35-dd2a-48fb-b2bd-1f80caf0ae3b",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/93d64d35-dd2a-48fb-b2bd-1f80caf0ae3b"
+      ],
+      "constNames": [
+        "imgCombinedShape1"
+      ],
+      "sources": [
+        "figma-artifacts/status-bars/523-41360.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

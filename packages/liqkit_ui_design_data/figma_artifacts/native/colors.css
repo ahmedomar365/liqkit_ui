@@ -1,0 +1,169 @@
+.ios26-colors-root {
+  width: 100%;
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-colors-loading {
+  margin: 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d8dce3;
+  background: #fafbfc;
+  color: #3b4350;
+  font: 400 14px/20px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colors-mode {
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f5f7;
+}
+
+.ios26-colors-mode h3 {
+  margin: 0 0 8px;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colors-group {
+  margin: 0 0 10px;
+}
+
+.ios26-colors-group h4 {
+  margin: 0 0 6px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.ios26-colors-card {
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+  padding: 6px;
+  background: #fff;
+}
+
+.ios26-colors-swatch-wrap {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  border: 1px solid #cfd4dc;
+  background-image: linear-gradient(45deg, #efefef 25%, transparent 25%),
+    linear-gradient(-45deg, #efefef 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #efefef 75%),
+    linear-gradient(-45deg, transparent 75%, #efefef 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.ios26-colors-swatch {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: var(--token-color);
+}
+
+.ios26-colors-label {
+  margin: 6px 0 2px;
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #111;
+}
+
+.ios26-colors-value {
+  font: 400 11px/14px "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #3b4350;
+}
+
+.ios26-colors-primitives {
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f5f7;
+}
+
+.ios26-colors-primitives-title {
+  margin: 0 0 8px;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colors-primitives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.ios26-colors-primitive {
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-colors-primitive p {
+  margin: 0;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-colors-primitive-chip {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid #cfd4dc;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #6ec9ff 0%, #0091ff 100%);
+  display: grid;
+  place-items: center;
+  font: 700 30px/1 "SF Pro Text", "SF Pro", sans-serif;
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.ios26-colors-primitive-chip--dark {
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #242426 0%, #000000 100%);
+  color: rgba(255, 255, 255, 0.86);
+  border-color: #30363f;
+}
+
+.ios26-colors-primitive-chip--text {
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.ios26-colors-support {
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f5f7;
+}
+
+.ios26-colors-support h4 {
+  margin: 0 0 8px;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colors-support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.ios26-colors-support-item {
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+  padding: 8px;
+  background: #ffffff;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}

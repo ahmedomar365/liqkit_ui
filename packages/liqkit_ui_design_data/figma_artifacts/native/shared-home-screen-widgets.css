@@ -1,0 +1,224 @@
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}

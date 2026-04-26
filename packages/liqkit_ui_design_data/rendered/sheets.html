@@ -1,0 +1,1591 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sheets - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-sheets-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-sheets-demo {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+}
+
+.ios26-sheets-variant {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-sheets-variant h3 {
+  margin: 0;
+  font: 590 14px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-sheet-device {
+  width: 402px;
+  height: 874px;
+  position: relative;
+  border-radius: 48px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.ios26-sheet-screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.ios26-sheet-screen.is-stack {
+  background: #000000;
+}
+
+.ios26-sheet-fullscreen {
+  position: absolute;
+  inset: 62px 0 0 0;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+  box-shadow: 0 15px 75px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.ios26-sheet-fullscreen.is-stack {
+  background: transparent;
+  box-shadow: none;
+}
+
+.ios26-sheet-background-page {
+  position: absolute;
+  inset: 0 16px;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+}
+
+.ios26-sheet-background-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ios26-sheet-stack-top {
+  position: absolute;
+  inset: 10px 0 0 0;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+  box-shadow: 0 15px 75px rgba(0, 0, 0, 0.18);
+}
+
+.ios26-sheet-toolbar {
+  width: 100%;
+  display: grid;
+  padding-bottom: 10px;
+}
+
+.ios26-sheet-grabber-wrap {
+  height: 16px;
+  display: grid;
+  place-items: start center;
+  padding-top: 5px;
+}
+
+.ios26-sheet-grabber {
+  width: 36px;
+  height: 5px;
+  border-radius: 100px;
+  background: #cccccc;
+}
+
+.ios26-sheet-controls {
+  height: 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.ios26-sheet-top-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0;
+  cursor: default;
+  color: #727272;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.9), rgba(230, 230, 230, 0.85));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sheet-top-btn .ios26-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.ios26-sheet-top-btn.is-primary {
+  color: #ffffff;
+  background: linear-gradient(180deg, #32a2ff, #0079ff);
+  box-shadow: 0 1px 8px rgba(0, 122, 255, 0.38);
+}
+
+.ios26-sheet-title {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-sheet-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.ios26-sheet-inspector {
+  position: absolute;
+  inset: 500px 0 0 0;
+  padding: 0 6px 6px;
+}
+
+.ios26-sheet-glass {
+  position: absolute;
+  inset: 0 6px 6px;
+  border-radius: 34px;
+  background: rgba(245, 245, 245, 0.6);
+  box-shadow:
+    0 15px 75px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.ios26-sheet-status {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 62px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 21px 24px 19px;
+  z-index: 3;
+  color: #000;
+}
+
+.ios26-sheet-time {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000000;
+}
+
+@media (max-width: 520px) {
+  .ios26-sheet-device {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Sheets</h1>
+        <p class="meta">Category Node <code>507:24684</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24684" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#sheets">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (770:21495)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-sheets-root" data-node-id="507:24684" aria-label="Sheets category">
+<svg class="ios26-sheets-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-sheets-symbol-1" viewBox="0 0 20 20">
+      <path d="M6 6L14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" /><path d="M14 6L6 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-sheets-symbol-2" viewBox="0 0 20 20">
+      <path d="M5 10.2L8.7 13.6L15 7.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-sheets-demo" data-node-id="770:21495" aria-label="Sheets (Modals)">
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64541">
+      <div class="ios26-sheet-screen" data-node-id="5729:24437">
+        <div class="ios26-sheet-fullscreen" data-node-id="5729:24127">
+          <div class="ios26-sheet-toolbar" data-node-id="I5729:24127;5726:34303">
+            <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24127;5726:34303;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+            <div class="ios26-sheet-controls" data-node-id="I5729:24127;5726:34303;5726:33529">
+              <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24127;5726:34303;5726:33530">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+              </button>
+              <div class="ios26-sheet-title" data-node-id="I5729:24127;5726:34303;5827:65227">Title</div>
+              <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24127;5726:34303;5726:33532">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5465:16807">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64543">
+      <div class="ios26-sheet-screen is-stack" data-node-id="5729:24438">
+        <div class="ios26-sheet-fullscreen is-stack" data-node-id="5729:24154">
+          <div class="ios26-sheet-background-page" data-node-id="I5729:24154;5591:74165"></div>
+          <div class="ios26-sheet-stack-top" data-node-id="I5729:24154;5591:74166">
+            <div class="ios26-sheet-toolbar" data-node-id="I5729:24154;5726:35206">
+              <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24154;5726:35206;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+              <div class="ios26-sheet-controls" data-node-id="I5729:24154;5726:35206;5726:33529">
+                <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24154;5726:35206;5726:33530">
+                  <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+                </button>
+                <div class="ios26-sheet-title" data-node-id="I5729:24154;5726:35206;5827:65227">Title</div>
+                <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24154;5726:35206;5726:33532">
+                  <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5729:24116">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64555">
+      <div class="ios26-sheet-screen" data-node-id="5729:24585">
+        <div class="ios26-sheet-scroll-edge" data-node-id="5729:24713"></div>
+        <div class="ios26-sheet-inspector" data-node-id="5729:24586">
+          <div class="ios26-sheet-glass" data-node-id="I5729:24586;5551:41149"></div>
+          <div class="ios26-sheet-toolbar" data-node-id="I5729:24586;5729:24624">
+            <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24586;5729:24624;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+            <div class="ios26-sheet-controls" data-node-id="I5729:24586;5729:24624;5726:33529">
+              <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24586;5729:24624;5726:33530">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+              </button>
+              <div class="ios26-sheet-title" data-node-id="I5729:24586;5729:24624;5827:65227">Title</div>
+              <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24586;5729:24624;5726:33532">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5465:16807">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Sheets metadata coverage supplement" data-node-id="507:24684">
+  <header class="ios26-node-coverage-header">
+    <h3>Sheets Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24684). Full coverage is persisted; this supplement lists 7 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (7)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5551:41121" data-node-name="Sheet - Inspector - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5551:41121</code>
+      <span class="ios26-node-coverage-item-name">Sheet - Inspector - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5551:18479" data-node-name="Overlay" data-node-reasons="metadata-root-gap">
+      <code>5551:18479</code>
+      <span class="ios26-node-coverage-item-name">Overlay</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:48163" data-node-name="Sheet - Full Screen - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5584:48163</code>
+      <span class="ios26-node-coverage-item-name">Sheet - Full Screen - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:74164" data-node-name="Stacked=True" data-node-reasons="metadata-root-gap">
+      <code>5591:74164</code>
+      <span class="ios26-node-coverage-item-name">Stacked=True</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:5085" data-node-name="Stacked=False" data-node-reasons="metadata-root-gap">
+      <code>0:5085</code>
+      <span class="ios26-node-coverage-item-name">Stacked=False</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5719:30145" data-node-name="Sheet - iPad" data-node-reasons="metadata-root-gap">
+      <code>5719:30145</code>
+      <span class="ios26-node-coverage-item-name">Sheet - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191847" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191847</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/sheets/770-21495.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/sheets/770-21495.screenshot.png" alt="Sheets screenshot" />
+        <p><a href="../evidence/figma-artifacts/sheets/770-21495.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/sheets/770-21495.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/sheets.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/sheets.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/sheets.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgCellularConnection = &quot;https://www.figma.com/api/mcp/asset/001a5dcb-2dd1-4d29-bc73-a94cae527840&quot;;
+const imgWifi = &quot;https://www.figma.com/api/mcp/asset/c6ad1726-815a-4ddc-8a6c-5d986d68d8ef&quot;;
+const imgFrame = &quot;https://www.figma.com/api/mcp/asset/78a3f8ee-9637-4376-bf14-1ec18b21877f&quot;;
+const imgIPhone17ProSilverPortrait = &quot;https://www.figma.com/api/mcp/asset/3b8f9716-7f6c-45cf-918c-3b1af2d7b32c&quot;;
+const imgBlur = &quot;https://www.figma.com/api/mcp/asset/ab0e5c0a-1986-4049-9052-78a39b413462&quot;;
+type AlertProps = {
+  className?: string;
+  showField2?: boolean;
+  showFields?: boolean;
+  type?: &quot;Side-by-Side&quot; | &quot;Stacked&quot;;
+};
+
+function Alert({ className, showField2 = true, showFields = true, type = &quot;Stacked&quot; }: AlertProps) {
+  const isSideBySide = type === &quot;Side-by-Side&quot;;
+  const isStacked = type === &quot;Stacked&quot;;
+  return (
+    &lt;div className={className || `content-stretch flex flex-col gap-[10px] items-start p-[14px] relative w-[300px] ${isStacked ? &quot;justify-center&quot; : &quot;&quot;}`} id={isStacked ? &quot;node-61_67601&quot; : &quot;node-65_57149&quot;}&gt;
+      &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; id={isStacked ? &quot;node-I5742_38608-5584_31830&quot; : &quot;node-I5446_7340-5584_31830&quot;}&gt;
+        &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; id={isStacked ? &quot;node-I5742_38608-5584_31831&quot; : &quot;node-I5446_7340-5584_31831&quot;}&gt;
+          &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; id={isStacked ? &quot;node-I5742_38608-5584_31831-5584_31864&quot; : &quot;node-I5446_7340-5584_31831-5584_31864&quot;} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]&quot; data-name=&quot;Blur&quot; id={isStacked ? &quot;node-I5742_38608-5607_81561&quot; : &quot;node-I5446_7340-5607_81561&quot;} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute inset-0 rounded-[34px]&quot; data-name=&quot;Fill&quot; id={isStacked ? &quot;node-I5742_38608-5607_25956&quot; : &quot;node-I5446_7340-5607_25956&quot;}&gt;
+        &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+          &lt;div className=&quot;absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]&quot; /&gt;
+          &lt;div className=&quot;absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]&quot; /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; id={isStacked ? &quot;node-I5742_38608-5607_25843&quot; : &quot;node-I5446_7340-5607_25843&quot;} /&gt;
+      &lt;div className=&quot;content-stretch flex flex-col gap-[10px] items-center leading-[0] not-italic pb-[24px] pt-[8px] px-[8px] relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full&quot; data-name=&quot;Title and Description&quot; id={isStacked ? &quot;node-61_67654&quot; : &quot;node-65_57150&quot;}&gt;
+        &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] justify-center relative shrink-0 w-full&quot; id={isStacked ? &quot;node-61_67599&quot; : &quot;node-65_57151&quot;}&gt;
+          &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;A Short Title Is Best&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center relative shrink-0 w-full&quot; id={isStacked ? &quot;node-61_67600&quot; : &quot;node-65_57152&quot;}&gt;
+          &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;A description should be a short, complete sentence.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {showFields &amp;&amp; (
+        &lt;div className=&quot;content-stretch flex flex-col items-start pb-[19px] relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Text Field(s)&quot; data-node-id=&quot;5469:8618&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full&quot; data-name=&quot;Fields&quot; data-node-id=&quot;5469:8619&quot;&gt;
+            &lt;div className=&quot;absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] inset-0 rounded-[26px]&quot; data-name=&quot;_Text Field Background&quot; data-node-id=&quot;5469:8620&quot; /&gt;
+            &lt;div className=&quot;content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Text Field&quot; data-node-id=&quot;5469:8621&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px relative&quot; data-name=&quot;Contents&quot; data-node-id=&quot;I5469:8621;5433:15632&quot;&gt;
+                &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I5469:8621;5469:8035&quot; /&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full&quot; data-node-id=&quot;I5469:8621;5433:15633&quot;&gt;
+                  &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Value&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            {showField2 &amp;&amp; (
+              &lt;div className=&quot;content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Text Field&quot; data-node-id=&quot;5469:8622&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px relative&quot; data-name=&quot;Contents&quot; data-node-id=&quot;I5469:8622;553:23062&quot;&gt;
+                  &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I5469:8622;5469:7944&quot; /&gt;
+                  &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px] w-full&quot; data-node-id=&quot;I5469:8622;553:23064&quot;&gt;
+                    &lt;p className=&quot;leading-[20px] whitespace-pre-wrap&quot;&gt;Value&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            )}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+      &lt;div className={`content-stretch flex items-start relative shrink-0 w-full ${isStacked ? &quot;flex-col gap-[10px]&quot; : &quot;gap-[16px]&quot;}`} data-name=&quot;Buttons&quot; id={isStacked ? &quot;node-537_39280&quot; : &quot;node-65_57156&quot;}&gt;
+        &lt;div className={`content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] ${isStacked ? &quot;bg-[rgba(255,255,255,0.6)] shrink-0 w-full&quot; : &quot;flex-[1_0_0] h-[48px] min-h-px min-w-px&quot;}`} data-name=&quot;_Buttons&quot; id={isStacked ? &quot;node-5446_6744&quot; : &quot;node-5446_6990&quot;}&gt;
+          &lt;div className={`absolute inset-0 rounded-[100px] ${isStacked ? String.raw`bg-[var(--accents\/blue,#08f)]` : String.raw`bg-[var(--fills\/secondary,rgba(120,120,128,0.16))]`}`} data-name=&quot;BG&quot; id={isStacked ? &quot;node-I5446_6744-5446_10002&quot; : &quot;node-I5446_6990-5446_9891&quot;} /&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Medium&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] whitespace-nowrap ${isStacked ? String.raw`text-[color:var(--grays\/white,white)]` : String.raw`text-[color:var(--labels\/primary,black)]`}`} id={isStacked ? &quot;node-I5446_6744-5446_6661&quot; : &quot;node-I5446_6990-5446_6662&quot;}&gt;
+            &lt;p className=&quot;leading-[22px]&quot;&gt;{isSideBySide ? &quot;Secondary&quot; : &quot;Primary&quot;}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className={`content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] ${isStacked ? &quot;h-[48px] shrink-0 w-full&quot; : &quot;bg-[rgba(255,255,255,0.6)] flex-[1_0_0] min-h-px min-w-px&quot;}`} data-name=&quot;_Buttons&quot; id={isStacked ? &quot;node-5446_7598&quot; : &quot;node-5446_7014&quot;}&gt;
+          &lt;div className={`absolute inset-0 rounded-[100px] ${isStacked ? String.raw`bg-[var(--fills\/secondary,rgba(120,120,128,0.16))]` : String.raw`bg-[var(--accents\/blue,#08f)]`}`} data-name=&quot;BG&quot; id={isStacked ? &quot;node-I5446_7598-5446_9932&quot; : &quot;node-I5446_7014-5446_10002&quot;} /&gt;
+          &lt;div className={`flex flex-col font-[&quot;SF_Pro:Medium&quot;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] tracking-[-0.43px] whitespace-nowrap ${isStacked ? &quot;text-[#ff383c]&quot; : String.raw`text-[color:var(--grays\/white,white)]`}`} id={isStacked ? &quot;node-I5446_7598-5446_6665&quot; : &quot;node-I5446_7014-5446_6661&quot;}&gt;
+            &lt;p className=&quot;leading-[22px]&quot;&gt;{isSideBySide ? &quot;Primary&quot; : &quot;Destructive&quot;}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        {isStacked &amp;&amp; (
+          &lt;div className=&quot;content-stretch flex gap-[10px] h-[48px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] shrink-0 w-full&quot; data-name=&quot;_Buttons&quot; data-node-id=&quot;5446:7604&quot;&gt;
+            &lt;div className=&quot;absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] inset-0 rounded-[100px]&quot; data-name=&quot;BG&quot; data-node-id=&quot;I5446:7604;5446:9891&quot; /&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] whitespace-nowrap&quot; data-node-id=&quot;I5446:7604;5446:6662&quot;&gt;
+              &lt;p className=&quot;leading-[22px]&quot;&gt;Secondary&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = &quot;9:41&quot; }: StatusBarIPhoneProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]&quot;} data-name=&quot;Status bar - iPhone&quot; data-node-id=&quot;5465:16807&quot;&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative&quot; data-name=&quot;Time&quot; data-node-id=&quot;5465:16808&quot;&gt;
+        &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;5465:16809&quot;&gt;
+          {time}
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative&quot; data-name=&quot;Levels&quot; data-node-id=&quot;5465:16811&quot;&gt;
+        &lt;div className=&quot;h-[12.226px] relative shrink-0 w-[19.2px]&quot; data-name=&quot;Cellular Connection&quot; data-node-id=&quot;5465:16812&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCellularConnection} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[12.328px] relative shrink-0 w-[17.142px]&quot; data-name=&quot;Wifi&quot; data-node-id=&quot;5465:16813&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgWifi} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[13px] relative shrink-0 w-[27.328px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;6325:1760&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgFrame} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type Alert1Props = {
+  className?: string;
+  type?: &quot;Side-by-side&quot; | &quot;Stacked&quot;;
+};
+
+export default function Alert1({ className, type = &quot;Side-by-side&quot; }: Alert1Props) {
+  const isSideBySide = type === &quot;Side-by-side&quot;;
+  return (
+    &lt;div className={className || &quot;h-[874px] relative w-[402px]&quot;} id={isSideBySide ? &quot;node-754_43567&quot; : &quot;node-754_57652&quot;}&gt;
+      &lt;div className=&quot;absolute bg-[var(--backgrounds\/primary,white)] content-stretch flex flex-col inset-0 items-center justify-center overflow-clip pb-[10px] pt-[167px] px-[16px] rounded-[50px]&quot; data-name=&quot;Screen&quot; id={isSideBySide ? &quot;node-5661_51119&quot; : &quot;node-5661_51124&quot;}&gt;
+        &lt;div className=&quot;absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0&quot; data-name=&quot;Scroll Edge Effect - Soft&quot; id={isSideBySide ? &quot;node-5707_46468&quot; : &quot;node-5707_46469&quot;}&gt;
+          &lt;div className=&quot;absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5707_46468-5661_28853&quot; : &quot;node-I5707_46469-5661_28853&quot;} style={{ maskImage: `url(&#39;${imgBlur}&#39;)` }} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;flex-[1_0_0] min-h-px min-w-px w-full&quot; data-name=&quot;Content Area&quot; id={isSideBySide ? &quot;node-5661_51122&quot; : &quot;node-5661_51127&quot;} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute content-stretch flex flex-col gap-[10px] items-center left-0 pb-[10px] right-0 top-[62px]&quot; data-name=&quot;Toolbar - Top - iPhone&quot; id={isSideBySide ? &quot;node-5661_51129&quot; : &quot;node-5661_51130&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Controls&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39603&quot; : &quot;node-I5661_51130-5553_39603&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex gap-[10px] items-center relative shrink-0&quot; data-name=&quot;Leading&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39604&quot; : &quot;node-I5661_51130-5553_39604&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605&quot; : &quot;node-I5661_51130-5553_39605&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565&quot; : &quot;node-I5661_51130-5553_39605-6491_22565&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-5575_44983&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-5575_75442&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-5575_75442-5575_32354&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-6491_20171&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-6491_20172&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22565-6491_20173&quot; : &quot;node-I5661_51130-5553_39605-6491_22565-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap&quot; data-name=&quot;_Button - Back&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22970&quot; : &quot;node-I5661_51130-5553_39605-6491_22970&quot;}&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22970-5431_837&quot; : &quot;node-I5661_51130-5553_39605-6491_22970-5431_837&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;􀯶&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39605-6491_22970-5431_840&quot; : &quot;node-I5661_51130-5553_39605-6491_22970-5431_840&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;flex flex-row items-center self-stretch&quot;&gt;
+            &lt;div className=&quot;h-full shrink-0 w-[8px]&quot; data-name=&quot;Spacer&quot; id={isSideBySide ? &quot;node-I5661_51129-5661_32020&quot; : &quot;node-I5661_51130-5661_32020&quot;} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex gap-[10px] items-center justify-end relative shrink-0&quot; data-name=&quot;Trailing&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39608&quot; : &quot;node-I5661_51130-5553_39608&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609&quot; : &quot;node-I5661_51130-5553_39609&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888&quot; : &quot;node-I5661_51130-5553_39609-5566_7888&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-5575_44983&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-5575_75442&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-5575_75442-5575_32354&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-6491_20171&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-6491_20172&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5566_7888-6491_20173&quot; : &quot;node-I5661_51130-5553_39609-5566_7888-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5432_23135&quot; : &quot;node-I5661_51130-5553_39609-5432_23135&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39609-5432_23135-5426_2011&quot; : &quot;node-I5661_51130-5553_39609-5432_23135-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610&quot; : &quot;node-I5661_51130-5553_39610&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516&quot; : &quot;node-I5661_51130-5553_39610-5566_11516&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-5575_44983&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-5575_75442&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-5575_75442-5575_32354&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-6491_20171&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-6491_20172&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5566_11516-6491_20173&quot; : &quot;node-I5661_51130-5553_39610-5566_11516-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23126&quot; : &quot;node-I5661_51130-5553_39610-5432_23126&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23126-5426_2011&quot; : &quot;node-I5661_51130-5553_39610-5432_23126-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23127&quot; : &quot;node-I5661_51130-5553_39610-5432_23127&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23127-5426_2011&quot; : &quot;node-I5661_51130-5553_39610-5432_23127-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23128&quot; : &quot;node-I5661_51130-5553_39610-5432_23128&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39610-5432_23128-5426_2011&quot; : &quot;node-I5661_51130-5553_39610-5432_23128-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-start px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Title and Subtitle&quot; id={isSideBySide ? &quot;node-I5661_51129-5553_39612&quot; : &quot;node-I5661_51130-5553_39612&quot;}&gt;
+          &lt;div className=&quot;h-[41px] relative shrink-0 w-full&quot; data-name=&quot;_Title - Large Title&quot; id={isSideBySide ? &quot;node-I5661_51129-5827_57570&quot; : &quot;node-I5661_51130-5827_57570&quot;}&gt;
+            &lt;p className=&quot;absolute font-[&#39;SF_Pro:Bold&#39;,sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]&quot; id={isSideBySide ? &quot;node-I5661_51129-5827_57570-5827_57542&quot; : &quot;node-I5661_51130-5827_57570-5827_57542&quot;}&gt;
+              Title
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;StatusBarIPhone className=&quot;absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0&quot; /&gt;
+      &lt;div className=&quot;absolute bg-[var(--miscellaneous\/alert---overlay,rgba(41,41,58,0.23))] inset-0&quot; data-name=&quot;Overlay - Alerts&quot; id={isSideBySide ? &quot;node-5446_18712&quot; : &quot;node-5446_18710&quot;} /&gt;
+      &lt;Alert className={`-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex flex-col gap-[10px] items-start left-1/2 p-[14px] w-[300px] ${isSideBySide ? &quot;top-1/2&quot; : &quot;justify-center top-[calc(50%+0.5px)]&quot;}`} type={isSideBySide ? &quot;Side-by-Side&quot; : undefined} /&gt;
+      &lt;div className=&quot;absolute h-[874px] left-0 top-0 w-[402px]&quot; data-name=&quot;iPhone 17 Pro&quot; id={isSideBySide ? &quot;node-5661_51139&quot; : &quot;node-5661_51140&quot;}&gt;
+        &lt;div className=&quot;absolute h-[920px] left-[-24px] top-[-23px] w-[450px]&quot; data-name=&quot;iPhone 17 Pro - Silver - Portrait&quot; id={isSideBySide ? &quot;node-I5661_51139-6316_14150&quot; : &quot;node-I5661_51140-6316_14150&quot;}&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPhone17ProSilverPortrait} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Large Title/Emphasized: Font(family: &quot;SF Pro&quot;, style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Alert
+**Node ID:** 770:21495
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Toolbar - Top - iPhone
+**Node ID:** 1:54472
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Alert
+**Node ID:** 63:57121
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/alerts](https://developer.apple.com/design/human-interface-guidelines/alerts)
+
+## Text Field
+**Node ID:** 553:23047
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

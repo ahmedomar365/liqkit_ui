@@ -1,0 +1,42 @@
+.ios26-segmented-demo {
+  width: 370px;
+  display: grid;
+  gap: 28px;
+}
+
+.ios26-segmented-group {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-segmented-control {
+  width: 370px;
+  height: 32px;
+  border-radius: 100px;
+  background: rgba(118, 118, 128, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+}
+
+.ios26-segment {
+  min-width: 0;
+  height: 28px;
+  border-radius: 20px;
+  flex: 1 0 0;
+  padding: 3px 6px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 500 13.333px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: #000000;
+}
+
+.ios26-segment.is-selected {
+  background: #ffffff;
+  font-weight: 600;
+}

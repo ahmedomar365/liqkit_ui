@@ -1,0 +1,215 @@
+.ios26-statusbars-root {
+  width: min(1280px, 100%);
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-statusbars-panel {
+  border: 1px solid #d9dde5;
+  border-radius: 20px;
+  background: rgba(247, 248, 251, 0.9);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-statusbars-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-statusbars-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  color: #0f1115;
+  letter-spacing: -0.35px;
+}
+
+.ios26-statusbars-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #666b75;
+}
+
+.ios26-statusbars-phone {
+  width: 402px;
+  height: 62px;
+  max-width: 100%;
+  border-radius: 20px;
+  border: 1px solid #dde2eb;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 11px 24px 17px;
+  color: #000000;
+}
+
+.ios26-statusbars-phone-left {
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-statusbars-phone-right {
+  justify-self: end;
+}
+
+.ios26-statusbars-ipad-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-statusbars-ipad {
+  width: 1210px;
+  max-width: 100%;
+  border-radius: 14px;
+  border: 1px solid #dfe3eb;
+  background: #ffffff;
+  display: grid;
+  align-items: center;
+  color: #000000;
+  padding: 0 26px;
+}
+
+.ios26-statusbars-ipad--status {
+  height: 32px;
+  grid-template-columns: auto 1fr;
+}
+
+.ios26-statusbars-ipad--windowed,
+.ios26-statusbars-ipad--fullscreen {
+  height: 24px;
+  grid-template-columns: auto 1fr auto;
+}
+
+.ios26-statusbars-ipad-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-statusbars-menu-left {
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.ios26-statusbars-ipad-center {
+  display: inline-flex;
+  justify-self: center;
+  align-items: center;
+  gap: 22px;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-statusbars-ipad-right {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-statusbars-example-surface {
+  border-radius: 16px;
+  border: 1px solid #e2e6ef;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-statusbars-example-surface.is-light {
+  background: linear-gradient(180deg, #ffffff 0%, #f2f4f8 100%);
+}
+
+.ios26-statusbars-example-surface.is-dark {
+  background: linear-gradient(180deg, #161a21 0%, #0d1117 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ios26-statusbars-menuitem-panel {
+  justify-items: start;
+}
+
+.ios26-statusbars-menuitem-stage {
+  width: 190px;
+  height: 72px;
+  border-radius: 6px;
+  border: 1px dashed #6155f5;
+  background: #aaaaaa;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(60px, 1fr));
+  align-items: center;
+  justify-items: center;
+  column-gap: 10px;
+  padding: 0 10px;
+}
+
+.ios26-statusbars-menuitem {
+  width: 60px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-statusbars-menuitem-frame {
+  width: 100%;
+  height: 22px;
+  border-radius: 100px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-statusbars-menuitem-frame span {
+  position: relative;
+  font: 500 14px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000000;
+}
+
+.ios26-statusbars-menuitem.is-selected .ios26-statusbars-menuitem-frame {
+  position: relative;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.ios26-statusbars-menuitem.is-selected .ios26-statusbars-menuitem-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: #121212;
+  mix-blend-mode: plus-lighter;
+}
+
+.ios26-statusbars-phone.is-dark,
+.ios26-statusbars-ipad.is-dark {
+  background: rgba(19, 22, 28, 0.85);
+  color: #f3f5f9;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 1060px) {
+  .ios26-statusbars-root {
+    width: 100%;
+  }
+
+  .ios26-statusbars-panel {
+    padding: 14px;
+  }
+
+  .ios26-statusbars-phone {
+    width: 100%;
+  }
+
+  .ios26-statusbars-ipad {
+    padding: 0 12px;
+  }
+
+  .ios26-statusbars-ipad-center {
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .ios26-statusbars-menuitem-stage {
+    width: min(190px, 100%);
+  }
+}

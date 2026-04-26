@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmented controls - Native Source Preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: #f7f8fa;
+        color: #111;
+        font-family: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .ios26-source-preview {
+        min-height: calc(100vh - 32px);
+        display: grid;
+        place-items: start center;
+      }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+
+.ios26-segmented-demo {
+  width: 370px;
+  display: grid;
+  gap: 28px;
+}
+
+.ios26-segmented-group {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-segmented-control {
+  width: 370px;
+  height: 32px;
+  border-radius: 100px;
+  background: rgba(118, 118, 128, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+}
+
+.ios26-segment {
+  min-width: 0;
+  height: 28px;
+  border-radius: 20px;
+  flex: 1 0 0;
+  padding: 3px 6px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 500 13.333px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: #000000;
+}
+
+.ios26-segment.is-selected {
+  background: #ffffff;
+  font-weight: 600;
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="ios26-source-preview">
+      <section class="ios26-segmented-root" data-node-id="507:24683" aria-label="Segmented controls category">
+<div class="ios26-segmented-demo" data-node-id="6:57374" aria-label="Segmented controls">
+  <div class="ios26-segmented-group" data-segments="2">
+    <div class="ios26-segmented-control" data-node-id="488:61152">
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:61062">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+    </div>
+  </div>
+
+  <div class="ios26-segmented-group" data-segments="3">
+    <div class="ios26-segmented-control" data-node-id="488:61122">
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:61032">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:61017">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+    </div>
+  </div>
+
+  <div class="ios26-segmented-group" data-segments="4">
+    <div class="ios26-segmented-control" data-node-id="488:61092">
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60972">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60957">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60942">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+    </div>
+  </div>
+
+  <div class="ios26-segmented-group" data-segments="5">
+    <div class="ios26-segmented-control" data-node-id="488:60882">
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60852">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60837">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="488:60807">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+      <span class="ios26-segment">Label</span>
+    </div>
+    <div class="ios26-segmented-control" data-node-id="6:57505">
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment">Label</span>
+      <span class="ios26-segment is-selected">Label</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Segmented controls metadata coverage supplement" data-node-id="507:24683">
+  <header class="ios26-node-coverage-header">
+    <h3>Segmented controls Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24683). Full coverage is persisted; this supplement lists 13 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (13)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="2666:17069" data-node-name="Light examples" data-node-reasons="metadata-root-gap">
+      <code>2666:17069</code>
+      <span class="ios26-node-coverage-item-name">Light examples</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19723" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19723</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19724" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19724</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19725" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19725</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19726" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19726</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:9245" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:9245</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="2666:17070" data-node-name="Dark examples" data-node-reasons="metadata-root-gap">
+      <code>2666:17070</code>
+      <span class="ios26-node-coverage-item-name">Dark examples</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19770" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19770</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19771" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19771</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19772" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19772</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="595:19773" data-node-name="Segmented control" data-node-reasons="metadata-root-gap">
+      <code>595:19773</code>
+      <span class="ios26-node-coverage-item-name">Segmented control</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:9251" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:9251</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191852" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191852</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-02-19T13:51:50Z",
+  "categoryNode": "507:24673",
+  "nodes": {
+    "40:58696": {
+      "Miscellaneous/Buttons/Label - Destructive - Disabled": "#ff383c80",
+      "Body/Regular": "Font(family: \"SF Pro\", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574)",
+      "Subheadline/Regular": "Font(family: \"SF Pro\", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513)",
+      "Miscellaneous/Buttons/BG - Destructive": "#ff383c24",
+      "Miscellaneous/Buttons/BG - Destructive - Prominent": "#ff383c33",
+      "Accents/Red": "#ff383c",
+      "Grays/White": "#ffffff",
+      "Labels/Tertiary": "#3c3c434d",
+      "Fills/Tertiary": "#7676801f",
+      "Accents/Blue": "#0088ff",
+      "Labels/Primary": "#000000",
+      "Component Fill": "#f5f5f5",
+      "Component Stroke": "#6155f5"
+    },
+    "2539:14600": {
+      "Labels/Secondary": "#3C3C43",
+      "Labels/Primary": "#000000",
+      "Text styles/Caption2/font-size": "11",
+      "SF Pro/semibold": "Semibold",
+      "SF Pro/font-system-apple": "SF Pro",
+      "Text styles/Caption2/line-height": "13",
+      "Fills/Secondary": "#78788029",
+      "Backgrounds/Primary": "#ffffff",
+      "Miscellaneous/Buttons/Label - Destructive - Disabled": "#ff383c80",
+      "Body/Regular": "Font(family: \"SF Pro\", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574)",
+      "Subheadline/Regular": "Font(family: \"SF Pro\", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513)",
+      "Miscellaneous/Buttons/BG - Destructive": "#ff383c24",
+      "Miscellaneous/Buttons/BG - Destructive - Prominent": "#ff383c33",
+      "Accents/Red": "#ff383c",
+      "Grays/White": "#ffffff",
+      "Labels/Tertiary": "#3c3c434d",
+      "Fills/Tertiary": "#7676801f",
+      "Accents/Blue": "#0088ff"
+    },
+    "2666:16141": {
+      "Labels/Secondary": "#3C3C43",
+      "Labels/Primary": "#ffffff",
+      "Text styles/Caption2/font-size": "11",
+      "SF Pro/semibold": "Semibold",
+      "SF Pro/font-system-apple": "SF Pro",
+      "Text styles/Caption2/line-height": "13",
+      "Fills/Secondary": "#78788052",
+      "Backgrounds/Primary": "#000000",
+      "Miscellaneous/Buttons/Label - Destructive - Disabled": "#ff424580",
+      "Body/Regular": "Font(family: \"SF Pro\", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574)",
+      "Subheadline/Regular": "Font(family: \"SF Pro\", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513)",
+      "Miscellaneous/Buttons/BG - Destructive": "#ff424524",
+      "Miscellaneous/Buttons/BG - Destructive - Prominent": "#ff424533",
+      "Accents/Red": "#ff4245",
+      "Grays/White": "#ffffff",
+      "Labels/Tertiary": "#ebebf54d",
+      "Fills/Tertiary": "#7676803d",
+      "Accents/Blue": "#0091ff"
+    }
+  }
+}

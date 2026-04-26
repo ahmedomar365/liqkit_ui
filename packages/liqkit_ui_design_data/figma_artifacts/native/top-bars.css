@@ -1,0 +1,312 @@
+.ios26-topbars-demo {
+  width: 100%;
+  display: grid;
+}
+
+.ios26-topbars-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-topbars-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ios26-topbars-phone-wrap {
+  width: 196px;
+  height: 425px;
+  position: relative;
+  overflow: visible;
+}
+
+.ios26-topbars-phone {
+  width: 402px;
+  height: 874px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(0.4875621891);
+  transform-origin: top left;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.ios26-topbars-screen {
+  position: absolute;
+  inset: 8px;
+  border-radius: 44px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.ios26-topbars-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0));
+}
+
+.ios26-topbars-scroll-edge--strong {
+  background: radial-gradient(130% 96% at 50% 0%, rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0));
+}
+
+.ios26-topbars-status {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  height: 50px;
+  padding: 11px 24px 17px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  z-index: 5;
+  color: #000;
+}
+
+.ios26-topbars-status > span {
+  text-align: left;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-topbars-status > .ios26-status-glyphs {
+  justify-self: end;
+}
+
+.ios26-topbars-btn {
+  height: 44px;
+  min-width: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0;
+  color: #1a1a1a;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-topbars-btn--symbol {
+  width: 44px;
+}
+
+.ios26-topbars-btn--accent {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  background: #08f;
+  color: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+.ios26-topbars-toolbar {
+  position: absolute;
+  top: 54px;
+  left: 8px;
+  right: 8px;
+  z-index: 4;
+}
+
+.ios26-topbars-toolbar--default {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.ios26-topbars-title-center {
+  margin: 0;
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-toolbar--compact {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ios26-topbars-title-large {
+  margin: 0;
+  font: 700 34px/41px "SF Pro Display", "SF Pro", sans-serif;
+  letter-spacing: 0.4px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-toolbar--large {
+  top: 54px;
+  padding-bottom: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-topbars-large-row {
+  padding: 0 16px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ios26-topbars-tool-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ios26-topbars-title-block {
+  padding: 0 16px;
+  display: grid;
+  justify-items: start;
+}
+
+.ios26-topbars-subtitle-subheadline {
+  margin: 0;
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.25px;
+  color: #727272;
+}
+
+.ios26-topbars-toolbar--two-line,
+.ios26-topbars-toolbar--two-line-left {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.ios26-topbars-title-two-line-center {
+  text-align: center;
+  line-height: 1;
+}
+
+.ios26-topbars-title-two-line-center h3,
+.ios26-topbars-title-two-line-left h3 {
+  margin: 0;
+  font: 590 15px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-title-two-line-center p,
+.ios26-topbars-title-two-line-left p {
+  margin: 0;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-topbars-title-two-line-left {
+  justify-self: start;
+  text-align: left;
+  padding-left: 2px;
+}
+
+.ios26-topbars-content {
+  position: absolute;
+  top: 108px;
+  left: 16px;
+  right: 16px;
+  bottom: 10px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.ios26-topbars-variant-gallery {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ios26-topbars-variant-card {
+  border: 1px solid #dde3ed;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-topbars-variant-card h4 {
+  margin: 0;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-topbars-variant-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ios26-topbars-tab-chip {
+  border: 1px solid #dbe1ea;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #1f2937;
+  height: 30px;
+  padding: 0 10px;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.2px;
+}
+
+.ios26-topbars-tab-chip.is-selected {
+  background: #eaf3ff;
+  border-color: #b4d2ff;
+  color: #0067d7;
+}
+
+.ios26-topbars-tab-chip.is-dark {
+  background: #1f2937;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+.ios26-topbars-tab-chip.is-dark.is-selected {
+  background: #172554;
+  border-color: #1d4ed8;
+  color: #bfdbfe;
+}
+
+.ios26-topbars-config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ios26-topbars-config-chip {
+  min-height: 30px;
+  padding: 7px 9px;
+  border-radius: 10px;
+  border: 1px solid #dbe1ea;
+  background: #f8fafc;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #334155;
+}
+
+@media (max-width: 980px) {
+  .ios26-topbars-strip {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .ios26-topbars-config-grid {
+    grid-template-columns: 1fr;
+  }
+}

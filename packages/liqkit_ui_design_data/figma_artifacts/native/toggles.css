@@ -1,0 +1,142 @@
+.ios26-toggles-root {
+  width: min(718px, 100%);
+  display: grid;
+  grid-template-columns: 304px 170px 170px;
+  gap: 34px;
+  align-items: start;
+}
+
+.ios26-toggles-canonical {
+  min-height: 320px;
+  border-radius: 22px;
+  border: 1px solid #d9dbe2;
+  background: #f7f8fb;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 19px;
+}
+
+.ios26-toggles-example {
+  width: 170px;
+  min-height: 180px;
+  border-radius: 24px;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 15px;
+  padding: 10px 0 16px;
+}
+
+.ios26-toggles-example.is-light {
+  background: #f4f4f5;
+}
+
+.ios26-toggles-example.is-dark {
+  background: #060606;
+}
+
+.ios26-toggle-switch {
+  width: 64px;
+  height: 28px;
+  border: 0;
+  border-radius: 100px;
+  padding: 2px;
+  background: #34c759;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+}
+
+.ios26-toggle-label {
+  display: block;
+  width: 2px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+.ios26-toggle-knob {
+  width: 39px;
+  height: 24px;
+  border-radius: 100px;
+  background: #ffffff;
+}
+
+.ios26-toggle-switch.is-off {
+  background: rgba(60, 60, 67, 0.3);
+  flex-direction: row-reverse;
+}
+
+.ios26-toggle-switch.is-off .ios26-toggle-label {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: 1.4px solid #8f9097;
+  border-radius: 50%;
+}
+
+.ios26-toggles-example.is-dark .ios26-toggle-switch.is-off {
+  background: rgba(120, 120, 128, 0.32);
+}
+
+.ios26-toggles-mode {
+  width: 54px;
+  height: 19px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border: 1px solid rgba(60, 60, 67, 0.6);
+  background: rgba(120, 120, 128, 0.16);
+  margin-left: 56px;
+}
+
+.ios26-toggles-mode.is-light {
+  color: #000000;
+}
+
+.ios26-toggles-mode.is-dark {
+  border-color: rgba(235, 235, 245, 0.7);
+  background: rgba(120, 120, 128, 0.32);
+  color: #ffffff;
+}
+
+.ios26-toggles-mode-dot {
+  width: 8px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1.2px currentColor;
+  opacity: 0.82;
+}
+
+.ios26-toggles-mode-dot::after {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  display: block;
+  background: currentColor;
+  margin: 3px auto 0;
+}
+
+.ios26-toggles-mode-text {
+  font: 590 11px/13px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.4px;
+}
+
+@media (max-width: 880px) {
+  .ios26-toggles-root {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    justify-items: center;
+  }
+
+  .ios26-toggles-canonical {
+    width: min(304px, 100%);
+  }
+}

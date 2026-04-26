@@ -1,0 +1,68 @@
+.ios26-popup-buttons-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-popup-buttons-root {
+  width: 120px;
+  height: 140px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-popup-buttons-frame {
+  width: 120px;
+  height: 140px;
+  border: 1px dashed #5f63ff;
+  border-radius: 7px;
+  padding: 14px 10px;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.ios26-popup-button {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: 400 32px/38px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  width: max-content;
+}
+
+.ios26-popup-button.is-enabled {
+  color: #08f;
+}
+
+.ios26-popup-button.is-disabled {
+  color: rgba(60, 60, 67, 0.3);
+}
+
+.ios26-popup-button-label {
+  font-size: 32px;
+  line-height: 38px;
+}
+
+.ios26-popup-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 38px;
+}
+
+.ios26-popup-button-icon .ios26-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-popup-button-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

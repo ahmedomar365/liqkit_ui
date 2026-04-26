@@ -1,0 +1,335 @@
+const imgSlider = "https://www.figma.com/api/mcp/asset/eb4519bc-415b-44a3-84ae-978c437265f6";
+const imgBg = "https://www.figma.com/api/mcp/asset/3a8cedf1-8da8-4a18-947b-84586a77acea";
+const imgBg1 = "https://www.figma.com/api/mcp/asset/f4a1d269-d690-4ca6-8946-f6ea8c483ab7";
+const imgAddButton = "https://www.figma.com/api/mcp/asset/d08826f2-0da3-4f59-8304-80ad6f8f9fb0";
+
+function PageControl({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Page control" data-node-id="488:51848">
+      <div className="h-[44px] relative w-[402px]" data-name="Dots=2, Selection=1" data-node-id="488:54949">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54950">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54951" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54952" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ColorPickerIPhone({ className }: { className?: string }) {
+  return (
+    <div className={className || "content-stretch flex flex-col h-[706px] items-start px-[6px] relative w-[402px]"} data-name="Color Picker - iPhone" data-node-id="0:5275">
+      <div className="absolute content-stretch flex flex-col inset-[0_0_-6px_0] items-center pb-[6px] px-[6px]" data-name="Sheet - Inspector - iPhone" data-node-id="5581:27433">
+        <div className="absolute inset-[0_6px_6px_6px]" data-name="Liquid Glass - Regular - Medium" data-node-id="I5581:27433;5551:41149">
+          <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5581:27433;5551:41149;5584:31830">
+            <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5581:27433;5551:41149;5584:31831">
+              <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5581:27433;5551:41149;5584:31831;5584:31864" />
+            </div>
+            <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5581:27433;5551:41149;5607:81561" />
+          </div>
+          <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5581:27433;5551:41149;5607:25956">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+              <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+              <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5581:27433;5551:41149;5607:25843" />
+        </div>
+        <div className="content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full" data-name="Toolbar - Top - Sheet" data-node-id="I5581:27433;5729:24624">
+          <div className="content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0" data-name="Grabber" data-node-id="I5581:27433;5729:24624;5726:33527">
+            <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" data-name="Grabber" data-node-id="I5581:27433;5729:24624;5827:65815" />
+          </div>
+          <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5581:27433;5729:24624;5726:33529">
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5581:27433;5729:24624;5726:33530">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5581:27433;5729:24624;5726:33530;5551:22138">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBg} />
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5581:27433;5729:24624;5726:33530;5551:22128" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀆄</p>
+              </div>
+            </div>
+            <div className="flex flex-row items-center self-stretch">
+              <div className="h-full shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5581:27433;5729:24624;5726:33531" />
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5581:27433;5729:24624;5726:33532">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5581:27433;5729:24624;5726:33532;5551:22487">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBg1} />
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]" data-node-id="I5581:27433;5729:24624;5726:33532;5551:22126" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀄨</p>
+              </div>
+            </div>
+            <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5581:27433;5729:24624;5827:65227">
+              <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5581:27433;5729:24624;5827:65227;5827:56434">
+                Title
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col items-start pb-[20px] px-[16px] relative rounded-tl-[10px] rounded-tr-[10px] shrink-0 w-full" data-name="Panel Contents" data-node-id="61:65757">
+        <div className="content-stretch flex flex-col items-center pb-[10px] pt-[8px] relative shrink-0 w-full" data-name="_Toolbar - iPhone" data-node-id="5584:58503">
+          <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5584:58503;5584:57402">
+            <div className="bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0" data-name="_Button" data-node-id="I5584:58503;5704:26034">
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5584:58503;5704:26034;5704:26029" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀎘</p>
+              </div>
+            </div>
+            <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Title" data-node-id="I5584:58503;5831:1411">
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[-0.43px]" data-node-id="I5584:58503;5831:1411;5831:1405">
+                Colors
+              </p>
+            </div>
+            <div className="bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0" data-name="_Button" data-node-id="I5584:58503;5704:26096">
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5584:58503;5704:26096;5704:26029" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀎘</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-center pb-[24px] relative shrink-0 w-full" data-name="Segmented Control" data-node-id="515:52150">
+          <div className="bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] shrink-0 w-full" data-name="Segmented control" data-node-id="528:94617">
+            <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="I528:94617;488:61123">
+              <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I528:94617;488:61124">
+                Grid
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="I528:94617;488:61126">
+              <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I528:94617;488:61127">
+                Spectrum
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="I528:94617;488:61129">
+              <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I528:94617;488:61130">
+                Sliders
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[18px] shrink-0 w-full" data-name="Color Grid" data-node-id="515:48178">
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 1" data-node-id="515:48805">
+            <div className="bg-[#fefffe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48179" />
+            <div className="bg-[#ebebeb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48181" />
+            <div className="bg-[#d6d6d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48183" />
+            <div className="bg-[#c2c2c2] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48185" />
+            <div className="bg-[#adadad] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48187" />
+            <div className="bg-[#999] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48189" />
+            <div className="bg-[#858585] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48191" />
+            <div className="bg-[#707070] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48193" />
+            <div className="bg-[#5c5c5c] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48195" />
+            <div className="bg-[#474747] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48197" />
+            <div className="bg-[#333] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48199" />
+            <div className="bg-black flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48201" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 2" data-node-id="515:48927">
+            <div className="bg-[#00374a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48180" />
+            <div className="bg-[#011d57] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48182" />
+            <div className="bg-[#11053b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48184" />
+            <div className="bg-[#2e063d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48186" />
+            <div className="bg-[#3c071b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48188" />
+            <div className="bg-[#5c0701] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48190" />
+            <div className="bg-[#5a1c00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48192" />
+            <div className="bg-[#583300] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48194" />
+            <div className="bg-[#563d00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48196" />
+            <div className="bg-[#666100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48198" />
+            <div className="bg-[#4f5504] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48200" />
+            <div className="bg-[#263e0f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48202" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 3" data-node-id="515:49050">
+            <div className="bg-[#004d65] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48203" />
+            <div className="bg-[#012f7b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48204" />
+            <div className="bg-[#1a0a52] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48205" />
+            <div className="bg-[#450d59] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48206" />
+            <div className="bg-[#551029] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48207" />
+            <div className="bg-[#831100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48208" />
+            <div className="bg-[#7b2900] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48209" />
+            <div className="bg-[#7a4a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48210" />
+            <div className="bg-[#785800] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48211" />
+            <div className="bg-[#8d8602] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48212" />
+            <div className="bg-[#6f760a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48213" />
+            <div className="bg-[#38571a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48214" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 4" data-node-id="515:49174">
+            <div className="bg-[#016e8f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48215" />
+            <div className="bg-[#0042a9] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48216" />
+            <div className="bg-[#2c0977] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48217" />
+            <div className="bg-[#61187c] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48218" />
+            <div className="bg-[#791a3d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48219" />
+            <div className="bg-[#b51a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48220" />
+            <div className="bg-[#ad3e00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48221" />
+            <div className="bg-[#a96800] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48222" />
+            <div className="bg-[#a67b01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48223" />
+            <div className="bg-[#c4bc00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48224" />
+            <div className="bg-[#9ba50e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48225" />
+            <div className="bg-[#4e7a27] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48226" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 5" data-node-id="515:49299">
+            <div className="bg-[#008cb4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48227" />
+            <div className="bg-[#0056d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48228" />
+            <div className="bg-[#371a94] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48229" />
+            <div className="bg-[#7a219e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48230" />
+            <div className="bg-[#99244f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48231" />
+            <div className="bg-[#e22400] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48232" />
+            <div className="bg-[#da5100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48233" />
+            <div className="bg-[#d38301] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48234" />
+            <div className="bg-[#d19d01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48235" />
+            <div className="bg-[#f5ec00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48236" />
+            <div className="bg-[#c3d117] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48237" />
+            <div className="bg-[#669d34] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48238" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 6" data-node-id="515:49425">
+            <div className="bg-[#00a1d8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48239" />
+            <div className="bg-[#0061fd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48240" />
+            <div className="bg-[#4d22b2] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48241" />
+            <div className="bg-[#982abc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48242" />
+            <div className="bg-[#b92d5d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48243" />
+            <div className="bg-[#ff4015] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48244" />
+            <div className="bg-[#ff6a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48245" />
+            <div className="bg-[#ffab01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48246" />
+            <div className="bg-[#fcc700] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48247" />
+            <div className="bg-[#fefb41] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48248" />
+            <div className="bg-[#d9ec37] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48249" />
+            <div className="bg-[#76bb40] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48250" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 7" data-node-id="515:49552">
+            <div className="bg-[#01c7fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48251" />
+            <div className="bg-[#3a87fd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48252" />
+            <div className="bg-[#5e30eb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48253" />
+            <div className="bg-[#be38f3] border-3 border-solid border-white flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48254" />
+            <div className="bg-[#e63b7a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48255" />
+            <div className="bg-[#fe6250] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48256" />
+            <div className="bg-[#fe8648] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48257" />
+            <div className="bg-[#feb43f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48258" />
+            <div className="bg-[#fecb3e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48259" />
+            <div className="bg-[#fff76b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48260" />
+            <div className="bg-[#e4ef65] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48261" />
+            <div className="bg-[#96d35f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48262" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 8" data-node-id="515:49680">
+            <div className="bg-[#52d6fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48263" />
+            <div className="bg-[#74a7ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48264" />
+            <div className="bg-[#864ffd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48265" />
+            <div className="bg-[#d357fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48266" />
+            <div className="bg-[#ee719e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48267" />
+            <div className="bg-[#ff8c82] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48268" />
+            <div className="bg-[#fea57d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48269" />
+            <div className="bg-[#fec777] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48270" />
+            <div className="bg-[#fed977] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48271" />
+            <div className="bg-[#fff994] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48272" />
+            <div className="bg-[#eaf28f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48273" />
+            <div className="bg-[#b1dd8b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48274" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 9" data-node-id="515:49809">
+            <div className="bg-[#93e3fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48275" />
+            <div className="bg-[#a7c6ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48276" />
+            <div className="bg-[#b18cfe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48277" />
+            <div className="bg-[#e292fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48278" />
+            <div className="bg-[#f4a4c0] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48279" />
+            <div className="bg-[#ffb5af] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48280" />
+            <div className="bg-[#ffc5ab] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48281" />
+            <div className="bg-[#fed9a8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48282" />
+            <div className="bg-[#fde4a8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48283" />
+            <div className="bg-[#fffbb9] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48284" />
+            <div className="bg-[#f1f7b7] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48285" />
+            <div className="bg-[#cde8b5] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48286" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 10" data-node-id="515:49939">
+            <div className="bg-[#cbf0ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48287" />
+            <div className="bg-[#d2e2fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48288" />
+            <div className="bg-[#d8c9fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48289" />
+            <div className="bg-[#efcafe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48290" />
+            <div className="bg-[#f9d3e0] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48291" />
+            <div className="bg-[#ffdad8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48292" />
+            <div className="bg-[#ffe2d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48293" />
+            <div className="bg-[#feecd4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48294" />
+            <div className="bg-[#fef1d5] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48295" />
+            <div className="bg-[#fdfbdd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48296" />
+            <div className="bg-[#f6fadb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48297" />
+            <div className="bg-[#deeed4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="515:48298" />
+          </div>
+        </div>
+        <div className="border-[var(--separators\/opaque,#c6c6c8)] border-b border-solid content-stretch flex flex-col items-start pb-[3px] pt-[26px] relative shrink-0 w-full" data-name="Opactiy Meter" data-node-id="515:47431">
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/primary,black)] w-[67.197px] whitespace-pre-wrap" data-node-id="515:47432">
+            Opacity
+          </p>
+          <div className="content-stretch flex gap-[11px] items-center justify-center pb-[22px] pt-[3px] relative shrink-0 w-full" data-name="Slider and Text Field" data-node-id="515:47433">
+            <div className="bg-size-[auto_auto,27.200000286102295px_27.200000286102295px] bg-top-left content-stretch flex flex-[1_0_0] h-[40px] items-center justify-end min-h-px min-w-px overflow-clip p-[2px] relative rounded-[100px]" data-name="_Slider" data-node-id="515:47434" style={{ backgroundImage: `linear-gradient(90deg, rgba(175, 82, 222, 0) 12%, rgb(175, 82, 222) 87.981%), url('${imgSlider}')` }}>
+              <div className="border-3 border-solid border-white rounded-[100px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.1)] shrink-0 size-[36px]" data-name="Knob" data-node-id="515:47437" />
+            </div>
+            <div className="bg-[var(--fills\/primary,rgba(120,120,120,0.2))] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[9px] relative rounded-[8px] shrink-0" data-name="Percentage" data-node-id="515:47438">
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="515:47439">
+                100%
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[30px] items-start pt-[26px] relative shrink-0 w-full" data-name="Swatches" data-node-id="515:46585">
+          <div className="bg-[#af52de] rounded-[18px] shrink-0 size-[82px]" data-name="Swatch" data-node-id="515:52741" />
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[22px] items-start min-h-px min-w-px relative" data-name="Swatches" data-node-id="515:52724">
+            <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-name="Row 1" data-node-id="515:46594">
+              <div className="bg-black rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46595" />
+              <div className="bg-[#007aff] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46596" />
+              <div className="bg-[#34c759] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46597" />
+              <div className="bg-[#fc0] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46598" />
+              <div className="bg-[#ff3b30] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46599" />
+            </div>
+            <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-name="Row 2" data-node-id="515:46586">
+              <div className="bg-[#7ac6f5] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46587" />
+              <div className="bg-[#af52de] relative rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46588">
+                <div className="absolute border-2 border-solid border-white left-[4px] rounded-[100px] size-[22px] top-[4px]" data-name="Selection Ring" data-node-id="515:46589" />
+              </div>
+              <div className="bg-[#5856d6] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46590" />
+              <div className="bg-[#ff2d55] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:46591" />
+              <div className="relative shrink-0 size-[30px]" data-name="Add Button" data-node-id="515:46592">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgAddButton} />
+              </div>
+            </div>
+            <PageControl className="h-[44px] relative shrink-0 w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Emphasized: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574), Fills/Primary: #787878.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Sheet - Inspector - iPhone
+**Node ID:** 5551:41121
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+## Segmented control
+**Node ID:** 6:57374
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/segmented-controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls)
+
+## Page control
+**Node ID:** 488:51848
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/page-controls](https://developer.apple.com/design/human-interface-guidelines/page-controls)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

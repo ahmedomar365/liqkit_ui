@@ -1,0 +1,33 @@
+{
+  "category": "page-controls",
+  "generatedAt": "2026-02-19T19:44:19.261Z",
+  "sourceFiles": [
+    "figma-artifacts/page-controls/488-51848.design-context.txt"
+  ],
+  "totalAssets": 1,
+  "downloaded": 0,
+  "existing": 1,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "0047d511-4f81-450d-9b1d-69f839d17204",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "0047d511-4f81-450d-9b1d-69f839d17204.svg",
+      "filePath": "figma-artifacts/assets/page-controls/0047d511-4f81-450d-9b1d-69f839d17204.svg",
+      "size": 268,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/0047d511-4f81-450d-9b1d-69f839d17204",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/0047d511-4f81-450d-9b1d-69f839d17204"
+      ],
+      "constNames": [
+        "imgDot7"
+      ],
+      "sources": [
+        "figma-artifacts/page-controls/488-51848.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

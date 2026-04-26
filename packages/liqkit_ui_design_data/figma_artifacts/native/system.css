@@ -1,0 +1,257 @@
+.ios26-system-root {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-system-panel {
+  border: 1px solid #d9dce4;
+  border-radius: 20px;
+  background: rgba(248, 249, 252, 0.9);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-system-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-system-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.35px;
+  color: #101114;
+}
+
+.ios26-system-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #676a72;
+}
+
+.ios26-system-home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ios26-home-indicator-slot {
+  border: 1px solid #e4e6ec;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-home-indicator-slot h3 {
+  margin: 0;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #676a72;
+}
+
+.ios26-home-indicator-device {
+  width: 100%;
+  border-radius: 11px;
+  border: 1px solid #d8dbe3;
+  background: #f4f5f8;
+  display: grid;
+  place-items: end center;
+}
+
+.ios26-home-indicator-device--iphone-portrait {
+  height: 34px;
+  padding-bottom: 8px;
+}
+
+.ios26-home-indicator-device--iphone-landscape {
+  height: 21px;
+  padding-bottom: 4px;
+}
+
+.ios26-home-indicator-device--ipad-portrait,
+.ios26-home-indicator-device--ipad-landscape {
+  height: 19.5px;
+  padding-bottom: 4px;
+}
+
+.ios26-home-indicator-bar {
+  width: 144px;
+  height: 5px;
+  border-radius: 100px;
+  background: #000000;
+}
+
+.ios26-system-hsqa-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-system-hsqa-row {
+  border: 1px solid #e4e7ee;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 170px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.ios26-system-hsqa-row h3 {
+  margin: 0;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #646870;
+}
+
+.ios26-system-action-pill,
+.ios26-system-widget-pill {
+  border-radius: 12px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font: 500 14px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #181a1f;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(230, 233, 238, 0.9) 100%);
+}
+
+.ios26-system-action-pill.is-destructive {
+  color: #ff3b30;
+}
+
+.ios26-system-hsqa-row.is-dark {
+  background: linear-gradient(180deg, #292e37 0%, #171a21 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ios26-system-hsqa-row.is-dark h3 {
+  color: #c9d0dc;
+}
+
+.ios26-system-hsqa-row.is-dark .ios26-system-action-pill {
+  color: #f1f3f7;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: linear-gradient(180deg, rgba(86, 92, 107, 0.72) 0%, rgba(50, 55, 68, 0.9) 100%);
+}
+
+.ios26-system-hsqa-row.is-dark .ios26-system-action-pill.is-destructive {
+  color: #ff5f57;
+}
+
+.ios26-system-widget-pill.is-dark {
+  color: #f0f2f7;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(97, 103, 120, 0.72) 0%, rgba(56, 61, 75, 0.9) 100%);
+}
+
+.ios26-system-toggle-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f0f2f6;
+}
+
+.ios26-system-toggle-dot.is-selected {
+  background: #0a84ff;
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.24);
+}
+
+.ios26-system-liquid-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ios26-system-liquid-block {
+  border: 1px solid #e3e6ee;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f5f6fa 0%, #eceff5 100%);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-system-liquid-block.is-dark {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, #303744 0%, #1d212b 100%);
+}
+
+.ios26-system-liquid-block h3 {
+  margin: 0;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #21242c;
+}
+
+.ios26-system-liquid-block.is-dark h3 {
+  color: #f2f4f8;
+}
+
+.ios26-system-chip-row {
+  display: grid;
+  grid-template-columns: 48px 48px;
+  gap: 12px;
+}
+
+.ios26-system-chip {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.38) 0%, transparent 70%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.46)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.68));
+  backdrop-filter: blur(36px);
+}
+
+.ios26-system-chip.is-primary {
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.22);
+}
+
+.ios26-system-liquid-block.is-dark .ios26-system-chip {
+  border-color: rgba(255, 255, 255, 0.24);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, transparent 70%),
+    linear-gradient(0deg, rgba(24, 27, 34, 0.62), rgba(24, 27, 34, 0.62)),
+    linear-gradient(0deg, rgba(49, 54, 67, 0.8), rgba(49, 54, 67, 0.8));
+}
+
+.ios26-system-medium-surface {
+  width: 100%;
+  height: 100px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.32) 0%, transparent 65%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.68));
+  backdrop-filter: blur(44px);
+}
+
+.ios26-system-liquid-block.is-dark .ios26-system-medium-surface {
+  border-color: rgba(255, 255, 255, 0.2);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, transparent 65%),
+    linear-gradient(0deg, rgba(18, 22, 31, 0.64), rgba(18, 22, 31, 0.64)),
+    linear-gradient(0deg, rgba(40, 45, 57, 0.84), rgba(40, 45, 57, 0.84));
+}
+
+@media (max-width: 980px) {
+  .ios26-system-root {
+    width: 100%;
+  }
+
+  .ios26-system-home-grid,
+  .ios26-system-liquid-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ios26-system-hsqa-row {
+    grid-template-columns: 1fr;
+  }
+}

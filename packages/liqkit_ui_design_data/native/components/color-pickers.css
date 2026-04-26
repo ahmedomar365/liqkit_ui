@@ -1,0 +1,466 @@
+.ios26-colorpickers-root {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
+.ios26-colorpickers-component-header {
+  width: min(402px, 100%);
+}
+
+.ios26-colorpickers-component-header h3 {
+  margin: 0;
+  font: 590 16px/21px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-colorpickers-reference-set {
+  width: min(402px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.ios26-colorpickers-sheet {
+  width: 402px;
+  min-height: 706px;
+  border-radius: 34px;
+  border: 1px solid rgba(214, 217, 222, 0.82);
+  background: rgba(245, 245, 245, 0.88);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.16),
+    0 1px 0 rgba(255, 255, 255, 0.74) inset;
+  backdrop-filter: blur(22px);
+  display: grid;
+  gap: 0;
+  align-content: start;
+  padding: 8px 16px 20px;
+}
+
+.ios26-colorpickers-topbar {
+  height: 54px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ios26-colorpickers-topbar p {
+  margin: 0;
+  color: #1a1a1a;
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-colorpickers-topbar--compact {
+  height: 36px;
+  grid-template-columns: 28px 1fr 28px;
+  gap: 8px;
+}
+
+.ios26-colorpickers-topbar--compact p {
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0;
+}
+
+.ios26-colorpickers-icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  padding: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-icon-btn.is-compact {
+  width: 28px;
+  height: 28px;
+}
+
+.ios26-colorpickers-icon-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.ios26-colorpickers-icon-fg {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  color: #727272;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-icon-fg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-colorpickers-icon-btn.is-compact .ios26-colorpickers-icon-fg {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-colorpickers-segments {
+  margin-top: 8px;
+  height: 32px;
+  border-radius: 100px;
+  background: rgba(118, 118, 128, 0.12);
+  padding: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.ios26-colorpickers-segments button {
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  color: #000000;
+  font: 500 13.333px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+}
+
+.ios26-colorpickers-segments button.is-active {
+  background: #ffffff;
+  font-weight: 590;
+}
+
+.ios26-colorpickers-grid {
+  margin-top: 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+}
+
+.ios26-colorpickers-grid-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.ios26-colorpickers-grid-swatch {
+  position: relative;
+  height: 30px;
+  background: var(--swatch);
+}
+
+.ios26-colorpickers-grid-swatch.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 3px solid #ffffff;
+  pointer-events: none;
+}
+
+.ios26-colorpickers-opacity-meter {
+  margin-top: 26px;
+  border-bottom: 1px solid #c6c6c8;
+  padding: 0 0 3px;
+}
+
+.ios26-colorpickers-opacity-meter p {
+  margin: 0;
+  font: 590 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000000;
+}
+
+.ios26-colorpickers-opacity-row {
+  padding-top: 3px;
+  padding-bottom: 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+}
+
+.ios26-colorpickers-slider {
+  height: 40px;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  justify-items: end;
+  padding: 2px;
+}
+
+.ios26-colorpickers-slider-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(175, 82, 222, 0) 12%, #af52de 88%),
+    repeating-conic-gradient(from 45deg, #121212 0deg 90deg, #f7f7f7 90deg 180deg) left center / 14px 14px;
+}
+
+.ios26-colorpickers-slider-knob {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #ffffff;
+  border-radius: 100px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.ios26-colorpickers-opacity-value {
+  border-radius: 8px;
+  background: rgba(120, 120, 120, 0.2);
+  padding: 9px 14px;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #000000;
+}
+
+.ios26-colorpickers-swatches {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.ios26-colorpickers-primary-swatch {
+  width: 82px;
+  height: 82px;
+  border-radius: 18px;
+  background: #af52de;
+}
+
+.ios26-colorpickers-palette {
+  display: grid;
+  gap: 22px;
+}
+
+.ios26-colorpickers-palette-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ios26-colorpickers-dot,
+.ios26-colorpickers-add-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  flex: 0 0 auto;
+}
+
+.ios26-colorpickers-dot {
+  background: var(--dot);
+}
+
+.ios26-colorpickers-dot.is-selected::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ffffff;
+  border-radius: 100px;
+  margin: 4px;
+}
+
+.ios26-colorpickers-add-button {
+  position: relative;
+  border-radius: 100px;
+  background: rgba(120, 120, 120, 0.2);
+}
+
+.ios26-colorpickers-add-button::before,
+.ios26-colorpickers-add-button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: #000000;
+  transform: translate(-50%, -50%);
+}
+
+.ios26-colorpickers-add-button::after {
+  width: 2px;
+  height: 12px;
+}
+
+.ios26-colorpickers-page-control {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ios26-colorpickers-page-control span {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ios26-colorpickers-page-control span.is-active {
+  background: #000000;
+}
+
+.ios26-colorpickers-swatches-preview {
+  width: min(402px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.ios26-colorpickers-layout-variants {
+  width: 100%;
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-colorpickers-layout-chip {
+  border: 1px solid #d8dde6;
+  border-radius: 10px;
+  background: #f6f7fb;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.ios26-colorpickers-layout-chip p {
+  margin: 0;
+  color: #111827;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colorpickers-button-variants,
+.ios26-colorpickers-pickerbutton-variants,
+.ios26-colorpickers-title-variants {
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 16px;
+}
+
+.ios26-colorpickers-button-variants {
+  width: 84px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-colorpickers-mode-button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 100px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.ios26-colorpickers-mode-button.is-light {
+  background: #e0e0e0;
+  color: #727272;
+}
+
+.ios26-colorpickers-mode-button.is-dark {
+  background: #1f1f1f;
+  color: #f5f5f5;
+}
+
+.ios26-colorpickers-mode-button-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.ios26-colorpickers-pickerbutton-variants {
+  width: 152px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(36px, 36px));
+  gap: 14px 18px;
+  align-items: center;
+}
+
+.ios26-colorpickers-picker-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-picker-button.is-large {
+  width: 36px;
+  height: 36px;
+}
+
+.ios26-colorpickers-picker-button.is-small {
+  width: 28px;
+  height: 28px;
+}
+
+.ios26-colorpickers-picker-gradient,
+.ios26-colorpickers-picker-swatch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  border-radius: 100px;
+}
+
+.ios26-colorpickers-picker-gradient {
+  background:
+    conic-gradient(from 90deg, #e7e040 0deg, #eeaa3c 44.65deg, #e8403b 89.78deg, #b33ed5 131.61deg, #694ae8 182.19deg, #3ccae7 231.34deg, #3ce885 269.54deg, #89e743 313.03deg, #e7e040 360deg),
+    radial-gradient(circle, rgba(228, 228, 228, 0) 65%, #e4e4e4 100%);
+}
+
+.ios26-colorpickers-picker-button.is-large .ios26-colorpickers-picker-swatch {
+  width: 26px;
+  height: 26px;
+  inset: 5px;
+}
+
+.ios26-colorpickers-picker-button.is-small .ios26-colorpickers-picker-swatch {
+  width: 18px;
+  height: 18px;
+  inset: 5px;
+}
+
+.ios26-colorpickers-picker-swatch {
+  background: #af52de;
+}
+
+.ios26-colorpickers-title-variants {
+  width: 84px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-colorpickers-title-variant {
+  margin: 0;
+  height: 22px;
+  display: grid;
+  align-items: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-colorpickers-title-variant.is-light {
+  color: #1a1a1a;
+}
+
+.ios26-colorpickers-title-variant.is-dark {
+  color: #f5f5f5;
+}

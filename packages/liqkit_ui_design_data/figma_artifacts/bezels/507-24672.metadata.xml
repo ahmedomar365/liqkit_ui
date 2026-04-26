@@ -1,0 +1,39 @@
+<canvas id="507:24672" name="Product Bezels" x="0" y="0" width="0" height="0">
+  <frame id="6316:14232" name="iPad Pro M4 13&quot;" x="2840" y="1399" width="1536" height="2364">
+    <symbol id="5456:18569" name="Color=Silver" x="80" y="80" width="1376" height="1034" />
+    <symbol id="6316:14233" name="Color=Space Gray" x="80" y="1250" width="1376" height="1034" />
+  </frame>
+  <frame id="6316:14229" name="iPad Pro M4 11&quot;" x="1330" y="1399" width="1370" height="1974">
+    <symbol id="487:11227" name="Color=Silver" x="80" y="80" width="1210" height="834" />
+    <symbol id="6316:14230" name="Color=Space Gray" x="80" y="1060" width="1210" height="834" />
+  </frame>
+  <symbol id="5456:18828" name="iPad mini" x="0" y="1399" width="1133" height="744" />
+  <symbol id="5456:18568" name="iPhone 16 Pro Max" x="9750" y="-25" width="440" height="956" />
+  <symbol id="523:41868" name="iPhone 16 Pro" x="9250" y="-25" width="402" height="874" />
+  <symbol id="5456:18567" name="iPhone 16 Plus" x="8700" y="-25" width="430" height="932" />
+  <symbol id="5456:18566" name="iPhone 16" x="8200" y="-25" width="393" height="852" />
+  <frame id="6316:14140" name="iPhone 17 Pro" x="4650" y="0" width="1462" height="974">
+    <symbol id="6316:14141" name="Color=Cosmic Orange" x="50" y="50" width="402" height="874" />
+    <symbol id="6316:14139" name="Color=Deep Blue" x="530" y="50" width="402" height="874" />
+    <symbol id="6316:14148" name="Color=Silver" x="1010" y="50" width="402" height="874" />
+  </frame>
+  <frame id="6316:14198" name="iPhone 17" x="0" y="0" width="2422" height="974">
+    <symbol id="6316:14199" name="Color=Black" x="50" y="50" width="402" height="874" />
+    <symbol id="6316:14201" name="Color=Lavendar" x="530" y="50" width="402" height="874" />
+    <symbol id="6316:14203" name="Color=Mist Blue" x="1010" y="50" width="402" height="874" />
+    <symbol id="6316:14210" name="Color=Sage" x="1490" y="50" width="402" height="874" />
+    <symbol id="6316:14212" name="Color=White" x="1970" y="50" width="402" height="874" />
+  </frame>
+  <frame id="6316:14172" name="iPhone Air" x="2550" y="0" width="2014" height="1012">
+    <symbol id="6316:14173" name="Color=Cloud White" x="50" y="50" width="420" height="912" />
+    <symbol id="6316:14179" name="Color=Light Gold" x="548" y="50" width="420" height="912" />
+    <symbol id="6316:14175" name="Color=Sky Blue" x="1046" y="50" width="420" height="912" />
+    <symbol id="6316:14177" name="Color=Space Black" x="1544" y="50" width="420" height="912" />
+  </frame>
+  <frame id="6316:14155" name="iPhone 17 Pro Max" x="6350" y="0" width="1576" height="1056">
+    <symbol id="6316:14158" name="Color=Cosmic Orange" x="50" y="50" width="440" height="956" />
+    <symbol id="6316:14156" name="Color=Deep Blue" x="568" y="50" width="440" height="956" />
+    <symbol id="6316:14160" name="Color=Silver" x="1086" y="50" width="440" height="956" />
+  </frame>
+  <instance id="5444:11543" name="Header" x="0" y="-500" width="1400" height="160" />
+</canvas>

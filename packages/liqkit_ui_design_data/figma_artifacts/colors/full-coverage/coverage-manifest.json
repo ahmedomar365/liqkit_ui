@@ -1,0 +1,235 @@
+{
+  "generatedAt": "2026-02-17T22:02:45.615Z",
+  "categoryNode": "0:1746",
+  "mode": "full-coverage-only",
+  "metadataPath": "figma-artifacts/colors/0-1746.metadata.xml",
+  "artifacts": {
+    "designContextPath": "figma-artifacts/colors/0-1746.design-context.txt",
+    "screenshotPath": "figma-artifacts/colors/0-1746.screenshot.png",
+    "variableDefsPath": "figma-artifacts/colors/0-1746.variable-defs.json"
+  },
+  "coverageNodes": [
+    {
+      "nodeId": "0:1746",
+      "role": "category-root",
+      "required": {
+        "designContext": false,
+        "screenshot": true,
+        "variableDefs": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/0-1746/2026-02-17T22-01-24-375Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/0-1746/2026-02-17T22-01-24-193Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/0-1746/2026-02-17T22-01-24-375Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/0-1746.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/0-1746.screenshot.png",
+        "variableDefs": null,
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/0-1746.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": false,
+      "complete": true
+    },
+    {
+      "nodeId": "5707:28659",
+      "role": "default-section",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5707-28659/2026-02-17T22-01-24-376Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5707-28659/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5707-28659/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5707-28659.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5707-28659.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5707-28659.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5707-28659.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5707:28660",
+      "role": "increased-contrast-section",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5707-28660/2026-02-17T22-01-24-379Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5707-28660/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5707-28660/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5707-28660.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5707-28660.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5707-28660.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5707-28660.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "0:2049",
+      "role": "default-colors-frame",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/0-2049/2026-02-17T22-01-24-377Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/0-2049/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/0-2049/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/0-2049.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/0-2049.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/0-2049.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/0-2049.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5532:12332",
+      "role": "increased-colors-frame",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5532-12332/2026-02-17T22-01-24-377Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5532-12332/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5532-12332/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5532-12332.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5532-12332.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5532-12332.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5532-12332.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5532:7800",
+      "role": "default-background-grid",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5532-7800/2026-02-17T22-01-24-376Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5532-7800/2026-02-17T22-01-24-194Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5532-7800/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5532-7800.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5532-7800.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5532-7800.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5532-7800.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5532:8407",
+      "role": "default-fills-grid",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5532-8407/2026-02-17T22-01-24-376Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5532-8407/2026-02-17T22-01-24-194Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5532-8407/2026-02-17T22-01-24-378Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5532-8407.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5532-8407.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5532-8407.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5532-8407.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5532:12327",
+      "role": "increased-labels-grid",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5532-12327/2026-02-17T22-01-24-379Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5532-12327/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5532-12327/2026-02-17T22-01-24-380Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5532-12327.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5532-12327.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5532-12327.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5532-12327.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "5532:12331",
+      "role": "increased-fills-grid",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5532-12331/2026-02-17T22-01-24-379Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/5532-12331/2026-02-17T22-01-24-195Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/5532-12331/2026-02-17T22-01-24-379Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/5532-12331.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/5532-12331.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/5532-12331.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/5532-12331.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    },
+    {
+      "nodeId": "0:4207",
+      "role": "swatch-color-mode-light",
+      "required": {
+        "designContext": true,
+        "screenshot": true,
+        "variableDefs": true
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/0-4207/2026-02-17T22-01-24-375Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/0-4207/2026-02-17T22-01-24-193Z.get_screenshot.png",
+        "variableDefs": "figma-artifacts/raw/0-4207/2026-02-17T22-01-24-376Z.get_variable_defs.txt"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/colors/full-coverage/nodes/0-4207.design-context.txt",
+        "screenshot": "figma-artifacts/colors/full-coverage/nodes/0-4207.screenshot.png",
+        "variableDefs": "figma-artifacts/colors/full-coverage/nodes/0-4207.variable-defs.json",
+        "variableDefsRaw": "figma-artifacts/colors/full-coverage/nodes/0-4207.variable-defs.raw.txt"
+      },
+      "parsedVariableDefs": true,
+      "complete": true
+    }
+  ],
+  "complete": true,
+  "missing": []
+}

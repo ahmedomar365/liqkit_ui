@@ -1,0 +1,706 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/0fb1cff3-fa0d-42b6-941a-6dd54814f87e";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/7b96c10b-528b-4702-82e1-834f42de57d7";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/1494c5c1-a7a5-4362-87b3-6f2d6bbb1792";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/5693dd84-2e8b-4be0-b6b7-af53f02e566c";
+const imgLollipopTrailingPop = "https://www.figma.com/api/mcp/asset/36660a9c-ca48-4d5c-b9c4-9e36fedf8c27";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type StatusBarAndMenuBarIPadProps = {
+  className?: string;
+  date?: string;
+  time?: string;
+};
+
+function StatusBarAndMenuBarIPad({ className, date = "Tue Apr 1", time = "9:41" }: StatusBarAndMenuBarIPadProps) {
+  return (
+    <div className={className || ""} data-name="Status bar and Menu bar- iPad" data-node-id="5413:10006">
+      <div className="content-stretch flex h-[32px] items-center justify-between px-[26px] py-[4px] relative w-[1210px]" data-name="Type=Status bar only" data-node-id="523:41360">
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="523:41361">
+          <p className="relative shrink-0" data-node-id="523:41362">
+            {time}
+          </p>
+          <p className="relative shrink-0" data-node-id="523:41363">
+            {date}
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="523:41364">
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="523:41365">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="523:41366">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="523:41367">
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="523:41368">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type SelectionProps = {
+  className?: string;
+  mode?: "Light" | "Dark";
+};
+
+function Selection({ className, mode = "Light" }: SelectionProps) {
+  return <div className={className || "bg-[var(--accents\/blue,#08f)] h-[28px] mix-blend-multiply opacity-25 rounded-[1px] w-[40px]"} data-node-id="5853:4741" />;
+}
+type MenusProps = {
+  className?: string;
+  type?: "Edit Menu" | "Menu and Submenu";
+};
+
+export default function Menus({ className, type = "Edit Menu" }: MenusProps) {
+  const isEditMenu = type === "Edit Menu";
+  const isMenuAndSubmenu = type === "Menu and Submenu";
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] h-[834px] relative w-[1210px]"} id={isEditMenu ? "node-754_64157" : "node-5719_26501"}>
+      <div className="absolute inset-[54px_0_0_0]" data-name="Screen" id={isEditMenu ? "node-5711_33810" : "node-5719_26502"}>
+        <div className="absolute h-[763px] left-0 top-0 w-[1210px]" data-name="Content Area" id={isEditMenu ? "node-5711_33811" : "node-5719_26503"}>
+          <p className="absolute font-['SF_Pro:Regular',sans-serif] leading-[normal] left-[60px] not-italic text-[17px] text-[color:var(--labels\/primary,black)] top-[80px] tracking-[-0.43px]" id={isEditMenu ? "node-5719_24352" : "node-5719_26504"}>
+            Hello World
+          </p>
+          <div className="absolute h-[22px] left-[60px] top-[80px] w-[94px]" data-name="Text Selection" id={isEditMenu ? "node-5719_24353" : "node-5719_26505"}>
+            <Selection className="absolute bg-[var(--accents\/blue,#08f)] inset-[-3px_0] mix-blend-multiply opacity-25 rounded-[1px]" />
+            <div className="absolute bottom-0 right-[-7px] top-0 w-[16px]" data-name="Lollipop - Trailing" id={isEditMenu ? "node-I5719_24353-5711_35407" : "node-I5719_26505-5711_35407"}>
+              <div className="-translate-x-1/2 absolute bg-[var(--accents\/blue,#08f)] bottom-[-7px] left-1/2 rounded-[2px] top-[-3px] w-[2px]" data-name="Lollipop - Trailing - Stick" id={isEditMenu ? "node-I5719_24353-5711_35408" : "node-I5719_26505-5711_35408"} />
+              <div className="-translate-x-1/2 absolute bottom-[-16px] left-1/2 size-[16px]" data-name="Lollipop - Trailing - Pop" id={isEditMenu ? "node-I5719_24353-5711_35409" : "node-I5719_26505-5711_35409"}>
+                <div className="absolute inset-[-106.25%_-125%_-143.75%_-125%]">
+                  <img alt="" className="block max-w-none size-full" src={imgLollipopTrailingPop} />
+                </div>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-[-7px] top-0 w-[16px]" data-name="Lollipop - Leading" id={isEditMenu ? "node-I5719_24353-5711_35410" : "node-I5719_26505-5711_35410"}>
+              <div className="-translate-x-1/2 absolute bg-[var(--accents\/blue,#08f)] bottom-[-3px] left-1/2 rounded-[2px] top-[-7px] w-[2px]" data-name="Lollipop - Leading - Stick" id={isEditMenu ? "node-I5719_24353-5711_35411" : "node-I5719_26505-5711_35411"} />
+              <div className="-translate-x-1/2 absolute left-1/2 size-[16px] top-[-16px]" data-name="Lollipop - Leading - Pop" id={isEditMenu ? "node-I5719_24353-5711_35412" : "node-I5719_26505-5711_35412"}>
+                <div className="absolute inset-[-106.25%_-125%_-143.75%_-125%]">
+                  <img alt="" className="block max-w-none size-full" src={imgLollipopTrailingPop} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {isMenuAndSubmenu && (
+        <>
+          <div className="absolute content-stretch flex flex-col items-center left-[166px] py-[10px] top-[128px] w-[250px]" data-name="Menu" data-node-id="5719:26637">
+            <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5719:26638;5584:31830">
+              <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5719:26638;5584:31831">
+                <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5719:26638;5584:31831;5584:31864" />
+              </div>
+              <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5719:26638;5607:81561" />
+            </div>
+            <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5719:26638;5607:25956">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5719:26638;5607:25843" />
+            <div className="content-stretch flex gap-[6px] items-center not-italic px-[10px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-full" data-name="Quick Actions" data-node-id="5719:26639">
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px overflow-clip px-[4px] py-[6px] relative rounded-[20px]" data-name="Quick Action - iPhone" data-node-id="5719:26640">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full" data-node-id="I5719:26640;5498:16160" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀉈</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I5719:26640;5498:16159">
+                  Cut
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px overflow-clip px-[4px] py-[6px] relative rounded-[20px]" data-name="Quick Action - iPhone" data-node-id="5719:26641">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full" data-node-id="I5719:26641;5498:16160" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀉁</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I5719:26641;5498:16159">
+                  Copy
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px overflow-clip px-[4px] py-[6px] relative rounded-[20px]" data-name="Quick Action - iPhone" data-node-id="5719:26642">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full" data-node-id="I5719:26642;5498:16160" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀉃</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I5719:26642;5498:16159">
+                  Paste
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-start overflow-clip px-[8px] relative shrink-0 w-full" data-name="Menu Items" data-node-id="5719:26643">
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26644">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26644;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26645">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26645;5856:23820">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center w-[28px]" data-node-id="I5719:26645;5856:23822">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26645;5856:23823">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[0.2px] w-full" data-node-id="I5719:26645;5856:23824">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26646">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26646;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26647">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26647;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26647;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26647;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26647;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26647;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26647;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26648">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26648;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26648;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26648;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26648;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26648;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26648;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26649">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26649;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26650">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26650;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26650;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26650;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26650;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26651">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26651;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26652">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26652;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26652;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26652;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26652;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26653">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26653;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26654">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26654;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26654;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26654;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26654;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26654;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26654;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26655">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26655;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26657">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26657;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26657;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26657;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26657;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26659">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26659;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26659;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26659;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26659;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26661">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26661;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26661;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26661;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26661;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26662">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26662;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26662;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26662;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26662;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPad" data-node-id="5719:26663">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26663;5855:5823" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPad" data-node-id="5719:26664">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26664;5856:23730">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26664;5856:23732">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26664;5856:23733">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26664;5856:23734">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex flex-col items-center left-[408px] py-[10px] top-[489px] w-[250px]" data-name="Submenu" data-node-id="5719:26665">
+            <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5719:26666;5584:31830">
+              <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5719:26666;5584:31831">
+                <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5719:26666;5584:31831;5584:31864" />
+              </div>
+              <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5719:26666;5607:81561" />
+            </div>
+            <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5719:26666;5607:25956">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5719:26666;5607:25843" />
+            <div className="content-stretch flex flex-col items-start overflow-clip px-[8px] relative shrink-0 w-full" data-name="Menu Items" data-node-id="5719:26667">
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26668">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26668;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26668;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26668;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26668;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26668;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26668;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPhone" data-node-id="5719:26669">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I5719:26669;5855:5821" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26670">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26670;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26670;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26670;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26670;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26670;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26670;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26671">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26671;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26671;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26671;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26671;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26671;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26671;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26672">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26672;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26672;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26672;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26672;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26672;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26672;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPad" data-node-id="5719:26673">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I5719:26673;5856:23790">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5719:26673;5856:23792">
+                    <p className="leading-[20px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px pl-[4px] py-[11px] relative" data-name="Label and Subtitle" data-node-id="I5719:26673;5856:23793">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[0.2px] w-full" data-node-id="I5719:26673;5856:23794">
+                      <p className="leading-[18px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="h-[20px] relative shrink-0 w-[14px]" data-name="Disclosure" data-node-id="I5719:26673;5856:26286">
+                  <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5719:26673;5856:26287" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[10px] right-0 top-[32px]" data-name="Toolbar - Top - iPad" data-node-id="5735:64010">
+            <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-name="Leading" data-node-id="I5735:64010;5564:42178">
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:64010;5564:42180">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:64010;5564:42180;6491:22565">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:64010;5564:42180;6491:22565;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:64010;5564:42180;6491:22565;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:64010;5564:42180;6491:22565;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:64010;5564:42180;6491:22565;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:64010;5564:42180;6491:22565;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:64010;5564:42180;6491:22565;6491:20173" />
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" data-node-id="I5735:64010;5564:42180;6491:22970">
+                  <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5735:64010;5564:42180;6491:22970;5431:837" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal]">􀯶</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5735:64010;5564:42180;6491:22970;5431:840" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal]">Label</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] flex-col h-[38px] items-start justify-center min-h-px min-w-px pl-[12px] pt-[5px] relative" data-name="Title" data-node-id="I5735:64010;5564:42183">
+              <div className="h-[41px] relative shrink-0 w-full" data-name="_Title - Large Title" data-node-id="I5735:64010;5827:67059">
+                <p className="absolute font-['SF_Pro:Bold',sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]" data-node-id="I5735:64010;5827:67059;5827:57542">
+                  Title
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0" data-name="Trailing" data-node-id="I5735:64010;5564:42186">
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:64010;5564:42187">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:64010;5564:42187;5566:7888">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:64010;5564:42187;5566:7888;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:64010;5564:42187;5566:7888;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:64010;5564:42187;5566:7888;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:64010;5564:42187;5566:7888;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:64010;5564:42187;5566:7888;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:64010;5564:42187;5566:7888;6491:20173" />
+                </div>
+                <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5735:64010;5564:42187;5432:23135">
+                  <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5735:64010;5564:42187;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:64010;5564:42188">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:64010;5564:42188;5566:7888">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:64010;5564:42188;5566:7888;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:64010;5564:42188;5566:7888;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:64010;5564:42188;5566:7888;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:64010;5564:42188;5566:7888;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:64010;5564:42188;5566:7888;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:64010;5564:42188;5566:7888;6491:20173" />
+                </div>
+                <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5735:64010;5564:42188;5432:23135">
+                  <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5735:64010;5564:42188;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <StatusBarAndMenuBarIPad className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-0 top-0" />
+          <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+        </>
+      )}
+      {isEditMenu && (
+        <>
+          <div className="absolute content-stretch flex h-[44px] items-center justify-center left-[16px] pl-[20px] pr-[4px] rounded-[100px] top-[178px]" data-name="Edit Menu" data-node-id="5719:26470">
+            <div className="-translate-y-1/2 absolute h-[160px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Medium" data-node-id="I5719:26470;5713:47564">
+              <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5719:26470;5713:47564;5584:31830">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5719:26470;5713:47564;5584:31831">
+                  <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5719:26470;5713:47564;5584:31831;5584:31864" />
+                </div>
+                <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5719:26470;5713:47564;5607:81561" />
+              </div>
+              <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5719:26470;5713:47564;5607:25956">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                  <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                  <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5719:26470;5713:47564;5607:25843" />
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47506">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47506;5713:48233" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47506;5713:47503">
+                Item
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47508">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47508;5713:48233" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47508;5713:47503">
+                Item
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47510">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47510;5713:48233" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47510;5713:47503">
+                Item
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47512">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47512;5713:49113" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47512;5713:49114">
+                Item
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47514">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47514;5713:48233" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47514;5713:47503">
+                Item
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-center pr-[16px] relative shrink-0" data-name="_Edit Menu Item" data-node-id="I5719:26470;5713:47516">
+              <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[18px] shrink-0 w-px" data-name="Separator" data-node-id="I5719:26470;5713:47516;5713:48233" />
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.6px]" data-node-id="I5719:26470;5713:47516;5713:47503">
+                Item
+              </p>
+            </div>
+            <div className="bg-[var(--fills---vibrant\/tertiary,#ededed)] overflow-clip relative rounded-[100px] shrink-0 size-[36px]" data-name="_Menu Indicator" data-node-id="I5719:26470;5831:53951">
+              <p className="-translate-x-1/2 absolute font-['SF_Pro:Semibold',sans-serif] leading-[normal] left-1/2 not-italic text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center top-[calc(50%-9px)] tracking-[-0.6px] w-[36px] whitespace-pre-wrap" data-node-id="I5719:26470;5831:53951;5831:53944">
+                􀆊
+              </p>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[10px] right-0 top-[32px]" data-name="Toolbar - Top - iPad" data-node-id="5735:63921">
+            <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-name="Leading" data-node-id="I5735:63921;5564:42178">
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:63921;5564:42180">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:63921;5564:42180;6491:22565">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:63921;5564:42180;6491:22565;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:63921;5564:42180;6491:22565;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:63921;5564:42180;6491:22565;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:63921;5564:42180;6491:22565;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:63921;5564:42180;6491:22565;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:63921;5564:42180;6491:22565;6491:20173" />
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" data-node-id="I5735:63921;5564:42180;6491:22970">
+                  <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5735:63921;5564:42180;6491:22970;5431:837" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal]">􀯶</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5735:63921;5564:42180;6491:22970;5431:840" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal]">Label</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] flex-col h-[38px] items-start justify-center min-h-px min-w-px pl-[12px] pt-[5px] relative" data-name="Title" data-node-id="I5735:63921;5564:42183">
+              <div className="h-[41px] relative shrink-0 w-full" data-name="_Title - Large Title" data-node-id="I5735:63921;5827:67059">
+                <p className="absolute font-['SF_Pro:Bold',sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]" data-node-id="I5735:63921;5827:67059;5827:57542">
+                  Title
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0" data-name="Trailing" data-node-id="I5735:63921;5564:42186">
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:63921;5564:42187">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:63921;5564:42187;5566:7888">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:63921;5564:42187;5566:7888;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:63921;5564:42187;5566:7888;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:63921;5564:42187;5566:7888;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:63921;5564:42187;5566:7888;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:63921;5564:42187;5566:7888;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:63921;5564:42187;5566:7888;6491:20173" />
+                </div>
+                <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5735:63921;5564:42187;5432:23135">
+                  <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5735:63921;5564:42187;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5735:63921;5564:42188">
+                <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+                <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5735:63921;5564:42188;5566:7888">
+                  <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5735:63921;5564:42188;5566:7888;5575:44983">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5735:63921;5564:42188;5566:7888;5575:75442">
+                      <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5735:63921;5564:42188;5566:7888;5575:75442;5575:32354" />
+                    </div>
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5735:63921;5564:42188;5566:7888;6491:20171" />
+                  </div>
+                  <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5735:63921;5564:42188;5566:7888;6491:20172">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                      <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                      <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                    </div>
+                  </div>
+                  <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5735:63921;5564:42188;5566:7888;6491:20173" />
+                </div>
+                <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5735:63921;5564:42188;5432:23135">
+                  <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5735:63921;5564:42188;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <StatusBarAndMenuBarIPad className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-0 top-0" />
+          <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+        </>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Large Title/Emphasized: Font(family: "SF Pro", style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Type=Menu and Submenu
+**Node ID:** 5719:26501
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Text Selection
+**Node ID:** 5711:35414
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/edit-menus](https://developer.apple.com/design/human-interface-guidelines/edit-menus)
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+## Type=Edit Menu
+**Node ID:** 754:64157
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

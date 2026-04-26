@@ -1,0 +1,31 @@
+<canvas id="507:24680" name="Pickers" x="0" y="0" width="0" height="0">
+  <section id="544:199442" name="Pickers" x="0" y="0" width="1300" height="620">
+    <frame id="30:53803" name="Date and time - Collapsed" x="956" y="100" width="247" height="132">
+      <symbol id="30:53923" name="State=Default" x="20" y="20" width="204" height="34" />
+      <symbol id="5442:5039" name="State=Selected" x="20" y="78" width="204" height="34" />
+    </frame>
+    <frame id="5442:1885" name="Date and time - Pickers" x="100" y="100" width="816" height="423">
+      <symbol id="51:56014" name="Style=Inline" x="426" y="20" width="370" height="388" />
+      <symbol id="51:60427" name="Style=Compact" x="20" y="20" width="370" height="381" />
+    </frame>
+  </section>
+  <symbol id="50:63951" name="_Week" x="50" y="836" width="393" height="44" />
+  <frame id="50:63907" name="_Day" x="50" y="710" width="310" height="84">
+    <symbol id="50:63912" name="State=Current and Selected" x="200" y="20" width="44" height="44" />
+    <symbol id="50:63910" name="State=Selected" x="140" y="20" width="44" height="44" />
+    <symbol id="50:63908" name="State=Current" x="80" y="20" width="44" height="44" />
+    <symbol id="50:63906" name="State=Default" x="20" y="20" width="44" height="44" />
+    <symbol id="50:64151" name="State=Null" x="260" y="20" width="40" height="44" />
+  </frame>
+  <section id="5442:5045" name="Light examples" x="1423" y="0" width="530" height="580">
+    <instance id="5442:5523" name="Date and time - Collapsed" x="21" y="430" width="204" height="34" />
+    <instance id="5442:5088" name="Date and time - Pickers" x="20" y="20" width="370" height="381" />
+    <instance id="5760:9057" name="Mode" x="466" y="10" width="54" height="19" />
+  </section>
+  <section id="5442:5048" name="Dark examples" x="2131" y="0" width="530" height="580">
+    <instance id="5442:5532" name="Date and time - Collapsed" x="21" y="430" width="204" height="34" />
+    <instance id="5442:5530" name="Date and time - Pickers" x="20" y="20" width="370" height="381" />
+    <instance id="5760:9063" name="Mode" x="466" y="10" width="54" height="19" />
+  </section>
+  <instance id="544:191872" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

@@ -1,0 +1,823 @@
+{
+  "generatedAt": "2026-02-17T22:34:36.584Z",
+  "categoryNode": "0:3329",
+  "mode": "full-coverage-only",
+  "metadataPath": "figma-artifacts/examples/0-3329.metadata.xml",
+  "artifacts": {
+    "designContextPath": "figma-artifacts/examples/0-3329.design-context.txt",
+    "screenshotPath": "figma-artifacts/examples/0-3329.screenshot.png",
+    "variableDefsPath": "figma-artifacts/examples/0-3329.variable-defs.json"
+  },
+  "coverageNodes": [
+    {
+      "nodeId": "5742:36225",
+      "role": "section",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5742-36225/2026-02-17T22-34-36-408Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5742-36225.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5742:36226",
+      "role": "section",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5742-36226/2026-02-17T22-34-36-408Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5742-36226.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "2517:14528",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/2517-14528/2026-02-17T22-34-36-410Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/2517-14528.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "2570:20912",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/2570-20912/2026-02-17T22-34-36-411Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/2570-20912.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "2607:22514",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/2607-22514/2026-02-17T22-34-36-411Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/2607-22514.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "3147:15989",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/3147-15989/2026-02-17T22-34-36-411Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/3147-15989.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5581:40610",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5581-40610/2026-02-17T22-34-36-411Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5581-40610.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5589:4058",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5589-4058/2026-02-17T22-34-36-412Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5589-4058.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5660:57680",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5660-57680/2026-02-17T22-34-36-412Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5660-57680.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:33949",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-33949/2026-02-17T22-34-36-412Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-33949.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:34264",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-34264/2026-02-17T22-34-36-412Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-34264.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:41970",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-41970/2026-02-17T22-34-36-413Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-41970.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:43368",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-43368/2026-02-17T22-34-36-413Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-43368.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:43611",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-43611/2026-02-17T22-34-36-413Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-43611.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5661:46038",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5661-46038/2026-02-17T22-34-36-414Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5661-46038.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5719:26500",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5719-26500/2026-02-17T22-34-36-415Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5719-26500.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5726:29555",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5726-29555/2026-02-17T22-34-36-417Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5726-29555.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5732:63624",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5732-63624/2026-02-17T22-34-36-417Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5732-63624.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "5735:66270",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/5735-66270/2026-02-17T22-34-36-418Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/5735-66270.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:26926",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-26926/2026-02-17T22-34-36-418Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-26926.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:26934",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-26934/2026-02-17T22-34-36-436Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-26934.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62559",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62559/2026-02-17T22-34-36-438Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62559.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62590",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62590/2026-02-17T22-34-36-422Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62590.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62648",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62648/2026-02-17T22-34-36-423Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62648.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62668",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62668/2026-02-17T22-34-36-423Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62668.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62748",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62748/2026-02-17T22-34-36-423Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62748.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62878",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62878/2026-02-17T22-34-36-423Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62878.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62883",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62883/2026-02-17T22-34-36-424Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62883.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62918",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62918/2026-02-17T22-34-36-424Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62918.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:62926",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-62926/2026-02-17T22-34-36-424Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-62926.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:63935",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-63935/2026-02-17T22-34-36-425Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-63935.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:64083",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-64083/2026-02-17T22-34-36-425Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-64083.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:64084",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-64084/2026-02-17T22-34-36-425Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-64084.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:64525",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-64525/2026-02-17T22-34-36-425Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-64525.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "754:64609",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/754-64609/2026-02-17T22-34-36-426Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/754-64609.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21495",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21495/2026-02-17T22-34-36-426Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21495.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21750",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21750/2026-02-17T22-34-36-427Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21750.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21898",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21898/2026-02-17T22-34-36-428Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21898.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21899",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21899/2026-02-17T22-34-36-428Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21899.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21900",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21900/2026-02-17T22-34-36-428Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21900.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21901",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21901/2026-02-17T22-34-36-429Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21901.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21905",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21905/2026-02-17T22-34-36-430Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21905.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21906",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21906/2026-02-17T22-34-36-430Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21906.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "770:21908",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/770-21908/2026-02-17T22-34-36-431Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/770-21908.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "775:13152",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/775-13152/2026-02-17T22-34-36-431Z.get_design_context.txt",
+        "screenshot": "figma-artifacts/raw/775-13152/2026-02-17T22-17-46-433Z.get_screenshot.png"
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/775-13152.design-context.txt",
+        "screenshot": "figma-artifacts/examples/full-coverage/nodes/775-13152.screenshot.png"
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "775:13153",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/775-13153/2026-02-17T22-34-36-432Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/775-13153.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    },
+    {
+      "nodeId": "781:15374",
+      "role": "node",
+      "required": {
+        "designContext": true,
+        "screenshot": false
+      },
+      "source": {
+        "designContext": "figma-artifacts/raw/781-15374/2026-02-17T22-34-36-432Z.get_design_context.txt",
+        "screenshot": null
+      },
+      "persisted": {
+        "designContext": "figma-artifacts/examples/full-coverage/nodes/781-15374.design-context.txt",
+        "screenshot": null
+      },
+      "complete": true
+    }
+  ],
+  "summary": {
+    "totalCoverageNodes": 47,
+    "designContextReady": 47,
+    "screenshotCandidates": 1
+  },
+  "complete": true,
+  "missing": {
+    "designContext": [],
+    "variableDefs": [],
+    "screenshot": []
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "category": "keyboards",
+  "generatedAt": "2026-02-19T19:44:19.254Z",
+  "sourceFiles": [
+    "figma-artifacts/keyboards/106-59544.design-context.txt"
+  ],
+  "totalAssets": 2,
+  "downloaded": 0,
+  "existing": 2,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "67a31a14-e983-426d-8baa-b551210d659f",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "67a31a14-e983-426d-8baa-b551210d659f.svg",
+      "filePath": "figma-artifacts/assets/keyboards/67a31a14-e983-426d-8baa-b551210d659f.svg",
+      "size": 2641,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/67a31a14-e983-426d-8baa-b551210d659f",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/67a31a14-e983-426d-8baa-b551210d659f"
+      ],
+      "constNames": [
+        "imgMic"
+      ],
+      "sources": [
+        "figma-artifacts/keyboards/106-59544.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "e645a943-2c21-4dd1-8039-e7e4a205c26b",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "e645a943-2c21-4dd1-8039-e7e4a205c26b.svg",
+      "filePath": "figma-artifacts/assets/keyboards/e645a943-2c21-4dd1-8039-e7e4a205c26b.svg",
+      "size": 1272,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/e645a943-2c21-4dd1-8039-e7e4a205c26b",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/e645a943-2c21-4dd1-8039-e7e4a205c26b"
+      ],
+      "constNames": [
+        "imgEmoji"
+      ],
+      "sources": [
+        "figma-artifacts/keyboards/106-59544.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

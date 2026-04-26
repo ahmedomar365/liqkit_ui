@@ -1,0 +1,932 @@
+const imgTypeFill = "https://www.figma.com/api/mcp/asset/9fc02827-26b6-47d4-981e-89cd5fa3b80f";
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/94d56ff0-5c8f-44b7-ae80-e1cba745601c";
+const imgBlur = "https://www.figma.com/api/mcp/asset/64016ab5-17c2-42af-bfbb-c7e7189894c5";
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/d0fc766c-1d53-4492-8121-cbb14cada546";
+const imgWifi = "https://www.figma.com/api/mcp/asset/4df37e94-2814-49f4-83f1-ade9c5f61d44";
+const imgFrame = "https://www.figma.com/api/mcp/asset/16895f27-230b-4cc7-a5c7-cffab510b17b";
+const imgBlur1 = "https://www.figma.com/api/mcp/asset/9f093816-f846-4623-9d82-712ac5e8a141";
+const imgBlur2 = "https://www.figma.com/api/mcp/asset/606f5427-1e9d-448e-bbfa-7202e1b99e16";
+type ToggleSwitchProps = {
+  className?: string;
+  showAxLabel?: boolean;
+};
+
+function ToggleSwitch({ className, showAxLabel = true }: ToggleSwitchProps) {
+  return (
+    <div className={className || ""} data-name="Toggle - Switch" data-node-id="29:56814">
+      <div className="bg-[var(--accents\/green,#34c759)] content-stretch flex items-center justify-between overflow-clip p-[2px] relative rounded-[100px] w-[64px]" data-name="State=On" data-node-id="27:68905">
+        <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px relative" data-name="Frame" data-node-id="6152:1812">
+          {showAxLabel && <div className="bg-white h-[10px] shrink-0 w-px" data-name="AX Label" data-node-id="6152:1755" />}
+        </div>
+        <div className="bg-white h-[24px] rounded-[100px] shrink-0 w-[39px]" data-name="Knob" data-node-id="508:69988" />
+      </div>
+    </div>
+  );
+}
+
+function Increment({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Increment" data-node-id="5415:17367">
+      <div className="bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] relative rounded-br-[100px] rounded-tr-[100px] w-[46px]" data-name="Style=Default" data-node-id="5415:17370">
+        <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center leading-[0] left-0 not-italic right-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5415:17371">
+          <p className="leading-[22px] whitespace-pre-wrap">􀅼</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Decrement({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Decrement" data-node-id="5415:17068">
+      <div className="bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] relative rounded-bl-[100px] rounded-tl-[100px] w-[46px]" data-name="Style=Default" data-node-id="5415:16951">
+        <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center leading-[0] left-0 not-italic right-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5415:16912">
+          <p className="leading-[22px] whitespace-pre-wrap">􀅽</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Stepper({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Stepper" data-node-id="29:63928">
+      <div className="h-[32px] relative w-[92px]" data-name="Mode=Light" data-node-id="27:68887">
+        <div className="-translate-x-1/2 absolute bg-[var(--labels\/tertiary,rgba(60,60,67,0.3))] h-[24px] left-1/2 rounded-[8px] top-[4px] w-px" data-name="Separator" data-node-id="27:68686" />
+        <Decrement className="absolute bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] left-0 right-1/2 rounded-bl-[100px] rounded-tl-[100px] top-0" />
+        <Increment className="absolute bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] left-1/2 right-0 rounded-br-[100px] rounded-tr-[100px] top-0" />
+      </div>
+    </div>
+  );
+}
+
+function ContentsDisclosure({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Contents/Disclosure" data-node-id="30:54020">
+      <div className="h-[32px] relative w-[8px]" data-name="Disclosed=False" data-node-id="30:54019">
+        <div className="absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] inset-[21.88%_0_21.88%_-37.5%] justify-center leading-[0] not-italic text-[17px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="30:54018" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+          <p className="leading-[25px] whitespace-pre-wrap">􀆊</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+type TrailingProps = {
+  className?: string;
+  detailText?: string;
+  showCheckmark?: boolean;
+  showDrillIn?: boolean;
+  showInfo?: boolean;
+  showSymbol?: boolean;
+  type?: "Button" | "Default" | "Disclosure" | "Picker - Date" | "Picker - Date and Time" | "Picker - Time" | "Pop-up" | "Stepper" | "Toggle";
+};
+
+function Trailing({ className, detailText = "Detail", showCheckmark = true, showDrillIn = true, showInfo = true, showSymbol = true, type = "Default" }: TrailingProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative text-[17px]"} data-node-id="29:53509">
+      <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="212:117599">
+        <p className="leading-[22px]">{detailText}</p>
+      </div>
+      {showSymbol && (
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+        </div>
+      )}
+      {showInfo && (
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="212:122278" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+          <p className="leading-[20px] whitespace-pre-wrap">􀅴</p>
+        </div>
+      )}
+      {showCheckmark && (
+        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="212:127130">
+          <p className="leading-[22px] whitespace-pre-wrap">􀆅</p>
+        </div>
+      )}
+      {showDrillIn && (
+        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ImagesTall({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Images/Tall" data-node-id="508:72799">
+      <div className="-translate-y-1/2 relative size-[68px]" data-name="Type=Fill" data-node-id="508:72810">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgTypeFill} />
+      </div>
+    </div>
+  );
+}
+type RowWithSwipeActionsProps = {
+  className?: string;
+  showSubtitle?: boolean;
+  subtitle?: string;
+  title?: string;
+};
+
+function RowWithSwipeActions({ className, showSubtitle = true, subtitle = "Subtitle", title = "Title" }: RowWithSwipeActionsProps) {
+  return (
+    <div className={className || ""} data-name="Row with Swipe Actions" data-node-id="550:49969">
+      <div className="content-stretch flex gap-[10px] items-center justify-end pr-[16px] relative w-[402px]" data-name="Height=Tall, Swipe=Left" data-node-id="550:50318">
+        <div className="bg-[var(--grays\/gray-5,#e5e5ea)] content-stretch flex gap-[4px] h-[68px] items-center px-[16px] relative rounded-[100px] shrink-0" data-name="Contents" data-node-id="550:50320">
+          <div className="border-[var(--separators\/non-opaque,rgba(0,0,0,0.12))] border-b-[0.33px] border-solid content-stretch flex h-full items-center leading-[0] not-italic relative shrink-0 w-[588px]" data-name="Title and Trailing Accessories" data-node-id="550:50323">
+            <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center min-h-px min-w-px relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="550:50324">
+              <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="550:50325">
+                <p className="leading-[22px] overflow-hidden">{title}</p>
+              </div>
+              {showSubtitle && (
+                <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="550:50326">
+                  <p className="leading-[20px] overflow-hidden">{subtitle}</p>
+                </div>
+              )}
+            </div>
+            <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="550:50327">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I550:50327;212:117599">
+                <p className="leading-[22px]">Detail</p>
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I550:50327;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I550:50327;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row items-center self-stretch">
+          <div className="content-stretch flex gap-[10px] h-full items-center relative shrink-0" data-name="Actions" data-node-id="5532:35794">
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8399">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8399;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8399;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8399;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8424">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8424;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8424;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8424;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[68px] relative rounded-[100px] shrink-0 w-[50px]" data-name="_Swipe Actions/Small" data-node-id="5533:8457">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%-0.5px)] not-italic text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center top-[calc(50%+29px)] w-[49px]" data-node-id="I5533:8457;27:68006">
+                <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+              </div>
+              <div className="absolute bg-[var(--accents\/orange,#ff8d28)] left-0 rounded-[100px] size-[50px] top-0" data-name="Frame" data-node-id="I5533:8457;5532:35793">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[17px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5533:8457;5532:35791" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓞</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type SectionTitleProps = {
+  className?: string;
+  text?: string;
+};
+
+function SectionTitle({ className, text = "A" }: SectionTitleProps) {
+  return (
+    <div className={className || "backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative w-[300px]"} data-name="Section Title" data-node-id="50:56535">
+      <div className="content-stretch flex flex-[1_0_0] h-[39px] items-end min-h-px min-w-px pb-[9px] relative" data-name="Title" data-node-id="517:37832">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px]" data-node-id="50:56531">
+          {text}
+        </p>
+      </div>
+    </div>
+  );
+}
+type ListProps = {
+  className?: string;
+  type?: "Full Width" | "Full Width + Section Headers" | "Inset";
+};
+
+export default function List({ className, type = "Inset" }: ListProps) {
+  const isFullWidth = type === "Full Width";
+  const isFullWidthSectionHeaders = type === "Full Width + Section Headers";
+  const isInset = type === "Inset";
+  return (
+    <div className={className || "h-[874px] relative w-[402px]"} id={isInset ? "node-754_63381" : isFullWidth ? "node-754_63455" : "node-754_63509"}>
+      <div className={`absolute content-stretch flex flex-col inset-0 items-center overflow-clip ${isInset ? String.raw`bg-[var(--backgrounds-\(grouped\)\/primary,#f2f2f7)] pt-[167px] rounded-[44px]` : isFullWidth ? String.raw`bg-[var(--backgrounds\/primary,white)] pt-[177px] rounded-bl-[40px] rounded-br-[40px]` : String.raw`bg-[var(--backgrounds\/primary,white)] pt-[177px] rounded-[44px]`}`} data-name="Screen" id={isInset ? "node-754_47484" : isFullWidth ? "node-5707_47740" : "node-5707_47955"}>
+        <div className={`content-stretch flex flex-col items-center pb-[50px] pt-[16px] relative shrink-0 w-full ${isInset ? "px-[16px]" : ""}`} data-name="Content Area" id={isInset ? "node-754_47486" : isFullWidth ? "node-5707_47741" : "node-5707_47956"}>
+          {isFullWidthSectionHeaders && (
+            <>
+              <div className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" data-name="Section Title" data-node-id="5707:48171">
+                <div className="content-stretch flex flex-[1_0_0] h-[39px] items-end min-h-px min-w-px pb-[9px] relative" data-name="Title" data-node-id="I5707:48171;517:37832">
+                  <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px]" data-node-id="I5707:48171;50:56531">
+                    A
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48172">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48172;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48172;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48172;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48172;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Alexander Valley</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48173">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48173;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48173;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48173;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48173;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Anderson Valley</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48174">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48174;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48174;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48174;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48174;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Atlas Peak</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="B" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48176">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48176;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48176;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48176;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48176;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Bennett Valley</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="C" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48178">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48178;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48178;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48178;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48178;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Carneros</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48179">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48179;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48179;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48179;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48179;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Calistoga</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48180">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48180;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48180;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48180;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48180;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Chalk Hill</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="D" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48182">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48182;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48182;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48182;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48182;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Diamond Mountain</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48183">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48183;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48183;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48183;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48183;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Dry Creek</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="E" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48185">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48185;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48185;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48185;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48185;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Fort Ross</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="F" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48187">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48187;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48187;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48187;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48187;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Green Valley</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="G" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48189">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48189;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48189;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48189;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48189;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Howell Mountain</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <SectionTitle className="backdrop-blur-[50px] content-stretch flex items-end px-[16px] relative shrink-0 w-full" text="H" />
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48191">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48191;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48191;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48191;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:48191;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+          {isFullWidth && (
+            <div className="bg-[var(--backgrounds\/primary,white)] content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="List Example" data-node-id="5707:48456">
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48457">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48457;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48457;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48457;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:48457;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:48457;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:48457;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:48457;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <RowWithSwipeActions className="content-stretch flex gap-[10px] items-center justify-end overflow-clip pr-[16px] relative shrink-0 w-full" />
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48459">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48459;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48459;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48459;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:48459;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:48459;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:48459;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:48459;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48460">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48460;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48460;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48460;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:48460;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:48460;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:48460;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:48460;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48461">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48461;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48461;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48461;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:48461;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:48461;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:48461;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:48461;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:48462">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:48462;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:48462;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:48462;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:48462;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:48462;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:48462;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:48462;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {isInset && (
+            <div className="bg-[var(--backgrounds-\(grouped\)\/secondary,white)] content-stretch flex flex-col h-[656px] items-start overflow-clip relative rounded-[26px] shrink-0 w-[362px]" data-name="Grouped Table View" data-node-id="5707:47188">
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47189">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47189;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47189;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47189;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47189;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47189;550:50637">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47190">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47190;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47190;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47190;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:47190;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:47190;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:47190;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47190;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[68px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47191">
+                <div className="content-stretch flex items-center pr-[8px] relative shrink-0" data-name="Image" data-node-id="I5707:47191;550:50519">
+                  <ImagesTall className="relative shrink-0 size-[68px]" />
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47191;550:50516">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47191;5534:22504" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47191;550:50521">
+                    <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-[60px] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative text-ellipsis whitespace-nowrap" data-name="Title and Detail" data-node-id="I5707:47191;550:50522">
+                      <div className="flex flex-col h-[22px] justify-center overflow-hidden relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I5707:47191;550:50523">
+                        <p className="leading-[22px] overflow-hidden">Title</p>
+                      </div>
+                      <div className="flex flex-col h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.23px] w-full" data-node-id="I5707:47191;550:50524">
+                        <p className="leading-[20px] overflow-hidden">Subtitle</p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47191;550:50525">
+                      <Trailing className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" showCheckmark={false} showInfo={false} showSymbol={false} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47192">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47192;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47192;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47192;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47192;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47192;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47192;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47192;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47192;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47192;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47193">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47193;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47193;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47193;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47193;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47193;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47193;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47193;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47193;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47193;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47194">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47194;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47194;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47194;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47194;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47194;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47194;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47194;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47194;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47194;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47195">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47195;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47195;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47195;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47195;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47195;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47195;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47195;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47195;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47195;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47196">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47196;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47196;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47196;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47196;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47196;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47196;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47196;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47196;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47196;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                      <div className="content-stretch flex flex-col h-full items-center justify-center pl-[12px] relative shrink-0" data-name="_Grabber" data-node-id="I5707:47196;5533:14289">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center w-full" data-node-id="I5707:47196;5533:14289;5533:12349">
+                          <p className="leading-[25px] whitespace-pre-wrap">􀌇</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47197">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47197;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47197;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47197;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47197;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47197;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47197;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47197;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47197;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47197;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47198">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47198;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47198;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47198;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47198;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47198;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47198;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47198;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47198;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47198;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full" data-name="Row" data-node-id="5707:47199">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative" data-name="Contents" data-node-id="I5707:47199;550:50628">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47199;5534:22992" />
+                  <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Title and Trailing Accessories" data-node-id="I5707:47199;550:50633">
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47199;550:50635">
+                      <p className="leading-[22px] overflow-hidden">Title</p>
+                    </div>
+                    <div className="content-stretch flex h-full items-center justify-end relative shrink-0" data-name="Accessories and Grabber" data-node-id="I5707:47199;550:50637">
+                      <div className="content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]" data-name="_Trailing" data-node-id="I5707:47199;550:50638">
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap" data-node-id="I5707:47199;550:50638;212:117599">
+                          <p className="leading-[22px]">Detail</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center" data-node-id="I5707:47199;550:50638;212:119974" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀋂</p>
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]" data-node-id="I5707:47199;550:50638;212:124674" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                          <p className="leading-[22px] whitespace-pre-wrap">􀆊</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[52px] items-center justify-center pb-px px-[16px] relative shrink-0 w-full" data-name="Row - Button" data-node-id="5707:47200">
+                <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5707:47200;5534:22457" />
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--accents\/blue,#08f)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap" data-node-id="I5707:47200;550:49761">
+                  <p className="leading-[22px] overflow-hidden">Action</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0" data-name="Scroll Edge Effect - Soft" id={isInset ? "node-5713_51515" : isFullWidth ? "node-5730_23934" : "node-5713_51511"}>
+          <div className="absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90" data-name="Blur" id={isInset ? "node-I5713_51515-5661_28857" : isFullWidth ? "node-I5730_23934-5661_28853" : "node-I5713_51511-5661_28857"} style={isInset ? { maskImage: `url('${imgBlur2}')` } : isFullWidth ? { maskImage: `url('${imgBlur1}')` } : { maskImage: `url('${imgBlur}')` }} />
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col gap-[10px] items-center left-0 pb-[10px] right-0 top-[62px]" data-name="Toolbar - Top - iPhone" id={isInset ? "node-754_47485" : isFullWidth ? "node-5707_47565" : "node-5707_47653"}>
+        <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Controls" id={isInset ? "node-I754_47485-5553_39603" : isFullWidth ? "node-I5707_47565-5553_39603" : "node-I5707_47653-5553_39603"}>
+          <div className="content-stretch flex gap-[10px] items-center relative shrink-0" data-name="Leading" id={isInset ? "node-I754_47485-5553_39604" : isFullWidth ? "node-I5707_47565-5553_39604" : "node-I5707_47653-5553_39604"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isInset ? "node-I754_47485-5553_39605" : isFullWidth ? "node-I5707_47565-5553_39605" : "node-I5707_47653-5553_39605"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isInset ? "node-I754_47485-5553_39605-6491_22565" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565" : "node-I5707_47653-5553_39605-6491_22565"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isInset ? "node-I754_47485-5553_39605-6491_22565-5575_44983" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-5575_44983" : "node-I5707_47653-5553_39605-6491_22565-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isInset ? "node-I754_47485-5553_39605-6491_22565-5575_75442" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-5575_75442" : "node-I5707_47653-5553_39605-6491_22565-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isInset ? "node-I754_47485-5553_39605-6491_22565-5575_75442-5575_32354" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-5575_75442-5575_32354" : "node-I5707_47653-5553_39605-6491_22565-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isInset ? "node-I754_47485-5553_39605-6491_22565-6491_20171" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-6491_20171" : "node-I5707_47653-5553_39605-6491_22565-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isInset ? "node-I754_47485-5553_39605-6491_22565-6491_20172" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-6491_20172" : "node-I5707_47653-5553_39605-6491_22565-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isInset ? "node-I754_47485-5553_39605-6491_22565-6491_20173" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22565-6491_20173" : "node-I5707_47653-5553_39605-6491_22565-6491_20173"} />
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" id={isInset ? "node-I754_47485-5553_39605-6491_22970" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22970" : "node-I5707_47653-5553_39605-6491_22970"}>
+                <div className="flex flex-col justify-center relative shrink-0" id={isInset ? "node-I754_47485-5553_39605-6491_22970-5431_837" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22970-5431_837" : "node-I5707_47653-5553_39605-6491_22970-5431_837"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">􀯶</p>
+                </div>
+                <div className="flex flex-col justify-center relative shrink-0" id={isInset ? "node-I754_47485-5553_39605-6491_22970-5431_840" : isFullWidth ? "node-I5707_47565-5553_39605-6491_22970-5431_840" : "node-I5707_47653-5553_39605-6491_22970-5431_840"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">Label</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row items-center self-stretch">
+            <div className="h-full shrink-0 w-[8px]" data-name="Spacer" id={isInset ? "node-I754_47485-5661_32020" : isFullWidth ? "node-I5707_47565-5661_32020" : "node-I5707_47653-5661_32020"} />
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center justify-end relative shrink-0" data-name="Trailing" id={isInset ? "node-I754_47485-5553_39608" : isFullWidth ? "node-I5707_47565-5553_39608" : "node-I5707_47653-5553_39608"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isInset ? "node-I754_47485-5553_39609" : isFullWidth ? "node-I5707_47565-5553_39609" : "node-I5707_47653-5553_39609"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isInset ? "node-I754_47485-5553_39609-5566_7888" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888" : "node-I5707_47653-5553_39609-5566_7888"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isInset ? "node-I754_47485-5553_39609-5566_7888-5575_44983" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-5575_44983" : "node-I5707_47653-5553_39609-5566_7888-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isInset ? "node-I754_47485-5553_39609-5566_7888-5575_75442" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-5575_75442" : "node-I5707_47653-5553_39609-5566_7888-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isInset ? "node-I754_47485-5553_39609-5566_7888-5575_75442-5575_32354" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-5575_75442-5575_32354" : "node-I5707_47653-5553_39609-5566_7888-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isInset ? "node-I754_47485-5553_39609-5566_7888-6491_20171" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-6491_20171" : "node-I5707_47653-5553_39609-5566_7888-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isInset ? "node-I754_47485-5553_39609-5566_7888-6491_20172" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-6491_20172" : "node-I5707_47653-5553_39609-5566_7888-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isInset ? "node-I754_47485-5553_39609-5566_7888-6491_20173" : isFullWidth ? "node-I5707_47565-5553_39609-5566_7888-6491_20173" : "node-I5707_47653-5553_39609-5566_7888-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isInset ? "node-I754_47485-5553_39609-5432_23135" : isFullWidth ? "node-I5707_47565-5553_39609-5432_23135" : "node-I5707_47653-5553_39609-5432_23135"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isInset ? "node-I754_47485-5553_39609-5432_23135-5426_2011" : isFullWidth ? "node-I5707_47565-5553_39609-5432_23135-5426_2011" : "node-I5707_47653-5553_39609-5432_23135-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isInset ? "node-I754_47485-5553_39610" : isFullWidth ? "node-I5707_47565-5553_39610" : "node-I5707_47653-5553_39610"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isInset ? "node-I754_47485-5553_39610-5566_11516" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516" : "node-I5707_47653-5553_39610-5566_11516"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isInset ? "node-I754_47485-5553_39610-5566_11516-5575_44983" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-5575_44983" : "node-I5707_47653-5553_39610-5566_11516-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isInset ? "node-I754_47485-5553_39610-5566_11516-5575_75442" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-5575_75442" : "node-I5707_47653-5553_39610-5566_11516-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isInset ? "node-I754_47485-5553_39610-5566_11516-5575_75442-5575_32354" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-5575_75442-5575_32354" : "node-I5707_47653-5553_39610-5566_11516-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isInset ? "node-I754_47485-5553_39610-5566_11516-6491_20171" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-6491_20171" : "node-I5707_47653-5553_39610-5566_11516-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isInset ? "node-I754_47485-5553_39610-5566_11516-6491_20172" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-6491_20172" : "node-I5707_47653-5553_39610-5566_11516-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isInset ? "node-I754_47485-5553_39610-5566_11516-6491_20173" : isFullWidth ? "node-I5707_47565-5553_39610-5566_11516-6491_20173" : "node-I5707_47653-5553_39610-5566_11516-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isInset ? "node-I754_47485-5553_39610-5432_23126" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23126" : "node-I5707_47653-5553_39610-5432_23126"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isInset ? "node-I754_47485-5553_39610-5432_23126-5426_2011" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23126-5426_2011" : "node-I5707_47653-5553_39610-5432_23126-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isInset ? "node-I754_47485-5553_39610-5432_23127" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23127" : "node-I5707_47653-5553_39610-5432_23127"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isInset ? "node-I754_47485-5553_39610-5432_23127-5426_2011" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23127-5426_2011" : "node-I5707_47653-5553_39610-5432_23127-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isInset ? "node-I754_47485-5553_39610-5432_23128" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23128" : "node-I5707_47653-5553_39610-5432_23128"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isInset ? "node-I754_47485-5553_39610-5432_23128-5426_2011" : isFullWidth ? "node-I5707_47565-5553_39610-5432_23128-5426_2011" : "node-I5707_47653-5553_39610-5432_23128-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-start px-[16px] relative shrink-0 w-full" data-name="Title and Subtitle" id={isInset ? "node-I754_47485-5553_39612" : isFullWidth ? "node-I5707_47565-5553_39612" : "node-I5707_47653-5553_39612"}>
+          <div className="h-[41px] relative shrink-0 w-full" data-name="_Title - Large Title" id={isInset ? "node-I754_47485-5827_57570" : isFullWidth ? "node-I5707_47565-5827_57570" : "node-I5707_47653-5827_57570"}>
+            <p className="absolute font-['SF_Pro:Bold',sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]" id={isInset ? "node-I754_47485-5827_57570-5827_57542" : isFullWidth ? "node-I5707_47565-5827_57570-5827_57542" : "node-I5707_47653-5827_57570-5827_57542"}>
+              Title
+            </p>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0 w-full" data-name="_Subtitle - Subheadline" id={isInset ? "node-I754_47485-5827_57971" : isFullWidth ? "node-I5707_47565-5827_57971" : "node-I5707_47653-5827_57971"}>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.25px]" id={isInset ? "node-I754_47485-5827_57971-5827_57543" : isFullWidth ? "node-I5707_47565-5827_57971-5827_57543" : "node-I5707_47653-5827_57971-5827_57543"}>
+              Subtitle
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0" data-name="Status bar - iPhone" id={isInset ? "node-5707_47402" : isFullWidth ? "node-5707_47566" : "node-5707_47654"}>
+        <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" id={isInset ? "node-I5707_47402-5465_16808" : isFullWidth ? "node-I5707_47566-5465_16808" : "node-I5707_47654-5465_16808"}>
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" id={isInset ? "node-I5707_47402-5465_16809" : isFullWidth ? "node-I5707_47566-5465_16809" : "node-I5707_47654-5465_16809"}>
+            9:41
+          </p>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" id={isInset ? "node-I5707_47402-5465_16811" : isFullWidth ? "node-I5707_47566-5465_16811" : "node-I5707_47654-5465_16811"}>
+          <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" id={isInset ? "node-I5707_47402-5465_16812" : isFullWidth ? "node-I5707_47566-5465_16812" : "node-I5707_47654-5465_16812"}>
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+          </div>
+          <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" id={isInset ? "node-I5707_47402-5465_16813" : isFullWidth ? "node-I5707_47566-5465_16813" : "node-I5707_47654-5465_16813"}>
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+          </div>
+          <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" id={isInset ? "node-I5707_47402-6325_1760" : isFullWidth ? "node-I5707_47566-6325_1760" : "node-I5707_47654-6325_1760"}>
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute h-[874px] left-0 top-0 w-[402px]" data-name="iPhone 17 Pro" id={isInset ? "node-754_47505" : isFullWidth ? "node-5707_47567" : "node-5707_47655"}>
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" id={isInset ? "node-I754_47505-6316_14150" : isFullWidth ? "node-I5707_47567-6316_14150" : "node-I5707_47655-6316_14150"}>
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Emphasized: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574), Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Large Title/Emphasized: Font(family: "SF Pro", style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645), Subheadline/Regular: Font(family: "SF Pro", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513), Colors/Blue: #0088FF, Headline/Regular: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## List
+**Node ID:** 781:15374
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Section Title
+**Node ID:** 50:56535
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+## Row
+**Node ID:** 550:50430
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+## Toolbar - Top - iPhone
+**Node ID:** 1:54472
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Row with Swipe Actions
+**Node ID:** 550:49969
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+## Date and time - Collapsed
+**Node ID:** 30:53803
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/pickers](https://developer.apple.com/design/human-interface-guidelines/pickers)
+
+## Stepper
+**Node ID:** 29:63928
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/steppers](https://developer.apple.com/design/human-interface-guidelines/steppers)
+
+## Toggle - Switch
+**Node ID:** 29:56814
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/toggles](https://developer.apple.com/design/human-interface-guidelines/toggles)
+
+## Row - Button
+**Node ID:** 550:49677
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

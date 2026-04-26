@@ -1,0 +1,201 @@
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/6d06e4a4-3d75-4022-a3ad-88fd0dfcb837";
+const imgWifi = "https://www.figma.com/api/mcp/asset/67de5850-6752-4cbf-977b-744a3e416da4";
+const imgFrame = "https://www.figma.com/api/mcp/asset/151da245-9737-44b1-a867-20440e936657";
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/3fede7d0-4a4b-4d47-b097-a5fe917c7bfb";
+const imgBlur = "https://www.figma.com/api/mcp/asset/fc4573a6-f6d2-4e61-b7df-8af949b1b0e8";
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = "9:41" }: StatusBarIPhoneProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]"} data-name="Status bar - iPhone" data-node-id="5465:16807">
+      <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" data-node-id="5465:16808">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="5465:16809">
+          {time}
+        </p>
+      </div>
+      <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" data-node-id="5465:16811">
+        <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" data-node-id="5465:16812">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+        </div>
+        <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" data-node-id="5465:16813">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+        </div>
+        <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" data-node-id="6325:1760">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type TextFieldProps = {
+  className?: string;
+  state?: "Placeholder" | "Focused" | "Typing" | "Value Entered";
+  value?: string;
+};
+
+function TextField({ className, state = "Placeholder", value = "Value" }: TextFieldProps) {
+  const isFocused = state === "Focused";
+  const isTyping = state === "Typing";
+  const isValueEntered = state === "Value Entered";
+  return (
+    <div className={className || `content-stretch flex h-[52px] px-[16px] relative w-[402px] ${isFocused ? "items-start" : "items-center"}`} id={isTyping ? "node-5433_15635" : isValueEntered ? "node-5433_15631" : isFocused ? "node-5433_15646" : "node-553_23061"}>
+      <div className={`content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px relative ${isFocused ? "" : "justify-center"}`} data-name="Contents" id={isTyping ? "node-5433_15636" : isValueEntered ? "node-5433_15632" : isFocused ? "node-5433_15647" : "node-553_23062"}>
+        <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" id={isTyping ? "node-5469_8041" : isValueEntered ? "node-5469_8035" : isFocused ? "node-5469_8033" : "node-5469_7944"} />
+        {state === "Placeholder" && (
+          <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px] w-full" data-node-id="553:23064">
+            <p className="leading-[20px] whitespace-pre-wrap">{value}</p>
+          </div>
+        )}
+        {isFocused && (
+          <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full" data-name="Cursor and Value" data-node-id="5433:15650">
+            <div className="bg-[var(--accents\/blue,#08f)] h-[22px] rounded-[10px] shrink-0 w-[2px]" data-name="Cursor" data-node-id="5433:15651" />
+          </div>
+        )}
+        {isValueEntered && (
+          <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="5433:15633">
+            <p className="leading-[20px] whitespace-pre-wrap">{value}</p>
+          </div>
+        )}
+        {isTyping && (
+          <div className="content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px relative w-full" data-name="Text" data-node-id="5433:15645">
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px relative" data-name="Cursor and Value" data-node-id="5433:15639">
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] whitespace-nowrap" data-node-id="5433:15640">
+                <p className="leading-[20px]">{value}</p>
+              </div>
+              <div className="bg-[var(--accents\/blue,#08f)] h-[22px] rounded-[10px] shrink-0 w-[2px]" data-name="Cursor" data-node-id="5433:15641" />
+            </div>
+            <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[20px]" data-node-id="5433:15643">
+              <p className="leading-[22px] whitespace-pre-wrap">􀁡</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function TextFields({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[874px] relative w-[402px]"} data-name="Text Fields" data-node-id="5661:33949">
+      <div className="absolute bg-[var(--backgrounds-\(grouped\)\/primary,#f2f2f7)] content-stretch flex flex-col inset-0 items-center justify-center overflow-clip pb-[10px] pt-[116px] px-[16px]" data-name="Screen" data-node-id="5661:33886">
+        <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-h-px min-w-px py-[10px] relative w-full" data-name="Content Area" data-node-id="5661:33887">
+          <div className="bg-[var(--backgrounds-\(grouped\)\/secondary,white)] content-stretch flex flex-col items-start overflow-clip relative rounded-[26px] shrink-0 w-full" data-name="Grouped List" data-node-id="5661:34003">
+            <TextField className="content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full" value="Placeholder" />
+            <TextField className="content-stretch flex h-[52px] items-start px-[16px] relative shrink-0 w-full" state="Focused" />
+            <TextField className="content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full" state="Typing" />
+            <TextField className="content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full" state="Value Entered" />
+          </div>
+        </div>
+        <div className="absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0" data-name="Scroll Edge Effect - Soft" data-node-id="5707:46440">
+          <div className="absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90" data-name="Blur" data-node-id="I5707:46440;5661:28853" style={{ maskImage: `url('${imgBlur}')` }} />
+        </div>
+      </div>
+      <div className="absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[16px] right-0 top-[62px]" data-name="Toolbar - Top - iPhone" data-node-id="5661:33892">
+        <div className="content-stretch flex gap-[10px] items-center relative shrink-0" data-name="Leading" data-node-id="I5661:33892;5553:35134">
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5661:33892;5553:35135">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5661:33892;5553:35135;6491:22565">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5661:33892;5553:35135;6491:22565;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5661:33892;5553:35135;6491:22565;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5661:33892;5553:35135;6491:22565;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5661:33892;5553:35135;6491:22565;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5661:33892;5553:35135;6491:22565;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5661:33892;5553:35135;6491:22565;6491:20173" />
+            </div>
+            <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" data-node-id="I5661:33892;5553:35135;6491:22970">
+              <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5661:33892;5553:35135;6491:22970;5431:837" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal]">􀯶</p>
+              </div>
+              <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5661:33892;5553:35135;6491:22970;5431:840" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal]">Label</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="self-stretch shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5661:33892;5661:34483" />
+        <div className="content-stretch flex gap-[10px] items-center justify-end relative shrink-0" data-name="Trailing" data-node-id="I5661:33892;5553:33054">
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5661:33892;5553:33055">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5661:33892;5553:33055;5720:30354">
+              <div className="absolute inset-0 rounded-[1000px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.1),0px_1px_8px_0px_rgba(0,0,0,0.12)]" data-name="Tint" data-node-id="I5661:33892;5553:33055;5720:30354;5607:78140">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[1000px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.5)] inset-0 rounded-[1000px]" />
+                  <div className="absolute bg-white inset-0 mix-blend-saturation rounded-[1000px]" />
+                  <div className="absolute bg-[#999] inset-0 mix-blend-overlay rounded-[1000px]" />
+                  <div className="absolute bg-[#0091ff] inset-0 rounded-[1000px]" />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5661:33892;5553:33055;5720:30354;5607:77747" />
+            </div>
+            <div className="bg-[var(--accents\/blue,#08f)] content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5661:33892;5553:33055;5432:23263">
+              <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-center text-white w-full" data-node-id="I5661:33892;5553:33055;5432:23263;5426:2007" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5661:33892;5827:58547">
+          <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5661:33892;5827:58547;5827:56434">
+            Title
+          </p>
+        </div>
+      </div>
+      <StatusBarIPhone className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0" />
+      <div className="absolute h-[874px] left-0 top-0 w-[402px]" data-name="iPhone 17 Pro" data-node-id="5661:33895">
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" data-node-id="I5661:33895;6316:14150">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Headline/Regular: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Text Fields
+**Node ID:** 5661:33949
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/tab-bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
+
+## Text Field
+**Node ID:** 553:23047
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+## Toolbar - Top - iPhone
+**Node ID:** 1:54472
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

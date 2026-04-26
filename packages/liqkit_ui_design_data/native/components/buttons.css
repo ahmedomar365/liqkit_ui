@@ -1,0 +1,402 @@
+.ios26-buttons-root {
+  --btn-accent-blue: #0088ff;
+  --btn-accent-red: #ff383c;
+  --btn-label-primary: #000000;
+  --btn-label-tertiary: #3c3c434d;
+  --btn-fill-tertiary: #7676801f;
+  --btn-fill-secondary: #78788029;
+  --btn-destructive-bg: #ff383c24;
+  --btn-destructive-bg-prominent: #ff383c33;
+  --btn-destructive-disabled: #ff383c80;
+  --btn-prominent-disabled-bg: #0088ff33;
+  --btn-prominent-disabled-fg: rgba(255, 255, 255, 0.3);
+  --btn-state-bg: #ffffff;
+  --btn-state-border: #e3e7ef;
+  --btn-state-title: #505561;
+  --btn-grid-head: #646a77;
+  --btn-grid-label: #454a56;
+  --btn-grid-divider: #ebeff5;
+  --btn-sticky-bg: #ffffff;
+  --btn-cell-bg: #fafbfe;
+  --btn-cell-border: #edf1f7;
+  width: min(2600px, 100%);
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-buttons-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-buttons-panel {
+  border: 1px solid #d8dce3;
+  border-radius: 20px;
+  background: rgba(247, 248, 251, 0.9);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-buttons-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-buttons-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  color: #101114;
+  letter-spacing: -0.35px;
+}
+
+.ios26-buttons-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #666a72;
+}
+
+.ios26-buttons-examples-row {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(560px, 1fr));
+}
+
+.ios26-buttons-panel--example {
+  align-content: start;
+}
+
+.ios26-buttons-mode {
+  border-radius: 16px;
+  border: 1px solid var(--btn-state-border);
+  background: var(--btn-state-bg);
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-buttons-mode-badge {
+  justify-self: end;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  padding: 1px 8px;
+  font: 590 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  opacity: 0.82;
+}
+
+.ios26-buttons-mode-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-buttons-mode--light {
+  --btn-accent-blue: #0088ff;
+  --btn-accent-red: #ff383c;
+  --btn-label-primary: #000000;
+  --btn-label-tertiary: #3c3c434d;
+  --btn-fill-tertiary: #7676801f;
+  --btn-fill-secondary: #78788029;
+  --btn-destructive-bg: #ff383c24;
+  --btn-destructive-bg-prominent: #ff383c33;
+  --btn-destructive-disabled: #ff383c80;
+  --btn-prominent-disabled-bg: #0088ff33;
+  --btn-prominent-disabled-fg: rgba(255, 255, 255, 0.3);
+  --btn-state-bg: #ffffff;
+  --btn-state-border: #e3e7ef;
+  --btn-state-title: #505561;
+  --btn-grid-head: #646a77;
+  --btn-grid-label: #454a56;
+  --btn-grid-divider: #ebeff5;
+  --btn-sticky-bg: #ffffff;
+  --btn-cell-bg: #fafbfe;
+  --btn-cell-border: #edf1f7;
+  color: #101114;
+}
+
+.ios26-buttons-mode--dark {
+  --btn-accent-blue: #0091ff;
+  --btn-accent-red: #ff4245;
+  --btn-label-primary: #ffffff;
+  --btn-label-tertiary: #ebebf54d;
+  --btn-fill-tertiary: #7676803d;
+  --btn-fill-secondary: #78788052;
+  --btn-destructive-bg: #ff424524;
+  --btn-destructive-bg-prominent: #ff424533;
+  --btn-destructive-disabled: #ff424580;
+  --btn-prominent-disabled-bg: #0091ff33;
+  --btn-prominent-disabled-fg: rgba(255, 255, 255, 0.3);
+  --btn-state-bg: #000000;
+  --btn-state-border: #1f2430;
+  --btn-state-title: #858fa0;
+  --btn-grid-head: #7d8799;
+  --btn-grid-label: #a3abba;
+  --btn-grid-divider: #1d232d;
+  --btn-sticky-bg: #000000;
+  --btn-cell-bg: #05070b;
+  --btn-cell-border: #111722;
+  color: #ffffff;
+}
+
+.ios26-buttons-state-block {
+  border: 1px solid var(--btn-state-border);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--btn-state-bg);
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-buttons-state-block h3 {
+  margin: 0;
+  font: 500 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: var(--btn-state-title);
+}
+
+.ios26-buttons-grid {
+  display: grid;
+  grid-template-columns: 160px repeat(4, minmax(190px, 1fr));
+  gap: 8px;
+  align-items: start;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-buttons-grid-head {
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: var(--btn-grid-head);
+  border-bottom: 1px solid var(--btn-grid-divider);
+  padding-bottom: 6px;
+}
+
+.ios26-buttons-grid-head--label {
+  position: sticky;
+  left: 0;
+  background: var(--btn-sticky-bg);
+  z-index: 2;
+}
+
+.ios26-buttons-grid-label {
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: var(--btn-grid-label);
+  padding-top: 6px;
+  position: sticky;
+  left: 0;
+  background: var(--btn-sticky-bg);
+  z-index: 1;
+}
+
+.ios26-buttons-cell {
+  min-height: 70px;
+  border: 1px solid var(--btn-cell-border);
+  border-radius: 10px;
+  background: var(--btn-cell-bg);
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ios26-btn {
+  width: var(--btn-w);
+  height: var(--btn-h);
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--btn-accent-blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font: 400 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+}
+
+.ios26-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.ios26-btn-icon {
+  width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.ios26-btn-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-btn-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-btn--large {
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.43px;
+}
+
+.ios26-btn--medium {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.24px;
+}
+
+.ios26-btn--small {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.23px;
+}
+
+.ios26-btn--bordered-prominent {
+  background: var(--btn-accent-blue);
+  color: #ffffff;
+}
+
+.ios26-btn--bordered {
+  background: var(--btn-fill-secondary);
+  color: var(--btn-accent-blue);
+}
+
+.ios26-btn--bordered-secondary {
+  background: var(--btn-fill-tertiary);
+  color: var(--btn-label-primary);
+}
+
+.ios26-btn--borderless {
+  background: transparent;
+  color: var(--btn-accent-blue);
+}
+
+.ios26-btn.is-destructive {
+  color: var(--btn-accent-red);
+}
+
+.ios26-btn--bordered-prominent.is-destructive {
+  background: var(--btn-accent-red);
+  color: #ffffff;
+}
+
+.ios26-btn--bordered.is-destructive,
+.ios26-btn--bordered-secondary.is-destructive {
+  background: var(--btn-destructive-bg);
+}
+
+.ios26-btn.is-disabled {
+  color: var(--btn-label-tertiary);
+}
+
+.ios26-btn.is-disabled.is-destructive {
+  color: var(--btn-destructive-disabled);
+}
+
+.ios26-btn.is-disabled .ios26-btn-icon {
+  opacity: 0.85;
+}
+
+.ios26-btn--bordered-prominent.is-disabled {
+  background: var(--btn-prominent-disabled-bg);
+  color: var(--btn-prominent-disabled-fg);
+}
+
+.ios26-btn--bordered-prominent.is-disabled.is-destructive {
+  background: var(--btn-destructive-bg-prominent);
+  color: var(--btn-prominent-disabled-fg);
+}
+
+.ios26-btn--bordered.is-disabled,
+.ios26-btn--bordered-secondary.is-disabled {
+  background: var(--btn-fill-tertiary);
+}
+
+.ios26-btn--bordered.is-disabled.is-destructive,
+.ios26-btn--bordered-secondary.is-disabled.is-destructive {
+  background: var(--btn-destructive-bg);
+}
+
+.ios26-btn--liquid {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.12)),
+    rgba(118, 118, 128, 0.18);
+  color: var(--btn-label-primary);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.52);
+}
+
+.ios26-buttons-panel--supplement {
+  align-content: start;
+}
+
+.ios26-buttons-supplement-board {
+  --sheet-w: 1250px;
+  --sheet-h: 1070px;
+  width: min(var(--sheet-w), 100%);
+  min-height: min(var(--sheet-h), 70vh);
+  position: relative;
+  border: 1px solid var(--btn-state-border);
+  border-radius: 18px;
+  background:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.62)),
+    #f4f5f8;
+  overflow: auto;
+}
+
+.ios26-buttons-supplement-item {
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-buttons-supplement-item--button {
+  pointer-events: auto;
+}
+
+.ios26-buttons-supplement-item--button .ios26-btn {
+  width: 100%;
+  height: 100%;
+}
+
+.ios26-buttons-supplement-item--anchor {
+  border: 1px dashed rgba(80, 86, 97, 0.45);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 2px 4px;
+  align-items: start;
+  justify-items: start;
+}
+
+.ios26-buttons-supplement-item--anchor span {
+  font: 500 10px/12px "SF Pro Text", "SF Pro", sans-serif;
+  color: #535a68;
+  letter-spacing: -0.08px;
+}
+
+@media (max-width: 1600px) {
+  .ios26-buttons-root {
+    width: 100%;
+  }
+
+  .ios26-buttons-examples-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1060px) {
+  .ios26-buttons-panel {
+    padding: 14px;
+  }
+}

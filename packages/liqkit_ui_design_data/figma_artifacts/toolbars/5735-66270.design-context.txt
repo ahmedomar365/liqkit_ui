@@ -1,0 +1,271 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/7733be6c-d42f-4822-a93f-7ac66353b0a4";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/9225c301-3d60-4656-b794-af92c486872a";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/da8d7200-f257-4b43-9b11-c52ab7260e02";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/9418123c-2c19-44b5-a6e2-b72f272a54dd";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SearchAccessory({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Search Accessory" data-node-id="5573:24624">
+      <div className="content-stretch flex flex-col items-center relative w-[820px]" data-name="Show Filters=False" data-node-id="5573:24623">
+        <div className="content-stretch flex gap-[4px] h-[44px] items-center justify-center pl-[11px] pr-[10px] relative rounded-[296px] shrink-0 w-[190px]" data-name="_Search - Top" data-node-id="5573:24610">
+          <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+          <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5573:24610;6491:21929;5575:44983">
+            <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5573:24610;6491:21929;5575:75442">
+              <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5573:24610;6491:21929;5575:75442;5575:32354" />
+            </div>
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5573:24610;6491:21929;6491:20171" />
+          </div>
+          <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5573:24610;6491:21929;6491:20172">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+              <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+              <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5573:24610;6491:21929;6491:20173" />
+          <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center whitespace-nowrap" data-node-id="I5573:24610;5565:35418" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[normal]">􀊫</p>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="Value" data-node-id="I5573:24610;5565:35419">
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center whitespace-nowrap" data-node-id="I5573:24610;5565:35420" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal]">Search Term</p>
+            </div>
+          </div>
+          <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/secondary,#727272)] text-center whitespace-nowrap" data-node-id="I5573:24610;5565:35421">
+            <p className="leading-[normal]">􀊰</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type TabBarsProps = {
+  className?: string;
+  type?: "With Search" | "Without Search";
+};
+
+export default function TabBars({ className, type = "Without Search" }: TabBarsProps) {
+  const isWithoutSearch = type === "Without Search";
+  return (
+    <div className={className || "bg-white h-[834px] relative w-[1210px]"} id={isWithoutSearch ? "node-2517_14496" : "node-5735_66271"}>
+      <div className="absolute content-stretch flex flex-col gap-[10px] items-start left-0 pb-[10px] px-[10px] right-0 top-[32px]" data-name="Toolbar - Top - iPad" id={isWithoutSearch ? "node-5735_66401" : "node-5735_66626"}>
+        <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Controls" id={isWithoutSearch ? "node-I5735_66401-5573_24145" : "node-I5735_66626-5573_24145"}>
+          <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px relative" data-name="Leading" id={isWithoutSearch ? "node-I5735_66401-5573_24146" : "node-I5735_66626-5573_24146"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isWithoutSearch ? "node-I5735_66401-5573_24148" : "node-I5735_66626-5573_24148"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565" : "node-I5735_66626-5573_24148-6491_22565"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-5575_44983" : "node-I5735_66626-5573_24148-6491_22565-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-5575_75442" : "node-I5735_66626-5573_24148-6491_22565-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-5575_75442-5575_32354" : "node-I5735_66626-5573_24148-6491_22565-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-6491_20171" : "node-I5735_66626-5573_24148-6491_22565-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-6491_20172" : "node-I5735_66626-5573_24148-6491_22565-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22565-6491_20173" : "node-I5735_66626-5573_24148-6491_22565-6491_20173"} />
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22970" : "node-I5735_66626-5573_24148-6491_22970"}>
+                <div className="flex flex-col justify-center relative shrink-0" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22970-5431_837" : "node-I5735_66626-5573_24148-6491_22970-5431_837"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">􀯶</p>
+                </div>
+                <div className="flex flex-col justify-center relative shrink-0" id={isWithoutSearch ? "node-I5735_66401-5573_24148-6491_22970-5431_840" : "node-I5735_66626-5573_24148-6491_22970-5431_840"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">Label</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center justify-end min-h-px min-w-px relative" data-name="Trailing" id={isWithoutSearch ? "node-I5735_66401-5573_24151" : "node-I5735_66626-5573_24151"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isWithoutSearch ? "node-I5735_66401-5828_68514" : "node-I5735_66626-5828_68514"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888" : "node-I5735_66626-5828_68514-5566_7888"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-5575_44983" : "node-I5735_66626-5828_68514-5566_7888-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-5575_75442" : "node-I5735_66626-5828_68514-5566_7888-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-5575_75442-5575_32354" : "node-I5735_66626-5828_68514-5566_7888-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-6491_20171" : "node-I5735_66626-5828_68514-5566_7888-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-6491_20172" : "node-I5735_66626-5828_68514-5566_7888-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5566_7888-6491_20173" : "node-I5735_66626-5828_68514-5566_7888-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5432_23135" : "node-I5735_66626-5828_68514-5432_23135"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isWithoutSearch ? "node-I5735_66401-5828_68514-5432_23135-5426_2011" : "node-I5735_66626-5828_68514-5432_23135-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isWithoutSearch ? "node-I5735_66401-5828_68515" : "node-I5735_66626-5828_68515"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888" : "node-I5735_66626-5828_68515-5566_7888"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-5575_44983" : "node-I5735_66626-5828_68515-5566_7888-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-5575_75442" : "node-I5735_66626-5828_68515-5566_7888-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-5575_75442-5575_32354" : "node-I5735_66626-5828_68515-5566_7888-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-6491_20171" : "node-I5735_66626-5828_68515-5566_7888-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-6491_20172" : "node-I5735_66626-5828_68515-5566_7888-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5566_7888-6491_20173" : "node-I5735_66626-5828_68515-5566_7888-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5432_23135" : "node-I5735_66626-5828_68515-5432_23135"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isWithoutSearch ? "node-I5735_66401-5828_68515-5432_23135-5426_2011" : "node-I5735_66626-5828_68515-5432_23135-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute content-stretch flex items-start left-[calc(50%+5.5px)] p-[4px] top-0 w-[659px]" data-name="Tab Bar - iPad" id={isWithoutSearch ? "node-I5735_66401-5573_24157" : "node-I5735_66626-5573_24157"}>
+          <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-5575_44983" : "node-I5735_66626-5573_24157-5569_7539-5575_44983"}>
+            <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-5575_75442" : "node-I5735_66626-5573_24157-5569_7539-5575_75442"}>
+              <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-5575_75442-5575_32354" : "node-I5735_66626-5573_24157-5569_7539-5575_75442-5575_32354"} />
+            </div>
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-6491_20171" : "node-I5735_66626-5573_24157-5569_7539-6491_20171"} />
+          </div>
+          <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-6491_20172" : "node-I5735_66626-5573_24157-5569_7539-6491_20172"}>
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+              <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+              <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7539-6491_20173" : "node-I5735_66626-5573_24157-5569_7539-6491_20173"} />
+          <div className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0" data-name="_Tab Bar Button - iPad - Symbol" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9888" : "node-I5735_66626-5573_24157-5569_9888"}>
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9888-5569_8179" : "node-I5735_66626-5573_24157-5569_9888-5569_8179"}>
+              <p className="leading-[20px]">􀰱</p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] h-[36px] items-center justify-center min-h-px min-w-px relative" data-name="Stretch" id={isWithoutSearch ? "node-I5735_66401-5573_24157-2524_7960" : "node-I5735_66626-5573_24157-2524_7960"}>
+            <div className="content-stretch flex gap-[10px] items-center justify-center px-[18px] py-[8px] relative rounded-[100px] shrink-0" data-name="_Tab Bar Button - iPad - Text" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7324" : "node-I5735_66626-5573_24157-5569_7324"}>
+              <div className="absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 rounded-[100px]" data-name="Selection" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7324-5735_65310" : "node-I5735_66626-5573_24157-5569_7324-5735_65310"} />
+              <div className="flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/tab-bar-selection,#08f)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7324-5569_7313" : "node-I5735_66626-5573_24157-5569_7324-5569_7313"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7446" : "node-I5735_66626-5573_24157-5569_7446"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_7446-5569_7315" : "node-I5735_66626-5573_24157-5569_7446-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9335" : "node-I5735_66626-5573_24157-5569_9335"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9335-5569_7315" : "node-I5735_66626-5573_24157-5569_9335-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9372" : "node-I5735_66626-5573_24157-5569_9372"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9372-5569_7315" : "node-I5735_66626-5573_24157-5569_9372-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0" data-name="_Tab Bar Button - iPad - Symbol" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9985" : "node-I5735_66626-5573_24157-5569_9985"}>
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap" id={isWithoutSearch ? "node-I5735_66401-5573_24157-5569_9985-5569_8179" : "node-I5735_66626-5573_24157-5569_9985-5569_8179"}>
+              <p className="leading-[20px]">􀊫</p>
+            </div>
+          </div>
+        </div>
+        {type === "With Search" && (
+          <div className="content-stretch flex items-start justify-center pt-[20px] relative shrink-0 w-full" data-name="Frame" data-node-id="I5735:66626;5573:24981">
+            <SearchAccessory className="content-stretch flex flex-[1_0_0] flex-col items-center min-h-px min-w-px relative" />
+          </div>
+        )}
+      </div>
+      <div className="absolute bg-[var(--backgrounds\/primary,white)] content-stretch flex flex-col inset-0 items-center overflow-clip" data-name="Contents" id={isWithoutSearch ? "node-2517_14256" : "node-5735_66272"}>
+        <div className="flex-[1_0_0] min-h-px min-w-px w-full" data-name="Content Area" id={isWithoutSearch ? "node-2517_14258" : "node-5735_66273"} />
+      </div>
+      <div className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-[2px] top-0" data-name="Status bar and Menu bar- iPad" id={isWithoutSearch ? "node-2517_14260" : "node-5735_66289"}>
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" id={isWithoutSearch ? "node-I2517_14260-523_41361" : "node-I5735_66289-523_41361"}>
+          <p className="relative shrink-0" id={isWithoutSearch ? "node-I2517_14260-523_41362" : "node-I5735_66289-523_41362"}>
+            9:41
+          </p>
+          <p className="relative shrink-0" id={isWithoutSearch ? "node-I2517_14260-523_41363" : "node-I5735_66289-523_41363"}>
+            Tue Apr 1
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" id={isWithoutSearch ? "node-I2517_14260-523_41364" : "node-I5735_66289-523_41364"}>
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" id={isWithoutSearch ? "node-I2517_14260-523_41365" : "node-I5735_66289-523_41365"}>
+            <img alt="" className="absolute block max-w-none size-full" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" id={isWithoutSearch ? "node-I2517_14260-523_41366" : "node-I5735_66289-523_41366"}>
+            <img alt="" className="absolute block max-w-none size-full" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" id={isWithoutSearch ? "node-I2517_14260-523_41367" : "node-I5735_66289-523_41367"}>
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" id={isWithoutSearch ? "node-I2517_14260-523_41368" : "node-I5735_66289-523_41368"}>
+            <img alt="" className="absolute block max-w-none size-full" src={imgBatteryIcon} />
+          </div>
+        </div>
+      </div>
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Type=With Search
+**Node ID:** 5735:66271
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/tab-bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+## Type=Without Search
+**Node ID:** 2517:14496
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/tab-bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

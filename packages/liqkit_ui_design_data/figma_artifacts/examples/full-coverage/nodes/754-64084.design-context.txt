@@ -1,0 +1,287 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/ed5cb881-4e18-4d5b-8140-4ececdd53d6c";
+const imgModeLight = "https://www.figma.com/api/mcp/asset/505313c7-2241-4466-87fb-08ee0a0d5811";
+const img941 = "https://www.figma.com/api/mcp/asset/dce783d0-c07b-4457-80ef-ea9590b7ef0f";
+const imgDate = "https://www.figma.com/api/mcp/asset/7658bf5e-fcb5-4b23-96bd-a0b698460abd";
+const imgTicks = "https://www.figma.com/api/mcp/asset/1db8253c-a945-453b-b67f-a0c8f392b141";
+const imgHands = "https://www.figma.com/api/mcp/asset/a0dd89dd-6d56-4cab-966f-ebc12215efc0";
+const imgChart = "https://www.figma.com/api/mcp/asset/aa93c39c-c440-4a6f-b865-8768f274c546";
+const imgGauge = "https://www.figma.com/api/mcp/asset/24e7936d-9da8-4179-8838-db050a8e8c94";
+const imgCurrentValueIndicator = "https://www.figma.com/api/mcp/asset/3ecf7ce8-ed3f-4e78-9a06-8f3e44c7b6c1";
+const imgGauge1 = "https://www.figma.com/api/mcp/asset/cb2c4a63-9f0a-429a-b264-39a271a194ec";
+const img1 = "https://www.figma.com/api/mcp/asset/63d232b0-c88b-4b02-aa0c-5c2cfc060457";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/66b15839-9998-42bb-be33-d833da570f3e";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/6cde2894-c564-4f74-b2f4-33d62c51332f";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/e44a0de0-f372-47e5-a092-91d196275634";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type LockScreenWidgetModularWithBarProps = {
+  className?: string;
+  line1?: string;
+  line2?: string;
+  line3?: string;
+};
+
+function LockScreenWidgetModularWithBar({ className, line1 = "11:30AM-12:30PM", line2 = "Design Review", line3 = "Conference Room" }: LockScreenWidgetModularWithBarProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[3px] items-center pr-[8px] py-[8px] relative"} data-name="Lock Screen Widget - Modular with Bar" data-node-id="525:43071">
+      <div className="bg-white h-[54px] mix-blend-color-dodge opacity-90 rounded-[3px] shrink-0 w-[5px]" data-name="Bar" data-node-id="525:43075" />
+      <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-h-px min-w-px not-italic overflow-clip relative tracking-[-0.4px] whitespace-pre-wrap" data-name="Modular Columns" data-node-id="525:43076">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[21px] relative shrink-0 text-[16px] text-white w-full" data-node-id="525:43082">
+          {line1}
+        </p>
+        <p className="font-['SF_Pro:Medium',sans-serif] leading-[21px] relative shrink-0 text-[16px] text-white w-full" data-node-id="525:43080">
+          {line2}
+        </p>
+        <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] relative shrink-0 text-[#999] text-[15px] w-full" data-node-id="525:43078">
+          {line3}
+        </p>
+      </div>
+    </div>
+  );
+}
+type LockScreenWidgetTallBodyProps = {
+  className?: string;
+  line1?: string;
+  line2?: string;
+};
+
+function LockScreenWidgetTallBody({ className, line1 = "Label", line2 = "Label" }: LockScreenWidgetTallBodyProps) {
+  return (
+    <div className={className || "-translate-y-1/2 content-stretch flex flex-col gap-[4px] items-start justify-center not-italic pb-[5px] pt-[6px] px-[8px] relative text-white whitespace-pre-wrap"} data-name="Lock Screen Widget - Tall Body" data-node-id="525:43122">
+      <p className="font-['SF_Pro:Bold',sans-serif] h-[16px] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px] w-full" data-node-id="525:43125">
+        {line1}
+      </p>
+      <p className="font-['SF_Pro:Regular',sans-serif] leading-[41px] mix-blend-plus-lighter relative shrink-0 text-[34px] w-full" data-node-id="525:43124">
+        {line2}
+      </p>
+    </div>
+  );
+}
+
+function WallpapersIPad({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Wallpapers - iPad" data-node-id="5707:11471">
+      <div className="relative" data-name="Mode=Light" data-node-id="0:8808">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgModeLight} />
+      </div>
+    </div>
+  );
+}
+
+export default function LockScreen({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[834px] relative w-[1210px]"} data-name="Lock Screen" data-node-id="754:64084">
+      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgModeLight} />
+      <div className="-translate-x-1/2 absolute h-[102.011px] left-[calc(50%-0.28px)] top-[107px] w-[239.448px]" data-name="9:41" data-node-id="754:48067">
+        <img alt="" className="absolute block inset-0 max-w-none" src={img941} />
+      </div>
+      <div className="-translate-x-1/2 absolute h-[24.112px] left-[calc(50%-0.45px)] top-[67.86px] w-[219.105px]" data-name="Date" data-node-id="754:48068">
+        <img alt="" className="absolute block inset-0 max-w-none" src={imgDate} />
+      </div>
+      <div className="absolute h-[702px] left-[39px] top-[66px] w-[164px]" data-name="Widgets" data-node-id="754:48083">
+        <LockScreenWidgetTallBody className="-translate-y-1/2 absolute content-stretch flex flex-col gap-[4px] items-start justify-center left-[1.22%] not-italic pb-[5px] pt-[6px] px-[8px] right-0 text-white top-[calc(50%+315px)] whitespace-pre-wrap" line1="Cupertino" line2="9:41AM" />
+        <div className="absolute inset-[64.1%_0_12.82%_1.22%]" data-name="Lock Screen Widget/2x2/Clock Big (iPad Only)" data-node-id="754:48085">
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[25px] bg-[#333] left-1/2 mix-blend-plus-lighter rounded-[100px] size-[148px] top-1/2" data-name="Clock" data-node-id="I754:48085;526:38740" />
+          <div className="absolute font-['SF_Compact_Rounded:Bold',sans-serif] h-[129.405px] leading-[normal] left-[21.31px] not-italic text-[#999] text-[19px] top-[17.03px] w-[119.373px]" data-name="Numerals" data-node-id="I754:48085;598:4521">
+            <p className="absolute left-[calc(50%-10.95px)] opacity-85 top-[calc(50%-64.7px)]" data-node-id="I754:48085;526:38812">
+              12
+            </p>
+            <p className="absolute left-[calc(50%-34.6px)] opacity-85 top-[calc(50%-56.96px)]" data-node-id="I754:48085;526:38813">
+              11
+            </p>
+            <p className="absolute left-[calc(50%-53.05px)] opacity-85 top-[calc(50%-37.62px)]" data-node-id="I754:48085;526:38814">
+              10
+            </p>
+            <p className="absolute left-[calc(50%-59.69px)] opacity-85 top-[calc(50%-11.5px)]" data-node-id="I754:48085;526:38815">
+              9
+            </p>
+            <p className="absolute left-[calc(50%-51.95px)] opacity-85 top-[calc(50%+14.62px)]" data-node-id="I754:48085;526:38816">
+              8
+            </p>
+            <p className="absolute left-[calc(50%-33.07px)] opacity-85 top-[calc(50%+33px)]" data-node-id="I754:48085;526:38817">
+              7
+            </p>
+            <p className="absolute left-[calc(50%-5.52px)] opacity-85 top-[calc(50%+41.7px)]" data-node-id="I754:48085;526:38818">
+              6
+            </p>
+            <p className="absolute left-[calc(50%+18.67px)] opacity-85 top-[calc(50%+33px)]" data-node-id="I754:48085;526:38819">
+              5
+            </p>
+            <p className="absolute left-[calc(50%+38.98px)] opacity-85 top-[calc(50%+14.62px)]" data-node-id="I754:48085;526:38820">
+              4
+            </p>
+            <p className="absolute left-[calc(50%+47.69px)] opacity-85 top-[calc(50%-11.5px)]" data-node-id="I754:48085;526:38821">
+              3
+            </p>
+            <p className="absolute left-[calc(50%+40.45px)] opacity-85 top-[calc(50%-37.62px)]" data-node-id="I754:48085;526:38822">
+              2
+            </p>
+            <p className="absolute left-[calc(50%+22.6px)] opacity-85 top-[calc(50%-56.96px)]" data-node-id="I754:48085;526:38823">
+              1
+            </p>
+          </div>
+          <div className="absolute inset-[6.41%]" data-name="Ticks" data-node-id="I754:48085;526:39203">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgTicks} />
+          </div>
+          <div className="absolute inset-[27.01%_18.16%_6.71%_31.19%]" data-name="Hands" data-node-id="I754:48085;526:39235">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgHands} />
+          </div>
+        </div>
+        <div className="absolute content-stretch flex flex-col gap-[12px] inset-[51.28%_0_38.46%_1.22%] items-start px-[8px] py-[7px]" data-name="Lock Screen Widget - Rectangular with Chart" data-node-id="754:48086">
+          <div className="content-stretch flex items-center justify-between not-italic overflow-clip relative shrink-0 text-white w-full" data-name="Header" data-node-id="I754:48086;525:43102">
+            <div className="content-stretch flex gap-[3px] items-center relative shrink-0" data-name="Symbol and Title" data-node-id="I754:48086;5591:558">
+              <p className="font-['SF_Pro:Regular',sans-serif] leading-[16px] mix-blend-plus-lighter relative shrink-0 text-[12px]" data-node-id="I754:48086;525:43105" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                􀛤
+              </p>
+              <p className="font-['SF_Pro:Bold',sans-serif] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px] uppercase" data-node-id="I754:48086;525:43104">
+                AAPL
+              </p>
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px]" data-node-id="I754:48086;525:43103">
+              +1.78
+            </p>
+          </div>
+          <div className="h-[26px] relative shrink-0 w-[146px]" data-name="Chart" data-node-id="I754:48086;5591:593">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgChart} />
+          </div>
+        </div>
+        <div className="absolute backdrop-blur-[20px] content-stretch flex items-center justify-center left-[92px] p-[7px] size-[72px] top-[270px]" data-name="Lock Screen Widget / Circular / Open Gauge 3" data-node-id="754:48087">
+          <div className="h-[59px] mix-blend-plus-lighter relative shrink-0 w-[58px]" data-name="Frame" data-node-id="I754:48087;525:43645">
+            <div className="absolute inset-[-0.33%_0_23.26%_0]" data-name="Gauge" data-node-id="I754:48087;5591:1109">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgGauge} />
+            </div>
+            <div className="absolute flex inset-[3.85%_20.76%_83.02%_65.89%] items-center justify-center">
+              <div className="-rotate-60 -scale-y-100 flex-none size-[5.67px]">
+                <div className="relative size-full" data-name="Current Value Indicator" data-node-id="I754:48087;5591:1112">
+                  <img alt="" className="absolute block inset-0 max-w-none" src={imgCurrentValueIndicator} />
+                </div>
+              </div>
+            </div>
+            <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[74.58%_24.14%_1.7%_24.14%] leading-[normal] not-italic text-[12px] text-center text-white whitespace-pre-wrap" data-node-id="I754:48087;525:43656">
+              AQI
+            </p>
+            <p className="absolute font-['SF_Pro:Medium',sans-serif] leading-[normal] left-[calc(50%-14px)] not-italic text-[24.5px] text-white top-[calc(50%-17px)] tracking-[-1px]" data-node-id="I754:48087;525:43657">
+              27
+            </p>
+          </div>
+        </div>
+        <div className="absolute backdrop-blur-[20px] content-stretch flex flex-col items-center justify-center left-[2px] p-[7px] size-[72px] top-[270px]" data-name="Lock Screen Widget / Circular / Open Gauge 2" data-node-id="754:48088">
+          <div className="h-[55.387px] mix-blend-plus-lighter relative shrink-0 w-[58px]" data-name="Frame" data-node-id="I754:48088;525:43563">
+            <div className="absolute inset-[0_0_17.91%_0]" data-name="Gauge" data-node-id="I754:48088;145:62651">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgGauge1} />
+            </div>
+            <div className="absolute flex inset-[4.45%_20.76%_81.56%_65.89%] items-center justify-center">
+              <div className="-rotate-60 -scale-y-100 flex-none size-[5.67px]">
+                <div className="relative size-full" data-name="Current Value Indicator" data-node-id="I754:48088;145:62665">
+                  <img alt="" className="absolute block inset-0 max-w-none" src={imgCurrentValueIndicator} />
+                </div>
+              </div>
+            </div>
+            <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[80.14%_19.83%_-3.61%_56.03%] leading-[normal] not-italic text-[11px] text-white whitespace-pre-wrap" data-node-id="I754:48088;145:62630">
+              78
+            </p>
+            <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[80.14%_56.03%_-3.61%_18.1%] leading-[normal] not-italic text-[11px] text-white whitespace-pre-wrap" data-node-id="I754:48088;145:62631">
+              50
+            </p>
+            <p className="absolute font-['SF_Pro:Medium',sans-serif] leading-[normal] left-[calc(50%-15px)] not-italic text-[24px] text-white top-[calc(50%-15.03px)] w-[29px] whitespace-pre-wrap" data-node-id="I754:48088;145:62628">
+              67
+            </p>
+          </div>
+        </div>
+        <LockScreenWidgetModularWithBar className="absolute content-stretch flex gap-[3px] inset-[25.64%_0_64.1%_1.22%] items-center pr-[8px] py-[8px]" />
+        <div className="absolute inset-[0_0_76.92%_1.22%]" data-name="Lock Screen Widget/2x2/Date (iPad Only)" data-node-id="754:48090">
+          <div className="-translate-x-1/2 absolute h-[88.778px] left-[calc(50%-3.56px)] top-[52.22px] w-[38.883px]" data-name="1" data-node-id="I754:48090;558:16">
+            <img alt="" className="absolute block inset-0 max-w-none" src={img1} />
+          </div>
+          <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[normal] left-0 mix-blend-plus-lighter not-italic right-0 text-[#999] text-[32px] text-center top-0 whitespace-pre-wrap" data-node-id="I754:48090;526:38829">
+            Mon Jun
+          </p>
+        </div>
+      </div>
+      <div className="-translate-x-1/2 absolute bottom-[0.5px] h-[19.5px] left-1/2 w-[400px]" data-name="Home Indicator" data-node-id="754:48091">
+        <div className="-translate-x-1/2 absolute bottom-[7px] flex h-[5.5px] items-center justify-center left-[calc(50%+0.5px)] w-[315px]">
+          <div className="-scale-y-100 flex-none rotate-180">
+            <div className="bg-[var(--labels\/primary,black)] h-[5.5px] rounded-[100px] w-[315px]" data-name="Home Indicator" data-node-id="I754:48091;224:56834" />
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-0 top-0" data-name="Status bar and Menu bar- iPad" data-node-id="754:48049">
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="I754:48049;523:41361">
+          <p className="relative shrink-0" data-node-id="I754:48049;523:41362">
+            9:41
+          </p>
+          <p className="relative shrink-0" data-node-id="I754:48049;523:41363">
+            Tue Apr 1
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="I754:48049;523:41364">
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="I754:48049;523:41365">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="I754:48049;523:41366">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="I754:48049;523:41367">
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="I754:48049;523:41368">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+          </div>
+        </div>
+      </div>
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Vibrant Labels/Dark/Vibrant Primary: #FFFFFF, Vibrant Fills/Dark/Vibrant Primary: #333333, Vibrant Labels/Dark/Vibrant Secondary: #999999.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Lock Screen Widget / Circular / Open Gauge 3
+**Node ID:** 525:43658
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Lock Screen Widget / Circular / Open Gauge 2
+**Node ID:** 145:62670
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Home Indicator
+**Node ID:** 106:60033
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/going-full-screen](https://developer.apple.com/design/human-interface-guidelines/going-full-screen)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

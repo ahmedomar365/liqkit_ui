@@ -1,0 +1,34 @@
+{
+  "category": "face-id",
+  "generatedAt": "2026-02-19T19:44:19.252Z",
+  "sourceFiles": [
+    "figma-artifacts/face-id/123-58197.design-context.txt",
+    "figma-artifacts/face-id/123-58202.design-context.txt"
+  ],
+  "totalAssets": 1,
+  "downloaded": 0,
+  "existing": 1,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "86873029-7b0c-467b-a914-56c7f1b6f0d9",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "86873029-7b0c-467b-a914-56c7f1b6f0d9.svg",
+      "filePath": "figma-artifacts/assets/face-id/86873029-7b0c-467b-a914-56c7f1b6f0d9.svg",
+      "size": 4132,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/86873029-7b0c-467b-a914-56c7f1b6f0d9",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/86873029-7b0c-467b-a914-56c7f1b6f0d9"
+      ],
+      "constNames": [
+        "imgFaceIdSymbol"
+      ],
+      "sources": [
+        "figma-artifacts/face-id/123-58202.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

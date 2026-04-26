@@ -1,0 +1,1444 @@
+{
+  "generatedAt": "2026-02-20T05:41:59.214Z",
+  "verificationScope": "strict canonical-node evidence, category-root where available",
+  "source": {
+    "catalogPath": "packages/components-html/src/catalog.json",
+    "canonicalPath": "figma-artifacts/canonical-nodes.json",
+    "contextIndexPath": "figma-artifacts/context-index.json"
+  },
+  "summary": {
+    "total": 37,
+    "verified": 37,
+    "verifiedCategoryRoot": 3,
+    "verifiedCanonicalOnly": 34,
+    "unverified": 0,
+    "verificationPercent": 100,
+    "invalidVerifiedCount": 0,
+    "releaseReadiness": "ready"
+  },
+  "snapshot": {
+    "latestSnapshotId": "2026-02-19T18-56-13-539Z",
+    "latestSnapshot": {
+      "snapshotId": "2026-02-19T18-56-13-539Z",
+      "generatedAt": "2026-02-19T18:56:21.491Z",
+      "fileCount": 18008,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T18-56-13-539Z"
+    },
+    "totalSnapshots": 87
+  },
+  "workflow": {
+    "activeCategoryNode": null,
+    "completedCategoryNodes": [
+      "0:1746",
+      "0:3329",
+      "215:105157",
+      "0:2194",
+      "507:24672",
+      "507:24688",
+      "507:24669",
+      "507:24670",
+      "507:24668",
+      "507:24671",
+      "507:24673",
+      "507:26010",
+      "507:25994",
+      "5518:18111",
+      "507:26011",
+      "507:24674",
+      "507:24675",
+      "507:24676",
+      "507:24678",
+      "507:24679",
+      "507:24680",
+      "507:24681",
+      "507:26009",
+      "507:24682",
+      "507:24683",
+      "507:24684",
+      "507:26013",
+      "507:24685",
+      "507:24686",
+      "507:24687",
+      "507:24689",
+      "553:22762",
+      "507:24690",
+      "507:25993",
+      "507:26511",
+      "5413:10149",
+      "507:29124"
+    ],
+    "blocker": "Do not start next category until active category is fully complete and manually verified."
+  },
+  "entries": [
+    {
+      "id": "examples",
+      "category": "Examples",
+      "figmaNodeId": "0:3329",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-3329",
+      "status": "verified",
+      "statusLabel": "verified (category root)",
+      "verifiedAt": "2026-02-17T22:34:57.280Z",
+      "canonicalNode": "0:3329",
+      "coverage": {
+        "key": "category-root",
+        "label": "category root (0:3329)",
+        "artifactNodeId": "0:3329"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/examples/0-3329.design-context.txt",
+        "screenshotPath": "figma-artifacts/examples/775-13152.screenshot.png",
+        "variableDefsPath": "figma-artifacts/examples/0-3329.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/examples.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/examples.native.html",
+        "cssPath": "preview/rendered/source/examples.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#examples"
+    },
+    {
+      "id": "colors",
+      "category": "Colors",
+      "figmaNodeId": "0:1746",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-1746",
+      "status": "verified",
+      "statusLabel": "verified (category root)",
+      "verifiedAt": "2026-02-17T22:03:54.585Z",
+      "canonicalNode": "0:1746",
+      "coverage": {
+        "key": "category-root",
+        "label": "category root (0:1746)",
+        "artifactNodeId": "0:1746"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/colors/0-1746.design-context.txt",
+        "screenshotPath": "figma-artifacts/colors/0-1746.screenshot.png",
+        "variableDefsPath": "figma-artifacts/colors/0-1746.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/colors.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/colors.native.html",
+        "cssPath": "preview/rendered/source/colors.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#colors"
+    },
+    {
+      "id": "materials",
+      "category": "Materials",
+      "figmaNodeId": "215:105157",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=215-105157",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:36:48.199Z",
+      "canonicalNode": "510:79110",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (510:79110)",
+        "artifactNodeId": "510:79110"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/materials/510-79110.design-context.txt",
+        "screenshotPath": "figma-artifacts/materials/215-105157.screenshot.png",
+        "variableDefsPath": "figma-artifacts/materials/510-79110.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/materials.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/materials.native.html",
+        "cssPath": "preview/rendered/source/materials.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#materials"
+    },
+    {
+      "id": "text-styles",
+      "category": "Text styles",
+      "figmaNodeId": "0:2194",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-2194",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:36:48.313Z",
+      "canonicalNode": "0:3040",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (0:3040)",
+        "artifactNodeId": "0:3040"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/text-styles/0-3040.design-context.txt",
+        "screenshotPath": "figma-artifacts/text-styles/0-3040.screenshot.png",
+        "variableDefsPath": "figma-artifacts/text-styles/0-3040.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/text-styles.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/text-styles.native.html",
+        "cssPath": "preview/rendered/source/text-styles.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#text-styles"
+    },
+    {
+      "id": "bezels",
+      "category": "Bezels",
+      "figmaNodeId": "507:24672",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24672",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:39:05.694Z",
+      "canonicalNode": "523:41868",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (523:41868)",
+        "artifactNodeId": "523:41868"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/bezels/523-41868.design-context.txt",
+        "screenshotPath": "figma-artifacts/bezels/523-41868.screenshot.png",
+        "variableDefsPath": "figma-artifacts/bezels/523-41868.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/bezels.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/bezels.native.html",
+        "cssPath": "preview/rendered/source/bezels.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#bezels"
+    },
+    {
+      "id": "system",
+      "category": "System",
+      "figmaNodeId": "507:24688",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24688",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:39:05.806Z",
+      "canonicalNode": "106:60032",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (106:60032)",
+        "artifactNodeId": "106:60032"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/system/106-60032.design-context.txt",
+        "screenshotPath": "figma-artifacts/system/106-60032.screenshot.png",
+        "variableDefsPath": "figma-artifacts/system/106-60032.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/system.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/system.native.html",
+        "cssPath": "preview/rendered/source/system.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#system"
+    },
+    {
+      "id": "action-sheets",
+      "category": "Action sheets",
+      "figmaNodeId": "507:24669",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24669",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:44:20.753Z",
+      "canonicalNode": "5446:10266",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5446:10266)",
+        "artifactNodeId": "5446:10266"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/action-sheets/5446-10266.design-context.txt",
+        "screenshotPath": "figma-artifacts/action-sheets/5446-10266.screenshot.png",
+        "variableDefsPath": "figma-artifacts/action-sheets/5446-10266.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/action-sheets.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/action-sheets.native.html",
+        "cssPath": "preview/rendered/source/action-sheets.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#action-sheets"
+    },
+    {
+      "id": "activity-views",
+      "category": "Activity views",
+      "figmaNodeId": "507:24670",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24670",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:46:17.530Z",
+      "canonicalNode": "3176:15162",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (3176:15162)",
+        "artifactNodeId": "3176:15162"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/activity-views/3176-15162.design-context.txt",
+        "screenshotPath": "figma-artifacts/activity-views/3176-15162.screenshot.png",
+        "variableDefsPath": "figma-artifacts/activity-views/3176-15162.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/activity-views.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/activity-views.native.html",
+        "cssPath": "preview/rendered/source/activity-views.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#activity-views"
+    },
+    {
+      "id": "alerts",
+      "category": "Alerts",
+      "figmaNodeId": "507:24668",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24668",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:47:17.698Z",
+      "canonicalNode": "61:67601",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (61:67601)",
+        "artifactNodeId": "61:67601"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/alerts/61-67601.design-context.txt",
+        "screenshotPath": "figma-artifacts/alerts/61-67601.screenshot.png",
+        "variableDefsPath": "figma-artifacts/alerts/61-67601.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/alerts.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/alerts.native.html",
+        "cssPath": "preview/rendered/source/alerts.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#alerts"
+    },
+    {
+      "id": "app-icons",
+      "category": "App icons",
+      "figmaNodeId": "507:24671",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24671",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:48:15.613Z",
+      "canonicalNode": "2402:669",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (2402:669)",
+        "artifactNodeId": "2402:669"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/app-icons/2402-669.design-context.txt",
+        "screenshotPath": "figma-artifacts/app-icons/2402-669.screenshot.png",
+        "variableDefsPath": "figma-artifacts/app-icons/2402-669.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/app-icons.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/app-icons.native.html",
+        "cssPath": "preview/rendered/source/app-icons.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#app-icons"
+    },
+    {
+      "id": "buttons",
+      "category": "Buttons",
+      "figmaNodeId": "507:24673",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24673",
+      "status": "verified",
+      "statusLabel": "verified (category root)",
+      "verifiedAt": "2026-02-19T13:51:59.133Z",
+      "canonicalNode": "507:24673",
+      "coverage": {
+        "key": "category-root",
+        "label": "category root (507:24673)",
+        "artifactNodeId": "507:24673"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/buttons/507-24673.design-context.txt",
+        "screenshotPath": "figma-artifacts/buttons/507-24673.screenshot.png",
+        "variableDefsPath": "figma-artifacts/buttons/507-24673.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/buttons.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/buttons.native.html",
+        "cssPath": "preview/rendered/source/buttons.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#buttons"
+    },
+    {
+      "id": "color-pickers",
+      "category": "Color pickers",
+      "figmaNodeId": "507:26010",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26010",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:49:52.472Z",
+      "canonicalNode": "0:5275",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (0:5275)",
+        "artifactNodeId": "0:5275"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/color-pickers/0-5275.design-context.txt",
+        "screenshotPath": "figma-artifacts/color-pickers/0-5275.screenshot.png",
+        "variableDefsPath": "figma-artifacts/color-pickers/0-5275.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/color-pickers.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/color-pickers.native.html",
+        "cssPath": "preview/rendered/source/color-pickers.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#color-pickers"
+    },
+    {
+      "id": "context-menu",
+      "category": "Context menu",
+      "figmaNodeId": "507:25994",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-25994",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:52:15.115Z",
+      "canonicalNode": "125:58302",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (125:58302)",
+        "artifactNodeId": "125:58302"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/context-menu/125-58302.design-context.txt",
+        "screenshotPath": "figma-artifacts/context-menu/125-58302.screenshot.png",
+        "variableDefsPath": "figma-artifacts/context-menu/125-58302.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/context-menu.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/context-menu.native.html",
+        "cssPath": "preview/rendered/source/context-menu.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#context-menu"
+    },
+    {
+      "id": "empty-states",
+      "category": "Empty states",
+      "figmaNodeId": "5518:18111",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=5518-18111",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:53:51.759Z",
+      "canonicalNode": "5583:24435",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5583:24435)",
+        "artifactNodeId": "5583:24435"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/empty-states/5583-24435.design-context.txt",
+        "screenshotPath": "figma-artifacts/empty-states/5583-24435.screenshot.png",
+        "variableDefsPath": "figma-artifacts/empty-states/5583-24435.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/empty-states.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/empty-states.native.html",
+        "cssPath": "preview/rendered/source/empty-states.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#empty-states"
+    },
+    {
+      "id": "face-id",
+      "category": "Face ID",
+      "figmaNodeId": "507:26011",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26011",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:54:30.463Z",
+      "canonicalNode": "123:58202",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (123:58202)",
+        "artifactNodeId": "123:58202"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/face-id/123-58202.design-context.txt",
+        "screenshotPath": "figma-artifacts/face-id/123-58202.screenshot.png",
+        "variableDefsPath": "figma-artifacts/face-id/123-58202.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/face-id.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/face-id.native.html",
+        "cssPath": "preview/rendered/source/face-id.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#face-id"
+    },
+    {
+      "id": "keyboards",
+      "category": "Keyboards",
+      "figmaNodeId": "507:24674",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24674",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:56:31.822Z",
+      "canonicalNode": "106:59544",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (106:59544)",
+        "artifactNodeId": "106:59544"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/keyboards/106-59544.design-context.txt",
+        "screenshotPath": "figma-artifacts/keyboards/106-59544.screenshot.png",
+        "variableDefsPath": "figma-artifacts/keyboards/106-59544.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/keyboards.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/keyboards.native.html",
+        "cssPath": "preview/rendered/source/keyboards.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#keyboards"
+    },
+    {
+      "id": "lists",
+      "category": "Lists",
+      "figmaNodeId": "507:24675",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24675",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:58:26.436Z",
+      "canonicalNode": "550:49969",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (550:49969)",
+        "artifactNodeId": "550:49969"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/lists/550-49969.design-context.txt",
+        "screenshotPath": "figma-artifacts/lists/550-49969.screenshot.png",
+        "variableDefsPath": "figma-artifacts/lists/550-49969.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/lists.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/lists.native.html",
+        "cssPath": "preview/rendered/source/lists.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#lists"
+    },
+    {
+      "id": "menu",
+      "category": "Menu",
+      "figmaNodeId": "507:24676",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24676",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T22:59:54.946Z",
+      "canonicalNode": "5908:6487",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5908:6487)",
+        "artifactNodeId": "5908:6487"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/menu/5908-6487.design-context.txt",
+        "screenshotPath": "figma-artifacts/menu/5908-6487.screenshot.png",
+        "variableDefsPath": "figma-artifacts/menu/5908-6487.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/menu.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/menu.native.html",
+        "cssPath": "preview/rendered/source/menu.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#menu"
+    },
+    {
+      "id": "notifications",
+      "category": "Notifications",
+      "figmaNodeId": "507:24678",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24678",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:01:06.639Z",
+      "canonicalNode": "143:62847",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (143:62847)",
+        "artifactNodeId": "143:62847"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/notifications/143-62847.design-context.txt",
+        "screenshotPath": "figma-artifacts/notifications/143-62847.screenshot.png",
+        "variableDefsPath": "figma-artifacts/notifications/143-62847.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/notifications.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/notifications.native.html",
+        "cssPath": "preview/rendered/source/notifications.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#notifications"
+    },
+    {
+      "id": "page-controls",
+      "category": "Page controls",
+      "figmaNodeId": "507:24679",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24679",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:02:00.531Z",
+      "canonicalNode": "488:51848",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (488:51848)",
+        "artifactNodeId": "488:51848"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/page-controls/488-51848.design-context.txt",
+        "screenshotPath": "figma-artifacts/page-controls/488-51848.screenshot.png",
+        "variableDefsPath": "figma-artifacts/page-controls/488-51848.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/page-controls.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/page-controls.native.html",
+        "cssPath": "preview/rendered/source/page-controls.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#page-controls"
+    },
+    {
+      "id": "pickers",
+      "category": "Pickers",
+      "figmaNodeId": "507:24680",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24680",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:05:31.304Z",
+      "canonicalNode": "5442:1885",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5442:1885)",
+        "artifactNodeId": "5442:1885"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/pickers/5442-1885.design-context.txt",
+        "screenshotPath": "figma-artifacts/pickers/5442-1885.screenshot.png",
+        "variableDefsPath": "figma-artifacts/pickers/5442-1885.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/pickers.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/pickers.native.html",
+        "cssPath": "preview/rendered/source/pickers.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#pickers"
+    },
+    {
+      "id": "popovers",
+      "category": "Popovers",
+      "figmaNodeId": "507:24681",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24681",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:07:09.339Z",
+      "canonicalNode": "61:65421",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (61:65421)",
+        "artifactNodeId": "61:65421"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/popovers/61-65421.design-context.txt",
+        "screenshotPath": "figma-artifacts/popovers/61-65421.screenshot.png",
+        "variableDefsPath": "figma-artifacts/popovers/61-65421.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/popovers.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/popovers.native.html",
+        "cssPath": "preview/rendered/source/popovers.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#popovers"
+    },
+    {
+      "id": "popup-buttons",
+      "category": "Popup buttons",
+      "figmaNodeId": "507:26009",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26009",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:07:56.656Z",
+      "canonicalNode": "410:50387",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (410:50387)",
+        "artifactNodeId": "410:50387"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/popup-buttons/410-50387.design-context.txt",
+        "screenshotPath": "figma-artifacts/popup-buttons/410-50387.screenshot.png",
+        "variableDefsPath": "figma-artifacts/popup-buttons/410-50387.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/popup-buttons.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/popup-buttons.native.html",
+        "cssPath": "preview/rendered/source/popup-buttons.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#popup-buttons"
+    },
+    {
+      "id": "progress-indicators",
+      "category": "Progress indicators",
+      "figmaNodeId": "507:24682",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24682",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:18:37.711Z",
+      "canonicalNode": "5425:3472",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5425:3472)",
+        "artifactNodeId": "5425:3472"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/progress-indicators/5425-3472.design-context.txt",
+        "screenshotPath": "figma-artifacts/progress-indicators/5425-3472.screenshot.png",
+        "variableDefsPath": "figma-artifacts/progress-indicators/5425-3472.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/progress-indicators.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/progress-indicators.native.html",
+        "cssPath": "preview/rendered/source/progress-indicators.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#progress-indicators"
+    },
+    {
+      "id": "segmented-controls",
+      "category": "Segmented controls",
+      "figmaNodeId": "507:24683",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24683",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-17T23:42:34.045Z",
+      "canonicalNode": "6:57374",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (6:57374)",
+        "artifactNodeId": "6:57374"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/segmented-controls/6-57374.design-context.txt",
+        "screenshotPath": "figma-artifacts/segmented-controls/6-57374.screenshot.png",
+        "variableDefsPath": "figma-artifacts/segmented-controls/6-57374.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/segmented-controls.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/segmented-controls.native.html",
+        "cssPath": "preview/rendered/source/segmented-controls.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#segmented-controls"
+    },
+    {
+      "id": "sheets",
+      "category": "Sheets",
+      "figmaNodeId": "507:24684",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24684",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T00:02:54.113Z",
+      "canonicalNode": "770:21495",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (770:21495)",
+        "artifactNodeId": "770:21495"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/sheets/770-21495.design-context.txt",
+        "screenshotPath": "figma-artifacts/sheets/770-21495.screenshot.png",
+        "variableDefsPath": "figma-artifacts/sheets/770-21495.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/sheets.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/sheets.native.html",
+        "cssPath": "preview/rendered/source/sheets.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#sheets"
+    },
+    {
+      "id": "sidebars",
+      "category": "Sidebars",
+      "figmaNodeId": "507:26013",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26013",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T00:12:00.890Z",
+      "canonicalNode": "5726:29555",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5726:29555)",
+        "artifactNodeId": "5726:29555"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/sidebars/5726-29555.design-context.txt",
+        "screenshotPath": "figma-artifacts/sidebars/5726-29555.screenshot.png",
+        "variableDefsPath": "figma-artifacts/sidebars/5726-29555.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/sidebars.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/sidebars.native.html",
+        "cssPath": "preview/rendered/source/sidebars.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#sidebars"
+    },
+    {
+      "id": "sliders",
+      "category": "Sliders",
+      "figmaNodeId": "507:24685",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24685",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:45:37.130Z",
+      "canonicalNode": "5661:43611",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5661:43611)",
+        "artifactNodeId": "5661:43611"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/sliders/5661-43611.design-context.txt",
+        "screenshotPath": "figma-artifacts/sliders/5661-43611.screenshot.png",
+        "variableDefsPath": "figma-artifacts/sliders/5661-43611.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/sliders.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/sliders.native.html",
+        "cssPath": "preview/rendered/source/sliders.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#sliders"
+    },
+    {
+      "id": "status-bars",
+      "category": "Status bars",
+      "figmaNodeId": "507:24686",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24686",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:46:56.983Z",
+      "canonicalNode": "523:41360",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (523:41360)",
+        "artifactNodeId": "523:41360"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/status-bars/523-41360.design-context.txt",
+        "screenshotPath": "figma-artifacts/status-bars/523-41360.screenshot.png",
+        "variableDefsPath": "figma-artifacts/status-bars/523-41360.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/status-bars.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/status-bars.native.html",
+        "cssPath": "preview/rendered/source/status-bars.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#status-bars"
+    },
+    {
+      "id": "steppers",
+      "category": "Steppers",
+      "figmaNodeId": "507:24687",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24687",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:47:32.664Z",
+      "canonicalNode": "5661:43368",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5661:43368)",
+        "artifactNodeId": "5661:43368"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/steppers/5661-43368.design-context.txt",
+        "screenshotPath": "figma-artifacts/steppers/5661-43368.screenshot.png",
+        "variableDefsPath": "figma-artifacts/steppers/5661-43368.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/steppers.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/steppers.native.html",
+        "cssPath": "preview/rendered/source/steppers.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#steppers"
+    },
+    {
+      "id": "top-bars",
+      "category": "Top bars",
+      "figmaNodeId": "507:24689",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24689",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:48:15.294Z",
+      "canonicalNode": "5661:41970",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5661:41970)",
+        "artifactNodeId": "5661:41970"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/top-bars/5661-41970.design-context.txt",
+        "screenshotPath": "figma-artifacts/top-bars/5661-41970.screenshot.png",
+        "variableDefsPath": "figma-artifacts/top-bars/5661-41970.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/top-bars.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/top-bars.native.html",
+        "cssPath": "preview/rendered/source/top-bars.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#top-bars"
+    },
+    {
+      "id": "text-fields",
+      "category": "Text fields",
+      "figmaNodeId": "553:22762",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=553-22762",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:48:15.441Z",
+      "canonicalNode": "5433:15646",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5433:15646)",
+        "artifactNodeId": "5433:15646"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/text-fields/5433-15646.design-context.txt",
+        "screenshotPath": "figma-artifacts/text-fields/5433-15646.screenshot.png",
+        "variableDefsPath": "figma-artifacts/text-fields/5433-15646.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/text-fields.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/text-fields.native.html",
+        "cssPath": "preview/rendered/source/text-fields.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#text-fields"
+    },
+    {
+      "id": "toggles",
+      "category": "Toggles",
+      "figmaNodeId": "507:24690",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24690",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:48:15.498Z",
+      "canonicalNode": "27:68905",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (27:68905)",
+        "artifactNodeId": "27:68905"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/toggles/27-68905.design-context.txt",
+        "screenshotPath": "figma-artifacts/toggles/27-68905.screenshot.png",
+        "variableDefsPath": "figma-artifacts/toggles/27-68905.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/toggles.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/toggles.native.html",
+        "cssPath": "preview/rendered/source/toggles.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#toggles"
+    },
+    {
+      "id": "toolbars",
+      "category": "Toolbars",
+      "figmaNodeId": "507:25993",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-25993",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:48:59.656Z",
+      "canonicalNode": "5735:66270",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5735:66270)",
+        "artifactNodeId": "5735:66270"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/toolbars/5735-66270.design-context.txt",
+        "screenshotPath": "figma-artifacts/toolbars/5735-66270.screenshot.png",
+        "variableDefsPath": "figma-artifacts/toolbars/5735-66270.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/toolbars.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/toolbars.native.html",
+        "cssPath": "preview/rendered/source/toolbars.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#toolbars"
+    },
+    {
+      "id": "widgets",
+      "category": "Widgets",
+      "figmaNodeId": "507:26511",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26511",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:50:40.812Z",
+      "canonicalNode": "775:13152",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (775:13152)",
+        "artifactNodeId": "775:13152"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/widgets/775-13152.design-context.txt",
+        "screenshotPath": "figma-artifacts/widgets/775-13152.screenshot.png",
+        "variableDefsPath": "figma-artifacts/widgets/775-13152.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/widgets.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/widgets.native.html",
+        "cssPath": "preview/rendered/source/widgets.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#widgets"
+    },
+    {
+      "id": "windows",
+      "category": "Windows",
+      "figmaNodeId": "5413:10149",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=5413-10149",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:51:07.766Z",
+      "canonicalNode": "5589:4058",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (5589:4058)",
+        "artifactNodeId": "5589:4058"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/windows/5589-4058.design-context.txt",
+        "screenshotPath": "figma-artifacts/windows/5589-4058.screenshot.png",
+        "variableDefsPath": "figma-artifacts/windows/5589-4058.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/windows.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/windows.native.html",
+        "cssPath": "preview/rendered/source/windows.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#windows"
+    },
+    {
+      "id": "kit-helpers",
+      "category": "Kit helpers",
+      "figmaNodeId": "507:29124",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-29124",
+      "status": "verified",
+      "statusLabel": "verified (canonical coverage)",
+      "verifiedAt": "2026-02-18T16:51:56.811Z",
+      "canonicalNode": "507:29149",
+      "coverage": {
+        "key": "canonical-node",
+        "label": "canonical child (507:29149)",
+        "artifactNodeId": "507:29149"
+      },
+      "artifacts": {
+        "designContextPath": "figma-artifacts/kit-helpers/507-29149.design-context.txt",
+        "screenshotPath": "figma-artifacts/kit-helpers/507-29149.screenshot.png",
+        "variableDefsPath": "figma-artifacts/kit-helpers/507-29149.variable-defs.json",
+        "exists": {
+          "designContext": true,
+          "screenshot": true,
+          "variableDefs": true
+        },
+        "presentCount": 3,
+        "expectedCount": 3
+      },
+      "renderPage": "preview/rendered/kit-helpers.html",
+      "nativeSource": {
+        "htmlPath": "preview/rendered/source/kit-helpers.native.html",
+        "cssPath": "preview/rendered/source/kit-helpers.native.css",
+        "exists": {
+          "html": true,
+          "css": true
+        }
+      },
+      "evidenceAnchor": "preview/index.html#kit-helpers"
+    }
+  ]
+}

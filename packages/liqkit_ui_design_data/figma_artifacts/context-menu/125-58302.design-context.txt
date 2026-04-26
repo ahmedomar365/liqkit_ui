@@ -1,0 +1,233 @@
+function ContextMenu({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Context Menu" data-node-id="125:58750">
+      <div className="relative size-[351px]" data-name="Alignment=Vertical, Side=Leading" data-node-id="125:58302">
+        <div className="absolute bg-[var(--backgrounds\/primary---elevated,white)] content-stretch flex flex-col inset-[-0.5px_0_0.5px_0] items-center justify-center px-[125px] py-[165px] rounded-[30px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.2)]" data-name="Content Area" data-node-id="548:49755">
+          <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[rgba(0,0,0,0.6)] text-center tracking-[-0.43px]" data-node-id="548:49756">
+            Content Area
+          </p>
+        </div>
+        <div className="absolute content-stretch flex flex-col items-start left-0 top-[368.5px]" data-name="Frame" data-node-id="548:52086">
+          <div className="content-stretch flex flex-col items-center py-[10px] relative shrink-0 w-[238px]" data-name="Menu - iPhone" data-node-id="548:49757">
+            <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I548:49757;5707:51032;5584:31830">
+              <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I548:49757;5707:51032;5584:31831">
+                <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I548:49757;5707:51032;5584:31831;5584:31864" />
+              </div>
+              <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I548:49757;5707:51032;5607:81561" />
+            </div>
+            <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I548:49757;5707:51032;5607:25956">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I548:49757;5707:51032;5607:25843" />
+            <div className="content-stretch flex gap-[6px] items-center px-[10px] relative shrink-0 w-full" data-name="Quick Actions" data-node-id="I548:49757;5500:7456">
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px overflow-clip px-[4px] py-[6px] relative rounded-[20px]" data-name="Quick Action - iPhone" data-node-id="I548:49757;5500:7457">
+                <div className="absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 rounded-[20px]" data-name="BG" data-node-id="I548:49757;5500:7457;5511:39416" />
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-full" data-node-id="I548:49757;5500:7457;5498:16160" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀋂</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full not-italic overflow-hidden relative shrink-0 text-[12px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I548:49757;5500:7457;5498:16159">
+                  Label
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px not-italic overflow-clip px-[4px] py-[6px] relative rounded-[20px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-name="Quick Action - iPhone" data-node-id="I548:49757;5500:7458">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full" data-node-id="I548:49757;5500:7458;5498:16160" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀋂</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I548:49757;5500:7458;5498:16159">
+                  Label
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-center justify-center min-h-px min-w-px not-italic overflow-clip px-[4px] py-[6px] relative rounded-[20px] text-[color:var(--accents\/red,#ff383c)] text-center" data-name="Quick Action - iPhone" data-node-id="I548:49757;5500:7459">
+                <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-[22px] justify-center leading-[0] relative shrink-0 text-[13px] w-full" data-node-id="I548:49757;5500:7459;5498:16567" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[15px] whitespace-pre-wrap">􀋂</p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[18px] min-w-full overflow-hidden relative shrink-0 text-[12px] text-ellipsis w-[min-content] whitespace-nowrap" data-node-id="I548:49757;5500:7459;5498:16568">
+                  Desctructive
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-start px-[16px] relative shrink-0 w-full" data-name="Menu Items" data-node-id="I548:49757;5504:2999">
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPhone" data-node-id="I548:49757;5500:10129">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I548:49757;5500:10129;5855:5821" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPhone" data-node-id="I548:49757;5500:14728">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:14728;5856:21173">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I548:49757;5500:14728;5856:21175">
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:14728;5856:21176">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:14728;5856:21177">
+                      <p className="leading-[20px] whitespace-pre-wrap">Label</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center" data-name="Shortcuts" data-node-id="I548:49757;5500:14728;5856:26622">
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:14728;5856:26626" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆔</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:14728;5856:26627" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">A</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPhone" data-node-id="I548:49757;5500:16268">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:16268;5856:21191">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)] text-center w-[28px]" data-node-id="I548:49757;5500:16268;5856:21193">
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:16268;5856:21194">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:16268;5856:21195">
+                      <p className="leading-[20px] whitespace-pre-wrap">Disabled Action</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/quaternary,#d9d9d9)] text-center" data-name="Shortcuts" data-node-id="I548:49757;5500:16268;5856:26640">
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:16268;5856:26644" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆔</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:16268;5856:26645" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">B</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPhone" data-node-id="I548:49757;5500:16827">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:16827;5856:21203">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/red,#ff383c)] text-center w-[28px]" data-node-id="I548:49757;5500:16827;5856:21205">
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:16827;5856:21206">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:16827;5856:21207">
+                      <p className="leading-[20px] whitespace-pre-wrap">Destructive Action</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center" data-name="Shortcuts" data-node-id="I548:49757;5500:16827;5856:26610">
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:16827;5856:26614" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆔</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:16827;5856:26615" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">C</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPhone" data-node-id="I548:49757;5500:11252">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I548:49757;5500:11252;5855:5821" />
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPhone" data-node-id="I548:49757;5500:18448">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:18448;5856:21173">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I548:49757;5500:18448;5856:21175">
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:18448;5856:21176">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:18448;5856:21177">
+                      <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPhone" data-node-id="I548:49757;5500:11549">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I548:49757;5500:11549;5855:5821" />
+              </div>
+              <div className="content-stretch flex items-center pb-[10px] pt-[4px] px-[8px] relative shrink-0 w-full" data-name="Section Title - iPhone" data-node-id="I548:49757;5500:25804">
+                <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)] text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I548:49757;5500:25804;5855:5952">
+                  <p className="leading-[15px] overflow-hidden">Section Title</p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPhone" data-node-id="I548:49757;5500:18965">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:18965;5856:23215">
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:18965;5856:23218">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:18965;5856:23219">
+                      <p className="leading-[20px] whitespace-pre-wrap">Submenu</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[14px]" data-node-id="I548:49757;5500:18965;5856:20341" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                  <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPhone" data-node-id="I548:49757;5500:19524">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:19524;5856:23215">
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:19524;5856:23218">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:19524;5856:23219">
+                      <p className="leading-[20px] whitespace-pre-wrap">Submenu</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[14px]" data-node-id="I548:49757;5500:19524;5856:20341" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                  <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - Submenus - iPhone" data-node-id="I548:49757;5500:20125">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:20125;5856:23215">
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:20125;5856:23218">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:20125;5856:23219">
+                      <p className="leading-[20px] whitespace-pre-wrap">Submenu with a long title</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[14px]" data-node-id="I548:49757;5500:20125;5856:20341" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                  <p className="leading-[20px] whitespace-pre-wrap">􀆊</p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[21px] items-center justify-center px-[8px] relative shrink-0 w-full" data-name="Separator - iPhone" data-node-id="I548:49757;5500:11860">
+                <div className="bg-[var(--separators\/vibrant,#e6e6e6)] h-px shrink-0 w-full" data-name="Separator" data-node-id="I548:49757;5500:11860;5855:5821" />
+              </div>
+              <div className="content-stretch flex items-center pb-[10px] pt-[4px] px-[8px] relative shrink-0 w-full" data-name="Section Title - iPhone" data-node-id="I548:49757;5500:26213">
+                <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)] text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I548:49757;5500:26213;5855:5952">
+                  <p className="leading-[15px] overflow-hidden">Section Title</p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[6px] items-center pl-[6px] pr-[8px] relative shrink-0 w-full" data-name="Menu Items - iPhone" data-node-id="I548:49757;5500:21279">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Leading" data-node-id="I548:49757;5500:21279;5856:21173">
+                  <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I548:49757;5500:21279;5856:21175">
+                    <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start justify-center min-h-px min-w-px py-[10px] relative" data-name="Label and Subtitle" data-node-id="I548:49757;5500:21279;5856:21176">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.43px] w-full" data-node-id="I548:49757;5500:21279;5856:21177">
+                      <p className="leading-[20px] whitespace-pre-wrap">Action</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-px items-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center" data-name="Shortcuts" data-node-id="I548:49757;5500:21279;5856:26622">
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:21279;5856:26626" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">􀆔</p>
+                  </div>
+                  <div className="flex flex-col justify-center relative shrink-0 w-[14px]" data-node-id="I548:49757;5500:21279;5856:26627" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    <p className="leading-[20px] whitespace-pre-wrap">Y</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Context Menu
+**Node ID:** 125:58750
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/context-menus](https://developer.apple.com/design/human-interface-guidelines/context-menus)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

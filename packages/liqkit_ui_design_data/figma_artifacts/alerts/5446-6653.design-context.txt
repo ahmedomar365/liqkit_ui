@@ -1,0 +1,49 @@
+type ButtonsProps = {
+  className?: string;
+  mode?: "Light" | "Dark";
+  text?: string;
+  type?: "Secondary" | "Primary" | "Destructive";
+};
+
+export default function Buttons({ className, mode = "Light", text = "Action", type = "Primary" }: ButtonsProps) {
+  const isDarkAndPrimary = mode === "Dark" && type === "Primary";
+  const isDarkAndSecondary = mode === "Dark" && type === "Secondary";
+  const isLightAndDestructive = mode === "Light" && type === "Destructive";
+  const isLightAndIsDestructiveOrSecondary = mode === "Light" && ["Destructive", "Secondary"].includes(type);
+  const isLightAndPrimary = mode === "Light" && type === "Primary";
+  const isLightAndSecondary = mode === "Light" && type === "Secondary";
+  return (
+    <div className={className || `content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] w-[83px] ${isLightAndPrimary ? "bg-[rgba(255,255,255,0.6)]" : isLightAndIsDestructiveOrSecondary ? "h-[48px]" : isDarkAndPrimary ? "bg-[rgba(0,0,0,0.67)]" : ""}`} id={isLightAndPrimary ? "node-5446_6658" : isLightAndSecondary ? "node-5446_6654" : isLightAndDestructive ? "node-5446_6664" : isDarkAndPrimary ? "node-5446_6676" : isDarkAndSecondary ? "node-5446_6674" : "node-5446_6672"}>
+      <div className={`absolute inset-0 rounded-[100px] ${isLightAndPrimary ? String.raw`bg-[var(--accents\/blue,#08f)]` : isLightAndIsDestructiveOrSecondary ? String.raw`bg-[var(--fills\/secondary,rgba(120,120,128,0.16))]` : isDarkAndPrimary ? String.raw`bg-[var(--accents\/blue,#08f)] mix-blend-plus-lighter` : String.raw`bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] mix-blend-plus-lighter`}`} data-name="BG" id={isLightAndPrimary ? "node-5446_10002" : isLightAndSecondary ? "node-5446_9891" : isLightAndDestructive ? "node-5446_9932" : isDarkAndPrimary ? "node-5446_10040" : isDarkAndSecondary ? "node-5446_9970" : "node-5446_9980"} />
+      {type === "Destructive" && ["Dark", "Light"].includes(mode) && (
+        <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#ff383c] text-[17px] tracking-[-0.43px] whitespace-nowrap" data-node-id="5446:6673">
+          <p className="leading-[22px]">{text}</p>
+        </div>
+      )}
+      {type === "Secondary" && ["Dark", "Light"].includes(mode) && (
+        <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] whitespace-nowrap" data-node-id="5446:6675">
+          <p className="leading-[22px]">{text}</p>
+        </div>
+      )}
+      {type === "Primary" && ["Dark", "Light"].includes(mode) && (
+        <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px] whitespace-nowrap" data-node-id="5446:6677">
+          <p className="leading-[22px]">{text}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

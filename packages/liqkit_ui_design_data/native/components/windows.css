@@ -1,0 +1,286 @@
+.ios26-windows-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-windows-demo {
+  width: 1024px;
+  max-width: 100%;
+  display: grid;
+}
+
+.ios26-windows-canvas-wrap {
+  width: 1024px;
+  height: 730px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios26-windows-canvas {
+  width: 1320px;
+  height: 940px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(0.7757575758);
+  transform-origin: top left;
+}
+
+.ios26-windows-shell-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ios26-windows-screen {
+  position: absolute;
+  left: 55px;
+  top: 53px;
+  width: 1210px;
+  height: 834px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ios26-windows-wallpaper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ios26-windows-wallpaper-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.ios26-windows-menubar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  padding: 0 26px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  color: #000;
+  z-index: 4;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.ios26-windows-menubar-left,
+.ios26-windows-menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-windows-menubar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font: 500 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-windows-menubar-center span {
+  padding: 2px 11px 1px;
+  border-radius: 100px;
+}
+
+.ios26-windows-menubar-right .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ios26-windows-menubar-right .ios26-status-icon {
+  display: inline-flex;
+  color: #000000;
+}
+
+.ios26-windows-menubar-right .ios26-status-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-windows-menubar-right .ios26-status-cell {
+  width: 16px;
+  height: 10px;
+}
+
+.ios26-windows-menubar-right .ios26-status-wifi {
+  width: 14px;
+  height: 10px;
+}
+
+.ios26-windows-menubar-right .ios26-status-battery {
+  width: 27px;
+  height: 12px;
+}
+
+.ios26-window-card {
+  position: absolute;
+  left: 96px;
+  top: 97px;
+  width: 1018px;
+  height: 620px;
+  border-radius: 34px;
+  background: #fff;
+  box-shadow: 0 20px 76px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.ios26-window-toolbar {
+  height: 64px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.ios26-window-toolbar-group {
+  display: flex;
+  gap: 12px;
+}
+
+.ios26-window-toolbar-group--leading .is-back {
+  min-width: 78px;
+  padding: 0 8px;
+  justify-content: center;
+}
+
+.ios26-window-glass-btn {
+  border: 0;
+  border-radius: 296px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 4px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ios26-window-glass-btn.is-symbol {
+  width: 44px;
+  min-width: 44px;
+}
+
+.ios26-window-title {
+  text-align: center;
+  font: 590 15px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-window-title small {
+  display: block;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-window-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: 0;
+  background: #fff;
+}
+
+.ios26-window-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 65px;
+  height: 65px;
+  padding: 6px;
+  display: grid;
+  align-items: end;
+  justify-items: end;
+}
+
+.ios26-window-resize svg {
+  width: 55.5px;
+  height: 55.5px;
+  display: block;
+  color: #1a1a1a;
+}
+
+.ios26-windows-controls-panel {
+  position: absolute;
+  left: 96px;
+  bottom: 70px;
+  display: grid;
+  gap: 8px;
+  z-index: 5;
+}
+
+.ios26-windows-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.ios26-windows-controls-row h4 {
+  margin: 0;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-windows-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ios26-windows-controls span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.32);
+}
+
+.ios26-windows-controls .is-red {
+  background: #ff605c;
+}
+
+.ios26-windows-controls .is-yellow {
+  background: #ffbd44;
+}
+
+.ios26-windows-controls .is-green {
+  background: #00ca4e;
+}
+
+.ios26-windows-controls.is-inactive span {
+  opacity: 0.34;
+}

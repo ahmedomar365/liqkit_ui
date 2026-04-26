@@ -1,0 +1,217 @@
+{
+  "category": "color-pickers",
+  "generatedAt": "2026-02-19T19:44:19.177Z",
+  "sourceFiles": [
+    "figma-artifacts/color-pickers/0-5275.design-context.txt",
+    "figma-artifacts/color-pickers/507-26010.design-context.txt",
+    "figma-artifacts/color-pickers/5704-26179.design-context.txt",
+    "figma-artifacts/color-pickers/5739-34128.design-context.txt",
+    "figma-artifacts/color-pickers/5831-1408.design-context.txt"
+  ],
+  "totalAssets": 10,
+  "downloaded": 0,
+  "existing": 10,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "147cf206-57a5-4a2d-9970-c1cd0b105d7b",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "147cf206-57a5-4a2d-9970-c1cd0b105d7b.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/147cf206-57a5-4a2d-9970-c1cd0b105d7b.svg",
+      "size": 4873,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/147cf206-57a5-4a2d-9970-c1cd0b105d7b",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/147cf206-57a5-4a2d-9970-c1cd0b105d7b"
+      ],
+      "constNames": [
+        "imgGradient"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "3a8cedf1-8da8-4a18-947b-84586a77acea",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "3a8cedf1-8da8-4a18-947b-84586a77acea.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/3a8cedf1-8da8-4a18-947b-84586a77acea.svg",
+      "size": 268,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/3a8cedf1-8da8-4a18-947b-84586a77acea",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/3a8cedf1-8da8-4a18-947b-84586a77acea"
+      ],
+      "constNames": [
+        "imgBg"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/0-5275.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "8c26ad4e-31d2-4b65-8a92-a96d80f9f734",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "8c26ad4e-31d2-4b65-8a92-a96d80f9f734.png",
+      "filePath": "figma-artifacts/assets/color-pickers/8c26ad4e-31d2-4b65-8a92-a96d80f9f734.png",
+      "size": 7967,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/8c26ad4e-31d2-4b65-8a92-a96d80f9f734",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/8c26ad4e-31d2-4b65-8a92-a96d80f9f734"
+      ],
+      "constNames": [
+        "imgGradient1"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "91978deb-45a7-49c3-a229-5d7dd5c7e57d",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "91978deb-45a7-49c3-a229-5d7dd5c7e57d.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/91978deb-45a7-49c3-a229-5d7dd5c7e57d.svg",
+      "size": 5427,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/91978deb-45a7-49c3-a229-5d7dd5c7e57d",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/91978deb-45a7-49c3-a229-5d7dd5c7e57d"
+      ],
+      "constNames": [
+        "imgGradient2"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "9378612e-9a73-4c11-8b18-f30618351766",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "9378612e-9a73-4c11-8b18-f30618351766.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/9378612e-9a73-4c11-8b18-f30618351766.svg",
+      "size": 249,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/9378612e-9a73-4c11-8b18-f30618351766",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/9378612e-9a73-4c11-8b18-f30618351766"
+      ],
+      "constNames": [
+        "imgSwatch1"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9.png",
+      "filePath": "figma-artifacts/assets/color-pickers/b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9.png",
+      "size": 5378,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9"
+      ],
+      "constNames": [
+        "imgGradient3"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "c618c9ad-06c0-4496-9473-4a128d96322d",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "c618c9ad-06c0-4496-9473-4a128d96322d.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/c618c9ad-06c0-4496-9473-4a128d96322d.svg",
+      "size": 252,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/c618c9ad-06c0-4496-9473-4a128d96322d",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/c618c9ad-06c0-4496-9473-4a128d96322d"
+      ],
+      "constNames": [
+        "imgSwatch"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/5739-34128.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "d08826f2-0da3-4f59-8304-80ad6f8f9fb0",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "d08826f2-0da3-4f59-8304-80ad6f8f9fb0.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/d08826f2-0da3-4f59-8304-80ad6f8f9fb0.svg",
+      "size": 926,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/d08826f2-0da3-4f59-8304-80ad6f8f9fb0",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/d08826f2-0da3-4f59-8304-80ad6f8f9fb0"
+      ],
+      "constNames": [
+        "imgAddButton"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/0-5275.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "eb4519bc-415b-44a3-84ae-978c437265f6",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "eb4519bc-415b-44a3-84ae-978c437265f6.png",
+      "filePath": "figma-artifacts/assets/color-pickers/eb4519bc-415b-44a3-84ae-978c437265f6.png",
+      "size": 4358,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/eb4519bc-415b-44a3-84ae-978c437265f6",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/eb4519bc-415b-44a3-84ae-978c437265f6"
+      ],
+      "constNames": [
+        "imgSlider"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/0-5275.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "f4a1d269-d690-4ca6-8946-f6ea8c483ab7",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "f4a1d269-d690-4ca6-8946-f6ea8c483ab7.svg",
+      "filePath": "figma-artifacts/assets/color-pickers/f4a1d269-d690-4ca6-8946-f6ea8c483ab7.svg",
+      "size": 248,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/f4a1d269-d690-4ca6-8946-f6ea8c483ab7",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/f4a1d269-d690-4ca6-8946-f6ea8c483ab7"
+      ],
+      "constNames": [
+        "imgBg1"
+      ],
+      "sources": [
+        "figma-artifacts/color-pickers/0-5275.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+Screenshot not yet fetched for node 5661:43368.
+Reason: conserving MCP screenshot calls while active category 507:24685 is blocked by screenshot quota.

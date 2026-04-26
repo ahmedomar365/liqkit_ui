@@ -1,0 +1,11 @@
+function FaceIdSuccess() {
+  return (
+    <div data-name="Face ID" data-node-id="123:58236">
+      <div data-name="State=Success" data-node-id="123:58197" style="width:402px;height:190px;backdrop-filter:blur(1px)">
+        <div data-name="Bezel" data-node-id="6281:13637" style="width:143px;height:145px;border-radius:40px;background:#000" />
+        <div data-name="Circle" data-node-id="6281:13609" style="width:70px;height:70px" />
+        <div data-node-id="6281:13607" style="font-size:42px;color:#87fa89">checkmark</div>
+      </div>
+    </div>
+  );
+}

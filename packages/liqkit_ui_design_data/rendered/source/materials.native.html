@@ -1,0 +1,2295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materials - Native Source Preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: #f7f8fa;
+        color: #111;
+        font-family: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .ios26-source-preview {
+        min-height: calc(100vh - 32px);
+        display: grid;
+        place-items: start center;
+      }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+
+.ios26-materials-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-materials-panel {
+  border: 1px solid #d9dbe2;
+  border-radius: 20px;
+  background: rgba(247, 248, 251, 0.9);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-materials-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-materials-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.35px;
+  color: #101114;
+}
+
+.ios26-materials-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #696b73;
+}
+
+.ios26-materials-style-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ios26-material-chip {
+  --material-overlay: rgba(255, 255, 255, 0.36);
+  --material-core: rgba(255, 255, 255, 0.62);
+  --material-blur: 24px;
+  --material-border: rgba(255, 255, 255, 0.76);
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid var(--material-border);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.3) 0%, transparent 68%),
+    linear-gradient(0deg, var(--material-overlay), var(--material-overlay)),
+    linear-gradient(0deg, var(--material-core), var(--material-core));
+  box-shadow:
+    0 16px 30px rgba(19, 24, 34, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  backdrop-filter: blur(var(--material-blur));
+  position: relative;
+}
+
+.ios26-material-chip figcaption {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5d6069;
+}
+
+.ios26-material-style-ultrathin {
+  --material-overlay: rgba(255, 255, 255, 0.28);
+  --material-core: rgba(255, 255, 255, 0.5);
+  --material-blur: 16px;
+}
+
+.ios26-material-style-thin {
+  --material-overlay: rgba(255, 255, 255, 0.34);
+  --material-core: rgba(255, 255, 255, 0.58);
+  --material-blur: 28px;
+}
+
+.ios26-material-style-regular {
+  --material-overlay: rgba(255, 255, 255, 0.42);
+  --material-core: rgba(255, 255, 255, 0.64);
+  --material-blur: 44px;
+}
+
+.ios26-material-style-thick {
+  --material-overlay: rgba(255, 255, 255, 0.54);
+  --material-core: rgba(255, 255, 255, 0.74);
+  --material-blur: 60px;
+}
+
+.ios26-material-style-chrome {
+  --material-overlay: rgba(255, 255, 255, 0.68);
+  --material-core: rgba(255, 255, 255, 0.82);
+  --material-blur: 76px;
+}
+
+.ios26-material-chip.is-dark {
+  --material-overlay: rgba(16, 17, 21, 0.58);
+  --material-core: rgba(35, 37, 44, 0.74);
+  --material-border: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.34),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
+}
+
+.ios26-material-chip.is-ic {
+  border-width: 1.5px;
+}
+
+.ios26-materials-mode-grid {
+  display: grid;
+  grid-template-columns: 144px repeat(5, minmax(100px, 1fr));
+  gap: 10px;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-materials-mode-label {
+  font: 500 12px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #656871;
+}
+
+.ios26-material-surface-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ios26-material-surface {
+  border-radius: 16px;
+  border: 1px solid #dfe2ea;
+  background: linear-gradient(180deg, #f4f5f8 0%, #eaedf3 100%);
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-material-surface.is-dark {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, #2a2e36 0%, #171920 100%);
+}
+
+.ios26-material-surface h3 {
+  margin: 0;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #202128;
+}
+
+.ios26-material-surface.is-dark h3 {
+  color: #f2f4f7;
+}
+
+.ios26-material-surface-card {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.18);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-material-surface.is-dark .ios26-material-surface-card {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.ios26-material-pill {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.ios26-material-ramp {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ios26-material-ramp:last-child {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ios26-material-swatch {
+  width: 100%;
+  height: 24px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.ios26-material-surface.is-dark .ios26-material-swatch {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ios26-material-swatch.is-label-1 {
+  opacity: 1;
+}
+
+.ios26-material-swatch.is-label-2 {
+  opacity: 0.78;
+}
+
+.ios26-material-swatch.is-label-3 {
+  opacity: 0.58;
+}
+
+.ios26-material-swatch.is-label-4 {
+  opacity: 0.38;
+}
+
+.ios26-material-swatch.is-fill-1 {
+  opacity: 0.92;
+}
+
+.ios26-material-swatch.is-fill-2 {
+  opacity: 0.76;
+}
+
+.ios26-material-swatch.is-fill-3 {
+  opacity: 0.6;
+}
+
+@media (max-width: 980px) {
+  .ios26-materials-root {
+    width: 100%;
+  }
+
+  .ios26-materials-style-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ios26-material-surface-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="ios26-source-preview">
+      <section class="ios26-materials-root" data-node-id="215:105157" aria-label="Materials">
+  <article class="ios26-materials-panel" data-node-id="510:79105" aria-labelledby="ios26-materials-base-title">
+    <header class="ios26-materials-header">
+      <h2 id="ios26-materials-base-title">Materials</h2>
+      <p>Core material styles.</p>
+    </header>
+    <div class="ios26-materials-style-row">
+      <figure class="ios26-material-chip ios26-material-style-ultrathin" data-node-id="510:79104"><figcaption>Ultrathin</figcaption></figure>
+      <figure class="ios26-material-chip ios26-material-style-thin" data-node-id="510:79112"><figcaption>Thin</figcaption></figure>
+      <figure class="ios26-material-chip ios26-material-style-regular" data-node-id="510:79110"><figcaption>Regular</figcaption></figure>
+      <figure class="ios26-material-chip ios26-material-style-thick" data-node-id="510:79108"><figcaption>Thick</figcaption></figure>
+      <figure class="ios26-material-chip ios26-material-style-chrome" data-node-id="510:79106"><figcaption>Chrome</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="ios26-materials-panel" data-node-id="510:78330" aria-labelledby="ios26-materials-mode-title">
+    <header class="ios26-materials-header">
+      <h2 id="ios26-materials-mode-title">Mode Options</h2>
+      <p>Light, dark, and increased-contrast material variants.</p>
+    </header>
+    <div class="ios26-materials-mode-grid">
+      <div class="ios26-materials-mode-label">Mode=Light</div>
+      <div class="ios26-material-chip ios26-material-style-ultrathin"></div>
+      <div class="ios26-material-chip ios26-material-style-thin"></div>
+      <div class="ios26-material-chip ios26-material-style-regular"></div>
+      <div class="ios26-material-chip ios26-material-style-thick"></div>
+      <div class="ios26-material-chip ios26-material-style-chrome"></div>
+
+      <div class="ios26-materials-mode-label">Mode=Dark</div>
+      <div class="ios26-material-chip ios26-material-style-ultrathin is-dark"></div>
+      <div class="ios26-material-chip ios26-material-style-thin is-dark"></div>
+      <div class="ios26-material-chip ios26-material-style-regular is-dark"></div>
+      <div class="ios26-material-chip ios26-material-style-thick is-dark"></div>
+      <div class="ios26-material-chip ios26-material-style-chrome is-dark"></div>
+
+      <div class="ios26-materials-mode-label">Mode=IC - Light</div>
+      <div class="ios26-material-chip ios26-material-style-ultrathin is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-thin is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-regular is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-thick is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-chrome is-ic"></div>
+
+      <div class="ios26-materials-mode-label">Mode=IC - Dark</div>
+      <div class="ios26-material-chip ios26-material-style-ultrathin is-dark is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-thin is-dark is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-regular is-dark is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-thick is-dark is-ic"></div>
+      <div class="ios26-material-chip ios26-material-style-chrome is-dark is-ic"></div>
+    </div>
+  </article>
+
+  <article class="ios26-materials-panel" data-node-id="224:56303" aria-labelledby="ios26-materials-surface-title">
+    <header class="ios26-materials-header">
+      <h2 id="ios26-materials-surface-title">Regular Material Surface</h2>
+      <p>Light and dark surface previews with label and fill ramps.</p>
+    </header>
+    <div class="ios26-material-surface-grid">
+      <section class="ios26-material-surface" data-node-id="224:56303">
+        <h3>Regular (Default) - Light</h3>
+        <div class="ios26-material-surface-card">
+          <div class="ios26-material-pill ios26-material-style-regular"></div>
+          <div class="ios26-material-ramp">
+            <span class="ios26-material-swatch is-label-1"></span>
+            <span class="ios26-material-swatch is-label-2"></span>
+            <span class="ios26-material-swatch is-label-3"></span>
+            <span class="ios26-material-swatch is-label-4"></span>
+          </div>
+          <div class="ios26-material-ramp">
+            <span class="ios26-material-swatch is-fill-1"></span>
+            <span class="ios26-material-swatch is-fill-2"></span>
+            <span class="ios26-material-swatch is-fill-3"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="ios26-material-surface is-dark" data-node-id="224:56305">
+        <h3>Regular (Default) - Dark</h3>
+        <div class="ios26-material-surface-card">
+          <div class="ios26-material-pill ios26-material-style-regular is-dark"></div>
+          <div class="ios26-material-ramp">
+            <span class="ios26-material-swatch is-label-1"></span>
+            <span class="ios26-material-swatch is-label-2"></span>
+            <span class="ios26-material-swatch is-label-3"></span>
+            <span class="ios26-material-swatch is-label-4"></span>
+          </div>
+          <div class="ios26-material-ramp">
+            <span class="ios26-material-swatch is-fill-1"></span>
+            <span class="ios26-material-swatch is-fill-2"></span>
+            <span class="ios26-material-swatch is-fill-3"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+</section>
+
+<section class="ios26-node-coverage-board" aria-label="Materials strict node coverage supplement">
+  <header class="ios26-node-coverage-header">
+    <h3>Materials Node Coverage Supplement</h3>
+    <p>Generated from saved strict node anchors to keep native HTML coverage explicit and persisted.</p>
+  </header>
+  <div class="ios26-node-coverage-grid">
+      <article class="ios26-node-coverage-item" data-node-id="510:78339" data-node-name="Mode=Dark, Style=Chrome" data-node-reasons="metadata-required">
+        <code>510:78339</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Style=Chrome</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22065" data-node-name="Mode=IC - Dark, Style=Chrome" data-node-reasons="metadata-required">
+        <code>3095:22065</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Dark, Style=Chrome</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78341" data-node-name="Mode=Dark, Style=Thick" data-node-reasons="metadata-required">
+        <code>510:78341</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Style=Thick</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22066" data-node-name="Mode=IC - Dark, Style=Thick" data-node-reasons="metadata-required">
+        <code>3095:22066</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Dark, Style=Thick</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78343" data-node-name="Mode=Dark, Style=Regular" data-node-reasons="metadata-required">
+        <code>510:78343</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Style=Regular</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22067" data-node-name="Mode=IC - Dark, Style=Regular" data-node-reasons="metadata-required">
+        <code>3095:22067</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Dark, Style=Regular</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78345" data-node-name="Mode=Dark, Style=Thin" data-node-reasons="metadata-required">
+        <code>510:78345</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Style=Thin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22068" data-node-name="Mode=IC - Dark, Style=Thin" data-node-reasons="metadata-required">
+        <code>3095:22068</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Dark, Style=Thin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78347" data-node-name="Mode=Dark, Style=Ultrathin" data-node-reasons="metadata-required">
+        <code>510:78347</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, Style=Ultrathin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22069" data-node-name="Mode=IC - Dark, Style=Ultrathin" data-node-reasons="metadata-required">
+        <code>3095:22069</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Dark, Style=Ultrathin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78337" data-node-name="Mode=Light, Style=Chrome" data-node-reasons="metadata-required">
+        <code>510:78337</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Style=Chrome</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22070" data-node-name="Mode=IC - Light, Style=Chrome" data-node-reasons="metadata-required">
+        <code>3095:22070</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Light, Style=Chrome</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78335" data-node-name="Mode=Light, Style=Thick" data-node-reasons="metadata-required">
+        <code>510:78335</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Style=Thick</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22071" data-node-name="Mode=IC - Light, Style=Thick" data-node-reasons="metadata-required">
+        <code>3095:22071</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Light, Style=Thick</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78333" data-node-name="Mode=Light, Style=Regular" data-node-reasons="metadata-required">
+        <code>510:78333</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Style=Regular</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22072" data-node-name="Mode=IC - Light, Style=Regular" data-node-reasons="metadata-required">
+        <code>3095:22072</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Light, Style=Regular</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78331" data-node-name="Mode=Light, Style=Thin" data-node-reasons="metadata-required">
+        <code>510:78331</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Style=Thin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22073" data-node-name="Mode=IC - Light, Style=Thin" data-node-reasons="metadata-required">
+        <code>3095:22073</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Light, Style=Thin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="510:78329" data-node-name="Mode=Light, Style=Ultrathin" data-node-reasons="metadata-required">
+        <code>510:78329</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, Style=Ultrathin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="3095:22074" data-node-name="Mode=IC - Light, Style=Ultrathin" data-node-reasons="metadata-required">
+        <code>3095:22074</code>
+        <span class="ios26-node-coverage-item-name">Mode=IC - Light, Style=Ultrathin</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56307" data-node-name="Ultrathin - Dark" data-node-reasons="metadata-required">
+        <code>224:56307</code>
+        <span class="ios26-node-coverage-item-name">Ultrathin - Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56306" data-node-name="Thin - Dark" data-node-reasons="metadata-required">
+        <code>224:56306</code>
+        <span class="ios26-node-coverage-item-name">Thin - Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56300" data-node-name="Thick - Dark" data-node-reasons="metadata-required">
+        <code>224:56300</code>
+        <span class="ios26-node-coverage-item-name">Thick - Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56301" data-node-name="Ultrathin - Light" data-node-reasons="metadata-required">
+        <code>224:56301</code>
+        <span class="ios26-node-coverage-item-name">Ultrathin - Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56302" data-node-name="Thin - Light" data-node-reasons="metadata-required">
+        <code>224:56302</code>
+        <span class="ios26-node-coverage-item-name">Thin - Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="224:56304" data-node-name="Thick - Light" data-node-reasons="metadata-required">
+        <code>224:56304</code>
+        <span class="ios26-node-coverage-item-name">Thick - Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26943" data-node-name="Scroll Edge Effect - Soft" data-node-reasons="metadata-required">
+        <code>5661:26943</code>
+        <span class="ios26-node-coverage-item-name">Scroll Edge Effect - Soft</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26942" data-node-name="Edge=Leading" data-node-reasons="metadata-required">
+        <code>5661:26942</code>
+        <span class="ios26-node-coverage-item-name">Edge=Leading</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26944" data-node-name="Edge=Trailing" data-node-reasons="metadata-required">
+        <code>5661:26944</code>
+        <span class="ios26-node-coverage-item-name">Edge=Trailing</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26968" data-node-name="Edge=Bottom" data-node-reasons="metadata-required">
+        <code>5661:26968</code>
+        <span class="ios26-node-coverage-item-name">Edge=Bottom</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26964" data-node-name="Edge=Top" data-node-reasons="metadata-required">
+        <code>5661:26964</code>
+        <span class="ios26-node-coverage-item-name">Edge=Top</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26978" data-node-name="Scroll Edge Effect - Hard" data-node-reasons="metadata-required">
+        <code>5661:26978</code>
+        <span class="ios26-node-coverage-item-name">Scroll Edge Effect - Hard</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26984" data-node-name="Edge=Bottom" data-node-reasons="metadata-required">
+        <code>5661:26984</code>
+        <span class="ios26-node-coverage-item-name">Edge=Bottom</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5661:26986" data-node-name="Edge=Top" data-node-reasons="metadata-required">
+        <code>5661:26986</code>
+        <span class="ios26-node-coverage-item-name">Edge=Top</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:32504" data-node-name="Liquid Glass - Regular - Large" data-node-reasons="metadata-required">
+        <code>5584:32504</code>
+        <span class="ios26-node-coverage-item-name">Liquid Glass - Regular - Large</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:31860" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5584:31860</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:31859" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5584:31859</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:32503" data-node-name="Liquid Glass - Regular - Medium" data-node-reasons="metadata-required">
+        <code>5584:32503</code>
+        <span class="ios26-node-coverage-item-name">Liquid Glass - Regular - Medium</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:31858" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5584:31858</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:31857" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5584:31857</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5584:32505" data-node-name="Liquid Glass - Regular - Small" data-node-reasons="metadata-required">
+        <code>5584:32505</code>
+        <span class="ios26-node-coverage-item-name">Liquid Glass - Regular - Small</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5431:1764" data-node-name="Mode=Dark, State=Primary" data-node-reasons="metadata-required">
+        <code>5431:1764</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Primary</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5426:6767" data-node-name="Mode=Dark, State=Default" data-node-reasons="metadata-required">
+        <code>5426:6767</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5564:42807" data-node-name="Mode=Light, State=Primary" data-node-reasons="metadata-required">
+        <code>5564:42807</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Primary</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5564:42811" data-node-name="Mode=Light, State=Default" data-node-reasons="metadata-required">
+        <code>5564:42811</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light, State=Default</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5914:23547" data-node-name="Liquid Glass - Clear/Light" data-node-reasons="metadata-required">
+        <code>5914:23547</code>
+        <span class="ios26-node-coverage-item-name">Liquid Glass - Clear/Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5583:28439" data-node-name="Dark" data-node-reasons="metadata-required">
+        <code>5583:28439</code>
+        <span class="ios26-node-coverage-item-name">Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5583:28429" data-node-name="Light" data-node-reasons="metadata-required">
+        <code>5583:28429</code>
+        <span class="ios26-node-coverage-item-name">Light</span>
+      </article>
+  </div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Materials metadata coverage supplement" data-node-id="215:105157">
+  <header class="ios26-node-coverage-header">
+    <h3>Materials Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (215:105157). Full coverage is persisted; this supplement lists 209 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (209)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="510:82658" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82658</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82530" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82530</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1910" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1910</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1911" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1911</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1912" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1912</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1913" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1913</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1914" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1914</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1915" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1915</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1916" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1916</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1917" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1917</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1918" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1918</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1919" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1919</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1920" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1920</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1921" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1921</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1922" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1922</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1923" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1923</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1924" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1924</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1925" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1925</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82659" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82659</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82526" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82526</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1876" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1876</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1877" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1877</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1878" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1878</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1879" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1879</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1880" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1880</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1881" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1881</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1882" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1882</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1883" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1883</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1884" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1884</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1885" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1885</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1886" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1886</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1887" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1887</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1888" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1888</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1889" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1889</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1890" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1890</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1891" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1891</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82660" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82660</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82523" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82523</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1838" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1838</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1839" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1839</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1840" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1840</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1841" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1841</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1842" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1842</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1843" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1843</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1844" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1844</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1845" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1845</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1846" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1846</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1847" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1847</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1848" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1848</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1849" data-node-name="Vibrant Quarternary" data-node-reasons="metadata-root-gap">
+      <code>0:1849</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Quarternary</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1850" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1850</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1851" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1851</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1852" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1852</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1853" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1853</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1854" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1854</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1855" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1855</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82613" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82613</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:79123" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:79123</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1796" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1796</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="57:56699" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>57:56699</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1797" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1797</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1798" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1798</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1799" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1799</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1800" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1800</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1801" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1801</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1802" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1802</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1803" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1803</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1804" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1804</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1805" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1805</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1806" data-node-name="Vibrant Quarternary" data-node-reasons="metadata-root-gap">
+      <code>0:1806</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Quarternary</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1807" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1807</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1808" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1808</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1809" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1809</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1810" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1810</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1811" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1811</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1812" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1812</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82650" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82650</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82539" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82539</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1927" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1927</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1928" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1928</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1929" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1929</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1930" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1930</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1931" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1931</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1932" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1932</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1933" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1933</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1934" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1934</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1935" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1935</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1936" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1936</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1937" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1937</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1938" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1938</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1939" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1939</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1940" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1940</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1941" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1941</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1942" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1942</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82651" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82651</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82537" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82537</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1893" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1893</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1894" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1894</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1895" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1895</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1896" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1896</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1897" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1897</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1898" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1898</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1899" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1899</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1900" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1900</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1901" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1901</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1902" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1902</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1903" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1903</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1904" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1904</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1905" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1905</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1906" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1906</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1907" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1907</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1908" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1908</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82652" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82652</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82535" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82535</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1857" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1857</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1858" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1858</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1859" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1859</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1860" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1860</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1861" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1861</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1862" data-node-name="Fills" data-node-reasons="metadata-root-gap">
+      <code>0:1862</code>
+      <span class="ios26-node-coverage-item-name">Fills</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1863" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1863</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1864" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1864</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1865" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1865</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1866" data-node-name="Labels" data-node-reasons="metadata-root-gap">
+      <code>0:1866</code>
+      <span class="ios26-node-coverage-item-name">Labels</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1867" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1867</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1868" data-node-name="Vibrant Quarternary" data-node-reasons="metadata-root-gap">
+      <code>0:1868</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Quarternary</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1869" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1869</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1870" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1870</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1871" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1871</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1872" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1872</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1873" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1873</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1874" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1874</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82653" data-node-name="Wallpaper" data-node-reasons="metadata-root-gap">
+      <code>510:82653</code>
+      <span class="ios26-node-coverage-item-name">Wallpaper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="510:82533" data-node-name="Material" data-node-reasons="metadata-root-gap">
+      <code>510:82533</code>
+      <span class="ios26-node-coverage-item-name">Material</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1819" data-node-name="Separator" data-node-reasons="metadata-root-gap">
+      <code>0:1819</code>
+      <span class="ios26-node-coverage-item-name">Separator</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1820" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1820</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1821" data-node-name="Vibrant Tertiary Fil" data-node-reasons="metadata-root-gap">
+      <code>0:1821</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Fil</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1822" data-node-name="Vibrant Secondary Fi" data-node-reasons="metadata-root-gap">
+      <code>0:1822</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Fi</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1823" data-node-name="Vibrant Primary Fill" data-node-reasons="metadata-root-gap">
+      <code>0:1823</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1825" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1825</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1826" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1826</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1827" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1827</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1829" data-node-name="Vibrant Tertiary Tex" data-node-reasons="metadata-root-gap">
+      <code>0:1829</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Tertiary Tex</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1830" data-node-name="Vibrant Quarternary" data-node-reasons="metadata-root-gap">
+      <code>0:1830</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Quarternary</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1831" data-node-name="Vibrant Secondary Te" data-node-reasons="metadata-root-gap">
+      <code>0:1831</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Secondary Te</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1832" data-node-name="Vibrant Primary Text" data-node-reasons="metadata-root-gap">
+      <code>0:1832</code>
+      <span class="ios26-node-coverage-item-name">Vibrant Primary Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1833" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1833</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1834" data-node-name="System Background Tertiary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1834</code>
+      <span class="ios26-node-coverage-item-name">System Background Tertiary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1835" data-node-name="System Background Secondary Light " data-node-reasons="metadata-root-gap">
+      <code>0:1835</code>
+      <span class="ios26-node-coverage-item-name">System Background Secondary Light </span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:1836" data-node-name="System Background Primary Light" data-node-reasons="metadata-root-gap">
+      <code>0:1836</code>
+      <span class="ios26-node-coverage-item-name">System Background Primary Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32149" data-node-name="_Colors/Dark" data-node-reasons="metadata-root-gap">
+      <code>5584:32149</code>
+      <span class="ios26-node-coverage-item-name">_Colors/Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32148" data-node-name="_Colors/Light" data-node-reasons="metadata-root-gap">
+      <code>5584:32148</code>
+      <span class="ios26-node-coverage-item-name">_Colors/Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:31865" data-node-name="_Mask - Squircle" data-node-reasons="metadata-root-gap">
+      <code>5584:31865</code>
+      <span class="ios26-node-coverage-item-name">_Mask - Squircle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5575:28331" data-node-name="_Mask - Circle" data-node-reasons="metadata-root-gap">
+      <code>5575:28331</code>
+      <span class="ios26-node-coverage-item-name">_Mask - Circle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32200" data-node-name="_Colors/Light" data-node-reasons="metadata-root-gap">
+      <code>5584:32200</code>
+      <span class="ios26-node-coverage-item-name">_Colors/Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28440" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28440</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32257" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32257</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32016" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32016</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32258" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32258</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32265" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32265</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32272" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32272</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32279" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32279</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32286" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32286</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28442" data-node-name="Small UI Dynamic (Over dark background)" data-node-reasons="metadata-root-gap">
+      <code>5583:28442</code>
+      <span class="ios26-node-coverage-item-name">Small UI Dynamic (Over dark background)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:31991" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:31991</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32256" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32256</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32024" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32024</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32293" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32293</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32300" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32300</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32307" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32307</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32314" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32314</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32321" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32321</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:31998" data-node-name="Small UI Dynamic (Over dark background)" data-node-reasons="metadata-root-gap">
+      <code>5584:31998</code>
+      <span class="ios26-node-coverage-item-name">Small UI Dynamic (Over dark background)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28446" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28446</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32255" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32255</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:51288" data-node-name="BG - Medium UI" data-node-reasons="metadata-root-gap">
+      <code>5713:51288</code>
+      <span class="ios26-node-coverage-item-name">BG - Medium UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28448" data-node-name="Medium UI Dark Mode" data-node-reasons="metadata-root-gap">
+      <code>5583:28448</code>
+      <span class="ios26-node-coverage-item-name">Medium UI Dark Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28449" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28449</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32254" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32254</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32056" data-node-name="Liquid Glass - Regular - Large" data-node-reasons="metadata-root-gap">
+      <code>5584:32056</code>
+      <span class="ios26-node-coverage-item-name">Liquid Glass - Regular - Large</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28451" data-node-name="Large UI Dark Mode" data-node-reasons="metadata-root-gap">
+      <code>5583:28451</code>
+      <span class="ios26-node-coverage-item-name">Large UI Dark Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32157" data-node-name="_Colors/Dark" data-node-reasons="metadata-root-gap">
+      <code>5584:32157</code>
+      <span class="ios26-node-coverage-item-name">_Colors/Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28427" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28427</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32208" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32208</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32008" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32008</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32165" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32165</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32172" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32172</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32179" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32179</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32186" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32186</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32209" data-node-name="BG - Small UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32209</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28424" data-node-name="Small UI Dynamic (Over light background)" data-node-reasons="metadata-root-gap">
+      <code>5583:28424</code>
+      <span class="ios26-node-coverage-item-name">Small UI Dynamic (Over light background)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:31982" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:31982</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32216" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32216</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32000" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32000</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32217" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32217</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32224" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32224</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32231" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32231</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32238" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32238</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32245" data-node-name="BG - Small UI - Tinted" data-node-reasons="metadata-root-gap">
+      <code>5584:32245</code>
+      <span class="ios26-node-coverage-item-name">BG - Small UI - Tinted</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:31989" data-node-name="Small UI Dynamic (Over light background)" data-node-reasons="metadata-root-gap">
+      <code>5584:31989</code>
+      <span class="ios26-node-coverage-item-name">Small UI Dynamic (Over light background)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28430" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28430</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32252" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32252</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32032" data-node-name="BG - Medium UI" data-node-reasons="metadata-root-gap">
+      <code>5584:32032</code>
+      <span class="ios26-node-coverage-item-name">BG - Medium UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28432" data-node-name="Medium UI Light Mode" data-node-reasons="metadata-root-gap">
+      <code>5583:28432</code>
+      <span class="ios26-node-coverage-item-name">Medium UI Light Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28433" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5583:28433</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:32253" data-node-name="Frame" data-node-reasons="metadata-root-gap">
+      <code>5584:32253</code>
+      <span class="ios26-node-coverage-item-name">Frame</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5713:51267" data-node-name="BG - Large UI" data-node-reasons="metadata-root-gap">
+      <code>5713:51267</code>
+      <span class="ios26-node-coverage-item-name">BG - Large UI</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5583:28435" data-node-name="Large UI Light Mode" data-node-reasons="metadata-root-gap">
+      <code>5583:28435</code>
+      <span class="ios26-node-coverage-item-name">Large UI Light Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:193109" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:193109</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+
+    </main>
+  </body>
+</html>

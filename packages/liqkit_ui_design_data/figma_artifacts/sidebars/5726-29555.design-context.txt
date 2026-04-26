@@ -1,0 +1,880 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/44995ec7-a2e5-428d-b36b-6f6dc34e64cf";
+const imgClose = "https://www.figma.com/api/mcp/asset/52cf6c8c-01e6-4176-8494-12865a4e93a1";
+const imgMinimize = "https://www.figma.com/api/mcp/asset/2cb1e223-d16d-42cb-9a31-01953ed35a58";
+const imgExpand = "https://www.figma.com/api/mcp/asset/20fb07a6-8280-4b07-83ec-2a547ae11b44";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/f023dc80-4cb0-48f5-88c8-996110ff4e28";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/900ff944-2696-48ed-9277-d78b6724ef02";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/5f193507-7339-4675-8003-14738a77e3b0";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type WindowControlsProps = {
+  className?: string;
+  state?: boolean;
+};
+
+function WindowControls({ className, state = true }: WindowControlsProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative"} data-node-id="5565:22714">
+      <div className="absolute left-0 size-[48px] top-0" data-name="Liquid Glass - Regular - Small" data-node-id="5731:57886">
+        <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5731:57886;5575:44983">
+          <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5731:57886;5575:75442">
+            <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5731:57886;5575:75442;5575:32354" />
+          </div>
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5731:57886;6491:20171" />
+        </div>
+        <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5731:57886;6491:20172">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+            <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+            <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5731:57886;6491:20173" />
+      </div>
+      <div className="relative shrink-0 size-[6px]" data-name="Close" data-node-id="5565:22717">
+        <img alt="" className="absolute block inset-0 max-w-none" src={imgClose} />
+      </div>
+      <div className="relative shrink-0 size-[6px]" data-name="Minimize" data-node-id="5565:22718">
+        <img alt="" className="absolute block inset-0 max-w-none" src={imgMinimize} />
+      </div>
+      <div className="relative shrink-0 size-[6px]" data-name="Expand" data-node-id="5565:22719">
+        <img alt="" className="absolute block inset-0 max-w-none" src={imgExpand} />
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ className }: { className?: string }) {
+  return (
+    <div className={className || "content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative w-[260px]"} data-name="Section Header" data-node-id="131:66427">
+      <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="_Section Header" data-node-id="5840:30065">
+        <p className="flex-[1_0_0] font-['SF_Pro:Regular',sans-serif] h-[22px] leading-[22px] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px] whitespace-pre-wrap" data-node-id="I5840:30065;5840:30046">
+          Section Heading
+        </p>
+        <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Trailing" data-node-id="I5840:30065;5840:30047">
+          <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px]" data-node-id="I5840:30065;5840:30048">
+            Detail
+          </p>
+          <div className="relative shrink-0 size-[18px]" data-name="_Trailing - Disclosure" data-node-id="I5840:30065;5840:30049">
+            <div className="absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5840:30065;5840:30049;5643:20201" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+              <p className="leading-[22px] whitespace-pre-wrap">􀆈</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SidebarSearchField({ className }: { className?: string }) {
+  return (
+    <div className={className || "content-stretch flex items-center relative rounded-[100px] w-[200px]"} data-name="Sidebar Search Field" data-node-id="5840:30516">
+      <div className="bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex flex-[1_0_0] font-['SF_Pro:Regular',sans-serif] items-center leading-[22px] min-h-px min-w-px not-italic p-[11px] relative rounded-[100px] text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.08px]" data-name="_Search Field" data-node-id="5840:34781">
+        <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Frame" data-node-id="I5840:34781;5840:30502">
+          <p className="relative shrink-0" data-node-id="I5840:34781;5840:30503">
+            􀊫
+          </p>
+          <p className="relative shrink-0" data-node-id="I5840:34781;5840:30504">
+            Search
+          </p>
+        </div>
+        <p className="relative shrink-0" data-node-id="I5840:34781;5840:30505">
+          􀊱
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Sidebar({ className }: { className?: string }) {
+  return (
+    <div className={className || "content-stretch flex flex-col h-[802px] items-start pb-[10px] pt-[11px] px-[16px] relative w-[320px]"} data-name="Sidebar" data-node-id="131:70868">
+      <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5643:18284;5584:31842">
+        <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5643:18284;5584:31843">
+          <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5643:18284;5584:31843;5584:31864" />
+        </div>
+        <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5643:18284;5607:81648" />
+      </div>
+      <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5643:18284;5607:25683">
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+          <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+          <div className="absolute bg-[rgba(250,250,250,0.7)] inset-0 rounded-[34px]" />
+        </div>
+      </div>
+      <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5643:18284;5607:25691" />
+      <div className="content-stretch flex gap-[2px] items-start justify-center pb-[20px] relative shrink-0 w-full" data-name="Sidebar Toolbar" data-node-id="5840:28688">
+        <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px pt-px relative" data-name="Leading" data-node-id="I5840:28688;5643:14710">
+          <div className="content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative shrink-0" data-name="_Window Controls" data-node-id="I5840:28688;5643:13745">
+            <div className="absolute left-0 size-[48px] top-0" data-name="Liquid Glass - Regular - Small" data-node-id="I5840:28688;5643:13745;5731:57886">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5840:28688;5643:13745;5731:57886;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5840:28688;5643:13745;5731:57886;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5840:28688;5643:13745;5731:57886;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5840:28688;5643:13745;5731:57886;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5840:28688;5643:13745;5731:57886;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5840:28688;5643:13745;5731:57886;6491:20173" />
+            </div>
+            <div className="relative shrink-0 size-[6px]" data-name="Close" data-node-id="I5840:28688;5643:13745;5565:22717">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgClose} />
+            </div>
+            <div className="relative shrink-0 size-[6px]" data-name="Minimize" data-node-id="I5840:28688;5643:13745;5565:22718">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgMinimize} />
+            </div>
+            <div className="relative shrink-0 size-[6px]" data-name="Expand" data-node-id="I5840:28688;5643:13745;5565:22719">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgExpand} />
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Text" data-node-id="I5840:28688;5840:28042">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)]" data-node-id="I5840:28688;5840:28042;5840:27880">
+              Edit
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[24px] h-[22px] items-center relative shrink-0" data-name="Trailing" data-node-id="I5840:28688;5643:14762">
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5840:28688;5840:27909">
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5840:28688;5840:27909;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀀀</p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5840:28688;5840:27978">
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5840:28688;5840:27978;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀟈</p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5840:28688;5840:28004">
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5840:28688;5840:28004;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀏚</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <SidebarSearchField className="content-stretch flex items-center relative rounded-[100px] shrink-0 w-full" />
+      <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="131:69884">
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:69885">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69885;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69885;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69885;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69885;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69885;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69885;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69885;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:70821">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:70821;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:70821;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:70821;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:70821;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:70821;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:70821;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:70821;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:70832">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:70832;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:70832;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:70832;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:70832;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:70832;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:70832;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:70832;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-[320px]" data-name="Sidebar Row" data-node-id="131:69886">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69886;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69886;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69886;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69886;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69886;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69886;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69886;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="131:69889">
+        <SectionHeader className="content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full" />
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:69891">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69891;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69891;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69891;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69891;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69891;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69891;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69891;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative rounded-[100px] shrink-0 w-full" data-name="Sidebar Row" data-node-id="5657:12516">
+          <div className="-translate-y-1/2 absolute h-[44px] left-0 right-0 top-1/2" data-name="_Selection BG" data-node-id="I5657:12516;5840:25958">
+            <div className="absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 mix-blend-plus-lighter rounded-[100px]" data-name="BG" data-node-id="I5657:12516;5840:25958;5840:25253" />
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5657:12516;5657:12957">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5657:12516;5657:12957;5660:45440">
+              <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] text-center w-[34px]" data-node-id="I5657:12516;5657:12957;5659:15000" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5657:12516;5657:12957;5660:38742">
+                <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]" data-node-id="I5657:12516;5657:12957;5660:38743">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I5657:12516;147:62175">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I5657:12516;147:62175;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:69893">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69893;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69893;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69893;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69893;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69893;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69893;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69893;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="2608:30594">
+        <SectionHeader className="content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full" />
+      </div>
+      <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="131:69899">
+        <SectionHeader className="content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full" />
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:69901">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69901;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69901;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69901;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69901;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69901;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69901;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69901;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:69902">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:69902;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:69902;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:69902;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:69902;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:69902;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:69902;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:69902;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="131:70224">
+          <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I131:70224;5643:24724">
+            <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I131:70224;5643:24724;5660:44879">
+              <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I131:70224;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+              </div>
+              <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I131:70224;5643:24724;5660:38827">
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I131:70224;5643:24724;5660:38828">
+                  Title
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I131:70224;147:61937">
+            <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I131:70224;147:61937;5643:28162">
+              Detail
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type Sidebar1Props = {
+  className?: string;
+  type?: "List" | "List (Multi-level)";
+};
+
+export default function Sidebar1({ className, type = "List" }: Sidebar1Props) {
+  const isList = type === "List";
+  const isListMultiLevel = type === "List (Multi-level)";
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] h-[834px] relative w-[1210px]"} id={isListMultiLevel ? "node-5726_29556" : "node-754_64697"}>
+      <div className="absolute content-stretch flex flex-col gap-[10px] items-start left-[330px] pb-[10px] px-[10px] top-[32px] w-[820px]" data-name="Toolbar - Top - iPad" id={isListMultiLevel ? "node-5726_29557" : "node-5713_52531"}>
+        <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Controls" id={isListMultiLevel ? "node-I5726_29557-5572_23774" : "node-I5713_52531-5572_23774"}>
+          <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px relative" data-name="Leading" id={isListMultiLevel ? "node-I5726_29557-5572_23775" : "node-I5713_52531-5572_23775"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isListMultiLevel ? "node-I5726_29557-5572_23777" : "node-I5713_52531-5572_23777"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565" : "node-I5713_52531-5572_23777-6491_22565"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-5575_44983" : "node-I5713_52531-5572_23777-6491_22565-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-5575_75442" : "node-I5713_52531-5572_23777-6491_22565-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-5575_75442-5575_32354" : "node-I5713_52531-5572_23777-6491_22565-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-6491_20171" : "node-I5713_52531-5572_23777-6491_22565-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-6491_20172" : "node-I5713_52531-5572_23777-6491_22565-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22565-6491_20173" : "node-I5713_52531-5572_23777-6491_22565-6491_20173"} />
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22970" : "node-I5713_52531-5572_23777-6491_22970"}>
+                <div className="flex flex-col justify-center relative shrink-0" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22970-5431_837" : "node-I5713_52531-5572_23777-6491_22970-5431_837"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">􀯶</p>
+                </div>
+                <div className="flex flex-col justify-center relative shrink-0" id={isListMultiLevel ? "node-I5726_29557-5572_23777-6491_22970-5431_840" : "node-I5713_52531-5572_23777-6491_22970-5431_840"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">Label</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center justify-end min-h-px min-w-px relative" data-name="Trailing" id={isListMultiLevel ? "node-I5726_29557-5572_23780" : "node-I5713_52531-5572_23780"}>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isListMultiLevel ? "node-I5726_29557-5572_23781" : "node-I5713_52531-5572_23781"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888" : "node-I5713_52531-5572_23781-5566_7888"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-5575_44983" : "node-I5713_52531-5572_23781-5566_7888-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-5575_75442" : "node-I5713_52531-5572_23781-5566_7888-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-5575_75442-5575_32354" : "node-I5713_52531-5572_23781-5566_7888-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-6491_20171" : "node-I5713_52531-5572_23781-5566_7888-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-6491_20172" : "node-I5713_52531-5572_23781-5566_7888-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5566_7888-6491_20173" : "node-I5713_52531-5572_23781-5566_7888-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5432_23135" : "node-I5713_52531-5572_23781-5432_23135"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isListMultiLevel ? "node-I5726_29557-5572_23781-5432_23135-5426_2011" : "node-I5713_52531-5572_23781-5432_23135-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" id={isListMultiLevel ? "node-I5726_29557-5572_23782" : "node-I5713_52531-5572_23782"}>
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888" : "node-I5713_52531-5572_23782-5566_7888"}>
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-5575_44983" : "node-I5713_52531-5572_23782-5566_7888-5575_44983"}>
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-5575_75442" : "node-I5713_52531-5572_23782-5566_7888-5575_75442"}>
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-5575_75442-5575_32354" : "node-I5713_52531-5572_23782-5566_7888-5575_75442-5575_32354"} />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-6491_20171" : "node-I5713_52531-5572_23782-5566_7888-6491_20171"} />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-6491_20172" : "node-I5713_52531-5572_23782-5566_7888-6491_20172"}>
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5566_7888-6491_20173" : "node-I5713_52531-5572_23782-5566_7888-6491_20173"} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5432_23135" : "node-I5713_52531-5572_23782-5432_23135"}>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" id={isListMultiLevel ? "node-I5726_29557-5572_23782-5432_23135-5426_2011" : "node-I5713_52531-5572_23782-5432_23135-5426_2011"} style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[2px] items-start min-h-[48px] pt-[4px] px-[10px] relative shrink-0 w-full" data-name="Title and Subtitle" id={isListMultiLevel ? "node-I5726_29557-5572_23876" : "node-I5713_52531-5572_23876"}>
+          <div className="h-[41px] relative shrink-0 w-full" data-name="_Title - Large Title" id={isListMultiLevel ? "node-I5726_29557-5827_67089" : "node-I5713_52531-5827_67089"}>
+            <p className="absolute font-['SF_Pro:Bold',sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]" id={isListMultiLevel ? "node-I5726_29557-5827_67089-5827_57542" : "node-I5713_52531-5827_67089-5827_57542"}>
+              Title
+            </p>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Subtitle - Subheadline" id={isListMultiLevel ? "node-I5726_29557-5827_67090" : "node-I5713_52531-5827_67090"}>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.25px]" id={isListMultiLevel ? "node-I5726_29557-5827_67090-5827_57543" : "node-I5713_52531-5827_67090-5827_57543"}>
+              Subtitle
+            </p>
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute content-stretch flex items-start left-[calc(50%+5.5px)] p-[4px] top-0 w-[659px]" data-name="Tab Bar - iPad" id={isListMultiLevel ? "node-I5726_29557-5572_23786" : "node-I5713_52531-5572_23786"}>
+          <div className="absolute inset-[-26px] opacity-67" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-5575_44983" : "node-I5713_52531-5572_23786-5569_7539-5575_44983"}>
+            <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-5575_75442" : "node-I5713_52531-5572_23786-5569_7539-5575_75442"}>
+              <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-5575_75442-5575_32354" : "node-I5713_52531-5572_23786-5569_7539-5575_75442-5575_32354"} />
+            </div>
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-6491_20171" : "node-I5713_52531-5572_23786-5569_7539-6491_20171"} />
+          </div>
+          <div className="absolute inset-0 rounded-[296px]" data-name="Fill" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-6491_20172" : "node-I5713_52531-5572_23786-5569_7539-6491_20172"}>
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+              <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+              <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7539-6491_20173" : "node-I5713_52531-5572_23786-5569_7539-6491_20173"} />
+          <div className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0" data-name="_Tab Bar Button - iPad - Symbol" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9888" : "node-I5713_52531-5572_23786-5569_9888"}>
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9888-5569_8179" : "node-I5713_52531-5572_23786-5569_9888-5569_8179"}>
+              <p className="leading-[20px]">􀰱</p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] h-[36px] items-center justify-center min-h-px min-w-px relative" data-name="Stretch" id={isListMultiLevel ? "node-I5726_29557-5572_23786-2524_7960" : "node-I5713_52531-5572_23786-2524_7960"}>
+            <div className="content-stretch flex gap-[10px] items-center justify-center px-[18px] py-[8px] relative rounded-[100px] shrink-0" data-name="_Tab Bar Button - iPad - Text" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7324" : "node-I5713_52531-5572_23786-5569_7324"}>
+              <div className="absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 rounded-[100px]" data-name="Selection" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7324-5735_65310" : "node-I5713_52531-5572_23786-5569_7324-5735_65310"} />
+              <div className="flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/tab-bar-selection,#08f)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7324-5569_7313" : "node-I5713_52531-5572_23786-5569_7324-5569_7313"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7446" : "node-I5713_52531-5572_23786-5569_7446"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_7446-5569_7315" : "node-I5713_52531-5572_23786-5569_7446-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9335" : "node-I5713_52531-5572_23786-5569_9335"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9335-5569_7315" : "node-I5713_52531-5572_23786-5569_9335-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative" data-name="_Tab Bar Button - iPad - Text" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9372" : "node-I5713_52531-5572_23786-5569_9372"}>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9372-5569_7315" : "node-I5713_52531-5572_23786-5569_9372-5569_7315"}>
+                <p className="leading-[20px] overflow-hidden">Label</p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0" data-name="_Tab Bar Button - iPad - Symbol" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9985" : "node-I5713_52531-5572_23786-5569_9985"}>
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap" id={isListMultiLevel ? "node-I5726_29557-5572_23786-5569_9985-5569_8179" : "node-I5713_52531-5572_23786-5569_9985-5569_8179"}>
+              <p className="leading-[20px]">􀊫</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {isList && (
+        <>
+          <Sidebar className="absolute bottom-[5px] content-stretch flex flex-col items-start left-[10px] pb-[10px] pt-[11px] px-[16px] top-[27px] w-[320px]" />
+          <div className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-[2px] top-0" data-name="Status bar and Menu bar- iPad" data-node-id="5713:52532">
+            <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="I5713:52532;523:41361">
+              <p className="relative shrink-0" data-node-id="I5713:52532;523:41362">
+                9:41
+              </p>
+              <p className="relative shrink-0" data-node-id="I5713:52532;523:41363">
+                Tue Apr 1
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="I5713:52532;523:41364">
+              <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="I5713:52532;523:41365">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+              </div>
+              <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="I5713:52532;523:41366">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+              </div>
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="I5713:52532;523:41367">
+                100%
+              </p>
+              <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="I5713:52532;523:41368">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+              </div>
+            </div>
+          </div>
+          <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+        </>
+      )}
+      {isListMultiLevel && (
+        <>
+          <div className="absolute bottom-[5px] content-stretch flex flex-col items-start left-[10px] pb-[10px] pt-[11px] px-[16px] top-[27px] w-[320px]" data-name="Sidebar" data-node-id="5726:29995">
+            <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5726:29996;5584:31842">
+              <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5726:29996;5584:31843">
+                <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5726:29996;5584:31843;5584:31864" />
+              </div>
+              <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5726:29996;5607:81648" />
+            </div>
+            <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5726:29996;5607:25683">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                <div className="absolute bg-[rgba(250,250,250,0.7)] inset-0 rounded-[34px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5726:29996;5607:25691" />
+            <div className="content-stretch flex gap-[2px] items-start justify-center pb-[20px] relative shrink-0 w-full" data-name="Sidebar Toolbar" data-node-id="5726:29997">
+              <div className="content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px pt-px relative" data-name="Leading" data-node-id="I5726:29997;5643:14710">
+                <WindowControls className="content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative shrink-0" />
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Text" data-node-id="I5726:29997;5840:28042">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)]" data-node-id="I5726:29997;5840:28042;5840:27880">
+                    Edit
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[24px] h-[22px] items-center relative shrink-0" data-name="Trailing" data-node-id="I5726:29997;5643:14762">
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5726:29997;5840:27909">
+                  <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5726:29997;5840:27909;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀀀</p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5726:29997;5840:27978">
+                  <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5726:29997;5840:27978;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀟈</p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Toolbar Button - Symbol" data-node-id="I5726:29997;5840:28004">
+                  <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]" data-node-id="I5726:29997;5840:28004;5840:27845" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                    <p className="leading-[normal] whitespace-pre-wrap">􀏚</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex font-['SF_Pro:Regular',sans-serif] items-center leading-[22px] not-italic p-[11px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.08px] w-full" data-name="Sidebar Search Field" data-node-id="5726:29998">
+              <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Frame" data-node-id="I5726:29998;5657:8188">
+                <p className="relative shrink-0" data-node-id="I5726:29998;5657:8185">
+                  􀊫
+                </p>
+                <p className="relative shrink-0" data-node-id="I5726:29998;5657:8186">
+                  Search
+                </p>
+              </div>
+              <p className="relative shrink-0" data-node-id="I5726:29998;5657:8187">
+                􀊱
+              </p>
+            </div>
+            <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="5726:30004">
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30006">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30006;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30006;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30006;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30006;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30006;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30007">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30007;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30007;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30007;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30007;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30007;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30008">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30008;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30008;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30008;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30008;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30008;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30181">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30181;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30181;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30181;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30181;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30181;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full" data-name="Section" data-node-id="5726:30011">
+              <div className="content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full" data-name="Section Header" data-node-id="5726:30012">
+                <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="_Section Header" data-node-id="I5726:30012;5840:30065">
+                  <p className="flex-[1_0_0] font-['SF_Pro:Regular',sans-serif] h-[22px] leading-[22px] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px] whitespace-pre-wrap" data-node-id="I5726:30012;5840:30065;5840:30046">
+                    Section Heading
+                  </p>
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Trailing" data-node-id="I5726:30012;5840:30065;5840:30047">
+                    <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px]" data-node-id="I5726:30012;5840:30065;5840:30048">
+                      Detail
+                    </p>
+                    <div className="relative shrink-0 size-[18px]" data-name="_Trailing - Disclosure" data-node-id="I5726:30012;5840:30065;5840:30049">
+                      <div className="absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5726:30012;5840:30065;5840:30049;5643:20201" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                        <p className="leading-[22px] whitespace-pre-wrap">􀆈</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30013">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30013;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30013;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30013;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30013;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30013;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30014">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30014;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30014;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30014;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30014;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30014;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30015">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30015;5643:24724">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30015;5643:24724;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30015;5643:24724;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30015;5643:24724;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30015;5643:24724;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative rounded-[100px] shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30248">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30248;5660:50849">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30248;5660:50849;5660:45440">
+                    <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] text-center w-[34px]" data-node-id="I5726:30248;5660:50849;5659:15000" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30248;5660:50849;5660:38742">
+                      <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]" data-node-id="I5726:30248;5660:50849;5660:38743">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex gap-[4px] h-[44px] items-center justify-end pr-[4px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I5726:30248;5726:31153">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I5726:30248;5726:31153;5643:28170">
+                    Detail
+                  </p>
+                  <div className="relative shrink-0 size-[18px]" data-name="_Trailing - Disclosure" data-node-id="I5726:30248;5726:31153;5726:30820">
+                    <div className="absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center" data-node-id="I5726:30248;5726:31153;5726:30820;5643:20201" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀆈</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30191">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30191;5657:12959">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30191;5657:12959;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30191;5657:12959;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30191;5657:12959;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30191;5657:12959;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I5726:30191;147:62157">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I5726:30191;147:62157;5643:28162">
+                    Detail
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30201">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30201;5657:12959">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30201;5657:12959;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30201;5657:12959;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30201;5657:12959;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30201;5657:12959;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I5726:30201;147:62157">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I5726:30201;147:62157;5643:28162">
+                    Detail
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full" data-name="Sidebar Row" data-node-id="5726:30211">
+                <div className="content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative" data-name="_Sidebar - Leading" data-node-id="I5726:30211;5657:12959">
+                  <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]" data-name="Frame" data-node-id="I5726:30211;5657:12959;5660:44879">
+                    <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]" data-node-id="I5726:30211;5657:12959;147:62632" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0" data-name="Title and Subtitle" data-node-id="I5726:30211;5657:12959;5660:38827">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="I5726:30211;5657:12959;5660:38828">
+                        Title
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0" data-name="_Sidebar - Trailing" data-node-id="I5726:30211;147:62157">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]" data-node-id="I5726:30211;147:62157;5643:28162">
+                    Detail
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-[2px] top-0" data-name="Status bar and Menu bar- iPad" data-node-id="5726:29560">
+            <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="I5726:29560;523:41361">
+              <p className="relative shrink-0" data-node-id="I5726:29560;523:41362">
+                9:41
+              </p>
+              <p className="relative shrink-0" data-node-id="I5726:29560;523:41363">
+                Tue Apr 1
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="I5726:29560;523:41364">
+              <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="I5726:29560;523:41365">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+              </div>
+              <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="I5726:29560;523:41366">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+              </div>
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="I5726:29560;523:41367">
+                100%
+              </p>
+              <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="I5726:29560;523:41368">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+              </div>
+            </div>
+          </div>
+          <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+        </>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Large Title/Emphasized: Font(family: "SF Pro", style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645), Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Body/Emphasized: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Sidebar Row
+**Node ID:** 131:70029
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

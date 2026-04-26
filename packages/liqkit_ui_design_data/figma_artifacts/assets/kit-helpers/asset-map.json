@@ -1,0 +1,54 @@
+{
+  "category": "kit-helpers",
+  "generatedAt": "2026-02-19T19:44:19.255Z",
+  "sourceFiles": [
+    "figma-artifacts/kit-helpers/507-29149.design-context.txt",
+    "figma-artifacts/kit-helpers/540-189865.design-context.txt"
+  ],
+  "totalAssets": 2,
+  "downloaded": 0,
+  "existing": 2,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "ae66e4d6-2d49-41c4-99db-f3168cc07014",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "ae66e4d6-2d49-41c4-99db-f3168cc07014.svg",
+      "filePath": "figma-artifacts/assets/kit-helpers/ae66e4d6-2d49-41c4-99db-f3168cc07014.svg",
+      "size": 605,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/ae66e4d6-2d49-41c4-99db-f3168cc07014",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/ae66e4d6-2d49-41c4-99db-f3168cc07014"
+      ],
+      "constNames": [
+        "imgUnion"
+      ],
+      "sources": [
+        "figma-artifacts/kit-helpers/540-189865.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "bb87f293-0070-4db2-b949-dbd2498d86b4",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "bb87f293-0070-4db2-b949-dbd2498d86b4.svg",
+      "filePath": "figma-artifacts/assets/kit-helpers/bb87f293-0070-4db2-b949-dbd2498d86b4.svg",
+      "size": 605,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/bb87f293-0070-4db2-b949-dbd2498d86b4",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/bb87f293-0070-4db2-b949-dbd2498d86b4"
+      ],
+      "constNames": [
+        "imgUnion1"
+      ],
+      "sources": [
+        "figma-artifacts/kit-helpers/540-189865.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

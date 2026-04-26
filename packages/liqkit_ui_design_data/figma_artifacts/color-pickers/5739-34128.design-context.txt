@@ -1,0 +1,44 @@
+const imgGradient1 = "https://www.figma.com/api/mcp/asset/8c26ad4e-31d2-4b65-8a92-a96d80f9f734";
+const imgGradient3 = "https://www.figma.com/api/mcp/asset/b338b1b5-1bc7-4e5a-b4c1-a8072f08f0b9";
+const imgSwatch = "https://www.figma.com/api/mcp/asset/c618c9ad-06c0-4496-9473-4a128d96322d";
+const imgGradient = "https://www.figma.com/api/mcp/asset/147cf206-57a5-4a2d-9970-c1cd0b105d7b";
+const imgSwatch1 = "https://www.figma.com/api/mcp/asset/9378612e-9a73-4c11-8b18-f30618351766";
+const imgGradient2 = "https://www.figma.com/api/mcp/asset/91978deb-45a7-49c3-a229-5d7dd5c7e57d";
+type PickerButtonProps = {
+  className?: string;
+  selected?: boolean;
+  size?: "Small" | "Large";
+};
+
+export default function PickerButton({ className, selected = false, size = "Small" }: PickerButtonProps) {
+  const isLargeAndNotSelected = size === "Large" && !selected;
+  const isSmallAndIsTrueOrFalse = size === "Small" && [true, false].includes(selected);
+  const isSmallAndNotSelected = size === "Small" && !selected;
+  const isSmallAndSelected = size === "Small" && selected;
+  return (
+    <div className={className || `relative ${isSmallAndIsTrueOrFalse ? "size-[28px]" : "size-[36px]"}`} id={isSmallAndNotSelected ? "node-128_75285" : isSmallAndSelected ? "node-128_75287" : isLargeAndNotSelected ? "node-128_75178" : "node-128_75180"}>
+      {selected && ["Large", "Small"].includes(size) && (
+        <div className={`-translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-1/2 ${isSmallAndSelected ? "size-[18px]" : "size-[26px]"}`} data-name="Swatch" id={isSmallAndSelected ? "node-128_75288" : "node-128_75181"}>
+          <img alt="" className="absolute block max-w-none size-full" src={isSmallAndSelected ? imgSwatch1 : imgSwatch} />
+        </div>
+      )}
+      <div className={`-translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-1/2 ${isSmallAndIsTrueOrFalse ? "size-[28px]" : "size-[36px]"}`} data-name="Gradient" id={isSmallAndNotSelected ? "node-528_96087" : isSmallAndSelected ? "node-528_96092" : isLargeAndNotSelected ? "node-528_96086" : "node-528_96093"}>
+        <img alt="" className="absolute block max-w-none size-full" height={isSmallAndNotSelected ? "28" : isLargeAndNotSelected ? "36" : undefined} src={isSmallAndNotSelected ? imgGradient3 : isSmallAndSelected ? imgGradient2 : isLargeAndNotSelected ? imgGradient1 : imgGradient} width={isSmallAndNotSelected ? "28" : isLargeAndNotSelected ? "36" : undefined} />
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

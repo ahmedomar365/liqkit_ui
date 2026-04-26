@@ -1,0 +1,39 @@
+<canvas id="507:24670" name="Activity Views" x="0" y="0" width="0" height="0">
+  <frame id="127:58423" name="_Contact" x="0" y="2990" width="240" height="150">
+    <symbol id="127:58424" name="People=2" x="130" y="20" width="78" height="104" />
+    <symbol id="127:58381" name="People=1" x="20" y="20" width="78" height="104" />
+  </frame>
+  <frame id="127:59083" name="_Header" x="0" y="2490" width="870" height="200">
+    <symbol id="5591:68353" name="Mode=Dark" x="440" y="20" width="402" height="161" />
+    <symbol id="5591:68049" name="Mode=Light" x="20" y="20" width="402" height="161" />
+  </frame>
+  <section id="544:198964" x="0" y="-1.1368683772161603e-13" width="1909" height="1200">
+    <frame id="5908:1783" name="Activity View - iPad" x="980" y="80" width="870" height="1050">
+      <symbol id="5908:1784" name="Mode=Dark" x="450" y="20" width="402" height="992" />
+      <symbol id="128:60578" name="Mode=Light" x="20" y="20" width="402" height="992" />
+    </frame>
+    <frame id="5908:2105" name="Activity View - iPhone" x="80" y="80" width="870" height="1050">
+      <symbol id="5908:2106" name="Mode=Dark" x="450" y="20" width="402" height="992" />
+      <symbol id="128:58645" name="Mode=Light" x="20" y="20" width="402" height="992" />
+    </frame>
+  </section>
+  <frame id="5591:28787" name="_Close Button" x="270" y="2790" width="180" height="90">
+    <symbol id="5591:28889" name="Mode=Light" x="20" y="20" width="44" height="44" />
+    <symbol id="5591:28942" name="Mode=Dark" x="110" y="20" width="44" height="44" />
+  </frame>
+  <frame id="5591:32475" name="_Action" x="0" y="2790" width="220" height="140">
+    <symbol id="5591:32476" name="Mode=Dark" x="120" y="20" width="78" height="107" />
+    <symbol id="5591:32474" name="Mode=Light" x="20" y="20" width="78" height="107" />
+  </frame>
+  <frame id="5591:67812" name="_Button - Liquid Glass" x="480" y="2790" width="300" height="90">
+    <symbol id="5591:67816" name="Mode=Dark" x="160" y="30" width="108" height="34" />
+    <symbol id="5591:67822" name="Mode=Light" x="30" y="30" width="108" height="34" />
+  </frame>
+  <frame id="5591:68347" name="_Actions" x="0" y="3190" width="470" height="90">
+    <symbol id="5591:68348" name="Mode=Dark" x="250" y="20" width="200" height="52" />
+    <symbol id="126:58332" name="Mode=Light" x="20" y="20" width="200" height="52" />
+  </frame>
+  <symbol id="3176:15162" name="_Activity View" x="0" y="1340" width="402" height="992" />
+  <instance id="540:190166" name="Header" x="0" y="-500" width="1400" height="208" />
+  <symbol id="5846:3358" name="Overlay" x="470" y="1340" width="100" height="100" />
+</canvas>

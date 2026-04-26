@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sheets - Native Source Preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: #f7f8fa;
+        color: #111;
+        font-family: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .ios26-source-preview {
+        min-height: calc(100vh - 32px);
+        display: grid;
+        place-items: start center;
+      }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+
+.ios26-sheets-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-sheets-demo {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+}
+
+.ios26-sheets-variant {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-sheets-variant h3 {
+  margin: 0;
+  font: 590 14px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-sheet-device {
+  width: 402px;
+  height: 874px;
+  position: relative;
+  border-radius: 48px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.ios26-sheet-screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.ios26-sheet-screen.is-stack {
+  background: #000000;
+}
+
+.ios26-sheet-fullscreen {
+  position: absolute;
+  inset: 62px 0 0 0;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+  box-shadow: 0 15px 75px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.ios26-sheet-fullscreen.is-stack {
+  background: transparent;
+  box-shadow: none;
+}
+
+.ios26-sheet-background-page {
+  position: absolute;
+  inset: 0 16px;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+}
+
+.ios26-sheet-background-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ios26-sheet-stack-top {
+  position: absolute;
+  inset: 10px 0 0 0;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  background: #ffffff;
+  box-shadow: 0 15px 75px rgba(0, 0, 0, 0.18);
+}
+
+.ios26-sheet-toolbar {
+  width: 100%;
+  display: grid;
+  padding-bottom: 10px;
+}
+
+.ios26-sheet-grabber-wrap {
+  height: 16px;
+  display: grid;
+  place-items: start center;
+  padding-top: 5px;
+}
+
+.ios26-sheet-grabber {
+  width: 36px;
+  height: 5px;
+  border-radius: 100px;
+  background: #cccccc;
+}
+
+.ios26-sheet-controls {
+  height: 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.ios26-sheet-top-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0;
+  cursor: default;
+  color: #727272;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.9), rgba(230, 230, 230, 0.85));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sheet-top-btn .ios26-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.ios26-sheet-top-btn.is-primary {
+  color: #ffffff;
+  background: linear-gradient(180deg, #32a2ff, #0079ff);
+  box-shadow: 0 1px 8px rgba(0, 122, 255, 0.38);
+}
+
+.ios26-sheet-title {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-sheet-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.ios26-sheet-inspector {
+  position: absolute;
+  inset: 500px 0 0 0;
+  padding: 0 6px 6px;
+}
+
+.ios26-sheet-glass {
+  position: absolute;
+  inset: 0 6px 6px;
+  border-radius: 34px;
+  background: rgba(245, 245, 245, 0.6);
+  box-shadow:
+    0 15px 75px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.ios26-sheet-status {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 62px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 21px 24px 19px;
+  z-index: 3;
+  color: #000;
+}
+
+.ios26-sheet-time {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000000;
+}
+
+@media (max-width: 520px) {
+  .ios26-sheet-device {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="ios26-source-preview">
+      <section class="ios26-sheets-root" data-node-id="507:24684" aria-label="Sheets category">
+<svg class="ios26-sheets-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-sheets-symbol-1" viewBox="0 0 20 20">
+      <path d="M6 6L14 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" /><path d="M14 6L6 14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-sheets-symbol-2" viewBox="0 0 20 20">
+      <path d="M5 10.2L8.7 13.6L15 7.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-sheets-demo" data-node-id="770:21495" aria-label="Sheets (Modals)">
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64541">
+      <div class="ios26-sheet-screen" data-node-id="5729:24437">
+        <div class="ios26-sheet-fullscreen" data-node-id="5729:24127">
+          <div class="ios26-sheet-toolbar" data-node-id="I5729:24127;5726:34303">
+            <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24127;5726:34303;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+            <div class="ios26-sheet-controls" data-node-id="I5729:24127;5726:34303;5726:33529">
+              <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24127;5726:34303;5726:33530">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+              </button>
+              <div class="ios26-sheet-title" data-node-id="I5729:24127;5726:34303;5827:65227">Title</div>
+              <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24127;5726:34303;5726:33532">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5465:16807">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64543">
+      <div class="ios26-sheet-screen is-stack" data-node-id="5729:24438">
+        <div class="ios26-sheet-fullscreen is-stack" data-node-id="5729:24154">
+          <div class="ios26-sheet-background-page" data-node-id="I5729:24154;5591:74165"></div>
+          <div class="ios26-sheet-stack-top" data-node-id="I5729:24154;5591:74166">
+            <div class="ios26-sheet-toolbar" data-node-id="I5729:24154;5726:35206">
+              <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24154;5726:35206;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+              <div class="ios26-sheet-controls" data-node-id="I5729:24154;5726:35206;5726:33529">
+                <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24154;5726:35206;5726:33530">
+                  <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+                </button>
+                <div class="ios26-sheet-title" data-node-id="I5729:24154;5726:35206;5827:65227">Title</div>
+                <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24154;5726:35206;5726:33532">
+                  <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5729:24116">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="ios26-sheets-variant">
+    <div class="ios26-sheet-device" data-node-id="754:64555">
+      <div class="ios26-sheet-screen" data-node-id="5729:24585">
+        <div class="ios26-sheet-scroll-edge" data-node-id="5729:24713"></div>
+        <div class="ios26-sheet-inspector" data-node-id="5729:24586">
+          <div class="ios26-sheet-glass" data-node-id="I5729:24586;5551:41149"></div>
+          <div class="ios26-sheet-toolbar" data-node-id="I5729:24586;5729:24624">
+            <div class="ios26-sheet-grabber-wrap" data-node-id="I5729:24586;5729:24624;5726:33527"><div class="ios26-sheet-grabber" data-node-id="5827:57545"></div></div>
+            <div class="ios26-sheet-controls" data-node-id="I5729:24586;5729:24624;5726:33529">
+              <button class="ios26-sheet-top-btn" type="button" data-node-id="I5729:24586;5729:24624;5726:33530">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-1" xlink:href="#ios26-sheets-symbol-1"></use></svg></span>
+              </button>
+              <div class="ios26-sheet-title" data-node-id="I5729:24586;5729:24624;5827:65227">Title</div>
+              <button class="ios26-sheet-top-btn is-primary" type="button" data-node-id="I5729:24586;5729:24624;5726:33532">
+                <span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sheets-symbol-2" xlink:href="#ios26-sheets-symbol-2"></use></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ios26-sheet-status" data-node-id="5465:16807">
+        <span class="ios26-sheet-time">9:41</span>
+        <div class="ios26-status-glyphs" aria-hidden="true">
+          <span class="ios26-status-cell"></span>
+          <span class="ios26-status-wifi"></span>
+          <span class="ios26-status-battery"></span>
+        </div>
+      </div>
+      <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+    </div>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Sheets metadata coverage supplement" data-node-id="507:24684">
+  <header class="ios26-node-coverage-header">
+    <h3>Sheets Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24684). Full coverage is persisted; this supplement lists 7 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (7)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5551:41121" data-node-name="Sheet - Inspector - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5551:41121</code>
+      <span class="ios26-node-coverage-item-name">Sheet - Inspector - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5551:18479" data-node-name="Overlay" data-node-reasons="metadata-root-gap">
+      <code>5551:18479</code>
+      <span class="ios26-node-coverage-item-name">Overlay</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5584:48163" data-node-name="Sheet - Full Screen - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5584:48163</code>
+      <span class="ios26-node-coverage-item-name">Sheet - Full Screen - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:74164" data-node-name="Stacked=True" data-node-reasons="metadata-root-gap">
+      <code>5591:74164</code>
+      <span class="ios26-node-coverage-item-name">Stacked=True</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:5085" data-node-name="Stacked=False" data-node-reasons="metadata-root-gap">
+      <code>0:5085</code>
+      <span class="ios26-node-coverage-item-name">Stacked=False</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5719:30145" data-node-name="Sheet - iPad" data-node-reasons="metadata-root-gap">
+      <code>5719:30145</code>
+      <span class="ios26-node-coverage-item-name">Sheet - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191847" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191847</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+
+    </main>
+  </body>
+</html>

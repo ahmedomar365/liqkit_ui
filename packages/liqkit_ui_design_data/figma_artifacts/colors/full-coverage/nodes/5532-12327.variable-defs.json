@@ -1,0 +1,8 @@
+{
+  "Labels/Primary": "#ffffff",
+  "Labels/Secondary": "#ebebf5b2",
+  "Labels/Tertiary": "#ebebf58c",
+  "Labels/Quaternary": "#ebebf566",
+  "Footnote/Regular": "Font(family: \"SF Pro\", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066)",
+  "Footnote/Emphasized": "Font(family: \"SF Pro\", style: Semibold, size: 13, weight: 590, lineHeight: 18, letterSpacing: -0.07999999821186066)"
+}

@@ -1,0 +1,53 @@
+{
+  "category": "windows",
+  "generatedAt": "2026-02-19T19:44:19.276Z",
+  "sourceFiles": [
+    "figma-artifacts/windows/5589-4058.design-context.txt"
+  ],
+  "totalAssets": 2,
+  "downloaded": 0,
+  "existing": 2,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "01ad78e8-cb51-45d3-bf26-583b3ea0d1bb",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "01ad78e8-cb51-45d3-bf26-583b3ea0d1bb.png",
+      "filePath": "figma-artifacts/assets/windows/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb.png",
+      "size": 219280,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb"
+      ],
+      "constNames": [
+        "imgIPadPro11M4SilverLandscape"
+      ],
+      "sources": [
+        "figma-artifacts/windows/5589-4058.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "46ca574d-0660-4208-9539-07b552d863a9",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "46ca574d-0660-4208-9539-07b552d863a9.jpg",
+      "filePath": "figma-artifacts/assets/windows/46ca574d-0660-4208-9539-07b552d863a9.jpg",
+      "size": 1276096,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/46ca574d-0660-4208-9539-07b552d863a9",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/46ca574d-0660-4208-9539-07b552d863a9"
+      ],
+      "constNames": [
+        "imgWindow"
+      ],
+      "sources": [
+        "figma-artifacts/windows/5589-4058.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

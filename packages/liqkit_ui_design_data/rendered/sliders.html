@@ -1,0 +1,1771 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sliders - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-sliders-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-sliders-demo {
+  width: 100%;
+  display: grid;
+}
+
+.ios26-sliders-device {
+  width: 402px;
+  height: 874px;
+  position: relative;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #f2f2f7;
+}
+
+.ios26-sliders-screen {
+  position: absolute;
+  inset: 0;
+  background: #f2f2f7;
+}
+
+.ios26-sliders-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+}
+
+.ios26-sliders-topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62px;
+  height: 44px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  z-index: 3;
+}
+
+.ios26-sliders-back-btn,
+.ios26-sliders-action-btn {
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0 10px;
+  background: #f7f7f7;
+  color: #1a1a1a;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sliders-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ios26-sliders-action-btn {
+  width: 44px;
+  padding: 0;
+  background: #08f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sliders-title {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-sliders-content {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 116px;
+  bottom: 10px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 10px 0;
+}
+
+.ios26-sliders-group {
+  border-radius: 26px;
+  background: #ffffff;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+}
+
+.ios26-slider-row {
+  height: 52px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px solid #e6e6e6;
+}
+
+.ios26-slider-row:first-child {
+  border-top: 0;
+}
+
+.ios26-slider-row.is-plain {
+  grid-template-columns: 1fr;
+}
+
+.ios26-slider-symbol {
+  text-align: center;
+  color: #3c3c4399;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-slider-symbol .ios26-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.ios26-slider-track {
+  position: relative;
+  height: 24px;
+}
+
+.ios26-slider-track::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(120, 120, 120, 0.2);
+}
+
+.ios26-slider-fill {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 6px;
+  border-radius: 3px;
+  background: #08f;
+}
+
+.ios26-slider-track.is-50 .ios26-slider-fill {
+  right: calc(50% - 1px);
+}
+
+.ios26-slider-track.is-100 .ios26-slider-fill {
+  right: 16px;
+}
+
+.ios26-slider-track.is-25 .ios26-slider-fill {
+  right: calc(75% - 4px);
+}
+
+.ios26-slider-track.is-75 .ios26-slider-fill {
+  right: calc(25% + 4px);
+}
+
+.ios26-slider-knob {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+}
+
+.ios26-slider-knob::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  border-radius: 100px;
+  background: #ffffff;
+  box-shadow:
+    0 0.5px 4px rgba(0, 0, 0, 0.12),
+    0 6px 13px rgba(0, 0, 0, 0.12);
+}
+
+.ios26-slider-track.is-0 .ios26-slider-knob {
+  left: 18px;
+}
+
+.ios26-slider-track.is-50 .ios26-slider-knob {
+  left: 50%;
+}
+
+.ios26-slider-track.is-100 .ios26-slider-knob {
+  left: calc(100% - 18px);
+}
+
+.ios26-slider-track.is-25 .ios26-slider-knob {
+  left: calc(25% + 2px);
+}
+
+.ios26-slider-track.is-75 .ios26-slider-knob {
+  left: calc(75% - 2px);
+}
+
+.ios26-slider-ticks {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: calc(50% + 9px);
+  transform: translateY(-50%);
+  height: 4px;
+  background-image: radial-gradient(circle, rgba(60, 60, 67, 0.35) 1.8px, transparent 2px);
+  background-size: 25% 4px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+}
+
+.ios26-sliders-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62px;
+  padding: 21px 24px 19px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  z-index: 3;
+  color: #000;
+}
+
+.ios26-sliders-status > span {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000;
+}
+
+.ios26-sliders-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ios26-sliders-example-card {
+  border-radius: 18px;
+  border: 1px solid #d8dce3;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-sliders-example-card h3 {
+  margin: 0;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-sliders-example-list {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.ios26-sliders-example-card .ios26-slider-row {
+  height: 42px;
+}
+
+.ios26-sliders-example-card.is-dark {
+  background: #111217;
+  border-color: #2d313a;
+  color: #f5f5f5;
+}
+
+.ios26-sliders-example-card.is-dark .ios26-sliders-example-list {
+  border-color: #2f333d;
+}
+
+.ios26-sliders-example-card.is-dark .ios26-slider-row {
+  border-top-color: #2d313a;
+}
+
+.ios26-sliders-example-card.is-dark .ios26-slider-track::before {
+  background: rgba(120, 120, 128, 0.34);
+}
+
+.ios26-sliders-example-card.is-dark .ios26-slider-fill {
+  background: #0a84ff;
+}
+
+.ios26-sliders-example-card.is-dark .ios26-slider-knob::before {
+  background: #f8f8f8;
+  box-shadow:
+    0 0.5px 4px rgba(0, 0, 0, 0.2),
+    0 6px 13px rgba(0, 0, 0, 0.26);
+}
+
+@media (max-width: 520px) {
+  .ios26-sliders-device {
+    transform: scale(0.86);
+    transform-origin: top left;
+  }
+
+  .ios26-sliders-examples {
+    grid-template-columns: 1fr;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Sliders</h1>
+        <p class="meta">Category Node <code>507:24685</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24685" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#sliders">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (5661:43611)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-sliders-root" data-node-id="507:24685" aria-label="Sliders category">
+<svg class="ios26-sliders-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-sliders-symbol-1" viewBox="0 0 20 20">
+      <path d="M3 12H6L9.8 16V4L6 8H3V12Z" fill="currentColor" />
+                  <path d="M12.2 7.4C13 8.15 13.4 9.05 13.4 10C13.4 10.95 13 11.85 12.2 12.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                  <path d="M14.4 5.4C15.7 6.65 16.4 8.25 16.4 10C16.4 11.75 15.7 13.35 14.4 14.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-sliders-symbol-2" viewBox="0 0 20 20">
+      <path d="M3 12H6L9.8 16V4L6 8H3V12Z" fill="currentColor" />
+                  <path d="M12.4 7.6C13.2 8.25 13.7 9.1 13.7 10C13.7 10.9 13.2 11.75 12.4 12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-sliders-demo" data-node-id="5661:43611" aria-label="Sliders">
+  <div class="ios26-sliders-device">
+    <div class="ios26-sliders-screen" data-node-id="5661:43562">
+      <div class="ios26-sliders-scroll-edge" data-node-id="5707:46452"></div>
+
+      <div class="ios26-sliders-topbar" data-node-id="5661:43568">
+        <button class="ios26-sliders-back-btn" type="button">
+          <span class="ios26-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 3.5L6 10L12.5 16.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span>Label</span>
+        </button>
+        <div class="ios26-sliders-title">Title</div>
+        <button class="ios26-sliders-action-btn" type="button" aria-label="More actions">
+          <span class="ios26-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <circle cx="5" cy="10" r="1.6" />
+              <circle cx="10" cy="10" r="1.6" />
+              <circle cx="15" cy="10" r="1.6" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="ios26-sliders-content">
+        <section class="ios26-sliders-group">
+          <div class="ios26-slider-row">
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-1" xlink:href="#ios26-sliders-symbol-1"></use></svg>
+              </span>
+            </span>
+            <div class="ios26-slider-track is-0">
+              <div class="ios26-slider-ticks"></div>
+              <span class="ios26-slider-knob"></span>
+            </div>
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-2" xlink:href="#ios26-sliders-symbol-2"></use></svg>
+              </span>
+            </span>
+          </div>
+
+          <div class="ios26-slider-row">
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-1" xlink:href="#ios26-sliders-symbol-1"></use></svg>
+              </span>
+            </span>
+            <div class="ios26-slider-track is-50">
+              <div class="ios26-slider-fill"></div>
+              <div class="ios26-slider-ticks"></div>
+              <span class="ios26-slider-knob"></span>
+            </div>
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-2" xlink:href="#ios26-sliders-symbol-2"></use></svg>
+              </span>
+            </span>
+          </div>
+
+          <div class="ios26-slider-row">
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-1" xlink:href="#ios26-sliders-symbol-1"></use></svg>
+              </span>
+            </span>
+            <div class="ios26-slider-track is-100">
+              <div class="ios26-slider-fill"></div>
+              <div class="ios26-slider-ticks"></div>
+              <span class="ios26-slider-knob"></span>
+            </div>
+            <span class="ios26-slider-symbol" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sliders-symbol-2" xlink:href="#ios26-sliders-symbol-2"></use></svg>
+              </span>
+            </span>
+          </div>
+        </section>
+
+        <section class="ios26-sliders-group">
+          <div class="ios26-slider-row is-plain">
+            <div class="ios26-slider-track is-0"><span class="ios26-slider-knob"></span></div>
+          </div>
+          <div class="ios26-slider-row is-plain">
+            <div class="ios26-slider-track is-50"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+          </div>
+          <div class="ios26-slider-row is-plain">
+            <div class="ios26-slider-track is-100"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="ios26-sliders-status" data-node-id="5465:16807">
+      <span>9:41</span>
+      <div class="ios26-status-glyphs" aria-hidden="true">
+        <span class="ios26-status-cell"></span>
+        <span class="ios26-status-wifi"></span>
+        <span class="ios26-status-battery"></span>
+      </div>
+    </div>
+
+    <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+  </div>
+
+  <section class="ios26-sliders-examples" data-node-id="7:53847" aria-label="Slider value examples">
+    <article class="ios26-sliders-example-card is-light" data-node-id="5430:1471">
+      <h3>Light examples</h3>
+      <div class="ios26-sliders-example-list">
+        <div class="ios26-slider-row is-plain" data-node-id="5441:5235">
+          <div class="ios26-slider-track is-0"><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain" data-node-id="520:49536">
+          <div class="ios26-slider-track is-25"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain" data-node-id="520:49524">
+          <div class="ios26-slider-track is-50"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain" data-node-id="520:49512">
+          <div class="ios26-slider-track is-75"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain" data-node-id="520:49506">
+          <div class="ios26-slider-track is-100"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ios26-sliders-example-card is-dark" data-node-id="5430:2054">
+      <h3>Dark examples</h3>
+      <div class="ios26-sliders-example-list">
+        <div class="ios26-slider-row is-plain">
+          <div class="ios26-slider-track is-0"><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain">
+          <div class="ios26-slider-track is-25"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain">
+          <div class="ios26-slider-track is-50"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain">
+          <div class="ios26-slider-track is-75"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+        <div class="ios26-slider-row is-plain">
+          <div class="ios26-slider-track is-100"><div class="ios26-slider-fill"></div><span class="ios26-slider-knob"></span></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Sliders metadata coverage supplement" data-node-id="507:24685">
+  <header class="ios26-node-coverage-header">
+    <h3>Sliders Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24685). Full coverage is persisted; this supplement lists 13 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (13)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5430:5333" data-node-name="_Ticks" data-node-reasons="metadata-root-gap">
+      <code>5430:5333</code>
+      <span class="ios26-node-coverage-item-name">_Ticks</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5428:5456" data-node-name="_Track" data-node-reasons="metadata-root-gap">
+      <code>5428:5456</code>
+      <span class="ios26-node-coverage-item-name">_Track</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5441:3942" data-node-name="_Fill" data-node-reasons="metadata-root-gap">
+      <code>5441:3942</code>
+      <span class="ios26-node-coverage-item-name">_Fill</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="520:49468" data-node-name="_Knob" data-node-reasons="metadata-root-gap">
+      <code>520:49468</code>
+      <span class="ios26-node-coverage-item-name">_Knob</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:1475" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:1475</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:1980" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:1980</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:1999" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:1999</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:9887" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:9887</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:2055" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:2055</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:2056" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:2056</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5430:2057" data-node-name="Sliders" data-node-reasons="metadata-root-gap">
+      <code>5430:2057</code>
+      <span class="ios26-node-coverage-item-name">Sliders</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:9897" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:9897</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191837" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191837</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/sliders/5661-43611.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/sliders/5661-43611.screenshot.png" alt="Sliders screenshot" />
+        <p><a href="../evidence/figma-artifacts/sliders/5661-43611.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/sliders/5661-43611.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/sliders.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/sliders.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/sliders.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgCellularConnection = &quot;https://www.figma.com/api/mcp/asset/fc786c7e-f4bf-4367-a67a-9cd16fe9b058&quot;;
+const imgWifi = &quot;https://www.figma.com/api/mcp/asset/b1e275b4-afcf-4dd8-9499-78295f80f938&quot;;
+const imgFrame = &quot;https://www.figma.com/api/mcp/asset/b6279892-558d-4b61-8a70-ab29f853374f&quot;;
+const imgTick = &quot;https://www.figma.com/api/mcp/asset/43e698df-b993-4cf1-a62a-8fe1d2910bc6&quot;;
+const imgIPhone17ProSilverPortrait = &quot;https://www.figma.com/api/mcp/asset/340ad10e-0dd8-49cf-81e1-c0c66a3d7daf&quot;;
+const imgBlur = &quot;https://www.figma.com/api/mcp/asset/8ce04fd6-1445-4ba9-a2dd-2e2a0504c652&quot;;
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = &quot;9:41&quot; }: StatusBarIPhoneProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]&quot;} data-name=&quot;Status bar - iPhone&quot; data-node-id=&quot;5465:16807&quot;&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative&quot; data-name=&quot;Time&quot; data-node-id=&quot;5465:16808&quot;&gt;
+        &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;5465:16809&quot;&gt;
+          {time}
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative&quot; data-name=&quot;Levels&quot; data-node-id=&quot;5465:16811&quot;&gt;
+        &lt;div className=&quot;h-[12.226px] relative shrink-0 w-[19.2px]&quot; data-name=&quot;Cellular Connection&quot; data-node-id=&quot;5465:16812&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgCellularConnection} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[12.328px] relative shrink-0 w-[17.142px]&quot; data-name=&quot;Wifi&quot; data-node-id=&quot;5465:16813&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgWifi} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[13px] relative shrink-0 w-[27.328px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;6325:1760&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgFrame} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Ticks({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex items-center justify-between relative w-[282px]&quot;} data-name=&quot;_Ticks&quot; data-node-id=&quot;5430:5333&quot;&gt;
+      &lt;div className=&quot;relative shrink-0 size-[4px]&quot; data-name=&quot;Tick&quot; data-node-id=&quot;5430:4906&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgTick} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[4px]&quot; data-name=&quot;Tick&quot; data-node-id=&quot;5430:4907&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgTick} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[4px]&quot; data-name=&quot;Tick&quot; data-node-id=&quot;5430:4908&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgTick} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[4px]&quot; data-name=&quot;Tick&quot; data-node-id=&quot;5430:4909&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgTick} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[4px]&quot; data-name=&quot;Tick&quot; data-node-id=&quot;5430:4910&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgTick} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Track({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;h-[6px] relative w-[282px]&quot;} data-name=&quot;_Track&quot; data-node-id=&quot;5428:5456&quot;&gt;
+      &lt;div className=&quot;-translate-y-1/2 absolute bg-[var(--fills\/primary,rgba(120,120,120,0.2))] h-[6px] left-0 right-0 rounded-[3px] top-1/2&quot; data-name=&quot;Track&quot; data-node-id=&quot;5428:5504&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Separator({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;_Separator&quot; data-node-id=&quot;5469:7924&quot;&gt;
+      &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px w-[370px]&quot; data-name=&quot;Mode=Light&quot; data-node-id=&quot;5469:7925&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Fill({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;h-[6px] relative w-[282px]&quot;} data-name=&quot;_Fill&quot; data-node-id=&quot;5441:3942&quot;&gt;
+      &lt;div className=&quot;-translate-y-1/2 absolute bg-[var(--accents\/blue,#08f)] h-[6px] left-0 right-0 rounded-[3px] top-1/2&quot; data-name=&quot;Fill&quot; data-node-id=&quot;5441:3941&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+type SlidersProps = {
+  className?: string;
+  showSymbols?: boolean;
+  showTicks?: boolean;
+  symbolMax?: string;
+  symbolMin?: string;
+  value?: &quot;0%&quot; | &quot;50%&quot; | &quot;100%&quot;;
+};
+
+function Sliders({ className, showSymbols = true, showTicks = true, symbolMax = &quot;􀓏&quot;, symbolMin = &quot;􀓑&quot;, value = &quot;0%&quot; }: SlidersProps) {
+  const is0 = value === &quot;0%&quot;;
+  const is50 = value === &quot;50%&quot;;
+  return (
+    &lt;div className={className || `content-stretch flex flex-col h-[52px] pb-px px-[16px] relative ${is0 ? &quot;items-start justify-center&quot; : &quot;items-center&quot;}`} id={is0 ? &quot;node-5441_5235&quot; : is50 ? &quot;node-520_49524&quot; : &quot;node-520_49506&quot;}&gt;
+      &lt;Separator className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; /&gt;
+      &lt;div className={`content-stretch flex flex-[1_0_0] gap-[12px] min-h-px min-w-px relative w-full ${is0 ? &quot;items-start justify-center rounded-br-[1px]&quot; : is50 ? &quot;items-center&quot; : &quot;items-start justify-center&quot;}`} data-name=&quot;Frame&quot; id={is0 ? &quot;node-5547_23358&quot; : is50 ? &quot;node-5547_23402&quot; : &quot;node-5547_23452&quot;}&gt;
+        {showSymbols &amp;&amp; (
+          &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center w-[32px]&quot; data-node-id=&quot;5441:4523&quot;&gt;
+            &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;{symbolMin}&lt;/p&gt;
+          &lt;/div&gt;
+        )}
+        &lt;div className=&quot;flex-[1_0_0] h-full min-h-px min-w-px relative&quot; data-name=&quot;Stack&quot; id={is0 ? &quot;node-5441_5237&quot; : is50 ? &quot;node-5441_4069&quot; : &quot;node-5441_4524&quot;}&gt;
+          &lt;Track className=&quot;-translate-y-1/2 absolute h-[6px] left-0 right-0 top-1/2&quot; /&gt;
+          {[&quot;100%&quot;, &quot;50%&quot;].includes(value) &amp;&amp; &lt;Fill className={`-translate-y-1/2 absolute h-[6px] left-0 top-1/2 ${is50 ? &quot;right-[49.2%]&quot; : &quot;right-0&quot;}`} /&gt;}
+          &lt;div className=&quot;-translate-y-1/2 absolute h-[24px] left-[16px] right-[16px] top-1/2&quot; data-name=&quot;Ticks and Knob&quot; id={is0 ? &quot;node-5547_24002&quot; : is50 ? &quot;node-5547_23863&quot; : &quot;node-5547_24049&quot;}&gt;
+            {showTicks &amp;&amp; &lt;Ticks className=&quot;-translate-y-1/2 absolute content-stretch flex items-center justify-between left-0 right-0 top-[calc(50%+9px)]&quot; /&gt;}
+            &lt;div className={`-translate-y-1/2 absolute flex h-[24px] items-center justify-center top-1/2 w-[2px] ${is0 ? &quot;left-[2.89px]&quot; : is50 ? &quot;-translate-x-1/2 left-1/2&quot; : &quot;right-[2px]&quot;}`}&gt;
+              &lt;div className=&quot;-scale-y-100 flex-none rotate-180&quot;&gt;
+                &lt;div className=&quot;h-[24px] relative rounded-[100px] w-[2px]&quot; data-name=&quot;_Knob&quot; id={is0 ? &quot;node-5441_5241&quot; : is50 ? &quot;node-5441_4073&quot; : &quot;node-5441_4528&quot;}&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute bg-white h-[24px] left-1/2 rounded-[100px] shadow-[0px_0.5px_4px_0px_rgba(0,0,0,0.12),0px_6px_13px_0px_rgba(0,0,0,0.12)] top-1/2 w-[38px]&quot; data-name=&quot;Knob&quot; id={is0 ? &quot;node-I5441_5241-5437_1568&quot; : is50 ? &quot;node-I5441_4073-5437_1568&quot; : &quot;node-I5441_4528-5437_1568&quot;} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        {showSymbols &amp;&amp; (
+          &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-center w-[32px]&quot; data-node-id=&quot;5441:4529&quot;&gt;
+            &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;{symbolMax}&lt;/p&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function Slider({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;h-[874px] relative w-[402px]&quot;} data-name=&quot;Slider&quot; data-node-id=&quot;5661:43611&quot;&gt;
+      &lt;div className=&quot;absolute bg-[var(--backgrounds-\(grouped\)\/primary,#f2f2f7)] content-stretch flex flex-col inset-0 items-center justify-center overflow-clip pb-[10px] pt-[116px] px-[16px]&quot; data-name=&quot;Screen&quot; data-node-id=&quot;5661:43562&quot;&gt;
+        &lt;div className=&quot;absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0&quot; data-name=&quot;Scroll Edge Effect - Soft&quot; data-node-id=&quot;5707:46452&quot;&gt;
+          &lt;div className=&quot;absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5707:46452;5661:28853&quot; style={{ maskImage: `url(&#39;${imgBlur}&#39;)` }} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-start min-h-px min-w-px py-[10px] relative w-full&quot; data-name=&quot;Content Area&quot; data-node-id=&quot;5661:43564&quot;&gt;
+          &lt;div className=&quot;bg-[var(--backgrounds-\(grouped\)\/secondary,white)] content-stretch flex flex-col items-center overflow-clip relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Grouped List&quot; data-node-id=&quot;5661:43683&quot;&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-start justify-center pb-px px-[16px] relative shrink-0 w-full&quot; /&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-center pb-px px-[16px] relative shrink-0 w-full&quot; value=&quot;50%&quot; /&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-center pb-px px-[16px] relative shrink-0 w-full&quot; value=&quot;100%&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;bg-[var(--backgrounds-\(grouped\)\/secondary,white)] content-stretch flex flex-col items-center overflow-clip relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Grouped List&quot; data-node-id=&quot;5661:43687&quot;&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-start justify-center pb-px px-[16px] relative shrink-0 w-full&quot; showSymbols={false} showTicks={false} /&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-center pb-px px-[16px] relative shrink-0 w-full&quot; showSymbols={false} showTicks={false} value=&quot;50%&quot; /&gt;
+            &lt;Sliders className=&quot;content-stretch flex flex-col h-[52px] items-center pb-px px-[16px] relative shrink-0 w-full&quot; showSymbols={false} showTicks={false} value=&quot;100%&quot; /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[16px] right-0 top-[62px]&quot; data-name=&quot;Toolbar - Top - iPhone&quot; data-node-id=&quot;5661:43568&quot;&gt;
+        &lt;div className=&quot;content-stretch flex gap-[10px] items-center relative shrink-0&quot; data-name=&quot;Leading&quot; data-node-id=&quot;I5661:43568;5553:35134&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5661:43568;5553:35135&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565&quot;&gt;
+              &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;5575:44983&quot;&gt;
+                &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;5575:75442&quot;&gt;
+                  &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;5575:75442;5575:32354&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;6491:20171&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;6491:20172&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                  &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22565;6491:20173&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap&quot; data-name=&quot;_Button - Back&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22970&quot;&gt;
+              &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22970;5431:837&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal]&quot;&gt;􀯶&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5661:43568;5553:35135;6491:22970;5431:840&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;self-stretch shrink-0 w-[8px]&quot; data-name=&quot;Spacer&quot; data-node-id=&quot;I5661:43568;5661:34483&quot; /&gt;
+        &lt;div className=&quot;content-stretch flex gap-[10px] items-center justify-end relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5661:43568;5553:33054&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5661:43568;5553:33055&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5661:43568;5553:33055;5720:30354&quot;&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[1000px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.1),0px_1px_8px_0px_rgba(0,0,0,0.12)]&quot; data-name=&quot;Tint&quot; data-node-id=&quot;I5661:43568;5553:33055;5720:30354;5607:78140&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[1000px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[rgba(255,255,255,0.5)] inset-0 rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-white inset-0 mix-blend-saturation rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-[#999] inset-0 mix-blend-overlay rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-[#0091ff] inset-0 rounded-[1000px]&quot; /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5661:43568;5553:33055;5720:30354;5607:77747&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;bg-[var(--accents\/blue,#08f)] content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5661:43568;5553:33055;5432:23263&quot;&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-center text-white w-full&quot; data-node-id=&quot;I5661:43568;5553:33055;5432:23263;5426:2007&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]&quot; data-name=&quot;_Title - Body&quot; data-node-id=&quot;I5661:43568;5827:58547&quot;&gt;
+          &lt;p className=&quot;absolute font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]&quot; data-node-id=&quot;I5661:43568;5827:58547;5827:56434&quot;&gt;
+            Title
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;StatusBarIPhone className=&quot;absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0&quot; /&gt;
+      &lt;div className=&quot;absolute h-[874px] left-0 top-0 w-[402px]&quot; data-name=&quot;iPhone 17 Pro&quot; data-node-id=&quot;5661:43571&quot;&gt;
+        &lt;div className=&quot;absolute h-[920px] left-[-24px] top-[-23px] w-[450px]&quot; data-name=&quot;iPhone 17 Pro - Silver - Portrait&quot; data-node-id=&quot;I5661:43571;6316:14150&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPhone17ProSilverPortrait} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Headline/Regular: Font(family: &quot;SF Pro&quot;, style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Slider
+**Node ID:** 5661:43611
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/tab-bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
+
+## Sliders
+**Node ID:** 7:53847
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sliders](https://developer.apple.com/design/human-interface-guidelines/sliders)
+
+## Toolbar - Top - iPhone
+**Node ID:** 1:54472
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

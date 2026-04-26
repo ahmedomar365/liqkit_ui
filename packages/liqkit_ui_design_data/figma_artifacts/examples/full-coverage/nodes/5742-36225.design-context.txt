@@ -1,0 +1,80 @@
+<section id="5742:36225" name="iPhone" x="-100" y="-100" width="30900" height="2400">
+  <frame id="770:21905" name="Notifications" x="7600" y="1390" width="900" height="930">
+    <symbol id="754:64316" name="Expanded=True" x="460" y="20" width="402" height="874" />
+    <symbol id="754:64315" name="Expanded=False" x="20" y="20" width="402" height="874" />
+  </frame>
+  <symbol id="754:64083" name="Lock Screen" x="6100" y="1390" width="402" height="874" />
+  <frame id="775:13152" name="Home Screen Widgets" x="4500" y="1390" width="1370" height="930">
+    <symbol id="754:63000" name="Size=Large" x="940" y="20" width="402" height="874" />
+    <symbol id="754:62987" name="Size=Medium" x="480" y="20" width="402" height="874" />
+    <symbol id="754:62974" name="Size=Small" x="20" y="20" width="402" height="874" />
+  </frame>
+  <symbol id="754:62883" name="Home Screen Quick Actions" x="3020" y="1410" width="402" height="874" />
+  <symbol id="754:62878" name="Home Screen" x="1500" y="1410" width="402" height="874" />
+  <symbol id="2570:20912" name="Control Center" x="100" y="1390" width="402" height="874" />
+  <frame id="5661:41970" name="Toolbars - Top" x="28470" y="80" width="2290" height="950">
+    <symbol id="5661:42566" name="Type=Title 2 Line Left" x="1840" y="40" width="402" height="874" />
+    <symbol id="5661:42453" name="Type=Title 2 Line" x="1390" y="40" width="402" height="874" />
+    <symbol id="5661:41971" name="Type=Large Title" x="940" y="40" width="402" height="874" />
+    <symbol id="5661:41980" name="Type=Compact Large Title" x="490" y="40" width="402" height="874" />
+    <symbol id="5661:41989" name="Type=Default" x="40" y="40" width="402" height="874" />
+  </frame>
+  <frame id="2517:14528" name="Toolbars - Bottom" x="26870" y="80" width="1390" height="950">
+    <symbol id="5432:25429" name="Type=Search" x="940" y="40" width="402" height="874" />
+    <symbol id="2517:14527" name="Type=Symbols" x="490" y="40" width="402" height="874" />
+    <symbol id="2517:14526" name="Type=Text" x="40" y="40" width="402" height="874" />
+  </frame>
+  <symbol id="5661:34264" name="Steppers" x="26170" y="100" width="402" height="874" />
+  <symbol id="5661:33949" name="Text Fields" x="25470" y="100" width="402" height="874" />
+  <frame id="5660:57680" name="Tab Bar" x="23870" y="80" width="950" height="950">
+    <symbol id="5660:57681" name="Split Search=False" x="510" y="40" width="402" height="874" />
+    <symbol id="2517:14488" name="Split Search=True" x="40" y="40" width="402" height="874" />
+  </frame>
+  <symbol id="5661:43368" name="Steppers" x="21800" y="100" width="402" height="874" />
+  <symbol id="5661:43611" name="Slider" x="21200" y="100" width="402" height="874" />
+  <frame id="770:21908" name="Sheets (Modals)" x="19500" y="60" width="1430" height="950">
+    <symbol id="754:64555" name="Type=Inspector" x="980" y="40" width="402" height="874" />
+    <symbol id="754:64543" name="Type=Fullscreen Stack" x="510" y="41" width="402" height="874" />
+    <symbol id="754:64541" name="Type=Fullscreen" x="40" y="41" width="402" height="874" />
+  </frame>
+  <frame id="5661:46038" name="Picker" x="17000" y="60" width="940" height="950">
+    <symbol id="5661:44434" name="Type=Inline" x="40" y="40" width="402" height="874" />
+    <symbol id="5661:46039" name="Type=Compact" x="490" y="40" width="402" height="874" />
+  </frame>
+  <frame id="770:21901" name="Menus" x="15200" y="60" width="1410" height="950">
+    <symbol id="5713:50078" name="Type=Menu with Submenu" x="970" y="40" width="402" height="874" />
+    <symbol id="754:64091" name="Type=Menu" x="510" y="40" width="402" height="874" />
+    <symbol id="5711:35806" name="Type=Edit Medium" x="50" y="40" width="402" height="874" />
+  </frame>
+  <frame id="781:15374" name="List" x="13300" y="60" width="1410" height="950">
+    <symbol id="754:63509" name="Type=Full Width + Section Headers" x="960" y="40" width="402" height="874" />
+    <symbol id="754:63455" name="Type=Full Width" x="500" y="40" width="402" height="874" />
+    <symbol id="754:63381" name="Type=Inset" x="40" y="40" width="402" height="874" />
+  </frame>
+  <frame id="770:21899" name="Keyboard" x="10510" y="60" width="2320" height="950">
+    <symbol id="754:63116" name="Type=Find and Replace" x="1880" y="40" width="402" height="874" />
+    <symbol id="5532:28030" name="Type=Find" x="1420" y="40" width="402" height="874" />
+    <symbol id="754:63103" name="Type=Emoji" x="960" y="40" width="402" height="874" />
+    <symbol id="754:63090" name="Type=Numeric" x="500" y="40" width="402" height="874" />
+    <symbol id="754:63077" name="Type=Text" x="40" y="40" width="402" height="874" />
+  </frame>
+  <frame id="770:21898" name="Face ID" x="9230" y="60" width="950" height="950">
+    <symbol id="754:62809" name="State=Success" x="500" y="40" width="402" height="874" />
+    <symbol id="754:62794" name="State=Authenticating" x="40" y="40" width="402" height="874" />
+  </frame>
+  <frame id="5581:40610" name="Empty States" x="7590" y="60" width="1400" height="950">
+    <symbol id="5581:40767" name="Config=Large Symbol" x="960" y="40" width="402" height="874" />
+    <symbol id="5581:40611" name="Config=Symbol in Circle" x="500" y="40" width="402" height="874" />
+    <symbol id="5581:39343" name="Config=Title and Subtitle" x="40" y="40" width="402" height="874" />
+  </frame>
+  <symbol id="754:62668" name="Context Menu" x="6100" y="100" width="402" height="874" />
+  <symbol id="3147:15989" name="Color Picker" x="4500" y="99" width="402" height="874" />
+  <symbol id="754:62559" name="Action Sheet" x="3020" y="100" width="402" height="874" />
+  <frame id="770:21495" name="Alert" x="1500" y="60" width="940" height="950">
+    <symbol id="754:57652" name="Type=Stacked" x="500" y="40" width="402" height="874" />
+    <symbol id="754:43567" name="Type=Side-by-side" x="40" y="40" width="402" height="874" />
+  </frame>
+  <symbol id="754:26934" name="Activity View" x="100" y="100" width="402" height="874" />
+</section>
+
+IMPORTANT: The user has selected a section node, so you have received a sparse metadata response. You MUST call get_design_context on the nodes or their sublayers individually based on their IDs to implement the design.

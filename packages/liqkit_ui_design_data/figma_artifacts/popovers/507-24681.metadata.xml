@@ -1,0 +1,25 @@
+<canvas id="507:24681" name="Popovers" x="0" y="0" width="0" height="0">
+  <section id="5433:20661" name="Light examples" x="900" y="0" width="420" height="232">
+    <instance id="5433:20665" name="Popovers (iPad Only)" x="160" y="66" width="100" height="100" />
+    <instance id="5760:9092" name="Mode" x="356" y="10" width="54" height="19" />
+  </section>
+  <section id="5433:20666" name="Dark examples" x="1360" y="0" width="410" height="232">
+    <instance id="5444:11161" name="Popovers (iPad Only)" x="160" y="66" width="100" height="100" />
+    <instance id="5760:9098" name="Mode" x="346" y="10" width="54" height="19" />
+  </section>
+  <frame id="61:65421" name="Popovers (iPad Only)" x="0" y="0" width="800" height="800">
+    <symbol id="61:65434" name="Direction=Up - Align Trailing" x="182" y="608" width="120" height="120" />
+    <symbol id="61:65452" name="Direction=Up - Align Leading" x="466" y="608" width="120" height="120" />
+    <symbol id="0:12354" name="Direction=Up - Align Center" x="324" y="608" width="120" height="120" />
+    <symbol id="61:65473" name="Direction=Trailing - Align Bottom" x="40" y="178" width="120" height="120" />
+    <symbol id="61:65431" name="Direction=Trailing - Align Top" x="40" y="462" width="120" height="120" />
+    <symbol id="61:65461" name="Direction=Trailing - Align Middle" x="40" y="320" width="120" height="120" />
+    <symbol id="61:65476" name="Direction=Leading - Align Bottom" x="626" y="182" width="120" height="120" />
+    <symbol id="61:65425" name="Direction=Leading - Align Top" x="626" y="466" width="120" height="120" />
+    <symbol id="61:65464" name="Direction=Leading - Align Middle" x="626" y="324" width="120" height="120" />
+    <symbol id="61:65428" name="Direction=Down - Align Trailing" x="182" y="40" width="120" height="120" />
+    <symbol id="61:65449" name="Direction=Down - Align Leading" x="466" y="40" width="120" height="120" />
+    <symbol id="61:65422" name="Direction=Down - Align Center" x="324" y="40" width="120" height="120" />
+  </frame>
+  <instance id="544:191867" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

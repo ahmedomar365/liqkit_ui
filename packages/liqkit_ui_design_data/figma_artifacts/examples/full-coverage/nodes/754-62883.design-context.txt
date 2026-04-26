@@ -1,0 +1,431 @@
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/0eb7c299-b288-4763-a428-0096bf78ed1c";
+const img = "https://www.figma.com/api/mcp/asset/a2bde3d9-f7ee-4130-97c6-61db9dde825f";
+const imgHomeScreenIPhone = "https://www.figma.com/api/mcp/asset/11769931-0fb4-42a6-9e1a-142f3685dea5";
+const imgIcon = "https://www.figma.com/api/mcp/asset/1fb44873-a297-4cf0-ae1e-1b6502fb8bec";
+const imgCustomIconDefault = "https://www.figma.com/api/mcp/asset/acd5d2a5-fc00-4ae9-8147-802d3176fbd1";
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/fda8374f-ff16-4fbb-8949-e5650897443c";
+const imgWifi = "https://www.figma.com/api/mcp/asset/bfef0f6a-6996-4bd5-987e-db98e5bac238";
+const imgFrame = "https://www.figma.com/api/mcp/asset/29a47383-d2cf-441b-aee3-9b4a22a83952";
+
+function IPhone17Pro({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPhone 17 Pro" data-node-id="6316:14140">
+      <div className="h-[874px] relative w-[402px]" data-name="Color=Silver" data-node-id="6316:14148">
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" data-node-id="6316:14150">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type HsqaWidgetLightProps = {
+  className?: string;
+  state?: "Selected" | "Default";
+  symbol?: string;
+};
+
+function HsqaWidgetLight({ className, state = "Default", symbol = "􂘬" }: HsqaWidgetLightProps) {
+  const isDefault = state === "Default";
+  return (
+    <div className={className || `relative size-[38px] ${isDefault ? "" : String.raw`bg-[var(--fills---vibrant\/tertiary,#ededed)] rounded-[8px]`}`} id={isDefault ? "node-5619_49860" : "node-5619_49862"}>
+      <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[19px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="5619:49863">
+        <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+      </div>
+    </div>
+  );
+}
+type HsqaAppIconLightProps = {
+  className?: string;
+  symbol?: string;
+};
+
+function HsqaAppIconLight({ className, symbol = "􀇷" }: HsqaAppIconLightProps) {
+  return (
+    <div className={className || ""} data-name="_HSQA - App Icon - Light" data-node-id="5624:50419">
+      <div className="relative size-[38px]" data-name="State=Default" data-node-id="5624:50422">
+        <div className="absolute inset-[28.33%_27.54%_26.72%_27.51%]" data-name="􀇷" data-node-id="5624:50430">
+          <img alt="" className="absolute block inset-0 max-w-none" src={img} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type HomeScreenQuickActionsProps = {
+  className?: string;
+  showAction2?: boolean;
+  showAction3?: boolean;
+  showAction4?: boolean;
+  showAction5?: boolean;
+  showAction6?: boolean;
+};
+
+function HomeScreenQuickActions({ className, showAction2 = true, showAction3 = true, showAction4 = true, showAction5 = true, showAction6 = true }: HomeScreenQuickActionsProps) {
+  return (
+    <div className={className || "content-stretch flex flex-col gap-[17.5px] items-start pb-[11px] pt-[7.5px] relative rounded-[12px] w-[250px]"} data-name="_Home Screen Quick Actions" data-node-id="2607:26472">
+      <div className="absolute left-0 size-[160px] top-0" data-name="Liquid Glass - Regular - Medium" data-node-id="5915:82218">
+        <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5915:82218;5584:31830">
+          <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5915:82218;5584:31831">
+            <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5915:82218;5584:31831;5584:31864" />
+          </div>
+          <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5915:82218;5607:81561" />
+        </div>
+        <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5915:82218;5607:25956">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+            <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+            <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5915:82218;5607:25843" />
+      </div>
+      <div className="content-stretch flex items-center justify-between px-[17px] relative shrink-0 w-full" data-name="_HSQA - Widget Row" data-node-id="5619:49848">
+        <HsqaAppIconLight className="relative shrink-0 size-[38px]" />
+        <HsqaWidgetLight className="relative shrink-0 size-[38px]" />
+        <HsqaWidgetLight className="bg-[var(--fills---vibrant\/tertiary,#ededed)] relative rounded-[8px] shrink-0 size-[38px]" state="Selected" symbol="􂘭" />
+        <HsqaWidgetLight className="relative shrink-0 size-[38px]" symbol="􂘮" />
+      </div>
+      <div className="content-stretch flex flex-col font-['SF_Pro:Regular',sans-serif] items-start leading-[0] not-italic relative shrink-0 text-[17px] w-full" data-name="Actions" data-node-id="5621:50116">
+        <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5619:49823">
+          <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5619:49823;5619:49811">
+            <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+          </div>
+          <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5619:49823;5619:49810">
+            <p className="leading-[22px] overflow-hidden">Action</p>
+          </div>
+        </div>
+        {showAction2 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5619:49827">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5619:49827;5619:49811">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5619:49827;5619:49810">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        )}
+        {showAction3 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5619:49830">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5619:49830;5619:49811">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5619:49830;5619:49810">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        )}
+        {showAction4 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5619:49833">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5619:49833;5619:49811">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5619:49833;5619:49810">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        )}
+        {showAction5 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5621:50020">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5621:50020;5619:49811">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5621:50020;5619:49810">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        )}
+        {showAction6 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--labels---vibrant\/primary,#1a1a1a)] w-full" data-name="_HSQA - Actions" data-node-id="5621:50049">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5621:50049;5619:49811">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5621:50049;5619:49810">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        )}
+        {showAction6 && (
+          <div className="content-stretch flex gap-[14px] h-[42px] items-center pt-[2px] px-[26px] relative shrink-0 text-[color:var(--accents\/red,#ff383c)] w-full" data-name="_HSQA - Actions" data-node-id="5622:50219">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I5622:50219;5622:50174">
+              <p className="leading-[22px] whitespace-pre-wrap">􀁎</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5622:50219;5622:50175">
+              <p className="leading-[22px] overflow-hidden">Remove App</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ContextMenuDimmingOverlay({ className }: { className?: string }) {
+  return <div className={className || "bg-[rgba(0,0,0,0.23)] size-[200px]"} data-name="Context Menu - Dimming Overlay" data-node-id="128:76929" />;
+}
+
+function HomeScreenQuickActionsIPhone({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[874px] relative w-[402px]"} data-name="Home Screen Quick Actions - iPhone" data-node-id="2607:25374">
+      <div className="absolute content-stretch flex flex-col h-[874px] items-center left-0 overflow-clip top-0 w-[402px]" data-name="Home Screen - iPhone" data-node-id="5593:41732">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHomeScreenIPhone} />
+        <div className="content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative shrink-0 w-[402px]" data-name="Status bar - iPhone" data-node-id="I5593:41732;2971:29538">
+          <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" data-node-id="I5593:41732;2971:29538;5465:16808">
+            <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="I5593:41732;2971:29538;5465:16809">
+              9:41
+            </p>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" data-node-id="I5593:41732;2971:29538;5465:16811">
+            <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" data-node-id="I5593:41732;2971:29538;5465:16812">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+            </div>
+            <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" data-node-id="I5593:41732;2971:29538;5465:16813">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+            </div>
+            <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" data-node-id="I5593:41732;2971:29538;6325:1760">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+            </div>
+          </div>
+        </div>
+        <div className="content-start flex flex-[1_0_0] flex-wrap gap-y-[17.33329963684082px] items-start justify-between min-h-px min-w-px pt-[28.666px] px-[26px] relative w-full" data-name="App Icons" data-node-id="I5593:41732;2969:26120">
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26121">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26121;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26121;2402:975">
+              FaceTime
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26122">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26122;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26122;2402:975">
+              Calendar
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26123">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26123;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26123;2402:975">
+              Photos
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26124">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26124;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26124;2402:975">
+              Camera
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26125">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26125;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26125;2402:975">
+              Mail
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26126">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26126;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26126;2402:975">
+              Notes
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26127">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26127;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26127;2402:975">
+              Reminders
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26128">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26128;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26128;2402:975">
+              Clock
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26129">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26129;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26129;2402:975">
+              News
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26130">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26130;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26130;2402:975">
+              TV
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26131">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26131;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26131;2402:975">
+              Games
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26132">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26132;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26132;2402:975">
+              App Store
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26133">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26133;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26133;2402:975">
+              Maps
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26134">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26134;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26134;2402:975">
+              Health
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26135">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26135;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26135;2402:975">
+              Wallet
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26136">
+            <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;2969:26136;5592:30156">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26136;2402:975">
+              Settings
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;2969:26137">
+            <div className="overflow-clip relative shrink-0 size-[66px]" data-name="_Custom Icon" data-node-id="I5593:41732;2969:26137;5592:37810">
+              <div className="-translate-x-1/2 absolute aspect-[256/256] bottom-0 left-1/2 top-0" data-name="Custom-Icon-Default" data-node-id="I5593:41732;2969:26137;5592:37810;5413:5936">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgCustomIconDefault} />
+              </div>
+            </div>
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic overflow-hidden relative shrink-0 text-[12px] text-center text-ellipsis text-shadow-[0px_2px_25px_black] text-white" data-node-id="I5593:41732;2969:26137;2402:17546">
+              My App
+            </p>
+            <div className="-translate-x-1/2 absolute bg-[var(--accents\/red,#ff383c)] content-stretch flex items-center justify-center left-[calc(50%+33px)] min-w-[24px] px-[7px] py-[2.5px] rounded-[100px] top-[-12px]" data-name="_Badge" data-node-id="I5593:41732;2969:26137;5592:52612">
+              <p className="flex-[1_0_0] font-['SF_Pro:Regular',sans-serif] leading-[19px] min-h-px min-w-px not-italic relative text-[16px] text-center text-white whitespace-pre-wrap" data-node-id="I5593:41732;2969:26137;5592:52612;5592:39414">
+                1
+              </p>
+            </div>
+          </div>
+          <div className="h-[79px] shrink-0 w-[72px]" data-name="Empty" data-node-id="I5593:41732;2969:26142" />
+          <div className="h-[79px] shrink-0 w-[72px]" data-name="Empty" data-node-id="I5593:41732;2969:26143" />
+          <div className="h-[79px] shrink-0 w-[72px]" data-name="Empty" data-node-id="I5593:41732;2969:26144" />
+        </div>
+        <div className="content-stretch flex gap-[2px] h-[30px] items-start overflow-clip px-[12px] py-[7px] relative rounded-[100px] shrink-0" data-name="Search Field" data-node-id="I5593:41732;512:41975">
+          <div className="-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2" data-name="Blur" data-node-id="I5593:41732;533:32954;5592:52690">
+            <div className="absolute bg-white inset-[-76px]" data-name="_Mask - Circle" data-node-id="I5593:41732;533:32954;5592:52691">
+              <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5593:41732;533:32954;5592:52691;5575:32354" />
+            </div>
+            <div className="-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]" data-name="Blur" data-node-id="I5593:41732;533:32954;5607:81966" />
+          </div>
+          <div className="absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]" data-name="Glass Effect" data-node-id="I5593:41732;533:32954;5607:81713" />
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5593:41732;512:41976" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+            􀊫
+          </p>
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[11.5px] text-[color:var(--grays\/white,white)] text-center" data-node-id="I5593:41732;5593:10113">
+            Search
+          </p>
+        </div>
+        <div className="content-stretch flex items-center justify-center pb-[17px] pt-[20px] px-[17px] relative shrink-0 w-full" data-name="_Dock - iPhone" data-node-id="I5593:41732;559:4206">
+          <div className="content-stretch flex flex-[1_0_0] items-center justify-between min-h-px min-w-px pb-[19px] pt-[20px] px-[19px] relative" data-name="Dock" data-node-id="I5593:41732;559:4206;559:4168">
+            <div className="-translate-y-1/2 absolute h-[100px] left-0 opacity-67 right-0 top-1/2" data-name="Blur" data-node-id="I5593:41732;559:4206;5592:57196;5592:52690">
+              <div className="absolute bg-white inset-[-76px]" data-name="_Mask - Circle" data-node-id="I5593:41732;559:4206;5592:57196;5592:52691">
+                <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5593:41732;559:4206;5592:57196;5592:52691;5575:32354" />
+              </div>
+              <div className="-translate-y-1/2 absolute backdrop-blur-[30px] bg-[rgba(0,0,0,0.4)] blur-[30px] h-[100px] left-0 mix-blend-hard-light right-0 rounded-[38px] top-[calc(50%+2px)]" data-name="Blur" data-node-id="I5593:41732;559:4206;5592:57196;5607:81966" />
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0.2)] inset-0 mix-blend-screen rounded-[38px]" data-name="Glass Effect" data-node-id="I5593:41732;559:4206;5592:57196;5607:81713" />
+            <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;559:4206;2402:19689">
+              <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;559:4206;2402:19689;5592:30156">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;559:4206;2402:20273">
+              <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;559:4206;2402:20273;5592:30156">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;559:4206;2402:20570">
+              <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;559:4206;2402:20570;5592:30156">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-[5px] items-center relative shrink-0" data-name="App Icon/iPhone" data-node-id="I5593:41732;559:4206;2402:20916">
+              <div className="relative shrink-0 size-[66px]" data-name="_System Icons" data-node-id="I5593:41732;559:4206;2402:20916;5592:30156">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIcon} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ContextMenuDimmingOverlay className="absolute bg-[rgba(0,0,0,0.23)] inset-0" />
+      <div className="absolute left-[24px] overflow-clip size-[66px] top-[482px]" data-name="_Custom Icon" data-node-id="5626:51218">
+        <div className="-translate-x-1/2 absolute aspect-[256/256] bottom-0 left-1/2 top-0" data-name="Custom-Icon-Default" data-node-id="I5626:51218;5413:5936">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgCustomIconDefault} />
+        </div>
+      </div>
+      <HomeScreenQuickActions className="absolute content-stretch flex flex-col gap-[17.5px] items-start left-[24px] pb-[11px] pt-[7.5px] rounded-[12px] top-[105px] w-[250px]" />
+    </div>
+  );
+}
+
+export default function HomeScreenQuickActions1({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[874px] relative w-[402px]"} data-name="Home Screen Quick Actions" data-node-id="754:62883">
+      <HomeScreenQuickActionsIPhone className="absolute inset-0 overflow-clip" />
+      <IPhone17Pro className="absolute h-[874px] left-0 top-0 w-[402px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Home Screen Quick Actions
+**Node ID:** 754:62883
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Home Screen - iPhone
+**Node ID:** 561:5800
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

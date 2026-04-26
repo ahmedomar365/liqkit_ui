@@ -1,0 +1,63 @@
+type NotificationExpandedProps = {
+  className?: string;
+  showMenu?: boolean;
+};
+
+export default function NotificationExpanded({ className, showMenu = true }: NotificationExpandedProps) {
+  return (
+    <div className={className || "content-stretch flex flex-col gap-[15px] h-[443px] isolate items-center px-[8px] relative w-[393px]"} data-name="Notification - Expanded" data-node-id="143:62847">
+      <div className="bg-[var(--backgrounds\/primary---elevated,white)] flex-[1_0_0] min-h-px min-w-px rounded-[32px] w-full z-[2]" data-name="Content Background" data-node-id="143:64281" />
+      {showMenu && (
+        <div className="content-stretch flex flex-col gap-[20px] items-start px-[26px] py-[20px] relative shrink-0 w-[250px] z-[1]" data-name="Menu" data-node-id="143:62995">
+          <div className="absolute left-[0.5px] size-[160px] top-0" data-name="Liquid Glass - Regular - Medium" data-node-id="5914:29101">
+            <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5914:29101;5584:31830">
+              <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5914:29101;5584:31831">
+                <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5914:29101;5584:31831;5584:31864" />
+              </div>
+              <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5914:29101;5607:81561" />
+            </div>
+            <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5914:29101;5607:25956">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5914:29101;5607:25843" />
+          </div>
+          <div className="content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full" data-name="Row 1" data-node-id="5551:17823">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="5551:17825">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="5551:17824">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+          <div className="content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full" data-name="Row 2" data-node-id="5551:17812">
+            <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="5551:17814">
+              <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+            </div>
+            <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="5551:17813">
+              <p className="leading-[22px] overflow-hidden">Action</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

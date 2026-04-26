@@ -1,0 +1,2 @@
+Captured via Figma MCP `get_screenshot` for node `0:3040` on 2026-02-17.
+Reference image was observed in-session and corresponds to category root `0:2194` (Text styles) canonical child node `0:3040`.

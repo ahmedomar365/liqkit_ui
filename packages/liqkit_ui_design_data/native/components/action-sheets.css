@@ -1,0 +1,22 @@
+.ios26-action-sheet {
+  width: 300px;
+  padding: 14px;
+  gap: 10px;
+  min-height: 542px;
+  height: 542px;
+  align-content: start;
+}
+
+.ios26-action-sheet .ios26-dialog-title-stack {
+  padding: 8px 8px 24px;
+  gap: 10px;
+}
+
+.ios26-action-sheet .ios26-dialog-actions {
+  gap: 10px;
+}
+
+.ios26-action-sheet .ios26-dialog-action {
+  height: 48px;
+  border-radius: 100px;
+}

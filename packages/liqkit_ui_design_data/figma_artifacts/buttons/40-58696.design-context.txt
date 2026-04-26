@@ -1,0 +1,1484 @@
+type ButtonContentAreaProps = {
+  className?: string;
+  destructive?: boolean;
+  enabled?: boolean;
+  label?: string;
+  labelType?: "Symbol + Text" | "Symbol" | "Text";
+  size?: "Small" | "Medium" | "Large";
+  style?: "Bordered - Prominent" | "Bordered" | "Bordered - Secondary" | "Borderless";
+  symbol?: string;
+};
+
+export default function ButtonContentArea({ className, destructive = false, enabled = true, label = "Play", labelType = "Symbol + Text", size = "Small", style = "Bordered - Prominent", symbol = "􀊄" }: ButtonContentAreaProps) {
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20407">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20408">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20409">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20410">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20411">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20412">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20584">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20585">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20586">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20587">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20588">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20589">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20449">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20450">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20451">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20452">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20453">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20454">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20491">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20493">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20494">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20496">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" data-node-id="5473:20497">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20499">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20413">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20414">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20415">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20416">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20417">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20418">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20590">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20591">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20592">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20593">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20594">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20595">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20455">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20456">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20457">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20458">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20459">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--accents\/red,#ff383c)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20460">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20500">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.43px]" data-node-id="5473:20501">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20502">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20503">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" data-node-id="5473:20504">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.23px]" data-node-id="5473:20505">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[12px]"} data-name="Size=Large, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20419">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]" data-node-id="5473:20420">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[40px]"} data-name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20421">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20422">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[40px]"} data-name="Size=Small, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20423">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20424">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20596">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]" data-node-id="5473:20597">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20598">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20599">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20600">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20601">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20461">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]" data-node-id="5473:20462">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20463">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20464">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20465">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]" data-node-id="5473:20466">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20506">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[rgba(255,255,255,0.3)] tracking-[-0.43px]" data-node-id="5473:20508">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20509">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="5473:20511">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" data-node-id="5473:20512">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="5473:20514">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[12px]"} data-name="Size=Large, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20425">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]" data-node-id="5473:20426">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[40px]"} data-name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20427">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20428">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[40px]"} data-name="Size=Small, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20429">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20430">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20602">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]" data-node-id="5473:20603">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20604">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20605">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20606">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20607">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20467">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]" data-node-id="5473:20468">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20469">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20470">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20471">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]" data-node-id="5473:20472">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20515">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px]" data-node-id="5473:20516">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20517">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]" data-node-id="5473:20518">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" data-node-id="5473:20519">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]" data-node-id="5473:20520">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[12px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20434">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20435">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20436">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[40px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20440">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20441">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20442">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[40px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20446">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20447">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20448">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20611">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20612">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20613">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20617">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20618">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20619">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20623">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20624">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20625">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20476">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20477">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20478">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20482">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20483">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20484">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--miscellaneous\/buttons\/label---destructive---disabled,rgba(255,56,60,0.5))] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20488">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20489">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20490">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[rgba(255,255,255,0.3)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20524">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20526">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20527">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20531">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20533">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20534">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive---prominent,rgba(255,56,60,0.2))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" data-node-id="5473:20538">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20540">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20541">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[12px] text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20431">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20432">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20433">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[40px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20437">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20438">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20439">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[40px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20443">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20444">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20445">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20608">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20609">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20610">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20614">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20615">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20616">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20620">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20621">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20622">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20473">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20474">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20475">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20479">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20480">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20481">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--miscellaneous\/buttons\/bg---destructive,rgba(255,56,60,0.14))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/red,#ff383c)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20485">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20486">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20487">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20521">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20522">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="5473:20523">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20528">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20529">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20530">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && enabled && destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/red,#ff383c)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" data-node-id="5473:20535">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="5473:20536">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="5473:20537">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58794">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48693">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58790">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48104">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58786">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48079">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58966">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48299">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58958">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48196">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:58950">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48898">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59290">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48943">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59282">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48408">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59274">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48642">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59338">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19532" />
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:49230">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59330">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19538" />
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48168">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol" && !enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" data-node-id="40:59322">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19544" />
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[rgba(255,255,255,0.3)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48341">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58694">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48657">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58691">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48107">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58690">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48645">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58964">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48901">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58956">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48204">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:58948">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48293">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59288">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:48608">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59280">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48511">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59272">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--accents\/blue,#08f)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48701">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] relative rounded-[500px] size-[50px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59336">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[50px] text-[17px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.43px]" data-node-id="488:49289">
+          <p className="leading-[22px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] relative rounded-[500px] size-[34px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59328">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[34px] text-[15px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:48651">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] relative rounded-[500px] size-[28px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" data-node-id="40:59320">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[28px] text-[15px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.23px]" data-node-id="488:49384">
+          <p className="leading-[20px] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[12px]"} data-name="Size=Large, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108801">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]" data-node-id="5:108803">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[40px]"} data-name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108825">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108827">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[40px]"} data-name="Size=Small, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108849">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108851">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108729">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]" data-node-id="5:108731">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108753">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108755">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108777">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108779">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108657">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]" data-node-id="5:108659">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108681">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108683">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108705">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]" data-node-id="5:108707">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[4px] items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108585">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19526" />
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[rgba(255,255,255,0.3)] tracking-[-0.43px]" data-node-id="5:108587">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[4px] items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108609">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19556" />
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="5:108611">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" data-node-id="5:108633">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19550" />
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="5:108635">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[12px]"} data-name="Size=Large, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108795">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]" data-node-id="5:108797">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[40px]"} data-name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108819">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]" data-node-id="5:108821">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[40px]"} data-name="Size=Small, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108843">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]" data-node-id="5:108845">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108723">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="5:108725">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108747">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/primary,black)] tracking-[-0.23px]" data-node-id="5:108749">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108771">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/primary,black)] tracking-[-0.23px]" data-node-id="5:108773">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108651">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]" data-node-id="5:108653">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108675">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]" data-node-id="5:108677">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108699">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]" data-node-id="5:108701">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108579">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px]" data-node-id="5:108581">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108603">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]" data-node-id="5:108605">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" data-node-id="5:108627">
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]" data-node-id="5:108629">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[12px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58796">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50602">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50603">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[40px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58792">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50170">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50171">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[40px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58788">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49771">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49772">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58970">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50638">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50639">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58962">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50290">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50291">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:58954">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49864">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49865">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59294">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50584">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50585">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59286">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50167">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50168">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59278">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49738">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49739">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[4px] items-center justify-center px-[20px] py-[14px] relative rounded-[1000px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59342">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19512" />
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[rgba(255,255,255,0.3)] text-center tracking-[-0.43px] whitespace-nowrap" data-node-id="488:50692">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[rgba(255,255,255,0.3)] tracking-[-0.43px]" data-node-id="488:50693">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[4px] items-center justify-center px-[14px] py-[7px] relative rounded-[1000px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59334">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19570" />
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] text-center tracking-[-0.23px] whitespace-nowrap" data-node-id="488:50173">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="488:50174">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && !enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[4px] relative rounded-[1000px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" data-node-id="40:59326">
+        <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 opacity-20 rounded-[1000px]" data-name="BG" data-node-id="5473:19562" />
+        <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] text-center tracking-[-0.23px] whitespace-nowrap" data-node-id="488:49846">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[rgba(255,255,255,0.3)] tracking-[-0.23px]" data-node-id="488:49847">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Borderless" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[12px] text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]"} data-name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58695">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50623">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50624">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Borderless" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[40px] text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58693">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50212">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50213">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Borderless" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[40px] text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]"} data-name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58692">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49479">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49480">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58968">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50587">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50588">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/primary,black)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58960">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50242">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50243">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered - Secondary" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--labels\/primary,black)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:58952">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49816">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49817">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59292">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50713">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50714">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59284">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50227">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50228">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Small" && style === "Bordered" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59276">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49774">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:49775">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Large" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[20px] py-[14px] relative rounded-[1000px] text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px]"} data-name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59340">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50656">
+          <p className="leading-[22px]">{symbol}</p>
+        </div>
+        <p className="leading-[22px] relative shrink-0" data-node-id="488:50657">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  if (size === "Medium" && style === "Bordered - Prominent" && labelType === "Symbol + Text" && enabled && !destructive) {
+    return (
+      <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[4px] items-center justify-center not-italic px-[14px] py-[7px] relative rounded-[1000px] text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]"} data-name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59332">
+        <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:50176">
+          <p className="leading-[20px]">{symbol}</p>
+        </div>
+        <p className="leading-[20px] relative shrink-0" data-node-id="488:50177">
+          {label}
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className={className || "bg-[var(--accents\/blue,#08f)] content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[3px] items-center justify-center not-italic px-[10px] py-[4px] relative rounded-[1000px] text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px]"} data-name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" data-node-id="40:59324">
+      <div className="flex flex-col justify-center leading-[0] relative shrink-0 text-center whitespace-nowrap" data-node-id="488:49795">
+        <p className="leading-[20px]">{symbol}</p>
+      </div>
+      <p className="leading-[20px] relative shrink-0" data-node-id="488:49796">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Subheadline/Regular: Font(family: "SF Pro", style: Regular, size: 15, weight: 400, lineHeight: 20, letterSpacing: -0.23000000417232513).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Button - Content Area
+**Node ID:** 40:58696
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/buttons](https://developer.apple.com/design/human-interface-guidelines/buttons)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

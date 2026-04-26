@@ -1,0 +1,58 @@
+{
+  "category": "notifications",
+  "generatedAt": "2026-02-19T19:44:19.260Z",
+  "sourceFiles": [
+    "figma-artifacts/notifications/135-67787.design-context.txt",
+    "figma-artifacts/notifications/135-73247.design-context.txt",
+    "figma-artifacts/notifications/143-62847.design-context.txt",
+    "figma-artifacts/notifications/507-24678.design-context.txt",
+    "figma-artifacts/notifications/533-7109.design-context.txt",
+    "figma-artifacts/notifications/5551-17755.design-context.txt"
+  ],
+  "totalAssets": 2,
+  "downloaded": 0,
+  "existing": 2,
+  "failed": 0,
+  "assets": [
+    {
+      "id": "f0155d66-c8ec-485f-9c1f-9d0a9de362f6",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "f0155d66-c8ec-485f-9c1f-9d0a9de362f6.png",
+      "filePath": "figma-artifacts/assets/notifications/f0155d66-c8ec-485f-9c1f-9d0a9de362f6.png",
+      "size": 236323,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/f0155d66-c8ec-485f-9c1f-9d0a9de362f6",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/f0155d66-c8ec-485f-9c1f-9d0a9de362f6"
+      ],
+      "constNames": [
+        "imgCustomIconDefault"
+      ],
+      "sources": [
+        "figma-artifacts/notifications/135-67787.design-context.txt"
+      ],
+      "error": ""
+    },
+    {
+      "id": "f2e37f79-771b-4e86-bdfd-0bffd4dd37fb",
+      "status": "ok",
+      "syncStatus": "existing",
+      "file": "f2e37f79-771b-4e86-bdfd-0bffd4dd37fb.png",
+      "filePath": "figma-artifacts/assets/notifications/f2e37f79-771b-4e86-bdfd-0bffd4dd37fb.png",
+      "size": 236323,
+      "contentType": "",
+      "url": "https://www.figma.com/api/mcp/asset/f2e37f79-771b-4e86-bdfd-0bffd4dd37fb",
+      "urls": [
+        "https://www.figma.com/api/mcp/asset/f2e37f79-771b-4e86-bdfd-0bffd4dd37fb"
+      ],
+      "constNames": [
+        "imgCustomIconDefault"
+      ],
+      "sources": [
+        "figma-artifacts/notifications/135-73247.design-context.txt"
+      ],
+      "error": ""
+    }
+  ]
+}

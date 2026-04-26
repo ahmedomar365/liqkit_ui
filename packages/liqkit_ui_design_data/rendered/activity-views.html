@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity views - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-activity-root {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.ios26-activity-sheet {
+  width: 402px;
+  min-height: 874px;
+  border-radius: 34px;
+  background: rgba(247, 247, 247, 0.88);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(18px);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding: 16px;
+}
+
+.ios26-activity-header {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.ios26-activity-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background:
+    radial-gradient(96% 82% at 24% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 56%),
+    linear-gradient(150deg, #4e8bff 0%, #6c4cff 54%, #7139d3 100%);
+  border: 0.5px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.ios26-activity-thumb-glyph {
+  color: #ffffff;
+  font: 630 24px/1 "SF Pro Display", "SF Pro", sans-serif;
+}
+
+.ios26-activity-copy p { margin: 0; }
+
+.ios26-activity-title {
+  color: #1a1a1a;
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+}
+
+.ios26-activity-subtitle {
+  color: #727272;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+}
+
+.ios26-activity-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 100px;
+  padding: 0;
+  background: rgba(120, 120, 128, 0.16);
+  color: #1a1a1a;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-activity-close-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.ios26-activity-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ios26-activity-contact,
+.ios26-activity-app {
+  width: 68px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.ios26-activity-avatar,
+.ios26-activity-app-icon {
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+}
+
+.ios26-activity-avatar {
+  border-radius: 100px;
+  background:
+    radial-gradient(86% 66% at 50% 22%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.08) 54%, rgba(0, 0, 0, 0) 100%),
+    linear-gradient(160deg, #f8bb8d 0%, #d98658 42%, #9d4f31 100%);
+  color: rgba(255, 255, 255, 0.95);
+  font: 600 16px/1 "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.ios26-activity-contact p,
+.ios26-activity-app p {
+  margin: 0;
+  color: #111111;
+  font: 400 11px/13px "SF Pro Text", "SF Pro", sans-serif;
+  text-align: center;
+}
+
+.ios26-activity-contact p + p {
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.ios26-activity-contact--group {
+  width: 78px;
+}
+
+.ios26-activity-avatar-group {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.ios26-activity-contact--group .ios26-activity-avatar--small {
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  border-radius: 100px;
+  font-size: 12px;
+}
+
+.ios26-activity-contact--group .ios26-activity-avatar--small:first-child {
+  top: 9px;
+  left: 9px;
+}
+
+.ios26-activity-contact--group .ios26-activity-avatar--small:last-child {
+  right: 9px;
+  bottom: 9px;
+}
+
+.ios26-activity-app-icon {
+  position: relative;
+  background:
+    radial-gradient(78% 68% at 28% 22%, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(160deg, #6fa0ff 0%, #4b62f8 56%, #3f37de 100%);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.58),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ios26-activity-app-icon::before,
+.ios26-activity-app-icon::after {
+  content: "";
+  position: absolute;
+}
+
+.ios26-activity-app-icon--airdrop::before {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.94);
+}
+
+.ios26-activity-app-icon--airdrop::after {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.ios26-activity-app-icon--messages {
+  background:
+    radial-gradient(80% 68% at 28% 22%, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(160deg, #42d76e 0%, #1cbe54 100%);
+}
+
+.ios26-activity-app-icon--messages::before {
+  width: 34px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.ios26-activity-app-icon--messages::after {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  transform: translate(4px, 10px);
+}
+
+.ios26-activity-app-icon--mail {
+  background:
+    radial-gradient(80% 66% at 28% 22%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(160deg, #5ba6ff 0%, #3478f6 100%);
+}
+
+.ios26-activity-app-icon--mail::before {
+  width: 36px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.ios26-activity-app-icon--mail::after {
+  width: 24px;
+  height: 12px;
+  border-left: 2px solid #3478f6;
+  border-right: 2px solid #3478f6;
+  border-bottom: 2px solid #3478f6;
+  transform: translateY(-3px) rotate(45deg) skewX(-18deg);
+}
+
+.ios26-activity-app-icon--notes {
+  background:
+    linear-gradient(180deg, #ffd95a 0 27%, #fff5b8 27% 100%);
+}
+
+.ios26-activity-app-icon--notes::before {
+  width: 35px;
+  height: 2px;
+  top: 26px;
+  background: rgba(0, 0, 0, 0.14);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12), 0 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ios26-activity-app-icon--reminders {
+  background:
+    radial-gradient(80% 66% at 28% 22%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(160deg, #ffffff 0%, #eef1f7 100%);
+}
+
+.ios26-activity-app-icon--reminders::before {
+  width: 28px;
+  height: 3px;
+  background: #327dff;
+  top: 21px;
+  box-shadow: 0 10px 0 #f0a401, 0 20px 0 #38b658;
+}
+
+.ios26-activity-app-icon--reminders::after {
+  width: 6px;
+  height: 6px;
+  left: 18px;
+  top: 19px;
+  border-radius: 50%;
+  background: #327dff;
+  box-shadow: 0 10px 0 #f0a401, 0 20px 0 #38b658;
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Activity views</h1>
+        <p class="meta">Category Node <code>507:24670</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24670" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#activity-views">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (3176:15162)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-activity-root" data-node-id="507:24670" aria-label="Activity views">
+
+  <article class="ios26-activity-sheet" data-node-id="3176:15162">
+    <div class="ios26-activity-header">
+      <div class="ios26-activity-thumb" aria-label="Thumbnail" role="img">
+        <span class="ios26-activity-thumb-glyph" aria-hidden="true">A</span>
+      </div>
+      <div class="ios26-activity-copy">
+        <p class="ios26-activity-title">Title</p>
+        <p class="ios26-activity-subtitle">Subtitle</p>
+      </div>
+      <button class="ios26-activity-close" type="button" aria-label="More">
+        <svg viewBox="0 0 20 20" class="ios26-activity-close-icon" aria-hidden="true">
+          <circle cx="5" cy="10" r="1.5" fill="currentColor"></circle>
+          <circle cx="10" cy="10" r="1.5" fill="currentColor"></circle>
+          <circle cx="15" cy="10" r="1.5" fill="currentColor"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ios26-activity-row" aria-label="Contacts">
+      <div class="ios26-activity-contact">
+        <div class="ios26-activity-avatar" aria-hidden="true">HA</div>
+        <p>Herland</p>
+        <p>Antezana</p>
+      </div>
+      <div class="ios26-activity-contact">
+        <div class="ios26-activity-avatar" aria-hidden="true">RR</div>
+        <p>Rigo</p>
+        <p>Rangel</p>
+      </div>
+      <div class="ios26-activity-contact ios26-activity-contact--group">
+        <div class="ios26-activity-avatar-group" aria-hidden="true">
+          <div class="ios26-activity-avatar ios26-activity-avatar--small">M</div>
+          <div class="ios26-activity-avatar ios26-activity-avatar--small">E</div>
+        </div>
+        <p>Magico and El...</p>
+        <p>2 People</p>
+      </div>
+    </div>
+
+    <div class="ios26-activity-row" aria-label="Apps">
+      <div class="ios26-activity-app">
+        <div class="ios26-activity-app-icon ios26-activity-app-icon--airdrop" aria-hidden="true"></div>
+        <p>AirDrop</p>
+      </div>
+      <div class="ios26-activity-app">
+        <div class="ios26-activity-app-icon ios26-activity-app-icon--messages" aria-hidden="true"></div>
+        <p>Messages</p>
+      </div>
+      <div class="ios26-activity-app">
+        <div class="ios26-activity-app-icon ios26-activity-app-icon--mail" aria-hidden="true"></div>
+        <p>Mail</p>
+      </div>
+      <div class="ios26-activity-app">
+        <div class="ios26-activity-app-icon ios26-activity-app-icon--notes" aria-hidden="true"></div>
+        <p>Notes</p>
+      </div>
+      <div class="ios26-activity-app">
+        <div class="ios26-activity-app-icon ios26-activity-app-icon--reminders" aria-hidden="true"></div>
+        <p>Reminders</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="ios26-node-coverage-board" aria-label="Activity Views strict node coverage supplement">
+  <header class="ios26-node-coverage-header">
+    <h3>Activity Views Node Coverage Supplement</h3>
+    <p>Generated from saved strict node anchors to keep native HTML coverage explicit and persisted.</p>
+  </header>
+  <div class="ios26-node-coverage-grid">
+      <article class="ios26-node-coverage-item" data-node-id="127:58424" data-node-name="People=2" data-node-reasons="metadata-required">
+        <code>127:58424</code>
+        <span class="ios26-node-coverage-item-name">People=2</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="127:58381" data-node-name="People=1" data-node-reasons="metadata-required">
+        <code>127:58381</code>
+        <span class="ios26-node-coverage-item-name">People=1</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:68353" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5591:68353</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:68049" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5591:68049</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5908:1784" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5908:1784</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="128:60578" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>128:60578</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5908:2106" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5908:2106</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="128:58645" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>128:58645</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:28889" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5591:28889</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:28942" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5591:28942</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:32476" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5591:32476</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:32474" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5591:32474</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:67816" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5591:67816</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:67822" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>5591:67822</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="5591:68348" data-node-name="Mode=Dark" data-node-reasons="metadata-required">
+        <code>5591:68348</code>
+        <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+      </article>
+      <article class="ios26-node-coverage-item" data-node-id="126:58332" data-node-name="Mode=Light" data-node-reasons="metadata-required">
+        <code>126:58332</code>
+        <span class="ios26-node-coverage-item-name">Mode=Light</span>
+      </article>
+  </div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Activity views metadata coverage supplement" data-node-id="507:24670">
+  <header class="ios26-node-coverage-header">
+    <h3>Activity views Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24670). Full coverage is persisted; this supplement lists 10 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (10)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="127:58423" data-node-name="_Contact" data-node-reasons="metadata-root-gap">
+      <code>127:58423</code>
+      <span class="ios26-node-coverage-item-name">_Contact</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="127:59083" data-node-name="_Header" data-node-reasons="metadata-root-gap">
+      <code>127:59083</code>
+      <span class="ios26-node-coverage-item-name">_Header</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:1783" data-node-name="Activity View - iPad" data-node-reasons="metadata-root-gap">
+      <code>5908:1783</code>
+      <span class="ios26-node-coverage-item-name">Activity View - iPad</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5908:2105" data-node-name="Activity View - iPhone" data-node-reasons="metadata-root-gap">
+      <code>5908:2105</code>
+      <span class="ios26-node-coverage-item-name">Activity View - iPhone</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:28787" data-node-name="_Close Button" data-node-reasons="metadata-root-gap">
+      <code>5591:28787</code>
+      <span class="ios26-node-coverage-item-name">_Close Button</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:32475" data-node-name="_Action" data-node-reasons="metadata-root-gap">
+      <code>5591:32475</code>
+      <span class="ios26-node-coverage-item-name">_Action</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:67812" data-node-name="_Button - Liquid Glass" data-node-reasons="metadata-root-gap">
+      <code>5591:67812</code>
+      <span class="ios26-node-coverage-item-name">_Button - Liquid Glass</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5591:68347" data-node-name="_Actions" data-node-reasons="metadata-root-gap">
+      <code>5591:68347</code>
+      <span class="ios26-node-coverage-item-name">_Actions</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="540:190166" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>540:190166</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5846:3358" data-node-name="Overlay" data-node-reasons="metadata-root-gap">
+      <code>5846:3358</code>
+      <span class="ios26-node-coverage-item-name">Overlay</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/activity-views/3176-15162.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/activity-views/3176-15162.screenshot.png" alt="Activity views screenshot" />
+        <p><a href="../evidence/figma-artifacts/activity-views/3176-15162.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/activity-views/3176-15162.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/activity-views.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/activity-views.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/activity-views.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgIconMessagesModeDefault = &quot;https://www.figma.com/api/mcp/asset/d1cac19c-02fb-4428-b0c6-9a9f8a0b1de2&quot;;
+const imgIconAppStoreModeDefault = &quot;https://www.figma.com/api/mcp/asset/6c578f22-96d7-4303-a232-3c6256880e73&quot;;
+const imgThumbnail = &quot;https://www.figma.com/api/mcp/asset/8bae123b-606e-47ff-912d-3d4f293ec789&quot;;
+const imgAvatar = &quot;https://www.figma.com/api/mcp/asset/93653d88-ed0b-4216-bca6-ab7c3f6d664b&quot;;
+const imgAvatar2 = &quot;https://www.figma.com/api/mcp/asset/ee7bcf2b-0e2e-4551-8ce6-e71390e7b479&quot;;
+const imgAvatar1 = &quot;https://www.figma.com/api/mcp/asset/3e25f60c-11fc-4f7b-b4dc-8f463c048db5&quot;;
+const imgIcon = &quot;https://www.figma.com/api/mcp/asset/12d331d9-86ff-41a6-8856-9682c291a89b&quot;;
+const imgIcon1 = &quot;https://www.figma.com/api/mcp/asset/0326fee0-8553-446d-97e0-32107521ff70&quot;;
+const imgIcon2 = &quot;https://www.figma.com/api/mcp/asset/89819064-d2ab-4b9b-89bb-ab4db2fbda11&quot;;
+const imgIcon3 = &quot;https://www.figma.com/api/mcp/asset/b250a2f9-e120-40fa-986e-32c4929d9e14&quot;;
+type SystemIconsProps = {
+  className?: string;
+  icon?: &quot;App Store&quot; | &quot;Books&quot; | &quot;Calendar&quot; | &quot;Camera&quot; | &quot;Calculator&quot; | &quot;Clock&quot; | &quot;Contacts&quot; | &quot;FaceTime&quot; | &quot;Files&quot; | &quot;Find My&quot; | &quot;Fitness&quot; | &quot;Freeform&quot; | &quot;Health&quot; | &quot;Home&quot; | &quot;iTunes Store&quot; | &quot;Keynote&quot; | &quot;Mail&quot; | &quot;Maps&quot; | &quot;Measure&quot; | &quot;Messages&quot; | &quot;Music&quot; | &quot;News&quot; | &quot;Notes&quot; | &quot;Number&quot; | &quot;Pages&quot; | &quot;Phone&quot; | &quot;Photos&quot; | &quot;Podcasts&quot; | &quot;Reminders&quot; | &quot;Safari&quot; | &quot;Settings&quot; | &quot;Shortcuts&quot; | &quot;Stocks&quot; | &quot;Tips&quot; | &quot;Translate&quot; | &quot;TV&quot; | &quot;Voice Memos&quot; | &quot;Wallet&quot; | &quot;Watch&quot; | &quot;Weather&quot; | &quot;Games&quot; | &quot;Preview&quot; | &quot;Airdrop&quot; | &quot;Passwords&quot;;
+  mode?: &quot;Default&quot; | &quot;Dark&quot; | &quot;Clear Light&quot;;
+};
+
+function SystemIcons({ className, icon = &quot;App Store&quot;, mode = &quot;Default&quot; }: SystemIconsProps) {
+  const isAppStoreAndDefault = icon === &quot;App Store&quot; &amp;&amp; mode === &quot;Default&quot;;
+  return (
+    &lt;div className={className || &quot;relative size-[66px]&quot;} id={isAppStoreAndDefault ? &quot;node-2402_966&quot; : &quot;node-2402_810&quot;}&gt;
+      &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={isAppStoreAndDefault ? imgIconAppStoreModeDefault : imgIconMessagesModeDefault} /&gt;
+    &lt;/div&gt;
+  );
+}
+type ActivityViewProps = {
+  className?: string;
+  showGrabber?: boolean;
+};
+
+export default function ActivityView({ className, showGrabber = true }: ActivityViewProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col items-start relative w-[402px]&quot;} data-name=&quot;_Activity View&quot; data-node-id=&quot;3176:15162&quot;&gt;
+      &lt;div className=&quot;content-stretch flex gap-[16px] items-start p-[16px] relative shrink-0 w-full&quot; data-name=&quot;_Header&quot; data-node-id=&quot;5591:69659&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-center pl-[12px] pt-[14px] relative self-stretch shrink-0&quot; data-name=&quot;Thumbnail&quot; data-node-id=&quot;I5591:69659;5591:68050&quot;&gt;
+          &lt;div className=&quot;border-[0.5px] border-[rgba(0,0,0,0.15)] border-solid relative rounded-[16px] shadow-[0px_2px_16px_0px_rgba(0,0,0,0.15)] shrink-0 size-[64px]&quot; data-name=&quot;Thumbnail&quot; data-node-id=&quot;I5591:69659;5591:68051&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full&quot; src={imgThumbnail} /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-h-px min-w-px pb-[2px] pt-[12px] relative&quot; data-name=&quot;Middle&quot; data-node-id=&quot;I5591:69659;5591:68052&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-col gap-px items-start leading-[0] not-italic relative shrink-0 text-ellipsis w-full whitespace-nowrap&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5591:69659;5591:68053&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[20px] justify-center overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.23px] w-full&quot; data-node-id=&quot;I5591:69659;5591:68054&quot;&gt;
+              &lt;p className=&quot;leading-[20px] overflow-hidden&quot;&gt;Title&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[18px] justify-center overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.08px] w-[215px]&quot; data-node-id=&quot;I5591:69659;5591:68055&quot;&gt;
+              &lt;p className=&quot;leading-[18px] overflow-hidden&quot;&gt;Subtitle&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex gap-[4px] h-[34px] items-center justify-center pl-[14px] pr-[10px] py-[6px] relative rounded-[1000px] shrink-0&quot; data-name=&quot;_Button - Liquid Glass&quot; data-node-id=&quot;I5591:69659;5591:68056&quot;&gt;
+            &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;5575:44983&quot;&gt;
+              &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;5575:75442&quot;&gt;
+                &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;5575:75442;5575:32354&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;6491:20171&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;6491:20172&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67823;6491:20173&quot; /&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center whitespace-nowrap&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67855&quot;&gt;
+              &lt;p className=&quot;leading-[18px]&quot;&gt;􀉬&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center whitespace-nowrap&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:68105&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[18px]&quot;&gt;Label&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/secondary,#727272)] text-center whitespace-nowrap&quot; data-node-id=&quot;I5591:69659;5591:68056;5591:67858&quot;&gt;
+              &lt;p className=&quot;leading-[18px]&quot;&gt;􀆊&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-[4px] items-start leading-[0] not-italic relative shrink-0 text-[15px] text-ellipsis tracking-[-0.08px] whitespace-nowrap&quot; data-name=&quot;Secondary Menu&quot; data-node-id=&quot;I5591:69659;5591:68277&quot;&gt;
+            &lt;div className=&quot;flex flex-col justify-center overflow-hidden relative shrink-0 text-[color:var(--labels---vibrant\/secondary,#727272)]&quot; data-node-id=&quot;I5591:69659;5591:68294&quot;&gt;
+              &lt;p className=&quot;leading-[18px] overflow-hidden&quot;&gt;Only invited people can edit.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-col justify-center overflow-hidden relative shrink-0 text-[color:var(--labels---vibrant\/tertiary,#bfbfbf)]&quot; data-node-id=&quot;I5591:69659;5591:68258&quot;&gt;
+              &lt;p className=&quot;leading-[18px] overflow-hidden&quot;&gt;􀆊&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex items-start justify-center pb-[10px] px-[16px] relative shrink-0 size-[44px]&quot; data-name=&quot;_Close Button&quot; data-node-id=&quot;I5591:69659;5591:68057&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888&quot;&gt;
+              &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;5575:44983&quot;&gt;
+                &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;5575:75442&quot;&gt;
+                  &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;5575:75442;5575:32354&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;6491:20171&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;6491:20172&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                  &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5566:7888;6491:20173&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5432:23135&quot;&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; data-node-id=&quot;I5591:69659;5591:68057;5591:28895;5432:23135;5426:2011&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start px-[24px] relative shrink-0 w-full&quot; data-name=&quot;Separator&quot; data-node-id=&quot;5591:46143&quot;&gt;
+        &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;5591:34133&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex gap-[14px] items-start pb-[16px] pl-[24px] pt-[14px] relative shrink-0 w-full&quot; data-name=&quot;Contacts Row&quot; data-node-id=&quot;3176:15064&quot;&gt;
+        &lt;div className=&quot;h-[104px] relative shrink-0 w-[78px]&quot; data-name=&quot;_Contact&quot; data-node-id=&quot;3176:15065&quot;&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-px items-start leading-[15px] left-0 not-italic text-[12px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis top-[75px] tracking-[0.06px] w-[78px] whitespace-nowrap&quot; data-name=&quot;Name&quot; data-node-id=&quot;I3176:15065;5591:62272&quot;&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15065;5591:64136&quot;&gt;
+              Herland
+            &lt;/p&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15065;127:58378&quot;&gt;
+              Antezana
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute left-1/2 rounded-[100px] size-[70px] top-0&quot; data-name=&quot;Avatar&quot; data-node-id=&quot;I3176:15065;127:58385&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar} /&gt;
+          &lt;/div&gt;
+          &lt;SystemIcons className=&quot;-translate-x-1/2 absolute left-[calc(50%+25px)] size-[66px] top-[50px]&quot; icon=&quot;Messages&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[104px] relative shrink-0 w-[78px]&quot; data-name=&quot;_Contact&quot; data-node-id=&quot;3176:15066&quot;&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-px items-start leading-[15px] left-0 not-italic text-[12px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis top-[75px] tracking-[0.06px] w-[78px] whitespace-nowrap&quot; data-name=&quot;Name&quot; data-node-id=&quot;I3176:15066;5591:62272&quot;&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15066;5591:64136&quot;&gt;
+              Rigo
+            &lt;/p&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15066;127:58378&quot;&gt;
+              Rangel
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute left-1/2 rounded-[100px] size-[70px] top-0&quot; data-name=&quot;Avatar&quot; data-node-id=&quot;I3176:15066;127:58385&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar} /&gt;
+          &lt;/div&gt;
+          &lt;SystemIcons className=&quot;-translate-x-1/2 absolute left-[calc(50%+25px)] size-[66px] top-[50px]&quot; icon=&quot;Messages&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[104px] relative shrink-0 w-[78px]&quot; data-name=&quot;_Contact&quot; data-node-id=&quot;3176:15067&quot;&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute content-stretch flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-px items-center left-1/2 not-italic text-center text-ellipsis top-[75px] tracking-[0.06px] w-[78px] whitespace-nowrap&quot; data-name=&quot;Names&quot; data-node-id=&quot;I3176:15067;5591:62159&quot;&gt;
+            &lt;p className=&quot;leading-[13px] overflow-hidden relative shrink-0 text-[10px] text-[color:var(--labels\/primary,black)] w-full&quot; data-node-id=&quot;I3176:15067;5591:62060&quot;&gt;
+              Magico and El...
+            &lt;/p&gt;
+            &lt;p className=&quot;leading-[15px] overflow-hidden relative shrink-0 text-[12px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] w-full&quot; data-node-id=&quot;I3176:15067;127:58425&quot;&gt;
+              2 People
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] left-1/2 rounded-[100px] size-[70px] top-[-1px]&quot; data-name=&quot;Group&quot; data-node-id=&quot;I3176:15067;5591:61947&quot;&gt;
+            &lt;div className=&quot;absolute bottom-[9px] right-[9px] rounded-[100px] size-[22px]&quot; data-name=&quot;Avatar 2&quot; data-node-id=&quot;I3176:15067;127:58598&quot;&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar2} /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute left-[9px] rounded-[100px] size-[37.333px] top-[9px]&quot; data-name=&quot;Avatar 1&quot; data-node-id=&quot;I3176:15067;127:58426&quot;&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar1} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;SystemIcons className=&quot;-translate-x-1/2 absolute left-[calc(50%+25px)] size-[66px] top-[49px]&quot; icon=&quot;Messages&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[104px] relative shrink-0 w-[78px]&quot; data-name=&quot;_Contact&quot; data-node-id=&quot;3176:15068&quot;&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-px items-start leading-[15px] left-0 not-italic text-[12px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis top-[75px] tracking-[0.06px] w-[78px] whitespace-nowrap&quot; data-name=&quot;Name&quot; data-node-id=&quot;I3176:15068;5591:62272&quot;&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15068;5591:64136&quot;&gt;
+              Jenny
+            &lt;/p&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15068;127:58378&quot;&gt;
+              Court
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute left-1/2 rounded-[100px] size-[70px] top-0&quot; data-name=&quot;Avatar&quot; data-node-id=&quot;I3176:15068;127:58385&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar} /&gt;
+          &lt;/div&gt;
+          &lt;SystemIcons className=&quot;-translate-x-1/2 absolute left-[calc(50%+25px)] size-[66px] top-[50px]&quot; icon=&quot;Messages&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[104px] relative shrink-0 w-[78px]&quot; data-name=&quot;_Contact&quot; data-node-id=&quot;3176:15069&quot;&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-px items-start leading-[15px] left-0 not-italic text-[12px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis top-[75px] tracking-[0.06px] w-[78px] whitespace-nowrap&quot; data-name=&quot;Name&quot; data-node-id=&quot;I3176:15069;5591:62272&quot;&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15069;5591:64136&quot;&gt;
+              Alejandra
+            &lt;/p&gt;
+            &lt;p className=&quot;overflow-hidden relative shrink-0 w-[78px]&quot; data-node-id=&quot;I3176:15069;127:58378&quot;&gt;
+              Delgado
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 absolute left-1/2 rounded-[100px] size-[70px] top-0&quot; data-name=&quot;Avatar&quot; data-node-id=&quot;I3176:15069;127:58385&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none rounded-[100px] size-full&quot; src={imgAvatar} /&gt;
+          &lt;/div&gt;
+          &lt;SystemIcons className=&quot;-translate-x-1/2 absolute left-[calc(50%+25px)] size-[66px] top-[50px]&quot; icon=&quot;Messages&quot; /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start px-[24px] relative shrink-0 w-full&quot; data-name=&quot;Separator&quot; data-node-id=&quot;5591:47734&quot;&gt;
+        &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;5591:47735&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex gap-[14px] items-start pb-[20px] pl-[24px] pt-[18px] relative shrink-0 w-full&quot; data-name=&quot;App Icon Row&quot; data-node-id=&quot;3176:15070&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[8px] items-center pb-[2px] relative shrink-0 w-[78px]&quot; data-name=&quot;App 1&quot; data-node-id=&quot;3176:15071&quot;&gt;
+          &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;3176:15073&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[13px] leading-[13px] not-italic overflow-hidden relative shrink-0 text-[11px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[0.06px] w-full whitespace-nowrap&quot; data-node-id=&quot;3176:15072&quot;&gt;
+            AirDrop
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[8px] items-center pb-[2px] relative shrink-0 w-[78px]&quot; data-name=&quot;App 2&quot; data-node-id=&quot;3176:15074&quot;&gt;
+          &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;3176:15076&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIconMessagesModeDefault} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[13px] leading-[13px] not-italic overflow-hidden relative shrink-0 text-[11px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[0.06px] w-full whitespace-nowrap&quot; data-node-id=&quot;3176:15075&quot;&gt;
+            Messages
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[8px] items-center pb-[2px] relative shrink-0 w-[78px]&quot; data-name=&quot;App 3&quot; data-node-id=&quot;3176:15077&quot;&gt;
+          &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;3176:15079&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon1} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[13px] leading-[13px] not-italic overflow-hidden relative shrink-0 text-[11px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[0.06px] w-full whitespace-nowrap&quot; data-node-id=&quot;3176:15078&quot;&gt;
+            Mail
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[8px] items-center pb-[2px] relative shrink-0 w-[78px]&quot; data-name=&quot;App 4&quot; data-node-id=&quot;3176:15080&quot;&gt;
+          &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;3176:15082&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon2} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[13px] leading-[13px] not-italic overflow-hidden relative shrink-0 text-[11px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[0.06px] w-full whitespace-nowrap&quot; data-node-id=&quot;3176:15081&quot;&gt;
+            Notes
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[8px] items-center pb-[2px] relative shrink-0 w-[78px]&quot; data-name=&quot;App 5&quot; data-node-id=&quot;3176:15083&quot;&gt;
+          &lt;div className=&quot;relative shrink-0 size-[66px]&quot; data-name=&quot;_System Icons&quot; data-node-id=&quot;3176:15085&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIcon3} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[13px] leading-[13px] not-italic overflow-hidden relative shrink-0 text-[11px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[0.06px] w-full whitespace-nowrap&quot; data-node-id=&quot;3176:15084&quot;&gt;
+            Reminders
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start px-[24px] relative shrink-0 w-full&quot; data-name=&quot;Separator&quot; data-node-id=&quot;5591:53210&quot;&gt;
+        &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;5591:53211&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex gap-[14px] items-start pb-[20px] pl-[24px] pt-[14px] relative shrink-0 w-full&quot; data-name=&quot;Actions (Buttons)&quot; data-node-id=&quot;5591:30862&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[7px] items-center relative shrink-0 w-[78px]&quot; data-name=&quot;_Action&quot; data-node-id=&quot;5591:32498&quot;&gt;
+          &lt;div className=&quot;bg-[var(--fills---vibrant\/tertiary,#ededed)] content-stretch flex flex-col items-center justify-center relative rounded-[1000px] shrink-0 size-[70px]&quot; data-name=&quot;Symbol&quot; data-node-id=&quot;I5591:32498;5591:32483&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[70px] text-[25px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[0.06px]&quot; data-node-id=&quot;I5591:32498;5591:32485&quot;&gt;
+              &lt;p className=&quot;leading-[13px] whitespace-pre-wrap&quot;&gt;􀉁&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[30px] leading-[15px] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.1px] w-full whitespace-nowrap&quot; data-node-id=&quot;I5591:32498;5591:32473&quot;&gt;
+            Copy
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[7px] items-center relative shrink-0 w-[78px]&quot; data-name=&quot;_Action&quot; data-node-id=&quot;5591:33550&quot;&gt;
+          &lt;div className=&quot;bg-[var(--fills---vibrant\/tertiary,#ededed)] content-stretch flex flex-col items-center justify-center relative rounded-[1000px] shrink-0 size-[70px]&quot; data-name=&quot;Symbol&quot; data-node-id=&quot;I5591:33550;5591:32483&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[70px] text-[25px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[0.06px]&quot; data-node-id=&quot;I5591:33550;5591:32485&quot;&gt;
+              &lt;p className=&quot;leading-[13px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[30px] leading-[15px] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.1px] w-full whitespace-nowrap&quot; data-node-id=&quot;I5591:33550;5591:32473&quot;&gt;
+            Add to Favorites
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[7px] items-center relative shrink-0 w-[78px]&quot; data-name=&quot;_Action&quot; data-node-id=&quot;5591:33645&quot;&gt;
+          &lt;div className=&quot;bg-[var(--fills---vibrant\/tertiary,#ededed)] content-stretch flex flex-col items-center justify-center relative rounded-[1000px] shrink-0 size-[70px]&quot; data-name=&quot;Symbol&quot; data-node-id=&quot;I5591:33645;5591:32483&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[70px] text-[25px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[0.06px]&quot; data-node-id=&quot;I5591:33645;5591:32485&quot;&gt;
+              &lt;p className=&quot;leading-[13px] whitespace-pre-wrap&quot;&gt;􀖆&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[30px] leading-[15px] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.1px] w-full whitespace-nowrap&quot; data-node-id=&quot;I5591:33645;5591:32473&quot;&gt;
+            Add to Reading List
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[7px] items-center relative shrink-0 w-[78px]&quot; data-name=&quot;_Action&quot; data-node-id=&quot;5591:33785&quot;&gt;
+          &lt;div className=&quot;bg-[var(--fills---vibrant\/tertiary,#ededed)] content-stretch flex flex-col items-center justify-center relative rounded-[1000px] shrink-0 size-[70px]&quot; data-name=&quot;Symbol&quot; data-node-id=&quot;I5591:33785;5591:32483&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[70px] text-[25px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[0.06px]&quot; data-node-id=&quot;I5591:33785;5591:32485&quot;&gt;
+              &lt;p className=&quot;leading-[13px] whitespace-pre-wrap&quot;&gt;􀉚&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[30px] leading-[15px] not-italic overflow-hidden relative shrink-0 text-[13px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.1px] w-full whitespace-nowrap&quot; data-node-id=&quot;I5591:33785;5591:32473&quot;&gt;
+            Add Bookmark
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col gap-[20px] items-center justify-center pb-[20px] pt-[2px] px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Actions (List)&quot; data-node-id=&quot;3176:15086&quot;&gt;
+        &lt;div className=&quot;bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex flex-col items-start overflow-clip relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Action Group 2&quot; data-node-id=&quot;3176:15089&quot;&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15090&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15090;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀖆&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15090;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15090;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15090;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Add to Reading List&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15091&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15091;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀉚&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15091;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15091;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15091;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Add Bookmark&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15092&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15092;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15092;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15092;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15092;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Add to Favorites&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15094&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15094;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀑍&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15094;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15094;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15094;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Add to Home Screen&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex flex-col items-start overflow-clip relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Action Group 3&quot; data-node-id=&quot;3176:15095&quot;&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15096&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15096;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀉥&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15096;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15096;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15096;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Markup&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[52px] items-center pl-[16px] pr-[11px] relative shrink-0 w-full&quot; data-name=&quot;_Actions&quot; data-node-id=&quot;3176:15097&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 size-[44px] text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;I3176:15097;126:59453&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀎚&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Title&quot; data-node-id=&quot;I3176:15097;5591:26670&quot;&gt;
+              &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I3176:15097;5591:26669&quot; /&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] w-full whitespace-nowrap&quot; data-node-id=&quot;I3176:15097;5591:26671&quot;&gt;
+                &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Print&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[4px] items-center justify-center px-[20px] py-[6px] relative rounded-[1000px] shrink-0&quot; data-name=&quot;Button - Liquid Glass - Text&quot; data-node-id=&quot;5591:27944&quot;&gt;
+          &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:27944;5583:24021;5575:44983&quot;&gt;
+            &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5591:27944;5583:24021;5575:75442&quot;&gt;
+              &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5591:27944;5583:24021;5575:75442;5575:32354&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5591:27944;5583:24021;6491:20171&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5591:27944;5583:24021;6491:20172&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+              &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5591:27944;5583:24021;6491:20173&quot; /&gt;
+          &lt;div className=&quot;content-stretch flex h-[36px] items-center justify-center relative rounded-[100px] shrink-0&quot; data-name=&quot;_Label - Text - Default&quot; data-node-id=&quot;I5591:27944;5473:26005&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center whitespace-nowrap&quot; data-node-id=&quot;I5591:27944;5473:26005;5522:11829&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {showGrabber &amp;&amp; &lt;div className=&quot;-translate-x-1/2 absolute bg-[var(--labels\/tertiary,rgba(60,60,67,0.3))] h-[5px] left-[calc(50%-1px)] rounded-[2.5px] top-[5px] w-[36px]&quot; data-name=&quot;Grabber&quot; data-node-id=&quot;3176:15099&quot; /&gt;}
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Caption2/Regular: Font(family: &quot;SF Pro&quot;, style: Regular, size: 11, weight: 400, lineHeight: 13, letterSpacing: 0.05999999865889549), Body/Regular: Font(family: &quot;SF Pro&quot;, style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## _Button - Liquid Glass
+**Node ID:** 5591:67812
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/buttons](https://developer.apple.com/design/human-interface-guidelines/buttons)
+
+## _Close Button
+**Node ID:** 5591:28787
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Button - Liquid Glass - Text
+**Node ID:** 5473:21667
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/buttons](https://developer.apple.com/design/human-interface-guidelines/buttons)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/2e961884-7dc2-4e9f-b095-6f0f54735dce";
+const imgWifi = "https://www.figma.com/api/mcp/asset/197fa78a-ba53-4120-bff1-31894215cd85";
+const imgFrame = "https://www.figma.com/api/mcp/asset/a66df276-c2cf-451a-b6cd-0a8aeba559c6";
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/ad4f4800-ada1-4d5e-974e-c9ab7311bd5d";
+const imgBlur = "https://www.figma.com/api/mcp/asset/d9f16564-ede3-4ce1-90aa-3c6d7210ee0d";
+const imgCircle = "https://www.figma.com/api/mcp/asset/89429d55-0c1a-4f6e-a8f7-618229f17777";
+const imgFaceIdSymbol = "https://www.figma.com/api/mcp/asset/7d4a1316-a4dd-492e-8596-3164306b6294";
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = "9:41" }: StatusBarIPhoneProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]"} data-name="Status bar - iPhone" data-node-id="5465:16807">
+      <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" data-node-id="5465:16808">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="5465:16809">
+          {time}
+        </p>
+      </div>
+      <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" data-node-id="5465:16811">
+        <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" data-node-id="5465:16812">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+        </div>
+        <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" data-node-id="5465:16813">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+        </div>
+        <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" data-node-id="6325:1760">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type FaceIdProps = {
+  className?: string;
+  state?: "Authenticating" | "Success";
+};
+
+export default function FaceId({ className, state = "Authenticating" }: FaceIdProps) {
+  const isAuthenticating = state === "Authenticating";
+  const isSuccess = state === "Success";
+  return (
+    <div className={className || "h-[874px] relative w-[402px]"} id={isAuthenticating ? "node-754_62794" : "node-754_62809"}>
+      <div className="absolute bg-[var(--backgrounds\/primary,white)] content-stretch flex flex-col inset-0 items-center justify-center overflow-clip pb-[10px] pt-[167px] px-[16px] rounded-[50px]" data-name="Screen" id={isAuthenticating ? "node-5661_47755" : "node-5661_47758"}>
+        <div className="absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0" data-name="Scroll Edge Effect - Soft" id={isAuthenticating ? "node-5661_47756" : "node-5661_47759"}>
+          <div className="absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90" data-name="Blur" id={isAuthenticating ? "node-I5661_47756-5661_28853" : "node-I5661_47759-5661_28853"} style={{ maskImage: `url('${imgBlur}')` }} />
+        </div>
+        <div className="flex-[1_0_0] min-h-px min-w-px w-full" data-name="Content Area" id={isAuthenticating ? "node-5661_47757" : "node-5661_47760"} />
+      </div>
+      <StatusBarIPhone className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0" />
+      <div className="absolute backdrop-blur-[1px] inset-0" data-name="Face ID" id={isAuthenticating ? "node-754_45871" : "node-754_45940"}>
+        <div className={`${String.raw`-translate-x-1/2 absolute bg-[var(--grays\/black,black)] rounded-[40px] shadow-[0px_12px_74px_0px_rgba(0,0,0,0.22)] top-[10px] `}${isAuthenticating ? "left-[calc(50%+0.5px)] size-[145px]" : "h-[145px] left-1/2 w-[143px]"}`} data-name="Bezel" id={isAuthenticating ? "node-I754_45871-6281_13635" : "node-I754_45940-6281_13637"} />
+        {isSuccess && (
+          <>
+            <div className="-translate-x-1/2 absolute left-1/2 size-[70px] top-[48px]" data-name="Circle" data-node-id="I754:45940;6281:13609">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgCircle} />
+            </div>
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-1/2 not-italic text-[#87fa89] text-[42px] text-center top-[83px] whitespace-nowrap" data-node-id="I754:45940;6281:13607" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+              <p className="leading-[normal]">􀆅</p>
+            </div>
+          </>
+        )}
+        {isAuthenticating && (
+          <div className="-translate-x-1/2 absolute left-[calc(50%+0.5px)] size-[70px] top-[47.5px]" data-name="Face ID Symbol" data-node-id="I754:45871;6281:13622">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgFaceIdSymbol} />
+          </div>
+        )}
+      </div>
+      <div className="absolute h-[874px] left-0 top-0 w-[402px]" data-name="iPhone 17 Pro" id={isAuthenticating ? "node-5661_47769" : "node-5661_47770"}>
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" id={isAuthenticating ? "node-I5661_47769-6316_14150" : "node-I5661_47770-6316_14150"}>
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Face ID
+**Node ID:** 770:21898
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Face ID
+**Node ID:** 123:58236
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/privacy](https://developer.apple.com/design/human-interface-guidelines/privacy)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

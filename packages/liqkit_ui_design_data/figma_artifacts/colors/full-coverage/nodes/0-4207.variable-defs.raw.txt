@@ -1,0 +1,1 @@
+{"Accents/Red":"#ff383c","Footnote/Regular":"Font(family: \"SF Pro\", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066)"}

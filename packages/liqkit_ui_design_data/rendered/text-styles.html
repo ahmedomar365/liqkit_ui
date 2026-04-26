@@ -1,0 +1,2718 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text styles - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-text-styles-root {
+  width: min(1320px, 100%);
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-text-styles-panel {
+  border: 1px solid #d9d9de;
+  border-radius: 20px;
+  background: rgba(248, 248, 250, 0.88);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-text-styles-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-text-styles-header h2 {
+  margin: 0;
+  font: 600 20px/24px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.35px;
+  color: #111111;
+}
+
+.ios26-text-styles-header p {
+  margin: 0;
+  font: 400 13px/17px "SF Pro Text", "SF Pro", sans-serif;
+  color: #66666c;
+}
+
+.ios26-text-columns {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-text-columns--dynamic {
+  grid-template-columns: repeat(7, minmax(146px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-columns--accessibility {
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-columns--labels {
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.ios26-text-column {
+  --scale: 1;
+  --tone: #000000;
+  min-width: 0;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  padding: 10px;
+  background: #ffffff;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-text-column h3 {
+  margin: 0;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #66666c;
+  border-bottom: 1px solid #ececf1;
+  padding-bottom: 8px;
+}
+
+.ios26-text-column p {
+  margin: 0;
+  color: var(--tone);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-type-large-title,
+.ios26-type-title-1,
+.ios26-type-title-2,
+.ios26-type-title-3,
+.ios26-type-headline,
+.ios26-type-body,
+.ios26-type-callout,
+.ios26-type-subhead,
+.ios26-type-footnote,
+.ios26-type-caption-1,
+.ios26-type-caption-2 {
+  font-size: calc(var(--base-size) * var(--scale));
+  line-height: calc(var(--base-line) * var(--scale));
+  letter-spacing: calc(var(--base-track) * var(--scale));
+}
+
+.ios26-type-large-title {
+  --base-size: 34px;
+  --base-line: 41px;
+  --base-track: 0.4px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 700;
+}
+
+.ios26-type-title-1 {
+  --base-size: 28px;
+  --base-line: 34px;
+  --base-track: 0.36px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-title-2 {
+  --base-size: 22px;
+  --base-line: 28px;
+  --base-track: 0.35px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-title-3 {
+  --base-size: 20px;
+  --base-line: 25px;
+  --base-track: 0.38px;
+  font-family: "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-headline {
+  --base-size: 17px;
+  --base-line: 22px;
+  --base-track: -0.43px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 600;
+}
+
+.ios26-type-body {
+  --base-size: 17px;
+  --base-line: 22px;
+  --base-track: -0.43px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-callout {
+  --base-size: 16px;
+  --base-line: 21px;
+  --base-track: -0.32px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-subhead {
+  --base-size: 15px;
+  --base-line: 20px;
+  --base-track: -0.24px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-footnote {
+  --base-size: 13px;
+  --base-line: 18px;
+  --base-track: -0.08px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-caption-1 {
+  --base-size: 12px;
+  --base-line: 16px;
+  --base-track: 0;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-type-caption-2 {
+  --base-size: 11px;
+  --base-line: 13px;
+  --base-track: 0.06px;
+  font-family: "SF Pro Text", "SF Pro", sans-serif;
+  font-weight: 400;
+}
+
+.ios26-scale-xsmall {
+  --scale: 0.9;
+}
+
+.ios26-scale-small {
+  --scale: 0.95;
+}
+
+.ios26-scale-medium {
+  --scale: 0.98;
+}
+
+.ios26-scale-large {
+  --scale: 1;
+}
+
+.ios26-scale-xlarge {
+  --scale: 1.1;
+}
+
+.ios26-scale-xxlarge {
+  --scale: 1.2;
+}
+
+.ios26-scale-xxxlarge {
+  --scale: 1.32;
+}
+
+.ios26-scale-ax1 {
+  --scale: 1.45;
+}
+
+.ios26-scale-ax2 {
+  --scale: 1.65;
+}
+
+.ios26-scale-ax3 {
+  --scale: 1.85;
+}
+
+.ios26-scale-ax4 {
+  --scale: 2.05;
+}
+
+.ios26-scale-ax5 {
+  --scale: 2.25;
+}
+
+.ios26-tone-primary {
+  --tone: #000000;
+}
+
+.ios26-tone-secondary {
+  --tone: #3c3c43;
+}
+
+.ios26-tone-tertiary {
+  --tone: #3c3c43;
+  opacity: 0.62;
+}
+
+.ios26-tone-quaternary {
+  --tone: #3c3c43;
+  opacity: 0.38;
+}
+
+@media (max-width: 980px) {
+  .ios26-text-styles-root {
+    width: 100%;
+  }
+
+  .ios26-text-styles-panel {
+    padding: 14px;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Text styles</h1>
+        <p class="meta">Category Node <code>0:2194</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-2194" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#text-styles">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (0:3040)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-text-styles-root" data-node-id="0:2194" aria-label="Text styles and dynamic type">
+  <span data-node-id="0:3040" aria-hidden="true"></span>
+  <article class="ios26-text-styles-panel" data-node-id="5418:17465" aria-labelledby="ios26-text-dynamic-title">
+    <header class="ios26-text-styles-header">
+      <h2 id="ios26-text-dynamic-title">Dynamic Type</h2>
+      <p>Scale presets from xSmall to xxxLarge.</p>
+    </header>
+    <div class="ios26-text-columns ios26-text-columns--dynamic">
+      <section class="ios26-text-column ios26-scale-xsmall" data-node-id="224:56258">
+        <h3>xSmall</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-small" data-node-id="224:56259">
+        <h3>Small</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-medium" data-node-id="224:56260">
+        <h3>Medium</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-large" data-node-id="224:56261">
+        <h3>Large (Default)</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-xlarge" data-node-id="224:56262">
+        <h3>xLarge</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-xxlarge" data-node-id="224:56263">
+        <h3>xxLarge</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-xxxlarge" data-node-id="224:56264">
+        <h3>xxxLarge</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+    </div>
+  </article>
+
+  <article class="ios26-text-styles-panel" data-node-id="5418:27121" aria-labelledby="ios26-text-ax-title">
+    <header class="ios26-text-styles-header">
+      <h2 id="ios26-text-ax-title">Dynamic Type Accessibility</h2>
+      <p>AX1 to AX5 accessibility-size presets.</p>
+    </header>
+    <div class="ios26-text-columns ios26-text-columns--accessibility">
+      <section class="ios26-text-column ios26-scale-ax1" data-node-id="5418:27170">
+        <h3>AX1</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-ax2" data-node-id="5418:27158">
+        <h3>AX2</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-ax3" data-node-id="5418:27146">
+        <h3>AX3</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-ax4" data-node-id="5418:27134">
+        <h3>AX4</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-scale-ax5" data-node-id="5418:27122">
+        <h3>AX5</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+    </div>
+  </article>
+
+  <article class="ios26-text-styles-panel" data-node-id="5418:17464" aria-labelledby="ios26-text-color-title">
+    <header class="ios26-text-styles-header">
+      <h2 id="ios26-text-color-title">Text Styles by Label Color</h2>
+      <p>Primary, secondary, tertiary, and quaternary label ramps.</p>
+    </header>
+    <div class="ios26-text-columns ios26-text-columns--labels">
+      <section class="ios26-text-column ios26-tone-primary" data-node-id="224:56274">
+        <h3>Label Color</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-tone-secondary" data-node-id="224:56275">
+        <h3>Secondary Label Color</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-tone-tertiary" data-node-id="224:56276">
+        <h3>Tertiary Label Color</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+      <section class="ios26-text-column ios26-tone-quaternary" data-node-id="224:56277">
+        <h3>Quaternary Label Color</h3>
+        <p class="ios26-type-large-title">Large Title</p>
+        <p class="ios26-type-title-1">Title 1</p>
+        <p class="ios26-type-title-2">Title 2</p>
+        <p class="ios26-type-title-3">Title 3</p>
+        <p class="ios26-type-headline">Headline</p>
+        <p class="ios26-type-body">Body</p>
+        <p class="ios26-type-callout">Callout</p>
+        <p class="ios26-type-subhead">Subhead</p>
+        <p class="ios26-type-footnote">Footnote</p>
+        <p class="ios26-type-caption-1">Caption 1</p>
+        <p class="ios26-type-caption-2">Caption 2</p>
+      </section>
+    </div>
+  </article>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Text styles metadata coverage supplement" data-node-id="0:2194">
+  <header class="ios26-node-coverage-header">
+    <h3>Text styles Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (0:2194). Full coverage is persisted; this supplement lists 301 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (301)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="224:56285" data-node-name="Labels - - - - - - - - - - - -" data-node-reasons="metadata-root-gap">
+      <code>224:56285</code>
+      <span class="ios26-node-coverage-item-name">Labels - - - - - - - - - - - -</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3130" data-node-name="xSmall" data-node-reasons="metadata-root-gap">
+      <code>0:3130</code>
+      <span class="ios26-node-coverage-item-name">xSmall</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3131" data-node-name="Small" data-node-reasons="metadata-root-gap">
+      <code>0:3131</code>
+      <span class="ios26-node-coverage-item-name">Small</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3132" data-node-name="Medium" data-node-reasons="metadata-root-gap">
+      <code>0:3132</code>
+      <span class="ios26-node-coverage-item-name">Medium</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3133" data-node-name="Large (Default)" data-node-reasons="metadata-root-gap">
+      <code>0:3133</code>
+      <span class="ios26-node-coverage-item-name">Large (Default)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3134" data-node-name="xLarge" data-node-reasons="metadata-root-gap">
+      <code>0:3134</code>
+      <span class="ios26-node-coverage-item-name">xLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3135" data-node-name="xxLarge" data-node-reasons="metadata-root-gap">
+      <code>0:3135</code>
+      <span class="ios26-node-coverage-item-name">xxLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3136" data-node-name="xxxLarge" data-node-reasons="metadata-root-gap">
+      <code>0:3136</code>
+      <span class="ios26-node-coverage-item-name">xxxLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27107" data-node-name="Labels - - - - - - - - - - - -" data-node-reasons="metadata-root-gap">
+      <code>5418:27107</code>
+      <span class="ios26-node-coverage-item-name">Labels - - - - - - - - - - - -</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27113" data-node-name="xSmall" data-node-reasons="metadata-root-gap">
+      <code>5418:27113</code>
+      <span class="ios26-node-coverage-item-name">xSmall</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27114" data-node-name="Small" data-node-reasons="metadata-root-gap">
+      <code>5418:27114</code>
+      <span class="ios26-node-coverage-item-name">Small</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27115" data-node-name="Medium" data-node-reasons="metadata-root-gap">
+      <code>5418:27115</code>
+      <span class="ios26-node-coverage-item-name">Medium</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27116" data-node-name="Large (Default)" data-node-reasons="metadata-root-gap">
+      <code>5418:27116</code>
+      <span class="ios26-node-coverage-item-name">Large (Default)</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27117" data-node-name="xLarge" data-node-reasons="metadata-root-gap">
+      <code>5418:27117</code>
+      <span class="ios26-node-coverage-item-name">xLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27118" data-node-name="xxLarge" data-node-reasons="metadata-root-gap">
+      <code>5418:27118</code>
+      <span class="ios26-node-coverage-item-name">xxLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27119" data-node-name="xxxLarge" data-node-reasons="metadata-root-gap">
+      <code>5418:27119</code>
+      <span class="ios26-node-coverage-item-name">xxxLarge</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3210" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3210</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3211" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3211</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3212" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3212</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3213" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3213</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3214" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3214</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3215" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3215</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3216" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3216</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3217" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3217</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3218" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3218</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3219" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3219</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3220" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3220</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3198" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3198</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3199" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3199</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3200" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3200</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3201" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3201</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3202" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3202</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3203" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3203</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3204" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3204</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3205" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3205</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3206" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3206</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3207" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3207</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3208" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3208</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3186" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3186</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3187" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3187</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3188" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3188</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3189" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3189</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3190" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3190</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3191" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3191</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3192" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3192</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3193" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3193</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3194" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3194</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3195" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3195</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3196" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3196</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3174" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3174</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3175" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3175</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3176" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3176</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3177" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3177</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3178" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3178</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3179" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3179</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3180" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3180</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3181" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3181</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3182" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3182</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3183" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3183</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3184" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3184</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3162" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3162</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3163" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3163</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3164" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3164</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3165" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3165</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3166" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3166</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3167" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3167</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3168" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3168</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3169" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3169</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3170" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3170</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3171" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3171</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3172" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3172</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3150" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3150</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3151" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3151</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3152" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3152</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3153" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3153</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3154" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3154</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3155" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3155</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3156" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3156</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3157" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3157</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3158" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3158</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3159" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3159</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3160" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3160</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3138" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>0:3138</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3139" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>0:3139</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3140" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3140</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3141" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>0:3141</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3142" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3142</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3143" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3143</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3144" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3144</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3145" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>0:3145</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3146" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>0:3146</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3147" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>0:3147</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3148" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3148</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27123" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27123</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27124" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27124</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27125" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>5418:27125</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27126" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>5418:27126</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27127" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>5418:27127</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27128" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>5418:27128</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27129" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>5418:27129</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27130" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>5418:27130</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27131" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27131</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27132" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27132</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27133" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>5418:27133</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27135" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27135</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27136" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27136</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27137" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>5418:27137</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27138" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>5418:27138</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27139" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>5418:27139</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27140" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>5418:27140</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27141" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>5418:27141</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27142" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>5418:27142</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27143" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27143</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27144" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27144</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27145" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>5418:27145</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27147" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27147</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27148" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27148</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27149" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>5418:27149</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27150" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>5418:27150</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27151" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>5418:27151</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27152" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>5418:27152</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27153" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>5418:27153</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27154" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>5418:27154</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27155" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27155</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27156" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27156</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27157" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>5418:27157</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27159" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27159</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27160" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27160</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27161" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>5418:27161</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27162" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>5418:27162</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27163" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>5418:27163</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27164" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>5418:27164</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27165" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>5418:27165</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27166" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>5418:27166</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27167" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27167</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27168" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27168</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27169" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>5418:27169</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27171" data-node-name="Caption 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27171</code>
+      <span class="ios26-node-coverage-item-name">Caption 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27172" data-node-name="Caption 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27172</code>
+      <span class="ios26-node-coverage-item-name">Caption 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27173" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>5418:27173</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27174" data-node-name="Subhead" data-node-reasons="metadata-root-gap">
+      <code>5418:27174</code>
+      <span class="ios26-node-coverage-item-name">Subhead</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27175" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>5418:27175</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27176" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>5418:27176</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27177" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>5418:27177</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27178" data-node-name="Title 3" data-node-reasons="metadata-root-gap">
+      <code>5418:27178</code>
+      <span class="ios26-node-coverage-item-name">Title 3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27179" data-node-name="Title 2" data-node-reasons="metadata-root-gap">
+      <code>5418:27179</code>
+      <span class="ios26-node-coverage-item-name">Title 2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27180" data-node-name="Title 1" data-node-reasons="metadata-root-gap">
+      <code>5418:27180</code>
+      <span class="ios26-node-coverage-item-name">Title 1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27181" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>5418:27181</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27182" data-node-name="Labels - - - - - - - - - - - -" data-node-reasons="metadata-root-gap">
+      <code>5418:27182</code>
+      <span class="ios26-node-coverage-item-name">Labels - - - - - - - - - - - -</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27183" data-node-name="AX1" data-node-reasons="metadata-root-gap">
+      <code>5418:27183</code>
+      <span class="ios26-node-coverage-item-name">AX1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27184" data-node-name="AX2" data-node-reasons="metadata-root-gap">
+      <code>5418:27184</code>
+      <span class="ios26-node-coverage-item-name">AX2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27185" data-node-name="AX3" data-node-reasons="metadata-root-gap">
+      <code>5418:27185</code>
+      <span class="ios26-node-coverage-item-name">AX3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27186" data-node-name="AX4" data-node-reasons="metadata-root-gap">
+      <code>5418:27186</code>
+      <span class="ios26-node-coverage-item-name">AX4</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27187" data-node-name="AX5" data-node-reasons="metadata-root-gap">
+      <code>5418:27187</code>
+      <span class="ios26-node-coverage-item-name">AX5</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27195" data-node-name="Labels - - - - - - - - - - - -" data-node-reasons="metadata-root-gap">
+      <code>5418:27195</code>
+      <span class="ios26-node-coverage-item-name">Labels - - - - - - - - - - - -</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27196" data-node-name="AX1" data-node-reasons="metadata-root-gap">
+      <code>5418:27196</code>
+      <span class="ios26-node-coverage-item-name">AX1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27197" data-node-name="AX2" data-node-reasons="metadata-root-gap">
+      <code>5418:27197</code>
+      <span class="ios26-node-coverage-item-name">AX2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27198" data-node-name="AX3" data-node-reasons="metadata-root-gap">
+      <code>5418:27198</code>
+      <span class="ios26-node-coverage-item-name">AX3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27199" data-node-name="AX4" data-node-reasons="metadata-root-gap">
+      <code>5418:27199</code>
+      <span class="ios26-node-coverage-item-name">AX4</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5418:27200" data-node-name="AX5" data-node-reasons="metadata-root-gap">
+      <code>5418:27200</code>
+      <span class="ios26-node-coverage-item-name">AX5</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55824" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55824</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55825" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55825</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55826" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55826</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55827" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55827</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55828" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55828</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55829" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55829</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55830" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55830</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55831" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55831</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55832" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55832</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55833" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55833</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55834" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55834</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55835" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55835</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55836" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55836</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55837" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55837</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55838" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55838</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55839" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55839</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55840" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55840</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55841" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55841</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55842" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55842</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55843" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55843</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55844" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55844</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55845" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55845</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55846" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55846</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55847" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55847</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55848" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55848</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55849" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55849</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55850" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55850</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55851" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55851</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55852" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55852</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55853" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55853</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55854" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55854</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55855" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55855</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55856" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55856</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55857" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55857</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55858" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55858</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55859" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55859</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55860" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55860</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55861" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55861</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55862" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55862</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55863" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55863</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55864" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55864</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55865" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55865</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55866" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55866</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55867" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55867</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55868" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55868</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55869" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55869</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55870" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55870</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55871" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55871</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55872" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55872</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55873" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55873</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55874" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55874</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55875" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55875</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55876" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55876</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55877" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55877</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55878" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55878</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55879" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55879</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55880" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55880</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55881" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55881</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55882" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55882</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55883" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55883</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55884" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55884</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55885" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55885</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55886" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55886</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55887" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55887</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55888" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55888</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55889" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55889</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55890" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55890</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55891" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55891</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55790" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55790</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55791" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55791</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55792" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55792</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55793" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>6:55793</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55794" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55794</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55795" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55795</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55796" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55796</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55797" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>6:55797</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55798" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55798</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55799" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55799</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55800" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55800</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55801" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>6:55801</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55802" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55802</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55803" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55803</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55804" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55804</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55805" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>6:55805</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55806" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55806</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55807" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55807</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55808" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55808</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55809" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>6:55809</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55810" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55810</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55811" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55811</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55812" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55812</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55813" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>6:55813</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55814" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55814</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55815" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>6:55815</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55816" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55816</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55817" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>6:55817</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55818" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55818</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55819" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>6:55819</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55820" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55820</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55821" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>6:55821</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55822" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55822</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="6:55823" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>6:55823</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3008" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>0:3008</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3009" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>0:3009</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3010" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>0:3010</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3011" data-node-name="Caption2" data-node-reasons="metadata-root-gap">
+      <code>0:3011</code>
+      <span class="ios26-node-coverage-item-name">Caption2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3012" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>0:3012</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3013" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>0:3013</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3014" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>0:3014</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3015" data-node-name="Caption1" data-node-reasons="metadata-root-gap">
+      <code>0:3015</code>
+      <span class="ios26-node-coverage-item-name">Caption1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3016" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3016</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3017" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3017</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3018" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3018</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3019" data-node-name="Footnote" data-node-reasons="metadata-root-gap">
+      <code>0:3019</code>
+      <span class="ios26-node-coverage-item-name">Footnote</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3020" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>0:3020</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3021" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>0:3021</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3022" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>0:3022</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3023" data-node-name="Subheadline" data-node-reasons="metadata-root-gap">
+      <code>0:3023</code>
+      <span class="ios26-node-coverage-item-name">Subheadline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3024" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3024</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3025" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3025</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3026" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3026</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3027" data-node-name="Callout" data-node-reasons="metadata-root-gap">
+      <code>0:3027</code>
+      <span class="ios26-node-coverage-item-name">Callout</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3028" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3028</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3029" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3029</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3030" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3030</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3031" data-node-name="Body" data-node-reasons="metadata-root-gap">
+      <code>0:3031</code>
+      <span class="ios26-node-coverage-item-name">Body</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3032" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3032</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3033" data-node-name="Headline" data-node-reasons="metadata-root-gap">
+      <code>0:3033</code>
+      <span class="ios26-node-coverage-item-name">Headline</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3034" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>0:3034</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3035" data-node-name="Title3" data-node-reasons="metadata-root-gap">
+      <code>0:3035</code>
+      <span class="ios26-node-coverage-item-name">Title3</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3036" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>0:3036</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3037" data-node-name="Title2" data-node-reasons="metadata-root-gap">
+      <code>0:3037</code>
+      <span class="ios26-node-coverage-item-name">Title2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3038" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>0:3038</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3039" data-node-name="Title1" data-node-reasons="metadata-root-gap">
+      <code>0:3039</code>
+      <span class="ios26-node-coverage-item-name">Title1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3041" data-node-name="Large Title" data-node-reasons="metadata-root-gap">
+      <code>0:3041</code>
+      <span class="ios26-node-coverage-item-name">Large Title</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="224:56284" data-node-name="Labels - - - - - - - - - - - -" data-node-reasons="metadata-root-gap">
+      <code>224:56284</code>
+      <span class="ios26-node-coverage-item-name">Labels - - - - - - - - - - - -</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3043" data-node-name="Quaternary Label Col" data-node-reasons="metadata-root-gap">
+      <code>0:3043</code>
+      <span class="ios26-node-coverage-item-name">Quaternary Label Col</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3044" data-node-name="Tertiary Label Color" data-node-reasons="metadata-root-gap">
+      <code>0:3044</code>
+      <span class="ios26-node-coverage-item-name">Tertiary Label Color</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3045" data-node-name="Secondary Label Colo" data-node-reasons="metadata-root-gap">
+      <code>0:3045</code>
+      <span class="ios26-node-coverage-item-name">Secondary Label Colo</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="0:3046" data-node-name="Label Color" data-node-reasons="metadata-root-gap">
+      <code>0:3046</code>
+      <span class="ios26-node-coverage-item-name">Label Color</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:193115" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:193115</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/text-styles/0-3040.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/text-styles/0-3040.screenshot.png" alt="Text styles screenshot" />
+        <p><a href="../evidence/figma-artifacts/text-styles/0-3040.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/text-styles/0-3040.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/text-styles.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/text-styles.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/text-styles.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>export default function LargeTitle() {
+  return (
+    &lt;p className=&quot;font-[&#39;SF_Pro:Bold&#39;,sans-serif] leading-[41px] not-italic relative size-full text-[34px] text-[color:var(--labels\/primary,black)] tracking-[0.4px]&quot; data-node-id=&quot;0:3040&quot;&gt;
+      LargeTitle
+    &lt;/p&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Large Title/Emphasized: Font(family: &quot;SF Pro&quot;, style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645).
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

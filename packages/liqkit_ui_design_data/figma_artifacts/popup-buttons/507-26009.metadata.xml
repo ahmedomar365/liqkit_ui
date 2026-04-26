@@ -1,0 +1,7 @@
+<canvas id="507:26009" name="Pop-up Buttons" x="0" y="0" width="0" height="0">
+  <frame id="410:50387" name="Popup Button" x="0" y="0" width="120" height="140">
+    <symbol id="410:50568" name="State=Enabled" x="20" y="20" width="65" height="44" />
+    <symbol id="410:50570" name="State=Disabled" x="20" y="80" width="65" height="44" />
+  </frame>
+  <instance id="544:191862" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

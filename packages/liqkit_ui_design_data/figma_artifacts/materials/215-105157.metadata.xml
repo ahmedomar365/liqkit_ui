@@ -1,0 +1,301 @@
+<canvas id="215:105157" name="Materials" x="0" y="0" width="0" height="0">
+  <frame id="510:78330" name="_Materials/Mode Options" x="1380" y="1750" width="620" height="540">
+    <symbol id="510:78339" name="Mode=Dark, Style=Chrome" x="500" y="140" width="100" height="100" />
+    <symbol id="3095:22065" name="Mode=IC - Dark, Style=Chrome" x="500" y="420" width="100" height="100" />
+    <symbol id="510:78341" name="Mode=Dark, Style=Thick" x="380" y="140" width="100" height="100" />
+    <symbol id="3095:22066" name="Mode=IC - Dark, Style=Thick" x="380" y="420" width="100" height="100" />
+    <symbol id="510:78343" name="Mode=Dark, Style=Regular" x="260" y="140" width="100" height="100" />
+    <symbol id="3095:22067" name="Mode=IC - Dark, Style=Regular" x="260" y="420" width="100" height="100" />
+    <symbol id="510:78345" name="Mode=Dark, Style=Thin" x="140" y="140" width="100" height="100" />
+    <symbol id="3095:22068" name="Mode=IC - Dark, Style=Thin" x="140" y="420" width="100" height="100" />
+    <symbol id="510:78347" name="Mode=Dark, Style=Ultrathin" x="20" y="140" width="100" height="100" />
+    <symbol id="3095:22069" name="Mode=IC - Dark, Style=Ultrathin" x="20" y="420" width="100" height="100" />
+    <symbol id="510:78337" name="Mode=Light, Style=Chrome" x="500" y="20" width="100" height="100" />
+    <symbol id="3095:22070" name="Mode=IC - Light, Style=Chrome" x="500" y="300" width="100" height="100" />
+    <symbol id="510:78335" name="Mode=Light, Style=Thick" x="380" y="20" width="100" height="100" />
+    <symbol id="3095:22071" name="Mode=IC - Light, Style=Thick" x="380" y="300" width="100" height="100" />
+    <symbol id="510:78333" name="Mode=Light, Style=Regular" x="260" y="20" width="100" height="100" />
+    <symbol id="3095:22072" name="Mode=IC - Light, Style=Regular" x="260" y="300" width="100" height="100" />
+    <symbol id="510:78331" name="Mode=Light, Style=Thin" x="140" y="20" width="100" height="100" />
+    <symbol id="3095:22073" name="Mode=IC - Light, Style=Thin" x="140" y="300" width="100" height="100" />
+    <symbol id="510:78329" name="Mode=Light, Style=Ultrathin" x="20" y="20" width="100" height="100" />
+    <symbol id="3095:22074" name="Mode=IC - Light, Style=Ultrathin" x="20" y="300" width="100" height="100" />
+  </frame>
+  <frame id="510:79105" name="_Materials" x="1380" y="1550" width="620" height="140">
+    <symbol id="510:79106" name="Style=Chrome" x="500" y="20" width="100" height="100" />
+    <symbol id="510:79108" name="Style=Thick" x="380" y="20" width="100" height="100" />
+    <symbol id="510:79110" name="Style=Regular" x="260" y="20" width="100" height="100" />
+    <symbol id="510:79112" name="Style=Thin" x="140" y="20" width="100" height="100" />
+    <symbol id="510:79104" name="Style=Ultrathin" x="20" y="20" width="100" height="100" />
+  </frame>
+  <frame id="224:56307" name="Ultrathin - Dark" x="680" y="3050" width="620" height="440">
+    <instance id="510:82658" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82530" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1910" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1911" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1912" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1913" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1914" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1915" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1916" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1917" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1918" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1919" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1920" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1921" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1922" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1923" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1924" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1925" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56306" name="Thin - Dark" x="680" y="2550" width="620" height="440">
+    <instance id="510:82659" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82526" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1876" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1877" name="System Background Primary Light" x="60" y="306.9166259765625" width="500" height="0.4583333432674408" />
+    <text id="0:1878" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1879" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1880" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1881" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1882" name="System Background Tertiary Light" x="340" y="203.3333740234375" width="40" height="36.66666793823242" />
+    <rounded-rectangle id="0:1883" name="System Background Secondary Light " x="340" y="157.5" width="40" height="36.66666793823242" />
+    <rounded-rectangle id="0:1884" name="System Background Primary Light" x="340" y="111.6666259765625" width="40" height="36.66666793823242" />
+    <text id="0:1885" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1886" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1887" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1888" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1889" name="System Background Tertiary Light" x="80" y="203.3333740234375" width="40" height="36.66666793823242" />
+    <rounded-rectangle id="0:1890" name="System Background Secondary Light " x="80" y="157.5" width="40" height="36.66666793823242" />
+    <rounded-rectangle id="0:1891" name="System Background Primary Light" x="80" y="111.6666259765625" width="40" height="36.66666793823242" />
+  </frame>
+  <frame id="224:56305" name="Regular (Default) - Dark" x="680" y="2050" width="620" height="440">
+    <instance id="510:82660" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82523" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1838" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1839" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1840" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1841" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1842" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1843" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1844" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1845" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1846" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1847" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1848" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1849" name="Vibrant Quarternary" x="130" y="265" width="135" height="13" />
+    <text id="0:1850" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1851" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1852" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1853" name="System Background Tertiary Light" x="80" y="250" width="40" height="40" />
+    <rounded-rectangle id="0:1854" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1855" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56300" name="Thick - Dark" x="680" y="1550" width="620" height="440">
+    <instance id="510:82613" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:79123" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1796" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="57:56699" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1797" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1798" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1799" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1800" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1801" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1802" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1803" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1804" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1805" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1806" name="Vibrant Quarternary" x="130" y="265" width="135" height="13" />
+    <text id="0:1807" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1808" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1809" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1810" name="System Background Tertiary Light" x="80" y="250" width="40" height="40" />
+    <rounded-rectangle id="0:1811" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1812" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56301" name="Ultrathin - Light" x="0" y="3050" width="620" height="440">
+    <instance id="510:82650" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82539" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1927" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1928" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1929" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1930" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1931" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1932" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1933" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1934" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1935" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1936" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1937" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1938" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1939" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1940" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1941" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1942" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56302" name="Thin - Light" x="0" y="2550" width="620" height="440">
+    <instance id="510:82651" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82537" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1893" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1894" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1895" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1896" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1897" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1898" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1899" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1900" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1901" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1902" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1903" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1904" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1905" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1906" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1907" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1908" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56303" name="Regular (Default) - Light" x="0" y="2050" width="620" height="440">
+    <instance id="510:82652" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82535" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1857" name="Separator" x="80" y="322" width="54" height="13" />
+    <rounded-rectangle id="0:1858" name="System Background Primary Light" x="60" y="313" width="500" height="0.5" />
+    <text id="0:1859" name="Vibrant Tertiary Fil" x="390" y="214" width="104" height="13" />
+    <text id="0:1860" name="Vibrant Secondary Fi" x="390" y="164" width="120" height="13" />
+    <text id="0:1861" name="Vibrant Primary Fill" x="390" y="114" width="104" height="13" />
+    <text id="0:1862" name="Fills" x="340" y="79" width="22" height="13" />
+    <rounded-rectangle id="0:1863" name="System Background Tertiary Light" x="340" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1864" name="System Background Secondary Light " x="340" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1865" name="System Background Primary Light" x="340" y="100" width="40" height="40" />
+    <text id="0:1866" name="Labels" x="80" y="79" width="36" height="13" />
+    <text id="0:1867" name="Vibrant Tertiary Tex" x="130" y="215" width="111" height="13" />
+    <text id="0:1868" name="Vibrant Quarternary" x="130" y="265" width="135" height="13" />
+    <text id="0:1869" name="Vibrant Secondary Te" x="130" y="165" width="127" height="13" />
+    <text id="0:1870" name="Vibrant Primary Text" x="130" y="115" width="111" height="13" />
+    <rounded-rectangle id="0:1871" name="System Background Tertiary Light" x="80" y="200" width="40" height="40" />
+    <rounded-rectangle id="0:1872" name="System Background Tertiary Light" x="80" y="250" width="40" height="40" />
+    <rounded-rectangle id="0:1873" name="System Background Secondary Light " x="80" y="150" width="40" height="40" />
+    <rounded-rectangle id="0:1874" name="System Background Primary Light" x="80" y="100" width="40" height="40" />
+  </frame>
+  <frame id="224:56304" name="Thick - Light" x="0" y="1550" width="620" height="440">
+    <instance id="510:82653" name="Wallpaper" x="0" y="0" width="620" height="440" />
+    <instance id="510:82533" name="Material" x="60" y="60" width="500" height="320" />
+    <text id="0:1819" name="Separator" x="80" y="320" width="54" height="13" />
+    <rounded-rectangle id="0:1820" name="System Background Primary Light" x="60" y="310.88037109375" width="500" height="0.496614009141922" />
+    <text id="0:1821" name="Vibrant Tertiary Fil" x="390" y="212" width="104" height="13" />
+    <text id="0:1822" name="Vibrant Secondary Fi" x="390" y="162" width="120" height="13" />
+    <text id="0:1823" name="Vibrant Primary Fill" x="390" y="112" width="104" height="13" />
+    <rounded-rectangle id="0:1825" name="System Background Tertiary Light" x="340" y="198.64559936523438" width="40" height="39.72911834716797" />
+    <rounded-rectangle id="0:1826" name="System Background Secondary Light " x="340" y="148.98419189453125" width="40" height="39.72911834716797" />
+    <rounded-rectangle id="0:1827" name="System Background Primary Light" x="340" y="99.32279968261719" width="40" height="39.72911834716797" />
+    <text id="0:1829" name="Vibrant Tertiary Tex" x="130" y="213" width="111" height="13" />
+    <text id="0:1830" name="Vibrant Quarternary" x="130" y="263" width="135" height="13" />
+    <text id="0:1831" name="Vibrant Secondary Te" x="130" y="163" width="127" height="13" />
+    <text id="0:1832" name="Vibrant Primary Text" x="130" y="113" width="111" height="13" />
+    <rounded-rectangle id="0:1833" name="System Background Tertiary Light" x="80" y="198.64559936523438" width="40" height="39.72911834716797" />
+    <rounded-rectangle id="0:1834" name="System Background Tertiary Light" x="80" y="248.30699157714844" width="40" height="39.72911834716797" />
+    <rounded-rectangle id="0:1835" name="System Background Secondary Light " x="80" y="148.98419189453125" width="40" height="39.72911834716797" />
+    <rounded-rectangle id="0:1836" name="System Background Primary Light" x="80" y="99.32279968261719" width="40" height="39.72911834716797" />
+  </frame>
+  <frame id="5661:26943" name="Scroll Edge Effect - Soft" x="680" y="0" width="240" height="900">
+    <symbol id="5661:26942" name="Edge=Leading" x="20" y="460" width="200" height="200" />
+    <symbol id="5661:26944" name="Edge=Trailing" x="20" y="680" width="200" height="200" />
+    <symbol id="5661:26968" name="Edge=Bottom" x="20" y="240" width="200" height="200" />
+    <symbol id="5661:26964" name="Edge=Top" x="20" y="20" width="200" height="200" />
+  </frame>
+  <frame id="5661:26978" name="Scroll Edge Effect - Hard" x="940" y="0" width="240" height="460">
+    <symbol id="5661:26984" name="Edge=Bottom" x="20" y="240" width="200" height="200" />
+    <symbol id="5661:26986" name="Edge=Top" x="20" y="20" width="200" height="200" />
+  </frame>
+  <symbol id="5584:32149" name="_Colors/Dark" x="1380" y="930" width="600" height="20" />
+  <symbol id="5584:32148" name="_Colors/Light" x="2500" y="930" width="600" height="20" />
+  <symbol id="5584:31865" name="_Mask - Squircle" x="240" y="790" width="240" height="240" />
+  <symbol id="5575:28331" name="_Mask - Circle" x="0" y="790" width="200" height="200" />
+  <frame id="5584:32504" name="Liquid Glass - Regular - Large" x="0" y="460" width="400" height="200">
+    <symbol id="5584:31860" name="Mode=Dark" x="210" y="20" width="160" height="160" />
+    <symbol id="5584:31859" name="Mode=Light" x="20" y="20" width="160" height="160" />
+  </frame>
+  <frame id="5584:32503" name="Liquid Glass - Regular - Medium" x="0" y="210" width="400" height="200">
+    <symbol id="5584:31858" name="Mode=Dark" x="210" y="20" width="160" height="160" />
+    <symbol id="5584:31857" name="Mode=Light" x="20" y="20" width="160" height="160" />
+  </frame>
+  <frame id="5584:32505" name="Liquid Glass - Regular - Small" x="0" y="0" width="170" height="170">
+    <symbol id="5431:1764" name="Mode=Dark, State=Primary" x="100" y="100" width="48" height="48" />
+    <symbol id="5426:6767" name="Mode=Dark, State=Default" x="100" y="20" width="48" height="48" />
+    <symbol id="5564:42807" name="Mode=Light, State=Primary" x="20" y="100" width="48" height="48" />
+    <symbol id="5564:42811" name="Mode=Light, State=Default" x="20" y="20" width="48" height="48" />
+  </frame>
+  <symbol id="5914:23547" name="Liquid Glass - Clear/Light" x="441" y="0" width="160" height="160" />
+  <frame id="5583:28439" name="Dark" x="2500" y="0" width="1000" height="860">
+    <instance id="5584:32200" name="_Colors/Light" x="0" y="0" width="600" height="860" />
+    <frame id="5583:28440" name="Frame" x="10" y="30" width="980" height="60">
+      <frame id="5584:32257" name="Frame" x="0" y="6" width="645" height="48">
+        <instance id="5584:32016" name="BG - Small UI" x="30" y="0" width="80" height="48" />
+        <instance id="5584:32258" name="BG - Small UI" x="130" y="0" width="80" height="48" />
+        <instance id="5584:32265" name="BG - Small UI" x="230" y="0" width="80" height="48" />
+        <instance id="5584:32272" name="BG - Small UI" x="330" y="0" width="80" height="48" />
+        <instance id="5584:32279" name="BG - Small UI" x="430" y="0" width="80" height="48" />
+        <instance id="5584:32286" name="BG - Small UI" x="530" y="0" width="80" height="48" />
+      </frame>
+      <text id="5583:28442" name="Small UI Dynamic (Over dark background)" x="670" y="0" width="270" height="60" />
+    </frame>
+    <frame id="5584:31991" name="Frame" x="10" y="140" width="980" height="60">
+      <frame id="5584:32256" name="Frame" x="0" y="6" width="645" height="48">
+        <instance id="5584:32024" name="BG - Small UI - Tinted" x="30" y="0" width="80" height="48" />
+        <instance id="5584:32293" name="BG - Small UI - Tinted" x="130" y="0" width="80" height="48" />
+        <instance id="5584:32300" name="BG - Small UI - Tinted" x="230" y="0" width="80" height="48" />
+        <instance id="5584:32307" name="BG - Small UI - Tinted" x="330" y="0" width="80" height="48" />
+        <instance id="5584:32314" name="BG - Small UI - Tinted" x="430" y="0" width="80" height="48" />
+        <instance id="5584:32321" name="BG - Small UI - Tinted" x="530" y="0" width="80" height="48" />
+      </frame>
+      <text id="5584:31998" name="Small UI Dynamic (Over dark background)" x="670" y="0" width="270" height="60" />
+    </frame>
+    <frame id="5583:28446" name="Frame" x="10" y="250" width="980" height="180">
+      <frame id="5584:32255" name="Frame" x="0" y="0" width="645" height="180">
+        <instance id="5713:51288" name="BG - Medium UI" x="30" y="0" width="585" height="180" />
+      </frame>
+      <text id="5583:28448" name="Medium UI Dark Mode" x="670" y="70" width="270" height="40" />
+    </frame>
+    <frame id="5583:28449" name="Frame" x="10" y="480" width="980" height="300">
+      <frame id="5584:32254" name="Frame" x="0" y="0" width="645" height="300">
+        <instance id="5584:32056" name="Liquid Glass - Regular - Large" x="30" y="0" width="585" height="300" />
+      </frame>
+      <text id="5583:28451" name="Large UI Dark Mode" x="670" y="130" width="270" height="40" />
+    </frame>
+  </frame>
+  <frame id="5583:28429" name="Light" x="1380" y="0" width="1000" height="860">
+    <instance id="5584:32157" name="_Colors/Dark" x="0" y="0" width="600" height="860" />
+    <frame id="5583:28427" name="Frame" x="10" y="30" width="980" height="60">
+      <frame id="5584:32208" name="Frame" x="0" y="6" width="640" height="48">
+        <instance id="5584:32008" name="BG - Small UI" x="30" y="0" width="80" height="48" />
+        <instance id="5584:32165" name="BG - Small UI" x="130" y="0" width="80" height="48" />
+        <instance id="5584:32172" name="BG - Small UI" x="230" y="0" width="80" height="48" />
+        <instance id="5584:32179" name="BG - Small UI" x="330" y="0" width="80" height="48" />
+        <instance id="5584:32186" name="BG - Small UI" x="430" y="0" width="80" height="48" />
+        <instance id="5584:32209" name="BG - Small UI" x="530" y="0" width="80" height="48" />
+      </frame>
+      <text id="5583:28424" name="Small UI Dynamic (Over light background)" x="665" y="0" width="270" height="60" />
+    </frame>
+    <frame id="5584:31982" name="Frame" x="10" y="140" width="980" height="60">
+      <frame id="5584:32216" name="Frame" x="0" y="6" width="645" height="48">
+        <instance id="5584:32000" name="BG - Small UI - Tinted" x="30" y="0" width="80" height="48" />
+        <instance id="5584:32217" name="BG - Small UI - Tinted" x="130" y="0" width="80" height="48" />
+        <instance id="5584:32224" name="BG - Small UI - Tinted" x="230" y="0" width="80" height="48" />
+        <instance id="5584:32231" name="BG - Small UI - Tinted" x="330" y="0" width="80" height="48" />
+        <instance id="5584:32238" name="BG - Small UI - Tinted" x="430" y="0" width="80" height="48" />
+        <instance id="5584:32245" name="BG - Small UI - Tinted" x="530" y="0" width="80" height="48" />
+      </frame>
+      <text id="5584:31989" name="Small UI Dynamic (Over light background)" x="670" y="0" width="270" height="60" />
+    </frame>
+    <frame id="5583:28430" name="Frame" x="10" y="250" width="980" height="180">
+      <frame id="5584:32252" name="Frame" x="0" y="0" width="645" height="180">
+        <instance id="5584:32032" name="BG - Medium UI" x="30" y="0" width="585" height="180" />
+      </frame>
+      <text id="5583:28432" name="Medium UI Light Mode" x="670" y="70" width="270" height="40" />
+    </frame>
+    <frame id="5583:28433" name="Frame" x="10" y="480" width="980" height="300">
+      <frame id="5584:32253" name="Frame" x="0" y="0" width="645" height="300">
+        <instance id="5713:51267" name="BG - Large UI" x="30" y="0" width="585" height="300" />
+      </frame>
+      <text id="5583:28435" name="Large UI Light Mode" x="670" y="130" width="270" height="40" />
+    </frame>
+  </frame>
+  <instance id="544:193109" name="Header" x="0" y="-500" width="1400" height="242" />
+</canvas>

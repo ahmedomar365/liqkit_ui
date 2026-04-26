@@ -1,0 +1,18 @@
+const imgTypeColorModeLight = "https://www.figma.com/api/mcp/asset/f53b722b-52d8-4f71-9f4b-898f99e656ba";
+type SwatchProps = {
+  className?: string;
+  color?: string;
+};
+
+function Swatch({ className, color = "Color" }: SwatchProps) {
+  return (
+    <div className={className || ""} data-name="_Swatch" data-node-id="509:77730">
+      <div className="bg-size-[20px_20px] bg-top-left relative size-[100px]" data-name="Type=Color, Mode=Light" data-node-id="0:4207" style={{ backgroundImage: `url('${imgTypeColorModeLight}')` }}>
+        <div className="absolute bg-[var(--accents\/red,#ff383c)] left-[10px] rounded-[40px] size-[80px] top-[10px]" data-name="Swatch" data-node-id="509:77507" />
+        <p className="absolute bottom-[112%] font-['SF_Pro:Regular',sans-serif] leading-[18px] left-0 not-italic text-[13px] text-black top-[-30%] tracking-[-0.08px]" data-node-id="5532:8026">
+          {color}
+        </p>
+      </div>
+    </div>
+  );
+}

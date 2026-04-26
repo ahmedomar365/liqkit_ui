@@ -1,0 +1,2 @@
+Screenshot captured through Figma MCP on 2026-02-18 for node 27:68922 (State=Off).
+Rendered appearance: gray switch track with knob on the left and off-state label marker on the right.

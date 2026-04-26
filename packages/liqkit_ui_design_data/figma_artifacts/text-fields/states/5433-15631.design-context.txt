@@ -1,0 +1,19 @@
+type TextFieldProps = {
+  className?: string;
+  value?: string;
+};
+
+function TextField({ className, value = "Value" }: TextFieldProps) {
+  return (
+    <div className={className || ""} data-name="Text Field" data-node-id="553:23047">
+      <div className="content-stretch flex h-[52px] items-center px-[16px] relative w-[402px]" data-name="State=Value Entered" data-node-id="5433:15631">
+        <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px relative" data-name="Contents" data-node-id="5433:15632">
+          <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="5469:8035" />
+          <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="5433:15633">
+            <p className="leading-[20px] whitespace-pre-wrap">{value}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

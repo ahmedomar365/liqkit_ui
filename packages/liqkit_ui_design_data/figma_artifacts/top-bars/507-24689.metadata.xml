@@ -1,0 +1,46 @@
+<canvas id="507:24689" name="Tab Bars" x="0" y="0" width="0" height="0">
+  <frame id="5735:64660" name="_Tab Bar Button - iPad - Text" x="960" y="155" width="240" height="130">
+    <symbol id="5569:7317" name="Selected=False, Mode=Light" x="20" y="20" width="75" height="36" />
+    <symbol id="5569:7316" name="Selected=True, Mode=Light" x="20" y="70" width="77" height="36" />
+    <symbol id="5569:7320" name="Selected=False, Mode=Dark" x="127" y="20" width="75" height="36" />
+    <symbol id="5569:7322" name="Selected=True, Mode=Dark" x="127" y="70" width="77" height="36" />
+  </frame>
+  <frame id="5735:64661" name="_Tab Bar Button - iPad - Symbol" x="1220" y="155" width="180" height="130">
+    <symbol id="5569:8168" name="Selected=False, Mode=Light" x="20" y="20" width="54" height="36" />
+    <symbol id="5569:8170" name="Selected=True, Mode=Light" x="20" y="70" width="54" height="36" />
+    <symbol id="5569:8174" name="Mode=Dark,Selected=False" x="100" y="20" width="54" height="36" />
+    <symbol id="5569:8176" name="Mode=Dark,Selected=True" x="100" y="70" width="54" height="36" />
+  </frame>
+  <symbol id="2524:7957" name="Tab Bar - iPad" x="960" y="0" width="659" height="44" />
+  <frame id="5735:65306" name="_Tab Bar Button - iPhone - Search" x="240" y="1050" width="180" height="160">
+    <symbol id="5535:23152" name="Selected=True, Mode=Light" x="20" y="90" width="54" height="54" />
+    <symbol id="5538:24565" name="Selected=False, Mode=Light" x="20" y="20" width="54" height="54" />
+    <symbol id="5568:3938" name="Selected=True, Mode=Dark" x="100" y="90" width="54" height="54" />
+    <symbol id="5568:3941" name="Selected=False, Mode=Dark" x="100" y="20" width="54" height="54" />
+  </frame>
+  <frame id="5735:65307" name="_Tab Bar Button - iPhone - Text" x="0" y="1050" width="210" height="160">
+    <symbol id="5535:23117" name="Selected=True, Mode=Light" x="20" y="90" width="72" height="54" />
+    <symbol id="5535:23119" name="Selected=False, Mode=Light" x="20" y="20" width="72" height="53.5" />
+    <symbol id="5568:3930" name="Selected=True, Mode=Dark" x="120" y="90" width="72" height="54" />
+    <symbol id="5568:3934" name="Selected=False, Mode=Dark" x="120" y="20" width="72" height="54" />
+  </frame>
+  <frame id="3:70967" name="Tab Bar - iPhone" x="0" y="0" width="890" height="960">
+    <symbol id="5801:54206" name="Separate Search=False, Minimized=True, Tabs=5" x="450" y="350" width="402" height="95" />
+    <symbol id="5801:54657" name="Separate Search=True, Minimized=True, Tabs=5" x="450" y="830" width="402" height="95" />
+    <symbol id="5801:54667" name="Separate Search=True, Minimized=True, Tabs=4" x="450" y="720" width="402" height="95" />
+    <symbol id="5801:54676" name="Separate Search=True, Minimized=True, Tabs=3" x="450" y="610" width="402" height="95" />
+    <symbol id="5801:54684" name="Separate Search=True, Minimized=True, Tabs=2" x="450" y="500" width="402" height="95" />
+    <symbol id="5801:54691" name="Separate Search=False, Minimized=True, Tabs=4" x="450" y="240" width="402" height="95" />
+    <symbol id="5801:54698" name="Separate Search=False, Minimized=True, Tabs=3" x="450" y="130" width="402" height="95" />
+    <symbol id="5801:54704" name="Separate Search=False, Minimized=True, Tabs=2" x="450" y="20" width="402" height="95" />
+    <symbol id="5538:24452" name="Separate Search=True, Minimized=False, Tabs=5" x="20" y="830" width="402" height="95" />
+    <symbol id="5538:24460" name="Separate Search=True, Minimized=False, Tabs=4" x="20" y="720" width="402" height="95" />
+    <symbol id="5538:24467" name="Separate Search=True, Minimized=False, Tabs=3" x="20" y="610" width="402" height="95" />
+    <symbol id="5538:24473" name="Separate Search=True, Minimized=False, Tabs=2" x="20" y="500" width="402" height="95" />
+    <symbol id="3:72039" name="Separate Search=False, Minimized=False, Tabs=4" x="20" y="240" width="402" height="95" />
+    <symbol id="3:71910" name="Separate Search=False, Minimized=False, Tabs=3" x="20" y="130" width="402" height="95" />
+    <symbol id="3:71621" name="Separate Search=False, Minimized=False, Tabs=2" x="20" y="20" width="402" height="95" />
+    <symbol id="3:72207" name="Separate Search=False, Minimized=False, Tabs=5" x="20" y="350" width="402" height="95" />
+  </frame>
+  <instance id="544:191817" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

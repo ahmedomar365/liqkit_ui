@@ -1,0 +1,304 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb";
+const imgResizeGrabber = "https://www.figma.com/api/mcp/asset/7ec308fb-5ac6-44b2-aad9-ed580867a7bd";
+const imgWindow = "https://www.figma.com/api/mcp/asset/46ca574d-0660-4208-9539-07b552d863a9";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/df624ee5-2324-4e95-92ce-b436a6dd616d";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/b301b860-e3ac-4244-bed3-7048d8f7c12f";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/062c6834-f722-48b7-9245-67cbeabb4dd2";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type MenuBarItemProps = {
+  className?: string;
+  menuName?: string;
+};
+
+function MenuBarItem({ className, menuName = "Menu" }: MenuBarItemProps) {
+  return (
+    <div className={className || ""} data-name="_Menu bar item" data-node-id="5413:10045">
+      <div className="content-stretch flex items-center justify-center py-[6px] relative" data-name="State=Deselected" data-node-id="5413:10038">
+        <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="5413:10046">
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="5413:10036">
+            {menuName}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WindowResize({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative size-[65px]"} data-name="_Window Resize" data-node-id="5589:4090">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[55.5px] top-1/2" data-name="Resize Grabber" data-node-id="5589:4060">
+        <div className="absolute inset-[61.08%_-0.77%_-0.67%_61.41%]">
+          <img alt="" className="block max-w-none size-full" src={imgResizeGrabber} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Window({ className }: { className?: string }) {
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] overflow-clip relative rounded-[34px] shadow-[0px_20px_76px_0px_rgba(0,0,0,0.2)] size-[400px]"} data-name="Window" data-node-id="5588:3741">
+      <WindowResize className="absolute bottom-0 right-0 size-[65px]" />
+    </div>
+  );
+}
+
+export default function Window1({ className }: { className?: string }) {
+  return (
+    <div className={className || "-translate-x-1/2 -translate-y-1/2 h-[834px] relative w-[1210px]"} data-name="Window" data-node-id="5589:4058">
+      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgWindow} />
+      <div className="-translate-x-1/2 absolute h-[620px] left-1/2 top-[97px] w-[1018px]" data-name="Window" data-node-id="5732:63755">
+        <div className="absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[10px] right-0 top-[10px]" data-name="Toolbar - Top - iPad" data-node-id="5732:63757">
+          <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-name="Leading" data-node-id="I5732:63757;5564:41844">
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5732:63757;5564:41846">
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5732:63757;5564:41846;6491:22565">
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5732:63757;5564:41846;6491:22565;5575:44983">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5732:63757;5564:41846;6491:22565;5575:75442">
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5732:63757;5564:41846;6491:22565;5575:75442;5575:32354" />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5732:63757;5564:41846;6491:22565;6491:20171" />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5732:63757;5564:41846;6491:22565;6491:20172">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5732:63757;5564:41846;6491:22565;6491:20173" />
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" data-node-id="I5732:63757;5564:41846;6491:22970">
+                <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5732:63757;5564:41846;6491:22970;5431:837" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">􀯶</p>
+                </div>
+                <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5732:63757;5564:41846;6491:22970;5431:840" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal]">Label</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5732:63757;5564:41847">
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5732:63757;5564:41847;5566:7888">
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5732:63757;5564:41847;5566:7888;5575:44983">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5732:63757;5564:41847;5566:7888;5575:75442">
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5732:63757;5564:41847;5566:7888;5575:75442;5575:32354" />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5732:63757;5564:41847;5566:7888;6491:20171" />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5732:63757;5564:41847;5566:7888;6491:20172">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5732:63757;5564:41847;5566:7888;6491:20173" />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5732:63757;5564:41847;5432:23135">
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5732:63757;5564:41847;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5732:63757;5564:41848">
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5732:63757;5564:41848;5566:7888">
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5732:63757;5564:41848;5566:7888;5575:44983">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5732:63757;5564:41848;5566:7888;5575:75442">
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5732:63757;5564:41848;5566:7888;5575:75442;5575:32354" />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5732:63757;5564:41848;5566:7888;6491:20171" />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5732:63757;5564:41848;5566:7888;6491:20172">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5732:63757;5564:41848;5566:7888;6491:20173" />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5732:63757;5564:41848;5432:23135">
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5732:63757;5564:41848;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0" data-name="Trailing" data-node-id="I5732:63757;5564:41849">
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5732:63757;5564:41850">
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5732:63757;5564:41850;5566:7888">
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5732:63757;5564:41850;5566:7888;5575:44983">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5732:63757;5564:41850;5566:7888;5575:75442">
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5732:63757;5564:41850;5566:7888;5575:75442;5575:32354" />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5732:63757;5564:41850;5566:7888;6491:20171" />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5732:63757;5564:41850;5566:7888;6491:20172">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5732:63757;5564:41850;5566:7888;6491:20173" />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5732:63757;5564:41850;5432:23135">
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5732:63757;5564:41850;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5732:63757;5564:41851">
+              <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+              <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5732:63757;5564:41851;5566:7888">
+                <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5732:63757;5564:41851;5566:7888;5575:44983">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5732:63757;5564:41851;5566:7888;5575:75442">
+                    <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5732:63757;5564:41851;5566:7888;5575:75442;5575:32354" />
+                  </div>
+                  <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5732:63757;5564:41851;5566:7888;6491:20171" />
+                </div>
+                <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5732:63757;5564:41851;5566:7888;6491:20172">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                    <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                    <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5732:63757;5564:41851;5566:7888;6491:20173" />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5732:63757;5564:41851;5432:23135">
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5732:63757;5564:41851;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                  <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex flex-col gap-[2px] h-[36px] items-center justify-center left-[20px] right-[20px] top-[5px]" data-name="Title and Subtitle" data-node-id="I5732:63757;5564:41882">
+            <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Title - Subheadline" data-node-id="I5732:63757;5827:66834">
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.23px]" data-node-id="I5732:63757;5827:66834;5827:56432">
+                Title
+              </p>
+            </div>
+            <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Subtitle - Caption" data-node-id="I5732:63757;5827:66835">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels---vibrant\/secondary,#727272)]" data-node-id="I5732:63757;5827:66835;5827:56433">
+                Subtitle
+              </p>
+            </div>
+          </div>
+        </div>
+        <Window className="absolute bg-[var(--backgrounds\/primary,white)] inset-0 overflow-clip rounded-[34px] shadow-[0px_20px_76px_0px_rgba(0,0,0,0.2)]" />
+      </div>
+      <div className="absolute content-stretch flex h-[32px] items-center justify-between left-0 px-[26px] right-0 top-0" data-name="Status bar and Menu bar- iPad" data-node-id="5732:63758">
+        <div aria-hidden="true" className="absolute backdrop-blur-[0px] bg-white inset-0 mix-blend-multiply pointer-events-none" />
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="I5732:63758;5413:10008">
+          <p className="relative shrink-0" data-node-id="I5732:63758;5413:10009">
+            9:41
+          </p>
+          <p className="relative shrink-0" data-node-id="I5732:63758;5413:10010">
+            Tue Apr 1
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="I5732:63758;5413:10011">
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="I5732:63758;5413:10012">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="I5732:63758;5413:10013">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="I5732:63758;5413:10014">
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="I5732:63758;5413:10015">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+          </div>
+        </div>
+        <div className="absolute content-stretch flex items-center justify-center left-0 top-0 w-[1210px]" data-name="Menubar" data-node-id="I5732:63758;5413:10077">
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10078">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10078;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10078;5413:10036">
+                App
+              </p>
+            </div>
+          </div>
+          <MenuBarItem className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" menuName="File" />
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10080">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10080;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10080;5413:10036">
+                Edit
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10081">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10081;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10081;5413:10036">
+                Format
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10082">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10082;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10082;5413:10036">
+                View
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10084">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10084;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10084;5413:10036">
+                Window
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center py-[6px] relative shrink-0" data-name="_Menu bar item" data-node-id="I5732:63758;5413:10085">
+            <div className="content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0" data-name="Frame" data-node-id="I5732:63758;5413:10085;5413:10046">
+              <p className="font-['SF_Pro:Medium',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]" data-node-id="I5732:63758;5413:10085;5413:10036">
+                Help
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

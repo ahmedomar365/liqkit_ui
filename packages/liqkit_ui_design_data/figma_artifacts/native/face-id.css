@@ -1,0 +1,89 @@
+.ios26-faceid-root {
+  width: min(870px, 100%);
+  display: block;
+}
+
+.ios26-faceid-states {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 402px));
+  justify-content: center;
+  gap: 28px;
+}
+
+.ios26-faceid-authenticating {
+  width: 402px;
+  max-width: 100%;
+  height: 190px;
+  position: relative;
+  backdrop-filter: blur(1px);
+}
+
+.ios26-faceid-success {
+  width: 402px;
+  max-width: 100%;
+  height: 190px;
+  position: relative;
+  backdrop-filter: blur(1px);
+}
+
+.ios26-faceid-bezel {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 10px;
+  width: 145px;
+  height: 145px;
+  border-radius: 40px;
+  transform: translateX(-50%);
+  background: #000000;
+  box-shadow: 0 12px 74px rgba(0, 0, 0, 0.22);
+}
+
+.ios26-faceid-bezel--success {
+  width: 143px;
+  left: 50%;
+}
+
+.ios26-faceid-symbol {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 47.5px;
+  width: 70px;
+  height: 70px;
+  transform: translateX(-50%);
+  color: #87fa89;
+}
+
+.ios26-faceid-symbol svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-faceid-symbol path {
+  fill: currentColor;
+}
+
+.ios26-faceid-success-symbol {
+  position: absolute;
+  left: 50%;
+  top: 48px;
+  width: 70px;
+  height: 70px;
+  transform: translateX(-50%);
+  color: #87fa89;
+}
+
+.ios26-faceid-success-symbol svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .ios26-faceid-states {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    justify-items: center;
+  }
+}

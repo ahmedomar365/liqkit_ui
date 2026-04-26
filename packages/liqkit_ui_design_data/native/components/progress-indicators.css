@@ -1,0 +1,85 @@
+.ios26-progress-root {
+  width: 976px;
+  height: 880px;
+  position: relative;
+}
+
+.ios26-progress-layout {
+  position: absolute;
+  inset: 0;
+}
+
+.ios26-progress-bars {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  width: 440px;
+  display: grid;
+  gap: 16px;
+}
+
+.ios26-progress-row {
+  height: 44px;
+  display: grid;
+  align-items: center;
+}
+
+.ios26-progress-track {
+  width: 402px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(120, 120, 120, 0.2);
+}
+
+.ios26-progress-fill {
+  width: var(--value);
+  height: 100%;
+  border-radius: 999px;
+  background: #08f;
+}
+
+.ios26-progress-spinners {
+  position: absolute;
+  left: 600px;
+  top: 100px;
+  width: 276px;
+  height: 70px;
+}
+
+.ios26-spinner {
+  position: absolute;
+  border-style: solid;
+  border-color: rgba(60, 60, 67, 0.6);
+  border-right-color: rgba(60, 60, 67, 0.2);
+  border-radius: 50%;
+  animation: ios26-progress-spin 0.9s linear infinite;
+}
+
+.ios26-spinner.is-regular {
+  left: 56px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  border-width: 2.5px;
+}
+
+.ios26-spinner.is-small {
+  left: 198px;
+  top: 20px;
+  width: 22px;
+  height: 22px;
+  border-width: 2px;
+}
+
+@keyframes ios26-progress-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1120px) {
+  .ios26-progress-layout {
+    transform: scale(0.82);
+    transform-origin: top left;
+  }
+}

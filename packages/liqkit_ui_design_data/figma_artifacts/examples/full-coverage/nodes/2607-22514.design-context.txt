@@ -1,0 +1,686 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/c5c3d484-a1f1-4b0c-add2-9fe486954d7a";
+const img1 = "https://www.figma.com/api/mcp/asset/d40f4d42-c808-4f9e-a3be-5bf067ff1780";
+const imgGauge = "https://www.figma.com/api/mcp/asset/29797993-cbf4-4907-85c5-b8f58d66fd62";
+const imgCurrentValueIndicator = "https://www.figma.com/api/mcp/asset/07348a5d-0de9-4fde-943c-824d577f381e";
+const imgLockScreenIPad = "https://www.figma.com/api/mcp/asset/e84d52b2-4d62-4a52-a810-1299146d34cb";
+const imgTicks = "https://www.figma.com/api/mcp/asset/b560d0a9-43cf-4efa-8498-2112ce5c34f8";
+const imgHands = "https://www.figma.com/api/mcp/asset/a07961b7-154d-447e-ac9d-3cef87703c0f";
+const imgChart = "https://www.figma.com/api/mcp/asset/f3da5a13-841b-4721-9e56-baa076b9b2f0";
+const imgGauge1 = "https://www.figma.com/api/mcp/asset/71fe1e4b-1ce6-4030-8ff9-c03078a74314";
+const img941Fill = "https://www.figma.com/api/mcp/asset/5061893c-b91b-4b6e-9ba3-3bb1a0a7322e";
+const img941GlassEffect = "https://www.figma.com/api/mcp/asset/b36d4e0c-04b5-4287-94f9-f61d1519f672";
+const imgBackgroundBlur = "https://www.figma.com/api/mcp/asset/43142835-4d6e-4761-9381-6c858ea89cac";
+const img = "https://www.figma.com/api/mcp/asset/8a693fc7-bddc-46ea-bee5-aa2afb95aaee";
+const img2 = "https://www.figma.com/api/mcp/asset/310050c6-3192-40b4-8d20-4450319be3c1";
+const img3 = "https://www.figma.com/api/mcp/asset/73f65bcc-4d8b-46b7-8262-7ce2edaa2a58";
+const img4 = "https://www.figma.com/api/mcp/asset/1d9c6eb9-357a-4dfb-8b68-c0699e88e377";
+const imgSpeaker = "https://www.figma.com/api/mcp/asset/359efffa-cb57-4650-ac19-6e94b1dad213";
+const imgSun = "https://www.figma.com/api/mcp/asset/4bd072f5-16a7-4b7d-ae85-e3c4335480a9";
+const imgBluetooth = "https://www.figma.com/api/mcp/asset/e9689bc0-7705-4a89-b686-dee0d7a9168d";
+const imgAirDrop = "https://www.figma.com/api/mcp/asset/34e64abb-53be-4363-b4c3-6ce178ab6113";
+const imgWifi = "https://www.figma.com/api/mcp/asset/6ca3aa17-63af-4e83-b289-a4f6fa1791cd";
+const imgBattery = "https://www.figma.com/api/mcp/asset/303f055e-d9da-4ce0-9a66-d421b6be6697";
+const imgPageControl = "https://www.figma.com/api/mcp/asset/4088186f-37c3-4845-b265-4ee40bffdb4e";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type ControlsBgIPadProps = {
+  className?: string;
+  on?: boolean;
+};
+
+function ControlsBgIPad({ className, on = true }: ControlsBgIPadProps) {
+  const isNotOn = !on;
+  return (
+    <div className={className || "relative size-[66px]"} id={isNotOn ? "node-5626_53724" : "node-5626_53722"}>
+      <div className="absolute inset-0 rounded-[100px]" data-name="Fill" id={isNotOn ? "node-5626_53726" : "node-5626_53730"}>
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+          <div className={`absolute inset-0 rounded-[100px] ${isNotOn ? "bg-[#999]" : "bg-[#0f0f0f] mix-blend-plus-lighter"}`} />
+          <div className={`absolute inset-0 rounded-[100px] ${isNotOn ? "bg-[#242424] mix-blend-plus-lighter" : "bg-[#6f6f6f] mix-blend-color-dodge"}`} />
+          {on && <div className="absolute bg-[rgba(255,255,255,0.7)] inset-0 mix-blend-screen rounded-[100px]" />}
+        </div>
+      </div>
+      <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" id={isNotOn ? "node-5626_53727" : "node-5626_53729"} />
+    </div>
+  );
+}
+type ControlsIPad2XProps = {
+  className?: string;
+  detail?: string;
+  showDetail?: boolean;
+  symbol?: string;
+  title?: string;
+};
+
+function ControlsIPad2X({ className, detail = "Detail", showDetail = true, symbol = "􀑚", title = "Title" }: ControlsIPad2XProps) {
+  return (
+    <div className={className || ""} data-name="_Controls - iPad - 2x1" data-node-id="2606:21954">
+      <div className="content-stretch flex gap-[8px] h-[66px] items-center px-[14px] relative w-[142px]" data-name="On=False, Type=Toggle" data-node-id="2606:21967">
+        <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I5626:53832;5626:53726">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+            <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+            <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I5626:53832;5626:53727" />
+        <div className="relative rounded-[100px] shrink-0 size-[40px]" data-name="Symbol" data-node-id="2606:21968">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+            <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+            <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+            <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+          </div>
+          <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="2606:21969" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[normal] whitespace-pre-wrap">{symbol}</p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] items-start justify-center leading-[0] min-h-px min-w-px not-italic relative" data-name="Title and Detail" data-node-id="2606:21970">
+          <div className="flex flex-col justify-center relative shrink-0 text-[15px] text-white tracking-[-0.2px] w-full" data-node-id="2606:21971">
+            <p className="leading-[normal] whitespace-pre-wrap">{title}</p>
+          </div>
+          {showDetail && (
+            <div className="flex flex-col justify-center overflow-hidden relative shrink-0 text-[14px] text-[rgba(255,255,255,0.33)] text-ellipsis tracking-[-0.08px] w-full whitespace-nowrap" data-node-id="2606:21972">
+              <p className="leading-[18px] overflow-hidden">{detail}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+type ControlsIPad2X1Props = {
+  className?: string;
+  detail?: string;
+  symbol?: string;
+  title?: string;
+};
+
+function ControlsIPad2X1({ className, detail = "Detail", symbol = "􀑚", title = "Title" }: ControlsIPad2X1Props) {
+  return (
+    <div className={className || ""} data-name="_Controls - iPad - 2x2" data-node-id="2606:21979">
+      <div className="content-stretch flex flex-col items-start justify-between pb-[17px] pt-[14px] px-[13px] relative size-[142px]" data-name="On=False" data-node-id="2606:21980">
+        <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I5626:53780;5626:53726">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+            <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+            <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I5626:53780;5626:53727" />
+        <div className="relative rounded-[100px] shrink-0 size-[40px]" data-name="Symbol" data-node-id="2606:21981">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+            <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+            <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+            <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+          </div>
+          <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[15px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="2606:21982" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[normal] whitespace-pre-wrap">{symbol}</p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-start justify-center leading-[0] not-italic px-[2px] relative shrink-0 text-[14px] text-ellipsis tracking-[-0.08px] w-full whitespace-nowrap" data-name="Title and Detail" data-node-id="2606:21983">
+          <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center overflow-hidden relative shrink-0 text-white w-full" data-node-id="2606:21984">
+            <p className="leading-[normal] overflow-hidden">{title}</p>
+          </div>
+          <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center overflow-hidden relative shrink-0 text-[rgba(255,255,255,0.33)] w-full" data-node-id="2606:21985">
+            <p className="leading-[18px] overflow-hidden">{detail}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type ControlsIPad1XProps = {
+  className?: string;
+  on?: boolean;
+  symbol?: string;
+};
+
+function ControlsIPad1X({ className, on = true, symbol = "􀑚" }: ControlsIPad1XProps) {
+  const isNotOn = !on;
+  const isOn = on;
+  return (
+    <div className={className || "relative size-[66px]"} id={isNotOn ? "node-2606_21952" : "node-2606_21950"}>
+      <div className="absolute inset-0 rounded-[100px]" data-name="Fill" id={isNotOn ? "node-I5626_53754-5626_53726" : "node-I5626_53734-5626_53730"}>
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+          <div className={`absolute inset-0 rounded-[100px] ${isNotOn ? "bg-[#999]" : "bg-[#0f0f0f] mix-blend-plus-lighter"}`} />
+          <div className={`absolute inset-0 rounded-[100px] ${isNotOn ? "bg-[#242424] mix-blend-plus-lighter" : "bg-[#6f6f6f] mix-blend-color-dodge"}`} />
+          {isOn && <div className="absolute bg-[rgba(255,255,255,0.7)] inset-0 mix-blend-screen rounded-[100px]" />}
+        </div>
+      </div>
+      <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" id={isNotOn ? "node-I5626_53754-5626_53727" : "node-I5626_53734-5626_53729"} />
+      {isOn && (
+        <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic opacity-90 text-[19px] text-[color:var(--accents\/red,#ff383c)] text-center tracking-[-0.2px]" data-node-id="2606:21951" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+          <p className="leading-[normal] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      )}
+      {isNotOn && (
+        <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic text-[19px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="2606:21953" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+          <p className="leading-[normal] whitespace-pre-wrap">{symbol}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LockScreenWidget2X2DateIPadOnly({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative"} data-name="Lock Screen Widget/2x2/Date (iPad Only)" data-node-id="526:38824">
+      <div className="-translate-x-1/2 absolute h-[88.778px] left-[calc(50%-3.56px)] top-[52.22px] w-[38.883px]" data-name="1" data-node-id="558:16">
+        <img alt="" className="absolute block inset-0 max-w-none" src={img1} />
+      </div>
+      <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[normal] left-0 mix-blend-plus-lighter not-italic right-0 text-[#999] text-[32px] text-center top-0 whitespace-pre-wrap" data-node-id="526:38829">
+        Mon Jun
+      </p>
+    </div>
+  );
+}
+type LockScreenWidgetModularWithBarProps = {
+  className?: string;
+  line1?: string;
+  line2?: string;
+  line3?: string;
+};
+
+function LockScreenWidgetModularWithBar({ className, line1 = "11:30AM-12:30PM", line2 = "Design Review", line3 = "Conference Room" }: LockScreenWidgetModularWithBarProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[3px] items-center pr-[8px] py-[8px] relative"} data-name="Lock Screen Widget - Modular with Bar" data-node-id="525:43071">
+      <div className="bg-white h-[54px] mix-blend-color-dodge opacity-90 rounded-[3px] shrink-0 w-[5px]" data-name="Bar" data-node-id="525:43075" />
+      <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-h-px min-w-px not-italic overflow-clip relative tracking-[-0.4px] whitespace-pre-wrap" data-name="Modular Columns" data-node-id="525:43076">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[21px] relative shrink-0 text-[16px] text-white w-full" data-node-id="525:43082">
+          {line1}
+        </p>
+        <p className="font-['SF_Pro:Medium',sans-serif] leading-[21px] relative shrink-0 text-[16px] text-white w-full" data-node-id="525:43080">
+          {line2}
+        </p>
+        <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] relative shrink-0 text-[#999] text-[15px] w-full" data-node-id="525:43078">
+          {line3}
+        </p>
+      </div>
+    </div>
+  );
+}
+type LockScreenWidgetCircularOpenGaugeProps = {
+  className?: string;
+  label?: string;
+  number?: string;
+};
+
+function LockScreenWidgetCircularOpenGauge({ className, label = "AQI", number = "27" }: LockScreenWidgetCircularOpenGaugeProps) {
+  return (
+    <div className={className || "backdrop-blur-[20px] content-stretch flex items-center justify-center p-[7px] relative size-[72px]"} data-name="Lock Screen Widget / Circular / Open Gauge 3" data-node-id="525:43658">
+      <div className="h-[59px] mix-blend-plus-lighter relative shrink-0 w-[58px]" data-name="Frame" data-node-id="525:43645">
+        <div className="absolute inset-[-0.33%_0_23.26%_0]" data-name="Gauge" data-node-id="5591:1109">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgGauge} />
+        </div>
+        <div className="absolute flex inset-[3.85%_20.76%_83.02%_65.89%] items-center justify-center">
+          <div className="-rotate-60 -scale-y-100 flex-none size-[5.67px]">
+            <div className="relative size-full" data-name="Current Value Indicator" data-node-id="5591:1112">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgCurrentValueIndicator} />
+            </div>
+          </div>
+        </div>
+        <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[74.58%_24.14%_1.7%_24.14%] leading-[normal] not-italic text-[12px] text-center text-white whitespace-pre-wrap" data-node-id="525:43656">
+          {label}
+        </p>
+        <p className="absolute font-['SF_Pro:Medium',sans-serif] leading-[normal] left-[calc(50%-14px)] not-italic text-[24.5px] text-white top-[calc(50%-17px)] tracking-[-1px]" data-node-id="525:43657">
+          {number}
+        </p>
+      </div>
+    </div>
+  );
+}
+type LockScreenWidgetTallBodyProps = {
+  className?: string;
+  line1?: string;
+  line2?: string;
+};
+
+function LockScreenWidgetTallBody({ className, line1 = "Label", line2 = "Label" }: LockScreenWidgetTallBodyProps) {
+  return (
+    <div className={className || "-translate-y-1/2 content-stretch flex flex-col gap-[4px] items-start justify-center not-italic pb-[5px] pt-[6px] px-[8px] relative text-white whitespace-pre-wrap"} data-name="Lock Screen Widget - Tall Body" data-node-id="525:43122">
+      <p className="font-['SF_Pro:Bold',sans-serif] h-[16px] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px] w-full" data-node-id="525:43125">
+        {line1}
+      </p>
+      <p className="font-['SF_Pro:Regular',sans-serif] leading-[41px] mix-blend-plus-lighter relative shrink-0 text-[34px] w-full" data-node-id="525:43124">
+        {line2}
+      </p>
+    </div>
+  );
+}
+type LockScreenWidgetInlineProps = {
+  className?: string;
+  text?: string;
+};
+
+function LockScreenWidgetInline({ className, text = "Tue 1 􀆪 SFO 9:41 AM" }: LockScreenWidgetInlineProps) {
+  return (
+    <div className={className || "backdrop-blur-[10px] content-stretch flex flex-col items-center relative w-[327px]"} data-name="Lock Screen Widget - Inline" data-node-id="145:62745">
+      <p className="font-['SF_Pro:Medium',sans-serif] font-['SF_Pro:Semibold',sans-serif] leading-[0] mix-blend-plus-lighter not-italic relative shrink-0 text-[#999] text-[22px] text-center text-white tracking-[-0.2px] w-full whitespace-pre-wrap" data-node-id="145:62737">
+        <span className="leading-[normal]">{text}</span>
+        <span className="leading-[normal]" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+          􀆪
+        </span>
+        <span className="leading-[normal]">{` SFO 9:41 AM`}</span>
+      </p>
+    </div>
+  );
+}
+
+export default function ControlCenter({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[834px] relative w-[1210px]"} data-name="Control Center" data-node-id="2607:22514">
+      <div className="absolute inset-0 overflow-clip" data-name="Control Center - iPad" data-node-id="2607:22159">
+        <div className="absolute inset-0 overflow-clip" data-name="Lock Screen - iPad" data-node-id="I2607:22159;5593:44609">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLockScreenIPad} />
+          <div className="-translate-x-1/2 absolute bottom-[0.5px] h-[19.5px] left-1/2 w-[400px]" data-name="Home Indicator" data-node-id="I2607:22159;5593:44609;2606:21947">
+            <div className="-translate-x-1/2 absolute bottom-[7px] flex h-[5.5px] items-center justify-center left-[calc(50%+0.5px)] w-[315px]">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="bg-[var(--labels\/primary,black)] h-[5.5px] rounded-[100px] w-[315px]" data-name="Home Indicator" data-node-id="I2607:22159;5593:44609;2606:21947;224:56834" />
+              </div>
+            </div>
+          </div>
+          <LockScreenWidgetInline className="-translate-x-1/2 absolute backdrop-blur-[10px] content-stretch flex flex-col items-center left-[calc(50%+0.5px)] top-[66.5px] w-[327px]" />
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[calc(50%+0.5px)] not-italic text-[19px] text-center text-white top-[37.5px] whitespace-nowrap" data-node-id="I2607:22159;5593:44609;2606:21943">
+            <p className="leading-[normal]">􀎡</p>
+          </div>
+          <div className="absolute h-[702px] left-[39px] top-[66px] w-[164px]" data-name="Widgets" data-node-id="I2607:22159;5593:44609;598:3757">
+            <LockScreenWidgetTallBody className="-translate-y-1/2 absolute content-stretch flex flex-col gap-[4px] items-start justify-center left-[1.22%] not-italic pb-[5px] pt-[6px] px-[8px] right-0 text-white top-[calc(50%+315.5px)] whitespace-pre-wrap" line1="Cupertino" line2="9:41AM" />
+            <div className="absolute inset-[64.1%_0_12.82%_1.22%]" data-name="Lock Screen Widget/2x2/Clock Big (iPad Only)" data-node-id="I2607:22159;5593:44609;598:3759">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[25px] bg-[#333] left-1/2 mix-blend-plus-lighter rounded-[100px] size-[148px] top-1/2" data-name="Clock" data-node-id="I2607:22159;5593:44609;598:3759;526:38740" />
+              <div className="absolute font-['SF_Compact_Rounded:Bold',sans-serif] h-[129.405px] leading-[normal] left-[21.31px] not-italic text-[#999] text-[19px] top-[17.03px] w-[119.373px]" data-name="Numerals" data-node-id="I2607:22159;5593:44609;598:3759;598:4521">
+                <p className="absolute left-[calc(50%-10.95px)] opacity-85 top-[calc(50%-64.7px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38812">
+                  12
+                </p>
+                <p className="absolute left-[calc(50%-34.6px)] opacity-85 top-[calc(50%-56.96px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38813">
+                  11
+                </p>
+                <p className="absolute left-[calc(50%-53.05px)] opacity-85 top-[calc(50%-37.62px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38814">
+                  10
+                </p>
+                <p className="absolute left-[calc(50%-59.69px)] opacity-85 top-[calc(50%-11.5px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38815">
+                  9
+                </p>
+                <p className="absolute left-[calc(50%-51.95px)] opacity-85 top-[calc(50%+14.62px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38816">
+                  8
+                </p>
+                <p className="absolute left-[calc(50%-33.07px)] opacity-85 top-[calc(50%+33px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38817">
+                  7
+                </p>
+                <p className="absolute left-[calc(50%-5.52px)] opacity-85 top-[calc(50%+41.7px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38818">
+                  6
+                </p>
+                <p className="absolute left-[calc(50%+18.67px)] opacity-85 top-[calc(50%+33px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38819">
+                  5
+                </p>
+                <p className="absolute left-[calc(50%+38.98px)] opacity-85 top-[calc(50%+14.62px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38820">
+                  4
+                </p>
+                <p className="absolute left-[calc(50%+47.69px)] opacity-85 top-[calc(50%-11.5px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38821">
+                  3
+                </p>
+                <p className="absolute left-[calc(50%+40.45px)] opacity-85 top-[calc(50%-37.62px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38822">
+                  2
+                </p>
+                <p className="absolute left-[calc(50%+22.6px)] opacity-85 top-[calc(50%-56.96px)]" data-node-id="I2607:22159;5593:44609;598:3759;526:38823">
+                  1
+                </p>
+              </div>
+              <div className="absolute inset-[6.41%]" data-name="Ticks" data-node-id="I2607:22159;5593:44609;598:3759;526:39203">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgTicks} />
+              </div>
+              <div className="absolute inset-[27.01%_18.16%_6.71%_31.19%]" data-name="Hands" data-node-id="I2607:22159;5593:44609;598:3759;526:39235">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgHands} />
+              </div>
+            </div>
+            <div className="absolute content-stretch flex flex-col gap-[12px] inset-[51.17%_0_38.57%_1.22%] items-start px-[8px] py-[7px]" data-name="Lock Screen Widget - Rectangular with Chart" data-node-id="I2607:22159;5593:44609;598:3760">
+              <div className="content-stretch flex items-center justify-between not-italic overflow-clip relative shrink-0 text-white w-full" data-name="Header" data-node-id="I2607:22159;5593:44609;598:3760;525:43102">
+                <div className="content-stretch flex gap-[3px] items-center relative shrink-0" data-name="Symbol and Title" data-node-id="I2607:22159;5593:44609;598:3760;5591:558">
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[16px] mix-blend-plus-lighter relative shrink-0 text-[12px]" data-node-id="I2607:22159;5593:44609;598:3760;525:43105" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                    􀛤
+                  </p>
+                  <p className="font-['SF_Pro:Bold',sans-serif] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px] uppercase" data-node-id="I2607:22159;5593:44609;598:3760;525:43104">
+                    AAPL
+                  </p>
+                </div>
+                <p className="font-['SF_Pro:Medium',sans-serif] leading-[20px] mix-blend-plus-lighter relative shrink-0 text-[15px]" data-node-id="I2607:22159;5593:44609;598:3760;525:43103">
+                  +1.78
+                </p>
+              </div>
+              <div className="h-[26px] relative shrink-0 w-[146px]" data-name="Chart" data-node-id="I2607:22159;5593:44609;598:3760;5591:593">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgChart} />
+              </div>
+            </div>
+            <LockScreenWidgetCircularOpenGauge className="absolute backdrop-blur-[20px] content-stretch flex items-center justify-center left-[92px] p-[7px] size-[72px] top-[270px]" />
+            <div className="absolute backdrop-blur-[20px] content-stretch flex flex-col items-center justify-center left-[2px] p-[7px] size-[72px] top-[270px]" data-name="Lock Screen Widget / Circular / Open Gauge 2" data-node-id="I2607:22159;5593:44609;598:3762">
+              <div className="h-[55.387px] mix-blend-plus-lighter relative shrink-0 w-[58px]" data-name="Frame" data-node-id="I2607:22159;5593:44609;598:3762;525:43563">
+                <div className="absolute inset-[0_0_17.91%_0]" data-name="Gauge" data-node-id="I2607:22159;5593:44609;598:3762;145:62651">
+                  <img alt="" className="absolute block inset-0 max-w-none" src={imgGauge1} />
+                </div>
+                <div className="absolute flex inset-[4.45%_20.76%_81.56%_65.89%] items-center justify-center">
+                  <div className="-rotate-60 -scale-y-100 flex-none size-[5.67px]">
+                    <div className="relative size-full" data-name="Current Value Indicator" data-node-id="I2607:22159;5593:44609;598:3762;145:62665">
+                      <img alt="" className="absolute block inset-0 max-w-none" src={imgCurrentValueIndicator} />
+                    </div>
+                  </div>
+                </div>
+                <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[80.14%_19.83%_-3.61%_56.03%] leading-[normal] not-italic text-[11px] text-white whitespace-pre-wrap" data-node-id="I2607:22159;5593:44609;598:3762;145:62630">
+                  78
+                </p>
+                <p className="absolute font-['SF_Pro:Medium',sans-serif] inset-[80.14%_56.03%_-3.61%_18.1%] leading-[normal] not-italic text-[11px] text-white whitespace-pre-wrap" data-node-id="I2607:22159;5593:44609;598:3762;145:62631">
+                  50
+                </p>
+                <p className="absolute font-['SF_Pro:Medium',sans-serif] leading-[normal] left-[calc(50%-15px)] not-italic text-[24px] text-white top-[calc(50%-15.03px)] w-[29px] whitespace-pre-wrap" data-node-id="I2607:22159;5593:44609;598:3762;145:62628">
+                  67
+                </p>
+              </div>
+            </div>
+            <LockScreenWidgetModularWithBar className="absolute content-stretch flex gap-[3px] inset-[25.64%_0_64.1%_1.22%] items-center pr-[8px] py-[8px]" />
+            <LockScreenWidget2X2DateIPadOnly className="absolute inset-[0_0_76.92%_1.22%]" />
+          </div>
+          <div className="-translate-x-1/2 absolute h-[102px] left-[calc(50%-0.34px)] top-[109px] w-[239.313px]" data-name="9:41 - Fill" data-node-id="I2607:22159;5593:44609;6491:17528">
+            <img alt="" className="absolute block inset-0 max-w-none" src={img941Fill} />
+          </div>
+          <div className="-translate-x-1/2 absolute h-[102px] left-[calc(50%-0.34px)] top-[109px] w-[239.313px]" data-name="9:41 - Glass Effect" data-node-id="I2607:22159;5593:44609;6491:17549">
+            <img alt="" className="absolute block inset-0 max-w-none" src={img941GlassEffect} />
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute bottom-[0.5px] h-[19.5px] left-1/2 w-[400px]" data-name="Home Indicator" data-node-id="I2607:22159;2606:21651">
+          <div className="-translate-x-1/2 absolute bottom-[7px] flex h-[5.5px] items-center justify-center left-[calc(50%+0.5px)] w-[315px]">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="bg-[var(--labels\/primary,black)] h-[5.5px] rounded-[100px] w-[315px]" data-name="Home Indicator" data-node-id="I2607:22159;2606:21651;224:56834" />
+            </div>
+          </div>
+        </div>
+        <div className="absolute h-[491px] right-[50px] top-[72px] w-[294px]" data-name="Controls" data-node-id="I2607:22159;5642:6449">
+          <div className="absolute inset-[-75px_-120px_-120px_-120px]" data-name="Background Blur" data-node-id="I2607:22159;5642:7292">
+            <div className="absolute inset-[-100px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[5.45%_4.51%] mask-size-[89.1%_90.97%]" data-name="Background Blur" data-node-id="I2607:22159;5642:6974" style={{ maskImage: `url('${imgBackgroundBlur}')` }}>
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                <div className="absolute bg-[rgba(68,68,68,0.6)] inset-0 mix-blend-lighten" />
+                <div className="absolute bg-[#e5e5e5] inset-0" />
+                <div className="absolute backdrop-blur-[10px] bg-[#111] inset-0 mix-blend-plus-lighter" />
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[152px] rounded-[296px] size-[66px] top-[425px]" data-name="1x1 - Battery" data-node-id="I2607:22159;2606:21798">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:54135;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:54135;5626:53727" />
+            <div className="absolute inset-[37.77%_22.5%_36.88%_23.97%]" data-name="􀺸" data-node-id="I2607:22159;2606:21799">
+              <img alt="" className="absolute block inset-0 max-w-none" src={img} />
+            </div>
+            <div className="absolute inset-[44.17%_43.77%_43.28%_30.37%]" data-name="􀺸" data-node-id="I2607:22159;2606:21800">
+              <img alt="" className="absolute block inset-0 max-w-none" src={img2} />
+            </div>
+          </div>
+          <div className="absolute left-[228px] rounded-[296px] size-[66px] top-[350px]" data-name="1x1 - Screen Sharing" data-node-id="I2607:22159;2606:21801">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:54116;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:54116;5626:53727" />
+            <div className="absolute inset-[33.33%_35.13%_37.85%_28.79%]" data-name="􀏧" data-node-id="I2607:22159;2606:21802">
+              <img alt="" className="absolute block inset-0 max-w-none" src={img3} />
+            </div>
+            <div className="absolute inset-[41.67%_25.76%_29.55%_37.88%]" data-name="􀏧" data-node-id="I2607:22159;2606:21803">
+              <img alt="" className="absolute block inset-0 max-w-none" src={img4} />
+            </div>
+          </div>
+          <ControlsIPad1X className="absolute left-0 size-[66px] top-[198px]" on={false} symbol="􀌟" />
+          <ControlsIPad2X1 className="absolute content-stretch flex flex-col items-start justify-between left-0 pb-[17px] pt-[14px] px-[13px] size-[142px] top-[349px]" symbol="􀛮" />
+          <div className="absolute h-[142px] left-[228px] top-[197px] w-[66px]" data-name="Volume" data-node-id="I2607:22159;2606:21806">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:53988;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:53988;5626:53727" />
+            <div className="absolute bottom-0 h-[72px] left-0 right-0 rounded-bl-[100px] rounded-br-[100px]" data-name="Filled" data-node-id="I2607:22159;2606:21808">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-bl-[100px] rounded-br-[100px]">
+                <div className="absolute bg-[#0f0f0f] inset-0 mix-blend-plus-lighter rounded-bl-[100px] rounded-br-[100px]" />
+                <div className="absolute bg-[#6f6f6f] inset-0 mix-blend-color-dodge rounded-bl-[100px] rounded-br-[100px]" />
+                <div className="absolute bg-[rgba(255,255,255,0.7)] inset-0 mix-blend-screen rounded-bl-[100px] rounded-br-[100px]" />
+              </div>
+            </div>
+            <div className="absolute h-[22.725px] left-[16.29px] top-[97.48px] w-[29.402px]" data-name="Speaker" data-node-id="I2607:22159;2606:21809">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgSpeaker} />
+            </div>
+          </div>
+          <div className="absolute h-[142px] left-[152px] top-[197px] w-[66px]" data-name="Brightness" data-node-id="I2607:22159;2606:21812">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:53963;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:53963;5626:53727" />
+            <div className="absolute bottom-0 h-[87px] left-0 right-0 rounded-bl-[100px] rounded-br-[100px]" data-name="Filled" data-node-id="I2607:22159;2606:21814">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-bl-[100px] rounded-br-[100px]">
+                <div className="absolute bg-[#0f0f0f] inset-0 mix-blend-plus-lighter rounded-bl-[100px] rounded-br-[100px]" />
+                <div className="absolute bg-[#6f6f6f] inset-0 mix-blend-color-dodge rounded-bl-[100px] rounded-br-[100px]" />
+                <div className="absolute bg-[rgba(255,255,255,0.7)] inset-0 mix-blend-screen rounded-bl-[100px] rounded-br-[100px]" />
+              </div>
+            </div>
+            <div className="absolute h-[28.298px] left-[18.87px] top-[94.68px] w-[28.247px]" data-name="Sun" data-node-id="I2607:22159;2606:21815">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgSun} />
+            </div>
+          </div>
+          <ControlsIPad2X className="absolute content-stretch flex gap-[8px] h-[66px] items-center left-0 px-[14px] top-[273px] w-[142px]" symbol="􀆺" />
+          <div className="absolute left-[76px] size-[66px] top-[197px]" data-name="_Controls - iPad - 1x1" data-node-id="I2607:22159;2606:21819">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;2606:21819;5626:53734;5626:53730">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#0f0f0f] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+                <div className="absolute bg-[#6f6f6f] inset-0 mix-blend-color-dodge rounded-[100px]" />
+                <div className="absolute bg-[rgba(255,255,255,0.7)] inset-0 mix-blend-screen rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;2606:21819;5626:53734;5626:53729" />
+            <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-0 justify-center leading-[0] not-italic opacity-90 text-[19px] text-[color:var(--accents\/red,#ff383c)] text-center tracking-[-0.2px]" data-node-id="I2607:22159;2606:21819;2606:21951" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀋞</p>
+            </div>
+          </div>
+          <div className="absolute left-[152px] rounded-[296px] size-[66px] top-[349px]" data-name="1x1 - Rotation Lock" data-node-id="I2607:22159;2606:21820">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:54104;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:54104;5626:53727" />
+            <div className="absolute flex flex-col font-['SF_Pro:Medium',sans-serif] inset-0 justify-center leading-[0] not-italic text-[32px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="I2607:22159;2606:21821">
+              <p className="leading-[normal] whitespace-pre-wrap">􀑚</p>
+            </div>
+          </div>
+          <div className="absolute left-[152px] rounded-[30px] size-[142px] top-[45px]" data-name="Music" data-node-id="I2607:22159;2606:21822">
+            <div className="absolute bottom-0 left-0 top-0 w-[66px]" data-name="_Controls - BG - iPad" data-node-id="I2607:22159;5626:54013">
+              <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:54013;5626:53726">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                  <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                  <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:54013;5626:53727" />
+            </div>
+            <div className="absolute bottom-[24px] flex flex-col font-['SF_Pro:Bold',sans-serif] h-[14px] justify-center leading-[0] not-italic right-[34px] text-[12px] text-center text-white tracking-[-0.2px] translate-x-1/2 translate-y-1/2 w-[20px]" data-node-id="I2607:22159;2606:21823" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀊌</p>
+            </div>
+            <div className="-translate-x-1/2 absolute bottom-[25px] flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] left-[calc(50%-1px)] not-italic text-[25px] text-center text-white tracking-[-0.2px] translate-y-1/2 whitespace-nowrap" data-node-id="I2607:22159;2606:21824">
+              <p className="leading-[normal]">􀊄</p>
+            </div>
+            <div className="-translate-x-1/2 absolute bottom-[24px] flex flex-col font-['SF_Pro:Bold',sans-serif] h-[14px] justify-center leading-[0] left-[34px] not-italic text-[12px] text-center text-white tracking-[-0.2px] translate-y-1/2 w-[20px]" data-node-id="I2607:22159;2606:21825" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+              <p className="leading-[normal] whitespace-pre-wrap">􀊊</p>
+            </div>
+            <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] h-[18px] justify-center leading-[0] left-[16px] not-italic text-[14px] text-[rgba(255,255,255,0.33)] top-[93px] tracking-[-0.08px] w-[110px]" data-node-id="I2607:22159;2606:21826">
+              <p className="leading-[18px] whitespace-pre-wrap">Artist</p>
+            </div>
+            <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] h-[18px] justify-center leading-[0] left-[16px] not-italic text-[14px] text-white top-[75px] tracking-[-0.2px] w-[110px]" data-node-id="I2607:22159;2606:21827">
+              <p className="leading-[normal] whitespace-pre-wrap">Track</p>
+            </div>
+            <div className="absolute right-[14px] rounded-[100px] size-[39px] top-[13.5px]" data-name="AirDrop" data-node-id="I2607:22159;2606:21828">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+                <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+                <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[23px] text-[15px] text-center text-white top-[calc(50%+0.5px)] tracking-[-0.2px]" data-node-id="I2607:22159;2606:21829" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀑢</p>
+              </div>
+            </div>
+            <div className="absolute left-[14px] rounded-[14px] size-[50px] top-[14px]" data-name="Album Cover" data-node-id="I2607:22159;2606:21830">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[14px]">
+                <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[14px]" />
+                <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[14px]" />
+                <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[14px]" />
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-0 rounded-[30px] size-[142px] top-[45px]" data-name="Group" data-node-id="I2607:22159;2606:21831">
+            <div className="absolute inset-0 rounded-[100px]" data-name="Fill" data-node-id="I2607:22159;5626:53908;5626:53726">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[#999] inset-0 rounded-[100px]" />
+                <div className="absolute bg-[#242424] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+            </div>
+            <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[100px]" data-name="Glass Effect" data-node-id="I2607:22159;5626:53908;5626:53727" />
+            <div className="absolute left-[105.33px] rounded-[100px] size-[23px] top-[105.33px]" data-name="Network" data-node-id="I2607:22159;2606:21832">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+                <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+                <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] left-[calc(50%-0.33px)] not-italic size-[23px] text-[9px] text-[color:var(--grays\/white,white)] text-center top-[calc(50%-0.33px)] tracking-[-0.2px]" data-node-id="I2607:22159;2606:21833" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀤆</p>
+              </div>
+            </div>
+            <div className="absolute left-[77px] rounded-[100px] size-[23px] top-[105.33px]" data-name="Personal Hotspot" data-node-id="I2607:22159;2606:21834">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+                <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+                <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[23px] text-[13px] text-[color:var(--grays\/white,white)] text-center top-[calc(50%-0.33px)] tracking-[-0.2px]" data-node-id="I2607:22159;2606:21835" style={{ fontFeatureSettings: "\'ss15\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀉤</p>
+              </div>
+            </div>
+            <div className="absolute left-[105.33px] size-[23px] top-[77px]" data-name="Bluetooth" data-node-id="I2607:22159;2606:21836">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgBluetooth} />
+            </div>
+            <div className="absolute bg-[var(--accents\/green,#34c759)] left-[77px] rounded-[100px] size-[23px] top-[77px]" data-name="Cellular" data-node-id="I2607:22159;2606:21838">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Bold',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[23px] text-[7px] text-[color:var(--grays\/white,white)] text-center top-1/2 tracking-[-0.2px]" data-node-id="I2607:22159;2606:21839" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀭧</p>
+              </div>
+            </div>
+            <div className="absolute bg-[var(--accents\/blue,#08f)] left-[13px] rounded-[100px] size-[51px] top-[77px]" data-name="Wi-Fi" data-node-id="I2607:22159;2606:21840">
+              <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-[19px_14px_18px_14px] justify-center leading-[0] not-italic text-[16px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="I2607:22159;2606:21841" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀙇</p>
+              </div>
+            </div>
+            <div className="absolute left-[77px] size-[51px] top-[13px]" data-name="AirDrop" data-node-id="I2607:22159;2606:21842">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgAirDrop} />
+            </div>
+            <div className="absolute left-[13px] rounded-[100px] size-[51px] top-[13px]" data-name="Airplane Mode" data-node-id="I2607:22159;2606:21851">
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[100px]">
+                <div className="absolute bg-[rgba(17,17,17,0.6)] inset-0 mix-blend-luminosity rounded-[100px]" />
+                <div className="absolute bg-[#777] inset-0 mix-blend-color-dodge rounded-[100px]" />
+                <div className="absolute bg-[#222] inset-0 mix-blend-plus-lighter rounded-[100px]" />
+              </div>
+              <div className="absolute flex flex-col font-['SF_Pro:Bold',sans-serif] inset-[19px_14px_18px_15px] justify-center leading-[0] not-italic text-[16px] text-[color:var(--grays\/white,white)] text-center tracking-[-0.2px]" data-node-id="I2607:22159;2606:21852" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀑓</p>
+              </div>
+            </div>
+          </div>
+          <div className="-translate-x-1/2 absolute h-[18px] left-[calc(50%+92.71px)] top-0 w-[97.428px]" data-name="Status Bar" data-node-id="I2607:22159;2606:21853">
+            <div className="absolute h-[12.328px] left-px top-[2.84px] w-[17.142px]" data-name="Wifi" data-node-id="I2607:22159;2606:21859">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+            </div>
+            <div className="-translate-x-full -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] left-[63px] not-italic text-[15px] text-right text-white top-[9px] whitespace-nowrap" data-node-id="I2607:22159;2606:21858">
+              <p className="leading-[normal]">100%</p>
+            </div>
+            <div className="-translate-x-1/2 absolute bottom-[11.11%] left-[calc(50%+33.79px)] top-[11.11%] w-[31px]" data-name="Battery" data-node-id="I2607:22159;2606:21854">
+              <img alt="" className="absolute block inset-0 max-w-none" src={imgBattery} />
+            </div>
+          </div>
+        </div>
+        <div className="-translate-y-1/2 absolute h-[240.55px] right-[14.67px] top-[calc(50%+58.28px)] w-[21.33px]" data-name="Page Control" data-node-id="I2607:22159;2606:21792">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgPageControl} />
+        </div>
+        <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center leading-[0] not-italic right-[68.67px] size-[44px] text-[15px] text-center text-white top-[38px] translate-x-1/2" data-node-id="I2607:22159;2606:21865">
+          <p className="leading-[normal] whitespace-pre-wrap">􀆨</p>
+        </div>
+        <div className="-translate-y-1/2 absolute flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center leading-[0] not-italic right-[331px] size-[44px] text-[15px] text-center text-white top-[38px] translate-x-1/2" data-node-id="I2607:22159;2606:21866">
+          <p className="leading-[normal] whitespace-pre-wrap">􀅼</p>
+        </div>
+      </div>
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Vibrant Labels/Dark/Vibrant Primary: #FFFFFF, Vibrant Fills/Dark/Vibrant Primary: #333333, Vibrant Labels/Dark/Vibrant Secondary: #999999.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Control Center - iPad
+**Node ID:** 2606:21776
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Lock Screen - iPad
+**Node ID:** 557:20781
+
+Guidelines: https://developer.apple.com/design/human-interface-guidelines/system-experiences Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Home Indicator
+**Node ID:** 106:60033
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/going-full-screen](https://developer.apple.com/design/human-interface-guidelines/going-full-screen)
+
+## Lock Screen Widget - Inline
+**Node ID:** 145:62745
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Lock Screen Widget / Circular / Open Gauge 3
+**Node ID:** 525:43658
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+## Lock Screen Widget / Circular / Open Gauge 2
+**Node ID:** 145:62670
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/widgets](https://developer.apple.com/design/human-interface-guidelines/widgets)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

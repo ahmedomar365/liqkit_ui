@@ -1,0 +1,614 @@
+{
+  "latestSnapshotId": "2026-02-19T18-56-13-539Z",
+  "snapshots": [
+    {
+      "snapshotId": "2026-02-17T16-22-28-928Z",
+      "generatedAt": "2026-02-17T16:22:28.935Z",
+      "fileCount": 25,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T16-22-28-928Z"
+    },
+    {
+      "snapshotId": "2026-02-17T16-24-18-865Z",
+      "generatedAt": "2026-02-17T16:24:18.875Z",
+      "fileCount": 34,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T16-24-18-865Z"
+    },
+    {
+      "snapshotId": "2026-02-17T16-26-32-520Z",
+      "generatedAt": "2026-02-17T16:26:32.530Z",
+      "fileCount": 34,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T16-26-32-520Z"
+    },
+    {
+      "snapshotId": "2026-02-17T16-34-23-999Z",
+      "generatedAt": "2026-02-17T16:34:24.016Z",
+      "fileCount": 87,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T16-34-23-999Z"
+    },
+    {
+      "snapshotId": "2026-02-17T16-35-38-492Z",
+      "generatedAt": "2026-02-17T16:35:38.518Z",
+      "fileCount": 87,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T16-35-38-492Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-40-33-452Z",
+      "generatedAt": "2026-02-17T21:40:33.468Z",
+      "fileCount": 87,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-40-33-452Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-45-04-980Z",
+      "generatedAt": "2026-02-17T21:45:04.995Z",
+      "fileCount": 87,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-45-04-980Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-48-57-889Z",
+      "generatedAt": "2026-02-17T21:48:57.910Z",
+      "fileCount": 91,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-48-57-889Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-49-26-426Z",
+      "generatedAt": "2026-02-17T21:49:26.438Z",
+      "fileCount": 70,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-49-26-426Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-49-50-039Z",
+      "generatedAt": "2026-02-17T21:49:50.051Z",
+      "fileCount": 70,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-49-50-039Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-51-56-476Z",
+      "generatedAt": "2026-02-17T21:51:56.508Z",
+      "fileCount": 126,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-51-56-476Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-52-06-819Z",
+      "generatedAt": "2026-02-17T21:52:06.851Z",
+      "fileCount": 126,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-52-06-819Z"
+    },
+    {
+      "snapshotId": "2026-02-17T21-52-24-455Z",
+      "generatedAt": "2026-02-17T21:52:24.486Z",
+      "fileCount": 126,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T21-52-24-455Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-04-17-171Z",
+      "generatedAt": "2026-02-17T22:04:17.277Z",
+      "fileCount": 456,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-04-17-171Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-35-03-410Z",
+      "generatedAt": "2026-02-17T22:35:03.736Z",
+      "fileCount": 1084,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-35-03-410Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-50-42-468Z",
+      "generatedAt": "2026-02-17T22:50:43.222Z",
+      "fileCount": 2428,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-50-42-468Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-52-24-523Z",
+      "generatedAt": "2026-02-17T22:52:25.021Z",
+      "fileCount": 2642,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-52-24-523Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-56-39-314Z",
+      "generatedAt": "2026-02-17T22:56:40.196Z",
+      "fileCount": 3311,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-56-39-314Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-58-27-343Z",
+      "generatedAt": "2026-02-17T22:58:28.214Z",
+      "fileCount": 3543,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-58-27-343Z"
+    },
+    {
+      "snapshotId": "2026-02-17T22-59-55-942Z",
+      "generatedAt": "2026-02-17T22:59:57.203Z",
+      "fileCount": 3781,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T22-59-55-942Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-01-07-587Z",
+      "generatedAt": "2026-02-17T23:01:08.979Z",
+      "fileCount": 4022,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-01-07-587Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-02-01-462Z",
+      "generatedAt": "2026-02-17T23:02:02.541Z",
+      "fileCount": 4267,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-02-01-462Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-12-00-419Z",
+      "generatedAt": "2026-02-17T23:12:02.386Z",
+      "fileCount": 5049,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-12-00-419Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-14-18-733Z",
+      "generatedAt": "2026-02-17T23:14:20.760Z",
+      "fileCount": 5268,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-14-18-733Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-15-34-702Z",
+      "generatedAt": "2026-02-17T23:15:36.758Z",
+      "fileCount": 5269,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-15-34-702Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-17-58-398Z",
+      "generatedAt": "2026-02-17T23:18:00.523Z",
+      "fileCount": 5271,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-17-58-398Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-18-59-025Z",
+      "generatedAt": "2026-02-17T23:19:01.563Z",
+      "fileCount": 5766,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-18-59-025Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-19-27-307Z",
+      "generatedAt": "2026-02-17T23:19:29.896Z",
+      "fileCount": 6040,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-19-27-307Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-22-33-329Z",
+      "generatedAt": "2026-02-17T23:22:36.113Z",
+      "fileCount": 6266,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-22-33-329Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-30-07-482Z",
+      "generatedAt": "2026-02-17T23:30:10.331Z",
+      "fileCount": 6594,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-30-07-482Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-30-52-964Z",
+      "generatedAt": "2026-02-17T23:30:55.678Z",
+      "fileCount": 6594,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-30-52-964Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-32-01-011Z",
+      "generatedAt": "2026-02-17T23:32:03.935Z",
+      "fileCount": 6597,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-32-01-011Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-32-31-760Z",
+      "generatedAt": "2026-02-17T23:32:34.471Z",
+      "fileCount": 6597,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-32-31-760Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-32-51-460Z",
+      "generatedAt": "2026-02-17T23:32:54.418Z",
+      "fileCount": 6597,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-32-51-460Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-35-27-895Z",
+      "generatedAt": "2026-02-17T23:35:30.826Z",
+      "fileCount": 6879,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-35-27-895Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-39-28-040Z",
+      "generatedAt": "2026-02-17T23:39:31.088Z",
+      "fileCount": 6884,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-39-28-040Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-39-58-909Z",
+      "generatedAt": "2026-02-17T23:40:01.798Z",
+      "fileCount": 6884,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-39-58-909Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-42-34-684Z",
+      "generatedAt": "2026-02-17T23:42:37.954Z",
+      "fileCount": 7118,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-42-34-684Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-50-53-565Z",
+      "generatedAt": "2026-02-17T23:50:56.668Z",
+      "fileCount": 7410,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-50-53-565Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-51-38-464Z",
+      "generatedAt": "2026-02-17T23:51:40.236Z",
+      "fileCount": 7413,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-51-38-464Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-54-43-399Z",
+      "generatedAt": "2026-02-17T23:54:46.600Z",
+      "fileCount": 7415,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-54-43-399Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-56-29-971Z",
+      "generatedAt": "2026-02-17T23:56:32.404Z",
+      "fileCount": 7423,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-56-29-971Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-57-06-952Z",
+      "generatedAt": "2026-02-17T23:57:09.236Z",
+      "fileCount": 7423,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-57-06-952Z"
+    },
+    {
+      "snapshotId": "2026-02-17T23-57-41-253Z",
+      "generatedAt": "2026-02-17T23:57:42.927Z",
+      "fileCount": 7423,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-17T23-57-41-253Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-01-48-940Z",
+      "generatedAt": "2026-02-18T00:01:52.140Z",
+      "fileCount": 7715,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-01-48-940Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-03-02-574Z",
+      "generatedAt": "2026-02-18T00:03:05.727Z",
+      "fileCount": 7718,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-03-02-574Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-06-43-182Z",
+      "generatedAt": "2026-02-18T00:06:46.141Z",
+      "fileCount": 8009,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-06-43-182Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-07-11-460Z",
+      "generatedAt": "2026-02-18T00:07:12.915Z",
+      "fileCount": 8012,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-07-11-460Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-11-13-278Z",
+      "generatedAt": "2026-02-18T00:11:16.271Z",
+      "fileCount": 8022,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-11-13-278Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-12-01-567Z",
+      "generatedAt": "2026-02-18T00:12:04.474Z",
+      "fileCount": 8317,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-12-01-567Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-14-54-738Z",
+      "generatedAt": "2026-02-18T00:14:58.006Z",
+      "fileCount": 8332,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-14-54-738Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-19-42-668Z",
+      "generatedAt": "2026-02-18T00:19:45.747Z",
+      "fileCount": 8630,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-19-42-668Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-20-38-174Z",
+      "generatedAt": "2026-02-18T00:20:40.433Z",
+      "fileCount": 8633,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-20-38-174Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-23-05-722Z",
+      "generatedAt": "2026-02-18T00:23:10.855Z",
+      "fileCount": 8893,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-23-05-722Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-26-13-343Z",
+      "generatedAt": "2026-02-18T00:26:16.253Z",
+      "fileCount": 8914,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-26-13-343Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-27-47-609Z",
+      "generatedAt": "2026-02-18T00:27:50.311Z",
+      "fileCount": 8918,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-27-47-609Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-28-13-414Z",
+      "generatedAt": "2026-02-18T00:28:15.289Z",
+      "fileCount": 8918,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-28-13-414Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-32-19-633Z",
+      "generatedAt": "2026-02-18T00:32:22.925Z",
+      "fileCount": 8953,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-32-19-633Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-33-08-996Z",
+      "generatedAt": "2026-02-18T00:33:11.062Z",
+      "fileCount": 8953,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-33-08-996Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-33-32-700Z",
+      "generatedAt": "2026-02-18T00:33:34.373Z",
+      "fileCount": 8953,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-33-32-700Z"
+    },
+    {
+      "snapshotId": "2026-02-18T00-33-45-910Z",
+      "generatedAt": "2026-02-18T00:33:47.752Z",
+      "fileCount": 8953,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T00-33-45-910Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-03-11-710Z",
+      "generatedAt": "2026-02-18T07:03:15.784Z",
+      "fileCount": 8963,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-03-11-710Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-03-39-827Z",
+      "generatedAt": "2026-02-18T07:03:43.435Z",
+      "fileCount": 8963,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-03-39-827Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-04-08-061Z",
+      "generatedAt": "2026-02-18T07:04:11.678Z",
+      "fileCount": 8963,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-04-08-061Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-04-31-800Z",
+      "generatedAt": "2026-02-18T07:04:35.004Z",
+      "fileCount": 8963,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-04-31-800Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-06-48-834Z",
+      "generatedAt": "2026-02-18T07:06:52.327Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-06-48-834Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-07-23-803Z",
+      "generatedAt": "2026-02-18T07:07:26.522Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-07-23-803Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-07-37-702Z",
+      "generatedAt": "2026-02-18T07:07:40.850Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-07-37-702Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-07-59-334Z",
+      "generatedAt": "2026-02-18T07:08:03.062Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-07-59-334Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-14-53-352Z",
+      "generatedAt": "2026-02-18T07:14:57.165Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-14-53-352Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-15-59-968Z",
+      "generatedAt": "2026-02-18T07:16:03.134Z",
+      "fileCount": 9011,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-15-59-968Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-19-27-767Z",
+      "generatedAt": "2026-02-18T07:19:31.785Z",
+      "fileCount": 9018,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-19-27-767Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-20-57-400Z",
+      "generatedAt": "2026-02-18T07:21:01.297Z",
+      "fileCount": 9018,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-20-57-400Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-21-35-633Z",
+      "generatedAt": "2026-02-18T07:21:38.245Z",
+      "fileCount": 9018,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-21-35-633Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-24-03-663Z",
+      "generatedAt": "2026-02-18T07:24:07.941Z",
+      "fileCount": 9019,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-24-03-663Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-24-26-021Z",
+      "generatedAt": "2026-02-18T07:24:29.137Z",
+      "fileCount": 9019,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-24-26-021Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-25-23-398Z",
+      "generatedAt": "2026-02-18T07:25:27.921Z",
+      "fileCount": 9019,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-25-23-398Z"
+    },
+    {
+      "snapshotId": "2026-02-18T07-26-51-734Z",
+      "generatedAt": "2026-02-18T07:26:56.411Z",
+      "fileCount": 9019,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T07-26-51-734Z"
+    },
+    {
+      "snapshotId": "2026-02-18T19-27-50-646Z",
+      "generatedAt": "2026-02-18T19:27:55.398Z",
+      "fileCount": 12700,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T19-27-50-646Z"
+    },
+    {
+      "snapshotId": "2026-02-18T19-32-06-790Z",
+      "generatedAt": "2026-02-18T19:32:11.550Z",
+      "fileCount": 13026,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-18T19-32-06-790Z"
+    },
+    {
+      "snapshotId": "2026-02-19T08-49-31-690Z",
+      "generatedAt": "2026-02-19T08:49:38.743Z",
+      "fileCount": 13397,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T08-49-31-690Z"
+    },
+    {
+      "snapshotId": "2026-02-19T08-55-11-165Z",
+      "generatedAt": "2026-02-19T08:55:17.847Z",
+      "fileCount": 13728,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T08-55-11-165Z"
+    },
+    {
+      "snapshotId": "2026-02-19T13-54-58-743Z",
+      "generatedAt": "2026-02-19T13:55:06.118Z",
+      "fileCount": 14421,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T13-54-58-743Z"
+    },
+    {
+      "snapshotId": "2026-02-19T13-56-08-181Z",
+      "generatedAt": "2026-02-19T13:56:17.019Z",
+      "fileCount": 14421,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T13-56-08-181Z"
+    },
+    {
+      "snapshotId": "2026-02-19T14-11-42-342Z",
+      "generatedAt": "2026-02-19T14:11:48.951Z",
+      "fileCount": 15190,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T14-11-42-342Z"
+    },
+    {
+      "snapshotId": "2026-02-19T17-25-24-990Z",
+      "generatedAt": "2026-02-19T17:25:34.910Z",
+      "fileCount": 17225,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T17-25-24-990Z"
+    },
+    {
+      "snapshotId": "2026-02-19T18-56-13-539Z",
+      "generatedAt": "2026-02-19T18:56:21.491Z",
+      "fileCount": 18008,
+      "missingCount": 0,
+      "path": "figma-artifacts/snapshots/2026-02-19T18-56-13-539Z"
+    }
+  ]
+}

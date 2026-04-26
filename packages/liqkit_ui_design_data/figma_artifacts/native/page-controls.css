@@ -1,0 +1,82 @@
+.ios26-page-controls-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-page-controls-library {
+  width: min(860px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ios26-page-controls-mode {
+  border-radius: 14px;
+  border: 1px solid #d8dce3;
+  background: #f6f7f9;
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+  --dot-color: #000000;
+  --dot-opacity: 0.3;
+  --dot-active: #000000;
+}
+
+.ios26-page-controls-mode h3 {
+  margin: 0 0 2px;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+  color: #111827;
+}
+
+.ios26-page-controls-mode.is-dark {
+  border-color: #2f3340;
+  background: #12151c;
+  --dot-color: #f5f5f5;
+  --dot-opacity: 0.35;
+  --dot-active: #ffffff;
+}
+
+.ios26-page-controls-mode.is-dark h3 {
+  color: #e5e7eb;
+}
+
+.ios26-page-control-row {
+  width: 100%;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 50px;
+}
+
+.ios26-page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dot-color);
+  opacity: var(--dot-opacity);
+}
+
+.ios26-page-dot.is-sm {
+  width: 6px;
+  height: 6px;
+}
+
+.ios26-page-dot.is-xs {
+  width: 4px;
+  height: 4px;
+}
+
+.ios26-page-dot.is-active {
+  background: var(--dot-active);
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .ios26-page-controls-library {
+    grid-template-columns: 1fr;
+  }
+}

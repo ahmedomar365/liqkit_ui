@@ -1,0 +1,1076 @@
+const imgIconWeatherModeDefault = "https://www.figma.com/api/mcp/asset/cc4f9ccc-a294-4026-87f8-83aaf3b9681d";
+const imgIconAirdropModeDefault = "https://www.figma.com/api/mcp/asset/376710f5-ebf1-4927-b6e4-e12314b643f4";
+const imgIconWeatherModeDark = "https://www.figma.com/api/mcp/asset/b7f08e14-d917-4ec7-a6ec-b9d088e601df";
+const imgIconAirdropModeDark = "https://www.figma.com/api/mcp/asset/9dcdc9ce-e32c-47f4-8643-b2eed581f50b";
+const imgIconWeatherModeClearLight = "https://www.figma.com/api/mcp/asset/76ea9437-9a55-4b3a-b728-a00c29564148";
+const imgIconAirdropModeClearLight = "https://www.figma.com/api/mcp/asset/a5564c15-7ab3-416f-9553-f7305369d3f4";
+const imgIconWatchModeDefault = "https://www.figma.com/api/mcp/asset/19b6b5bb-3ae2-4a5e-95a0-779fecee17bf";
+const imgIconWatchModeDark = "https://www.figma.com/api/mcp/asset/8d259b92-95d1-4e9d-b8fd-5ed4739874ae";
+const imgIconWatchModeClearLight = "https://www.figma.com/api/mcp/asset/a3c13f5a-5ecb-46e2-b2d1-4d1803dd3b2c";
+const imgIconWalletModeDefault = "https://www.figma.com/api/mcp/asset/5fe8de11-8181-4baa-b32c-a2a0a260e220";
+const imgIconWalletModeDark = "https://www.figma.com/api/mcp/asset/1cc76e42-7887-4b20-bb6b-12709fc23a98";
+const imgIconWalletModeClearLight = "https://www.figma.com/api/mcp/asset/019807ad-0502-4a5a-8bd4-7c1bf1b04a1a";
+const imgIconVoiceMemosModeDefault = "https://www.figma.com/api/mcp/asset/ee9f009f-b27d-4804-afef-7cf1b6a2ef02";
+const imgIconVoiceMemosModeDark = "https://www.figma.com/api/mcp/asset/4917e7aa-4f7e-4526-984e-473138f5e3ff";
+const imgIconVoiceMemosModeClearLight = "https://www.figma.com/api/mcp/asset/21f653f2-f6ea-4b36-bfda-2001bc1e8b17";
+const imgIconTvModeDefault = "https://www.figma.com/api/mcp/asset/6d247718-a507-4104-8880-58d20ea6a6ee";
+const imgIconTvModeDark = "https://www.figma.com/api/mcp/asset/4d25cbd4-a000-4fd9-bca3-6a1a739e18c2";
+const imgIconTvModeClearLight = "https://www.figma.com/api/mcp/asset/24ce7a7f-e42a-4b5a-85b8-c8093e8f0c1d";
+const imgIconTranslateModeDefault = "https://www.figma.com/api/mcp/asset/7d8b8842-9110-495d-aa15-edf79ba2249d";
+const imgIconTranslateModeDark = "https://www.figma.com/api/mcp/asset/4e4c5e0e-bcc8-4b37-b544-db098a2debc1";
+const imgIconTranslateModeClearLight = "https://www.figma.com/api/mcp/asset/47b21e48-20b7-45ea-8c43-8b1094c76f2f";
+const imgIconTipsModeDefault = "https://www.figma.com/api/mcp/asset/ed8c3891-4a8d-4a67-af93-4338f1bb1c56";
+const imgIconTipsModeDark = "https://www.figma.com/api/mcp/asset/a46cd75b-8806-43cc-85f6-c279ec17d1c6";
+const imgIconTipsModeClearLight = "https://www.figma.com/api/mcp/asset/77200d77-cb57-4bd1-b534-ee7116a85f85";
+const imgIconStocksModeDefault = "https://www.figma.com/api/mcp/asset/b838a87f-d9e2-4f80-a085-5a8a5b2d35d9";
+const imgIconStocksModeDark = "https://www.figma.com/api/mcp/asset/418f4308-2612-4a13-924d-e4002c8ad4c4";
+const imgIconStocksModeClearLight = "https://www.figma.com/api/mcp/asset/1d78b6fa-be48-4355-973c-8d0e268dd0b4";
+const imgIconShortcutsModeDefault = "https://www.figma.com/api/mcp/asset/6d818590-36b5-4181-83ef-c6d0296c514d";
+const imgIconShortcutsModeDark = "https://www.figma.com/api/mcp/asset/a5ecb193-861b-4fcb-a181-59ee44e921a6";
+const imgIconShortcutsModeClearLight = "https://www.figma.com/api/mcp/asset/8248c297-caf3-45a9-b7c3-e89146163c02";
+const imgIconSettingsModeDefault = "https://www.figma.com/api/mcp/asset/f51e93d7-b8bd-4e1d-86d2-e9891e14ffef";
+const imgIconSettingsModeDark = "https://www.figma.com/api/mcp/asset/66b60794-5cf2-42dc-bbdd-8d39cbdb4137";
+const imgIconSettingsModeClearLight = "https://www.figma.com/api/mcp/asset/6fbac21c-9e3d-4664-8375-9c6f332651df";
+const imgIconSafariModeDefault = "https://www.figma.com/api/mcp/asset/291f177c-1acb-467c-b750-991970bcb876";
+const imgIconSafariModeDark = "https://www.figma.com/api/mcp/asset/8ae118f0-a67d-433c-a6d5-113a1d4af193";
+const imgIconSafariModeClearLight = "https://www.figma.com/api/mcp/asset/774b10d6-6c00-455c-8b09-55c7c10d600a";
+const imgIconRemindersModeDefault = "https://www.figma.com/api/mcp/asset/9263d6b7-a366-42a3-b988-711e84f83ce0";
+const imgIconRemindersModeDark = "https://www.figma.com/api/mcp/asset/9e7d8c7d-4224-4afe-b3d4-6a274d1e07db";
+const imgIconRemindersModeClearLight = "https://www.figma.com/api/mcp/asset/9f95747b-3e74-4777-a309-219687d37a35";
+const imgIconPreviewModeDefault = "https://www.figma.com/api/mcp/asset/02fbcafb-9184-4d06-8669-a04e3038a377";
+const imgIconPreviewModeDark = "https://www.figma.com/api/mcp/asset/bceae1f7-7dc5-4fd8-a001-0e498897e138";
+const imgIconPreviewModeClearLight = "https://www.figma.com/api/mcp/asset/434238a0-99b2-47cd-8592-8b38cb493739";
+const imgIconPodcastsModeDefault = "https://www.figma.com/api/mcp/asset/de8d95a1-0980-4bfd-b5ee-b8513c28a048";
+const imgIconPodcastsModeDark = "https://www.figma.com/api/mcp/asset/6e00062b-3b30-4028-81e5-3113722187a0";
+const imgIconPodcastsModeClearLight = "https://www.figma.com/api/mcp/asset/ee74170f-4bac-4b61-993d-6238f7bee2c7";
+const imgIconPhotosModeDefault = "https://www.figma.com/api/mcp/asset/2eac8939-7579-49b7-8293-bd95586c7675";
+const imgIconPhotosModeDark = "https://www.figma.com/api/mcp/asset/f9768e82-4382-4d60-b631-75673fd6ff7b";
+const imgIconPhotosModeClearLight = "https://www.figma.com/api/mcp/asset/4ee333a5-4ce4-4c07-b54f-465df60da81d";
+const imgIconPhoneModeDefault = "https://www.figma.com/api/mcp/asset/63f55885-a369-41af-b992-95eac14ce2a9";
+const imgIconPhoneModeDark = "https://www.figma.com/api/mcp/asset/a333b662-60a8-4bb9-aa83-7c32cdda0dd6";
+const imgIconPhoneModeClearLight = "https://www.figma.com/api/mcp/asset/4b5f690c-11a4-491b-bdc1-0cfd29832174";
+const imgIconPasswordsModeDefault = "https://www.figma.com/api/mcp/asset/71927bd0-4b7d-42e4-bb79-8fc49f2c8f08";
+const imgIconPasswordsModeDark = "https://www.figma.com/api/mcp/asset/65ff5b60-b93e-4342-aa50-952ec60cba0c";
+const imgIconPasswordsModeClearLight = "https://www.figma.com/api/mcp/asset/8e26ed81-bc1f-4d65-a97b-81cd73510b83";
+const imgIconPagesModeDefault = "https://www.figma.com/api/mcp/asset/78d2f401-aa24-493f-b2bf-d729f8884f84";
+const imgIconPagesModeDark = "https://www.figma.com/api/mcp/asset/dc947e3b-38b6-4fe3-9b6e-09df98facdc9";
+const imgIconPagesModeClearLight = "https://www.figma.com/api/mcp/asset/883e0f63-4316-4998-a2dd-565094f88526";
+const imgIconNumberModeDefault = "https://www.figma.com/api/mcp/asset/3fa5a3ee-774b-478b-a82a-64c48d9a1775";
+const imgIconNumberModeDark = "https://www.figma.com/api/mcp/asset/019afcee-bab0-4583-9d4c-405ef156472c";
+const imgIconNumberModeClearLight = "https://www.figma.com/api/mcp/asset/a8fa0e13-22c8-4829-93b6-8cf95aa4a147";
+const imgIconNotesModeDefault = "https://www.figma.com/api/mcp/asset/28e48391-5a42-4bdc-a425-50fa88fdb06a";
+const imgIconNotesModeDark = "https://www.figma.com/api/mcp/asset/d2d44437-cf49-4aa1-88ba-8eeed13180b8";
+const imgIconNotesModeClearLight = "https://www.figma.com/api/mcp/asset/96201868-e6c6-4036-8c69-645d5f526493";
+const imgIconNewsModeDefault = "https://www.figma.com/api/mcp/asset/c7101dad-e894-401c-b27c-2e4e6bde143a";
+const imgIconNewsModeDark = "https://www.figma.com/api/mcp/asset/58b38643-9ca7-4e64-9225-fd58f4ac3a51";
+const imgIconNewsModeClearLight = "https://www.figma.com/api/mcp/asset/3b30594d-a6cd-4c3d-a665-314b26b69e0f";
+const imgIconMusicModeDefault = "https://www.figma.com/api/mcp/asset/dfc3ee86-4d52-4da3-b8e8-3d2379b43ad3";
+const imgIconMusicModeDark = "https://www.figma.com/api/mcp/asset/8f69349b-131a-4f0d-9c55-ecf38d84cceb";
+const imgIconMusicModeClearLight = "https://www.figma.com/api/mcp/asset/9d7749db-1720-4247-b646-797b242d01fc";
+const imgIconMessagesModeDefault = "https://www.figma.com/api/mcp/asset/1852c596-63d5-45f5-b37a-70ba4ecbf6b8";
+const imgIconMessagesModeDark = "https://www.figma.com/api/mcp/asset/bab6bdb4-fe7b-4d54-b0d2-dc9f6e48117a";
+const imgIconMessagesModeClearLight = "https://www.figma.com/api/mcp/asset/0b88ae4d-3fa2-4ab9-9451-3e24c644a1dd";
+const imgIconMeasureModeDefault = "https://www.figma.com/api/mcp/asset/71718047-4138-482b-8038-46a22b3cb893";
+const imgIconMeasureModeDark = "https://www.figma.com/api/mcp/asset/5673f5de-cb0c-4659-89e8-322f6a537012";
+const imgIconMeasureModeClearLight = "https://www.figma.com/api/mcp/asset/99f1d86e-9d09-43d3-aea8-b26f1929876a";
+const imgIconMapsModeDefault = "https://www.figma.com/api/mcp/asset/c3cd7c7a-660f-41cf-8f06-15620b5d4b6c";
+const imgIconMapsModeDark = "https://www.figma.com/api/mcp/asset/ab2a5703-e2d6-444b-ae34-5baf8f042e8e";
+const imgIconMapsModeClearLight = "https://www.figma.com/api/mcp/asset/7a6b8e1d-0d66-4110-be08-a456f49b8560";
+const imgIconMailModeDefault = "https://www.figma.com/api/mcp/asset/74905983-7d38-463f-8d47-6431b492a9ea";
+const imgIconMailModeDark = "https://www.figma.com/api/mcp/asset/76089f36-2062-41c1-8219-57277a3d3ef3";
+const imgIconMailModeClearLight = "https://www.figma.com/api/mcp/asset/9f39c0f0-a2e8-4a6f-a8b3-9843ae31fb08";
+const imgIconKeynoteModeDefault = "https://www.figma.com/api/mcp/asset/c88fa577-3e28-4fef-92e8-8ce32b0c5a18";
+const imgIconKeynoteModeDark = "https://www.figma.com/api/mcp/asset/0ebcb39f-9614-4361-9adb-1d0bbd61735c";
+const imgIconKeynoteModeClearLight = "https://www.figma.com/api/mcp/asset/8caf5f3b-e121-44e2-ab79-de3dc5ec1154";
+const imgIconITunesStoreModeDefault = "https://www.figma.com/api/mcp/asset/9abd116b-f81a-4d54-a724-314ef2ebbcf5";
+const imgIconITunesStoreModeDark = "https://www.figma.com/api/mcp/asset/91d7718a-6897-4d8e-85eb-215f4443f32d";
+const imgIconITunesStoreModeClearLight = "https://www.figma.com/api/mcp/asset/e6995254-65c3-4fc0-8f68-8c702b5ce208";
+const imgIconHomeModeDefault = "https://www.figma.com/api/mcp/asset/b95d2f20-11bf-4f58-a1a0-9f6c934421c2";
+const imgIconHomeModeDark = "https://www.figma.com/api/mcp/asset/8af0cf14-7422-490d-a1eb-d1679945925e";
+const imgIconHomeModeClearLight = "https://www.figma.com/api/mcp/asset/3086e97b-c3c5-414b-9984-8ac842f73c39";
+const imgIconHealthModeDefault = "https://www.figma.com/api/mcp/asset/025b216a-08d8-4fe9-bc37-e1beec091635";
+const imgIconHealthModeDark = "https://www.figma.com/api/mcp/asset/5828fbb7-df3c-4322-b589-6d4626b39f3c";
+const imgIconHealthModeClearLight = "https://www.figma.com/api/mcp/asset/d15315d3-bf29-4ff2-b790-51a7812d907b";
+const imgIconGamesModeDefault = "https://www.figma.com/api/mcp/asset/1145bc6f-2b51-4e35-b583-c196f0ee1467";
+const imgIconGamesModeDark = "https://www.figma.com/api/mcp/asset/e17c5435-e646-4007-941f-4ac78201e50a";
+const imgIconGamesModeClearLight = "https://www.figma.com/api/mcp/asset/f9f07859-1977-4441-98c5-f502da0d5bdb";
+const imgIconFreeformModeDefault = "https://www.figma.com/api/mcp/asset/fffd6611-3a97-44a2-b675-5eda32b9fd61";
+const imgIconFreeformModeDark = "https://www.figma.com/api/mcp/asset/99ca5505-b45c-4afe-ae06-7ff0dcd23635";
+const imgIconFreeformModeClearLight = "https://www.figma.com/api/mcp/asset/88c1cd17-c2ab-41fa-867e-f2eb2702c2a8";
+const imgIconFitnessModeDefault = "https://www.figma.com/api/mcp/asset/a00d24ae-f49f-4b80-aa64-5c2751d06369";
+const imgIconFitnessModeDark = "https://www.figma.com/api/mcp/asset/0a7ae231-fec1-4ce2-a5e9-73ed8f7a6357";
+const imgIconFitnessModeClearLight = "https://www.figma.com/api/mcp/asset/fbff4493-9db5-471f-b5e0-f14fde2bf491";
+const imgIconFindMyModeDefault = "https://www.figma.com/api/mcp/asset/8fd95f7e-b3f5-43fc-8655-0ea76cab05d6";
+const imgIconFindMyModeDark = "https://www.figma.com/api/mcp/asset/57609be2-2c7e-4713-92f9-fbf010e5b7f8";
+const imgIconFindMyModeClearLight = "https://www.figma.com/api/mcp/asset/c9dfae6a-a323-4bf6-ba48-7141322da38d";
+const imgIconFilesModeDefault = "https://www.figma.com/api/mcp/asset/5d9a8d08-3f83-44af-8964-51d6fdb66a5c";
+const imgIconFilesModeDark = "https://www.figma.com/api/mcp/asset/b2b09353-34e6-423f-a269-308bf1258504";
+const imgIconFilesModeClearLight = "https://www.figma.com/api/mcp/asset/c1e27363-3770-46a0-a6bb-1a93060220c5";
+const imgIconFaceTimeModeDefault = "https://www.figma.com/api/mcp/asset/69bee2a4-980a-46b9-9115-fb4c0c9f886a";
+const imgIconFaceTimeModeDark = "https://www.figma.com/api/mcp/asset/3afeed79-1806-4710-90a3-fa7f44b77514";
+const imgIconFaceTimeModeClearLight = "https://www.figma.com/api/mcp/asset/4b72c506-54ef-434e-8d4c-81f60f4c19a0";
+const imgIconContactsModeDefault = "https://www.figma.com/api/mcp/asset/ea09aef1-cbfc-4fbd-a37f-90c9e90ebafb";
+const imgIconContactsModeDark = "https://www.figma.com/api/mcp/asset/e83edb59-f4f7-4448-89f6-b568240bd7f2";
+const imgIconContactsModeClearLight = "https://www.figma.com/api/mcp/asset/0f951b75-856b-4531-8488-3dbb42a44602";
+const imgIconClockModeDefault = "https://www.figma.com/api/mcp/asset/0ea6ab69-4e5d-4e60-bbee-7fbe96ef53cd";
+const imgIconClockModeDark = "https://www.figma.com/api/mcp/asset/a0806e72-6fdd-4ec1-a6bc-aa7b9bd0f284";
+const imgIconClockModeClearLight = "https://www.figma.com/api/mcp/asset/cbf6ad8f-9252-4c84-8077-901f5664fa30";
+const imgIconCalculatorModeDefault = "https://www.figma.com/api/mcp/asset/aaf2fc8a-419b-487b-baed-919488ed72f5";
+const imgIconCalculatorModeDark = "https://www.figma.com/api/mcp/asset/052b96b2-cd9c-4c49-a435-79ec96f7af28";
+const imgIconCalculatorModeClearLight = "https://www.figma.com/api/mcp/asset/f4e9208e-b9ac-4156-90ad-e5f2d3010866";
+const imgIconCameraModeDefault = "https://www.figma.com/api/mcp/asset/300daeb9-f17e-4715-bcd8-0d538c74e3f6";
+const imgIconCameraModeDark = "https://www.figma.com/api/mcp/asset/f46017a6-4dd6-400e-90ba-4554737b5808";
+const imgIconCameraModeClearLight = "https://www.figma.com/api/mcp/asset/9edfa7b2-e80f-4d77-9d93-85f736aaae19";
+const imgIconCalendarModeDefault = "https://www.figma.com/api/mcp/asset/d4a05ae8-f560-48f0-9ae0-1283b0b9ced7";
+const imgIconCalendarModeDark = "https://www.figma.com/api/mcp/asset/96273b03-1f1a-4f42-8d84-681c4299506b";
+const imgIconCalendarModeClearLight = "https://www.figma.com/api/mcp/asset/7d65e8b0-6000-4ad2-8c7a-397bc3ce395f";
+const imgIconBooksModeDefault = "https://www.figma.com/api/mcp/asset/22591536-0650-4e99-ace6-7e01fc26d799";
+const imgIconBooksModeDark = "https://www.figma.com/api/mcp/asset/481a9c85-78d6-4532-8a73-c3e4dd71cc82";
+const imgIconBooksModeClearLight = "https://www.figma.com/api/mcp/asset/efd03bf9-dc94-4894-a0f2-9825fbb49aa2";
+const imgIconAppStoreModeDefault = "https://www.figma.com/api/mcp/asset/a5ab34f1-3b74-4fa7-afd5-28e20f8ad8e2";
+const imgIconAppStoreModeDark = "https://www.figma.com/api/mcp/asset/2ef4724a-6732-416d-97e0-d8dcb8bde937";
+const imgIconAppStoreModeClearLight = "https://www.figma.com/api/mcp/asset/90ccf43a-0db9-42a0-bf36-7176beca1068";
+type SystemIconsProps = {
+  className?: string;
+  icon?: "App Store" | "Books" | "Calendar" | "Camera" | "Calculator" | "Clock" | "Contacts" | "FaceTime" | "Files" | "Find My" | "Fitness" | "Freeform" | "Health" | "Home" | "iTunes Store" | "Keynote" | "Mail" | "Maps" | "Measure" | "Messages" | "Music" | "News" | "Notes" | "Number" | "Pages" | "Phone" | "Photos" | "Podcasts" | "Reminders" | "Safari" | "Settings" | "Shortcuts" | "Stocks" | "Tips" | "Translate" | "TV" | "Voice Memos" | "Wallet" | "Watch" | "Weather" | "Games" | "Preview" | "Airdrop" | "Passwords";
+  mode?: "Default" | "Dark" | "Clear Light";
+};
+
+export default function SystemIcons({ className, icon = "App Store", mode = "Default" }: SystemIconsProps) {
+  if (icon === "Weather" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Weather, Mode=Default" data-node-id="2402:670">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWeatherModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Airdrop" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Airdrop, Mode=Default" data-node-id="5413:6377">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAirdropModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Weather" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Weather, Mode=Dark" data-node-id="2402:672">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWeatherModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Airdrop" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Airdrop, Mode=Dark" data-node-id="5413:6379">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAirdropModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Weather" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Weather, Mode=Clear Light" data-node-id="2402:674">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWeatherModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Airdrop" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Airdrop, Mode=Clear Light" data-node-id="5413:6381">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAirdropModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Watch" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Watch, Mode=Default" data-node-id="2402:677">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWatchModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Watch" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Watch, Mode=Dark" data-node-id="2402:679">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWatchModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Watch" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Watch, Mode=Clear Light" data-node-id="2402:681">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWatchModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Wallet" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Wallet, Mode=Default" data-node-id="2402:684">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWalletModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Wallet" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Wallet, Mode=Dark" data-node-id="2402:686">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWalletModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Wallet" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Wallet, Mode=Clear Light" data-node-id="2402:688">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconWalletModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Voice Memos" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Voice Memos, Mode=Default" data-node-id="2402:691">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconVoiceMemosModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Voice Memos" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Voice Memos, Mode=Dark" data-node-id="2402:693">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconVoiceMemosModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Voice Memos" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Voice Memos, Mode=Clear Light" data-node-id="2402:695">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconVoiceMemosModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "TV" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=TV, Mode=Default" data-node-id="2402:698">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTvModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "TV" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=TV, Mode=Dark" data-node-id="2402:700">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTvModeDark} />
+      </div>
+    );
+  }
+  if (icon === "TV" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=TV, Mode=Clear Light" data-node-id="2402:702">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTvModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Translate" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Translate, Mode=Default" data-node-id="2402:705">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTranslateModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Translate" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Translate, Mode=Dark" data-node-id="2402:707">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTranslateModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Translate" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Translate, Mode=Clear Light" data-node-id="2402:709">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTranslateModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Tips" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Tips, Mode=Default" data-node-id="2402:712">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTipsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Tips" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Tips, Mode=Dark" data-node-id="2402:714">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTipsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Tips" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Tips, Mode=Clear Light" data-node-id="2402:716">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconTipsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Stocks" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Stocks, Mode=Default" data-node-id="2402:719">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconStocksModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Stocks" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Stocks, Mode=Dark" data-node-id="2402:721">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconStocksModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Stocks" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Stocks, Mode=Clear Light" data-node-id="2402:723">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconStocksModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Shortcuts" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Shortcuts, Mode=Default" data-node-id="2402:726">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconShortcutsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Shortcuts" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Shortcuts, Mode=Dark" data-node-id="2402:728">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconShortcutsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Shortcuts" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Shortcuts, Mode=Clear Light" data-node-id="2402:730">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconShortcutsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Settings" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Settings, Mode=Default" data-node-id="2402:733">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSettingsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Settings" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Settings, Mode=Dark" data-node-id="2402:735">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSettingsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Settings" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Settings, Mode=Clear Light" data-node-id="2402:737">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSettingsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Safari" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Safari, Mode=Default" data-node-id="2402:740">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSafariModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Safari" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Safari, Mode=Dark" data-node-id="2402:742">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSafariModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Safari" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Safari, Mode=Clear Light" data-node-id="2402:744">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconSafariModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Reminders" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Reminders, Mode=Default" data-node-id="2402:747">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconRemindersModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Reminders" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Reminders, Mode=Dark" data-node-id="2402:749">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconRemindersModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Reminders" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Reminders, Mode=Clear Light" data-node-id="2402:751">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconRemindersModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Preview" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Preview, Mode=Default" data-node-id="5413:6359">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPreviewModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Preview" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Preview, Mode=Dark" data-node-id="5413:6361">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPreviewModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Preview" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Preview, Mode=Clear Light" data-node-id="5413:6363">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPreviewModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Podcasts" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Podcasts, Mode=Default" data-node-id="2402:754">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPodcastsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Podcasts" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Podcasts, Mode=Dark" data-node-id="2402:756">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPodcastsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Podcasts" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Podcasts, Mode=Clear Light" data-node-id="2402:758">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPodcastsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Photos" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Photos, Mode=Default" data-node-id="2402:761">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhotosModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Photos" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Photos, Mode=Dark" data-node-id="2402:763">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhotosModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Photos" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Photos, Mode=Clear Light" data-node-id="2402:765">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhotosModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Phone" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Phone, Mode=Default" data-node-id="2402:768">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhoneModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Phone" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Phone, Mode=Dark" data-node-id="2402:770">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhoneModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Phone" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Phone, Mode=Clear Light" data-node-id="2402:772">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPhoneModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Passwords" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Passwords, Mode=Default" data-node-id="5413:6395">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPasswordsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Passwords" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Passwords, Mode=Dark" data-node-id="5413:6397">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPasswordsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Passwords" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Passwords, Mode=Clear Light" data-node-id="5413:6399">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPasswordsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Pages" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Pages, Mode=Default" data-node-id="2402:775">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPagesModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Pages" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Pages, Mode=Dark" data-node-id="2402:777">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPagesModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Pages" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Pages, Mode=Clear Light" data-node-id="2402:779">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconPagesModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Number" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Number, Mode=Default" data-node-id="2402:782">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNumberModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Number" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Number, Mode=Dark" data-node-id="2402:784">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNumberModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Number" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Number, Mode=Clear Light" data-node-id="2402:786">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNumberModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Notes" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Notes, Mode=Default" data-node-id="2402:789">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNotesModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Notes" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Notes, Mode=Dark" data-node-id="2402:791">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNotesModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Notes" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Notes, Mode=Clear Light" data-node-id="2402:793">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNotesModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "News" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=News, Mode=Default" data-node-id="2402:796">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNewsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "News" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=News, Mode=Dark" data-node-id="2402:798">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNewsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "News" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=News, Mode=Clear Light" data-node-id="2402:800">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconNewsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Music" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Music, Mode=Default" data-node-id="2402:803">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMusicModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Music" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Music, Mode=Dark" data-node-id="2402:805">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMusicModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Music" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Music, Mode=Clear Light" data-node-id="2402:807">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMusicModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Messages" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Messages, Mode=Default" data-node-id="2402:810">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMessagesModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Messages" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Messages, Mode=Dark" data-node-id="2402:812">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMessagesModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Messages" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Messages, Mode=Clear Light" data-node-id="2402:814">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMessagesModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Measure" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Measure, Mode=Default" data-node-id="2402:817">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMeasureModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Measure" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Measure, Mode=Dark" data-node-id="2402:819">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMeasureModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Measure" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Measure, Mode=Clear Light" data-node-id="2402:821">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMeasureModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Maps" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Maps, Mode=Default" data-node-id="2402:824">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMapsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Maps" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Maps, Mode=Dark" data-node-id="2402:826">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMapsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Maps" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Maps, Mode=Clear Light" data-node-id="2402:828">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMapsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Mail" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Mail, Mode=Default" data-node-id="2402:831">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMailModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Mail" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Mail, Mode=Dark" data-node-id="2402:833">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMailModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Mail" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Mail, Mode=Clear Light" data-node-id="2402:835">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconMailModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Keynote" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Keynote, Mode=Default" data-node-id="2402:838">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconKeynoteModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Keynote" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Keynote, Mode=Dark" data-node-id="2402:840">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconKeynoteModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Keynote" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Keynote, Mode=Clear Light" data-node-id="2402:842">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconKeynoteModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "iTunes Store" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=iTunes Store, Mode=Default" data-node-id="2402:845">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconITunesStoreModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "iTunes Store" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=iTunes Store, Mode=Dark" data-node-id="2402:847">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconITunesStoreModeDark} />
+      </div>
+    );
+  }
+  if (icon === "iTunes Store" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=iTunes Store, Mode=Clear Light" data-node-id="2402:849">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconITunesStoreModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Home" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Home, Mode=Default" data-node-id="2402:859">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHomeModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Home" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Home, Mode=Dark" data-node-id="2402:861">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHomeModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Home" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Home, Mode=Clear Light" data-node-id="2402:863">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHomeModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Health" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Health, Mode=Default" data-node-id="2402:866">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHealthModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Health" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Health, Mode=Dark" data-node-id="2402:868">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHealthModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Health" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Health, Mode=Clear Light" data-node-id="2402:870">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconHealthModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Games" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Games, Mode=Default" data-node-id="2402:873">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconGamesModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Games" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Games, Mode=Dark" data-node-id="2402:875">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconGamesModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Games" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Games, Mode=Clear Light" data-node-id="2402:877">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconGamesModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Freeform" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Freeform, Mode=Default" data-node-id="2402:880">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFreeformModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Freeform" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Freeform, Mode=Dark" data-node-id="2402:882">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFreeformModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Freeform" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Freeform, Mode=Clear Light" data-node-id="2402:884">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFreeformModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Fitness" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Fitness, Mode=Default" data-node-id="2402:887">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFitnessModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Fitness" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Fitness, Mode=Dark" data-node-id="2402:889">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFitnessModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Fitness" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Fitness, Mode=Clear Light" data-node-id="2402:891">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFitnessModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Find My" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Find My, Mode=Default" data-node-id="2402:894">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFindMyModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Find My" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Find My, Mode=Dark" data-node-id="2402:896">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFindMyModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Find My" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Find My, Mode=Clear Light" data-node-id="2402:898">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFindMyModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Files" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Files, Mode=Default" data-node-id="2402:901">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFilesModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Files" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Files, Mode=Dark" data-node-id="2402:903">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFilesModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Files" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Files, Mode=Clear Light" data-node-id="2402:905">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFilesModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "FaceTime" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=FaceTime, Mode=Default" data-node-id="2402:908">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFaceTimeModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "FaceTime" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=FaceTime, Mode=Dark" data-node-id="2402:910">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFaceTimeModeDark} />
+      </div>
+    );
+  }
+  if (icon === "FaceTime" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=FaceTime, Mode=Clear Light" data-node-id="2402:912">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconFaceTimeModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Contacts" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Contacts, Mode=Default" data-node-id="2402:915">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconContactsModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Contacts" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Contacts, Mode=Dark" data-node-id="2402:917">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconContactsModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Contacts" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Contacts, Mode=Clear Light" data-node-id="2402:919">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconContactsModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Clock" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Clock, Mode=Default" data-node-id="2402:929">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconClockModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Clock" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Clock, Mode=Dark" data-node-id="2402:931">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconClockModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Clock" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Clock, Mode=Clear Light" data-node-id="2402:933">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconClockModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Calculator" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calculator, Mode=Default" data-node-id="2402:936">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalculatorModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Calculator" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calculator, Mode=Dark" data-node-id="2402:938">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalculatorModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Calculator" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calculator, Mode=Clear Light" data-node-id="2402:940">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalculatorModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Camera" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Camera, Mode=Default" data-node-id="2402:943">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCameraModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Camera" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Camera, Mode=Dark" data-node-id="2402:945">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCameraModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Camera" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Camera, Mode=Clear Light" data-node-id="2402:947">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCameraModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Calendar" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calendar, Mode=Default" data-node-id="2402:950">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalendarModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Calendar" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calendar, Mode=Dark" data-node-id="2402:953">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalendarModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Calendar" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Calendar, Mode=Clear Light" data-node-id="2402:956">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconCalendarModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "Books" && mode === "Default") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Books, Mode=Default" data-node-id="2402:959">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconBooksModeDefault} />
+      </div>
+    );
+  }
+  if (icon === "Books" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Books, Mode=Dark" data-node-id="2402:961">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconBooksModeDark} />
+      </div>
+    );
+  }
+  if (icon === "Books" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=Books, Mode=Clear Light" data-node-id="2402:963">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconBooksModeClearLight} />
+      </div>
+    );
+  }
+  if (icon === "App Store" && mode === "Dark") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=App Store, Mode=Dark" data-node-id="2402:968">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAppStoreModeDark} />
+      </div>
+    );
+  }
+  if (icon === "App Store" && mode === "Clear Light") {
+    return (
+      <div className={className || "relative size-[66px]"} data-name="Icon=App Store, Mode=Clear Light" data-node-id="2402:970">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAppStoreModeClearLight} />
+      </div>
+    );
+  }
+  return (
+    <div className={className || "relative size-[66px]"} data-name="Icon=App Store, Mode=Default" data-node-id="2402:966">
+      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIconAppStoreModeDefault} />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

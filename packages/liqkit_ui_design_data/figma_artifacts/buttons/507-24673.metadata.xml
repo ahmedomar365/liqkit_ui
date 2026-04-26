@@ -1,0 +1,487 @@
+<canvas id="507:24673" name="Buttons" x="0" y="0" width="0" height="0">
+  <frame id="40:58696" name="Button - Content Area" x="0" y="400" width="1270" height="1070">
+    <symbol id="5473:20407" name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" x="1130" y="980" width="50" height="50" />
+    <symbol id="5473:20409" name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" x="1040" y="980" width="34" height="34" />
+    <symbol id="5473:20411" name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=True" x="960" y="980" width="28" height="28" />
+    <symbol id="5473:20584" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" x="820" y="980" width="50" height="50" />
+    <symbol id="5473:20586" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" x="730" y="980" width="34" height="34" />
+    <symbol id="5473:20588" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=True" x="650" y="980" width="28" height="28" />
+    <symbol id="5473:20449" name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" x="510" y="980" width="50" height="50" />
+    <symbol id="5473:20451" name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" x="420" y="980" width="34" height="34" />
+    <symbol id="5473:20453" name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=True" x="340" y="980" width="28" height="28" />
+    <symbol id="5473:20491" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" x="200" y="980" width="50" height="50" />
+    <symbol id="5473:20494" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" x="110" y="980" width="34" height="34" />
+    <symbol id="5473:20497" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=True" x="30" y="980" width="28" height="28" />
+    <symbol id="5473:20413" name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" x="1130" y="910" width="50" height="50" />
+    <symbol id="5473:20415" name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" x="1040" y="910" width="34" height="34" />
+    <symbol id="5473:20417" name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=True" x="960" y="910" width="28" height="28" />
+    <symbol id="5473:20590" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" x="820" y="910" width="50" height="50" />
+    <symbol id="5473:20592" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" x="730" y="910" width="34" height="34" />
+    <symbol id="5473:20594" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=True" x="650" y="910" width="28" height="28" />
+    <symbol id="5473:20455" name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" x="510" y="910" width="50" height="50" />
+    <symbol id="5473:20457" name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" x="420" y="910" width="34" height="34" />
+    <symbol id="5473:20459" name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=True" x="340" y="910" width="28" height="28" />
+    <symbol id="5473:20500" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" x="200" y="910" width="50" height="50" />
+    <symbol id="5473:20502" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" x="110" y="910" width="34" height="34" />
+    <symbol id="5473:20504" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=True" x="30" y="910" width="28" height="28" />
+    <symbol id="5473:20419" name="Size=Large, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" x="1130" y="810" width="73" height="50" />
+    <symbol id="5473:20421" name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" x="1040" y="810" width="57" height="34" />
+    <symbol id="5473:20423" name="Size=Small, Style=Borderless, Label Type=Text, Enabled=False, Destructive=True" x="960" y="810" width="49" height="28" />
+    <symbol id="5473:20596" name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" x="820" y="810" width="73" height="50" />
+    <symbol id="5473:20598" name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" x="730" y="810" width="57" height="34" />
+    <symbol id="5473:20600" name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=True" x="650" y="810" width="49" height="28" />
+    <symbol id="5473:20461" name="Size=Large, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" x="510" y="810" width="73" height="50" />
+    <symbol id="5473:20463" name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" x="420" y="810" width="57" height="34" />
+    <symbol id="5473:20465" name="Size=Small, Style=Bordered, Label Type=Text, Enabled=False, Destructive=True" x="340" y="810" width="49" height="28" />
+    <symbol id="5473:20506" name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" x="200" y="810" width="73" height="50" />
+    <symbol id="5473:20509" name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" x="110" y="810" width="57" height="34" />
+    <symbol id="5473:20512" name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=True" x="30" y="810" width="49" height="28" />
+    <symbol id="5473:20425" name="Size=Large, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" x="1130" y="740" width="73" height="50" />
+    <symbol id="5473:20427" name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" x="1040" y="740" width="57" height="34" />
+    <symbol id="5473:20429" name="Size=Small, Style=Borderless, Label Type=Text, Enabled=True, Destructive=True" x="960" y="740" width="49" height="28" />
+    <symbol id="5473:20602" name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" x="820" y="740" width="73" height="50" />
+    <symbol id="5473:20604" name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" x="730" y="740" width="57" height="34" />
+    <symbol id="5473:20606" name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=True" x="650" y="740" width="49" height="28" />
+    <symbol id="5473:20467" name="Size=Large, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" x="510" y="740" width="73" height="50" />
+    <symbol id="5473:20469" name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" x="420" y="740" width="57" height="34" />
+    <symbol id="5473:20471" name="Size=Small, Style=Bordered, Label Type=Text, Enabled=True, Destructive=True" x="340" y="740" width="49" height="28" />
+    <symbol id="5473:20515" name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" x="200" y="740" width="73" height="50" />
+    <symbol id="5473:20517" name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" x="110" y="740" width="57" height="34" />
+    <symbol id="5473:20519" name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=True" x="30" y="740" width="49" height="28" />
+    <symbol id="5473:20434" name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="1130" y="640" width="92" height="50" />
+    <symbol id="5473:20440" name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="1040" y="640" width="75" height="34" />
+    <symbol id="5473:20446" name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="960" y="640" width="66" height="28" />
+    <symbol id="5473:20611" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="820" y="640" width="92" height="50" />
+    <symbol id="5473:20617" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="730" y="640" width="75" height="34" />
+    <symbol id="5473:20623" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="650" y="640" width="66" height="28" />
+    <symbol id="5473:20476" name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="510" y="640" width="92" height="50" />
+    <symbol id="5473:20482" name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="420" y="640" width="75" height="34" />
+    <symbol id="5473:20488" name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="340" y="640" width="66" height="28" />
+    <symbol id="5473:20524" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="200" y="640" width="92" height="50" />
+    <symbol id="5473:20531" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="110" y="640" width="75" height="34" />
+    <symbol id="5473:20538" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=True" x="30" y="640" width="66" height="28" />
+    <symbol id="5473:20431" name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="1130" y="570" width="92" height="50" />
+    <symbol id="5473:20437" name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="1040" y="570" width="75" height="34" />
+    <symbol id="5473:20443" name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="960" y="570" width="66" height="28" />
+    <symbol id="5473:20608" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="820" y="570" width="92" height="50" />
+    <symbol id="5473:20614" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="730" y="570" width="75" height="34" />
+    <symbol id="5473:20620" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="650" y="570" width="66" height="28" />
+    <symbol id="5473:20473" name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="510" y="570" width="92" height="50" />
+    <symbol id="5473:20479" name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="420" y="570" width="75" height="34" />
+    <symbol id="5473:20485" name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="340" y="570" width="66" height="28" />
+    <symbol id="5473:20521" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="200" y="570" width="92" height="50" />
+    <symbol id="5473:20528" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="110" y="570" width="75" height="34" />
+    <symbol id="5473:20535" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=True" x="30" y="570" width="66" height="28" />
+    <symbol id="40:58794" name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" x="1130" y="440" width="50" height="50" />
+    <symbol id="40:58790" name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" x="1040" y="440" width="34" height="34" />
+    <symbol id="40:58786" name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=False, Destructive=False" x="960" y="440" width="28" height="28" />
+    <symbol id="40:58966" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" x="820" y="440" width="50" height="50" />
+    <symbol id="40:58958" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" x="730" y="440" width="34" height="34" />
+    <symbol id="40:58950" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=False, Destructive=False" x="650" y="440" width="28" height="28" />
+    <symbol id="40:59290" name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" x="510" y="440" width="50" height="50" />
+    <symbol id="40:59282" name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" x="420" y="440" width="34" height="34" />
+    <symbol id="40:59274" name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=False, Destructive=False" x="340" y="440" width="28" height="28" />
+    <symbol id="40:59338" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" x="200" y="440" width="50" height="50" />
+    <symbol id="40:59330" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" x="110" y="440" width="34" height="34" />
+    <symbol id="40:59322" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=False, Destructive=False" x="30" y="440" width="28" height="28" />
+    <symbol id="40:58694" name="Size=Large, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" x="1130" y="370" width="50" height="50" />
+    <symbol id="40:58691" name="Size=Medium, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" x="1040" y="370" width="34" height="34" />
+    <symbol id="40:58690" name="Size=Small, Style=Borderless, Label Type=Symbol, Enabled=True, Destructive=False" x="960" y="370" width="28" height="28" />
+    <symbol id="40:58964" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" x="820" y="370" width="50" height="50" />
+    <symbol id="40:58956" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" x="730" y="370" width="34" height="34" />
+    <symbol id="40:58948" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol, Enabled=True, Destructive=False" x="650" y="370" width="28" height="28" />
+    <symbol id="40:59288" name="Size=Large, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" x="510" y="370" width="50" height="50" />
+    <symbol id="40:59280" name="Size=Medium, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" x="420" y="370" width="34" height="34" />
+    <symbol id="40:59272" name="Size=Small, Style=Bordered, Label Type=Symbol, Enabled=True, Destructive=False" x="340" y="370" width="28" height="28" />
+    <symbol id="40:59336" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" x="200" y="370" width="50" height="50" />
+    <symbol id="40:59328" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" x="110" y="370" width="34" height="34" />
+    <symbol id="40:59320" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol, Enabled=True, Destructive=False" x="30" y="370" width="28" height="28" />
+    <symbol id="5:108801" name="Size=Large, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" x="1130" y="270" width="73" height="50" />
+    <symbol id="5:108825" name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" x="1040" y="270" width="57" height="34" />
+    <symbol id="5:108849" name="Size=Small, Style=Borderless, Label Type=Text, Enabled=False, Destructive=False" x="960" y="270" width="49" height="28" />
+    <symbol id="5:108729" name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" x="820" y="270" width="73" height="50" />
+    <symbol id="5:108753" name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" x="730" y="270" width="57" height="34" />
+    <symbol id="5:108777" name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=False, Destructive=False" x="650" y="270" width="49" height="28" />
+    <symbol id="5:108657" name="Size=Large, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" x="510" y="270" width="73" height="50" />
+    <symbol id="5:108681" name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" x="420" y="270" width="57" height="34" />
+    <symbol id="5:108705" name="Size=Small, Style=Bordered, Label Type=Text, Enabled=False, Destructive=False" x="340" y="270" width="49" height="28" />
+    <symbol id="5:108585" name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" x="200" y="270" width="73" height="50" />
+    <symbol id="5:108609" name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" x="110" y="270" width="57" height="34" />
+    <symbol id="5:108633" name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=False, Destructive=False" x="30" y="270" width="49" height="28" />
+    <symbol id="5:108795" name="Size=Large, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" x="1130" y="200" width="73" height="50" />
+    <symbol id="5:108819" name="Size=Medium, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" x="1040" y="200" width="57" height="34" />
+    <symbol id="5:108843" name="Size=Small, Style=Borderless, Label Type=Text, Enabled=True, Destructive=False" x="960" y="200" width="49" height="28" />
+    <symbol id="5:108723" name="Size=Large, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" x="820" y="200" width="73" height="50" />
+    <symbol id="5:108747" name="Size=Medium, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" x="730" y="200" width="57" height="34" />
+    <symbol id="5:108771" name="Size=Small, Style=Bordered - Secondary, Label Type=Text, Enabled=True, Destructive=False" x="650" y="200" width="49" height="28" />
+    <symbol id="5:108651" name="Size=Large, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" x="510" y="200" width="73" height="50" />
+    <symbol id="5:108675" name="Size=Medium, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" x="420" y="200" width="57" height="34" />
+    <symbol id="5:108699" name="Size=Small, Style=Bordered, Label Type=Text, Enabled=True, Destructive=False" x="340" y="200" width="49" height="28" />
+    <symbol id="5:108579" name="Size=Large, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" x="200" y="200" width="73" height="50" />
+    <symbol id="5:108603" name="Size=Medium, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" x="110" y="200" width="57" height="34" />
+    <symbol id="5:108627" name="Size=Small, Style=Bordered - Prominent, Label Type=Text, Enabled=True, Destructive=False" x="30" y="200" width="49" height="28" />
+    <symbol id="40:58796" name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="1130" y="100" width="92" height="50" />
+    <symbol id="40:58792" name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="1040" y="100" width="75" height="34" />
+    <symbol id="40:58788" name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="960" y="100" width="66" height="28" />
+    <symbol id="40:58970" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="820" y="100" width="92" height="50" />
+    <symbol id="40:58962" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="730" y="100" width="75" height="34" />
+    <symbol id="40:58954" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="650" y="100" width="66" height="28" />
+    <symbol id="40:59294" name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="510" y="100" width="92" height="50" />
+    <symbol id="40:59286" name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="420" y="100" width="75" height="34" />
+    <symbol id="40:59278" name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="340" y="100" width="66" height="28" />
+    <symbol id="40:59342" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="200" y="100" width="92" height="50" />
+    <symbol id="40:59334" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="110" y="100" width="75" height="34" />
+    <symbol id="40:59326" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=False, Destructive=False" x="30" y="100" width="66" height="28" />
+    <symbol id="40:58695" name="Size=Large, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="1130" y="30" width="92" height="50" />
+    <symbol id="40:58693" name="Size=Medium, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="1040" y="30" width="75" height="34" />
+    <symbol id="40:58692" name="Size=Small, Style=Borderless, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="960" y="30" width="66" height="28" />
+    <symbol id="40:58968" name="Size=Large, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="820" y="30" width="92" height="50" />
+    <symbol id="40:58960" name="Size=Medium, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="730" y="30" width="75" height="34" />
+    <symbol id="40:58952" name="Size=Small, Style=Bordered - Secondary, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="650" y="30" width="66" height="28" />
+    <symbol id="40:59292" name="Size=Large, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="510" y="30" width="92" height="50" />
+    <symbol id="40:59284" name="Size=Medium, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="420" y="30" width="75" height="34" />
+    <symbol id="40:59276" name="Size=Small, Style=Bordered, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="340" y="30" width="66" height="28" />
+    <symbol id="40:59340" name="Size=Large, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="200" y="30" width="92" height="50" />
+    <symbol id="40:59332" name="Size=Medium, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="110" y="30" width="75" height="34" />
+    <symbol id="40:59324" name="Size=Small, Style=Bordered - Prominent, Label Type=Symbol + Text, Enabled=True, Destructive=False" x="30" y="30" width="66" height="28" />
+  </frame>
+  <section id="2539:14600" name="Light Examples" x="1400" y="400" width="1250" height="1070">
+    <instance id="548:35177" name="_Sticker Sheet" x="0" y="0" width="1250" height="1070" />
+    <instance id="5473:20630" name="Button" x="1130" y="985" width="50" height="50" />
+    <instance id="5473:20631" name="Button" x="1040" y="985" width="34" height="34" />
+    <instance id="5473:20632" name="Button" x="960" y="985" width="28" height="28" />
+    <instance id="5473:20633" name="Button" x="810" y="985" width="50" height="50" />
+    <instance id="5473:20634" name="Button" x="720" y="985" width="34" height="34" />
+    <instance id="5473:20635" name="Button" x="640" y="985" width="28" height="28" />
+    <instance id="5473:20636" name="Button" x="500" y="985" width="50" height="50" />
+    <instance id="5473:20637" name="Button" x="410" y="985" width="34" height="34" />
+    <instance id="5473:20638" name="Button" x="330" y="985" width="28" height="28" />
+    <instance id="5473:20639" name="Button" x="190" y="985" width="50" height="50" />
+    <instance id="5473:20640" name="Button" x="100" y="985" width="34" height="34" />
+    <instance id="5473:20641" name="Button" x="20" y="985" width="28" height="28" />
+    <instance id="5473:20642" name="Button" x="1130" y="915" width="50" height="50" />
+    <instance id="5473:20643" name="Button" x="1040" y="915" width="34" height="34" />
+    <instance id="5473:20644" name="Button" x="960" y="915" width="28" height="28" />
+    <instance id="5473:20645" name="Button" x="810" y="915" width="50" height="50" />
+    <instance id="5473:20646" name="Button" x="720" y="915" width="34" height="34" />
+    <instance id="5473:20647" name="Button" x="640" y="915" width="28" height="28" />
+    <instance id="5473:20648" name="Button" x="500" y="915" width="50" height="50" />
+    <instance id="5473:20649" name="Button" x="410" y="915" width="34" height="34" />
+    <instance id="5473:20650" name="Button" x="330" y="915" width="28" height="28" />
+    <instance id="5473:20651" name="Button" x="190" y="915" width="50" height="50" />
+    <instance id="5473:20652" name="Button" x="100" y="915" width="34" height="34" />
+    <instance id="5473:20653" name="Button" x="20" y="915" width="28" height="28" />
+    <instance id="5473:20654" name="Button" x="1130" y="815" width="73" height="50" />
+    <instance id="5473:20655" name="Button" x="1040" y="815" width="57" height="34" />
+    <instance id="5473:20656" name="Button" x="960" y="815" width="49" height="28" />
+    <instance id="5473:20657" name="Button" x="810" y="815" width="73" height="50" />
+    <instance id="5473:20658" name="Button" x="720" y="815" width="57" height="34" />
+    <instance id="5473:20659" name="Button" x="640" y="815" width="49" height="28" />
+    <instance id="5473:20660" name="Button" x="500" y="815" width="73" height="50" />
+    <instance id="5473:20661" name="Button" x="410" y="815" width="57" height="34" />
+    <instance id="5473:20662" name="Button" x="330" y="815" width="49" height="28" />
+    <instance id="5473:20663" name="Button" x="190" y="815" width="73" height="50" />
+    <instance id="5473:20664" name="Button" x="100" y="815" width="57" height="34" />
+    <instance id="5473:20665" name="Button" x="20" y="815" width="49" height="28" />
+    <instance id="5473:20666" name="Button" x="1130" y="745" width="73" height="50" />
+    <instance id="5473:20667" name="Button" x="1040" y="745" width="57" height="34" />
+    <instance id="5473:20668" name="Button" x="960" y="745" width="49" height="28" />
+    <instance id="5473:20669" name="Button" x="810" y="745" width="73" height="50" />
+    <instance id="5473:20670" name="Button" x="720" y="745" width="57" height="34" />
+    <instance id="5473:20671" name="Button" x="640" y="745" width="49" height="28" />
+    <instance id="5473:20672" name="Button" x="500" y="745" width="73" height="50" />
+    <instance id="5473:20673" name="Button" x="410" y="745" width="57" height="34" />
+    <instance id="5473:20674" name="Button" x="330" y="745" width="49" height="28" />
+    <instance id="5473:20675" name="Button" x="190" y="745" width="73" height="50" />
+    <instance id="5473:20676" name="Button" x="100" y="745" width="57" height="34" />
+    <instance id="5473:20677" name="Button" x="20" y="745" width="49" height="28" />
+    <instance id="5473:20678" name="Button" x="1130" y="645" width="92" height="50" />
+    <instance id="5473:20679" name="Button" x="1040" y="645" width="75" height="34" />
+    <instance id="5473:20680" name="Button" x="960" y="645" width="66" height="28" />
+    <instance id="5473:20681" name="Button" x="810" y="645" width="92" height="50" />
+    <instance id="5473:20682" name="Button" x="720" y="645" width="75" height="34" />
+    <instance id="5473:20683" name="Button" x="640" y="645" width="66" height="28" />
+    <instance id="5473:20684" name="Button" x="500" y="645" width="92" height="50" />
+    <instance id="5473:20685" name="Button" x="410" y="645" width="75" height="34" />
+    <instance id="5473:20686" name="Button" x="330" y="645" width="66" height="28" />
+    <instance id="5473:20687" name="Button" x="190" y="645" width="92" height="50" />
+    <instance id="5473:20688" name="Button" x="100" y="645" width="75" height="34" />
+    <instance id="5473:20689" name="Button" x="20" y="645" width="66" height="28" />
+    <instance id="5473:20690" name="Button" x="1130" y="575" width="92" height="50" />
+    <instance id="5473:20691" name="Button" x="1040" y="575" width="75" height="34" />
+    <instance id="5473:20692" name="Button" x="960" y="575" width="66" height="28" />
+    <instance id="5473:20693" name="Button" x="810" y="575" width="92" height="50" />
+    <instance id="5473:20694" name="Button" x="720" y="575" width="75" height="34" />
+    <instance id="5473:20695" name="Button" x="640" y="575" width="66" height="28" />
+    <instance id="5473:20696" name="Button" x="500" y="575" width="92" height="50" />
+    <instance id="5473:20697" name="Button" x="410" y="575" width="75" height="34" />
+    <instance id="5473:20698" name="Button" x="330" y="575" width="66" height="28" />
+    <instance id="5473:20699" name="Button" x="190" y="575" width="92" height="50" />
+    <instance id="5473:20700" name="Button" x="100" y="575" width="75" height="34" />
+    <instance id="5473:20701" name="Button" x="20" y="575" width="66" height="28" />
+    <instance id="5473:20702" name="Button" x="1130" y="445" width="50" height="50" />
+    <instance id="5473:20703" name="Button" x="1040" y="445" width="34" height="34" />
+    <instance id="5473:20704" name="Button" x="960" y="445" width="28" height="28" />
+    <instance id="5473:20705" name="Button" x="810" y="445" width="50" height="50" />
+    <instance id="5473:20706" name="Button" x="720" y="445" width="34" height="34" />
+    <instance id="5473:20707" name="Button" x="640" y="445" width="28" height="28" />
+    <instance id="5473:20708" name="Button" x="500" y="445" width="50" height="50" />
+    <instance id="5473:20709" name="Button" x="410" y="445" width="34" height="34" />
+    <instance id="5473:20710" name="Button" x="330" y="445" width="28" height="28" />
+    <instance id="5473:20711" name="Button" x="190" y="445" width="50" height="50" />
+    <instance id="5473:20712" name="Button" x="100" y="445" width="34" height="34" />
+    <instance id="5473:20713" name="Button" x="20" y="445" width="28" height="28" />
+    <instance id="5473:20714" name="Button" x="1130" y="375" width="50" height="50" />
+    <instance id="5473:20715" name="Button" x="1040" y="375" width="34" height="34" />
+    <instance id="5473:20716" name="Button" x="960" y="375" width="28" height="28" />
+    <instance id="5473:20717" name="Button" x="810" y="375" width="50" height="50" />
+    <instance id="5473:20718" name="Button" x="720" y="375" width="34" height="34" />
+    <instance id="5473:20719" name="Button" x="640" y="375" width="28" height="28" />
+    <instance id="5473:20720" name="Button" x="500" y="375" width="50" height="50" />
+    <instance id="5473:20721" name="Button" x="410" y="375" width="34" height="34" />
+    <instance id="5473:20722" name="Button" x="330" y="375" width="28" height="28" />
+    <instance id="5473:20723" name="Button" x="190" y="375" width="50" height="50" />
+    <instance id="5473:20724" name="Button" x="100" y="375" width="34" height="34" />
+    <instance id="5473:20725" name="Button" x="20" y="375" width="28" height="28" />
+    <instance id="5473:20726" name="Button" x="1130" y="275" width="73" height="50" />
+    <instance id="5473:20727" name="Button" x="1040" y="275" width="57" height="34" />
+    <instance id="5473:20728" name="Button" x="960" y="275" width="49" height="28" />
+    <instance id="5473:20729" name="Button" x="810" y="275" width="73" height="50" />
+    <instance id="5473:20730" name="Button" x="720" y="275" width="57" height="34" />
+    <instance id="5473:20731" name="Button" x="640" y="275" width="49" height="28" />
+    <instance id="5473:20732" name="Button" x="500" y="275" width="73" height="50" />
+    <instance id="5473:20733" name="Button" x="410" y="275" width="57" height="34" />
+    <instance id="5473:20734" name="Button" x="330" y="275" width="49" height="28" />
+    <instance id="5473:20735" name="Button" x="190" y="275" width="73" height="50" />
+    <instance id="5473:20736" name="Button" x="100" y="275" width="57" height="34" />
+    <instance id="5473:20737" name="Button" x="20" y="275" width="49" height="28" />
+    <instance id="5473:20738" name="Button" x="1130" y="205" width="73" height="50" />
+    <instance id="5473:20739" name="Button" x="1040" y="205" width="57" height="34" />
+    <instance id="5473:20740" name="Button" x="960" y="205" width="49" height="28" />
+    <instance id="5473:20741" name="Button" x="810" y="205" width="73" height="50" />
+    <instance id="5473:20742" name="Button" x="720" y="205" width="57" height="34" />
+    <instance id="5473:20743" name="Button" x="640" y="205" width="49" height="28" />
+    <instance id="5473:20744" name="Button" x="500" y="205" width="73" height="50" />
+    <instance id="5473:20745" name="Button" x="410" y="205" width="57" height="34" />
+    <instance id="5473:20746" name="Button" x="330" y="205" width="49" height="28" />
+    <instance id="5473:20747" name="Button" x="190" y="205" width="73" height="50" />
+    <instance id="5473:20748" name="Button" x="100" y="205" width="57" height="34" />
+    <instance id="5473:20749" name="Button" x="20" y="205" width="49" height="28" />
+    <instance id="5473:20750" name="Button" x="1130" y="105" width="92" height="50" />
+    <instance id="5473:20751" name="Button" x="1040" y="105" width="75" height="34" />
+    <instance id="5473:20752" name="Button" x="960" y="105" width="66" height="28" />
+    <instance id="5473:20753" name="Button" x="810" y="105" width="92" height="50" />
+    <instance id="5473:20754" name="Button" x="720" y="105" width="75" height="34" />
+    <instance id="5473:20755" name="Button" x="640" y="105" width="66" height="28" />
+    <instance id="5473:20756" name="Button" x="500" y="105" width="92" height="50" />
+    <instance id="5473:20757" name="Button" x="410" y="105" width="75" height="34" />
+    <instance id="5473:20758" name="Button" x="330" y="105" width="66" height="28" />
+    <instance id="5473:20759" name="Button" x="190" y="105" width="92" height="50" />
+    <instance id="5473:20760" name="Button" x="100" y="105" width="75" height="34" />
+    <instance id="5473:20761" name="Button" x="20" y="105" width="66" height="28" />
+    <instance id="5473:20762" name="Button" x="1130" y="35" width="92" height="50" />
+    <instance id="5473:20763" name="Button" x="1040" y="35" width="75" height="34" />
+    <instance id="5473:20764" name="Button" x="960" y="35" width="66" height="28" />
+    <instance id="5473:20765" name="Button" x="810" y="35" width="92" height="50" />
+    <instance id="5473:20766" name="Button" x="720" y="35" width="75" height="34" />
+    <instance id="5473:20767" name="Button" x="640" y="35" width="66" height="28" />
+    <instance id="5473:20768" name="Button" x="500" y="35" width="92" height="50" />
+    <instance id="5473:20769" name="Button" x="410" y="35" width="75" height="34" />
+    <instance id="5473:20770" name="Button" x="330" y="35" width="66" height="28" />
+    <instance id="5473:20771" name="Button" x="190" y="35" width="92" height="50" />
+    <instance id="5473:20772" name="Button" x="100" y="35" width="75" height="34" />
+    <instance id="5473:20773" name="Button" x="20" y="35" width="66" height="28" />
+  </section>
+  <section id="2666:16141" name="Dark Examples" x="2716" y="400" width="1250" height="1070">
+    <instance id="548:35179" name="_Sticker Sheet" x="0" y="0" width="1250" height="1070" />
+    <instance id="5473:21321" name="Button" x="1130" y="985" width="50" height="50" />
+    <instance id="5473:21322" name="Button" x="1040" y="985" width="34" height="34" />
+    <instance id="5473:21323" name="Button" x="960" y="985" width="28" height="28" />
+    <instance id="5473:21324" name="Button" x="810" y="985" width="50" height="50" />
+    <instance id="5473:21325" name="Button" x="720" y="985" width="34" height="34" />
+    <instance id="5473:21326" name="Button" x="640" y="985" width="28" height="28" />
+    <instance id="5473:21327" name="Button" x="500" y="985" width="50" height="50" />
+    <instance id="5473:21328" name="Button" x="410" y="985" width="34" height="34" />
+    <instance id="5473:21329" name="Button" x="330" y="985" width="28" height="28" />
+    <instance id="5473:21330" name="Button" x="190" y="985" width="50" height="50" />
+    <instance id="5473:21331" name="Button" x="100" y="985" width="34" height="34" />
+    <instance id="5473:21332" name="Button" x="20" y="985" width="28" height="28" />
+    <instance id="5473:21333" name="Button" x="1130" y="915" width="50" height="50" />
+    <instance id="5473:21334" name="Button" x="1040" y="915" width="34" height="34" />
+    <instance id="5473:21335" name="Button" x="960" y="915" width="28" height="28" />
+    <instance id="5473:21336" name="Button" x="810" y="915" width="50" height="50" />
+    <instance id="5473:21337" name="Button" x="720" y="915" width="34" height="34" />
+    <instance id="5473:21338" name="Button" x="640" y="915" width="28" height="28" />
+    <instance id="5473:21339" name="Button" x="500" y="915" width="50" height="50" />
+    <instance id="5473:21340" name="Button" x="410" y="915" width="34" height="34" />
+    <instance id="5473:21341" name="Button" x="330" y="915" width="28" height="28" />
+    <instance id="5473:21342" name="Button" x="190" y="915" width="50" height="50" />
+    <instance id="5473:21343" name="Button" x="100" y="915" width="34" height="34" />
+    <instance id="5473:21344" name="Button" x="20" y="915" width="28" height="28" />
+    <instance id="5473:21345" name="Button" x="1130" y="815" width="73" height="50" />
+    <instance id="5473:21346" name="Button" x="1040" y="815" width="57" height="34" />
+    <instance id="5473:21347" name="Button" x="960" y="815" width="49" height="28" />
+    <instance id="5473:21348" name="Button" x="810" y="815" width="73" height="50" />
+    <instance id="5473:21349" name="Button" x="720" y="815" width="57" height="34" />
+    <instance id="5473:21350" name="Button" x="640" y="815" width="49" height="28" />
+    <instance id="5473:21351" name="Button" x="500" y="815" width="73" height="50" />
+    <instance id="5473:21352" name="Button" x="410" y="815" width="57" height="34" />
+    <instance id="5473:21353" name="Button" x="330" y="815" width="49" height="28" />
+    <instance id="5473:21354" name="Button" x="190" y="815" width="73" height="50" />
+    <instance id="5473:21355" name="Button" x="100" y="815" width="57" height="34" />
+    <instance id="5473:21356" name="Button" x="20" y="815" width="49" height="28" />
+    <instance id="5473:21357" name="Button" x="1130" y="745" width="73" height="50" />
+    <instance id="5473:21358" name="Button" x="1040" y="745" width="57" height="34" />
+    <instance id="5473:21359" name="Button" x="960" y="745" width="49" height="28" />
+    <instance id="5473:21360" name="Button" x="810" y="745" width="73" height="50" />
+    <instance id="5473:21361" name="Button" x="720" y="745" width="57" height="34" />
+    <instance id="5473:21362" name="Button" x="640" y="745" width="49" height="28" />
+    <instance id="5473:21363" name="Button" x="500" y="745" width="73" height="50" />
+    <instance id="5473:21364" name="Button" x="410" y="745" width="57" height="34" />
+    <instance id="5473:21365" name="Button" x="330" y="745" width="49" height="28" />
+    <instance id="5473:21366" name="Button" x="190" y="745" width="73" height="50" />
+    <instance id="5473:21367" name="Button" x="100" y="745" width="57" height="34" />
+    <instance id="5473:21368" name="Button" x="20" y="745" width="49" height="28" />
+    <instance id="5473:21369" name="Button" x="1130" y="645" width="92" height="50" />
+    <instance id="5473:21370" name="Button" x="1040" y="645" width="75" height="34" />
+    <instance id="5473:21371" name="Button" x="960" y="645" width="66" height="28" />
+    <instance id="5473:21372" name="Button" x="810" y="645" width="92" height="50" />
+    <instance id="5473:21373" name="Button" x="720" y="645" width="75" height="34" />
+    <instance id="5473:21374" name="Button" x="640" y="645" width="66" height="28" />
+    <instance id="5473:21375" name="Button" x="500" y="645" width="92" height="50" />
+    <instance id="5473:21376" name="Button" x="410" y="645" width="75" height="34" />
+    <instance id="5473:21377" name="Button" x="330" y="645" width="66" height="28" />
+    <instance id="5473:21378" name="Button" x="190" y="645" width="92" height="50" />
+    <instance id="5473:21379" name="Button" x="100" y="645" width="75" height="34" />
+    <instance id="5473:21380" name="Button" x="20" y="645" width="66" height="28" />
+    <instance id="5473:21381" name="Button" x="1130" y="575" width="92" height="50" />
+    <instance id="5473:21382" name="Button" x="1040" y="575" width="75" height="34" />
+    <instance id="5473:21383" name="Button" x="960" y="575" width="66" height="28" />
+    <instance id="5473:21384" name="Button" x="810" y="575" width="92" height="50" />
+    <instance id="5473:21385" name="Button" x="720" y="575" width="75" height="34" />
+    <instance id="5473:21386" name="Button" x="640" y="575" width="66" height="28" />
+    <instance id="5473:21387" name="Button" x="500" y="575" width="92" height="50" />
+    <instance id="5473:21388" name="Button" x="410" y="575" width="75" height="34" />
+    <instance id="5473:21389" name="Button" x="330" y="575" width="66" height="28" />
+    <instance id="5473:21390" name="Button" x="190" y="575" width="92" height="50" />
+    <instance id="5473:21391" name="Button" x="100" y="575" width="75" height="34" />
+    <instance id="5473:21392" name="Button" x="20" y="575" width="66" height="28" />
+    <instance id="5473:21393" name="Button" x="1130" y="445" width="50" height="50" />
+    <instance id="5473:21394" name="Button" x="1040" y="445" width="34" height="34" />
+    <instance id="5473:21395" name="Button" x="960" y="445" width="28" height="28" />
+    <instance id="5473:21396" name="Button" x="810" y="445" width="50" height="50" />
+    <instance id="5473:21397" name="Button" x="720" y="445" width="34" height="34" />
+    <instance id="5473:21398" name="Button" x="640" y="445" width="28" height="28" />
+    <instance id="5473:21399" name="Button" x="500" y="445" width="50" height="50" />
+    <instance id="5473:21400" name="Button" x="410" y="445" width="34" height="34" />
+    <instance id="5473:21401" name="Button" x="330" y="445" width="28" height="28" />
+    <instance id="5473:21402" name="Button" x="190" y="445" width="50" height="50" />
+    <instance id="5473:21403" name="Button" x="100" y="445" width="34" height="34" />
+    <instance id="5473:21404" name="Button" x="20" y="445" width="28" height="28" />
+    <instance id="5473:21405" name="Button" x="1130" y="375" width="50" height="50" />
+    <instance id="5473:21406" name="Button" x="1040" y="375" width="34" height="34" />
+    <instance id="5473:21407" name="Button" x="960" y="375" width="28" height="28" />
+    <instance id="5473:21408" name="Button" x="810" y="375" width="50" height="50" />
+    <instance id="5473:21409" name="Button" x="720" y="375" width="34" height="34" />
+    <instance id="5473:21410" name="Button" x="640" y="375" width="28" height="28" />
+    <instance id="5473:21411" name="Button" x="500" y="375" width="50" height="50" />
+    <instance id="5473:21412" name="Button" x="410" y="375" width="34" height="34" />
+    <instance id="5473:21413" name="Button" x="330" y="375" width="28" height="28" />
+    <instance id="5473:21414" name="Button" x="190" y="375" width="50" height="50" />
+    <instance id="5473:21415" name="Button" x="100" y="375" width="34" height="34" />
+    <instance id="5473:21416" name="Button" x="20" y="375" width="28" height="28" />
+    <instance id="5473:21417" name="Button" x="1130" y="275" width="73" height="50" />
+    <instance id="5473:21418" name="Button" x="1040" y="275" width="57" height="34" />
+    <instance id="5473:21419" name="Button" x="960" y="275" width="49" height="28" />
+    <instance id="5473:21420" name="Button" x="810" y="275" width="73" height="50" />
+    <instance id="5473:21421" name="Button" x="720" y="275" width="57" height="34" />
+    <instance id="5473:21422" name="Button" x="640" y="275" width="49" height="28" />
+    <instance id="5473:21423" name="Button" x="500" y="275" width="73" height="50" />
+    <instance id="5473:21424" name="Button" x="410" y="275" width="57" height="34" />
+    <instance id="5473:21425" name="Button" x="330" y="275" width="49" height="28" />
+    <instance id="5473:21426" name="Button" x="190" y="275" width="73" height="50" />
+    <instance id="5473:21427" name="Button" x="100" y="275" width="57" height="34" />
+    <instance id="5473:21428" name="Button" x="20" y="275" width="49" height="28" />
+    <instance id="5473:21429" name="Button" x="1130" y="205" width="73" height="50" />
+    <instance id="5473:21430" name="Button" x="1040" y="205" width="57" height="34" />
+    <instance id="5473:21431" name="Button" x="960" y="205" width="49" height="28" />
+    <instance id="5473:21432" name="Button" x="810" y="205" width="73" height="50" />
+    <instance id="5473:21433" name="Button" x="720" y="205" width="57" height="34" />
+    <instance id="5473:21434" name="Button" x="640" y="205" width="49" height="28" />
+    <instance id="5473:21435" name="Button" x="500" y="205" width="73" height="50" />
+    <instance id="5473:21436" name="Button" x="410" y="205" width="57" height="34" />
+    <instance id="5473:21437" name="Button" x="330" y="205" width="49" height="28" />
+    <instance id="5473:21438" name="Button" x="190" y="205" width="73" height="50" />
+    <instance id="5473:21439" name="Button" x="100" y="205" width="57" height="34" />
+    <instance id="5473:21440" name="Button" x="20" y="205" width="49" height="28" />
+    <instance id="5473:21441" name="Button" x="1130" y="105" width="92" height="50" />
+    <instance id="5473:21442" name="Button" x="1040" y="105" width="75" height="34" />
+    <instance id="5473:21443" name="Button" x="960" y="105" width="66" height="28" />
+    <instance id="5473:21444" name="Button" x="810" y="105" width="92" height="50" />
+    <instance id="5473:21445" name="Button" x="720" y="105" width="75" height="34" />
+    <instance id="5473:21446" name="Button" x="640" y="105" width="66" height="28" />
+    <instance id="5473:21447" name="Button" x="500" y="105" width="92" height="50" />
+    <instance id="5473:21448" name="Button" x="410" y="105" width="75" height="34" />
+    <instance id="5473:21449" name="Button" x="330" y="105" width="66" height="28" />
+    <instance id="5473:21450" name="Button" x="190" y="105" width="92" height="50" />
+    <instance id="5473:21451" name="Button" x="100" y="105" width="75" height="34" />
+    <instance id="5473:21452" name="Button" x="20" y="105" width="66" height="28" />
+    <instance id="5473:21453" name="Button" x="1130" y="35" width="92" height="50" />
+    <instance id="5473:21454" name="Button" x="1040" y="35" width="75" height="34" />
+    <instance id="5473:21455" name="Button" x="960" y="35" width="66" height="28" />
+    <instance id="5473:21456" name="Button" x="810" y="35" width="92" height="50" />
+    <instance id="5473:21457" name="Button" x="720" y="35" width="75" height="34" />
+    <instance id="5473:21458" name="Button" x="640" y="35" width="66" height="28" />
+    <instance id="5473:21459" name="Button" x="500" y="35" width="92" height="50" />
+    <instance id="5473:21460" name="Button" x="410" y="35" width="75" height="34" />
+    <instance id="5473:21461" name="Button" x="330" y="35" width="66" height="28" />
+    <instance id="5473:21462" name="Button" x="190" y="35" width="92" height="50" />
+    <instance id="5473:21463" name="Button" x="100" y="35" width="75" height="34" />
+    <instance id="5473:21464" name="Button" x="20" y="35" width="66" height="28" />
+  </section>
+  <section id="5473:26157" name="Example over a dark background context" x="1090" y="-90" width="260" height="190">
+    <instance id="5829:18739" name="Button - Liquid Glass - Text" x="20" y="110" width="85" height="48" />
+    <instance id="5829:18740" name="Button - Liquid Glass - Text" x="20" y="30" width="85" height="48" />
+    <instance id="5829:18741" name="Button - Liquid Glass - Symbol" x="130" y="110" width="48" height="48" />
+    <instance id="5829:18742" name="Button - Liquid Glass - Symbol" x="130" y="30" width="48" height="48" />
+  </section>
+  <section id="5473:26011" name="Example over a light background context" x="800" y="-90" width="260" height="190">
+    <instance id="5829:18699" name="Button - Liquid Glass - Text" x="20" y="110" width="85" height="48" />
+    <instance id="5829:18700" name="Button - Liquid Glass - Text" x="20" y="30" width="85" height="48" />
+    <instance id="5829:18719" name="Button - Liquid Glass - Symbol" x="130" y="110" width="48" height="48" />
+    <instance id="5829:18720" name="Button - Liquid Glass - Symbol" x="130" y="30" width="48" height="48" />
+  </section>
+  <frame id="5522:11886" name="_Label - Symbol - Preferred" x="590" y="160" width="130" height="130">
+    <symbol id="5566:15308" name="Mode=Dark,State=Disabled" x="70" y="70" width="28" height="36" />
+    <symbol id="5566:15310" name="Mode=Dark,State=Default" x="70" y="20" width="28" height="36" />
+    <symbol id="5522:11891" name="Mode=Light,State=Disabled" x="20" y="70" width="28" height="36" />
+    <symbol id="5522:11893" name="Mode=Light,State=Default" x="20" y="20" width="28" height="36" />
+  </frame>
+  <frame id="5522:11873" name="_Label - Symbol - Default" x="440" y="160" width="130" height="130">
+    <symbol id="5566:15299" name="Mode=Dark,State=Disabled" x="70" y="70" width="28" height="36" />
+    <symbol id="5566:15301" name="Mode=Dark,State=Default" x="70" y="20" width="28" height="36" />
+    <symbol id="5522:11878" name="Mode=Light,State=Disabled" x="20" y="70" width="28" height="36" />
+    <symbol id="5522:11880" name="Mode=Light,State=Default" x="20" y="20" width="28" height="36" />
+  </frame>
+  <frame id="5522:11895" name="_Label - Text - Preferred" x="190" y="160" width="170" height="130">
+    <symbol id="5566:15290" name="Mode=Dark,State=Disabled" x="90" y="70" width="45" height="36" />
+    <symbol id="5566:15292" name="Mode=Dark,State=Default" x="90" y="20" width="45" height="36" />
+    <symbol id="5522:11900" name="Mode=Light,State=Disabled" x="20" y="70" width="45" height="36" />
+    <symbol id="5522:11902" name="Mode=Light,State=Default" x="20" y="20" width="45" height="36" />
+  </frame>
+  <frame id="5522:11813" name="_Label - Text - Default" x="0" y="160" width="170" height="130">
+    <symbol id="5566:15281" name="Mode=Dark, State=Disabled" x="90" y="70" width="45" height="36" />
+    <symbol id="5566:15283" name="Mode=Dark, State=Default" x="90" y="20" width="45" height="36" />
+    <symbol id="5522:11824" name="Mode=Light, State=Disabled" x="20" y="70" width="45" height="36" />
+    <symbol id="5522:11828" name="Mode=Light, State=Default" x="20" y="21" width="45" height="36" />
+  </frame>
+  <frame id="5473:21667" name="Button - Liquid Glass - Text" x="0" y="-90" width="150" height="190">
+    <symbol id="5473:21905" name="Tinted=True" x="30" y="110" width="85" height="48" />
+    <symbol id="5473:21932" name="Tinted=False" x="30" y="30" width="85" height="48" />
+  </frame>
+  <frame id="5522:11866" name="Button - Liquid Glass - Symbol" x="440" y="-90" width="110" height="190">
+    <symbol id="5522:11867" name="Tinted=True" x="30" y="110" width="48" height="48" />
+    <symbol id="5522:11870" name="Tinted=False" x="30" y="30" width="48" height="48" />
+  </frame>
+  <instance id="544:191927" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

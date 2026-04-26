@@ -1,0 +1,2 @@
+Screenshot captured through Figma MCP on 2026-02-18 for node 5433:15635 (State=Typing).
+Rendered appearance: value text with active blue cursor and trailing clear control.

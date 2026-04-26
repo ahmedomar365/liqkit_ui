@@ -1,0 +1,1570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-notifications-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-notifications-root {
+  width: min(1540px, 100%);
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.ios26-notifications-header {
+  width: min(1540px, 100%);
+  min-height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: inset 0 0 0 1px rgba(16, 18, 24, 0.1);
+  padding: 10px 14px;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-notifications-header h4,
+.ios26-notifications-header p {
+  margin: 0;
+}
+
+.ios26-notifications-header h4 {
+  font: 600 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #15161a;
+}
+
+.ios26-notifications-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #656b78;
+}
+
+.ios26-notifications-canvas {
+  width: min(1540px, 100%);
+  border-radius: 22px;
+  padding: 24px;
+  background: #f5f5f5;
+  box-shadow: inset 0 0 0 1px rgba(15, 20, 29, 0.1);
+  display: grid;
+  grid-template-columns: 430px 402px 393px;
+  grid-template-rows: auto auto;
+  column-gap: 30px;
+  row-gap: 36px;
+  align-items: start;
+}
+
+.ios26-notification-collapsed-frame {
+  width: 430px;
+  height: 310px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.ios26-notification-collapsed-track {
+  display: grid;
+  gap: 26px;
+}
+
+.ios26-notification-list-frame {
+  position: relative;
+  width: 402px;
+  padding: 20px;
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  background: #f5f5f5;
+  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.1);
+  display: grid;
+  gap: 20px;
+}
+
+.ios26-notification-card {
+  position: relative;
+  width: 386px;
+  min-height: 64px;
+  border-radius: 24px;
+  padding: 13px 17px 13px 14px;
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08)),
+    rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 24px 50px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.ios26-notification-card--stack2 {
+  min-height: 72px;
+  padding-bottom: 21px;
+}
+
+.ios26-notification-card--stack3 {
+  min-height: 78px;
+  padding-bottom: 27px;
+}
+
+.ios26-notification-card--list {
+  width: 100%;
+}
+
+.ios26-notification-card--stack2::after,
+.ios26-notification-card--stack3::after,
+.ios26-notification-card--stack3::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  height: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.17);
+  z-index: 0;
+}
+
+.ios26-notification-card--stack2::after {
+  bottom: 0.33px;
+  opacity: 0.9;
+}
+
+.ios26-notification-card--stack3::after {
+  left: 40px;
+  right: 40px;
+  bottom: -1.67px;
+  opacity: 0.8;
+}
+
+.ios26-notification-card--stack3::before {
+  bottom: 6.33px;
+  opacity: 0.9;
+}
+
+.ios26-notification-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-notification-icon {
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.ios26-notification-icon-surface {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 4px 9px rgba(0, 0, 0, 0.15);
+}
+
+.ios26-notification-icon-glyph {
+  display: block;
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.ios26-notification-icon-glyph--mail {
+  width: 24px;
+  height: 24px;
+}
+
+.ios26-notification-icon-glyph--list {
+  width: 22px;
+  height: 22px;
+}
+
+.ios26-notification-icon--mail {
+  background: transparent;
+}
+
+.ios26-notification-icon--mail .ios26-notification-icon-surface {
+  background:
+    radial-gradient(130% 130% at 20% 15%, rgba(124, 215, 255, 0.86) 0%, rgba(124, 215, 255, 0) 55%),
+    linear-gradient(180deg, #62ccff 0%, #0a87f5 100%);
+}
+
+.ios26-notification-icon--list {
+  background: transparent;
+}
+
+.ios26-notification-icon--list .ios26-notification-icon-surface {
+  background:
+    radial-gradient(120% 120% at 22% 14%, rgba(255, 193, 210, 0.9) 0%, rgba(255, 193, 210, 0) 55%),
+    linear-gradient(180deg, #ff6f88 0%, #ff2b3f 100%);
+}
+
+.ios26-notification-copy {
+  align-self: stretch;
+  display: grid;
+  gap: 1px;
+}
+
+.ios26-notification-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.ios26-notification-title,
+.ios26-notification-time,
+.ios26-notification-description,
+.ios26-notification-time-chip {
+  margin: 0;
+}
+
+.ios26-notification-title {
+  font: 600 15px/17px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.ios26-notification-time {
+  font: 400 13px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: rgba(248, 248, 248, 0.72);
+}
+
+.ios26-notification-description {
+  font: 400 15px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.ios26-notification-expanded {
+  position: relative;
+  width: 393px;
+  height: 443px;
+  border-radius: 32px;
+  padding: 20px 8px;
+}
+
+.ios26-notification-expanded-surface {
+  position: absolute;
+  inset: 0 8px;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(15, 20, 29, 0.08);
+}
+
+.ios26-notification-menu {
+  position: absolute;
+  right: 8px;
+  bottom: 18px;
+  width: 250px;
+  padding: 20px 26px;
+  border-radius: 24px;
+  display: grid;
+  gap: 20px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 16px 34px rgba(17, 20, 27, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(20px);
+}
+
+.ios26-notification-menu-row {
+  border: 0;
+  background: transparent;
+  min-height: 22px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  color: #000000;
+  text-align: left;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-notification-menu-icon {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-notification-menu-icon .ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-notification-overlay-samples {
+  width: 140px;
+  height: 260px;
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.ios26-notification-overlay-chip {
+  width: 100px;
+  height: 100px;
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+}
+
+.ios26-notification-overlay-chip.is-light {
+  background-color: #b4b4b4;
+}
+
+.ios26-notification-overlay-chip.is-dark {
+  background-color: #a7a7a7;
+}
+
+.ios26-notification-time-samples {
+  width: 100px;
+  min-height: 100px;
+  border: 1px dashed rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.ios26-notification-time-chip {
+  font: 400 13px/20px "SF Pro Text", "SF Pro", sans-serif;
+  text-align: right;
+  justify-self: start;
+}
+
+.ios26-notification-time-chip.is-light {
+  color: #f1f1f1;
+}
+
+.ios26-notification-time-chip.is-dark {
+  color: #d7d7d7;
+}
+
+@media (max-width: 1360px) {
+  .ios26-notifications-canvas {
+    grid-template-columns: 1fr;
+    width: min(460px, 100%);
+    justify-items: center;
+  }
+
+  .ios26-notification-collapsed-frame,
+  .ios26-notification-list-frame,
+  .ios26-notification-expanded,
+  .ios26-notification-overlay-samples,
+  .ios26-notification-time-samples {
+    grid-column: 1;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Notifications</h1>
+        <p class="meta">Category Node <code>507:24678</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24678" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#notifications">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (143:62847)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-notifications-root" data-node-id="507:24678" aria-label="Notifications">
+  <svg class="ios26-notifications-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <symbol id="ios26-notifications-symbol-1" viewBox="0 0 16 16">
+        <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+      </symbol>
+      <symbol id="ios26-notifications-symbol-mail" viewBox="0 0 24 24">
+        <rect x="3.25" y="6.25" width="17.5" height="11.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <path d="M4.5 7.75L12 13.25L19.5 7.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ios26-notifications-symbol-list" viewBox="0 0 24 24">
+        <path d="M6 8.5H18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+        <path d="M6 12H15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+        <path d="M6 15.5H13.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="ios26-notifications-header" data-node-id="544:191882" aria-label="Header">
+    <h4>Notifications</h4>
+    <p>Saved header anchor from Figma metadata.</p>
+  </header>
+
+  <div class="ios26-notifications-canvas" data-node-id="544:199441">
+    <article class="ios26-notification-collapsed-frame" data-node-id="135:67787">
+      <div class="ios26-notification-collapsed-track">
+        <article class="ios26-notification-card ios26-notification-card--stack1" data-node-id="0:11292">
+          <span class="ios26-notification-icon ios26-notification-icon--mail" aria-hidden="true">
+            <span class="ios26-notification-icon-surface">
+              <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--mail">
+                <use href="#ios26-notifications-symbol-mail" xlink:href="#ios26-notifications-symbol-mail"></use>
+              </svg>
+            </span>
+          </span>
+          <div class="ios26-notification-copy">
+            <div class="ios26-notification-title-row">
+              <p class="ios26-notification-title">Title</p>
+              <p class="ios26-notification-time">9:41 AM</p>
+            </div>
+            <p class="ios26-notification-description">Description</p>
+          </div>
+        </article>
+
+        <article class="ios26-notification-card ios26-notification-card--stack2" data-node-id="533:5978">
+          <span class="ios26-notification-icon ios26-notification-icon--mail" aria-hidden="true">
+            <span class="ios26-notification-icon-surface">
+              <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--mail">
+                <use href="#ios26-notifications-symbol-mail" xlink:href="#ios26-notifications-symbol-mail"></use>
+              </svg>
+            </span>
+          </span>
+          <div class="ios26-notification-copy">
+            <div class="ios26-notification-title-row">
+              <p class="ios26-notification-title">Title</p>
+              <p class="ios26-notification-time">9:41 AM</p>
+            </div>
+            <p class="ios26-notification-description">Description</p>
+          </div>
+        </article>
+
+        <article class="ios26-notification-card ios26-notification-card--stack3" data-node-id="5549:4949">
+          <span class="ios26-notification-icon ios26-notification-icon--mail" aria-hidden="true">
+            <span class="ios26-notification-icon-surface">
+              <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--mail">
+                <use href="#ios26-notifications-symbol-mail" xlink:href="#ios26-notifications-symbol-mail"></use>
+              </svg>
+            </span>
+          </span>
+          <div class="ios26-notification-copy">
+            <div class="ios26-notification-title-row">
+              <p class="ios26-notification-title">Title</p>
+              <p class="ios26-notification-time">9:41 AM</p>
+            </div>
+            <p class="ios26-notification-description">Description</p>
+          </div>
+        </article>
+      </div>
+    </article>
+
+    <article class="ios26-notification-list-frame" data-node-id="135:73247">
+      <article class="ios26-notification-card ios26-notification-card--list" data-node-id="135:73230">
+        <span class="ios26-notification-icon ios26-notification-icon--list" aria-hidden="true">
+          <span class="ios26-notification-icon-surface">
+            <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--list">
+              <use href="#ios26-notifications-symbol-list" xlink:href="#ios26-notifications-symbol-list"></use>
+            </svg>
+          </span>
+        </span>
+        <div class="ios26-notification-copy">
+          <div class="ios26-notification-title-row">
+            <p class="ios26-notification-title">Title</p>
+            <p class="ios26-notification-time">9:41 AM</p>
+          </div>
+          <p class="ios26-notification-description">Description</p>
+        </div>
+      </article>
+
+      <article class="ios26-notification-card ios26-notification-card--list" data-node-id="533:8538">
+        <span class="ios26-notification-icon ios26-notification-icon--list" aria-hidden="true">
+          <span class="ios26-notification-icon-surface">
+            <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--list">
+              <use href="#ios26-notifications-symbol-list" xlink:href="#ios26-notifications-symbol-list"></use>
+            </svg>
+          </span>
+        </span>
+        <div class="ios26-notification-copy">
+          <div class="ios26-notification-title-row">
+            <p class="ios26-notification-title">Title</p>
+            <p class="ios26-notification-time">9:41 AM</p>
+          </div>
+          <p class="ios26-notification-description">Description</p>
+        </div>
+      </article>
+
+      <article class="ios26-notification-card ios26-notification-card--list ios26-notification-card--stack2">
+        <span class="ios26-notification-icon ios26-notification-icon--list" aria-hidden="true">
+          <span class="ios26-notification-icon-surface">
+            <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--list">
+              <use href="#ios26-notifications-symbol-list" xlink:href="#ios26-notifications-symbol-list"></use>
+            </svg>
+          </span>
+        </span>
+        <div class="ios26-notification-copy">
+          <div class="ios26-notification-title-row">
+            <p class="ios26-notification-title">Title</p>
+            <p class="ios26-notification-time">9:41 AM</p>
+          </div>
+          <p class="ios26-notification-description">Description</p>
+        </div>
+      </article>
+
+      <article class="ios26-notification-card ios26-notification-card--list ios26-notification-card--stack3">
+        <span class="ios26-notification-icon ios26-notification-icon--list" aria-hidden="true">
+          <span class="ios26-notification-icon-surface">
+            <svg viewBox="0 0 24 24" class="ios26-notification-icon-glyph ios26-notification-icon-glyph--list">
+              <use href="#ios26-notifications-symbol-list" xlink:href="#ios26-notifications-symbol-list"></use>
+            </svg>
+          </span>
+        </span>
+        <div class="ios26-notification-copy">
+          <div class="ios26-notification-title-row">
+            <p class="ios26-notification-title">Title</p>
+            <p class="ios26-notification-time">9:41 AM</p>
+          </div>
+          <p class="ios26-notification-description">Description</p>
+        </div>
+      </article>
+    </article>
+
+    <article class="ios26-notification-expanded" data-node-id="143:62847">
+      <div class="ios26-notification-expanded-surface" data-node-id="143:64281"></div>
+      <aside class="ios26-notification-menu" data-node-id="143:62995" aria-label="Notification menu">
+        <button class="ios26-notification-menu-row" type="button" data-node-id="5551:17823">
+          <span class="ios26-notification-menu-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--action"><use href="#ios26-notifications-symbol-1" xlink:href="#ios26-notifications-symbol-1"></use></svg>
+          </span>
+          <span>Action</span>
+        </button>
+
+        <button class="ios26-notification-menu-row" type="button" data-node-id="5551:17812">
+          <span class="ios26-notification-menu-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" class="ios26-menu-icon-svg ios26-menu-icon-svg--action"><use href="#ios26-notifications-symbol-1" xlink:href="#ios26-notifications-symbol-1"></use></svg>
+          </span>
+          <span>Action</span>
+        </button>
+      </aside>
+    </article>
+
+    <aside class="ios26-notification-overlay-samples" data-node-id="5551:17755" aria-label="Overlay mode samples">
+      <div class="ios26-notification-overlay-chip is-light" data-node-id="5551:17757"></div>
+      <div class="ios26-notification-overlay-chip is-dark" data-node-id="5551:17756"></div>
+    </aside>
+
+    <aside class="ios26-notification-time-samples" data-node-id="533:7109" aria-label="Time mode samples">
+      <p class="ios26-notification-time-chip is-light" data-node-id="533:7108">9:41 AM</p>
+      <p class="ios26-notification-time-chip is-dark" data-node-id="533:7110">9:41 AM</p>
+    </aside>
+  </div>
+</section>
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/notifications/143-62847.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/notifications/143-62847.screenshot.png" alt="Notifications screenshot" />
+        <p><a href="../evidence/figma-artifacts/notifications/143-62847.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/notifications/143-62847.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/notifications.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/notifications.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/notifications.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>type NotificationExpandedProps = {
+  className?: string;
+  showMenu?: boolean;
+};
+
+export default function NotificationExpanded({ className, showMenu = true }: NotificationExpandedProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col gap-[15px] h-[443px] isolate items-center px-[8px] relative w-[393px]&quot;} data-name=&quot;Notification - Expanded&quot; data-node-id=&quot;143:62847&quot;&gt;
+      &lt;div className=&quot;bg-[var(--backgrounds\/primary---elevated,white)] flex-[1_0_0] min-h-px min-w-px rounded-[32px] w-full z-[2]&quot; data-name=&quot;Content Background&quot; data-node-id=&quot;143:64281&quot; /&gt;
+      {showMenu &amp;&amp; (
+        &lt;div className=&quot;content-stretch flex flex-col gap-[20px] items-start px-[26px] py-[20px] relative shrink-0 w-[250px] z-[1]&quot; data-name=&quot;Menu&quot; data-node-id=&quot;143:62995&quot;&gt;
+          &lt;div className=&quot;absolute left-[0.5px] size-[160px] top-0&quot; data-name=&quot;Liquid Glass - Regular - Medium&quot; data-node-id=&quot;5914:29101&quot;&gt;
+            &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; data-node-id=&quot;I5914:29101;5584:31830&quot;&gt;
+              &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; data-node-id=&quot;I5914:29101;5584:31831&quot;&gt;
+                &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5914:29101;5584:31831;5584:31864&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5914:29101;5607:81561&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute inset-0 rounded-[34px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5914:29101;5607:25956&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+                &lt;div className=&quot;absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]&quot; /&gt;
+                &lt;div className=&quot;absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]&quot; /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5914:29101;5607:25843&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full&quot; data-name=&quot;Row 1&quot; data-node-id=&quot;5551:17823&quot;&gt;
+            &lt;div className=&quot;flex flex-col justify-center relative shrink-0 text-center w-[20px]&quot; data-node-id=&quot;5551:17825&quot;&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap&quot; data-node-id=&quot;5551:17824&quot;&gt;
+              &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Action&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Regular&#39;,sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full&quot; data-name=&quot;Row 2&quot; data-node-id=&quot;5551:17812&quot;&gt;
+            &lt;div className=&quot;flex flex-col justify-center relative shrink-0 text-center w-[20px]&quot; data-node-id=&quot;5551:17814&quot;&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap&quot; data-node-id=&quot;5551:17813&quot;&gt;
+              &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Action&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Body/Regular: Font(family: &quot;SF Pro&quot;, style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+const imgMaterial = "https://www.figma.com/api/mcp/asset/9cbb05fd-d5b1-4eb9-94ed-7d722fe5536a";
+type MaterialsProps = {
+  className?: string;
+  style?: "Ultrathin" | "Thin" | "Regular" | "Thick" | "Chrome";
+};
+
+function Materials({ className, style = "Ultrathin" }: MaterialsProps) {
+  const isUltrathin = style === "Ultrathin";
+  return (
+    <div className={className || "relative size-[100px]"} id={isUltrathin ? "node-510_79104" : "node-510_79108"}>
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+        <div className={`absolute inset-0 ${isUltrathin ? "bg-[rgba(255,255,255,0.07)]" : "bg-[rgba(255,255,255,0.34)] mix-blend-plus-lighter"}`} />
+        <div className={`absolute backdrop-blur-[50px] inset-0 mix-blend-color-dodge ${isUltrathin ? "bg-[rgba(255,255,255,0.03)]" : "bg-[rgba(255,255,255,0.84)]"}`} />
+      </div>
+    </div>
+  );
+}
+type PopoversIPadOnlyProps = {
+  className?: string;
+  direction?: "Down - Align Leading" | "Down - Align Center" | "Down - Align Trailing" | "Leading - Align Top" | "Leading - Align Middle" | "Leading - Align Bottom" | "Trailing - Align Top" | "Trailing - Align Middle" | "Trailing - Align Bottom" | "Up - Align Leading" | "Up - Align Center" | "Up - Align Trailing";
+};
+
+export default function PopoversIPadOnly({ className, direction = "Down - Align Trailing" }: PopoversIPadOnlyProps) {
+  if (direction === "Up - Align Trailing") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Up - Align Trailing" data-node-id="61:65434">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95171">
+          <div className="absolute inset-0 overflow-clip" data-name="_Materials" data-node-id="513:95172">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+              <div className="absolute bg-[rgba(255,255,255,0.34)] inset-0 mix-blend-plus-lighter" />
+              <div className="absolute backdrop-blur-[50px] bg-[rgba(255,255,255,0.84)] inset-0 mix-blend-color-dodge" />
+            </div>
+          </div>
+        </div>
+        <div className="absolute contents right-[7px] top-[-13px]" data-name="Material" data-node-id="5433:21467">
+          <Materials className="absolute mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip right-[7px] size-[100px] top-[-13px]" style="Thick" />
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Up - Align Leading") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Up - Align Leading" data-node-id="61:65452">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95149">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute contents left-[8px] top-[-13px]" data-name="Material" data-node-id="5433:21433">
+          <Materials className="absolute left-[8px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip size-[100px] top-[-13px]" style="Thick" />
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Up - Align Center") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Up - Align Center" data-node-id="0:12354">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95160">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="-translate-x-1/2 absolute contents left-1/2 top-[-13px]" data-name="Material" data-node-id="5433:21458">
+          <Materials className="-translate-x-1/2 absolute left-1/2 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip size-[100px] top-[-13px]" style="Thick" />
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Trailing - Align Bottom") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Trailing - Align Bottom" data-node-id="61:65473">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95203">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute bottom-[7px] contents h-[56px] right-[-13px] w-[13px]" data-name="Material" data-node-id="5433:21544">
+          <div className="absolute bottom-[7px] flex items-center justify-center right-[-13px] size-[100px]">
+            <div className="flex-none rotate-90">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Trailing - Align Top") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Trailing - Align Top" data-node-id="61:65431">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95205">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute contents h-[56px] right-[-13px] top-[7px] w-[13px]" data-name="Material" data-node-id="5433:21539">
+          <div className="absolute flex items-center justify-center right-[-13px] size-[100px] top-[7px]">
+            <div className="flex-none rotate-90">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Trailing - Align Middle") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Trailing - Align Middle" data-node-id="61:65461">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95207">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="-translate-y-1/2 absolute contents h-[56px] right-[-13px] top-1/2 w-[13px]" data-name="Material" data-node-id="5433:21534">
+          <div className="-translate-y-1/2 absolute flex items-center justify-center right-[-13px] size-[100px] top-1/2">
+            <div className="flex-none rotate-90">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Leading - Align Bottom") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Leading - Align Bottom" data-node-id="61:65476">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95209">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute bottom-[7px] contents h-[56px] left-[-13px] w-[13px]" data-name="Material" data-node-id="5433:21559">
+          <div className="absolute bottom-[7px] flex items-center justify-center left-[-13px] size-[100px]">
+            <div className="-rotate-90 flex-none">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Leading - Align Top") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Leading - Align Top" data-node-id="61:65425">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95211">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute contents h-[56px] left-[-13px] top-[7px] w-[13px]" data-name="Material" data-node-id="5433:21554">
+          <div className="absolute flex items-center justify-center left-[-13px] size-[100px] top-[7px]">
+            <div className="-rotate-90 flex-none">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Leading - Align Middle") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Leading - Align Middle" data-node-id="61:65464">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95213">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="-translate-y-1/2 absolute contents h-[56px] left-[-13px] top-1/2 w-[13px]" data-name="Material" data-node-id="5433:21549">
+          <div className="-translate-y-1/2 absolute flex items-center justify-center left-[-13px] size-[100px] top-1/2">
+            <div className="-rotate-90 flex-none">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[13px_56px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Down - Align Leading") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Down - Align Leading" data-node-id="61:65449">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95247">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="absolute bottom-[-13px] contents left-[7px]" data-name="Material" data-node-id="5433:21609">
+          <div className="absolute bottom-[-13px] flex items-center justify-center left-[7px] size-[100px]">
+            <div className="flex-none rotate-180">
+              <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip relative size-[100px]" data-name="_Materials" data-node-id="5433:21610" style={{ maskImage: `url('${imgMaterial}')` }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                  <div className="absolute bg-[rgba(255,255,255,0.34)] inset-0 mix-blend-plus-lighter" />
+                  <div className="absolute backdrop-blur-[50px] bg-[rgba(255,255,255,0.84)] inset-0 mix-blend-color-dodge" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (direction === "Down - Align Center") {
+    return (
+      <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Down - Align Center" data-node-id="61:65422">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95249">
+          <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+        </div>
+        <div className="-translate-x-1/2 absolute bottom-[-13px] contents left-1/2" data-name="Material" data-node-id="5433:21564">
+          <div className="-translate-x-1/2 absolute bottom-[-13px] flex items-center justify-center left-1/2 size-[100px]">
+            <div className="flex-none rotate-180">
+              <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip relative size-[100px]" style="Thick" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={className || "backdrop-blur-[65px] relative shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)] size-[120px]"} data-name="Direction=Down - Align Trailing" data-node-id="61:65428">
+      <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="513:95245">
+        <Materials className="absolute inset-0 overflow-clip" style="Thick" />
+      </div>
+      <div className="absolute bottom-[-13px] contents right-[7px]" data-name="Material" data-node-id="5433:21604">
+        <div className="absolute bottom-[-13px] flex items-center justify-center right-[7px] size-[100px]">
+          <div className="flex-none rotate-180">
+            <Materials className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip relative size-[100px]" style="Thick" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Popovers (iPad Only)
+**Node ID:** 61:65421
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/popovers](https://developer.apple.com/design/human-interface-guidelines/popovers)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

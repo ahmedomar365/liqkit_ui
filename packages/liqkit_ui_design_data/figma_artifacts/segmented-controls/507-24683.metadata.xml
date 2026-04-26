@@ -1,0 +1,33 @@
+<canvas id="507:24683" name="Segmented Controls" x="0" y="0" width="0" height="0">
+  <section id="2666:17069" name="Light examples" x="490" y="0" width="420" height="270">
+    <instance id="595:19723" name="Segmented control" x="20" y="206" width="370" height="32" />
+    <instance id="595:19724" name="Segmented control" x="20" y="154" width="370" height="32" />
+    <instance id="595:19725" name="Segmented control" x="20" y="102" width="370" height="32" />
+    <instance id="595:19726" name="Segmented control" x="20" y="50" width="370" height="36" />
+    <instance id="5760:9245" name="Mode" x="356" y="10" width="54" height="19" />
+  </section>
+  <section id="2666:17070" name="Dark examples" x="950" y="0" width="420" height="270">
+    <instance id="595:19770" name="Segmented control" x="20" y="206" width="370" height="32" />
+    <instance id="595:19771" name="Segmented control" x="20" y="154" width="370" height="32" />
+    <instance id="595:19772" name="Segmented control" x="20" y="102" width="370" height="32" />
+    <instance id="595:19773" name="Segmented control" x="20" y="50" width="370" height="36" />
+    <instance id="5760:9251" name="Mode" x="356" y="10" width="54" height="19" />
+  </section>
+  <frame id="6:57374" name="Segmented control" x="0" y="0" width="410" height="710">
+    <symbol id="6:57505" name="Segments=5, Selected=5" x="20" y="660" width="370" height="32" />
+    <symbol id="488:60807" name="Segments=5, Selected=4" x="20" y="620" width="370" height="32" />
+    <symbol id="488:60837" name="Segments=5, Selected=3" x="20" y="580" width="370" height="32" />
+    <symbol id="488:60852" name="Segments=5, Selected=2" x="20" y="540" width="370" height="32" />
+    <symbol id="488:60882" name="Segments=5, Selected=1" x="20" y="500" width="370" height="32" />
+    <symbol id="488:60942" name="Segments=4, Selected=4" x="20" y="420" width="370" height="32" />
+    <symbol id="488:60957" name="Segments=4, Selected=3" x="20" y="380" width="370" height="32" />
+    <symbol id="488:60972" name="Segments=4, Selected=2" x="20" y="340" width="370" height="32" />
+    <symbol id="488:61092" name="Segments=4, Selected=1" x="20" y="300" width="370" height="32" />
+    <symbol id="488:61017" name="Segments=3, Selected=3" x="20" y="210" width="370" height="32" />
+    <symbol id="488:61032" name="Segments=3, Selected=2" x="20" y="170" width="370" height="32" />
+    <symbol id="488:61122" name="Segments=3, Selected=1" x="20" y="130" width="370" height="32" />
+    <symbol id="488:61062" name="Segments=2, Selected=2" x="20" y="60" width="370" height="32" />
+    <symbol id="488:61152" name="Segments=2, Selected=1" x="20" y="20" width="370" height="32" />
+  </frame>
+  <instance id="544:191852" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

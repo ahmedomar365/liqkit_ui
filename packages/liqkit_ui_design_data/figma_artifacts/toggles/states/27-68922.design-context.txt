@@ -1,0 +1,14 @@
+const imgFrame = "https://www.figma.com/api/mcp/asset/d8c9eef5-2543-400b-a89b-3df4e4e3fdc6";
+
+function ToggleSwitch({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Toggle - Switch" data-node-id="29:56814">
+      <div className="bg-[var(--labels\/tertiary,rgba(60,60,67,0.3))] h-[28px] overflow-clip relative rounded-[100px] w-[64px]" data-name="State=Off" data-node-id="27:68922">
+        <div className="absolute h-[10px] left-[41px] top-[9px] w-[21px]" data-name="Frame" data-node-id="6152:1855">
+          <img alt="" className="absolute block max-w-none size-full" src={imgFrame} />
+        </div>
+        <div className="absolute bg-white bottom-[7.14%] left-[2px] rounded-[100px] top-[7.14%] w-[39px]" data-name="Knob" data-node-id="508:70021" />
+      </div>
+    </div>
+  );
+}

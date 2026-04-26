@@ -1,0 +1,34 @@
+{
+  "capturedAt": "2026-02-18",
+  "source": "Saved Figma design-context artifacts containing SF Symbol private-use glyph codepoints",
+  "note": "Glyph codepoints were replaced with inline SVG fallbacks to keep native HTML/CSS deterministic in browsers without SF Symbols fonts.",
+  "sharedStyle": "figma-artifacts/native/shared-icons.css",
+  "components": [
+    "buttons",
+    "sliders",
+    "steppers",
+    "sidebars",
+    "top-bars",
+    "toolbars",
+    "windows",
+    "sheets",
+    "menu"
+  ],
+  "glyphMap": {
+    "􀯶": "chevron-left",
+    "􀓔": "ellipsis",
+    "􀓑": "speaker-high",
+    "􀓏": "speaker-low",
+    "􀊫": "search",
+    "􀊱": "mic",
+    "􀋂": "document",
+    "􀆊": "chevron-right",
+    "􀆈": "chevron-right",
+    "􀅽": "minus",
+    "􀅼": "plus",
+    "􀄨": "check",
+    "􀆄": "xmark",
+    "􀊄": "button-symbol-placeholder",
+    "􀰱": "layout"
+  }
+}

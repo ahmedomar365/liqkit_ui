@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steppers - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-steppers-demo {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-steppers-device {
+  width: 402px;
+  height: 874px;
+  position: relative;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #f2f2f7;
+}
+
+.ios26-steppers-screen {
+  position: absolute;
+  inset: 0;
+  background: #f2f2f7;
+}
+
+.ios26-steppers-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+}
+
+.ios26-steppers-topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62px;
+  height: 44px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  z-index: 3;
+}
+
+.ios26-steppers-back-btn,
+.ios26-steppers-action-btn {
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0 10px;
+  background: #f7f7f7;
+  color: #1a1a1a;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-steppers-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ios26-steppers-action-btn {
+  width: 44px;
+  padding: 0;
+  background: #08f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-steppers-title {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-steppers-content {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 116px;
+  bottom: 10px;
+  display: grid;
+  align-content: start;
+  padding: 10px 0;
+}
+
+.ios26-steppers-group {
+  border-radius: 26px;
+  background: #ffffff;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+}
+
+.ios26-steppers-row {
+  height: 52px;
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) auto auto auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 0 16px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.ios26-steppers-primary {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-steppers-secondary {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #3c3c4399;
+}
+
+.ios26-steppers-trailing-icon {
+  width: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #08f;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-steppers-chevron {
+  width: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3c3c434d;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-stepper-control {
+  width: 92px;
+  height: 32px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 100px;
+  overflow: hidden;
+  background: #76768014;
+}
+
+.ios26-stepper-btn {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 46px;
+  height: 32px;
+  background: #76768014;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-stepper-btn.is-decrement {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+.ios26-stepper-btn.is-increment {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.ios26-stepper-separator {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: #3c3c434d;
+}
+
+.ios26-steppers-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62px;
+  padding: 21px 24px 19px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  z-index: 3;
+  color: #000;
+}
+
+.ios26-steppers-status > span {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000;
+}
+
+.ios26-steppers-state-gallery {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-steppers-state-panel {
+  border-radius: 12px;
+  border: 1px solid #dde3ec;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.ios26-steppers-state-panel h4 {
+  margin: 0 0 8px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-steppers-state-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ios26-steppers-mini-control {
+  height: 32px;
+  border-radius: 100px;
+  background: #76768014;
+  border: 1px solid #e6e8ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #111827;
+}
+
+.ios26-steppers-mini-control.is-pressed {
+  background: #dce0e6;
+}
+
+.ios26-steppers-mini-control.is-disabled {
+  color: #9ba4b0;
+  background: #f1f3f6;
+}
+
+.ios26-steppers-state-panel.is-dark {
+  background: #10141b;
+  border-color: #283243;
+}
+
+.ios26-steppers-state-panel.is-dark h4 {
+  color: #f1f5f9;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control {
+  background: #cfd5de24;
+  border-color: #3c4452;
+  color: #e2e8f0;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control.is-pressed {
+  background: #cfd5de3d;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control.is-disabled {
+  color: #97a0ad;
+  background: #cfd5de17;
+}
+
+@media (max-width: 520px) {
+  .ios26-steppers-device {
+    transform: scale(0.86);
+    transform-origin: top left;
+  }
+
+  .ios26-steppers-row {
+    grid-template-columns: minmax(70px, 1fr) auto auto auto;
+    gap: 8px;
+  }
+
+  .ios26-steppers-trailing-icon {
+    display: none;
+  }
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Steppers</h1>
+        <p class="meta">Category Node <code>507:24687</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24687" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#steppers">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (5661:43368)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-steppers-root" data-node-id="507:24687" aria-label="Steppers category">
+<div class="ios26-steppers-demo" data-node-id="5661:43368" aria-label="Steppers">
+  <div class="ios26-steppers-device">
+    <div class="ios26-steppers-screen" data-node-id="5661:43319">
+      <div class="ios26-steppers-scroll-edge" data-node-id="5707:46448"></div>
+
+      <div class="ios26-steppers-topbar" data-node-id="5661:43325">
+        <button class="ios26-steppers-back-btn" type="button">
+          <span class="ios26-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 3.5L6 10L12.5 16.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span>Label</span>
+        </button>
+        <div class="ios26-steppers-title">Title</div>
+        <button class="ios26-steppers-action-btn" type="button" aria-label="More actions">
+          <span class="ios26-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <circle cx="5" cy="10" r="1.6" />
+              <circle cx="10" cy="10" r="1.6" />
+              <circle cx="15" cy="10" r="1.6" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="ios26-steppers-content">
+        <section class="ios26-steppers-group" data-node-id="5661:43322">
+          <div class="ios26-steppers-row" data-node-id="5661:43323">
+            <div class="ios26-steppers-primary">Stepper</div>
+            <div class="ios26-steppers-secondary">Detail</div>
+            <div class="ios26-steppers-trailing-icon" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <rect x="3.5" y="4" width="13" height="12" rx="2.3" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M9.4 6.4H13.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                  <path d="M6.4 9.3H13.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <div class="ios26-steppers-chevron" aria-hidden="true">
+              <span class="ios26-icon">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 4.5L13 10L7.5 15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </div>
+            <div class="ios26-stepper-control" data-node-id="29:63928">
+              <button type="button" class="ios26-stepper-btn is-decrement" aria-label="Decrease">
+                <span class="ios26-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M5 10H15" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+                  </svg>
+                </span>
+              </button>
+              <span class="ios26-stepper-separator" aria-hidden="true"></span>
+              <button type="button" class="ios26-stepper-btn is-increment" aria-label="Increase">
+                <span class="ios26-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M5 10H15" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+                    <path d="M10 5V15" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="ios26-steppers-status" data-node-id="5465:16807">
+      <span>9:41</span>
+      <div class="ios26-status-glyphs" aria-hidden="true">
+        <span class="ios26-status-cell"></span>
+        <span class="ios26-status-wifi"></span>
+        <span class="ios26-status-battery"></span>
+      </div>
+    </div>
+
+    <div class="ios26-device-frame ios26-device-frame--phone" aria-hidden="true"></div>
+  </div>
+
+  <section class="ios26-steppers-state-gallery" aria-label="Stepper state variants">
+    <article class="ios26-steppers-state-panel" data-node-id="5433:18793">
+      <h4>Light Examples</h4>
+      <div class="ios26-steppers-state-grid">
+        <div class="ios26-steppers-mini-control" data-node-id="5415:17689"><span>Decrement Default</span></div>
+        <div class="ios26-steppers-mini-control is-pressed" data-node-id="5415:17687"><span>Decrement Pressed</span></div>
+        <div class="ios26-steppers-mini-control is-disabled" data-node-id="5415:17685"><span>Decrement Disabled</span></div>
+        <div class="ios26-steppers-mini-control" data-node-id="5415:17696"><span>Increment Default</span></div>
+        <div class="ios26-steppers-mini-control is-pressed" data-node-id="5415:17694"><span>Increment Pressed</span></div>
+        <div class="ios26-steppers-mini-control is-disabled" data-node-id="5415:17692"><span>Increment Disabled</span></div>
+      </div>
+    </article>
+
+    <article class="ios26-steppers-state-panel is-dark" data-node-id="5433:18797">
+      <h4>Dark Examples</h4>
+      <div class="ios26-steppers-state-grid">
+        <div class="ios26-steppers-mini-control"><span>Decrement Default</span></div>
+        <div class="ios26-steppers-mini-control is-pressed"><span>Decrement Pressed</span></div>
+        <div class="ios26-steppers-mini-control is-disabled"><span>Decrement Disabled</span></div>
+        <div class="ios26-steppers-mini-control"><span>Increment Default</span></div>
+        <div class="ios26-steppers-mini-control is-pressed"><span>Increment Pressed</span></div>
+        <div class="ios26-steppers-mini-control is-disabled"><span>Increment Disabled</span></div>
+      </div>
+    </article>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Steppers metadata coverage supplement" data-node-id="507:24687">
+  <header class="ios26-node-coverage-header">
+    <h3>Steppers Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24687). Full coverage is persisted; this supplement lists 8 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (8)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5415:17699" data-node-name="Stepper" data-node-reasons="metadata-root-gap">
+      <code>5415:17699</code>
+      <span class="ios26-node-coverage-item-name">Stepper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5415:17684" data-node-name="_Decrement" data-node-reasons="metadata-root-gap">
+      <code>5415:17684</code>
+      <span class="ios26-node-coverage-item-name">_Decrement</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5415:17691" data-node-name="_Increment" data-node-reasons="metadata-root-gap">
+      <code>5415:17691</code>
+      <span class="ios26-node-coverage-item-name">_Increment</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5433:18978" data-node-name="Stepper" data-node-reasons="metadata-root-gap">
+      <code>5433:18978</code>
+      <span class="ios26-node-coverage-item-name">Stepper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:10159" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:10159</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5433:19034" data-node-name="Stepper" data-node-reasons="metadata-root-gap">
+      <code>5433:19034</code>
+      <span class="ios26-node-coverage-item-name">Stepper</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5760:10145" data-node-name="Mode" data-node-reasons="metadata-root-gap">
+      <code>5760:10145</code>
+      <span class="ios26-node-coverage-item-name">Mode</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191827" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191827</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/steppers/5661-43368.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/steppers/5661-43368.screenshot.png" alt="Steppers screenshot" />
+        <p><a href="../evidence/figma-artifacts/steppers/5661-43368.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/steppers/5661-43368.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/steppers.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/steppers.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/steppers.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgCellularConnection = &quot;https://www.figma.com/api/mcp/asset/6f1b2e55-6dde-4200-97a6-74e3c34dfeb5&quot;;
+const imgWifi = &quot;https://www.figma.com/api/mcp/asset/823b37fb-865b-460e-913f-68e1ade382cc&quot;;
+const imgFrame = &quot;https://www.figma.com/api/mcp/asset/972768b0-ba31-4e0f-bbaf-3b3d414490de&quot;;
+const imgIPhone17ProSilverPortrait = &quot;https://www.figma.com/api/mcp/asset/55e0c1b2-ea86-4d7e-b851-6203b213d640&quot;;
+const imgBlur = &quot;https://www.figma.com/api/mcp/asset/d62ec925-21e0-4abd-baef-3f147b061726&quot;;
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = &quot;9:41&quot; }: StatusBarIPhoneProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]&quot;} data-name=&quot;Status bar - iPhone&quot; data-node-id=&quot;5465:16807&quot;&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative&quot; data-name=&quot;Time&quot; data-node-id=&quot;5465:16808&quot;&gt;
+        &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center&quot; data-node-id=&quot;5465:16809&quot;&gt;
+          {time}
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative&quot; data-name=&quot;Levels&quot; data-node-id=&quot;5465:16811&quot;&gt;
+        &lt;div className=&quot;h-[12.226px] relative shrink-0 w-[19.2px]&quot; data-name=&quot;Cellular Connection&quot; data-node-id=&quot;5465:16812&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgCellularConnection} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[12.328px] relative shrink-0 w-[17.142px]&quot; data-name=&quot;Wifi&quot; data-node-id=&quot;5465:16813&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgWifi} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;h-[13px] relative shrink-0 w-[27.328px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;6325:1760&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute block max-w-none size-full&quot; src={imgFrame} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Increment({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;_Increment&quot; data-node-id=&quot;5415:17367&quot;&gt;
+      &lt;div className=&quot;bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] relative rounded-br-[100px] rounded-tr-[100px] w-[46px]&quot; data-name=&quot;Style=Default&quot; data-node-id=&quot;5415:17370&quot;&gt;
+        &lt;div className=&quot;-translate-y-1/2 absolute flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] justify-center leading-[0] left-0 not-italic right-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.43px]&quot; data-node-id=&quot;5415:17371&quot;&gt;
+          &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀅼&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Decrement({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;_Decrement&quot; data-node-id=&quot;5415:17068&quot;&gt;
+      &lt;div className=&quot;bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] relative rounded-bl-[100px] rounded-tl-[100px] w-[46px]&quot; data-name=&quot;Style=Default&quot; data-node-id=&quot;5415:16951&quot;&gt;
+        &lt;div className=&quot;-translate-y-1/2 absolute flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] justify-center leading-[0] left-0 not-italic right-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center top-1/2 tracking-[-0.43px]&quot; data-node-id=&quot;5415:16912&quot;&gt;
+          &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀅽&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Stepper({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;Stepper&quot; data-node-id=&quot;29:63928&quot;&gt;
+      &lt;div className=&quot;h-[32px] relative w-[92px]&quot; data-name=&quot;Mode=Light&quot; data-node-id=&quot;27:68887&quot;&gt;
+        &lt;div className=&quot;-translate-x-1/2 absolute bg-[var(--labels\/tertiary,rgba(60,60,67,0.3))] h-[24px] left-1/2 rounded-[8px] top-[4px] w-px&quot; data-name=&quot;Separator&quot; data-node-id=&quot;27:68686&quot; /&gt;
+        &lt;Decrement className=&quot;absolute bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] left-0 right-1/2 rounded-bl-[100px] rounded-tl-[100px] top-0&quot; /&gt;
+        &lt;Increment className=&quot;absolute bg-[var(--fills\/quaternary,rgba(116,116,128,0.08))] h-[32px] left-1/2 right-0 rounded-br-[100px] rounded-tr-[100px] top-0&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function Steppers({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;h-[874px] relative w-[402px]&quot;} data-name=&quot;Steppers&quot; data-node-id=&quot;5661:43368&quot;&gt;
+      &lt;div className=&quot;absolute bg-[var(--backgrounds-\(grouped\)\/primary,#f2f2f7)] content-stretch flex flex-col inset-0 items-center justify-center overflow-clip pb-[10px] pt-[116px] px-[16px]&quot; data-name=&quot;Screen&quot; data-node-id=&quot;5661:43319&quot;&gt;
+        &lt;div className=&quot;absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0&quot; data-name=&quot;Scroll Edge Effect - Soft&quot; data-node-id=&quot;5707:46448&quot;&gt;
+          &lt;div className=&quot;absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5707:46448;5661:28853&quot; style={{ maskImage: `url(&#39;${imgBlur}&#39;)` }} /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col items-start min-h-px min-w-px py-[10px] relative w-full&quot; data-name=&quot;Content Area&quot; data-node-id=&quot;5661:43321&quot;&gt;
+          &lt;div className=&quot;bg-[var(--backgrounds-\(grouped\)\/secondary,white)] content-stretch flex flex-col items-start overflow-clip relative rounded-[26px] shrink-0 w-full&quot; data-name=&quot;Grouped List&quot; data-node-id=&quot;5661:43322&quot;&gt;
+            &lt;div className=&quot;content-stretch flex h-[52px] items-center justify-center px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Row&quot; data-node-id=&quot;5661:43323&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px pb-px relative&quot; data-name=&quot;Contents&quot; data-node-id=&quot;I5661:43323;550:50628&quot;&gt;
+                &lt;div className=&quot;border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full&quot; data-name=&quot;_Separator&quot; data-node-id=&quot;I5661:43323;5534:22992&quot; /&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative w-full&quot; data-name=&quot;Title and Trailing Accessories&quot; data-node-id=&quot;I5661:43323;550:50633&quot;&gt;
+                  &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[17px] text-[color:var(--labels\/primary,black)] text-ellipsis tracking-[-0.43px] whitespace-nowrap&quot; data-node-id=&quot;I5661:43323;550:50635&quot;&gt;
+                    &lt;p className=&quot;leading-[22px] overflow-hidden&quot;&gt;Stepper&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;content-stretch flex h-full items-center justify-end relative shrink-0&quot; data-name=&quot;Accessories and Grabber&quot; data-node-id=&quot;I5661:43323;550:50637&quot;&gt;
+                    &lt;div className=&quot;content-stretch flex gap-[16px] items-center justify-end leading-[0] not-italic relative shrink-0 text-[17px]&quot; data-name=&quot;_Trailing&quot; data-node-id=&quot;I5661:43323;550:50638&quot;&gt;
+                      &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px] whitespace-nowrap&quot; data-node-id=&quot;I5661:43323;550:50638;212:117599&quot;&gt;
+                        &lt;p className=&quot;leading-[22px]&quot;&gt;Detail&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] justify-center relative shrink-0 size-[22px] text-[color:var(--accents\/blue,#08f)] text-center&quot; data-node-id=&quot;I5661:43323;550:50638;212:119974&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                        &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀋂&lt;/p&gt;
+                      &lt;/div&gt;
+                      &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] justify-center relative shrink-0 text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] w-[8px]&quot; data-node-id=&quot;I5661:43323;550:50638;212:124674&quot; style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+                        &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀆊&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[16px] right-0 top-[62px]&quot; data-name=&quot;Toolbar - Top - iPhone&quot; data-node-id=&quot;5661:43325&quot;&gt;
+        &lt;div className=&quot;content-stretch flex gap-[10px] items-center relative shrink-0&quot; data-name=&quot;Leading&quot; data-node-id=&quot;I5661:43325;5553:35134&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5661:43325;5553:35135&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565&quot;&gt;
+              &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;5575:44983&quot;&gt;
+                &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;5575:75442&quot;&gt;
+                  &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;5575:75442;5575:32354&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;6491:20171&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;6491:20172&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                  &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22565;6491:20173&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap&quot; data-name=&quot;_Button - Back&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22970&quot;&gt;
+              &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22970;5431:837&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal]&quot;&gt;􀯶&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5661:43325;5553:35135;6491:22970;5431:840&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;self-stretch shrink-0 w-[8px]&quot; data-name=&quot;Spacer&quot; data-node-id=&quot;I5661:43325;5661:34483&quot; /&gt;
+        &lt;div className=&quot;content-stretch flex gap-[10px] items-center justify-end relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5661:43325;5553:33054&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5661:43325;5553:33055&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5661:43325;5553:33055;5720:30354&quot;&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[1000px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.1),0px_1px_8px_0px_rgba(0,0,0,0.12)]&quot; data-name=&quot;Tint&quot; data-node-id=&quot;I5661:43325;5553:33055;5720:30354;5607:78140&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[1000px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[rgba(255,255,255,0.5)] inset-0 rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-white inset-0 mix-blend-saturation rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-[#999] inset-0 mix-blend-overlay rounded-[1000px]&quot; /&gt;
+                  &lt;div className=&quot;absolute bg-[#0091ff] inset-0 rounded-[1000px]&quot; /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5661:43325;5553:33055;5720:30354;5607:77747&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;bg-[var(--accents\/blue,#08f)] content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5661:43325;5553:33055;5432:23263&quot;&gt;
+              &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-center text-white w-full&quot; data-node-id=&quot;I5661:43325;5553:33055;5432:23263;5426:2007&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]&quot; data-name=&quot;_Title - Body&quot; data-node-id=&quot;I5661:43325;5827:58547&quot;&gt;
+          &lt;p className=&quot;absolute font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]&quot; data-node-id=&quot;I5661:43325;5827:58547;5827:56434&quot;&gt;
+            Title
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;StatusBarIPhone className=&quot;absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0&quot; /&gt;
+      &lt;div className=&quot;absolute h-[874px] left-0 top-0 w-[402px]&quot; data-name=&quot;iPhone 17 Pro&quot; data-node-id=&quot;5661:43328&quot;&gt;
+        &lt;div className=&quot;absolute h-[920px] left-[-24px] top-[-23px] w-[450px]&quot; data-name=&quot;iPhone 17 Pro - Silver - Portrait&quot; data-node-id=&quot;I5661:43328;6316:14150&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPhone17ProSilverPortrait} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Body/Regular: Font(family: &quot;SF Pro&quot;, style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Headline/Regular: Font(family: &quot;SF Pro&quot;, style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Steppers
+**Node ID:** 5661:43368
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/tab-bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
+
+## Row
+**Node ID:** 550:50430
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+## Stepper
+**Node ID:** 29:63928
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/steppers](https://developer.apple.com/design/human-interface-guidelines/steppers)
+
+## Toolbar - Top - iPhone
+**Node ID:** 1:54472
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

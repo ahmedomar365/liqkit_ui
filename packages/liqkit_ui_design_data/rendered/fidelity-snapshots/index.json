@@ -1,0 +1,386 @@
+{
+  "generatedAt": "2026-02-20T06:49:48.192Z",
+  "root": "/Users/ahmedomar/Documents/WebCardFight/ios-26",
+  "baseUrl": "http://127.0.0.1:4173",
+  "mode": "fidelity",
+  "installLog": {
+    "status": 0,
+    "stdout": "",
+    "stderr": "╔═══════════════════════════════════════════════════════════════════════════════╗\n║ WARNING: It looks like you are running 'npx playwright install' without first ║\n║ installing your project's dependencies.                                       ║\n║                                                                               ║\n║ To avoid unexpected behavior, please install your dependencies first, and     ║\n║ then run Playwright's install command:                                        ║\n║                                                                               ║\n║     npm install                                                               ║\n║     npx playwright install                                                    ║\n║                                                                               ║\n║ If your project does not yet depend on Playwright, first install the          ║\n║ applicable npm package (most commonly @playwright/test), and                  ║\n║ then run Playwright's install command to download the browsers:               ║\n║                                                                               ║\n║     npm install @playwright/test                                              ║\n║     npx playwright install                                                    ║\n║                                                                               ║\n╚═══════════════════════════════════════════════════════════════════════════════╝"
+  },
+  "total": 37,
+  "ok": 37,
+  "failed": 0,
+  "entries": [
+    {
+      "id": "examples",
+      "category": "Examples",
+      "renderedHtml": "preview/rendered/examples.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/examples.png",
+      "url": "http://127.0.0.1:4173/rendered/examples.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "colors",
+      "category": "Colors",
+      "renderedHtml": "preview/rendered/colors.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/colors.png",
+      "url": "http://127.0.0.1:4173/rendered/colors.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "materials",
+      "category": "Materials",
+      "renderedHtml": "preview/rendered/materials.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/materials.png",
+      "url": "http://127.0.0.1:4173/rendered/materials.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "text-styles",
+      "category": "Text styles",
+      "renderedHtml": "preview/rendered/text-styles.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/text-styles.png",
+      "url": "http://127.0.0.1:4173/rendered/text-styles.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "bezels",
+      "category": "Bezels",
+      "renderedHtml": "preview/rendered/bezels.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/bezels.png",
+      "url": "http://127.0.0.1:4173/rendered/bezels.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "system",
+      "category": "System",
+      "renderedHtml": "preview/rendered/system.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/system.png",
+      "url": "http://127.0.0.1:4173/rendered/system.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "action-sheets",
+      "category": "Action sheets",
+      "renderedHtml": "preview/rendered/action-sheets.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/action-sheets.png",
+      "url": "http://127.0.0.1:4173/rendered/action-sheets.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "activity-views",
+      "category": "Activity views",
+      "renderedHtml": "preview/rendered/activity-views.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/activity-views.png",
+      "url": "http://127.0.0.1:4173/rendered/activity-views.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "alerts",
+      "category": "Alerts",
+      "renderedHtml": "preview/rendered/alerts.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/alerts.png",
+      "url": "http://127.0.0.1:4173/rendered/alerts.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "app-icons",
+      "category": "App icons",
+      "renderedHtml": "preview/rendered/app-icons.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/app-icons.png",
+      "url": "http://127.0.0.1:4173/rendered/app-icons.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "buttons",
+      "category": "Buttons",
+      "renderedHtml": "preview/rendered/buttons.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/buttons.png",
+      "url": "http://127.0.0.1:4173/rendered/buttons.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "color-pickers",
+      "category": "Color pickers",
+      "renderedHtml": "preview/rendered/color-pickers.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/color-pickers.png",
+      "url": "http://127.0.0.1:4173/rendered/color-pickers.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "context-menu",
+      "category": "Context menu",
+      "renderedHtml": "preview/rendered/context-menu.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/context-menu.png",
+      "url": "http://127.0.0.1:4173/rendered/context-menu.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "empty-states",
+      "category": "Empty states",
+      "renderedHtml": "preview/rendered/empty-states.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/empty-states.png",
+      "url": "http://127.0.0.1:4173/rendered/empty-states.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "face-id",
+      "category": "Face ID",
+      "renderedHtml": "preview/rendered/face-id.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/face-id.png",
+      "url": "http://127.0.0.1:4173/rendered/face-id.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "keyboards",
+      "category": "Keyboards",
+      "renderedHtml": "preview/rendered/keyboards.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/keyboards.png",
+      "url": "http://127.0.0.1:4173/rendered/keyboards.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "lists",
+      "category": "Lists",
+      "renderedHtml": "preview/rendered/lists.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/lists.png",
+      "url": "http://127.0.0.1:4173/rendered/lists.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "menu",
+      "category": "Menu",
+      "renderedHtml": "preview/rendered/menu.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/menu.png",
+      "url": "http://127.0.0.1:4173/rendered/menu.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "notifications",
+      "category": "Notifications",
+      "renderedHtml": "preview/rendered/notifications.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/notifications.png",
+      "url": "http://127.0.0.1:4173/rendered/notifications.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "page-controls",
+      "category": "Page controls",
+      "renderedHtml": "preview/rendered/page-controls.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/page-controls.png",
+      "url": "http://127.0.0.1:4173/rendered/page-controls.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "pickers",
+      "category": "Pickers",
+      "renderedHtml": "preview/rendered/pickers.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/pickers.png",
+      "url": "http://127.0.0.1:4173/rendered/pickers.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "popovers",
+      "category": "Popovers",
+      "renderedHtml": "preview/rendered/popovers.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/popovers.png",
+      "url": "http://127.0.0.1:4173/rendered/popovers.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "popup-buttons",
+      "category": "Popup buttons",
+      "renderedHtml": "preview/rendered/popup-buttons.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/popup-buttons.png",
+      "url": "http://127.0.0.1:4173/rendered/popup-buttons.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "progress-indicators",
+      "category": "Progress indicators",
+      "renderedHtml": "preview/rendered/progress-indicators.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/progress-indicators.png",
+      "url": "http://127.0.0.1:4173/rendered/progress-indicators.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "segmented-controls",
+      "category": "Segmented controls",
+      "renderedHtml": "preview/rendered/segmented-controls.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/segmented-controls.png",
+      "url": "http://127.0.0.1:4173/rendered/segmented-controls.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "sheets",
+      "category": "Sheets",
+      "renderedHtml": "preview/rendered/sheets.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/sheets.png",
+      "url": "http://127.0.0.1:4173/rendered/sheets.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "sidebars",
+      "category": "Sidebars",
+      "renderedHtml": "preview/rendered/sidebars.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/sidebars.png",
+      "url": "http://127.0.0.1:4173/rendered/sidebars.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "sliders",
+      "category": "Sliders",
+      "renderedHtml": "preview/rendered/sliders.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/sliders.png",
+      "url": "http://127.0.0.1:4173/rendered/sliders.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "status-bars",
+      "category": "Status bars",
+      "renderedHtml": "preview/rendered/status-bars.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/status-bars.png",
+      "url": "http://127.0.0.1:4173/rendered/status-bars.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "steppers",
+      "category": "Steppers",
+      "renderedHtml": "preview/rendered/steppers.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/steppers.png",
+      "url": "http://127.0.0.1:4173/rendered/steppers.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "top-bars",
+      "category": "Top bars",
+      "renderedHtml": "preview/rendered/top-bars.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/top-bars.png",
+      "url": "http://127.0.0.1:4173/rendered/top-bars.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "text-fields",
+      "category": "Text fields",
+      "renderedHtml": "preview/rendered/text-fields.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/text-fields.png",
+      "url": "http://127.0.0.1:4173/rendered/text-fields.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "toggles",
+      "category": "Toggles",
+      "renderedHtml": "preview/rendered/toggles.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/toggles.png",
+      "url": "http://127.0.0.1:4173/rendered/toggles.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "toolbars",
+      "category": "Toolbars",
+      "renderedHtml": "preview/rendered/toolbars.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/toolbars.png",
+      "url": "http://127.0.0.1:4173/rendered/toolbars.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "widgets",
+      "category": "Widgets",
+      "renderedHtml": "preview/rendered/widgets.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/widgets.png",
+      "url": "http://127.0.0.1:4173/rendered/widgets.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "windows",
+      "category": "Windows",
+      "renderedHtml": "preview/rendered/windows.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/windows.png",
+      "url": "http://127.0.0.1:4173/rendered/windows.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    },
+    {
+      "id": "kit-helpers",
+      "category": "Kit helpers",
+      "renderedHtml": "preview/rendered/kit-helpers.html",
+      "screenshot": "preview/rendered/fidelity-snapshots/kit-helpers.png",
+      "url": "http://127.0.0.1:4173/rendered/kit-helpers.html?view=fidelity",
+      "status": "ok",
+      "browser": "webkit",
+      "error": null
+    }
+  ]
+}

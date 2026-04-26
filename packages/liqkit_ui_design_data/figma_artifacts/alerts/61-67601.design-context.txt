@@ -1,0 +1,108 @@
+type AlertProps = {
+  className?: string;
+  showField2?: boolean;
+  showFields?: boolean;
+};
+
+function Alert({ className, showField2 = true, showFields = true }: AlertProps) {
+  return (
+    <div className={className || ""} data-name="Alert" data-node-id="63:57121">
+      <div className="content-stretch flex flex-col gap-[10px] items-start justify-center p-[14px] relative w-[300px]" data-name="Type=Stacked" data-node-id="61:67601">
+        <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5742:38608;5584:31830">
+          <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5742:38608;5584:31831">
+            <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5742:38608;5584:31831;5584:31864" />
+          </div>
+          <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5742:38608;5607:81561" />
+        </div>
+        <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5742:38608;5607:25956">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+            <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+            <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5742:38608;5607:25843" />
+        <div className="content-stretch flex flex-col gap-[10px] items-center leading-[0] not-italic pb-[24px] pt-[8px] px-[8px] relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-name="Title and Description" data-node-id="61:67654">
+          <div className="flex flex-col font-['SF_Pro:Semibold',sans-serif] justify-center relative shrink-0 w-full" data-node-id="61:67599">
+            <p className="leading-[22px] whitespace-pre-wrap">A Short Title Is Best</p>
+          </div>
+          <div className="flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center relative shrink-0 w-full" data-node-id="61:67600">
+            <p className="leading-[22px] whitespace-pre-wrap">A description should be a short, complete sentence.</p>
+          </div>
+        </div>
+        {showFields && (
+          <div className="content-stretch flex flex-col items-start pb-[19px] relative rounded-[26px] shrink-0 w-full" data-name="Text Field(s)" data-node-id="5446:7168">
+            <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Fields" data-node-id="5469:8459">
+              <div className="absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] inset-0 rounded-[26px]" data-name="_Text Field Background" data-node-id="5469:8421" />
+              <div className="content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full" data-name="Text Field" data-node-id="65:57662">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px relative" data-name="Contents" data-node-id="I65:57662;5433:15632">
+                  <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I65:57662;5469:8035" />
+                  <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] w-full" data-node-id="I65:57662;5433:15633">
+                    <p className="leading-[20px] whitespace-pre-wrap">Value</p>
+                  </div>
+                </div>
+              </div>
+              {showField2 && (
+                <div className="content-stretch flex h-[52px] items-center px-[16px] relative shrink-0 w-full" data-name="Text Field" data-node-id="5469:8177">
+                  <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start justify-center min-h-px min-w-px relative" data-name="Contents" data-node-id="I5469:8177;553:23062">
+                    <div className="border-[var(--separators\/vibrant,#e6e6e6)] border-solid border-t h-px shrink-0 w-full" data-name="_Separator" data-node-id="I5469:8177;5469:7944" />
+                    <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/tertiary,rgba(60,60,67,0.3))] tracking-[-0.43px] w-full" data-node-id="I5469:8177;553:23064">
+                      <p className="leading-[20px] whitespace-pre-wrap">Value</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        <div className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full" data-name="Buttons" data-node-id="537:39280">
+          <div className="bg-[rgba(255,255,255,0.6)] content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] shrink-0 w-full" data-name="_Buttons" data-node-id="5446:6744">
+            <div className="absolute bg-[var(--accents\/blue,#08f)] inset-0 rounded-[100px]" data-name="BG" data-node-id="I5446:6744;5446:10002" />
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--grays\/white,white)] tracking-[-0.43px] whitespace-nowrap" data-node-id="I5446:6744;5446:6661">
+              <p className="leading-[22px]">Primary</p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] h-[48px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] shrink-0 w-full" data-name="_Buttons" data-node-id="5446:7598">
+            <div className="absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] inset-0 rounded-[100px]" data-name="BG" data-node-id="I5446:7598;5446:9932" />
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#ff383c] text-[17px] tracking-[-0.43px] whitespace-nowrap" data-node-id="I5446:7598;5446:6665">
+              <p className="leading-[22px]">Destructive</p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] h-[48px] items-center justify-center px-[16px] py-[13px] relative rounded-[100px] shrink-0 w-full" data-name="_Buttons" data-node-id="5446:7604">
+            <div className="absolute bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] inset-0 rounded-[100px]" data-name="BG" data-node-id="I5446:7604;5446:9891" />
+            <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px] whitespace-nowrap" data-node-id="I5446:7604;5446:6662">
+              <p className="leading-[22px]">Secondary</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Alert
+**Node ID:** 63:57121
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/alerts](https://developer.apple.com/design/human-interface-guidelines/alerts)
+
+## Text Field
+**Node ID:** 553:23047
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/lists-and-tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

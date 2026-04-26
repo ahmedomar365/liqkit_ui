@@ -1,0 +1,1536 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top bars - Native Source Preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: #f7f8fa;
+        color: #111;
+        font-family: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .ios26-source-preview {
+        min-height: calc(100vh - 32px);
+        display: grid;
+        place-items: start center;
+      }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+
+.ios26-topbars-demo {
+  width: 100%;
+  display: grid;
+}
+
+.ios26-topbars-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-topbars-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ios26-topbars-phone-wrap {
+  width: 196px;
+  height: 425px;
+  position: relative;
+  overflow: visible;
+}
+
+.ios26-topbars-phone {
+  width: 402px;
+  height: 874px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(0.4875621891);
+  transform-origin: top left;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.ios26-topbars-screen {
+  position: absolute;
+  inset: 8px;
+  border-radius: 44px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.ios26-topbars-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0));
+}
+
+.ios26-topbars-scroll-edge--strong {
+  background: radial-gradient(130% 96% at 50% 0%, rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0));
+}
+
+.ios26-topbars-status {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  height: 50px;
+  padding: 11px 24px 17px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  z-index: 5;
+  color: #000;
+}
+
+.ios26-topbars-status > span {
+  text-align: left;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-topbars-status > .ios26-status-glyphs {
+  justify-self: end;
+}
+
+.ios26-topbars-btn {
+  height: 44px;
+  min-width: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0;
+  color: #1a1a1a;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-topbars-btn--symbol {
+  width: 44px;
+}
+
+.ios26-topbars-btn--accent {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  background: #08f;
+  color: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+.ios26-topbars-toolbar {
+  position: absolute;
+  top: 54px;
+  left: 8px;
+  right: 8px;
+  z-index: 4;
+}
+
+.ios26-topbars-toolbar--default {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.ios26-topbars-title-center {
+  margin: 0;
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-toolbar--compact {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ios26-topbars-title-large {
+  margin: 0;
+  font: 700 34px/41px "SF Pro Display", "SF Pro", sans-serif;
+  letter-spacing: 0.4px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-toolbar--large {
+  top: 54px;
+  padding-bottom: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-topbars-large-row {
+  padding: 0 16px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ios26-topbars-tool-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ios26-topbars-title-block {
+  padding: 0 16px;
+  display: grid;
+  justify-items: start;
+}
+
+.ios26-topbars-subtitle-subheadline {
+  margin: 0;
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.25px;
+  color: #727272;
+}
+
+.ios26-topbars-toolbar--two-line,
+.ios26-topbars-toolbar--two-line-left {
+  height: 54px;
+  padding: 0 16px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.ios26-topbars-title-two-line-center {
+  text-align: center;
+  line-height: 1;
+}
+
+.ios26-topbars-title-two-line-center h3,
+.ios26-topbars-title-two-line-left h3 {
+  margin: 0;
+  font: 590 15px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  color: #1a1a1a;
+}
+
+.ios26-topbars-title-two-line-center p,
+.ios26-topbars-title-two-line-left p {
+  margin: 0;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-topbars-title-two-line-left {
+  justify-self: start;
+  text-align: left;
+  padding-left: 2px;
+}
+
+.ios26-topbars-content {
+  position: absolute;
+  top: 108px;
+  left: 16px;
+  right: 16px;
+  bottom: 10px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.ios26-topbars-variant-gallery {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ios26-topbars-variant-card {
+  border: 1px solid #dde3ed;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-topbars-variant-card h4 {
+  margin: 0;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-topbars-variant-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ios26-topbars-tab-chip {
+  border: 1px solid #dbe1ea;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #1f2937;
+  height: 30px;
+  padding: 0 10px;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.2px;
+}
+
+.ios26-topbars-tab-chip.is-selected {
+  background: #eaf3ff;
+  border-color: #b4d2ff;
+  color: #0067d7;
+}
+
+.ios26-topbars-tab-chip.is-dark {
+  background: #1f2937;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+.ios26-topbars-tab-chip.is-dark.is-selected {
+  background: #172554;
+  border-color: #1d4ed8;
+  color: #bfdbfe;
+}
+
+.ios26-topbars-config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ios26-topbars-config-chip {
+  min-height: 30px;
+  padding: 7px 9px;
+  border-radius: 10px;
+  border: 1px solid #dbe1ea;
+  background: #f8fafc;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #334155;
+}
+
+@media (max-width: 980px) {
+  .ios26-topbars-strip {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .ios26-topbars-config-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="ios26-source-preview">
+      <section class="ios26-topbars-root" data-node-id="507:24689" aria-label="Top bars category">
+<svg class="ios26-topbars-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-topbars-symbol-back" viewBox="0 0 20 20">
+      <path d="M11.8 3.8L5.7 10L11.8 16.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ios26-topbars-symbol-accent-arrow" viewBox="0 0 20 20">
+      <path d="M10 14.8V5.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+      <path d="M6.8 8.2L10 5L13.2 8.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ios26-topbars-symbol-square" viewBox="0 0 20 20">
+      <rect x="4.6" y="4.6" width="10.8" height="10.8" rx="1.8" stroke="currentColor" stroke-width="1.4" />
+    </symbol>
+    <symbol id="ios26-topbars-symbol-square-dot" viewBox="0 0 20 20">
+      <rect x="4.8" y="4.8" width="10.4" height="10.4" rx="1.7" stroke="currentColor" stroke-width="1.4" />
+      <circle cx="10" cy="10" r="1.8" fill="currentColor" />
+    </symbol>
+    <symbol id="ios26-topbars-symbol-plus" viewBox="0 0 20 20">
+      <path d="M5.4 10H14.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M10 5.4V14.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-topbars-symbol-triangle" viewBox="0 0 20 20">
+      <path d="M5 14.5L10 5.5L15 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-topbars-demo" data-node-id="5661:41970" aria-label="Top Bars">
+  <div class="ios26-topbars-strip">
+    <section class="ios26-topbars-phone-wrap" aria-label="Default">
+      <div class="ios26-topbars-phone ios26-topbars-phone--default" data-node-id="5661:41989">
+        <div class="ios26-topbars-screen" data-node-id="5661:41990">
+          <div class="ios26-topbars-scroll-edge" data-node-id="5661:41991"></div>
+
+          <header class="ios26-topbars-toolbar ios26-topbars-toolbar--default" data-node-id="5661:42189">
+            <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Back">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-back" xlink:href="#ios26-topbars-symbol-back"></use></svg>
+              </span>
+            </button>
+            <h3 class="ios26-topbars-title-center">Title</h3>
+            <button class="ios26-topbars-btn ios26-topbars-btn--accent" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-accent-arrow" xlink:href="#ios26-topbars-symbol-accent-arrow"></use></svg>
+              </span>
+            </button>
+          </header>
+
+          <div class="ios26-topbars-content" aria-hidden="true"></div>
+        </div>
+
+        <div class="ios26-topbars-status" data-node-id="5465:16807">
+          <span>9:41</span>
+          <div class="ios26-status-glyphs" aria-hidden="true">
+            <span class="ios26-status-cell"></span>
+            <span class="ios26-status-wifi"></span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="ios26-topbars-phone-wrap" aria-label="Compact Large Title">
+      <div class="ios26-topbars-phone ios26-topbars-phone--compact" data-node-id="5661:41980">
+        <div class="ios26-topbars-screen" data-node-id="5661:41981">
+          <div class="ios26-topbars-scroll-edge" data-node-id="5661:41982"></div>
+
+          <header class="ios26-topbars-toolbar ios26-topbars-toolbar--compact" data-node-id="5661:42256">
+            <h2 class="ios26-topbars-title-large">Title</h2>
+            <button class="ios26-topbars-btn ios26-topbars-btn--accent" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-accent-arrow" xlink:href="#ios26-topbars-symbol-accent-arrow"></use></svg>
+              </span>
+            </button>
+          </header>
+
+          <div class="ios26-topbars-content" aria-hidden="true"></div>
+        </div>
+
+        <div class="ios26-topbars-status" data-node-id="5465:16807">
+          <span>9:41</span>
+          <div class="ios26-status-glyphs" aria-hidden="true">
+            <span class="ios26-status-cell"></span>
+            <span class="ios26-status-wifi"></span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="ios26-topbars-phone-wrap" aria-label="Large Title">
+      <div class="ios26-topbars-phone ios26-topbars-phone--large" data-node-id="5661:41971">
+        <div class="ios26-topbars-screen" data-node-id="5661:41972">
+          <div class="ios26-topbars-scroll-edge ios26-topbars-scroll-edge--strong" data-node-id="5661:41973"></div>
+
+          <header class="ios26-topbars-toolbar ios26-topbars-toolbar--large" data-node-id="5661:42679">
+            <div class="ios26-topbars-large-row">
+              <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Back">
+                <span class="ios26-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-back" xlink:href="#ios26-topbars-symbol-back"></use></svg>
+                </span>
+              </button>
+
+              <div class="ios26-topbars-tool-row">
+                <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+                  <span class="ios26-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-square" xlink:href="#ios26-topbars-symbol-square"></use></svg>
+                  </span>
+                </button>
+                <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+                  <span class="ios26-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-square-dot" xlink:href="#ios26-topbars-symbol-square-dot"></use></svg>
+                  </span>
+                </button>
+                <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+                  <span class="ios26-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-plus" xlink:href="#ios26-topbars-symbol-plus"></use></svg>
+                  </span>
+                </button>
+                <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+                  <span class="ios26-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-triangle" xlink:href="#ios26-topbars-symbol-triangle"></use></svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="ios26-topbars-title-block">
+              <h2 class="ios26-topbars-title-large">Title</h2>
+              <p class="ios26-topbars-subtitle-subheadline">Subtitle</p>
+            </div>
+          </header>
+
+          <div class="ios26-topbars-content" aria-hidden="true"></div>
+        </div>
+
+        <div class="ios26-topbars-status" data-node-id="5465:16807">
+          <span>9:41</span>
+          <div class="ios26-status-glyphs" aria-hidden="true">
+            <span class="ios26-status-cell"></span>
+            <span class="ios26-status-wifi"></span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="ios26-topbars-phone-wrap" aria-label="Title 2 Line">
+      <div class="ios26-topbars-phone ios26-topbars-phone--two-line" data-node-id="5661:42453">
+        <div class="ios26-topbars-screen" data-node-id="5661:42454">
+          <div class="ios26-topbars-scroll-edge" data-node-id="5661:42455"></div>
+
+          <header class="ios26-topbars-toolbar ios26-topbars-toolbar--two-line" data-node-id="5661:42680">
+            <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Back">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-back" xlink:href="#ios26-topbars-symbol-back"></use></svg>
+              </span>
+            </button>
+            <div class="ios26-topbars-title-two-line-center">
+              <h3>Title</h3>
+              <p>Subtitle</p>
+            </div>
+            <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-square" xlink:href="#ios26-topbars-symbol-square"></use></svg>
+              </span>
+            </button>
+          </header>
+
+          <div class="ios26-topbars-content" aria-hidden="true"></div>
+        </div>
+
+        <div class="ios26-topbars-status" data-node-id="5465:16807">
+          <span>9:41</span>
+          <div class="ios26-status-glyphs" aria-hidden="true">
+            <span class="ios26-status-cell"></span>
+            <span class="ios26-status-wifi"></span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="ios26-topbars-phone-wrap" aria-label="Title 2 Line Left">
+      <div class="ios26-topbars-phone ios26-topbars-phone--two-line-left" data-node-id="5661:42566">
+        <div class="ios26-topbars-screen" data-node-id="5661:42567">
+          <div class="ios26-topbars-scroll-edge" data-node-id="5661:42568"></div>
+
+          <header class="ios26-topbars-toolbar ios26-topbars-toolbar--two-line-left" data-node-id="5661:42681">
+            <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Back">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-back" xlink:href="#ios26-topbars-symbol-back"></use></svg>
+              </span>
+            </button>
+
+            <div class="ios26-topbars-title-two-line-left">
+              <h3>Title</h3>
+              <p>Subtitle</p>
+            </div>
+
+            <button class="ios26-topbars-btn ios26-topbars-btn--symbol" type="button" aria-label="Tool">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-topbars-symbol-square" xlink:href="#ios26-topbars-symbol-square"></use></svg>
+              </span>
+            </button>
+          </header>
+
+          <div class="ios26-topbars-content" aria-hidden="true"></div>
+        </div>
+
+        <div class="ios26-topbars-status" data-node-id="5465:16807">
+          <span>9:41</span>
+          <div class="ios26-status-glyphs" aria-hidden="true">
+            <span class="ios26-status-cell"></span>
+            <span class="ios26-status-wifi"></span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <section class="ios26-topbars-variant-gallery" aria-label="Tab bar variant gallery">
+    <article class="ios26-topbars-variant-card" data-node-id="2524:7957">
+      <h4>iPad Tab Bar Buttons</h4>
+      <div class="ios26-topbars-variant-row">
+        <button class="ios26-topbars-tab-chip" type="button" data-node-id="5569:7317">Text Light Default</button>
+        <button class="ios26-topbars-tab-chip is-selected" type="button" data-node-id="5569:7316">Text Light Selected</button>
+        <button class="ios26-topbars-tab-chip is-dark" type="button" data-node-id="5569:7320">Text Dark Default</button>
+        <button class="ios26-topbars-tab-chip is-dark is-selected" type="button" data-node-id="5569:7322">Text Dark Selected</button>
+      </div>
+      <div class="ios26-topbars-variant-row">
+        <button class="ios26-topbars-tab-chip is-icon" type="button" data-node-id="5569:8168">Symbol Light Default</button>
+        <button class="ios26-topbars-tab-chip is-icon is-selected" type="button" data-node-id="5569:8170">Symbol Light Selected</button>
+        <button class="ios26-topbars-tab-chip is-icon is-dark" type="button" data-node-id="5569:8174">Symbol Dark Default</button>
+        <button class="ios26-topbars-tab-chip is-icon is-dark is-selected" type="button" data-node-id="5569:8176">Symbol Dark Selected</button>
+      </div>
+    </article>
+
+    <article class="ios26-topbars-variant-card" data-node-id="3:70967">
+      <h4>iPhone Tab Bar Buttons</h4>
+      <div class="ios26-topbars-variant-row">
+        <button class="ios26-topbars-tab-chip is-selected" type="button" data-node-id="5535:23152">Search Light Selected</button>
+        <button class="ios26-topbars-tab-chip" type="button" data-node-id="5538:24565">Search Light Default</button>
+        <button class="ios26-topbars-tab-chip is-dark is-selected" type="button" data-node-id="5568:3938">Search Dark Selected</button>
+        <button class="ios26-topbars-tab-chip is-dark" type="button" data-node-id="5568:3941">Search Dark Default</button>
+      </div>
+      <div class="ios26-topbars-variant-row">
+        <button class="ios26-topbars-tab-chip is-selected" type="button" data-node-id="5535:23117">Text Light Selected</button>
+        <button class="ios26-topbars-tab-chip" type="button" data-node-id="5535:23119">Text Light Default</button>
+        <button class="ios26-topbars-tab-chip is-dark is-selected" type="button" data-node-id="5568:3930">Text Dark Selected</button>
+        <button class="ios26-topbars-tab-chip is-dark" type="button" data-node-id="5568:3934">Text Dark Default</button>
+      </div>
+    </article>
+
+    <article class="ios26-topbars-variant-card">
+      <h4>iPhone Layout Configurations</h4>
+      <div class="ios26-topbars-config-grid">
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54206">Tabs=5 Minimized Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54657">Tabs=5 Minimized Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54667">Tabs=4 Minimized Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54676">Tabs=3 Minimized Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54684">Tabs=2 Minimized Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54691">Tabs=4 Minimized Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54698">Tabs=3 Minimized Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5801:54704">Tabs=2 Minimized Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5538:24452">Tabs=5 Full Height Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5538:24460">Tabs=4 Full Height Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5538:24467">Tabs=3 Full Height Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="5538:24473">Tabs=2 Full Height Search Separate</span>
+        <span class="ios26-topbars-config-chip" data-node-id="3:72039">Tabs=4 Full Height Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="3:71910">Tabs=3 Full Height Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="3:71621">Tabs=2 Full Height Search In-Bar</span>
+        <span class="ios26-topbars-config-chip" data-node-id="3:72207">Tabs=5 Full Height Search In-Bar</span>
+      </div>
+    </article>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Top bars metadata coverage supplement" data-node-id="507:24689">
+  <header class="ios26-node-coverage-header">
+    <h3>Top bars Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:24689). Full coverage is persisted; this supplement lists 5 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (5)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5735:64660" data-node-name="_Tab Bar Button - iPad - Text" data-node-reasons="metadata-root-gap">
+      <code>5735:64660</code>
+      <span class="ios26-node-coverage-item-name">_Tab Bar Button - iPad - Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5735:64661" data-node-name="_Tab Bar Button - iPad - Symbol" data-node-reasons="metadata-root-gap">
+      <code>5735:64661</code>
+      <span class="ios26-node-coverage-item-name">_Tab Bar Button - iPad - Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5735:65306" data-node-name="_Tab Bar Button - iPhone - Search" data-node-reasons="metadata-root-gap">
+      <code>5735:65306</code>
+      <span class="ios26-node-coverage-item-name">_Tab Bar Button - iPhone - Search</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5735:65307" data-node-name="_Tab Bar Button - iPhone - Text" data-node-reasons="metadata-root-gap">
+      <code>5735:65307</code>
+      <span class="ios26-node-coverage-item-name">_Tab Bar Button - iPhone - Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191817" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191817</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+
+    </main>
+  </body>
+</html>

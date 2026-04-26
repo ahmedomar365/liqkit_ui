@@ -1,0 +1,549 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/ebc9fd1a-2374-43b1-9db5-e55168f25c7c";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/74d44289-eb09-4e87-9b72-4c9cd9d16301";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/e48eb5c8-eff4-43a0-8462-8a2408f3981c";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/31ad6332-131a-4aa7-b469-ec69f602a033";
+const imgSlider = "https://www.figma.com/api/mcp/asset/00155b90-cef9-4d0a-a2a6-729f9b2b88e1";
+const imgMaterial = "https://www.figma.com/api/mcp/asset/5c85b051-501c-48d3-acd9-1ad43627422f";
+const imgAddButton = "https://www.figma.com/api/mcp/asset/d8770d60-2b57-4a70-8cb2-bc7ccca47966";
+const imgSwatch = "https://www.figma.com/api/mcp/asset/bb307662-722e-4658-8357-ccecc6b8149e";
+const imgGradient = "https://www.figma.com/api/mcp/asset/35ae02f6-e0c4-401f-ba27-36e5d0f4db64";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type StatusBarAndMenuBarIPadProps = {
+  className?: string;
+  date?: string;
+  time?: string;
+};
+
+function StatusBarAndMenuBarIPad({ className, date = "Tue Apr 1", time = "9:41" }: StatusBarAndMenuBarIPadProps) {
+  return (
+    <div className={className || ""} data-name="Status bar and Menu bar- iPad" data-node-id="5413:10006">
+      <div className="content-stretch flex h-[32px] items-center justify-between px-[26px] py-[4px] relative w-[1210px]" data-name="Type=Status bar only" data-node-id="523:41360">
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="523:41361">
+          <p className="relative shrink-0" data-node-id="523:41362">
+            {time}
+          </p>
+          <p className="relative shrink-0" data-node-id="523:41363">
+            {date}
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="523:41364">
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="523:41365">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="523:41366">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="523:41367">
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="523:41368">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PageControl({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Page control" data-node-id="488:51848">
+      <div className="h-[44px] relative w-[402px]" data-name="Dots=2, Selection=1" data-node-id="488:54949">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54950">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54951" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54952" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ToolbarIPad({ className }: { className?: string }) {
+  return (
+    <div className={className || "content-stretch flex flex-col gap-[5px] items-center pb-[10px] pt-[8px] relative"} data-name="_Toolbar - iPad" data-node-id="5584:61664">
+      <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" data-name="Grabber" data-node-id="5831:53762" />
+      <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-name="Title and Controls" data-node-id="5584:61666">
+        <div className="bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0" data-name="_Button" data-node-id="5704:26361">
+          <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5704:26361;5704:26029" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[normal] whitespace-pre-wrap">􀎘</p>
+          </div>
+        </div>
+        <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Title" data-node-id="5831:1841">
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[-0.43px]" data-node-id="I5831:1841;5831:1405">
+            Colors
+          </p>
+        </div>
+        <div className="bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0" data-name="_Button" data-node-id="5704:26362">
+          <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5704:26362;5704:26029" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+            <p className="leading-[normal] whitespace-pre-wrap">􀎘</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColorPickerIPad({ className }: { className?: string }) {
+  return (
+    <div className={className || "h-[691px] relative w-[402px]"} data-name="Color Picker - iPad" data-node-id="515:56319">
+      <div className="absolute backdrop-blur-[65px] inset-0 shadow-[0px_10px_100px_0px_rgba(0,0,0,0.3)]" data-name="Popovers (iPad Only)" data-node-id="515:56659">
+        <div className="absolute inset-0 overflow-clip rounded-[13px]" data-name="Background" data-node-id="I515:56659;513:95249">
+          <div className="absolute inset-0 overflow-clip" data-name="_Materials" data-node-id="I515:56659;513:95250">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+              <div className="absolute bg-[rgba(255,255,255,0.34)] inset-0 mix-blend-plus-lighter" />
+              <div className="absolute backdrop-blur-[50px] bg-[rgba(255,255,255,0.84)] inset-0 mix-blend-color-dodge" />
+            </div>
+          </div>
+        </div>
+        <div className="-translate-x-1/2 absolute bottom-[-13px] contents left-1/2" data-name="Material" data-node-id="I515:56659;5433:21564">
+          <div className="-translate-x-1/2 absolute bottom-[-13px] flex items-center justify-center left-1/2 size-[100px]">
+            <div className="flex-none rotate-180">
+              <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[56px_13px] overflow-clip relative size-[100px]" data-name="_Materials" data-node-id="I515:56659;5433:21565" style={{ maskImage: `url('${imgMaterial}')` }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+                  <div className="absolute bg-[rgba(255,255,255,0.34)] inset-0 mix-blend-plus-lighter" />
+                  <div className="absolute backdrop-blur-[50px] bg-[rgba(255,255,255,0.84)] inset-0 mix-blend-color-dodge" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col inset-0 items-start overflow-clip px-[16px]" data-name="Panel Contents" data-node-id="515:56662">
+        <ToolbarIPad className="content-stretch flex flex-col gap-[5px] items-center pb-[10px] pt-[8px] relative shrink-0 w-full" />
+        <div className="content-stretch flex flex-col items-center pb-[24px] relative shrink-0 w-full" data-name="Segmented Control" data-node-id="5581:30627">
+          <div className="bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] shrink-0 w-full" data-name="Segmented control" data-node-id="5581:30628">
+            <div className="bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]" data-name="Button 1" data-node-id="I5581:30628;488:61123">
+              <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I5581:30628;488:61124">
+                Grid
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 2" data-node-id="I5581:30628;488:61126">
+              <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I5581:30628;488:61127">
+                Spectrum
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative" data-name="Button 3" data-node-id="I5581:30628;488:61129">
+              <p className="flex-[1_0_0] font-['SF_Pro:Medium',sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap" data-node-id="I5581:30628;488:61130">
+                Sliders
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[18px] shrink-0 w-full" data-name="Color Grid" data-node-id="5581:30629">
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 1" data-node-id="5581:30630">
+            <div className="bg-[#fefffe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30631" />
+            <div className="bg-[#ebebeb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30632" />
+            <div className="bg-[#d6d6d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30633" />
+            <div className="bg-[#c2c2c2] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30634" />
+            <div className="bg-[#adadad] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30635" />
+            <div className="bg-[#999] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30636" />
+            <div className="bg-[#858585] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30637" />
+            <div className="bg-[#707070] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30638" />
+            <div className="bg-[#5c5c5c] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30639" />
+            <div className="bg-[#474747] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30640" />
+            <div className="bg-[#333] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30641" />
+            <div className="bg-black flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30642" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 2" data-node-id="5581:30643">
+            <div className="bg-[#00374a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30644" />
+            <div className="bg-[#011d57] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30645" />
+            <div className="bg-[#11053b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30646" />
+            <div className="bg-[#2e063d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30647" />
+            <div className="bg-[#3c071b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30648" />
+            <div className="bg-[#5c0701] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30649" />
+            <div className="bg-[#5a1c00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30650" />
+            <div className="bg-[#583300] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30651" />
+            <div className="bg-[#563d00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30652" />
+            <div className="bg-[#666100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30653" />
+            <div className="bg-[#4f5504] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30654" />
+            <div className="bg-[#263e0f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30655" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 3" data-node-id="5581:30656">
+            <div className="bg-[#004d65] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30657" />
+            <div className="bg-[#012f7b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30658" />
+            <div className="bg-[#1a0a52] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30659" />
+            <div className="bg-[#450d59] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30660" />
+            <div className="bg-[#551029] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30661" />
+            <div className="bg-[#831100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30662" />
+            <div className="bg-[#7b2900] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30663" />
+            <div className="bg-[#7a4a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30664" />
+            <div className="bg-[#785800] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30665" />
+            <div className="bg-[#8d8602] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30666" />
+            <div className="bg-[#6f760a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30667" />
+            <div className="bg-[#38571a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30668" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 4" data-node-id="5581:30669">
+            <div className="bg-[#016e8f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30670" />
+            <div className="bg-[#0042a9] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30671" />
+            <div className="bg-[#2c0977] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30672" />
+            <div className="bg-[#61187c] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30673" />
+            <div className="bg-[#791a3d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30674" />
+            <div className="bg-[#b51a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30675" />
+            <div className="bg-[#ad3e00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30676" />
+            <div className="bg-[#a96800] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30677" />
+            <div className="bg-[#a67b01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30678" />
+            <div className="bg-[#c4bc00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30679" />
+            <div className="bg-[#9ba50e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30680" />
+            <div className="bg-[#4e7a27] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30681" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 5" data-node-id="5581:30682">
+            <div className="bg-[#008cb4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30683" />
+            <div className="bg-[#0056d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30684" />
+            <div className="bg-[#371a94] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30685" />
+            <div className="bg-[#7a219e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30686" />
+            <div className="bg-[#99244f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30687" />
+            <div className="bg-[#e22400] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30688" />
+            <div className="bg-[#da5100] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30689" />
+            <div className="bg-[#d38301] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30690" />
+            <div className="bg-[#d19d01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30691" />
+            <div className="bg-[#f5ec00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30692" />
+            <div className="bg-[#c3d117] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30693" />
+            <div className="bg-[#669d34] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30694" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 6" data-node-id="5581:30695">
+            <div className="bg-[#00a1d8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30696" />
+            <div className="bg-[#0061fd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30697" />
+            <div className="bg-[#4d22b2] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30698" />
+            <div className="bg-[#982abc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30699" />
+            <div className="bg-[#b92d5d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30700" />
+            <div className="bg-[#ff4015] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30701" />
+            <div className="bg-[#ff6a00] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30702" />
+            <div className="bg-[#ffab01] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30703" />
+            <div className="bg-[#fcc700] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30704" />
+            <div className="bg-[#fefb41] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30705" />
+            <div className="bg-[#d9ec37] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30706" />
+            <div className="bg-[#76bb40] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30707" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 7" data-node-id="5581:30708">
+            <div className="bg-[#01c7fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30709" />
+            <div className="bg-[#3a87fd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30710" />
+            <div className="bg-[#5e30eb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30711" />
+            <div className="bg-[#be38f3] border-3 border-solid border-white flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30712" />
+            <div className="bg-[#e63b7a] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30713" />
+            <div className="bg-[#fe6250] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30714" />
+            <div className="bg-[#fe8648] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30715" />
+            <div className="bg-[#feb43f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30716" />
+            <div className="bg-[#fecb3e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30717" />
+            <div className="bg-[#fff76b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30718" />
+            <div className="bg-[#e4ef65] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30719" />
+            <div className="bg-[#96d35f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30720" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 8" data-node-id="5581:30721">
+            <div className="bg-[#52d6fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30722" />
+            <div className="bg-[#74a7ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30723" />
+            <div className="bg-[#864ffd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30724" />
+            <div className="bg-[#d357fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30725" />
+            <div className="bg-[#ee719e] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30726" />
+            <div className="bg-[#ff8c82] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30727" />
+            <div className="bg-[#fea57d] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30728" />
+            <div className="bg-[#fec777] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30729" />
+            <div className="bg-[#fed977] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30730" />
+            <div className="bg-[#fff994] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30731" />
+            <div className="bg-[#eaf28f] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30732" />
+            <div className="bg-[#b1dd8b] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30733" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 9" data-node-id="5581:30734">
+            <div className="bg-[#93e3fc] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30735" />
+            <div className="bg-[#a7c6ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30736" />
+            <div className="bg-[#b18cfe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30737" />
+            <div className="bg-[#e292fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30738" />
+            <div className="bg-[#f4a4c0] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30739" />
+            <div className="bg-[#ffb5af] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30740" />
+            <div className="bg-[#ffc5ab] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30741" />
+            <div className="bg-[#fed9a8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30742" />
+            <div className="bg-[#fde4a8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30743" />
+            <div className="bg-[#fffbb9] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30744" />
+            <div className="bg-[#f1f7b7] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30745" />
+            <div className="bg-[#cde8b5] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30746" />
+          </div>
+          <div className="content-stretch flex items-start relative shrink-0 w-full" data-name="Row 10" data-node-id="5581:30747">
+            <div className="bg-[#cbf0ff] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30748" />
+            <div className="bg-[#d2e2fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30749" />
+            <div className="bg-[#d8c9fe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30750" />
+            <div className="bg-[#efcafe] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30751" />
+            <div className="bg-[#f9d3e0] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30752" />
+            <div className="bg-[#ffdad8] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30753" />
+            <div className="bg-[#ffe2d6] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30754" />
+            <div className="bg-[#feecd4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30755" />
+            <div className="bg-[#fef1d5] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30756" />
+            <div className="bg-[#fdfbdd] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30757" />
+            <div className="bg-[#f6fadb] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30758" />
+            <div className="bg-[#deeed4] flex-[1_0_0] h-[30px] min-h-px min-w-px" data-name="Swatch" data-node-id="5581:30759" />
+          </div>
+        </div>
+        <div className="border-[var(--separators\/opaque,#c6c6c8)] border-b border-solid content-stretch flex flex-col items-start pb-[3px] pt-[26px] relative shrink-0 w-full" data-name="Opactiy Meter" data-node-id="515:56467">
+          <p className="font-['SF_Pro:Semibold',sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/primary,black)] w-[67.197px] whitespace-pre-wrap" data-node-id="515:56468">
+            Opacity
+          </p>
+          <div className="content-stretch flex gap-[11px] items-center justify-center pb-[22px] pt-[3px] relative shrink-0 w-full" data-name="Slider and Text Field" data-node-id="515:56469">
+            <div className="bg-size-[auto_auto,27.200000286102295px_27.200000286102295px] bg-top-left content-stretch flex flex-[1_0_0] h-[40px] items-center justify-end min-h-px min-w-px overflow-clip p-[2px] relative rounded-[100px]" data-name="Slider" data-node-id="515:56470" style={{ backgroundImage: `linear-gradient(90deg, rgba(175, 82, 222, 0) 12%, rgb(175, 82, 222) 87.981%), url('${imgSlider}')` }}>
+              <div className="border-3 border-solid border-white rounded-[100px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.1)] shrink-0 size-[36px]" data-name="Knob" data-node-id="515:56473" />
+            </div>
+            <div className="bg-[var(--fills\/primary,rgba(120,120,120,0.2))] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[9px] relative rounded-[8px] shrink-0" data-name="Percentage" data-node-id="515:56474">
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]" data-node-id="515:56475">
+                100%
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[30px] items-start pt-[26px] relative shrink-0 w-full" data-name="Swatches" data-node-id="515:56476">
+          <div className="bg-[#af52de] rounded-[18px] shrink-0 size-[82px]" data-name="Swatch" data-node-id="515:56477" />
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[22px] items-start min-h-px min-w-px relative" data-name="Swatches" data-node-id="515:56478">
+            <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-name="Row 1" data-node-id="515:56479">
+              <div className="bg-black rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56480" />
+              <div className="bg-[#007aff] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56481" />
+              <div className="bg-[#34c759] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56482" />
+              <div className="bg-[#fc0] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56483" />
+              <div className="bg-[#ff3b30] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56484" />
+            </div>
+            <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-name="Row 2" data-node-id="515:56485">
+              <div className="bg-[#7ac6f5] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56486" />
+              <div className="bg-[#af52de] relative rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56487">
+                <div className="absolute border-2 border-solid border-white left-[4px] rounded-[100px] size-[22px] top-[4px]" data-name="Selection Ring" data-node-id="515:56488" />
+              </div>
+              <div className="bg-[#5856d6] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56489" />
+              <div className="bg-[#ff2d55] rounded-[100px] shrink-0 size-[30px]" data-name="Swatch - Dot" data-node-id="515:56490" />
+              <div className="relative shrink-0 size-[30px]" data-name="Add Button" data-node-id="515:56491">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgAddButton} />
+              </div>
+            </div>
+            <PageControl className="h-[44px] relative shrink-0 w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PickerButton({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Picker Button" data-node-id="5739:34128">
+      <div className="relative size-[36px]" data-name="Size=Large, Selected=True" data-node-id="128:75180">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[26px] top-1/2" data-name="Swatch" data-node-id="128:75181">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgSwatch} />
+        </div>
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[36px] top-1/2" data-name="Gradient" data-node-id="528:96093">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgGradient} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ColorPicker({ className }: { className?: string }) {
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] h-[834px] relative w-[1210px]"} data-name="Color Picker" data-node-id="754:62648">
+      <div className="absolute inset-[54px_0_0_0]" data-name="Screen" data-node-id="754:47825">
+        <div className="absolute h-[763px] left-0 right-0 top-0" data-name="Content Area" data-node-id="754:47827">
+          <PickerButton className="-translate-x-1/2 absolute left-1/2 size-[36px] top-[693px]" />
+        </div>
+      </div>
+      <div className="absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[10px] right-0 top-[32px]" data-name="Toolbar - Top - iPad" data-node-id="5711:26743">
+        <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-name="Leading" data-node-id="I5711:26743;5564:41844">
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5711:26743;5564:41846">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5711:26743;5564:41846;6491:22565">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5711:26743;5564:41846;6491:22565;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5711:26743;5564:41846;6491:22565;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5711:26743;5564:41846;6491:22565;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5711:26743;5564:41846;6491:22565;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5711:26743;5564:41846;6491:22565;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5711:26743;5564:41846;6491:22565;6491:20173" />
+            </div>
+            <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap" data-name="_Button - Back" data-node-id="I5711:26743;5564:41846;6491:22970">
+              <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5711:26743;5564:41846;6491:22970;5431:837" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal]">􀯶</p>
+              </div>
+              <div className="flex flex-col justify-center relative shrink-0" data-node-id="I5711:26743;5564:41846;6491:22970;5431:840" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal]">Label</p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5711:26743;5564:41847">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5711:26743;5564:41847;5566:7888">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5711:26743;5564:41847;5566:7888;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5711:26743;5564:41847;5566:7888;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5711:26743;5564:41847;5566:7888;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5711:26743;5564:41847;5566:7888;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5711:26743;5564:41847;5566:7888;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5711:26743;5564:41847;5566:7888;6491:20173" />
+            </div>
+            <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5711:26743;5564:41847;5432:23135">
+              <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5711:26743;5564:41847;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5711:26743;5564:41848">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5711:26743;5564:41848;5566:7888">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5711:26743;5564:41848;5566:7888;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5711:26743;5564:41848;5566:7888;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5711:26743;5564:41848;5566:7888;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5711:26743;5564:41848;5566:7888;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5711:26743;5564:41848;5566:7888;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5711:26743;5564:41848;5566:7888;6491:20173" />
+            </div>
+            <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5711:26743;5564:41848;5432:23135">
+              <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5711:26743;5564:41848;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0" data-name="Trailing" data-node-id="I5711:26743;5564:41849">
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5711:26743;5564:41850">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5711:26743;5564:41850;5566:7888">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5711:26743;5564:41850;5566:7888;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5711:26743;5564:41850;5566:7888;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5711:26743;5564:41850;5566:7888;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5711:26743;5564:41850;5566:7888;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5711:26743;5564:41850;5566:7888;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5711:26743;5564:41850;5566:7888;6491:20173" />
+            </div>
+            <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5711:26743;5564:41850;5432:23135">
+              <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5711:26743;5564:41850;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top" data-node-id="I5711:26743;5564:41851">
+            <div aria-hidden="true" className="absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]" />
+            <div className="-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2" data-name="Liquid Glass - Regular - Small" data-node-id="I5711:26743;5564:41851;5566:7888">
+              <div className="absolute inset-[-26px] opacity-67" data-name="Blur" data-node-id="I5711:26743;5564:41851;5566:7888;5575:44983">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Circle" data-node-id="I5711:26743;5564:41851;5566:7888;5575:75442">
+                  <div className="absolute bg-black inset-[76px] rounded-[1000px]" data-name="Shape" data-node-id="I5711:26743;5564:41851;5566:7888;5575:75442;5575:32354" />
+                </div>
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2" data-name="Blur" data-node-id="I5711:26743;5564:41851;5566:7888;6491:20171" />
+              </div>
+              <div className="absolute inset-0 rounded-[296px]" data-name="Fill" data-node-id="I5711:26743;5564:41851;5566:7888;6491:20172">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[296px]">
+                  <div className="absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]" />
+                  <div className="absolute inset-0 rounded-[296px]" style={{ backgroundImage: "linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)" }} />
+                </div>
+              </div>
+              <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]" data-name="Glass Effect" data-node-id="I5711:26743;5564:41851;5566:7888;6491:20173" />
+            </div>
+            <div className="content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]" data-name="_Button - Symbol" data-node-id="I5711:26743;5564:41851;5432:23135">
+              <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Medium',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full" data-node-id="I5711:26743;5564:41851;5432:23135;5426:2011" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀓔</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute content-stretch flex flex-col gap-[2px] h-[36px] items-center justify-center left-[20px] right-[20px] top-[5px]" data-name="Title and Subtitle" data-node-id="I5711:26743;5564:41882">
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Title - Subheadline" data-node-id="I5711:26743;5827:66834">
+            <p className="font-['SF_Pro:Semibold',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.23px]" data-node-id="I5711:26743;5827:66834;5827:56432">
+              Title
+            </p>
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="_Subtitle - Caption" data-node-id="I5711:26743;5827:66835">
+            <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels---vibrant\/secondary,#727272)]" data-node-id="I5711:26743;5827:66835;5827:56433">
+              Subtitle
+            </p>
+          </div>
+        </div>
+      </div>
+      <ColorPickerIPad className="-translate-x-1/2 absolute h-[691px] left-1/2 top-[40px] w-[402px]" />
+      <StatusBarAndMenuBarIPad className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-0 top-0" />
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Emphasized: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574), Fills/Primary: #787878.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Popovers (iPad Only)
+**Node ID:** 61:65421
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/popovers](https://developer.apple.com/design/human-interface-guidelines/popovers)
+
+## Segmented control
+**Node ID:** 6:57374
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/segmented-controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls)
+
+## Page control
+**Node ID:** 488:51848
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/page-controls](https://developer.apple.com/design/human-interface-guidelines/page-controls)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

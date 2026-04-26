@@ -1,0 +1,2009 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color pickers - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-colorpickers-root {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
+.ios26-colorpickers-component-header {
+  width: min(402px, 100%);
+}
+
+.ios26-colorpickers-component-header h3 {
+  margin: 0;
+  font: 590 16px/21px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-colorpickers-reference-set {
+  width: min(402px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.ios26-colorpickers-sheet {
+  width: 402px;
+  min-height: 706px;
+  border-radius: 34px;
+  border: 1px solid rgba(214, 217, 222, 0.82);
+  background: rgba(245, 245, 245, 0.88);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.16),
+    0 1px 0 rgba(255, 255, 255, 0.74) inset;
+  backdrop-filter: blur(22px);
+  display: grid;
+  gap: 0;
+  align-content: start;
+  padding: 8px 16px 20px;
+}
+
+.ios26-colorpickers-topbar {
+  height: 54px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ios26-colorpickers-topbar p {
+  margin: 0;
+  color: #1a1a1a;
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-colorpickers-topbar--compact {
+  height: 36px;
+  grid-template-columns: 28px 1fr 28px;
+  gap: 8px;
+}
+
+.ios26-colorpickers-topbar--compact p {
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0;
+}
+
+.ios26-colorpickers-icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  padding: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-icon-btn.is-compact {
+  width: 28px;
+  height: 28px;
+}
+
+.ios26-colorpickers-icon-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.ios26-colorpickers-icon-fg {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  color: #727272;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-icon-fg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-colorpickers-icon-btn.is-compact .ios26-colorpickers-icon-fg {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-colorpickers-segments {
+  margin-top: 8px;
+  height: 32px;
+  border-radius: 100px;
+  background: rgba(118, 118, 128, 0.12);
+  padding: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.ios26-colorpickers-segments button {
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  color: #000000;
+  font: 500 13.333px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+}
+
+.ios26-colorpickers-segments button.is-active {
+  background: #ffffff;
+  font-weight: 590;
+}
+
+.ios26-colorpickers-grid {
+  margin-top: 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+}
+
+.ios26-colorpickers-grid-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.ios26-colorpickers-grid-swatch {
+  position: relative;
+  height: 30px;
+  background: var(--swatch);
+}
+
+.ios26-colorpickers-grid-swatch.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 3px solid #ffffff;
+  pointer-events: none;
+}
+
+.ios26-colorpickers-opacity-meter {
+  margin-top: 26px;
+  border-bottom: 1px solid #c6c6c8;
+  padding: 0 0 3px;
+}
+
+.ios26-colorpickers-opacity-meter p {
+  margin: 0;
+  font: 590 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000000;
+}
+
+.ios26-colorpickers-opacity-row {
+  padding-top: 3px;
+  padding-bottom: 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+}
+
+.ios26-colorpickers-slider {
+  height: 40px;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  justify-items: end;
+  padding: 2px;
+}
+
+.ios26-colorpickers-slider-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(175, 82, 222, 0) 12%, #af52de 88%),
+    repeating-conic-gradient(from 45deg, #121212 0deg 90deg, #f7f7f7 90deg 180deg) left center / 14px 14px;
+}
+
+.ios26-colorpickers-slider-knob {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #ffffff;
+  border-radius: 100px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.ios26-colorpickers-opacity-value {
+  border-radius: 8px;
+  background: rgba(120, 120, 120, 0.2);
+  padding: 9px 14px;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #000000;
+}
+
+.ios26-colorpickers-swatches {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.ios26-colorpickers-primary-swatch {
+  width: 82px;
+  height: 82px;
+  border-radius: 18px;
+  background: #af52de;
+}
+
+.ios26-colorpickers-palette {
+  display: grid;
+  gap: 22px;
+}
+
+.ios26-colorpickers-palette-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ios26-colorpickers-dot,
+.ios26-colorpickers-add-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  flex: 0 0 auto;
+}
+
+.ios26-colorpickers-dot {
+  background: var(--dot);
+}
+
+.ios26-colorpickers-dot.is-selected::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ffffff;
+  border-radius: 100px;
+  margin: 4px;
+}
+
+.ios26-colorpickers-add-button {
+  position: relative;
+  border-radius: 100px;
+  background: rgba(120, 120, 120, 0.2);
+}
+
+.ios26-colorpickers-add-button::before,
+.ios26-colorpickers-add-button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: #000000;
+  transform: translate(-50%, -50%);
+}
+
+.ios26-colorpickers-add-button::after {
+  width: 2px;
+  height: 12px;
+}
+
+.ios26-colorpickers-page-control {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ios26-colorpickers-page-control span {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ios26-colorpickers-page-control span.is-active {
+  background: #000000;
+}
+
+.ios26-colorpickers-swatches-preview {
+  width: min(402px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.ios26-colorpickers-layout-variants {
+  width: 100%;
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-colorpickers-layout-chip {
+  border: 1px solid #d8dde6;
+  border-radius: 10px;
+  background: #f6f7fb;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.ios26-colorpickers-layout-chip p {
+  margin: 0;
+  color: #111827;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-colorpickers-button-variants,
+.ios26-colorpickers-pickerbutton-variants,
+.ios26-colorpickers-title-variants {
+  border: 1px dashed #6155f5;
+  border-radius: 5px;
+  background: #aaaaaa;
+  padding: 16px;
+}
+
+.ios26-colorpickers-button-variants {
+  width: 84px;
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-colorpickers-mode-button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 100px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.ios26-colorpickers-mode-button.is-light {
+  background: #e0e0e0;
+  color: #727272;
+}
+
+.ios26-colorpickers-mode-button.is-dark {
+  background: #1f1f1f;
+  color: #f5f5f5;
+}
+
+.ios26-colorpickers-mode-button-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.ios26-colorpickers-pickerbutton-variants {
+  width: 152px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(36px, 36px));
+  gap: 14px 18px;
+  align-items: center;
+}
+
+.ios26-colorpickers-picker-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-colorpickers-picker-button.is-large {
+  width: 36px;
+  height: 36px;
+}
+
+.ios26-colorpickers-picker-button.is-small {
+  width: 28px;
+  height: 28px;
+}
+
+.ios26-colorpickers-picker-gradient,
+.ios26-colorpickers-picker-swatch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  border-radius: 100px;
+}
+
+.ios26-colorpickers-picker-gradient {
+  background:
+    conic-gradient(from 90deg, #e7e040 0deg, #eeaa3c 44.65deg, #e8403b 89.78deg, #b33ed5 131.61deg, #694ae8 182.19deg, #3ccae7 231.34deg, #3ce885 269.54deg, #89e743 313.03deg, #e7e040 360deg),
+    radial-gradient(circle, rgba(228, 228, 228, 0) 65%, #e4e4e4 100%);
+}
+
+.ios26-colorpickers-picker-button.is-large .ios26-colorpickers-picker-swatch {
+  width: 26px;
+  height: 26px;
+  inset: 5px;
+}
+
+.ios26-colorpickers-picker-button.is-small .ios26-colorpickers-picker-swatch {
+  width: 18px;
+  height: 18px;
+  inset: 5px;
+}
+
+.ios26-colorpickers-picker-swatch {
+  background: #af52de;
+}
+
+.ios26-colorpickers-title-variants {
+  width: 84px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-colorpickers-title-variant {
+  margin: 0;
+  height: 22px;
+  display: grid;
+  align-items: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-colorpickers-title-variant.is-light {
+  color: #1a1a1a;
+}
+
+.ios26-colorpickers-title-variant.is-dark {
+  color: #f5f5f5;
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Color pickers</h1>
+        <p class="meta">Category Node <code>507:26010</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26010" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#color-pickers">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (0:5275)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-colorpickers-root" data-node-id="507:26010" aria-label="Color pickers">
+  <header class="ios26-colorpickers-component-header" data-node-id="544:191922">
+    <h3>Color pickers</h3>
+  </header>
+
+  <svg class="ios26-colorpickers-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <symbol id="ios26-colorpickers-symbol-pipette" viewBox="0 0 24 24">
+        <path d="M14.8 3.6C13.8 2.6 12.2 2.6 11.2 3.6L8.7 6.1L10.7 8.1L13.2 5.6C13.4 5.4 13.8 5.4 14 5.6L16.4 8C16.6 8.2 16.6 8.6 16.4 8.8L13.9 11.3L15.9 13.3L18.4 10.8C19.4 9.8 19.4 8.2 18.4 7.2L14.8 3.6Z" fill="currentColor"></path>
+        <path d="M6.9 7.9L14.1 15.1L13 16.2C12.3 16.9 11.2 17 10.4 16.5L4 22.9L2.6 21.5L9 15.1L6.7 12.8C5.8 11.9 5.8 10.4 6.7 9.5L6.9 7.9Z" fill="currentColor"></path>
+      </symbol>
+      <symbol id="ios26-colorpickers-symbol-close" viewBox="0 0 20 20">
+        <path d="M5 5L15 15M15 5L5 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="ios26-colorpickers-reference-set" data-node-id="5581:27073">
+    <article class="ios26-colorpickers-sheet" data-node-id="0:5275">
+      <div class="ios26-colorpickers-topbar" data-node-id="5584:57400">
+        <button class="ios26-colorpickers-icon-btn" type="button" aria-label="Pick color" data-node-id="5704:26034">
+          <span class="ios26-colorpickers-icon-bg" aria-hidden="true"></span>
+          <span class="ios26-colorpickers-icon-fg" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ios26-colorpickers-symbol-pipette" xlink:href="#ios26-colorpickers-symbol-pipette"></use></svg></span>
+        </button>
+        <p data-node-id="5831:1405">Colors</p>
+        <button class="ios26-colorpickers-icon-btn" type="button" aria-label="Close" data-node-id="5704:26096">
+          <span class="ios26-colorpickers-icon-bg" aria-hidden="true"></span>
+          <span class="ios26-colorpickers-icon-fg" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#ios26-colorpickers-symbol-close" xlink:href="#ios26-colorpickers-symbol-close"></use></svg></span>
+        </button>
+      </div>
+
+      <div class="ios26-colorpickers-segments" role="tablist" aria-label="Color modes" data-node-id="528:94617">
+        <button class="is-active" type="button" data-node-id="488:61123">Grid</button>
+        <button type="button" data-node-id="488:61126">Spectrum</button>
+        <button type="button" data-node-id="488:61129">Sliders</button>
+      </div>
+
+      <div class="ios26-colorpickers-grid" data-node-id="515:48178" aria-label="Color grid">
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:48805">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48179" style="--swatch:#fefffe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48181" style="--swatch:#ebebeb;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48183" style="--swatch:#d6d6d6;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48185" style="--swatch:#c2c2c2;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48187" style="--swatch:#adadad;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48189" style="--swatch:#999;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48191" style="--swatch:#858585;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48193" style="--swatch:#707070;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48195" style="--swatch:#5c5c5c;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48197" style="--swatch:#474747;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48199" style="--swatch:#333;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48201" style="--swatch:black;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:48927">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48180" style="--swatch:#00374a;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48182" style="--swatch:#011d57;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48184" style="--swatch:#11053b;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48186" style="--swatch:#2e063d;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48188" style="--swatch:#3c071b;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48190" style="--swatch:#5c0701;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48192" style="--swatch:#5a1c00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48194" style="--swatch:#583300;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48196" style="--swatch:#563d00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48198" style="--swatch:#666100;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48200" style="--swatch:#4f5504;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48202" style="--swatch:#263e0f;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49050">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48203" style="--swatch:#004d65;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48204" style="--swatch:#012f7b;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48205" style="--swatch:#1a0a52;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48206" style="--swatch:#450d59;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48207" style="--swatch:#551029;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48208" style="--swatch:#831100;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48209" style="--swatch:#7b2900;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48210" style="--swatch:#7a4a00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48211" style="--swatch:#785800;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48212" style="--swatch:#8d8602;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48213" style="--swatch:#6f760a;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48214" style="--swatch:#38571a;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49174">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48215" style="--swatch:#016e8f;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48216" style="--swatch:#0042a9;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48217" style="--swatch:#2c0977;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48218" style="--swatch:#61187c;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48219" style="--swatch:#791a3d;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48220" style="--swatch:#b51a00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48221" style="--swatch:#ad3e00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48222" style="--swatch:#a96800;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48223" style="--swatch:#a67b01;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48224" style="--swatch:#c4bc00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48225" style="--swatch:#9ba50e;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48226" style="--swatch:#4e7a27;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49299">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48227" style="--swatch:#008cb4;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48228" style="--swatch:#0056d6;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48229" style="--swatch:#371a94;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48230" style="--swatch:#7a219e;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48231" style="--swatch:#99244f;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48232" style="--swatch:#e22400;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48233" style="--swatch:#da5100;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48234" style="--swatch:#d38301;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48235" style="--swatch:#d19d01;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48236" style="--swatch:#f5ec00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48237" style="--swatch:#c3d117;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48238" style="--swatch:#669d34;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49425">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48239" style="--swatch:#00a1d8;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48240" style="--swatch:#0061fd;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48241" style="--swatch:#4d22b2;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48242" style="--swatch:#982abc;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48243" style="--swatch:#b92d5d;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48244" style="--swatch:#ff4015;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48245" style="--swatch:#ff6a00;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48246" style="--swatch:#ffab01;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48247" style="--swatch:#fcc700;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48248" style="--swatch:#fefb41;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48249" style="--swatch:#d9ec37;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48250" style="--swatch:#76bb40;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49552">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48251" style="--swatch:#01c7fc;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48252" style="--swatch:#3a87fd;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48253" style="--swatch:#5e30eb;"></span>
+        <span class="ios26-colorpickers-grid-swatch is-selected" data-node-id="515:48254" style="--swatch:#be38f3;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48255" style="--swatch:#e63b7a;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48256" style="--swatch:#fe6250;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48257" style="--swatch:#fe8648;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48258" style="--swatch:#feb43f;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48259" style="--swatch:#fecb3e;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48260" style="--swatch:#fff76b;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48261" style="--swatch:#e4ef65;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48262" style="--swatch:#96d35f;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49680">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48263" style="--swatch:#52d6fc;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48264" style="--swatch:#74a7ff;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48265" style="--swatch:#864ffd;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48266" style="--swatch:#d357fe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48267" style="--swatch:#ee719e;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48268" style="--swatch:#ff8c82;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48269" style="--swatch:#fea57d;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48270" style="--swatch:#fec777;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48271" style="--swatch:#fed977;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48272" style="--swatch:#fff994;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48273" style="--swatch:#eaf28f;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48274" style="--swatch:#b1dd8b;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49809">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48275" style="--swatch:#93e3fc;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48276" style="--swatch:#a7c6ff;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48277" style="--swatch:#b18cfe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48278" style="--swatch:#e292fe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48279" style="--swatch:#f4a4c0;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48280" style="--swatch:#ffb5af;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48281" style="--swatch:#ffc5ab;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48282" style="--swatch:#fed9a8;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48283" style="--swatch:#fde4a8;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48284" style="--swatch:#fffbb9;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48285" style="--swatch:#f1f7b7;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48286" style="--swatch:#cde8b5;"></span>
+      </div>
+      <div class="ios26-colorpickers-grid-row" data-node-id="515:49939">
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48287" style="--swatch:#cbf0ff;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48288" style="--swatch:#d2e2fe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48289" style="--swatch:#d8c9fe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48290" style="--swatch:#efcafe;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48291" style="--swatch:#f9d3e0;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48292" style="--swatch:#ffdad8;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48293" style="--swatch:#ffe2d6;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48294" style="--swatch:#feecd4;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48295" style="--swatch:#fef1d5;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48296" style="--swatch:#fdfbdd;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48297" style="--swatch:#f6fadb;"></span>
+        <span class="ios26-colorpickers-grid-swatch" data-node-id="515:48298" style="--swatch:#deeed4;"></span>
+      </div>
+      </div>
+
+      <div class="ios26-colorpickers-opacity-meter" data-node-id="515:47431">
+        <p data-node-id="515:47432">Opacity</p>
+        <div class="ios26-colorpickers-opacity-row" data-node-id="515:47433">
+          <div class="ios26-colorpickers-slider" data-node-id="515:47434" aria-label="Opacity slider">
+            <span class="ios26-colorpickers-slider-overlay" aria-hidden="true"></span>
+            <span class="ios26-colorpickers-slider-knob" data-node-id="515:47437" aria-hidden="true"></span>
+          </div>
+          <span class="ios26-colorpickers-opacity-value" data-node-id="515:47438">100%</span>
+        </div>
+      </div>
+
+      <div class="ios26-colorpickers-swatches" data-node-id="515:46585" aria-label="Saved swatches">
+        <div class="ios26-colorpickers-primary-swatch" data-node-id="515:52741"></div>
+        <div class="ios26-colorpickers-palette">
+          <div class="ios26-colorpickers-palette-row" data-node-id="515:46594">
+            <span class="ios26-colorpickers-dot" style="--dot:#000000;" data-node-id="515:46595"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#007aff;" data-node-id="515:46596"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#34c759;" data-node-id="515:46597"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#ffcc00;" data-node-id="515:46598"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#ff3b30;" data-node-id="515:46599"></span>
+          </div>
+          <div class="ios26-colorpickers-palette-row" data-node-id="515:46586">
+            <span class="ios26-colorpickers-dot" style="--dot:#7ac6f5;" data-node-id="515:46587"></span>
+            <span class="ios26-colorpickers-dot is-selected" style="--dot:#af52de;" data-node-id="515:46588"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#5856d6;" data-node-id="515:46590"></span>
+            <span class="ios26-colorpickers-dot" style="--dot:#ff2d55;" data-node-id="515:46591"></span>
+            <span class="ios26-colorpickers-add-button" data-node-id="515:46592" aria-hidden="true"></span>
+          </div>
+          <div class="ios26-colorpickers-page-control" data-node-id="488:51848" aria-hidden="true">
+            <span class="is-active" data-node-id="488:54951"></span>
+            <span data-node-id="488:54952"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="ios26-colorpickers-swatches-preview" aria-label="Color picker token variants">
+      <section class="ios26-colorpickers-layout-variants" aria-label="Layout variants">
+        <article class="ios26-colorpickers-layout-chip" data-node-id="0:5275"><p>Color Picker - iPhone</p></article>
+        <article class="ios26-colorpickers-layout-chip" data-node-id="515:56319">
+          <div class="ios26-colorpickers-topbar ios26-colorpickers-topbar--compact" data-node-id="5584:61664">
+            <button class="ios26-colorpickers-icon-btn is-compact" type="button" aria-label="Pick color"><span class="ios26-colorpickers-icon-bg" aria-hidden="true"></span><span class="ios26-colorpickers-icon-fg" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ios26-colorpickers-symbol-pipette" xlink:href="#ios26-colorpickers-symbol-pipette"></use></svg></span></button>
+            <p>Color Picker - iPad</p>
+            <button class="ios26-colorpickers-icon-btn is-compact" type="button" aria-label="Close"><span class="ios26-colorpickers-icon-bg" aria-hidden="true"></span><span class="ios26-colorpickers-icon-fg" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#ios26-colorpickers-symbol-close" xlink:href="#ios26-colorpickers-symbol-close"></use></svg></span></button>
+          </div>
+        </article>
+      </section>
+
+      <section class="ios26-colorpickers-button-variants" data-node-id="5704:26179" aria-label="Button mode variants">
+        <button class="ios26-colorpickers-mode-button is-light" type="button" data-node-id="5704:26030" aria-label="Light mode button"><span class="ios26-colorpickers-mode-button-icon" data-node-id="5704:26029" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ios26-colorpickers-symbol-pipette" xlink:href="#ios26-colorpickers-symbol-pipette"></use></svg></span></button>
+        <button class="ios26-colorpickers-mode-button is-dark" type="button" data-node-id="5704:26180" aria-label="Dark mode button"><span class="ios26-colorpickers-mode-button-icon" data-node-id="5704:26181" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ios26-colorpickers-symbol-pipette" xlink:href="#ios26-colorpickers-symbol-pipette"></use></svg></span></button>
+      </section>
+
+      <section class="ios26-colorpickers-pickerbutton-variants" data-node-id="5739:34128" aria-label="Picker button variants">
+        <div class="ios26-colorpickers-picker-button is-large is-unselected" data-node-id="128:75178"><span class="ios26-colorpickers-picker-gradient" aria-hidden="true"></span></div>
+        <div class="ios26-colorpickers-picker-button is-large is-selected" data-node-id="128:75180"><span class="ios26-colorpickers-picker-gradient" aria-hidden="true"></span><span class="ios26-colorpickers-picker-swatch" aria-hidden="true"></span></div>
+        <div class="ios26-colorpickers-picker-button is-small is-unselected" data-node-id="128:75285"><span class="ios26-colorpickers-picker-gradient" aria-hidden="true"></span></div>
+        <div class="ios26-colorpickers-picker-button is-small is-selected" data-node-id="128:75287"><span class="ios26-colorpickers-picker-gradient" aria-hidden="true"></span><span class="ios26-colorpickers-picker-swatch" aria-hidden="true"></span></div>
+      </section>
+
+      <section class="ios26-colorpickers-title-variants" data-node-id="5831:1408" aria-label="Title mode variants">
+        <p class="ios26-colorpickers-title-variant is-light" data-node-id="5831:1406">Colors</p>
+        <p class="ios26-colorpickers-title-variant is-dark" data-node-id="5831:1407">Colors</p>
+      </section>
+    </div>
+
+  </div>
+</section>
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/color-pickers/0-5275.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/color-pickers/0-5275.screenshot.png" alt="Color pickers screenshot" />
+        <p><a href="../evidence/figma-artifacts/color-pickers/0-5275.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/color-pickers/0-5275.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/color-pickers.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/color-pickers.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/color-pickers.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgSlider = &quot;https://www.figma.com/api/mcp/asset/eb4519bc-415b-44a3-84ae-978c437265f6&quot;;
+const imgBg = &quot;https://www.figma.com/api/mcp/asset/3a8cedf1-8da8-4a18-947b-84586a77acea&quot;;
+const imgBg1 = &quot;https://www.figma.com/api/mcp/asset/f4a1d269-d690-4ca6-8946-f6ea8c483ab7&quot;;
+const imgAddButton = &quot;https://www.figma.com/api/mcp/asset/d08826f2-0da3-4f59-8304-80ad6f8f9fb0&quot;;
+
+function PageControl({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;Page control&quot; data-node-id=&quot;488:51848&quot;&gt;
+      &lt;div className=&quot;h-[44px] relative w-[402px]&quot; data-name=&quot;Dots=2, Selection=1&quot; data-node-id=&quot;488:54949&quot;&gt;
+        &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2&quot; data-name=&quot;Frame&quot; data-node-id=&quot;488:54950&quot;&gt;
+          &lt;div className=&quot;bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]&quot; data-name=&quot;Dot 1&quot; data-node-id=&quot;488:54951&quot; /&gt;
+          &lt;div className=&quot;bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]&quot; data-name=&quot;Dot 2&quot; data-node-id=&quot;488:54952&quot; /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function ColorPickerIPhone({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col h-[706px] items-start px-[6px] relative w-[402px]&quot;} data-name=&quot;Color Picker - iPhone&quot; data-node-id=&quot;0:5275&quot;&gt;
+      &lt;div className=&quot;absolute content-stretch flex flex-col inset-[0_0_-6px_0] items-center pb-[6px] px-[6px]&quot; data-name=&quot;Sheet - Inspector - iPhone&quot; data-node-id=&quot;5581:27433&quot;&gt;
+        &lt;div className=&quot;absolute inset-[0_6px_6px_6px]&quot; data-name=&quot;Liquid Glass - Regular - Medium&quot; data-node-id=&quot;I5581:27433;5551:41149&quot;&gt;
+          &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; data-node-id=&quot;I5581:27433;5551:41149;5584:31830&quot;&gt;
+            &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; data-node-id=&quot;I5581:27433;5551:41149;5584:31831&quot;&gt;
+              &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5581:27433;5551:41149;5584:31831;5584:31864&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5581:27433;5551:41149;5607:81561&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute inset-0 rounded-[34px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5581:27433;5551:41149;5607:25956&quot;&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+              &lt;div className=&quot;absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]&quot; /&gt;
+              &lt;div className=&quot;absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5581:27433;5551:41149;5607:25843&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full&quot; data-name=&quot;Toolbar - Top - Sheet&quot; data-node-id=&quot;I5581:27433;5729:24624&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0&quot; data-name=&quot;Grabber&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33527&quot;&gt;
+            &lt;div className=&quot;bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]&quot; data-name=&quot;Grabber&quot; data-node-id=&quot;I5581:27433;5729:24624;5827:65815&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full&quot; data-name=&quot;Title and Controls&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33529&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top - Sheets&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33530&quot;&gt;
+              &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2&quot; data-name=&quot;BG&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33530;5551:22138&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgBg} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33530;5551:22128&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀆄&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex flex-row items-center self-stretch&quot;&gt;
+              &lt;div className=&quot;h-full shrink-0 w-[8px]&quot; data-name=&quot;Spacer&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33531&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top - Sheets&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33532&quot;&gt;
+              &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2&quot; data-name=&quot;BG&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33532;5551:22487&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgBg1} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]&quot; data-node-id=&quot;I5581:27433;5729:24624;5726:33532;5551:22126&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀄨&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]&quot; data-name=&quot;_Title - Body&quot; data-node-id=&quot;I5581:27433;5729:24624;5827:65227&quot;&gt;
+              &lt;p className=&quot;absolute font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]&quot; data-node-id=&quot;I5581:27433;5729:24624;5827:65227;5827:56434&quot;&gt;
+                Title
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start pb-[20px] px-[16px] relative rounded-tl-[10px] rounded-tr-[10px] shrink-0 w-full&quot; data-name=&quot;Panel Contents&quot; data-node-id=&quot;61:65757&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-center pb-[10px] pt-[8px] relative shrink-0 w-full&quot; data-name=&quot;_Toolbar - iPhone&quot; data-node-id=&quot;5584:58503&quot;&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-between relative shrink-0 w-full&quot; data-name=&quot;Title and Controls&quot; data-node-id=&quot;I5584:58503;5584:57402&quot;&gt;
+            &lt;div className=&quot;bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0&quot; data-name=&quot;_Button&quot; data-node-id=&quot;I5584:58503;5704:26034&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]&quot; data-node-id=&quot;I5584:58503;5704:26034;5704:26029&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀎘&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Title&quot; data-node-id=&quot;I5584:58503;5831:1411&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center tracking-[-0.43px]&quot; data-node-id=&quot;I5584:58503;5831:1411;5831:1405&quot;&gt;
+                Colors
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;bg-[var(--fills---vibrant\/secondary,#e0e0e0)] content-stretch flex h-[44px] items-center justify-center px-[4px] relative rounded-[100px] shrink-0&quot; data-name=&quot;_Button&quot; data-node-id=&quot;I5584:58503;5704:26096&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]&quot; data-node-id=&quot;I5584:58503;5704:26096;5704:26029&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀎘&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-center pb-[24px] relative shrink-0 w-full&quot; data-name=&quot;Segmented Control&quot; data-node-id=&quot;515:52150&quot;&gt;
+          &lt;div className=&quot;bg-[var(--fills\/tertiary,rgba(118,118,128,0.12))] content-stretch flex gap-[4px] h-[32px] items-center justify-center overflow-clip p-[2px] relative rounded-[100px] shrink-0 w-full&quot; data-name=&quot;Segmented control&quot; data-node-id=&quot;528:94617&quot;&gt;
+            &lt;div className=&quot;bg-[var(--miscellaneous\/segmented-control---selected-fill,white)] content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative rounded-[20px]&quot; data-name=&quot;Button 1&quot; data-node-id=&quot;I528:94617;488:61123&quot;&gt;
+              &lt;p className=&quot;flex-[1_0_0] font-[&#39;SF_Pro:Semibold&#39;,sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap&quot; data-node-id=&quot;I528:94617;488:61124&quot;&gt;
+                Grid
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative&quot; data-name=&quot;Button 2&quot; data-node-id=&quot;I528:94617;488:61126&quot;&gt;
+              &lt;p className=&quot;flex-[1_0_0] font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap&quot; data-node-id=&quot;I528:94617;488:61127&quot;&gt;
+                Spectrum
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px px-[6px] py-[3px] relative&quot; data-name=&quot;Button 3&quot; data-node-id=&quot;I528:94617;488:61129&quot;&gt;
+              &lt;p className=&quot;flex-[1_0_0] font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[18px] leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[13.333px] text-[color:var(--labels\/primary,black)] text-center text-ellipsis tracking-[-0.08px] whitespace-nowrap&quot; data-node-id=&quot;I528:94617;488:61130&quot;&gt;
+                Sliders
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col items-center overflow-clip relative rounded-[18px] shrink-0 w-full&quot; data-name=&quot;Color Grid&quot; data-node-id=&quot;515:48178&quot;&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 1&quot; data-node-id=&quot;515:48805&quot;&gt;
+            &lt;div className=&quot;bg-[#fefffe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48179&quot; /&gt;
+            &lt;div className=&quot;bg-[#ebebeb] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48181&quot; /&gt;
+            &lt;div className=&quot;bg-[#d6d6d6] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48183&quot; /&gt;
+            &lt;div className=&quot;bg-[#c2c2c2] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48185&quot; /&gt;
+            &lt;div className=&quot;bg-[#adadad] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48187&quot; /&gt;
+            &lt;div className=&quot;bg-[#999] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48189&quot; /&gt;
+            &lt;div className=&quot;bg-[#858585] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48191&quot; /&gt;
+            &lt;div className=&quot;bg-[#707070] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48193&quot; /&gt;
+            &lt;div className=&quot;bg-[#5c5c5c] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48195&quot; /&gt;
+            &lt;div className=&quot;bg-[#474747] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48197&quot; /&gt;
+            &lt;div className=&quot;bg-[#333] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48199&quot; /&gt;
+            &lt;div className=&quot;bg-black flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48201&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 2&quot; data-node-id=&quot;515:48927&quot;&gt;
+            &lt;div className=&quot;bg-[#00374a] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48180&quot; /&gt;
+            &lt;div className=&quot;bg-[#011d57] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48182&quot; /&gt;
+            &lt;div className=&quot;bg-[#11053b] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48184&quot; /&gt;
+            &lt;div className=&quot;bg-[#2e063d] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48186&quot; /&gt;
+            &lt;div className=&quot;bg-[#3c071b] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48188&quot; /&gt;
+            &lt;div className=&quot;bg-[#5c0701] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48190&quot; /&gt;
+            &lt;div className=&quot;bg-[#5a1c00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48192&quot; /&gt;
+            &lt;div className=&quot;bg-[#583300] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48194&quot; /&gt;
+            &lt;div className=&quot;bg-[#563d00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48196&quot; /&gt;
+            &lt;div className=&quot;bg-[#666100] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48198&quot; /&gt;
+            &lt;div className=&quot;bg-[#4f5504] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48200&quot; /&gt;
+            &lt;div className=&quot;bg-[#263e0f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48202&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 3&quot; data-node-id=&quot;515:49050&quot;&gt;
+            &lt;div className=&quot;bg-[#004d65] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48203&quot; /&gt;
+            &lt;div className=&quot;bg-[#012f7b] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48204&quot; /&gt;
+            &lt;div className=&quot;bg-[#1a0a52] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48205&quot; /&gt;
+            &lt;div className=&quot;bg-[#450d59] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48206&quot; /&gt;
+            &lt;div className=&quot;bg-[#551029] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48207&quot; /&gt;
+            &lt;div className=&quot;bg-[#831100] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48208&quot; /&gt;
+            &lt;div className=&quot;bg-[#7b2900] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48209&quot; /&gt;
+            &lt;div className=&quot;bg-[#7a4a00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48210&quot; /&gt;
+            &lt;div className=&quot;bg-[#785800] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48211&quot; /&gt;
+            &lt;div className=&quot;bg-[#8d8602] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48212&quot; /&gt;
+            &lt;div className=&quot;bg-[#6f760a] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48213&quot; /&gt;
+            &lt;div className=&quot;bg-[#38571a] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48214&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 4&quot; data-node-id=&quot;515:49174&quot;&gt;
+            &lt;div className=&quot;bg-[#016e8f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48215&quot; /&gt;
+            &lt;div className=&quot;bg-[#0042a9] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48216&quot; /&gt;
+            &lt;div className=&quot;bg-[#2c0977] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48217&quot; /&gt;
+            &lt;div className=&quot;bg-[#61187c] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48218&quot; /&gt;
+            &lt;div className=&quot;bg-[#791a3d] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48219&quot; /&gt;
+            &lt;div className=&quot;bg-[#b51a00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48220&quot; /&gt;
+            &lt;div className=&quot;bg-[#ad3e00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48221&quot; /&gt;
+            &lt;div className=&quot;bg-[#a96800] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48222&quot; /&gt;
+            &lt;div className=&quot;bg-[#a67b01] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48223&quot; /&gt;
+            &lt;div className=&quot;bg-[#c4bc00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48224&quot; /&gt;
+            &lt;div className=&quot;bg-[#9ba50e] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48225&quot; /&gt;
+            &lt;div className=&quot;bg-[#4e7a27] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48226&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 5&quot; data-node-id=&quot;515:49299&quot;&gt;
+            &lt;div className=&quot;bg-[#008cb4] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48227&quot; /&gt;
+            &lt;div className=&quot;bg-[#0056d6] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48228&quot; /&gt;
+            &lt;div className=&quot;bg-[#371a94] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48229&quot; /&gt;
+            &lt;div className=&quot;bg-[#7a219e] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48230&quot; /&gt;
+            &lt;div className=&quot;bg-[#99244f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48231&quot; /&gt;
+            &lt;div className=&quot;bg-[#e22400] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48232&quot; /&gt;
+            &lt;div className=&quot;bg-[#da5100] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48233&quot; /&gt;
+            &lt;div className=&quot;bg-[#d38301] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48234&quot; /&gt;
+            &lt;div className=&quot;bg-[#d19d01] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48235&quot; /&gt;
+            &lt;div className=&quot;bg-[#f5ec00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48236&quot; /&gt;
+            &lt;div className=&quot;bg-[#c3d117] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48237&quot; /&gt;
+            &lt;div className=&quot;bg-[#669d34] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48238&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 6&quot; data-node-id=&quot;515:49425&quot;&gt;
+            &lt;div className=&quot;bg-[#00a1d8] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48239&quot; /&gt;
+            &lt;div className=&quot;bg-[#0061fd] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48240&quot; /&gt;
+            &lt;div className=&quot;bg-[#4d22b2] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48241&quot; /&gt;
+            &lt;div className=&quot;bg-[#982abc] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48242&quot; /&gt;
+            &lt;div className=&quot;bg-[#b92d5d] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48243&quot; /&gt;
+            &lt;div className=&quot;bg-[#ff4015] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48244&quot; /&gt;
+            &lt;div className=&quot;bg-[#ff6a00] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48245&quot; /&gt;
+            &lt;div className=&quot;bg-[#ffab01] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48246&quot; /&gt;
+            &lt;div className=&quot;bg-[#fcc700] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48247&quot; /&gt;
+            &lt;div className=&quot;bg-[#fefb41] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48248&quot; /&gt;
+            &lt;div className=&quot;bg-[#d9ec37] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48249&quot; /&gt;
+            &lt;div className=&quot;bg-[#76bb40] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48250&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 7&quot; data-node-id=&quot;515:49552&quot;&gt;
+            &lt;div className=&quot;bg-[#01c7fc] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48251&quot; /&gt;
+            &lt;div className=&quot;bg-[#3a87fd] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48252&quot; /&gt;
+            &lt;div className=&quot;bg-[#5e30eb] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48253&quot; /&gt;
+            &lt;div className=&quot;bg-[#be38f3] border-3 border-solid border-white flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48254&quot; /&gt;
+            &lt;div className=&quot;bg-[#e63b7a] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48255&quot; /&gt;
+            &lt;div className=&quot;bg-[#fe6250] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48256&quot; /&gt;
+            &lt;div className=&quot;bg-[#fe8648] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48257&quot; /&gt;
+            &lt;div className=&quot;bg-[#feb43f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48258&quot; /&gt;
+            &lt;div className=&quot;bg-[#fecb3e] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48259&quot; /&gt;
+            &lt;div className=&quot;bg-[#fff76b] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48260&quot; /&gt;
+            &lt;div className=&quot;bg-[#e4ef65] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48261&quot; /&gt;
+            &lt;div className=&quot;bg-[#96d35f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48262&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 8&quot; data-node-id=&quot;515:49680&quot;&gt;
+            &lt;div className=&quot;bg-[#52d6fc] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48263&quot; /&gt;
+            &lt;div className=&quot;bg-[#74a7ff] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48264&quot; /&gt;
+            &lt;div className=&quot;bg-[#864ffd] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48265&quot; /&gt;
+            &lt;div className=&quot;bg-[#d357fe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48266&quot; /&gt;
+            &lt;div className=&quot;bg-[#ee719e] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48267&quot; /&gt;
+            &lt;div className=&quot;bg-[#ff8c82] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48268&quot; /&gt;
+            &lt;div className=&quot;bg-[#fea57d] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48269&quot; /&gt;
+            &lt;div className=&quot;bg-[#fec777] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48270&quot; /&gt;
+            &lt;div className=&quot;bg-[#fed977] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48271&quot; /&gt;
+            &lt;div className=&quot;bg-[#fff994] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48272&quot; /&gt;
+            &lt;div className=&quot;bg-[#eaf28f] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48273&quot; /&gt;
+            &lt;div className=&quot;bg-[#b1dd8b] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48274&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 9&quot; data-node-id=&quot;515:49809&quot;&gt;
+            &lt;div className=&quot;bg-[#93e3fc] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48275&quot; /&gt;
+            &lt;div className=&quot;bg-[#a7c6ff] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48276&quot; /&gt;
+            &lt;div className=&quot;bg-[#b18cfe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48277&quot; /&gt;
+            &lt;div className=&quot;bg-[#e292fe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48278&quot; /&gt;
+            &lt;div className=&quot;bg-[#f4a4c0] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48279&quot; /&gt;
+            &lt;div className=&quot;bg-[#ffb5af] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48280&quot; /&gt;
+            &lt;div className=&quot;bg-[#ffc5ab] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48281&quot; /&gt;
+            &lt;div className=&quot;bg-[#fed9a8] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48282&quot; /&gt;
+            &lt;div className=&quot;bg-[#fde4a8] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48283&quot; /&gt;
+            &lt;div className=&quot;bg-[#fffbb9] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48284&quot; /&gt;
+            &lt;div className=&quot;bg-[#f1f7b7] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48285&quot; /&gt;
+            &lt;div className=&quot;bg-[#cde8b5] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48286&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Row 10&quot; data-node-id=&quot;515:49939&quot;&gt;
+            &lt;div className=&quot;bg-[#cbf0ff] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48287&quot; /&gt;
+            &lt;div className=&quot;bg-[#d2e2fe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48288&quot; /&gt;
+            &lt;div className=&quot;bg-[#d8c9fe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48289&quot; /&gt;
+            &lt;div className=&quot;bg-[#efcafe] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48290&quot; /&gt;
+            &lt;div className=&quot;bg-[#f9d3e0] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48291&quot; /&gt;
+            &lt;div className=&quot;bg-[#ffdad8] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48292&quot; /&gt;
+            &lt;div className=&quot;bg-[#ffe2d6] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48293&quot; /&gt;
+            &lt;div className=&quot;bg-[#feecd4] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48294&quot; /&gt;
+            &lt;div className=&quot;bg-[#fef1d5] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48295&quot; /&gt;
+            &lt;div className=&quot;bg-[#fdfbdd] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48296&quot; /&gt;
+            &lt;div className=&quot;bg-[#f6fadb] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48297&quot; /&gt;
+            &lt;div className=&quot;bg-[#deeed4] flex-[1_0_0] h-[30px] min-h-px min-w-px&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:48298&quot; /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;border-[var(--separators\/opaque,#c6c6c8)] border-b border-solid content-stretch flex flex-col items-start pb-[3px] pt-[26px] relative shrink-0 w-full&quot; data-name=&quot;Opactiy Meter&quot; data-node-id=&quot;515:47431&quot;&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels\/primary,black)] w-[67.197px] whitespace-pre-wrap&quot; data-node-id=&quot;515:47432&quot;&gt;
+            Opacity
+          &lt;/p&gt;
+          &lt;div className=&quot;content-stretch flex gap-[11px] items-center justify-center pb-[22px] pt-[3px] relative shrink-0 w-full&quot; data-name=&quot;Slider and Text Field&quot; data-node-id=&quot;515:47433&quot;&gt;
+            &lt;div className=&quot;bg-size-[auto_auto,27.200000286102295px_27.200000286102295px] bg-top-left content-stretch flex flex-[1_0_0] h-[40px] items-center justify-end min-h-px min-w-px overflow-clip p-[2px] relative rounded-[100px]&quot; data-name=&quot;_Slider&quot; data-node-id=&quot;515:47434&quot; style={{ backgroundImage: `linear-gradient(90deg, rgba(175, 82, 222, 0) 12%, rgb(175, 82, 222) 87.981%), url(&#39;${imgSlider}&#39;)` }}&gt;
+              &lt;div className=&quot;border-3 border-solid border-white rounded-[100px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.1)] shrink-0 size-[36px]&quot; data-name=&quot;Knob&quot; data-node-id=&quot;515:47437&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;bg-[var(--fills\/primary,rgba(120,120,120,0.2))] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[9px] relative rounded-[8px] shrink-0&quot; data-name=&quot;Percentage&quot; data-node-id=&quot;515:47438&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;515:47439&quot;&gt;
+                100%
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[30px] items-start pt-[26px] relative shrink-0 w-full&quot; data-name=&quot;Swatches&quot; data-node-id=&quot;515:46585&quot;&gt;
+          &lt;div className=&quot;bg-[#af52de] rounded-[18px] shrink-0 size-[82px]&quot; data-name=&quot;Swatch&quot; data-node-id=&quot;515:52741&quot; /&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] flex-col gap-[22px] items-start min-h-px min-w-px relative&quot; data-name=&quot;Swatches&quot; data-node-id=&quot;515:52724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-between relative shrink-0 w-full&quot; data-name=&quot;Row 1&quot; data-node-id=&quot;515:46594&quot;&gt;
+              &lt;div className=&quot;bg-black rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46595&quot; /&gt;
+              &lt;div className=&quot;bg-[#007aff] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46596&quot; /&gt;
+              &lt;div className=&quot;bg-[#34c759] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46597&quot; /&gt;
+              &lt;div className=&quot;bg-[#fc0] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46598&quot; /&gt;
+              &lt;div className=&quot;bg-[#ff3b30] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46599&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex items-start justify-between relative shrink-0 w-full&quot; data-name=&quot;Row 2&quot; data-node-id=&quot;515:46586&quot;&gt;
+              &lt;div className=&quot;bg-[#7ac6f5] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46587&quot; /&gt;
+              &lt;div className=&quot;bg-[#af52de] relative rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46588&quot;&gt;
+                &lt;div className=&quot;absolute border-2 border-solid border-white left-[4px] rounded-[100px] size-[22px] top-[4px]&quot; data-name=&quot;Selection Ring&quot; data-node-id=&quot;515:46589&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;bg-[#5856d6] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46590&quot; /&gt;
+              &lt;div className=&quot;bg-[#ff2d55] rounded-[100px] shrink-0 size-[30px]&quot; data-name=&quot;Swatch - Dot&quot; data-node-id=&quot;515:46591&quot; /&gt;
+              &lt;div className=&quot;relative shrink-0 size-[30px]&quot; data-name=&quot;Add Button&quot; data-node-id=&quot;515:46592&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgAddButton} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;PageControl className=&quot;h-[44px] relative shrink-0 w-full&quot; /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Body/Emphasized: Font(family: &quot;SF Pro&quot;, style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574), Fills/Primary: #787878.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Sheet - Inspector - iPhone
+**Node ID:** 5551:41121
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+## Segmented control
+**Node ID:** 6:57374
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/segmented-controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls)
+
+## Page control
+**Node ID:** 488:51848
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/page-controls](https://developer.apple.com/design/human-interface-guidelines/page-controls)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

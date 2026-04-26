@@ -1,0 +1,2 @@
+Screenshot captured through Figma MCP on 2026-02-18 for node 553:23061 (State=Placeholder).
+Rendered appearance: single-row field with top separator and tertiary placeholder text "Value".

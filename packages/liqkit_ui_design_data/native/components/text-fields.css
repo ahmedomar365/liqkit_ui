@@ -1,0 +1,242 @@
+.ios26-text-fields-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-text-fields-root {
+  width: min(1320px, 100%);
+  display: grid;
+  grid-template-columns: 410px 280px 280px;
+  gap: 24px;
+  align-items: start;
+}
+
+.ios26-text-fields-column {
+  border-radius: 16px;
+}
+
+.ios26-text-fields-column--states {
+  min-height: 310px;
+  border: 1px solid #adb3bd;
+  padding: 24px;
+  background: #f5f5f5;
+  --tf-primary: #000000;
+  --tf-tertiary: rgba(60, 60, 67, 0.3);
+  --tf-separator: #d8d8dc;
+  --tf-accent: #0088ff;
+  --tf-clear: rgba(60, 60, 67, 0.3);
+  --tf-row-bg: transparent;
+}
+
+.ios26-text-fields-states-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: #7d4dff;
+}
+
+.ios26-text-fields-states-header h3 {
+  margin: 0;
+  font: 590 38px/44px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.ios26-text-fields-states-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+}
+
+.ios26-text-fields-states-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ios26-text-fields-state-board {
+  width: 100%;
+  border: 1px dashed #8c93ff;
+  border-radius: 2px;
+  padding: 10px 22px;
+  display: grid;
+  gap: 0;
+}
+
+.ios26-text-fields-example-group {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-text-fields-example-title {
+  margin: 0;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #c7c7d2;
+  color: #1a1a1a;
+  background: #f5f5f5;
+  font: 590 40px/44px "SF Pro Display", "SF Pro Text", sans-serif;
+  letter-spacing: -0.55px;
+}
+
+.ios26-text-fields-example-title.is-dark {
+  background: #000000;
+  border-color: #000000;
+  color: #f5f5f5;
+}
+
+.ios26-text-fields-column--example {
+  width: 280px;
+  height: 280px;
+  padding: 10px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  --tf-primary: #000000;
+  --tf-tertiary: rgba(60, 60, 67, 0.3);
+  --tf-separator: #e6e6e6;
+  --tf-accent: #0088ff;
+  --tf-clear: rgba(60, 60, 67, 0.3);
+  --tf-row-bg: #ffffff;
+  --mode-fill: rgba(120, 120, 128, 0.16);
+  --mode-stroke: rgba(60, 60, 67, 0.6);
+  --mode-text: #1a1a1a;
+  background: #f2f2f7;
+}
+
+.ios26-text-fields-column--example.is-light {
+  background: #f2f2f7;
+  --tf-row-bg: #ffffff;
+}
+
+.ios26-text-fields-column--example.is-dark {
+  background: #000000;
+  --tf-primary: #ffffff;
+  --tf-tertiary: rgba(235, 235, 245, 0.3);
+  --tf-separator: #1a1a1a;
+  --tf-accent: #0091ff;
+  --tf-clear: rgba(235, 235, 245, 0.3);
+  --tf-row-bg: #1c1c1e;
+  --mode-fill: rgba(120, 120, 128, 0.32);
+  --mode-stroke: rgba(60, 60, 67, 0.6);
+  --mode-text: #f2f2f7;
+}
+
+.ios26-text-fields-mode-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ios26-text-fields-mode-chip {
+  min-width: 54px;
+  height: 19px;
+  border-radius: 14px;
+  border: 1px solid var(--mode-stroke);
+  background: var(--mode-fill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 6px;
+}
+
+.ios26-text-fields-mode-icon {
+  width: 8px;
+  height: 8px;
+  color: var(--mode-text);
+  display: inline-flex;
+}
+
+.ios26-text-fields-mode-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ios26-text-fields-mode-label {
+  color: var(--mode-text);
+  font: 590 11px/13px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.4px;
+}
+
+.ios26-text-fields-frame {
+  width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--tf-row-bg);
+}
+
+.ios26-text-field {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--tf-row-bg);
+}
+
+.ios26-text-field-separator {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  height: 1px;
+  background: var(--tf-separator);
+}
+
+.ios26-text-field-text-run {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.ios26-text-field-value {
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: var(--tf-primary);
+}
+
+.ios26-text-field-value.is-placeholder {
+  color: var(--tf-tertiary);
+}
+
+.ios26-text-field-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 22px;
+  border-radius: 10px;
+  background: var(--tf-accent);
+}
+
+.ios26-text-field.is-focused .ios26-text-field-text-run {
+  width: 2px;
+}
+
+.ios26-text-field.is-typing {
+  justify-content: space-between;
+}
+
+.ios26-text-field-clear {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: var(--tf-clear);
+}
+
+.ios26-text-field-clear svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+@media (max-width: 1180px) {
+  .ios26-text-fields-root {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}

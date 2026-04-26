@@ -1,0 +1,2934 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebars - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-sidebars-demo {
+  width: 702px;
+  max-width: 100%;
+  display: grid;
+  gap: 24px;
+}
+
+.ios26-sidebars-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-sidebars-tablet-wrap {
+  width: 702px;
+  height: 500px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios26-sidebars-tablet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1320px;
+  height: 940px;
+  transform: scale(0.5318181818);
+  transform-origin: top left;
+}
+
+.ios26-sidebars-shell {
+  position: absolute;
+  inset: 0;
+  border-radius: 52px;
+  background: #050505;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.85);
+}
+
+.ios26-sidebars-shell::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: rgba(68, 95, 151, 0.62);
+}
+
+.ios26-sidebars-screen {
+  position: absolute;
+  left: 55px;
+  top: 53px;
+  width: 1210px;
+  height: 834px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ios26-sidebars-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 32px;
+  padding: 4px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.ios26-sidebars-status-left,
+.ios26-sidebars-status-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #000;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-sidebars-status-right .ios26-status-glyphs {
+  gap: 5px;
+}
+
+.ios26-sidebars-status-right .ios26-status-cell {
+  width: 16px;
+  height: 10px;
+}
+
+.ios26-sidebars-status-right .ios26-status-wifi {
+  width: 14px;
+  height: 10px;
+}
+
+.ios26-sidebars-status-right .ios26-status-battery {
+  width: 26px;
+  height: 12px;
+}
+
+.ios26-sidebars-top-toolbar {
+  position: absolute;
+  left: 330px;
+  right: 10px;
+  top: 32px;
+  height: 54px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  z-index: 4;
+}
+
+.ios26-sidebars-top-leading {
+  justify-self: start;
+}
+
+.ios26-sidebars-top-trailing {
+  justify-self: end;
+  display: inline-flex;
+  gap: 12px;
+}
+
+.ios26-sidebars-icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sidebars-tabs {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 296px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  padding: 4px;
+}
+
+.ios26-sidebars-tab-label,
+.ios26-sidebars-tab-icon {
+  border: 0;
+  background: transparent;
+  height: 36px;
+  color: #1a1a1a;
+  border-radius: 100px;
+  font: 500 15px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-sidebars-tab-icon {
+  width: 36px;
+  padding: 0;
+}
+
+.ios26-sidebars-tab-label {
+  min-width: 58px;
+  padding: 0 12px;
+}
+
+.ios26-sidebars-tab-label.is-active {
+  color: #08f;
+  font-weight: 700;
+  background: #ededed;
+}
+
+.ios26-sidebars-page-title {
+  position: absolute;
+  left: 366px;
+  top: 88px;
+  z-index: 4;
+}
+
+.ios26-sidebars-page-title h4 {
+  margin: 0;
+  font: 700 49px/50px "SF Pro Display", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-sidebars-page-title p {
+  margin: 0;
+  font: 500 22px/28px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-sidebar-panel {
+  position: absolute;
+  left: 10px;
+  top: 27px;
+  width: 320px;
+  height: 802px;
+  border-radius: 34px;
+  padding: 11px 16px 10px;
+  box-sizing: border-box;
+  background: rgba(250, 250, 250, 0.7);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  z-index: 4;
+}
+
+.ios26-sidebar-panel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.ios26-window-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ios26-window-bubble {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.ios26-window-bubble.is-red { background: #ff5f57; }
+.ios26-window-bubble.is-yellow { background: #ffbd2e; }
+.ios26-window-bubble.is-green { background: #28c840; }
+
+.ios26-sidebar-edit-btn {
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-search {
+  height: 44px;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  color: #727272;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+}
+
+.ios26-sidebar-search .ios26-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.ios26-sidebar-search input {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  outline: 0;
+}
+
+.ios26-sidebar-list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+}
+
+.ios26-sidebar-row,
+.ios26-sidebar-section-header {
+  min-height: 44px;
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px 0 10px;
+  border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.ios26-sidebar-row.is-selected {
+  background: #ededed;
+}
+
+.ios26-sidebar-row.is-nested {
+  padding-left: 30px;
+}
+
+.ios26-sidebar-row-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #1a1a1a;
+}
+
+.ios26-sidebar-row-icon::before,
+.ios26-sidebar-row-icon::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.ios26-sidebar-row-icon:empty:not([class*="icon-"]) {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(26, 26, 26, 0.8);
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-envelope::before {
+  left: 2px;
+  top: 4px;
+  width: 16px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-envelope::after {
+  left: 4px;
+  top: 7px;
+  width: 12px;
+  height: 6px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.ios26-sidebar-row-icon.icon-inbox-stack::before {
+  left: 3px;
+  top: 3px;
+  width: 13px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-stack::after {
+  left: 5px;
+  top: 7px;
+  width: 13px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-tray::before {
+  left: 2px;
+  top: 5px;
+  width: 16px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+}
+
+.ios26-sidebar-row-icon.icon-inbox-tray::after {
+  left: 5px;
+  top: 8px;
+  width: 10px;
+  height: 4px;
+  border-left: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+}
+
+.ios26-sidebar-row-icon.icon-flag::before {
+  left: 4px;
+  top: 2px;
+  width: 1.5px;
+  height: 15px;
+  background: currentColor;
+}
+
+.ios26-sidebar-row-icon.icon-flag::after {
+  left: 5px;
+  top: 3px;
+  width: 9px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: skewX(-15deg);
+}
+
+.ios26-sidebar-row-icon.icon-paperplane::before {
+  left: 3px;
+  top: 4px;
+  width: 14px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: rotate(25deg);
+}
+
+.ios26-sidebar-row-icon.icon-paperplane::after {
+  left: 8px;
+  top: 10px;
+  width: 7px;
+  height: 1.5px;
+  background: currentColor;
+  transform: rotate(-20deg);
+}
+
+.ios26-sidebar-row-icon.icon-reply::before {
+  left: 3px;
+  top: 8px;
+  width: 10px;
+  height: 7px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  border-radius: 0 0 0 4px;
+}
+
+.ios26-sidebar-row-icon.icon-reply::after {
+  left: 3px;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-left: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.ios26-sidebar-row-icon.icon-folder::before {
+  left: 2px;
+  top: 6px;
+  width: 16px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.ios26-sidebar-row-icon.icon-folder::after {
+  left: 4px;
+  top: 4px;
+  width: 6px;
+  height: 3px;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 2px 2px 0 0;
+  background: #fff;
+}
+
+.ios26-sidebar-row-title {
+  color: #000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-row-detail,
+.ios26-sidebar-section-header > span:last-child {
+  color: #727272;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-sidebar-section-header {
+  margin-top: 6px;
+  grid-template-columns: 1fr auto;
+  padding-left: 12px;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.ios26-sidebar-section-header > span:first-child {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.ios26-sidebar-list--mail .ios26-sidebar-row {
+  grid-template-columns: 24px 1fr auto;
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Sidebars</h1>
+        <p class="meta">Category Node <code>507:26013</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26013" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#sidebars">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (5726:29555)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-sidebars-root" data-node-id="507:26013" aria-label="Sidebars category">
+<svg class="ios26-sidebars-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-sidebars-symbol-back" viewBox="0 0 20 20">
+      <path d="M12.5 3.5L6 10L12.5 16.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-sidebar" viewBox="0 0 20 20">
+      <rect x="3.7" y="4.7" width="4.6" height="10.6" rx="1.2" stroke="currentColor" stroke-width="1.35" />
+      <rect x="9.9" y="4.7" width="6.4" height="4.7" rx="1.2" stroke="currentColor" stroke-width="1.35" />
+      <rect x="9.9" y="10.6" width="6.4" height="4.7" rx="1.2" stroke="currentColor" stroke-width="1.35" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-search-top" viewBox="0 0 20 20">
+      <circle cx="8.6" cy="8.6" r="4.3" stroke="currentColor" stroke-width="1.5" />
+      <path d="M11.9 11.9L15.8 15.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-square" viewBox="0 0 20 20">
+      <rect x="4.4" y="4.4" width="11.2" height="11.2" rx="1.9" stroke="currentColor" stroke-width="1.4" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-square-fill" viewBox="0 0 20 20">
+      <rect x="4.7" y="4.7" width="10.6" height="10.6" rx="1.8" stroke="currentColor" stroke-width="1.4" />
+      <path d="M8.2 8.2H11.8V11.8H8.2Z" fill="currentColor" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-search-sidebar" viewBox="0 0 20 20">
+      <circle cx="8.5" cy="8.5" r="4.5" stroke="currentColor" stroke-width="1.6" />
+      <path d="M12 12L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+    <symbol id="ios26-sidebars-symbol-mic" viewBox="0 0 20 20">
+      <rect x="7" y="3.5" width="6" height="9.5" rx="3" stroke="currentColor" stroke-width="1.4" />
+      <path d="M10 13.5V16.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      <path d="M6 10.8C6 13 7.8 14.8 10 14.8C12.2 14.8 14 13 14 10.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-sidebars-demo" data-node-id="5726:29555" aria-label="Sidebars">
+  <section class="ios26-sidebars-tablet-wrap" data-node-id="754:64697" aria-label="Sidebar with rows">
+    <div class="ios26-sidebars-tablet">
+      <div class="ios26-sidebars-shell" aria-hidden="true"></div>
+      <div class="ios26-sidebars-screen">
+        <div class="ios26-sidebars-status" data-node-id="5713:52532">
+          <div class="ios26-sidebars-status-left"><span>9:41</span> <span>Tue Apr 1</span></div>
+          <div class="ios26-sidebars-status-right" aria-hidden="true">
+            <div class="ios26-status-glyphs">
+              <span class="ios26-status-cell"></span>
+              <span class="ios26-status-wifi"></span>
+            </div>
+            <span>100%</span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+        <div class="ios26-sidebars-top-toolbar" data-node-id="5713:52531">
+          <div class="ios26-sidebars-top-leading">
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Back">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-back" xlink:href="#ios26-sidebars-symbol-back"></use></svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="ios26-sidebars-tabs">
+            <button type="button" class="ios26-sidebars-tab-icon" aria-label="Sidebar">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-sidebar" xlink:href="#ios26-sidebars-symbol-sidebar"></use></svg>
+              </span>
+            </button>
+            <button type="button" class="ios26-sidebars-tab-label is-active">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-icon" aria-label="Search">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-search-top" xlink:href="#ios26-sidebars-symbol-search-top"></use></svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="ios26-sidebars-top-trailing">
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-square" xlink:href="#ios26-sidebars-symbol-square"></use></svg>
+              </span>
+            </button>
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-square-fill" xlink:href="#ios26-sidebars-symbol-square-fill"></use></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ios26-sidebars-page-title">
+          <h4>Title</h4>
+          <p>Subtitle</p>
+        </div>
+
+        <aside class="ios26-sidebar-panel" data-node-id="131:70868">
+          <div class="ios26-sidebar-panel-toolbar" data-node-id="5840:28688">
+            <div class="ios26-window-controls" data-node-id="5565:22714">
+              <span class="ios26-window-bubble is-red"></span>
+              <span class="ios26-window-bubble is-yellow"></span>
+              <span class="ios26-window-bubble is-green"></span>
+            </div>
+            <button class="ios26-sidebar-edit-btn" type="button">Edit</button>
+          </div>
+
+          <label class="ios26-sidebar-search" data-node-id="5840:30516">
+            <span class="ios26-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-search-sidebar" xlink:href="#ios26-sidebars-symbol-search-sidebar"></use></svg>
+            </span>
+            <input type="text" value="Search" readonly />
+            <span class="ios26-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-mic" xlink:href="#ios26-sidebars-symbol-mic"></use></svg>
+            </span>
+          </label>
+
+          <ul class="ios26-sidebar-list" data-node-id="131:69884">
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+            <li class="ios26-sidebar-section-header"><span>Section Heading</span><span>Detail</span></li>
+            <li class="ios26-sidebar-row is-selected"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+            <li class="ios26-sidebar-section-header"><span>Section Heading</span><span>Detail</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Title</span><span class="ios26-sidebar-row-detail">Detail</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ios26-sidebars-tablet-wrap" data-node-id="5726:29556" aria-label="Sidebar with mailboxes">
+    <div class="ios26-sidebars-tablet">
+      <div class="ios26-sidebars-shell" aria-hidden="true"></div>
+      <div class="ios26-sidebars-screen">
+        <div class="ios26-sidebars-status" data-node-id="5713:52532">
+          <div class="ios26-sidebars-status-left"><span>9:41</span> <span>Tue Apr 1</span></div>
+          <div class="ios26-sidebars-status-right" aria-hidden="true">
+            <div class="ios26-status-glyphs">
+              <span class="ios26-status-cell"></span>
+              <span class="ios26-status-wifi"></span>
+            </div>
+            <span>100%</span>
+            <span class="ios26-status-battery"></span>
+          </div>
+        </div>
+
+        <div class="ios26-sidebars-top-toolbar" data-node-id="5713:52531">
+          <div class="ios26-sidebars-top-leading">
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Back">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-back" xlink:href="#ios26-sidebars-symbol-back"></use></svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="ios26-sidebars-tabs">
+            <button type="button" class="ios26-sidebars-tab-icon" aria-label="Sidebar">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-sidebar" xlink:href="#ios26-sidebars-symbol-sidebar"></use></svg>
+              </span>
+            </button>
+            <button type="button" class="ios26-sidebars-tab-label is-active">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-label">Label</button>
+            <button type="button" class="ios26-sidebars-tab-icon" aria-label="Search">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-search-top" xlink:href="#ios26-sidebars-symbol-search-top"></use></svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="ios26-sidebars-top-trailing">
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-square" xlink:href="#ios26-sidebars-symbol-square"></use></svg>
+              </span>
+            </button>
+            <button class="ios26-sidebars-icon-btn" type="button" aria-label="Action">
+              <span class="ios26-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-square-fill" xlink:href="#ios26-sidebars-symbol-square-fill"></use></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ios26-sidebars-page-title">
+          <h4>Title</h4>
+          <p>Subtitle</p>
+        </div>
+
+        <aside class="ios26-sidebar-panel" data-node-id="5726:29995">
+          <div class="ios26-sidebar-panel-toolbar">
+            <div class="ios26-window-controls">
+              <span class="ios26-window-bubble is-red"></span>
+              <span class="ios26-window-bubble is-yellow"></span>
+              <span class="ios26-window-bubble is-green"></span>
+            </div>
+            <button class="ios26-sidebar-edit-btn" type="button">Edit</button>
+          </div>
+
+          <label class="ios26-sidebar-search">
+            <span class="ios26-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-search-sidebar" xlink:href="#ios26-sidebars-symbol-search-sidebar"></use></svg>
+            </span>
+            <input type="text" value="Search" readonly />
+            <span class="ios26-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><use href="#ios26-sidebars-symbol-mic" xlink:href="#ios26-sidebars-symbol-mic"></use></svg>
+            </span>
+          </label>
+
+          <ul class="ios26-sidebar-list ios26-sidebar-list--mail">
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-inbox-stack" aria-hidden="true"></span><span class="ios26-sidebar-row-title">All Inboxes</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-envelope" aria-hidden="true"></span><span class="ios26-sidebar-row-title">iCloud</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-envelope" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Apple</span></li>
+            <li class="ios26-sidebar-section-header"><span>Section Heading</span><span>Detail</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-inbox-tray" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Inbox</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-flag" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Flagged</span></li>
+            <li class="ios26-sidebar-row"><span class="ios26-sidebar-row-icon icon-paperplane" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Sent</span></li>
+            <li class="ios26-sidebar-row is-selected"><span class="ios26-sidebar-row-icon icon-reply" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Scuba Trips</span><span class="ios26-sidebar-row-detail">19</span></li>
+            <li class="ios26-sidebar-row is-nested"><span class="ios26-sidebar-row-icon icon-folder" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Philippines</span><span class="ios26-sidebar-row-detail">2</span></li>
+            <li class="ios26-sidebar-row is-nested"><span class="ios26-sidebar-row-icon icon-folder" aria-hidden="true"></span><span class="ios26-sidebar-row-title">Palau</span><span class="ios26-sidebar-row-detail">4</span></li>
+            <li class="ios26-sidebar-row is-nested"><span class="ios26-sidebar-row-icon icon-folder" aria-hidden="true"></span><span class="ios26-sidebar-row-title">BVI</span><span class="ios26-sidebar-row-detail">13</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Sidebars metadata coverage supplement" data-node-id="507:26013">
+  <header class="ios26-node-coverage-header">
+    <h3>Sidebars Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (507:26013). Full coverage is persisted; this supplement lists 89 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (89)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5643:28168" data-node-name="_Sidebar - Trailing" data-node-reasons="metadata-root-gap">
+      <code>5643:28168</code>
+      <span class="ios26-node-coverage-item-name">_Sidebar - Trailing</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39588" data-node-name="Mode=Dark, State=Selected, Type=Detail" data-node-reasons="metadata-root-gap">
+      <code>5660:39588</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Detail</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39590" data-node-name="Mode=Dark, State=Selected, Type=Checkmark" data-node-reasons="metadata-root-gap">
+      <code>5660:39590</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Checkmark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39593" data-node-name="Mode=Dark, State=Selected, Type=Info" data-node-reasons="metadata-root-gap">
+      <code>5660:39593</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Info</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39596" data-node-name="Mode=Dark, State=Selected, Type=Disclosure" data-node-reasons="metadata-root-gap">
+      <code>5660:39596</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Disclosure</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39599" data-node-name="Mode=Dark, State=Selected, Type=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5660:39599</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39602" data-node-name="Mode=Dark, State=Selected, Type=Toggle" data-node-reasons="metadata-root-gap">
+      <code>5660:39602</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Type=Toggle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39604" data-node-name="Mode=Dark, State=Default, Type=Detail" data-node-reasons="metadata-root-gap">
+      <code>5660:39604</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Detail</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39606" data-node-name="Mode=Dark, State=Default, Type=Checkmark" data-node-reasons="metadata-root-gap">
+      <code>5660:39606</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Checkmark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39609" data-node-name="Mode=Dark, State=Default, Type=Info" data-node-reasons="metadata-root-gap">
+      <code>5660:39609</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Info</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39612" data-node-name="Mode=Dark, State=Default, Type=Disclosure" data-node-reasons="metadata-root-gap">
+      <code>5660:39612</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Disclosure</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39615" data-node-name="Mode=Dark, State=Default, Type=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5660:39615</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39618" data-node-name="Mode=Dark, State=Default, Type=Toggle" data-node-reasons="metadata-root-gap">
+      <code>5660:39618</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Type=Toggle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14347" data-node-name="Mode=Light, State=Selected, Type=Detail" data-node-reasons="metadata-root-gap">
+      <code>5658:14347</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Detail</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14349" data-node-name="Mode=Light, State=Selected, Type=Checkmark" data-node-reasons="metadata-root-gap">
+      <code>5658:14349</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Checkmark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14352" data-node-name="Mode=Light, State=Selected, Type=Info" data-node-reasons="metadata-root-gap">
+      <code>5658:14352</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Info</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14355" data-node-name="Mode=Light, State=Selected, Type=Disclosure" data-node-reasons="metadata-root-gap">
+      <code>5658:14355</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Disclosure</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14358" data-node-name="Mode=Light, State=Selected, Type=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5658:14358</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5658:14361" data-node-name="Mode=Light, State=Selected, Type=Toggle" data-node-reasons="metadata-root-gap">
+      <code>5658:14361</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Type=Toggle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28164" data-node-name="Mode=Light, State=Default, Type=Detail" data-node-reasons="metadata-root-gap">
+      <code>5643:28164</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Detail</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28178" data-node-name="Mode=Light, State=Default, Type=Checkmark" data-node-reasons="metadata-root-gap">
+      <code>5643:28178</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Checkmark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28172" data-node-name="Mode=Light, State=Default, Type=Info" data-node-reasons="metadata-root-gap">
+      <code>5643:28172</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Info</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28169" data-node-name="Mode=Light, State=Default, Type=Disclosure" data-node-reasons="metadata-root-gap">
+      <code>5643:28169</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Disclosure</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28181" data-node-name="Mode=Light, State=Default, Type=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5643:28181</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:28175" data-node-name="Mode=Light, State=Default, Type=Toggle" data-node-reasons="metadata-root-gap">
+      <code>5643:28175</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Type=Toggle</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:15001" data-node-name="_Sidebar - Edit Button" data-node-reasons="metadata-root-gap">
+      <code>5659:15001</code>
+      <span class="ios26-node-coverage-item-name">_Sidebar - Edit Button</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:37328" data-node-name="Mode=Dark, Type=Selectable" data-node-reasons="metadata-root-gap">
+      <code>5660:37328</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, Type=Selectable</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:37329" data-node-name="Mode=Dark, Type=Selected" data-node-reasons="metadata-root-gap">
+      <code>5660:37329</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, Type=Selected</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:37331" data-node-name="Mode=Dark, Type=Delete" data-node-reasons="metadata-root-gap">
+      <code>5660:37331</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, Type=Delete</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:15004" data-node-name="Mode=Light, Type=Selectable" data-node-reasons="metadata-root-gap">
+      <code>5659:15004</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, Type=Selectable</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:15002" data-node-name="Mode=Light, Type=Selected" data-node-reasons="metadata-root-gap">
+      <code>5659:15002</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, Type=Selected</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:26138" data-node-name="Mode=Light, Type=Delete" data-node-reasons="metadata-root-gap">
+      <code>5643:26138</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, Type=Delete</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62237" data-node-name="_Sidebar - Leading" data-node-reasons="metadata-root-gap">
+      <code>147:62237</code>
+      <span class="ios26-node-coverage-item-name">_Sidebar - Leading</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:41138" data-node-name="Mode=Dark, State=Selected, Image=Hidden" data-node-reasons="metadata-root-gap">
+      <code>5660:41138</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Image=Hidden</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39428" data-node-name="Mode=Dark, State=Selected, Image=Collection" data-node-reasons="metadata-root-gap">
+      <code>5660:39428</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Image=Collection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39437" data-node-name="Mode=Dark, State=Selected, Image=Bitmap" data-node-reasons="metadata-root-gap">
+      <code>5660:39437</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Image=Bitmap</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39443" data-node-name="Mode=Dark, State=Selected, Image=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5660:39443</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Selected, Image=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:41084" data-node-name="Mode=Dark, State=Default, Image=Hidden" data-node-reasons="metadata-root-gap">
+      <code>5660:41084</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Image=Hidden</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39449" data-node-name="Mode=Dark, State=Default, Image=Collection" data-node-reasons="metadata-root-gap">
+      <code>5660:39449</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Image=Collection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39458" data-node-name="Mode=Dark, State=Default, Image=Bitmap" data-node-reasons="metadata-root-gap">
+      <code>5660:39458</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Image=Bitmap</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:39464" data-node-name="Mode=Dark, State=Default, Image=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5660:39464</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Default, Image=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:41129" data-node-name="Mode=Light, State=Selected, Image=Hidden" data-node-reasons="metadata-root-gap">
+      <code>5660:41129</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Image=Hidden</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:14989" data-node-name="Mode=Light, State=Selected, Image=Collection" data-node-reasons="metadata-root-gap">
+      <code>5659:14989</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Image=Collection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:14995" data-node-name="Mode=Light, State=Selected, Image=Bitmap" data-node-reasons="metadata-root-gap">
+      <code>5659:14995</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Image=Bitmap</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5659:14998" data-node-name="Mode=Light, State=Selected, Image=Symbol" data-node-reasons="metadata-root-gap">
+      <code>5659:14998</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Selected, Image=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:41075" data-node-name="Mode=Light, State=Default, Image=Hidden" data-node-reasons="metadata-root-gap">
+      <code>5660:41075</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Image=Hidden</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62508" data-node-name="Mode=Light, State=Default, Image=Collection" data-node-reasons="metadata-root-gap">
+      <code>147:62508</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Image=Collection</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62484" data-node-name="Mode=Light, State=Default, Image=Bitmap" data-node-reasons="metadata-root-gap">
+      <code>147:62484</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Image=Bitmap</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62238" data-node-name="Mode=Light, State=Default, Image=Symbol" data-node-reasons="metadata-root-gap">
+      <code>147:62238</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Default, Image=Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:20203" data-node-name="_Trailing - Disclosure" data-node-reasons="metadata-root-gap">
+      <code>5643:20203</code>
+      <span class="ios26-node-coverage-item-name">_Trailing - Disclosure</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:20202" data-node-name="Open=True" data-node-reasons="metadata-root-gap">
+      <code>5643:20202</code>
+      <span class="ios26-node-coverage-item-name">Open=True</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5643:20204" data-node-name="Open=False" data-node-reasons="metadata-root-gap">
+      <code>5643:20204</code>
+      <span class="ios26-node-coverage-item-name">Open=False</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5704:37671" data-node-name="Sidebars" data-node-reasons="metadata-root-gap">
+      <code>5704:37671</code>
+      <span class="ios26-node-coverage-item-name">Sidebars</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="131:70029" data-node-name="Sidebar Row" data-node-reasons="metadata-root-gap">
+      <code>131:70029</code>
+      <span class="ios26-node-coverage-item-name">Sidebar Row</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62816" data-node-name="State=Disabled, Indent Level=2" data-node-reasons="metadata-root-gap">
+      <code>147:62816</code>
+      <span class="ios26-node-coverage-item-name">State=Disabled, Indent Level=2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62819" data-node-name="State=Disabled, Indent Level=1" data-node-reasons="metadata-root-gap">
+      <code>147:62819</code>
+      <span class="ios26-node-coverage-item-name">State=Disabled, Indent Level=1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="147:62822" data-node-name="State=Disabled, Indent Level=0" data-node-reasons="metadata-root-gap">
+      <code>147:62822</code>
+      <span class="ios26-node-coverage-item-name">State=Disabled, Indent Level=0</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:85276" data-node-name="State=Selected, Indent Level=2" data-node-reasons="metadata-root-gap">
+      <code>145:85276</code>
+      <span class="ios26-node-coverage-item-name">State=Selected, Indent Level=2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:50839" data-node-name="State=Disclosable, Indent Level=2" data-node-reasons="metadata-root-gap">
+      <code>5660:50839</code>
+      <span class="ios26-node-coverage-item-name">State=Disclosable, Indent Level=2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:85245" data-node-name="State=Selected, Indent Level=1" data-node-reasons="metadata-root-gap">
+      <code>145:85245</code>
+      <span class="ios26-node-coverage-item-name">State=Selected, Indent Level=1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:50843" data-node-name="State=Disclosable, Indent Level=1" data-node-reasons="metadata-root-gap">
+      <code>5660:50843</code>
+      <span class="ios26-node-coverage-item-name">State=Disclosable, Indent Level=1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="131:70030" data-node-name="State=Selected, Indent Level=0" data-node-reasons="metadata-root-gap">
+      <code>131:70030</code>
+      <span class="ios26-node-coverage-item-name">State=Selected, Indent Level=0</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5660:50847" data-node-name="State=Disclosable, Indent Level=0" data-node-reasons="metadata-root-gap">
+      <code>5660:50847</code>
+      <span class="ios26-node-coverage-item-name">State=Disclosable, Indent Level=0</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:85278" data-node-name="State=Default, Indent Level=2" data-node-reasons="metadata-root-gap">
+      <code>145:85278</code>
+      <span class="ios26-node-coverage-item-name">State=Default, Indent Level=2</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="145:85224" data-node-name="State=Default, Indent Level=1" data-node-reasons="metadata-root-gap">
+      <code>145:85224</code>
+      <span class="ios26-node-coverage-item-name">State=Default, Indent Level=1</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="131:70028" data-node-name="State=Default, Indent Level=0" data-node-reasons="metadata-root-gap">
+      <code>131:70028</code>
+      <span class="ios26-node-coverage-item-name">State=Default, Indent Level=0</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="148:63293" data-node-name="Sidebar Toolbar" data-node-reasons="metadata-root-gap">
+      <code>148:63293</code>
+      <span class="ios26-node-coverage-item-name">Sidebar Toolbar</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="131:66427" data-node-name="Section Header" data-node-reasons="metadata-root-gap">
+      <code>131:66427</code>
+      <span class="ios26-node-coverage-item-name">Section Header</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="148:61709" data-node-name="Sidebar with Multilevel Hiearchy" data-node-reasons="metadata-root-gap">
+      <code>148:61709</code>
+      <span class="ios26-node-coverage-item-name">Sidebar with Multilevel Hiearchy</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30471" data-node-name="_Search Field" data-node-reasons="metadata-root-gap">
+      <code>5840:30471</code>
+      <span class="ios26-node-coverage-item-name">_Search Field</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30472" data-node-name="Mode=Dark, State=Typing" data-node-reasons="metadata-root-gap">
+      <code>5840:30472</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Typing</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30479" data-node-name="Mode=Dark, State=Value" data-node-reasons="metadata-root-gap">
+      <code>5840:30479</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Value</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30484" data-node-name="Mode=Dark, State=Placeholder" data-node-reasons="metadata-root-gap">
+      <code>5840:30484</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark, State=Placeholder</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30489" data-node-name="Mode=Light, State=Typing" data-node-reasons="metadata-root-gap">
+      <code>5840:30489</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Typing</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30496" data-node-name="Mode=Light, State=Value" data-node-reasons="metadata-root-gap">
+      <code>5840:30496</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Value</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30501" data-node-name="Mode=Light, State=Placeholder" data-node-reasons="metadata-root-gap">
+      <code>5840:30501</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light, State=Placeholder</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27831" data-node-name="_Toolbar Button - Symbol" data-node-reasons="metadata-root-gap">
+      <code>5840:27831</code>
+      <span class="ios26-node-coverage-item-name">_Toolbar Button - Symbol</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27832" data-node-name="Mode=Dark" data-node-reasons="metadata-root-gap">
+      <code>5840:27832</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27840" data-node-name="Mode=Light" data-node-reasons="metadata-root-gap">
+      <code>5840:27840</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27868" data-node-name="_Toolbar Button - Text" data-node-reasons="metadata-root-gap">
+      <code>5840:27868</code>
+      <span class="ios26-node-coverage-item-name">_Toolbar Button - Text</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27869" data-node-name="Mode=Dark" data-node-reasons="metadata-root-gap">
+      <code>5840:27869</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:27877" data-node-name="Mode=Light" data-node-reasons="metadata-root-gap">
+      <code>5840:27877</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="544:191842" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>544:191842</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:25291" data-node-name="_Selection BG" data-node-reasons="metadata-root-gap">
+      <code>5840:25291</code>
+      <span class="ios26-node-coverage-item-name">_Selection BG</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:25286" data-node-name="Mode=Dark" data-node-reasons="metadata-root-gap">
+      <code>5840:25286</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:25287" data-node-name="Mode=Light" data-node-reasons="metadata-root-gap">
+      <code>5840:25287</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30052" data-node-name="_Section Header" data-node-reasons="metadata-root-gap">
+      <code>5840:30052</code>
+      <span class="ios26-node-coverage-item-name">_Section Header</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30053" data-node-name="Mode=Dark" data-node-reasons="metadata-root-gap">
+      <code>5840:30053</code>
+      <span class="ios26-node-coverage-item-name">Mode=Dark</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5840:30051" data-node-name="Mode=Light" data-node-reasons="metadata-root-gap">
+      <code>5840:30051</code>
+      <span class="ios26-node-coverage-item-name">Mode=Light</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/sidebars/5726-29555.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/sidebars/5726-29555.screenshot.png" alt="Sidebars screenshot" />
+        <p><a href="../evidence/figma-artifacts/sidebars/5726-29555.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/sidebars/5726-29555.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/sidebars.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/sidebars.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/sidebars.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgIPadPro11M4SilverLandscape = &quot;https://www.figma.com/api/mcp/asset/44995ec7-a2e5-428d-b36b-6f6dc34e64cf&quot;;
+const imgClose = &quot;https://www.figma.com/api/mcp/asset/52cf6c8c-01e6-4176-8494-12865a4e93a1&quot;;
+const imgMinimize = &quot;https://www.figma.com/api/mcp/asset/2cb1e223-d16d-42cb-9a31-01953ed35a58&quot;;
+const imgExpand = &quot;https://www.figma.com/api/mcp/asset/20fb07a6-8280-4b07-83ec-2a547ae11b44&quot;;
+const imgCombinedShape = &quot;https://www.figma.com/api/mcp/asset/f023dc80-4cb0-48f5-88c8-996110ff4e28&quot;;
+const imgCombinedShape1 = &quot;https://www.figma.com/api/mcp/asset/900ff944-2696-48ed-9277-d78b6724ef02&quot;;
+const imgBatteryIcon = &quot;https://www.figma.com/api/mcp/asset/5f193507-7339-4675-8003-14738a77e3b0&quot;;
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;iPad Pro M4 11&#39;&quot; data-node-id=&quot;6316:14229&quot;&gt;
+      &lt;div className=&quot;h-[834px] relative w-[1210px]&quot; data-name=&quot;Color=Silver&quot; data-node-id=&quot;487:11227&quot;&gt;
+        &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]&quot; data-name=&quot;iPad Pro 11 - M4 - Silver - Landscape&quot; data-node-id=&quot;6318:14240&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPadPro11M4SilverLandscape} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type WindowControlsProps = {
+  className?: string;
+  state?: boolean;
+};
+
+function WindowControls({ className, state = true }: WindowControlsProps) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative&quot;} data-node-id=&quot;5565:22714&quot;&gt;
+      &lt;div className=&quot;absolute left-0 size-[48px] top-0&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;5731:57886&quot;&gt;
+        &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5731:57886;5575:44983&quot;&gt;
+          &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5731:57886;5575:75442&quot;&gt;
+            &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5731:57886;5575:75442;5575:32354&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5731:57886;6491:20171&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5731:57886;6491:20172&quot;&gt;
+          &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+            &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+            &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5731:57886;6491:20173&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Close&quot; data-node-id=&quot;5565:22717&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgClose} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Minimize&quot; data-node-id=&quot;5565:22718&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgMinimize} /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Expand&quot; data-node-id=&quot;5565:22719&quot;&gt;
+        &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgExpand} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function SectionHeader({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative w-[260px]&quot;} data-name=&quot;Section Header&quot; data-node-id=&quot;131:66427&quot;&gt;
+      &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Section Header&quot; data-node-id=&quot;5840:30065&quot;&gt;
+        &lt;p className=&quot;flex-[1_0_0] font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[22px] leading-[22px] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px] whitespace-pre-wrap&quot; data-node-id=&quot;I5840:30065;5840:30046&quot;&gt;
+          Section Heading
+        &lt;/p&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] items-center relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5840:30065;5840:30047&quot;&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5840:30065;5840:30048&quot;&gt;
+            Detail
+          &lt;/p&gt;
+          &lt;div className=&quot;relative shrink-0 size-[18px]&quot; data-name=&quot;_Trailing - Disclosure&quot; data-node-id=&quot;I5840:30065;5840:30049&quot;&gt;
+            &lt;div className=&quot;absolute flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center&quot; data-node-id=&quot;I5840:30065;5840:30049;5643:20201&quot; style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀆈&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function SidebarSearchField({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex items-center relative rounded-[100px] w-[200px]&quot;} data-name=&quot;Sidebar Search Field&quot; data-node-id=&quot;5840:30516&quot;&gt;
+      &lt;div className=&quot;bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex flex-[1_0_0] font-[&#39;SF_Pro:Regular&#39;,sans-serif] items-center leading-[22px] min-h-px min-w-px not-italic p-[11px] relative rounded-[100px] text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.08px]&quot; data-name=&quot;_Search Field&quot; data-node-id=&quot;5840:34781&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5840:34781;5840:30502&quot;&gt;
+          &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5840:34781;5840:30503&quot;&gt;
+            􀊫
+          &lt;/p&gt;
+          &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5840:34781;5840:30504&quot;&gt;
+            Search
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5840:34781;5840:30505&quot;&gt;
+          􀊱
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Sidebar({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;content-stretch flex flex-col h-[802px] items-start pb-[10px] pt-[11px] px-[16px] relative w-[320px]&quot;} data-name=&quot;Sidebar&quot; data-node-id=&quot;131:70868&quot;&gt;
+      &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; data-node-id=&quot;I5643:18284;5584:31842&quot;&gt;
+        &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; data-node-id=&quot;I5643:18284;5584:31843&quot;&gt;
+          &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5643:18284;5584:31843;5584:31864&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5643:18284;5607:81648&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute inset-0 rounded-[34px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5643:18284;5607:25683&quot;&gt;
+        &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+          &lt;div className=&quot;absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]&quot; /&gt;
+          &lt;div className=&quot;absolute bg-[rgba(250,250,250,0.7)] inset-0 rounded-[34px]&quot; /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5643:18284;5607:25691&quot; /&gt;
+      &lt;div className=&quot;content-stretch flex gap-[2px] items-start justify-center pb-[20px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Toolbar&quot; data-node-id=&quot;5840:28688&quot;&gt;
+        &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px pt-px relative&quot; data-name=&quot;Leading&quot; data-node-id=&quot;I5840:28688;5643:14710&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative shrink-0&quot; data-name=&quot;_Window Controls&quot; data-node-id=&quot;I5840:28688;5643:13745&quot;&gt;
+            &lt;div className=&quot;absolute left-0 size-[48px] top-0&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886&quot;&gt;
+              &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;5575:44983&quot;&gt;
+                &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;5575:75442&quot;&gt;
+                  &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;5575:75442;5575:32354&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;6491:20171&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;6491:20172&quot;&gt;
+                &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                  &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                  &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5840:28688;5643:13745;5731:57886;6491:20173&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Close&quot; data-node-id=&quot;I5840:28688;5643:13745;5565:22717&quot;&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgClose} /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Minimize&quot; data-node-id=&quot;I5840:28688;5643:13745;5565:22718&quot;&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgMinimize} /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;relative shrink-0 size-[6px]&quot; data-name=&quot;Expand&quot; data-node-id=&quot;I5840:28688;5643:13745;5565:22719&quot;&gt;
+              &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgExpand} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Text&quot; data-node-id=&quot;I5840:28688;5840:28042&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)]&quot; data-node-id=&quot;I5840:28688;5840:28042;5840:27880&quot;&gt;
+              Edit
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[24px] h-[22px] items-center relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5840:28688;5643:14762&quot;&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5840:28688;5840:27909&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5840:28688;5840:27909;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀀀&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5840:28688;5840:27978&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5840:28688;5840:27978;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀟈&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5840:28688;5840:28004&quot;&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5840:28688;5840:28004;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+              &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀏚&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;SidebarSearchField className=&quot;content-stretch flex items-center relative rounded-[100px] shrink-0 w-full&quot; /&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;131:69884&quot;&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69885&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69885;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69885;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69885;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69885;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69885;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69885;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69885;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:70821&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:70821;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:70821;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:70821;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:70821;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:70821;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:70821;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:70821;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:70832&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:70832;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:70832;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:70832;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:70832;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:70832;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:70832;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:70832;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-[320px]&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69886&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69886;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69886;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69886;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69886;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69886;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69886;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69886;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;131:69889&quot;&gt;
+        &lt;SectionHeader className=&quot;content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full&quot; /&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69891&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69891;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69891;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69891;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69891;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69891;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69891;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69891;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative rounded-[100px] shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5657:12516&quot;&gt;
+          &lt;div className=&quot;-translate-y-1/2 absolute h-[44px] left-0 right-0 top-1/2&quot; data-name=&quot;_Selection BG&quot; data-node-id=&quot;I5657:12516;5840:25958&quot;&gt;
+            &lt;div className=&quot;absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 mix-blend-plus-lighter rounded-[100px]&quot; data-name=&quot;BG&quot; data-node-id=&quot;I5657:12516;5840:25958;5840:25253&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5657:12516;5657:12957&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5657:12516;5657:12957;5660:45440&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] text-center w-[34px]&quot; data-node-id=&quot;I5657:12516;5657:12957;5659:15000&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5657:12516;5657:12957;5660:38742&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]&quot; data-node-id=&quot;I5657:12516;5657:12957;5660:38743&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I5657:12516;147:62175&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5657:12516;147:62175;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69893&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69893;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69893;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69893;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69893;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69893;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69893;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69893;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;2608:30594&quot;&gt;
+        &lt;SectionHeader className=&quot;content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;131:69899&quot;&gt;
+        &lt;SectionHeader className=&quot;content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full&quot; /&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69901&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69901;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69901;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69901;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69901;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69901;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69901;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69901;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:69902&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:69902;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:69902;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:69902;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:69902;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:69902;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:69902;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:69902;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;131:70224&quot;&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I131:70224;5643:24724&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I131:70224;5643:24724;5660:44879&quot;&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I131:70224;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I131:70224;5643:24724;5660:38827&quot;&gt;
+                &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I131:70224;5643:24724;5660:38828&quot;&gt;
+                  Title
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I131:70224;147:61937&quot;&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I131:70224;147:61937;5643:28162&quot;&gt;
+              Detail
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type Sidebar1Props = {
+  className?: string;
+  type?: &quot;List&quot; | &quot;List (Multi-level)&quot;;
+};
+
+export default function Sidebar1({ className, type = &quot;List&quot; }: Sidebar1Props) {
+  const isList = type === &quot;List&quot;;
+  const isListMultiLevel = type === &quot;List (Multi-level)&quot;;
+  return (
+    &lt;div className={className || &quot;bg-[var(--backgrounds\/primary,white)] h-[834px] relative w-[1210px]&quot;} id={isListMultiLevel ? &quot;node-5726_29556&quot; : &quot;node-754_64697&quot;}&gt;
+      &lt;div className=&quot;absolute content-stretch flex flex-col gap-[10px] items-start left-[330px] pb-[10px] px-[10px] top-[32px] w-[820px]&quot; data-name=&quot;Toolbar - Top - iPad&quot; id={isListMultiLevel ? &quot;node-5726_29557&quot; : &quot;node-5713_52531&quot;}&gt;
+        &lt;div className=&quot;content-stretch flex items-start relative shrink-0 w-full&quot; data-name=&quot;Controls&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23774&quot; : &quot;node-I5713_52531-5572_23774&quot;}&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Leading&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23775&quot; : &quot;node-I5713_52531-5572_23775&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777&quot; : &quot;node-I5713_52531-5572_23777&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565&quot; : &quot;node-I5713_52531-5572_23777-6491_22565&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-5575_44983&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-5575_75442&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-5575_75442-5575_32354&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-6491_20171&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-6491_20172&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22565-6491_20173&quot; : &quot;node-I5713_52531-5572_23777-6491_22565-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap&quot; data-name=&quot;_Button - Back&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22970&quot; : &quot;node-I5713_52531-5572_23777-6491_22970&quot;}&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22970-5431_837&quot; : &quot;node-I5713_52531-5572_23777-6491_22970-5431_837&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;􀯶&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23777-6491_22970-5431_840&quot; : &quot;node-I5713_52531-5572_23777-6491_22970-5431_840&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[12px] items-center justify-end min-h-px min-w-px relative&quot; data-name=&quot;Trailing&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23780&quot; : &quot;node-I5713_52531-5572_23780&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781&quot; : &quot;node-I5713_52531-5572_23781&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888&quot; : &quot;node-I5713_52531-5572_23781-5566_7888&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-5575_44983&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-5575_75442&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-5575_75442-5575_32354&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-6491_20171&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-6491_20172&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5566_7888-6491_20173&quot; : &quot;node-I5713_52531-5572_23781-5566_7888-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5432_23135&quot; : &quot;node-I5713_52531-5572_23781-5432_23135&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23781-5432_23135-5426_2011&quot; : &quot;node-I5713_52531-5572_23781-5432_23135-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782&quot; : &quot;node-I5713_52531-5572_23782&quot;}&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888&quot; : &quot;node-I5713_52531-5572_23782-5566_7888&quot;}&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-5575_44983&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-5575_44983&quot;}&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-5575_75442&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-5575_75442&quot;}&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-5575_75442-5575_32354&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-5575_75442-5575_32354&quot;} /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-6491_20171&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-6491_20171&quot;} /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-6491_20172&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-6491_20172&quot;}&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5566_7888-6491_20173&quot; : &quot;node-I5713_52531-5572_23782-5566_7888-6491_20173&quot;} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5432_23135&quot; : &quot;node-I5713_52531-5572_23782-5432_23135&quot;}&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23782-5432_23135-5426_2011&quot; : &quot;node-I5713_52531-5572_23782-5432_23135-5426_2011&quot;} style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex flex-col gap-[2px] items-start min-h-[48px] pt-[4px] px-[10px] relative shrink-0 w-full&quot; data-name=&quot;Title and Subtitle&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23876&quot; : &quot;node-I5713_52531-5572_23876&quot;}&gt;
+          &lt;div className=&quot;h-[41px] relative shrink-0 w-full&quot; data-name=&quot;_Title - Large Title&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5827_67089&quot; : &quot;node-I5713_52531-5827_67089&quot;}&gt;
+            &lt;p className=&quot;absolute font-[&#39;SF_Pro:Bold&#39;,sans-serif] leading-[41px] left-0 not-italic right-0 text-[34px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[0.4px]&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5827_67089-5827_57542&quot; : &quot;node-I5713_52531-5827_67089-5827_57542&quot;}&gt;
+              Title
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Subtitle - Subheadline&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5827_67090&quot; : &quot;node-I5713_52531-5827_67090&quot;}&gt;
+            &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[20px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.25px]&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5827_67090-5827_57543&quot; : &quot;node-I5713_52531-5827_67090-5827_57543&quot;}&gt;
+              Subtitle
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;-translate-x-1/2 absolute content-stretch flex items-start left-[calc(50%+5.5px)] p-[4px] top-0 w-[659px]&quot; data-name=&quot;Tab Bar - iPad&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786&quot; : &quot;node-I5713_52531-5572_23786&quot;}&gt;
+          &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-5575_44983&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-5575_44983&quot;}&gt;
+            &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-5575_75442&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-5575_75442&quot;}&gt;
+              &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-5575_75442-5575_32354&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-5575_75442-5575_32354&quot;} /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-6491_20171&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-6491_20171&quot;} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-6491_20172&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-6491_20172&quot;}&gt;
+            &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+              &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7539-6491_20173&quot; : &quot;node-I5713_52531-5572_23786-5569_7539-6491_20173&quot;} /&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0&quot; data-name=&quot;_Tab Bar Button - iPad - Symbol&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9888&quot; : &quot;node-I5713_52531-5572_23786-5569_9888&quot;}&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9888-5569_8179&quot; : &quot;node-I5713_52531-5572_23786-5569_9888-5569_8179&quot;}&gt;
+              &lt;p className=&quot;leading-[20px]&quot;&gt;􀰱&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex flex-[1_0_0] h-[36px] items-center justify-center min-h-px min-w-px relative&quot; data-name=&quot;Stretch&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-2524_7960&quot; : &quot;node-I5713_52531-5572_23786-2524_7960&quot;}&gt;
+            &lt;div className=&quot;content-stretch flex gap-[10px] items-center justify-center px-[18px] py-[8px] relative rounded-[100px] shrink-0&quot; data-name=&quot;_Tab Bar Button - iPad - Text&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7324&quot; : &quot;node-I5713_52531-5572_23786-5569_7324&quot;}&gt;
+              &lt;div className=&quot;absolute bg-[var(--fills---vibrant\/tertiary,#ededed)] inset-0 rounded-[100px]&quot; data-name=&quot;Selection&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7324-5735_65310&quot; : &quot;node-I5713_52531-5572_23786-5569_7324-5735_65310&quot;} /&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Bold&#39;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--miscellaneous\/tab-bar-selection,#08f)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7324-5569_7313&quot; : &quot;node-I5713_52531-5572_23786-5569_7324-5569_7313&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] overflow-hidden&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative&quot; data-name=&quot;_Tab Bar Button - iPad - Text&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7446&quot; : &quot;node-I5713_52531-5572_23786-5569_7446&quot;}&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_7446-5569_7315&quot; : &quot;node-I5713_52531-5572_23786-5569_7446-5569_7315&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] overflow-hidden&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative&quot; data-name=&quot;_Tab Bar Button - iPad - Text&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9335&quot; : &quot;node-I5713_52531-5572_23786-5569_9335&quot;}&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9335-5569_7315&quot; : &quot;node-I5713_52531-5572_23786-5569_9335-5569_7315&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] overflow-hidden&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center justify-center min-h-px min-w-px px-[18px] py-[8px] relative&quot; data-name=&quot;_Tab Bar Button - iPad - Text&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9372&quot; : &quot;node-I5713_52531-5572_23786-5569_9372&quot;}&gt;
+              &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9372-5569_7315&quot; : &quot;node-I5713_52531-5572_23786-5569_9372-5569_7315&quot;}&gt;
+                &lt;p className=&quot;leading-[20px] overflow-hidden&quot;&gt;Label&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center px-[16px] py-[8px] relative shrink-0&quot; data-name=&quot;_Tab Bar Button - iPad - Symbol&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9985&quot; : &quot;node-I5713_52531-5572_23786-5569_9985&quot;}&gt;
+            &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center tracking-[-0.23px] whitespace-nowrap&quot; id={isListMultiLevel ? &quot;node-I5726_29557-5572_23786-5569_9985-5569_8179&quot; : &quot;node-I5713_52531-5572_23786-5569_9985-5569_8179&quot;}&gt;
+              &lt;p className=&quot;leading-[20px]&quot;&gt;􀊫&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {isList &amp;&amp; (
+        &lt;&gt;
+          &lt;Sidebar className=&quot;absolute bottom-[5px] content-stretch flex flex-col items-start left-[10px] pb-[10px] pt-[11px] px-[16px] top-[27px] w-[320px]&quot; /&gt;
+          &lt;div className=&quot;absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-[2px] top-0&quot; data-name=&quot;Status bar and Menu bar- iPad&quot; data-node-id=&quot;5713:52532&quot;&gt;
+            &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]&quot; data-name=&quot;Left&quot; data-node-id=&quot;I5713:52532;523:41361&quot;&gt;
+              &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5713:52532;523:41362&quot;&gt;
+                9:41
+              &lt;/p&gt;
+              &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5713:52532;523:41363&quot;&gt;
+                Tue Apr 1
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0&quot; data-name=&quot;Right&quot; data-node-id=&quot;I5713:52532;523:41364&quot;&gt;
+              &lt;div className=&quot;h-[10px] relative shrink-0 w-[16.5px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5713:52532;523:41365&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;h-[10px] relative shrink-0 w-[14.053px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5713:52532;523:41366&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape1} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right&quot; data-node-id=&quot;I5713:52532;523:41367&quot;&gt;
+                100%
+              &lt;/p&gt;
+              &lt;div className=&quot;h-[12px] relative shrink-0 w-[26.5px]&quot; data-name=&quot;Battery Icon&quot; data-node-id=&quot;I5713:52532;523:41368&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgBatteryIcon} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;IPadProM className=&quot;absolute h-[834px] left-0 top-0 w-[1210px]&quot; /&gt;
+        &lt;/&gt;
+      )}
+      {isListMultiLevel &amp;&amp; (
+        &lt;&gt;
+          &lt;div className=&quot;absolute bottom-[5px] content-stretch flex flex-col items-start left-[10px] pb-[10px] pt-[11px] px-[16px] top-[27px] w-[320px]&quot; data-name=&quot;Sidebar&quot; data-node-id=&quot;5726:29995&quot;&gt;
+            &lt;div className=&quot;absolute inset-[-26px]&quot; data-name=&quot;Shadow&quot; data-node-id=&quot;I5726:29996;5584:31842&quot;&gt;
+              &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Squircle&quot; data-node-id=&quot;I5726:29996;5584:31843&quot;&gt;
+                &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[34px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5726:29996;5584:31843;5584:31864&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5726:29996;5607:81648&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute inset-0 rounded-[34px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5726:29996;5607:25683&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[34px]&quot;&gt;
+                &lt;div className=&quot;absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]&quot; /&gt;
+                &lt;div className=&quot;absolute bg-[rgba(250,250,250,0.7)] inset-0 rounded-[34px]&quot; /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5726:29996;5607:25691&quot; /&gt;
+            &lt;div className=&quot;content-stretch flex gap-[2px] items-start justify-center pb-[20px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Toolbar&quot; data-node-id=&quot;5726:29997&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[12px] items-center min-h-px min-w-px pt-px relative&quot; data-name=&quot;Leading&quot; data-node-id=&quot;I5726:29997;5643:14710&quot;&gt;
+                &lt;WindowControls className=&quot;content-stretch flex gap-[3px] items-center justify-center px-[10px] py-[8px] relative shrink-0&quot; /&gt;
+                &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Text&quot; data-node-id=&quot;I5726:29997;5840:28042&quot;&gt;
+                  &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)]&quot; data-node-id=&quot;I5726:29997;5840:28042;5840:27880&quot;&gt;
+                    Edit
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[24px] h-[22px] items-center relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5726:29997;5643:14762&quot;&gt;
+                &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5726:29997;5840:27909&quot;&gt;
+                  &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5726:29997;5840:27909;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                    &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀀀&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5726:29997;5840:27978&quot;&gt;
+                  &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5726:29997;5840:27978;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                    &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀟈&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Toolbar Button - Symbol&quot; data-node-id=&quot;I5726:29997;5840:28004&quot;&gt;
+                  &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] h-[22px] justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[28px]&quot; data-node-id=&quot;I5726:29997;5840:28004;5840:27845&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                    &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀏚&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;bg-[var(--fills\/secondary,rgba(120,120,128,0.16))] content-stretch flex font-[&#39;SF_Pro:Regular&#39;,sans-serif] items-center leading-[22px] not-italic p-[11px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] tracking-[-0.08px] w-full&quot; data-name=&quot;Sidebar Search Field&quot; data-node-id=&quot;5726:29998&quot;&gt;
+              &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:29998;5657:8188&quot;&gt;
+                &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5726:29998;5657:8185&quot;&gt;
+                  􀊫
+                &lt;/p&gt;
+                &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5726:29998;5657:8186&quot;&gt;
+                  Search
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5726:29998;5657:8187&quot;&gt;
+                􀊱
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;5726:30004&quot;&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30006&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30006;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30006;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30006;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30006;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30006;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30007&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30007;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30007;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30007;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30007;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30007;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30008&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30008;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30008;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30008;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30008;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30008;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30181&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30181;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30181;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30181;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30181;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30181;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex flex-col items-start pt-[20px] relative shrink-0 w-full&quot; data-name=&quot;Section&quot; data-node-id=&quot;5726:30011&quot;&gt;
+              &lt;div className=&quot;content-stretch flex items-center pb-[10px] pt-[2px] px-[12px] relative shrink-0 w-full&quot; data-name=&quot;Section Header&quot; data-node-id=&quot;5726:30012&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Section Header&quot; data-node-id=&quot;I5726:30012;5840:30065&quot;&gt;
+                  &lt;p className=&quot;flex-[1_0_0] font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-[22px] leading-[22px] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] tracking-[-0.43px] whitespace-pre-wrap&quot; data-node-id=&quot;I5726:30012;5840:30065;5840:30046&quot;&gt;
+                    Section Heading
+                  &lt;/p&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[8px] items-center relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5726:30012;5840:30065;5840:30047&quot;&gt;
+                    &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/secondary,rgba(60,60,67,0.6))] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30012;5840:30065;5840:30048&quot;&gt;
+                      Detail
+                    &lt;/p&gt;
+                    &lt;div className=&quot;relative shrink-0 size-[18px]&quot; data-name=&quot;_Trailing - Disclosure&quot; data-node-id=&quot;I5726:30012;5840:30065;5840:30049&quot;&gt;
+                      &lt;div className=&quot;absolute flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center&quot; data-node-id=&quot;I5726:30012;5840:30065;5840:30049;5643:20201&quot; style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+                        &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀆈&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30013&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30013;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30013;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30013;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30013;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30013;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30014&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30014;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30014;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30014;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30014;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30014;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30015&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30015;5643:24724&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30015;5643:24724;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30015;5643:24724;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30015;5643:24724;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30015;5643:24724;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[10px] pr-[8px] relative rounded-[100px] shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30248&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30248;5660:50849&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30248;5660:50849;5660:45440&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30248;5660:50849;5659:15000&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30248;5660:50849;5660:38742&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--accents\/blue,#08f)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30248;5660:50849;5660:38743&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex gap-[4px] h-[44px] items-center justify-end pr-[4px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I5726:30248;5726:31153&quot;&gt;
+                  &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30248;5726:31153;5643:28170&quot;&gt;
+                    Detail
+                  &lt;/p&gt;
+                  &lt;div className=&quot;relative shrink-0 size-[18px]&quot; data-name=&quot;_Trailing - Disclosure&quot; data-node-id=&quot;I5726:30248;5726:31153;5726:30820&quot;&gt;
+                    &lt;div className=&quot;absolute flex flex-col font-[&#39;SF_Pro:Semibold&#39;,sans-serif] inset-[11.11%_0_-11.11%_0] justify-center leading-[0] not-italic text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center&quot; data-node-id=&quot;I5726:30248;5726:31153;5726:30820;5643:20201&quot; style={{ fontFeatureSettings: &quot;\&#39;ss15\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀆈&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30191&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30191;5657:12959&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30191;5657:12959;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30191;5657:12959;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30191;5657:12959;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30191;5657:12959;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I5726:30191;147:62157&quot;&gt;
+                  &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30191;147:62157;5643:28162&quot;&gt;
+                    Detail
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30201&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30201;5657:12959&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30201;5657:12959;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30201;5657:12959;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30201;5657:12959;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30201;5657:12959;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I5726:30201;147:62157&quot;&gt;
+                  &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30201;147:62157;5643:28162&quot;&gt;
+                    Detail
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex gap-[8px] h-[44px] items-center pl-[30px] pr-[8px] relative shrink-0 w-full&quot; data-name=&quot;Sidebar Row&quot; data-node-id=&quot;5726:30211&quot;&gt;
+                &lt;div className=&quot;content-stretch flex flex-[1_0_0] gap-[8px] h-[44px] items-center min-h-px min-w-px relative&quot; data-name=&quot;_Sidebar - Leading&quot; data-node-id=&quot;I5726:30211;5657:12959&quot;&gt;
+                  &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center relative shrink-0 w-[85px]&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5726:30211;5657:12959;5660:44879&quot;&gt;
+                    &lt;div className=&quot;flex flex-col font-[&#39;SF_Pro:Regular&#39;,sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center w-[34px]&quot; data-node-id=&quot;I5726:30211;5657:12959;147:62632&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                      &lt;p className=&quot;leading-[22px] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;content-stretch flex flex-col items-start justify-center pb-[2px] relative shrink-0&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5726:30211;5657:12959;5660:38827&quot;&gt;
+                      &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30211;5657:12959;5660:38828&quot;&gt;
+                        Title
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;content-stretch flex h-[44px] items-center justify-end pr-[8px] relative shrink-0&quot; data-name=&quot;_Sidebar - Trailing&quot; data-node-id=&quot;I5726:30211;147:62157&quot;&gt;
+                  &lt;p className=&quot;font-[&#39;SF_Pro:Regular&#39;,sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-right tracking-[-0.43px]&quot; data-node-id=&quot;I5726:30211;147:62157;5643:28162&quot;&gt;
+                    Detail
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-[2px] top-0&quot; data-name=&quot;Status bar and Menu bar- iPad&quot; data-node-id=&quot;5726:29560&quot;&gt;
+            &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]&quot; data-name=&quot;Left&quot; data-node-id=&quot;I5726:29560;523:41361&quot;&gt;
+              &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5726:29560;523:41362&quot;&gt;
+                9:41
+              &lt;/p&gt;
+              &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5726:29560;523:41363&quot;&gt;
+                Tue Apr 1
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0&quot; data-name=&quot;Right&quot; data-node-id=&quot;I5726:29560;523:41364&quot;&gt;
+              &lt;div className=&quot;h-[10px] relative shrink-0 w-[16.5px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5726:29560;523:41365&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;h-[10px] relative shrink-0 w-[14.053px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5726:29560;523:41366&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape1} /&gt;
+              &lt;/div&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right&quot; data-node-id=&quot;I5726:29560;523:41367&quot;&gt;
+                100%
+              &lt;/p&gt;
+              &lt;div className=&quot;h-[12px] relative shrink-0 w-[26.5px]&quot; data-name=&quot;Battery Icon&quot; data-node-id=&quot;I5726:29560;523:41368&quot;&gt;
+                &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgBatteryIcon} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;IPadProM className=&quot;absolute h-[834px] left-0 top-0 w-[1210px]&quot; /&gt;
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+These styles are contained in the design: Large Title/Emphasized: Font(family: &quot;SF Pro&quot;, style: Bold, size: 34, weight: 700, lineHeight: 41, letterSpacing: 0.4000000059604645), Body/Regular: Font(family: &quot;SF Pro&quot;, style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574), Body/Emphasized: Font(family: &quot;SF Pro&quot;, style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Sidebar Row
+**Node ID:** 131:70029
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

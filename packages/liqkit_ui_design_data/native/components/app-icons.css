@@ -1,0 +1,90 @@
+.ios26-app-icons-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 14px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-app-icons-links a:hover,
+.ios26-app-icons-links a:focus-visible {
+  text-decoration: underline;
+}
+
+.ios26-app-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.ios26-app-icons-card {
+  border: 1px solid #dde2ea;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-app-icons-card h4 {
+  margin: 0;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-app-icons-modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ios26-app-icons-mode {
+  margin: 0;
+  border: 1px solid #e6e9ef;
+  border-radius: 10px;
+  background: #f9fafc;
+  padding: 8px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.ios26-app-icons-mode figcaption {
+  color: #4f5866;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-align: center;
+}
+
+.ios26-app-icons-mode.is-missing {
+  align-items: center;
+  justify-items: center;
+}
+
+.ios26-app-icons-mode.is-missing p {
+  margin: 24px 0;
+  color: #8b94a5;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+@media (max-width: 720px) {
+  .ios26-app-icons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ios26-app-icons-image {
+  width: 66px;
+  height: 66px;
+  border-radius: 14px;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.ios26-app-icons-image {
+  width: 66px;
+  height: 66px;
+  border-radius: 14px;
+  display: block;
+  object-fit: cover;
+}

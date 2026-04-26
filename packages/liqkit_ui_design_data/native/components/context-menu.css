@@ -1,0 +1,154 @@
+.ios26-context-menu-root {
+  width: min(1060px, 100%);
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  padding: 12px;
+}
+
+.ios26-context-menu-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+  justify-items: center;
+}
+
+.ios26-context-menu-column {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  width: 100%;
+}
+
+.ios26-context-menu-variant {
+  border-radius: 12px;
+}
+
+.ios26-context-menu-variant--vertical {
+  width: 176px;
+  min-height: 478px;
+}
+
+.ios26-context-menu-variant--horizontal {
+  width: 309px;
+  min-height: 282px;
+}
+
+.ios26-context-menu-scene {
+  position: relative;
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.ios26-context-menu-scene--vertical-leading,
+.ios26-context-menu-scene--vertical-trailing {
+  width: 351px;
+  min-height: 956px;
+}
+
+.ios26-context-menu-scene--horizontal-leading,
+.ios26-context-menu-scene--horizontal-trailing {
+  width: 617px;
+  min-height: 562px;
+}
+
+.ios26-context-menu-content-area {
+  position: absolute;
+  top: 0;
+  width: 351px;
+  height: 351px;
+  border-radius: 30px;
+  border: 1px solid #e8ebef;
+  background: #ffffff;
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.82) inset;
+  display: grid;
+  place-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-context-menu-scene--vertical-leading .ios26-context-menu-content-area,
+.ios26-context-menu-scene--vertical-trailing .ios26-context-menu-content-area,
+.ios26-context-menu-scene--horizontal-trailing .ios26-context-menu-content-area {
+  left: 0;
+}
+
+.ios26-context-menu-scene--horizontal-leading .ios26-context-menu-content-area {
+  left: 266px;
+}
+
+.ios26-context-menu-panel {
+  position: absolute;
+}
+
+.ios26-context-menu-scene--vertical-leading .ios26-context-menu-panel {
+  left: 0;
+  top: 368px;
+}
+
+.ios26-context-menu-scene--vertical-trailing .ios26-context-menu-panel {
+  left: 113px;
+  top: 368px;
+}
+
+.ios26-context-menu-scene--horizontal-leading .ios26-context-menu-panel {
+  left: 0;
+  top: 0;
+}
+
+.ios26-context-menu-scene--horizontal-trailing .ios26-context-menu-panel {
+  left: 379px;
+  top: 0;
+}
+
+.ios26-context-menu-root .ios26-menu-panel {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.72) inset;
+}
+
+.ios26-context-menu-root .ios26-menu-item-leading {
+  align-items: start;
+}
+
+.ios26-menu-item-label-wrap {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ios26-menu-item-subtitle {
+  font: 400 11px/13px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-subtitle {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-subtitle {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-context-menu-overlay-swatch {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.23);
+}
+
+@media (max-width: 980px) {
+  .ios26-context-menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ios26-context-menu-column {
+    justify-items: center;
+  }
+}

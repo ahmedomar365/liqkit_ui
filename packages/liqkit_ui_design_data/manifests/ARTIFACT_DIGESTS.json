@@ -1,0 +1,1006 @@
+{
+  "generatedAt": "2026-02-19T22:59:05.841Z",
+  "source": "figma-artifacts/verification.json",
+  "entryCount": 111,
+  "entries": [
+    {
+      "componentId": "action-sheets",
+      "category": "Action sheets",
+      "categoryNodeId": "507:24669",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/action-sheets/5446-10266.design-context.txt",
+      "bytes": 8771,
+      "sha256": "5e6862763f198dba23757d1b0ae39d623a92c8807c5cff124805d3a94bd451c7"
+    },
+    {
+      "componentId": "action-sheets",
+      "category": "Action sheets",
+      "categoryNodeId": "507:24669",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/action-sheets/5446-10266.screenshot.png",
+      "bytes": 42372,
+      "sha256": "48cea9687f590032d2dc9c522aadd168cbc9d134c4b491db3441a4b637b689b3"
+    },
+    {
+      "componentId": "action-sheets",
+      "category": "Action sheets",
+      "categoryNodeId": "507:24669",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/action-sheets/5446-10266.variable-defs.json",
+      "bytes": 107,
+      "sha256": "5698fae078035a0afd95d5637af09720f6d0d62eefa33bc6c5d444821a6e675d"
+    },
+    {
+      "componentId": "activity-views",
+      "category": "Activity views",
+      "categoryNodeId": "507:24670",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/activity-views/3176-15162.design-context.txt",
+      "bytes": 42013,
+      "sha256": "9d39aeb6fd61cf9a952f21db754c54a94c092206e1edf766c1b465f314a09be4"
+    },
+    {
+      "componentId": "activity-views",
+      "category": "Activity views",
+      "categoryNodeId": "507:24670",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/activity-views/3176-15162.screenshot.png",
+      "bytes": 115337,
+      "sha256": "784c451d356c5a1bd2d4cb56e01210086c8e0c3e8dfcf67348859093815067a3"
+    },
+    {
+      "componentId": "activity-views",
+      "category": "Activity views",
+      "categoryNodeId": "507:24670",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/activity-views/3176-15162.variable-defs.json",
+      "bytes": 718,
+      "sha256": "56a05dfa41aed0a486fe4439e0979aab2a3f9c980c2147d6aba65e14413269c8"
+    },
+    {
+      "componentId": "alerts",
+      "category": "Alerts",
+      "categoryNodeId": "507:24668",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/alerts/61-67601.design-context.txt",
+      "bytes": 9213,
+      "sha256": "a06e9ef9da4a03cbd15d20091fdf3fcbdb88567aa2253363b87754c6bfb829bd"
+    },
+    {
+      "componentId": "alerts",
+      "category": "Alerts",
+      "categoryNodeId": "507:24668",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/alerts/61-67601.screenshot.png",
+      "bytes": 58864,
+      "sha256": "48b62ad0929f097d2b45f4fb3efd4b3779a89aaabe8411378adfe890c5f93246"
+    },
+    {
+      "componentId": "alerts",
+      "category": "Alerts",
+      "categoryNodeId": "507:24668",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/alerts/61-67601.variable-defs.json",
+      "bytes": 217,
+      "sha256": "94f09317abe5bb6af1401109e0f0e2a408f096e603eaf9f9f3d3c007ce72bc82"
+    },
+    {
+      "componentId": "app-icons",
+      "category": "App icons",
+      "categoryNodeId": "507:24671",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/app-icons/2402-669.design-context.txt",
+      "bytes": 62101,
+      "sha256": "1437484d9b4e5c1b87b04ffc371788066d692eb0edcf2c8125f0419758a3dded"
+    },
+    {
+      "componentId": "app-icons",
+      "category": "App icons",
+      "categoryNodeId": "507:24671",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/app-icons/2402-669.screenshot.png",
+      "bytes": 89381,
+      "sha256": "3862823bc1ff0e72f398ec99f7ea4599bff970378788d2c6e2a4351785575887"
+    },
+    {
+      "componentId": "app-icons",
+      "category": "App icons",
+      "categoryNodeId": "507:24671",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/app-icons/2402-669.variable-defs.json",
+      "bytes": 66,
+      "sha256": "e9873fb23c841221c9b0c0871af4a65990244e58a779ef93fe6e8064edbd69cd"
+    },
+    {
+      "componentId": "bezels",
+      "category": "Bezels",
+      "categoryNodeId": "507:24672",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/bezels/523-41868.design-context.txt",
+      "bytes": 1695,
+      "sha256": "100cddb33f27ee7df93400dc06e497f1ca0e4838dff29135d6820959d4dc95e3"
+    },
+    {
+      "componentId": "bezels",
+      "category": "Bezels",
+      "categoryNodeId": "507:24672",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/bezels/523-41868.screenshot.png",
+      "bytes": 44164,
+      "sha256": "7373a8c741e9ffda7c2521decd8539a48839a61c16ab899c2ef185de8c74acc2"
+    },
+    {
+      "componentId": "bezels",
+      "category": "Bezels",
+      "categoryNodeId": "507:24672",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/bezels/523-41868.variable-defs.json",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "componentId": "buttons",
+      "category": "Buttons",
+      "categoryNodeId": "507:24673",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/buttons/507-24673.design-context.txt",
+      "bytes": 196346,
+      "sha256": "6750f6c4f6c82afe21b9abd931db8280a9d0d445f7f49259a9d53b85970baf96"
+    },
+    {
+      "componentId": "buttons",
+      "category": "Buttons",
+      "categoryNodeId": "507:24673",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/buttons/507-24673.screenshot.png",
+      "bytes": 91342,
+      "sha256": "cdfedb624564dfd6f591d8d01ae477c24b4c85c42b2f9de2556c43f270f8bb02"
+    },
+    {
+      "componentId": "buttons",
+      "category": "Buttons",
+      "categoryNodeId": "507:24673",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/buttons/507-24673.variable-defs.json",
+      "bytes": 2938,
+      "sha256": "fc3e3ad22a2c16e112c42b608efb42194105bfd3105af159159cd2b4ecff365c"
+    },
+    {
+      "componentId": "color-pickers",
+      "category": "Color pickers",
+      "categoryNodeId": "507:26010",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/color-pickers/0-5275.design-context.txt",
+      "bytes": 35329,
+      "sha256": "2ec0f4c8f83718a2c3156fd8d55ce69c96377568c1b0e62f30f30ac7339c38ca"
+    },
+    {
+      "componentId": "color-pickers",
+      "category": "Color pickers",
+      "categoryNodeId": "507:26010",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/color-pickers/0-5275.screenshot.png",
+      "bytes": 78821,
+      "sha256": "b15cebed5e4661fcefed969ee8081c5c7b334a0aff1dcb95221ff8e93f782270"
+    },
+    {
+      "componentId": "color-pickers",
+      "category": "Color pickers",
+      "categoryNodeId": "507:26010",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/color-pickers/0-5275.variable-defs.json",
+      "bytes": 538,
+      "sha256": "e8ea4cd715875bd5d857f6fd4cd2c62aa154bf6f8395be09fbc7903887faf875"
+    },
+    {
+      "componentId": "colors",
+      "category": "Colors",
+      "categoryNodeId": "0:1746",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/colors/0-1746.design-context.txt",
+      "bytes": 123635,
+      "sha256": "399c758a795eb1b8888fa6195b2e660b6dcb7be3865f97467626725aabd89d39"
+    },
+    {
+      "componentId": "colors",
+      "category": "Colors",
+      "categoryNodeId": "0:1746",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/colors/0-1746.screenshot.png",
+      "bytes": 74400,
+      "sha256": "47f31f7ee9b739cf7e09cbd3ad0a19bd144df42c5d4f938aba2c045aef538dbe"
+    },
+    {
+      "componentId": "colors",
+      "category": "Colors",
+      "categoryNodeId": "0:1746",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/colors/0-1746.variable-defs.json",
+      "bytes": 11414,
+      "sha256": "5814fac6bd085e6ed402091f79bf687fbdbff0b5d1f33d77a965cf67d9f64b28"
+    },
+    {
+      "componentId": "context-menu",
+      "category": "Context menu",
+      "categoryNodeId": "507:25994",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/context-menu/125-58302.design-context.txt",
+      "bytes": 26040,
+      "sha256": "57d59d3f49c0ade840bb7c16a948f4c722518939a7b33f187c616810994f07ec"
+    },
+    {
+      "componentId": "context-menu",
+      "category": "Context menu",
+      "categoryNodeId": "507:25994",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/context-menu/125-58302.screenshot.png",
+      "bytes": 80306,
+      "sha256": "32b6cefee8031455457fd54c86b3a5aa8316a55be333ada7b2e0b984ee33b9aa"
+    },
+    {
+      "componentId": "context-menu",
+      "category": "Context menu",
+      "categoryNodeId": "507:25994",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/context-menu/125-58302.variable-defs.json",
+      "bytes": 432,
+      "sha256": "5e45e1db84a245453a85a83cbdaf3444c94778ad36dddda50e4201dbd516cb1a"
+    },
+    {
+      "componentId": "empty-states",
+      "category": "Empty states",
+      "categoryNodeId": "5518:18111",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/empty-states/5583-24435.design-context.txt",
+      "bytes": 5103,
+      "sha256": "c2326f3806183356f5769c0b57af0451487b5488c9b6fe887359c4c872460eb0"
+    },
+    {
+      "componentId": "empty-states",
+      "category": "Empty states",
+      "categoryNodeId": "5518:18111",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/empty-states/5583-24435.screenshot.png",
+      "bytes": 14447,
+      "sha256": "0fe463d0d87caf10f7df61e38a2876a996be1e2dea5a3a651a088d3a37fcdb79"
+    },
+    {
+      "componentId": "empty-states",
+      "category": "Empty states",
+      "categoryNodeId": "5518:18111",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/empty-states/5583-24435.variable-defs.json",
+      "bytes": 108,
+      "sha256": "0af095e015bc24ec85f0ffaf6dbec055a6ccae888d2cc3ad3ad6c611595cd58a"
+    },
+    {
+      "componentId": "examples",
+      "category": "Examples",
+      "categoryNodeId": "0:3329",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/examples/0-3329.design-context.txt",
+      "bytes": 2034391,
+      "sha256": "db8c2b3a25b96c59367a5a768841bfce446ed5795802d78b1c599301d7d9d04d"
+    },
+    {
+      "componentId": "examples",
+      "category": "Examples",
+      "categoryNodeId": "0:3329",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/examples/0-3329.screenshot.png",
+      "bytes": 752532,
+      "sha256": "b8678dcf6101b993099b6780583139f789508cfd3a8701c185c8a572b1626e0b"
+    },
+    {
+      "componentId": "examples",
+      "category": "Examples",
+      "categoryNodeId": "0:3329",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/examples/0-3329.variable-defs.json",
+      "bytes": 6526,
+      "sha256": "6090bd9165253315eaaf0cb699b09f24e9618d07854ab9ec0eee528b48650fb5"
+    },
+    {
+      "componentId": "face-id",
+      "category": "Face ID",
+      "categoryNodeId": "507:26011",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/face-id/123-58202.design-context.txt",
+      "bytes": 2523,
+      "sha256": "4f536d3aa052f0597e6e8bbf3e3a0d653f6c0a627e859efefc2c95088a4d0d17"
+    },
+    {
+      "componentId": "face-id",
+      "category": "Face ID",
+      "categoryNodeId": "507:26011",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/face-id/123-58202.screenshot.png",
+      "bytes": 21034,
+      "sha256": "b9b26f3a74e0eb46e7c7234d881e3bea675125add9d890d1b72b55ff7287f0fd"
+    },
+    {
+      "componentId": "face-id",
+      "category": "Face ID",
+      "categoryNodeId": "507:26011",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/face-id/123-58202.variable-defs.json",
+      "bytes": 26,
+      "sha256": "159cb9c4fb05a30e49399b14a79937cdc62ada16282c32b69427cff3fabb6afd"
+    },
+    {
+      "componentId": "keyboards",
+      "category": "Keyboards",
+      "categoryNodeId": "507:24674",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/keyboards/106-59544.design-context.txt",
+      "bytes": 43406,
+      "sha256": "010c1f11e995635503627dadd648aba8d9deb18adbc597905c92f46bf4f6f976"
+    },
+    {
+      "componentId": "keyboards",
+      "category": "Keyboards",
+      "categoryNodeId": "507:24674",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/keyboards/106-59544.screenshot.png",
+      "bytes": 19997,
+      "sha256": "bad1591596b1ce54fb41f8daf9bc1ea18a8b812b93b606f435304ffeb722e70a"
+    },
+    {
+      "componentId": "keyboards",
+      "category": "Keyboards",
+      "categoryNodeId": "507:24674",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/keyboards/106-59544.variable-defs.json",
+      "bytes": 455,
+      "sha256": "73f6160a4c0eeea4e4eff09418d10d4933a77ec4fc5a2b1d953a9725da2e7c9d"
+    },
+    {
+      "componentId": "kit-helpers",
+      "category": "Kit helpers",
+      "categoryNodeId": "507:29124",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/kit-helpers/507-29149.design-context.txt",
+      "bytes": 3131,
+      "sha256": "4253f7ea6fbd9548c7a55912525dcfb550a06bfc16819f878e654d6bb1129592"
+    },
+    {
+      "componentId": "kit-helpers",
+      "category": "Kit helpers",
+      "categoryNodeId": "507:29124",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/kit-helpers/507-29149.screenshot.png",
+      "bytes": 7208,
+      "sha256": "a3478b6686318b12c27666c192bbac8ffbb89da05c95765fc7e7330dd1a544dc"
+    },
+    {
+      "componentId": "kit-helpers",
+      "category": "Kit helpers",
+      "categoryNodeId": "507:29124",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/kit-helpers/507-29149.variable-defs.json",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "componentId": "lists",
+      "category": "Lists",
+      "categoryNodeId": "507:24675",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/lists/550-49969.design-context.txt",
+      "bytes": 23659,
+      "sha256": "3631f92cf58ab89ad9ea836a766be1d78162f443411ee93c0a20fc25f3bb0680"
+    },
+    {
+      "componentId": "lists",
+      "category": "Lists",
+      "categoryNodeId": "507:24675",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/lists/550-49969.screenshot.png",
+      "bytes": 27005,
+      "sha256": "b3d4e4049482ab055cd8bef04c852640316f5ee506f3e55458413bee80220d4e"
+    },
+    {
+      "componentId": "lists",
+      "category": "Lists",
+      "categoryNodeId": "507:24675",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/lists/550-49969.variable-defs.json",
+      "bytes": 708,
+      "sha256": "3bce418d35416afe0c67be4f97fddb7f0d9cbef39cf26b7d50011f793a1e92df"
+    },
+    {
+      "componentId": "materials",
+      "category": "Materials",
+      "categoryNodeId": "215:105157",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/materials/510-79110.design-context.txt",
+      "bytes": 1699,
+      "sha256": "c8595b6ec4b1640234eedfedc2f6df1ceb688b1075d4d5de6ae7974dfa960d5b"
+    },
+    {
+      "componentId": "materials",
+      "category": "Materials",
+      "categoryNodeId": "215:105157",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/materials/215-105157.screenshot.png",
+      "bytes": 257047,
+      "sha256": "30f94edffae2822f55d566ce7d42e1de5befc5b7d5ccd44655f1439e5a1cf504"
+    },
+    {
+      "componentId": "materials",
+      "category": "Materials",
+      "categoryNodeId": "215:105157",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/materials/510-79110.variable-defs.json",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "componentId": "menu",
+      "category": "Menu",
+      "categoryNodeId": "507:24676",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/menu/5908-6487.design-context.txt",
+      "bytes": 29688,
+      "sha256": "ab5737714c039fbe56f0418d7ed214992dd023b5d1d20b55280772dbd87ce295"
+    },
+    {
+      "componentId": "menu",
+      "category": "Menu",
+      "categoryNodeId": "507:24676",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/menu/5908-6487.screenshot.png",
+      "bytes": 56857,
+      "sha256": "dc386f1ea7d328e94174f9eeeeac1c4035d9c97fef47cf58a7d8fc23c6197992"
+    },
+    {
+      "componentId": "menu",
+      "category": "Menu",
+      "categoryNodeId": "507:24676",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/menu/5908-6487.variable-defs.json",
+      "bytes": 352,
+      "sha256": "abb27411ab0c1eb778a569cceb3bb6748ba4fe6ad066700377e808b29bb57fe7"
+    },
+    {
+      "componentId": "notifications",
+      "category": "Notifications",
+      "categoryNodeId": "507:24678",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/notifications/143-62847.design-context.txt",
+      "bytes": 5046,
+      "sha256": "794f68a5ecff7de7fbcb480aa0a3d715ae3bf2b67dabd62eb10ef377fe3cbeb4"
+    },
+    {
+      "componentId": "notifications",
+      "category": "Notifications",
+      "categoryNodeId": "507:24678",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/notifications/143-62847.screenshot.png",
+      "bytes": 84843,
+      "sha256": "cfea3260beaf2c27ea41c0508f7edb5d5c0387fdba182559ddb96f636ce1239e"
+    },
+    {
+      "componentId": "notifications",
+      "category": "Notifications",
+      "categoryNodeId": "507:24678",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/notifications/143-62847.variable-defs.json",
+      "bytes": 253,
+      "sha256": "91867b01f89f09aedd3228c9b3144b5c0337bea94f7f9f68b9e0eae1d020632c"
+    },
+    {
+      "componentId": "page-controls",
+      "category": "Page controls",
+      "categoryNodeId": "507:24679",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/page-controls/488-51848.design-context.txt",
+      "bytes": 53068,
+      "sha256": "116e8f690357a5974c36dfae50b8c5037573ad2dff8a4d006cae173ea1510881"
+    },
+    {
+      "componentId": "page-controls",
+      "category": "Page controls",
+      "categoryNodeId": "507:24679",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/page-controls/488-51848.screenshot.png",
+      "bytes": 16272,
+      "sha256": "ec4dd643e700995a4d6e014e7c6bdd78ad4a1fe073020b4d72b98b00c92f7059"
+    },
+    {
+      "componentId": "page-controls",
+      "category": "Page controls",
+      "categoryNodeId": "507:24679",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/page-controls/488-51848.variable-defs.json",
+      "bytes": 85,
+      "sha256": "983901f3638a9dafdd9bc438945bfdf020b4db9fe8dbd929ac0f6c7a18a9dd2d"
+    },
+    {
+      "componentId": "pickers",
+      "category": "Pickers",
+      "categoryNodeId": "507:24680",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/pickers/5442-1885.design-context.txt",
+      "bytes": 56256,
+      "sha256": "2691952f2e9a4900b1aeb314545bec54b9245de19532652403b546ad42244200"
+    },
+    {
+      "componentId": "pickers",
+      "category": "Pickers",
+      "categoryNodeId": "507:24680",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/pickers/5442-1885.screenshot.png",
+      "bytes": 44805,
+      "sha256": "6f973b71612cabd6322e40f3be9ad82d50c794f69d43ea2f60975bd5bb100a67"
+    },
+    {
+      "componentId": "pickers",
+      "category": "Pickers",
+      "categoryNodeId": "507:24680",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/pickers/5442-1885.variable-defs.json",
+      "bytes": 659,
+      "sha256": "dad2d44b9cefe2d2bd41a9af198261f071cea91830ac2f84a7bef5ef3c29dc52"
+    },
+    {
+      "componentId": "popovers",
+      "category": "Popovers",
+      "categoryNodeId": "507:24681",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/popovers/61-65421.design-context.txt",
+      "bytes": 15664,
+      "sha256": "6f8739a5f45d446b72a57a87aff6cd05c81cc783756ea33074fed9a14ce1b2d2"
+    },
+    {
+      "componentId": "popovers",
+      "category": "Popovers",
+      "categoryNodeId": "507:24681",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/popovers/61-65421.screenshot.png",
+      "bytes": 195042,
+      "sha256": "e703197c349e5a7bcb143f6d92bfebcf3af078221697b7196bd3cc137adfc2bd"
+    },
+    {
+      "componentId": "popovers",
+      "category": "Popovers",
+      "categoryNodeId": "507:24681",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/popovers/61-65421.variable-defs.json",
+      "bytes": 58,
+      "sha256": "eadf11e7fd4c1d813865b4ad729dfd37abb24f9891bc7c34da58292e6e31f257"
+    },
+    {
+      "componentId": "popup-buttons",
+      "category": "Popup buttons",
+      "categoryNodeId": "507:26009",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/popup-buttons/410-50387.design-context.txt",
+      "bytes": 2693,
+      "sha256": "da5499a0bb3b7c385aa35f646af8723dd0a47b3dee485ed3adbe1247a734b762"
+    },
+    {
+      "componentId": "popup-buttons",
+      "category": "Popup buttons",
+      "categoryNodeId": "507:26009",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/popup-buttons/410-50387.screenshot.png",
+      "bytes": 3045,
+      "sha256": "7f072d1f536f0d253833e1babea06346b71965580fb2320aa8af73f5e2af35a8"
+    },
+    {
+      "componentId": "popup-buttons",
+      "category": "Popup buttons",
+      "categoryNodeId": "507:26009",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/popup-buttons/410-50387.variable-defs.json",
+      "bytes": 113,
+      "sha256": "3033b9aaa473838e0337cae0ed80a4d7ba4809e002cf8cd892f6502190e4cc84"
+    },
+    {
+      "componentId": "progress-indicators",
+      "category": "Progress indicators",
+      "categoryNodeId": "507:24682",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/progress-indicators/5425-3472.design-context.txt",
+      "bytes": 1586,
+      "sha256": "4acda0403f3a1d8ec897f16a9ee2f629464d55c41eb2b14472ee1d267d3f94e8"
+    },
+    {
+      "componentId": "progress-indicators",
+      "category": "Progress indicators",
+      "categoryNodeId": "507:24682",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/progress-indicators/5425-3472.screenshot.png",
+      "bytes": 13079,
+      "sha256": "e48fa452b21d73edd21398048362f9647716dfbaab8cfa4d2c53c8bd28ee0ebc"
+    },
+    {
+      "componentId": "progress-indicators",
+      "category": "Progress indicators",
+      "categoryNodeId": "507:24682",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/progress-indicators/5425-3472.variable-defs.json",
+      "bytes": 201,
+      "sha256": "382b66a36ed751190ac4c7bee1949ff4f73ddc43732e9acc08a0cf5682e2ce5f"
+    },
+    {
+      "componentId": "segmented-controls",
+      "category": "Segmented controls",
+      "categoryNodeId": "507:24683",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/segmented-controls/6-57374.design-context.txt",
+      "bytes": 36368,
+      "sha256": "22815744678991f2d7c24900c1b2d09a24e14ecbbf5b227b99cf45e42f40ac5b"
+    },
+    {
+      "componentId": "segmented-controls",
+      "category": "Segmented controls",
+      "categoryNodeId": "507:24683",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/segmented-controls/6-57374.screenshot.png",
+      "bytes": 31612,
+      "sha256": "4188a74c053a9d28098a0a44a57d6ba2e97f121a3658036b4f796c8d57f657d0"
+    },
+    {
+      "componentId": "segmented-controls",
+      "category": "Segmented controls",
+      "categoryNodeId": "507:24683",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/segmented-controls/6-57374.variable-defs.json",
+      "bytes": 174,
+      "sha256": "921b7510e6c6d53b6ece092ed92d3d958afea4c3e74b9eee70f5b0be413fac16"
+    },
+    {
+      "componentId": "sheets",
+      "category": "Sheets",
+      "categoryNodeId": "507:24684",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/sheets/770-21495.design-context.txt",
+      "bytes": 30154,
+      "sha256": "bcfbcc2606e3543085d68a1ae49b8e1782ac532ff44b69878331dd31673afcd9"
+    },
+    {
+      "componentId": "sheets",
+      "category": "Sheets",
+      "categoryNodeId": "507:24684",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/sheets/770-21495.screenshot.png",
+      "bytes": 166127,
+      "sha256": "42bd3ed9f94163338c6d04bcc484f1205f3c1a8342f168d2cfab5552117ccaac"
+    },
+    {
+      "componentId": "sheets",
+      "category": "Sheets",
+      "categoryNodeId": "507:24684",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/sheets/770-21495.variable-defs.json",
+      "bytes": 603,
+      "sha256": "842ecbd8fcd8d1ea4a63e5334bd36837b997d2634a482ac11565457775eb3fa7"
+    },
+    {
+      "componentId": "sidebars",
+      "category": "Sidebars",
+      "categoryNodeId": "507:26013",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/sidebars/5726-29555.design-context.txt",
+      "bytes": 91461,
+      "sha256": "5a226083c69cd9cdf23b40e60efd01bfe4e504a38b2b95c4a262e004a4c8cca6"
+    },
+    {
+      "componentId": "sidebars",
+      "category": "Sidebars",
+      "categoryNodeId": "507:26013",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/sidebars/5726-29555.screenshot.png",
+      "bytes": 96312,
+      "sha256": "53ce1ffa62245101c3811bc97ca32e0186ce6eca45c40104b606687d7f27ff53"
+    },
+    {
+      "componentId": "sidebars",
+      "category": "Sidebars",
+      "categoryNodeId": "507:26013",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/sidebars/5726-29555.variable-defs.json",
+      "bytes": 883,
+      "sha256": "5c0337ab5904a0cb058056cc302af4be65b34d8e79a5a67fed8386befe00b8ee"
+    },
+    {
+      "componentId": "sliders",
+      "category": "Sliders",
+      "categoryNodeId": "507:24685",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/sliders/5661-43611.design-context.txt",
+      "bytes": 20281,
+      "sha256": "54ebd483cff6ca4b367b6cea9fde755569f3c7b841d46cb1e36bf614b5fa794c"
+    },
+    {
+      "componentId": "sliders",
+      "category": "Sliders",
+      "categoryNodeId": "507:24685",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/sliders/5661-43611.screenshot.png",
+      "bytes": 70871,
+      "sha256": "ca9089eaf5f7201ed41a46216420a3693b5b36498c8c10179d395f821e36bceb"
+    },
+    {
+      "componentId": "sliders",
+      "category": "Sliders",
+      "categoryNodeId": "507:24685",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/sliders/5661-43611.variable-defs.json",
+      "bytes": 475,
+      "sha256": "2ecac03721b0a9b3b88dee5f9fefb05bb39eb07eee88e0aa067c7b83514327ae"
+    },
+    {
+      "componentId": "status-bars",
+      "category": "Status bars",
+      "categoryNodeId": "507:24686",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/status-bars/523-41360.design-context.txt",
+      "bytes": 4056,
+      "sha256": "c771fa6027e0111c124e0c50f6260c4eceb925807d3bc91728cd7e9dc0a4d97e"
+    },
+    {
+      "componentId": "status-bars",
+      "category": "Status bars",
+      "categoryNodeId": "507:24686",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/status-bars/523-41360.screenshot.png",
+      "bytes": 22045,
+      "sha256": "ecececbaebaccf818131217744d8f12922186fc59d8919275e6510883c7aef10"
+    },
+    {
+      "componentId": "status-bars",
+      "category": "Status bars",
+      "categoryNodeId": "507:24686",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/status-bars/523-41360.variable-defs.json",
+      "bytes": 29,
+      "sha256": "dac1dd54438314e08b9b567522f232ff107aff2dec1aaa45f21e89e1014c3005"
+    },
+    {
+      "componentId": "steppers",
+      "category": "Steppers",
+      "categoryNodeId": "507:24687",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/steppers/5661-43368.design-context.txt",
+      "bytes": 18679,
+      "sha256": "53584f8279c5bd63f8f73cbaae8f9a693a17200fe9eaad7212a290cf0a8eaa07"
+    },
+    {
+      "componentId": "steppers",
+      "category": "Steppers",
+      "categoryNodeId": "507:24687",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/steppers/5661-43368.screenshot.png",
+      "bytes": 58139,
+      "sha256": "f6520fc535c5450baff8d8420db6a54545befb02b6a3ef57b7909d3fb0221bee"
+    },
+    {
+      "componentId": "steppers",
+      "category": "Steppers",
+      "categoryNodeId": "507:24687",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/steppers/5661-43368.variable-defs.json",
+      "bytes": 553,
+      "sha256": "0e275cf4ba9b67ff84f0446c844639da86de55cb15d572968111f4a23f5bccad"
+    },
+    {
+      "componentId": "system",
+      "category": "System",
+      "categoryNodeId": "507:24688",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/system/106-60032.design-context.txt",
+      "bytes": 2438,
+      "sha256": "f3d9a65f0f539a6e26c68e997a6006fb12972bae045262584cfe6fc7e3db73c3"
+    },
+    {
+      "componentId": "system",
+      "category": "System",
+      "categoryNodeId": "507:24688",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/system/106-60032.screenshot.png",
+      "bytes": 348,
+      "sha256": "07418a9c4b75f8d14970146f6b366618d46a43c3d2f28fb47009dbb30e91708d"
+    },
+    {
+      "componentId": "system",
+      "category": "System",
+      "categoryNodeId": "507:24688",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/system/106-60032.variable-defs.json",
+      "bytes": 29,
+      "sha256": "dac1dd54438314e08b9b567522f232ff107aff2dec1aaa45f21e89e1014c3005"
+    },
+    {
+      "componentId": "text-fields",
+      "category": "Text fields",
+      "categoryNodeId": "553:22762",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/text-fields/5433-15646.design-context.txt",
+      "bytes": 2641,
+      "sha256": "db3a71ea5192e56ce50ebd4dd9bfb3f84072e0a3b359547a1fd9d01c58075ee5"
+    },
+    {
+      "componentId": "text-fields",
+      "category": "Text fields",
+      "categoryNodeId": "553:22762",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/text-fields/5433-15646.screenshot.png",
+      "bytes": 382,
+      "sha256": "93795288c3aa68b5e254249c171aaf9a7e4e445022bca92cd9f7d89e9432951b"
+    },
+    {
+      "componentId": "text-fields",
+      "category": "Text fields",
+      "categoryNodeId": "553:22762",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/text-fields/5433-15646.variable-defs.json",
+      "bytes": 58,
+      "sha256": "d94089329cad4716c315440f24326863f2cc7126ee3735d3cf153a6c9e2c86ac"
+    },
+    {
+      "componentId": "text-styles",
+      "category": "Text styles",
+      "categoryNodeId": "0:2194",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/text-styles/0-3040.design-context.txt",
+      "bytes": 1553,
+      "sha256": "3e889f8d506f79d45af2306fdcdf4294f9d818e096efebe58e6d2cada80fe6a2"
+    },
+    {
+      "componentId": "text-styles",
+      "category": "Text styles",
+      "categoryNodeId": "0:2194",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/text-styles/0-3040.screenshot.png",
+      "bytes": 60444,
+      "sha256": "08361edfe1f0cd6ebdf4a38953cbfc866dc8ca3a6a6127f7d65a01d1783113ef"
+    },
+    {
+      "componentId": "text-styles",
+      "category": "Text styles",
+      "categoryNodeId": "0:2194",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/text-styles/0-3040.variable-defs.json",
+      "bytes": 168,
+      "sha256": "276a85e2996dd90cd8e54524de132c90b2b857089f62f10637a82b911cc1866a"
+    },
+    {
+      "componentId": "toggles",
+      "category": "Toggles",
+      "categoryNodeId": "507:24690",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/toggles/27-68905.design-context.txt",
+      "bytes": 2538,
+      "sha256": "fbf8850b160958f8a4e19dec775292637d888a3c5c927b9079bc8dd1ded0bbba"
+    },
+    {
+      "componentId": "toggles",
+      "category": "Toggles",
+      "categoryNodeId": "507:24690",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/toggles/27-68905.screenshot.png",
+      "bytes": 982,
+      "sha256": "56dc992aaf3766ad59f4441e82a04feecb0ebb1428499b2b4ceb796e0aae5c8d"
+    },
+    {
+      "componentId": "toggles",
+      "category": "Toggles",
+      "categoryNodeId": "507:24690",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/toggles/27-68905.variable-defs.json",
+      "bytes": 28,
+      "sha256": "8c59081834f8d6cff2c454ec44c39dda70693fa56c6b1e57b6615d27b30215a2"
+    },
+    {
+      "componentId": "toolbars",
+      "category": "Toolbars",
+      "categoryNodeId": "507:25993",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/toolbars/5735-66270.design-context.txt",
+      "bytes": 30216,
+      "sha256": "564ddc1f32bb71db0122d996303be88b82d082dc2b2734c6b0efcccf94091452"
+    },
+    {
+      "componentId": "toolbars",
+      "category": "Toolbars",
+      "categoryNodeId": "507:25993",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/toolbars/5735-66270.screenshot.png",
+      "bytes": 58210,
+      "sha256": "21ff5fa4b72be4bfb644aef2011680f3d09189359979cb196bc876cac59b91fa"
+    },
+    {
+      "componentId": "toolbars",
+      "category": "Toolbars",
+      "categoryNodeId": "507:25993",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/toolbars/5735-66270.variable-defs.json",
+      "bytes": 288,
+      "sha256": "e2e28b7ce300a5ab14ed61cdb670bc2e2643d0421a2dc3b7410cfb06989ecf99"
+    },
+    {
+      "componentId": "top-bars",
+      "category": "Top bars",
+      "categoryNodeId": "507:24689",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/top-bars/5661-41970.design-context.txt",
+      "bytes": 40299,
+      "sha256": "9c91497f9dbc0a3381a8a9613f9fdf353707ec42064bbee6193b27500d767dff"
+    },
+    {
+      "componentId": "top-bars",
+      "category": "Top bars",
+      "categoryNodeId": "507:24689",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/top-bars/5661-41970.screenshot.png",
+      "bytes": 75106,
+      "sha256": "62fd03ddd06ea4025c97a1002f3883423a668d27a6b1030a274ad29565f8d11d"
+    },
+    {
+      "componentId": "top-bars",
+      "category": "Top bars",
+      "categoryNodeId": "507:24689",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/top-bars/5661-41970.variable-defs.json",
+      "bytes": 573,
+      "sha256": "2983d3d748f064b5b44009dabe38659e673b5a5bfbb7a3dc184981099a9d02c3"
+    },
+    {
+      "componentId": "widgets",
+      "category": "Widgets",
+      "categoryNodeId": "507:26511",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/widgets/775-13152.design-context.txt",
+      "bytes": 50966,
+      "sha256": "76f43d847eaf982cfedd85d9203ac2655cb77c380673ef700d72d7d4563cb69f"
+    },
+    {
+      "componentId": "widgets",
+      "category": "Widgets",
+      "categoryNodeId": "507:26511",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/widgets/775-13152.screenshot.png",
+      "bytes": 752532,
+      "sha256": "b8678dcf6101b993099b6780583139f789508cfd3a8701c185c8a572b1626e0b"
+    },
+    {
+      "componentId": "widgets",
+      "category": "Widgets",
+      "categoryNodeId": "507:26511",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/widgets/775-13152.variable-defs.json",
+      "bytes": 26,
+      "sha256": "09690f61961ce5eda6e252a8afbd193c98f8c984dd7fb778900349251d8b7442"
+    },
+    {
+      "componentId": "windows",
+      "category": "Windows",
+      "categoryNodeId": "5413:10149",
+      "artifactType": "designContextPath",
+      "path": "figma-artifacts/windows/5589-4058.design-context.txt",
+      "bytes": 28410,
+      "sha256": "89dedfbce11365a6653dd2f532cf252ccbc53dad2e1ca00f3fa6e2826b893d28"
+    },
+    {
+      "componentId": "windows",
+      "category": "Windows",
+      "categoryNodeId": "5413:10149",
+      "artifactType": "screenshotPath",
+      "path": "figma-artifacts/windows/5589-4058.screenshot.png",
+      "bytes": 417445,
+      "sha256": "cd7957ebd12a243083a3a29bf4b4d0b2b2a410c85788644ac9e211a218209823"
+    },
+    {
+      "componentId": "windows",
+      "category": "Windows",
+      "categoryNodeId": "5413:10149",
+      "artifactType": "variableDefsPath",
+      "path": "figma-artifacts/windows/5589-4058.variable-defs.json",
+      "bytes": 274,
+      "sha256": "67bb1182c12e6dc9d02e7c0edbb0c562f4b6fc35b66968365021514e771ecf9f"
+    }
+  ]
+}

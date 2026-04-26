@@ -1,0 +1,293 @@
+.ios26-steppers-demo {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+}
+
+.ios26-steppers-device {
+  width: 402px;
+  height: 874px;
+  position: relative;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #f2f2f7;
+}
+
+.ios26-steppers-screen {
+  position: absolute;
+  inset: 0;
+  background: #f2f2f7;
+}
+
+.ios26-steppers-scroll-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  background: radial-gradient(140% 95% at 50% 0%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+}
+
+.ios26-steppers-topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62px;
+  height: 44px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  z-index: 3;
+}
+
+.ios26-steppers-back-btn,
+.ios26-steppers-action-btn {
+  height: 44px;
+  border: 0;
+  border-radius: 296px;
+  padding: 0 10px;
+  background: #f7f7f7;
+  color: #1a1a1a;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-steppers-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ios26-steppers-action-btn {
+  width: 44px;
+  padding: 0;
+  background: #08f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-steppers-title {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #1a1a1a;
+}
+
+.ios26-steppers-content {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 116px;
+  bottom: 10px;
+  display: grid;
+  align-content: start;
+  padding: 10px 0;
+}
+
+.ios26-steppers-group {
+  border-radius: 26px;
+  background: #ffffff;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+}
+
+.ios26-steppers-row {
+  height: 52px;
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) auto auto auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 0 16px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.ios26-steppers-primary {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-steppers-secondary {
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  color: #3c3c4399;
+}
+
+.ios26-steppers-trailing-icon {
+  width: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #08f;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-steppers-chevron {
+  width: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3c3c434d;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-stepper-control {
+  width: 92px;
+  height: 32px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 100px;
+  overflow: hidden;
+  background: #76768014;
+}
+
+.ios26-stepper-btn {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 46px;
+  height: 32px;
+  background: #76768014;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-stepper-btn.is-decrement {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+.ios26-stepper-btn.is-increment {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.ios26-stepper-separator {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: #3c3c434d;
+}
+
+.ios26-steppers-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62px;
+  padding: 21px 24px 19px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  z-index: 3;
+  color: #000;
+}
+
+.ios26-steppers-status > span {
+  text-align: center;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #000;
+}
+
+.ios26-steppers-state-gallery {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-steppers-state-panel {
+  border-radius: 12px;
+  border: 1px solid #dde3ec;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.ios26-steppers-state-panel h4 {
+  margin: 0 0 8px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-steppers-state-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ios26-steppers-mini-control {
+  height: 32px;
+  border-radius: 100px;
+  background: #76768014;
+  border: 1px solid #e6e8ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #111827;
+}
+
+.ios26-steppers-mini-control.is-pressed {
+  background: #dce0e6;
+}
+
+.ios26-steppers-mini-control.is-disabled {
+  color: #9ba4b0;
+  background: #f1f3f6;
+}
+
+.ios26-steppers-state-panel.is-dark {
+  background: #10141b;
+  border-color: #283243;
+}
+
+.ios26-steppers-state-panel.is-dark h4 {
+  color: #f1f5f9;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control {
+  background: #cfd5de24;
+  border-color: #3c4452;
+  color: #e2e8f0;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control.is-pressed {
+  background: #cfd5de3d;
+}
+
+.ios26-steppers-state-panel.is-dark .ios26-steppers-mini-control.is-disabled {
+  color: #97a0ad;
+  background: #cfd5de17;
+}
+
+@media (max-width: 520px) {
+  .ios26-steppers-device {
+    transform: scale(0.86);
+    transform-origin: top left;
+  }
+
+  .ios26-steppers-row {
+    grid-template-columns: minmax(70px, 1fr) auto auto auto;
+    gap: 8px;
+  }
+
+  .ios26-steppers-trailing-icon {
+    display: none;
+  }
+}

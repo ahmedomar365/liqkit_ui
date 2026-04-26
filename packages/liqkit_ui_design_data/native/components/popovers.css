@@ -1,0 +1,164 @@
+.ios26-popovers-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-popovers-root {
+  width: min(1100px, 100%);
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-popovers-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ios26-popovers-panel {
+  border-radius: 16px;
+  border: 1px solid #d8dce3;
+  background: #f6f7f9;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-popovers-panel h3 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+  color: #111827;
+}
+
+.ios26-popovers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ios26-popover-swatch {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+
+.ios26-popover-swatch p {
+  margin: 0;
+  color: #1f2937;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-align: center;
+}
+
+.ios26-popover-bubble {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  --popover-tip-color: rgba(255, 255, 255, 0.84);
+}
+
+.ios26-popovers-panel.is-dark {
+  border-color: #2f3340;
+  background: #12151c;
+}
+
+.ios26-popovers-panel.is-dark h3,
+.ios26-popovers-panel.is-dark .ios26-popover-swatch p {
+  color: #e5e7eb;
+}
+
+.ios26-popovers-panel.is-dark .ios26-popover-bubble {
+  background: rgba(39, 43, 54, 0.94);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  --popover-tip-color: rgba(39, 43, 54, 0.94);
+}
+
+.ios26-popover-tip {
+  position: absolute;
+  width: 56px;
+  height: 13px;
+  color: var(--popover-tip-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-popover-tip-svg {
+  width: 56px;
+  height: 13px;
+  display: block;
+  transform-origin: 50% 50%;
+}
+
+.ios26-popover-tip--up {
+  top: -13px;
+}
+
+.ios26-popover-tip--down {
+  bottom: -13px;
+}
+
+.ios26-popover-tip--down .ios26-popover-tip-svg {
+  transform: rotate(180deg);
+}
+
+.ios26-popover-tip--leading {
+  left: -34px;
+  width: 13px;
+  height: 56px;
+}
+
+.ios26-popover-tip--leading .ios26-popover-tip-svg {
+  transform: rotate(-90deg);
+}
+
+.ios26-popover-tip--trailing {
+  right: -34px;
+  width: 13px;
+  height: 56px;
+}
+
+.ios26-popover-tip--trailing .ios26-popover-tip-svg {
+  transform: rotate(90deg);
+}
+
+.ios26-popover-tip--align-leading {
+  left: 8px;
+}
+
+.ios26-popover-tip--align-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ios26-popover-tip--align-trailing {
+  right: 8px;
+}
+
+.ios26-popover-tip--align-top {
+  top: 7px;
+}
+
+.ios26-popover-tip--align-middle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ios26-popover-tip--align-bottom {
+  bottom: 7px;
+}
+
+@media (max-width: 920px) {
+  .ios26-popovers-examples {
+    grid-template-columns: 1fr;
+  }
+}

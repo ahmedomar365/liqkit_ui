@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-02-19T19:44:19.277Z",
+  "categories": 37,
+  "totalAssets": 549,
+  "downloaded": 0,
+  "existing": 549,
+  "failed": 0,
+  "manifests": [
+    {
+      "category": "action-sheets",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/action-sheets/asset-map.json"
+    },
+    {
+      "category": "activity-views",
+      "totalAssets": 10,
+      "downloaded": 0,
+      "existing": 10,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/activity-views/asset-map.json"
+    },
+    {
+      "category": "alerts",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/alerts/asset-map.json"
+    },
+    {
+      "category": "app-icons",
+      "totalAssets": 132,
+      "downloaded": 0,
+      "existing": 132,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/app-icons/asset-map.json"
+    },
+    {
+      "category": "bezels",
+      "totalAssets": 1,
+      "downloaded": 0,
+      "existing": 1,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/bezels/asset-map.json"
+    },
+    {
+      "category": "buttons",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/buttons/asset-map.json"
+    },
+    {
+      "category": "color-pickers",
+      "totalAssets": 10,
+      "downloaded": 0,
+      "existing": 10,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/color-pickers/asset-map.json"
+    },
+    {
+      "category": "colors",
+      "totalAssets": 8,
+      "downloaded": 0,
+      "existing": 8,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/colors/asset-map.json"
+    },
+    {
+      "category": "context-menu",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/context-menu/asset-map.json"
+    },
+    {
+      "category": "empty-states",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/empty-states/asset-map.json"
+    },
+    {
+      "category": "examples",
+      "totalAssets": 329,
+      "downloaded": 0,
+      "existing": 329,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/examples/asset-map.json"
+    },
+    {
+      "category": "face-id",
+      "totalAssets": 1,
+      "downloaded": 0,
+      "existing": 1,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/face-id/asset-map.json"
+    },
+    {
+      "category": "keyboards",
+      "totalAssets": 2,
+      "downloaded": 0,
+      "existing": 2,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/keyboards/asset-map.json"
+    },
+    {
+      "category": "kit-helpers",
+      "totalAssets": 2,
+      "downloaded": 0,
+      "existing": 2,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/kit-helpers/asset-map.json"
+    },
+    {
+      "category": "lists",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/lists/asset-map.json"
+    },
+    {
+      "category": "materials",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/materials/asset-map.json"
+    },
+    {
+      "category": "menu",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/menu/asset-map.json"
+    },
+    {
+      "category": "notifications",
+      "totalAssets": 2,
+      "downloaded": 0,
+      "existing": 2,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/notifications/asset-map.json"
+    },
+    {
+      "category": "page-controls",
+      "totalAssets": 1,
+      "downloaded": 0,
+      "existing": 1,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/page-controls/asset-map.json"
+    },
+    {
+      "category": "pickers",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/pickers/asset-map.json"
+    },
+    {
+      "category": "popovers",
+      "totalAssets": 1,
+      "downloaded": 0,
+      "existing": 1,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/popovers/asset-map.json"
+    },
+    {
+      "category": "popup-buttons",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/popup-buttons/asset-map.json"
+    },
+    {
+      "category": "progress-indicators",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/progress-indicators/asset-map.json"
+    },
+    {
+      "category": "segmented-controls",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/segmented-controls/asset-map.json"
+    },
+    {
+      "category": "sheets",
+      "totalAssets": 5,
+      "downloaded": 0,
+      "existing": 5,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/sheets/asset-map.json"
+    },
+    {
+      "category": "sidebars",
+      "totalAssets": 7,
+      "downloaded": 0,
+      "existing": 7,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/sidebars/asset-map.json"
+    },
+    {
+      "category": "sliders",
+      "totalAssets": 6,
+      "downloaded": 0,
+      "existing": 6,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/sliders/asset-map.json"
+    },
+    {
+      "category": "status-bars",
+      "totalAssets": 3,
+      "downloaded": 0,
+      "existing": 3,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/status-bars/asset-map.json"
+    },
+    {
+      "category": "steppers",
+      "totalAssets": 5,
+      "downloaded": 0,
+      "existing": 5,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/steppers/asset-map.json"
+    },
+    {
+      "category": "system",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/system/asset-map.json"
+    },
+    {
+      "category": "text-fields",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/text-fields/asset-map.json"
+    },
+    {
+      "category": "text-styles",
+      "totalAssets": 0,
+      "downloaded": 0,
+      "existing": 0,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/text-styles/asset-map.json"
+    },
+    {
+      "category": "toggles",
+      "totalAssets": 2,
+      "downloaded": 0,
+      "existing": 2,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/toggles/asset-map.json"
+    },
+    {
+      "category": "toolbars",
+      "totalAssets": 4,
+      "downloaded": 0,
+      "existing": 4,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/toolbars/asset-map.json"
+    },
+    {
+      "category": "top-bars",
+      "totalAssets": 6,
+      "downloaded": 0,
+      "existing": 6,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/top-bars/asset-map.json"
+    },
+    {
+      "category": "widgets",
+      "totalAssets": 6,
+      "downloaded": 0,
+      "existing": 6,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/widgets/asset-map.json"
+    },
+    {
+      "category": "windows",
+      "totalAssets": 6,
+      "downloaded": 0,
+      "existing": 6,
+      "failed": 0,
+      "manifestPath": "figma-artifacts/assets/windows/asset-map.json"
+    }
+  ]
+}

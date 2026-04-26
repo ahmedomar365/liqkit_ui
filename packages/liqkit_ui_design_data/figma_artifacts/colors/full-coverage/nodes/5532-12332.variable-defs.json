@@ -1,0 +1,23 @@
+{
+  "Grays/Black": "#000000",
+  "Footnote/Regular": "Font(family: \"SF Pro\", style: Regular, size: 13, weight: 400, lineHeight: 18, letterSpacing: -0.07999999821186066)",
+  "Grays/Gray": "#aeaeb2",
+  "Grays/Gray 2": "#AEAEB2",
+  "Grays/Gray 3": "#444446",
+  "Grays/Gray 4": "#363638",
+  "Grays/Gray 5": "#242426",
+  "Grays/Gray 6": "#000000",
+  "Grays/White": "#ffffff",
+  "Accents/Red": "#ff6165",
+  "Accents/Orange": "#ffa056",
+  "Accents/Yellow": "#fedf43",
+  "Accents/Green": "#4ae968",
+  "Accents/Mint": "#54dfcb",
+  "Accents/Teal": "#3bddec",
+  "Accents/Cyan": "#6dd9ff",
+  "Accents/Blue": "#5cb8ff",
+  "Accents/Indigo": "#a7aaff",
+  "Accents/Purple": "#ea8dff",
+  "Accents/Pink": "#ff8ac4",
+  "Accents/Brown": "#dba679"
+}

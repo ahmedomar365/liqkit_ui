@@ -1,0 +1,265 @@
+{
+  "mode": "full-coverage-only",
+  "createdAt": "2026-02-17T21:47:54.466Z",
+  "noSamplePolicy": true,
+  "blocker": "Do not start next category until active category is fully complete and manually verified.",
+  "sequence": [
+    {
+      "category": "Examples",
+      "categoryNode": "0:3329",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-3329"
+    },
+    {
+      "category": "Colors",
+      "categoryNode": "0:1746",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-1746"
+    },
+    {
+      "category": "Materials",
+      "categoryNode": "215:105157",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=215-105157"
+    },
+    {
+      "category": "Text styles",
+      "categoryNode": "0:2194",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=0-2194"
+    },
+    {
+      "category": "Bezels",
+      "categoryNode": "507:24672",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24672"
+    },
+    {
+      "category": "System",
+      "categoryNode": "507:24688",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24688"
+    },
+    {
+      "category": "Action sheets",
+      "categoryNode": "507:24669",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24669"
+    },
+    {
+      "category": "Activity views",
+      "categoryNode": "507:24670",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24670"
+    },
+    {
+      "category": "Alerts",
+      "categoryNode": "507:24668",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24668"
+    },
+    {
+      "category": "App icons",
+      "categoryNode": "507:24671",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24671"
+    },
+    {
+      "category": "Buttons",
+      "categoryNode": "507:24673",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24673"
+    },
+    {
+      "category": "Color pickers",
+      "categoryNode": "507:26010",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26010"
+    },
+    {
+      "category": "Context menu",
+      "categoryNode": "507:25994",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-25994"
+    },
+    {
+      "category": "Empty states",
+      "categoryNode": "5518:18111",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=5518-18111"
+    },
+    {
+      "category": "Face ID",
+      "categoryNode": "507:26011",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26011"
+    },
+    {
+      "category": "Keyboards",
+      "categoryNode": "507:24674",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24674"
+    },
+    {
+      "category": "Lists",
+      "categoryNode": "507:24675",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24675"
+    },
+    {
+      "category": "Menu",
+      "categoryNode": "507:24676",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24676"
+    },
+    {
+      "category": "Notifications",
+      "categoryNode": "507:24678",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24678"
+    },
+    {
+      "category": "Page controls",
+      "categoryNode": "507:24679",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24679"
+    },
+    {
+      "category": "Pickers",
+      "categoryNode": "507:24680",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24680"
+    },
+    {
+      "category": "Popovers",
+      "categoryNode": "507:24681",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24681"
+    },
+    {
+      "category": "Popup buttons",
+      "categoryNode": "507:26009",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26009"
+    },
+    {
+      "category": "Progress indicators",
+      "categoryNode": "507:24682",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24682"
+    },
+    {
+      "category": "Segmented controls",
+      "categoryNode": "507:24683",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24683"
+    },
+    {
+      "category": "Sheets",
+      "categoryNode": "507:24684",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24684"
+    },
+    {
+      "category": "Sidebars",
+      "categoryNode": "507:26013",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26013"
+    },
+    {
+      "category": "Sliders",
+      "categoryNode": "507:24685",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24685"
+    },
+    {
+      "category": "Status bars",
+      "categoryNode": "507:24686",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24686"
+    },
+    {
+      "category": "Steppers",
+      "categoryNode": "507:24687",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24687"
+    },
+    {
+      "category": "Top bars",
+      "categoryNode": "507:24689",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24689"
+    },
+    {
+      "category": "Text fields",
+      "categoryNode": "553:22762",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=553-22762"
+    },
+    {
+      "category": "Toggles",
+      "categoryNode": "507:24690",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-24690"
+    },
+    {
+      "category": "Toolbars",
+      "categoryNode": "507:25993",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-25993"
+    },
+    {
+      "category": "Widgets",
+      "categoryNode": "507:26511",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-26511"
+    },
+    {
+      "category": "Windows",
+      "categoryNode": "5413:10149",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=5413-10149"
+    },
+    {
+      "category": "Kit helpers",
+      "categoryNode": "507:29124",
+      "figmaUrl": "https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=507-29124"
+    }
+  ],
+  "activeCategoryNode": null,
+  "completedCategoryNodes": [
+    "0:1746",
+    "0:3329",
+    "215:105157",
+    "0:2194",
+    "507:24672",
+    "507:24688",
+    "507:24669",
+    "507:24670",
+    "507:24668",
+    "507:24671",
+    "507:24673",
+    "507:26010",
+    "507:25994",
+    "5518:18111",
+    "507:26011",
+    "507:24674",
+    "507:24675",
+    "507:24676",
+    "507:24678",
+    "507:24679",
+    "507:24680",
+    "507:24681",
+    "507:26009",
+    "507:24682",
+    "507:24683",
+    "507:24684",
+    "507:26013",
+    "507:24685",
+    "507:24686",
+    "507:24687",
+    "507:24689",
+    "553:22762",
+    "507:24690",
+    "507:25993",
+    "507:26511",
+    "5413:10149",
+    "507:29124"
+  ],
+  "prioritizedBy": "user-request-colors-first",
+  "updatedAt": "2026-02-19T13:51:59.140Z",
+  "progress": {
+    "0:1746": {
+      "step": "full-coverage-artifacts-ready",
+      "metadataPath": "figma-artifacts/colors/0-1746.metadata.xml",
+      "coverageManifestPath": "figma-artifacts/colors/full-coverage/coverage-manifest.json",
+      "artifacts": {
+        "designContextPath": "figma-artifacts/colors/0-1746.design-context.txt",
+        "screenshotPath": "figma-artifacts/colors/0-1746.screenshot.png",
+        "variableDefsPath": "figma-artifacts/colors/0-1746.variable-defs.json"
+      },
+      "missing": [],
+      "updatedAt": "2026-02-17T22:02:45.615Z"
+    },
+    "0:3329": {
+      "step": "full-coverage-artifacts-ready",
+      "metadataPath": "figma-artifacts/examples/0-3329.metadata.xml",
+      "coverageManifestPath": "figma-artifacts/examples/full-coverage/coverage-manifest.json",
+      "artifacts": {
+        "designContextPath": "figma-artifacts/examples/0-3329.design-context.txt",
+        "screenshotPath": "figma-artifacts/examples/0-3329.screenshot.png",
+        "variableDefsPath": "figma-artifacts/examples/0-3329.variable-defs.json"
+      },
+      "missing": {
+        "designContext": [],
+        "variableDefs": [],
+        "screenshot": []
+      },
+      "updatedAt": "2026-02-17T22:34:36.584Z"
+    }
+  }
+}

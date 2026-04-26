@@ -1,0 +1,104 @@
+<canvas id="507:26013" name="Sidebars" x="0" y="0" width="0" height="0">
+  <frame id="5643:28168" name="_Sidebar - Trailing" x="350" y="2190" width="260" height="800">
+    <symbol id="5660:39588" name="Mode=Dark, State=Selected, Type=Detail" x="140" y="420" width="54" height="44" />
+    <symbol id="5660:39590" name="Mode=Dark, State=Selected, Type=Checkmark" x="140" y="480" width="84" height="44" />
+    <symbol id="5660:39593" name="Mode=Dark, State=Selected, Type=Info" x="140" y="540" width="84" height="44" />
+    <symbol id="5660:39596" name="Mode=Dark, State=Selected, Type=Disclosure" x="140" y="600" width="76" height="44" />
+    <symbol id="5660:39599" name="Mode=Dark, State=Selected, Type=Symbol" x="140" y="660" width="88" height="44" />
+    <symbol id="5660:39602" name="Mode=Dark, State=Selected, Type=Toggle" x="140" y="720" width="64" height="44" />
+    <symbol id="5660:39604" name="Mode=Dark, State=Default, Type=Detail" x="140" y="20" width="52" height="44" />
+    <symbol id="5660:39606" name="Mode=Dark, State=Default, Type=Checkmark" x="140" y="80" width="82" height="44" />
+    <symbol id="5660:39609" name="Mode=Dark, State=Default, Type=Info" x="140" y="140" width="82" height="44" />
+    <symbol id="5660:39612" name="Mode=Dark, State=Default, Type=Disclosure" x="140" y="200" width="74" height="44" />
+    <symbol id="5660:39615" name="Mode=Dark, State=Default, Type=Symbol" x="140" y="260" width="86" height="44" />
+    <symbol id="5660:39618" name="Mode=Dark, State=Default, Type=Toggle" x="140" y="320" width="64" height="44" />
+    <symbol id="5658:14347" name="Mode=Light, State=Selected, Type=Detail" x="20" y="420" width="54" height="44" />
+    <symbol id="5658:14349" name="Mode=Light, State=Selected, Type=Checkmark" x="20" y="480" width="84" height="44" />
+    <symbol id="5658:14352" name="Mode=Light, State=Selected, Type=Info" x="20" y="540" width="84" height="44" />
+    <symbol id="5658:14355" name="Mode=Light, State=Selected, Type=Disclosure" x="20" y="600" width="76" height="44" />
+    <symbol id="5658:14358" name="Mode=Light, State=Selected, Type=Symbol" x="20" y="660" width="88" height="44" />
+    <symbol id="5658:14361" name="Mode=Light, State=Selected, Type=Toggle" x="20" y="720" width="64" height="44" />
+    <symbol id="5643:28164" name="Mode=Light, State=Default, Type=Detail" x="20" y="20" width="52" height="44" />
+    <symbol id="5643:28178" name="Mode=Light, State=Default, Type=Checkmark" x="20" y="80" width="82" height="44" />
+    <symbol id="5643:28172" name="Mode=Light, State=Default, Type=Info" x="20" y="140" width="82" height="44" />
+    <symbol id="5643:28169" name="Mode=Light, State=Default, Type=Disclosure" x="20" y="200" width="70" height="44" />
+    <symbol id="5643:28181" name="Mode=Light, State=Default, Type=Symbol" x="20" y="260" width="86" height="44" />
+    <symbol id="5643:28175" name="Mode=Light, State=Default, Type=Toggle" x="20" y="320" width="64" height="44" />
+  </frame>
+  <frame id="5659:15001" name="_Sidebar - Edit Button" x="0" y="2850" width="110" height="150">
+    <symbol id="5660:37328" name="Mode=Dark, Type=Selectable" x="60" y="103" width="21" height="21" />
+    <symbol id="5660:37329" name="Mode=Dark, Type=Selected" x="60" y="61" width="21" height="21" />
+    <symbol id="5660:37331" name="Mode=Dark, Type=Delete" x="60" y="20" width="21" height="21" />
+    <symbol id="5659:15004" name="Mode=Light, Type=Selectable" x="20" y="103" width="21" height="21" />
+    <symbol id="5659:15002" name="Mode=Light, Type=Selected" x="20" y="61" width="21" height="21" />
+    <symbol id="5643:26138" name="Mode=Light, Type=Delete" x="20" y="20" width="21" height="21" />
+  </frame>
+  <frame id="147:62237" name="_Sidebar - Leading" x="0" y="2190" width="300" height="600">
+    <symbol id="5660:41138" name="Mode=Dark, State=Selected, Image=Hidden" x="170" y="530" width="36" height="44" />
+    <symbol id="5660:39428" name="Mode=Dark, State=Selected, Image=Collection" x="170" y="460" width="85" height="44" />
+    <symbol id="5660:39437" name="Mode=Dark, State=Selected, Image=Bitmap" x="170" y="390" width="85" height="44" />
+    <symbol id="5660:39443" name="Mode=Dark, State=Selected, Image=Symbol" x="170" y="320" width="85" height="44" />
+    <symbol id="5660:41084" name="Mode=Dark, State=Default, Image=Hidden" x="170" y="230" width="34" height="44" />
+    <symbol id="5660:39449" name="Mode=Dark, State=Default, Image=Collection" x="170" y="160" width="85" height="44" />
+    <symbol id="5660:39458" name="Mode=Dark, State=Default, Image=Bitmap" x="170" y="90" width="85" height="44" />
+    <symbol id="5660:39464" name="Mode=Dark, State=Default, Image=Symbol" x="170" y="20" width="85" height="44" />
+    <symbol id="5660:41129" name="Mode=Light, State=Selected, Image=Hidden" x="20" y="530" width="36" height="44" />
+    <symbol id="5659:14989" name="Mode=Light, State=Selected, Image=Collection" x="20" y="460" width="85" height="44" />
+    <symbol id="5659:14995" name="Mode=Light, State=Selected, Image=Bitmap" x="20" y="390" width="85" height="44" />
+    <symbol id="5659:14998" name="Mode=Light, State=Selected, Image=Symbol" x="20" y="320" width="85" height="44" />
+    <symbol id="5660:41075" name="Mode=Light, State=Default, Image=Hidden" x="20" y="230" width="34" height="44" />
+    <symbol id="147:62508" name="Mode=Light, State=Default, Image=Collection" x="20" y="160" width="85" height="44" />
+    <symbol id="147:62484" name="Mode=Light, State=Default, Image=Bitmap" x="20" y="90" width="85" height="44" />
+    <symbol id="147:62238" name="Mode=Light, State=Default, Image=Symbol" x="20" y="20" width="85" height="44" />
+  </frame>
+  <frame id="5643:20203" name="_Trailing - Disclosure" x="1058" y="2362" width="58" height="96">
+    <symbol id="5643:20202" name="Open=True" x="20" y="20" width="18" height="18" />
+    <symbol id="5643:20204" name="Open=False" x="20" y="58" width="18" height="18" />
+  </frame>
+  <section id="5704:37671" name="Sidebars" x="0" y="0" width="1400" height="2090">
+    <frame id="131:70029" name="Sidebar Row" x="100" y="1050" width="360" height="940">
+      <symbol id="147:62816" name="State=Disabled, Indent Level=2" x="20" y="850" width="320" height="44" />
+      <symbol id="147:62819" name="State=Disabled, Indent Level=1" x="20" y="780" width="320" height="44" />
+      <symbol id="147:62822" name="State=Disabled, Indent Level=0" x="20" y="710" width="320" height="44" />
+      <symbol id="145:85276" name="State=Selected, Indent Level=2" x="20" y="390" width="320" height="44" />
+      <symbol id="5660:50839" name="State=Disclosable, Indent Level=2" x="20" y="620" width="320" height="44" />
+      <symbol id="145:85245" name="State=Selected, Indent Level=1" x="20" y="320" width="320" height="44" />
+      <symbol id="5660:50843" name="State=Disclosable, Indent Level=1" x="20" y="550" width="320" height="44" />
+      <symbol id="131:70030" name="State=Selected, Indent Level=0" x="20" y="250" width="320" height="44" />
+      <symbol id="5660:50847" name="State=Disclosable, Indent Level=0" x="20" y="480" width="320" height="44" />
+      <symbol id="145:85278" name="State=Default, Indent Level=2" x="20" y="160" width="320" height="44" />
+      <symbol id="145:85224" name="State=Default, Indent Level=1" x="20" y="90" width="320" height="44" />
+      <symbol id="131:70028" name="State=Default, Indent Level=0" x="20" y="20" width="320" height="44" />
+    </frame>
+    <symbol id="148:63293" name="Sidebar Toolbar" x="500" y="1050" width="260" height="43" />
+    <symbol id="131:66427" name="Section Header" x="840" y="1050" width="260" height="34" />
+    <symbol id="148:61709" name="Sidebar with Multilevel Hiearchy" x="470" y="100" width="320" height="802" />
+    <symbol id="131:70868" name="Sidebar" x="100" y="100" width="320" height="802" />
+    <symbol id="5840:30516" name="Sidebar Search Field" x="1131" y="1050" width="200" height="44" />
+  </section>
+  <frame id="5840:30471" name="_Search Field" x="1400" y="2190" width="470" height="210">
+    <symbol id="5840:30472" name="Mode=Dark, State=Typing" x="250" y="84" width="200" height="44" />
+    <symbol id="5840:30479" name="Mode=Dark, State=Value" x="250" y="148" width="200" height="44" />
+    <symbol id="5840:30484" name="Mode=Dark, State=Placeholder" x="250" y="20" width="200" height="44" />
+    <symbol id="5840:30489" name="Mode=Light, State=Typing" x="20" y="84" width="200" height="44" />
+    <symbol id="5840:30496" name="Mode=Light, State=Value" x="20" y="148" width="200" height="44" />
+    <symbol id="5840:30501" name="Mode=Light, State=Placeholder" x="20" y="20" width="200" height="44" />
+  </frame>
+  <frame id="5840:27831" name="_Toolbar Button - Symbol" x="930" y="2190" width="70" height="110">
+    <symbol id="5840:27832" name="Mode=Dark" x="20" y="70" width="28" height="22" />
+    <symbol id="5840:27840" name="Mode=Light" x="20" y="20" width="28" height="22" />
+  </frame>
+  <frame id="5840:27868" name="_Toolbar Button - Text" x="850" y="2190" width="70" height="110">
+    <symbol id="5840:27869" name="Mode=Dark" x="20" y="70" width="31" height="22" />
+    <symbol id="5840:27877" name="Mode=Light" x="20" y="20" width="31" height="22" />
+  </frame>
+  <instance id="544:191842" name="Header" x="0" y="-500" width="1400" height="208" />
+  <frame id="5840:25291" name="_Selection BG" x="660" y="2190" width="140" height="150">
+    <symbol id="5840:25286" name="Mode=Dark" x="23" y="80" width="100" height="44" />
+    <symbol id="5840:25287" name="Mode=Light" x="20" y="20" width="100" height="44" />
+  </frame>
+  <frame id="5840:30052" name="_Section Header" x="1058" y="2190" width="300" height="130">
+    <symbol id="5840:30053" name="Mode=Dark" x="20" y="70" width="260" height="22" />
+    <symbol id="5840:30051" name="Mode=Light" x="20" y="20" width="260" height="22" />
+  </frame>
+</canvas>

@@ -1,0 +1,35 @@
+<section id="5707:28660" name="Increased Contrast" x="2620" y="0" width="2560" height="1500">
+  <instance id="5735:67114" name="Swatch Grid" x="100" y="1030" width="659" height="370" />
+  <instance id="5532:12331" name="Swatches" x="900" y="1030" width="659" height="370" />
+  <instance id="5532:12327" name="Swatch Grid" x="900" y="600" width="659" height="370" />
+  <instance id="5735:67113" name="Swatch Grid" x="100" y="600" width="659" height="370" />
+  <instance id="5532:12329" name="Swatches" x="1900" y="600" width="659" height="370" />
+  <frame id="5532:12332" name="Colors" x="100" y="100" width="2360" height="420">
+    <frame id="5532:12333" name="Grays" x="100" y="360" width="1560" height="160">
+      <instance id="5532:12334" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="5532:12335" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="5532:12336" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="5532:12337" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="5532:12338" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="5532:12339" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="5532:12340" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="5532:12341" name="Swatch" x="1400" y="0" width="160" height="160" />
+    </frame>
+    <frame id="5532:12342" name="Colors" x="100" y="100" width="2360" height="160">
+      <instance id="5532:12343" name="Swatch" x="0" y="0" width="160" height="160" />
+      <instance id="5532:12344" name="Swatch" x="200" y="0" width="160" height="160" />
+      <instance id="5532:12345" name="Swatch" x="400" y="0" width="160" height="160" />
+      <instance id="5532:12346" name="Swatch" x="600" y="0" width="160" height="160" />
+      <instance id="5532:12347" name="Swatch" x="800" y="0" width="160" height="160" />
+      <instance id="5532:12348" name="Swatch" x="1000" y="0" width="160" height="160" />
+      <instance id="5532:12349" name="Swatch" x="1200" y="0" width="160" height="160" />
+      <instance id="5532:12350" name="Swatch" x="1400" y="0" width="160" height="160" />
+      <instance id="5532:12351" name="Swatch" x="1600" y="0" width="160" height="160" />
+      <instance id="5532:12352" name="Swatch" x="1800" y="0" width="160" height="160" />
+      <instance id="5532:12353" name="Swatch" x="2000" y="0" width="160" height="160" />
+      <instance id="5532:12354" name="Swatch" x="2200" y="0" width="160" height="160" />
+    </frame>
+  </frame>
+</section>
+
+IMPORTANT: The user has selected a section node, so you have received a sparse metadata response. You MUST call get_design_context on the nodes or their sublayers individually based on their IDs to implement the design.

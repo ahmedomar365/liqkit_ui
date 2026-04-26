@@ -1,0 +1,29 @@
+<canvas id="553:22762" name="Text Fields" x="0" y="0" width="0" height="0">
+  <section id="5433:15705" name="Light examples" x="682" y="0" width="440" height="280">
+    <frame id="5534:22454" name="Frame" x="20" y="80" width="402" height="156">
+      <instance id="5433:15706" name="Text Field" x="0" y="0" width="402" height="52" />
+      <instance id="5433:18724" name="Text Field" x="0" y="52" width="402" height="52" />
+      <instance id="5433:18728" name="Text Field" x="0" y="104" width="402" height="52" />
+    </frame>
+    <instance id="5760:10501" name="Mode" x="376" y="10" width="54" height="19" />
+  </section>
+  <section id="5433:15709" name="Dark examples" x="1164" y="0" width="440" height="280">
+    <frame id="5534:22455" name="Frame" x="20" y="80" width="402" height="156">
+      <instance id="5433:18742" name="Text Field" x="0" y="0" width="402" height="52" />
+      <instance id="5433:18743" name="Text Field" x="0" y="52" width="402" height="52" />
+      <instance id="5433:18744" name="Text Field" x="0" y="104" width="402" height="52" />
+    </frame>
+    <instance id="5760:10507" name="Mode" x="376" y="10" width="54" height="19" />
+  </section>
+  <section id="5433:20204" x="0" y="0" width="642" height="492">
+    <frame id="553:23047" name="Text Field" x="100" y="100" width="442" height="310">
+      <symbol id="553:23061" name="State=Placeholder" x="20" y="20" width="402" height="52" />
+      <symbol id="5433:15646" name="State=Focused" x="20" y="90" width="402" height="52" />
+      <symbol id="5433:15631" name="State=Value Entered" x="20" y="230" width="402" height="52" />
+      <symbol id="5433:15635" name="State=Typing" x="20" y="160" width="402" height="52" />
+    </frame>
+  </section>
+  <instance id="553:22763" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>
+
+IMPORTANT: After you call this tool, you MUST call get_design_context if trying to implement the design, since this tool only returns metadata. If you do not call get_design_context, the agent will not be able to implement the design.

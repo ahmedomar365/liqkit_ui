@@ -1,0 +1,10 @@
+<canvas id="507:25994" name="Contextual Menus" x="0" y="0" width="0" height="0">
+  <symbol id="128:76929" name="Context Menu - Dimming Overlay" x="0" y="1060" width="200" height="200" />
+  <frame id="125:58750" name="Context Menu" x="0" y="0" width="2110" height="980">
+    <symbol id="128:77880" name="Alignment=Horizontal (iPad only), Side=Trailing" x="1470" y="20" width="351" height="351" />
+    <symbol id="128:77888" name="Alignment=Horizontal (iPad only), Side=Leading" x="1080" y="20" width="351" height="351" />
+    <symbol id="125:58751" name="Alignment=Vertical, Side=Trailing" x="410" y="20" width="351" height="351" />
+    <symbol id="125:58302" name="Alignment=Vertical, Side=Leading" x="20" y="20" width="351" height="351" />
+  </frame>
+  <instance id="544:191917" name="Header" x="1.4210854715202004e-14" y="-500" width="1400" height="208" />
+</canvas>

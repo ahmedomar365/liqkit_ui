@@ -1,0 +1,670 @@
+const imgIPadPro11M4SilverLandscape = "https://www.figma.com/api/mcp/asset/409b056d-80d1-4c84-b8c6-e00d20dde384";
+const imgCombinedShape = "https://www.figma.com/api/mcp/asset/e1986890-57fb-443b-b2d2-b48eac333359";
+const imgCombinedShape1 = "https://www.figma.com/api/mcp/asset/eaed70cf-1f29-4e6d-820b-ae263f272172";
+const imgBatteryIcon = "https://www.figma.com/api/mcp/asset/cb394b4f-687b-4988-b0ae-c1354f3497bd";
+const imgBg = "https://www.figma.com/api/mcp/asset/c78066ce-e9ab-4feb-a233-75aecc17037f";
+const imgBg1 = "https://www.figma.com/api/mcp/asset/b0ff25bf-af21-477a-bdfc-46a56e928c31";
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPad Pro M4 11'" data-node-id="6316:14229">
+      <div className="h-[834px] relative w-[1210px]" data-name="Color=Silver" data-node-id="487:11227">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]" data-name="iPad Pro 11 - M4 - Silver - Landscape" data-node-id="6318:14240">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro11M4SilverLandscape} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type KeysIPadCommandProps = {
+  className?: string;
+  align?: "Left" | "Right";
+  label?: string;
+  mode?: "Light" | "Dark";
+};
+
+function KeysIPadCommand({ className, align = "Left", label = "􀅂", mode = "Light" }: KeysIPadCommandProps) {
+  const isLightAndLeft = mode === "Light" && align === "Left";
+  return (
+    <div className={className || "content-stretch flex h-[74px] items-start px-[13px] py-[12px] relative rounded-[8.5px] w-[105px]"} id={isLightAndLeft ? "node-204_65641" : "node-204_65645"}>
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+        <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+        <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+      </div>
+      {mode === "Light" && align === "Right" && (
+        <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[19.5px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-right tracking-[-0.4px]" data-node-id="204:65646">
+          <p className="leading-[normal] whitespace-pre-wrap">{label}</p>
+        </div>
+      )}
+      {isLightAndLeft && (
+        <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[19.5px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] tracking-[-0.4px]" data-node-id="204:65642">
+          <p className="leading-[normal] whitespace-pre-wrap">{label}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+type KeysIPadLowercaseProps = {
+  className?: string;
+  alt?: string;
+  key?: string;
+  mode?: "Light" | "Dark";
+  type?: "2 Storey Lower" | "2 Storey Punctuation" | "2 Storey Upper";
+};
+
+function KeysIPadLowercase({ className, alt = "1", key = "q", mode = "Light", type = "2 Storey Lower" }: KeysIPadLowercaseProps) {
+  return (
+    <div className={className || "content-stretch flex flex-col h-[72px] items-start pt-[6px] relative rounded-[8.5px] w-[82px]"} data-node-id="0:10866">
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+        <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+        <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+      </div>
+      <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="0:10869">
+        <p className="leading-[21px] whitespace-pre-wrap">{alt}</p>
+      </div>
+      <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="0:10868">
+        {key}
+      </p>
+    </div>
+  );
+}
+type KeysIPadReturnProps = {
+  className?: string;
+  label?: string;
+  mode?: "Light" | "Dark";
+  prominent?: "False";
+};
+
+function KeysIPadReturn({ className, label = "􁂆", mode = "Light", prominent = "False" }: KeysIPadReturnProps) {
+  return (
+    <div className={className || "content-stretch flex h-[74px] items-start pb-[10px] pr-[13px] relative rounded-[8.5px] w-[105px]"} data-node-id="204:69504">
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+        <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+        <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+      </div>
+      <div className="flex flex-[1_0_0] flex-col font-['SF_Compact:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[23px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-right tracking-[-0.4px]" data-node-id="204:69505">
+        <p className="leading-[28px] whitespace-pre-wrap">{label}</p>
+      </div>
+    </div>
+  );
+}
+type StatusBarAndMenuBarIPadProps = {
+  className?: string;
+  date?: string;
+  time?: string;
+};
+
+function StatusBarAndMenuBarIPad({ className, date = "Tue Apr 1", time = "9:41" }: StatusBarAndMenuBarIPadProps) {
+  return (
+    <div className={className || ""} data-name="Status bar and Menu bar- iPad" data-node-id="5413:10006">
+      <div className="content-stretch flex h-[32px] items-center justify-between px-[26px] py-[4px] relative w-[1210px]" data-name="Type=Status bar only" data-node-id="523:41360">
+        <div className="content-stretch flex font-['SF_Pro:Medium',sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]" data-name="Left" data-node-id="523:41361">
+          <p className="relative shrink-0" data-node-id="523:41362">
+            {time}
+          </p>
+          <p className="relative shrink-0" data-node-id="523:41363">
+            {date}
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0" data-name="Right" data-node-id="523:41364">
+          <div className="h-[10px] relative shrink-0 w-[16.5px]" data-name="Combined Shape" data-node-id="523:41365">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape} />
+          </div>
+          <div className="h-[10px] relative shrink-0 w-[14.053px]" data-name="Combined Shape" data-node-id="523:41366">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgCombinedShape1} />
+          </div>
+          <p className="font-['SF_Pro:Medium',sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right" data-node-id="523:41367">
+            100%
+          </p>
+          <div className="h-[12px] relative shrink-0 w-[26.5px]" data-name="Battery Icon" data-node-id="523:41368">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgBatteryIcon} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+type GrabberProps = {
+  className?: string;
+  mode?: "Light" | "Dark";
+};
+
+function Grabber({ className, mode = "Light" }: GrabberProps) {
+  return <div className={className || "bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] w-[36px]"} data-node-id="5827:57545" />;
+}
+
+export default function SheetsModals({ className }: { className?: string }) {
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] h-[834px] relative w-[1210px]"} data-name="Sheets (Modals)" data-node-id="754:64609">
+      <div className="absolute bg-[var(--overlays\/default,rgba(0,0,0,0.2))] inset-0" data-name="Overlay" data-node-id="5553:20483" />
+      <div className="-translate-x-1/2 absolute bg-[var(--backgrounds\/primary---elevated,white)] content-stretch flex flex-col h-[852px] items-center left-1/2 rounded-[var(--sheet\/ipad-radius,38px)] shadow-[0px_15px_75px_0px_rgba(0,0,0,0.18)] top-[32px] w-[936px]" data-name="Sheet - iPad" data-node-id="5553:20484">
+        <div className="content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full" data-name="Toolbar - Top - Sheet" data-node-id="I5553:20484;5726:35219">
+          <div className="content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0" data-name="Grabber" data-node-id="I5553:20484;5726:35219;5726:33527">
+            <Grabber className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" />
+          </div>
+          <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5553:20484;5726:35219;5726:33529">
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5553:20484;5726:35219;5726:33530">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5553:20484;5726:35219;5726:33530;5551:22138">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBg} />
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5553:20484;5726:35219;5726:33530;5551:22128" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀆄</p>
+              </div>
+            </div>
+            <div className="flex flex-row items-center self-stretch">
+              <div className="h-full shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5553:20484;5726:35219;5726:33531" />
+            </div>
+            <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5553:20484;5726:35219;5726:33532">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5553:20484;5726:35219;5726:33532;5551:22487">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgBg1} />
+              </div>
+              <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]" data-node-id="I5553:20484;5726:35219;5726:33532;5551:22126" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                <p className="leading-[normal] whitespace-pre-wrap">􀄨</p>
+              </div>
+            </div>
+            <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5553:20484;5726:35219;5827:65227">
+              <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5553:20484;5726:35219;5827:65227;5827:56434">
+                Title
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <StatusBarAndMenuBarIPad className="absolute content-stretch flex h-[32px] items-center justify-between left-0 overflow-clip px-[26px] py-[4px] right-0 top-0" />
+      <div className="absolute bottom-0 content-stretch flex flex-col gap-[16px] items-start left-0 overflow-clip pb-[30px] pt-[6px] px-[13.5px] right-0 rounded-[27px]" data-name="Keyboard" data-node-id="5553:20248">
+        <div className="absolute inset-0 rounded-[27px]" data-name="_Background - iPad" data-node-id="I5553:20248;537:133490">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[27px]">
+            <div className="absolute bg-[rgba(212,212,212,0.74)] inset-0 mix-blend-luminosity rounded-[27px]" />
+            <div className="absolute bg-[#1b1b1b] inset-0 mix-blend-plus-lighter rounded-[27px]" />
+            <div className="absolute bg-[#e6e9ed] inset-0 rounded-[27px]" />
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[146px] items-center justify-center relative shrink-0 w-full" data-name="Frame" data-node-id="I5553:20248;5522:20630">
+          <div className="content-stretch flex h-[44px] items-center justify-center overflow-clip relative shrink-0 w-[644px]" data-name="Accessory Bar" data-node-id="I5553:20248;135:66089">
+            <div className="content-stretch flex flex-[1_0_0] gap-[20px] h-[27px] items-center min-h-px min-w-px px-[22px] relative" data-name="_Autocorrection" data-node-id="I5553:20248;135:66090">
+              <div className="flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[4.6px]" data-name="Autocomplete Suggestion" data-node-id="I5553:20248;135:66090;119:56697">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic overflow-hidden text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5553:20248;135:66090;119:56698">
+                  <p className="leading-[22px] overflow-hidden">“The”</p>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[25px] items-center justify-center px-[2px] relative shrink-0" data-name="Separator" data-node-id="I5553:20248;135:66090;135:64959">
+                <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-full opacity-10 shrink-0 w-px" data-name="Separator" data-node-id="I5553:20248;135:66090;135:64960" />
+              </div>
+              <div className="flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[4.6px]" data-name="Autocomplete Suggestion" data-node-id="I5553:20248;135:66090;119:56703">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic overflow-hidden text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5553:20248;135:66090;119:56704">
+                  <p className="leading-[22px] overflow-hidden">the</p>
+                </div>
+              </div>
+              <div className="content-stretch flex h-[25px] items-center justify-center px-[2px] relative shrink-0" data-name="Separator" data-node-id="I5553:20248;135:66090;135:64957">
+                <div className="bg-[var(--fills---vibrant\/primary,#ccc)] h-full opacity-10 shrink-0 w-px" data-name="Separator" data-node-id="I5553:20248;135:66090;135:64958" />
+              </div>
+              <div className="flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[4.6px]" data-name="Autocomplete Suggestion" data-node-id="I5553:20248;135:66090;119:56711">
+                <div className="absolute flex flex-col font-['SF_Pro:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic overflow-hidden text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] text-center text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I5553:20248;135:66090;119:56712">
+                  <p className="leading-[22px] overflow-hidden">to</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute content-stretch flex gap-[16px] items-start justify-center left-0 top-[8px]" data-name="_Accessory Bar - iPad" data-node-id="I5553:20248;5915:37691">
+            <div className="relative shrink-0 size-[28px]" data-name="_Accessory Bar - iPad - Buttons/Light" data-node-id="I5553:20248;5915:37691;128:87684">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[44px] text-[21px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center top-1/2" data-node-id="I5553:20248;5915:37691;128:87684;0:11632">
+                <p className="leading-[normal] whitespace-pre-wrap">􀱍</p>
+              </div>
+            </div>
+            <div className="relative shrink-0 size-[28px]" data-name="_Accessory Bar - iPad - Buttons/Light" data-node-id="I5553:20248;5915:37691;128:87685">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[44px] text-[21px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center top-1/2" data-node-id="I5553:20248;5915:37691;128:87685;0:11632">
+                <p className="leading-[normal] whitespace-pre-wrap">􀱓</p>
+              </div>
+            </div>
+            <div className="relative shrink-0 size-[28px]" data-name="_Accessory Bar - iPad - Buttons/Light" data-node-id="I5553:20248;5915:37691;128:87686">
+              <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['SF_Pro:Regular',sans-serif] justify-center leading-[0] left-1/2 not-italic size-[44px] text-[21px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center top-1/2" data-node-id="I5553:20248;5915:37691;128:87686;0:11632">
+                <p className="leading-[normal] whitespace-pre-wrap">􀉃</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full" data-name="_Keyboard - iPad Layouts" data-node-id="I5553:20248;5915:45497">
+          <div className="content-stretch flex gap-[14px] h-[74px] items-center justify-center relative shrink-0 w-full" data-name="Row 1" data-node-id="I5553:20248;5915:45497;5514:22845">
+            <KeysIPadCommand className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" />
+            <div className="content-stretch flex flex-[1_0_0] gap-[13.75px] h-full items-center min-h-px min-w-px relative" data-name="Middle" data-node-id="I5553:20248;5915:45497;128:81329">
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81193">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81193;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">1</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81193;0:10868">
+                  q
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81192">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81192;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">2</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81192;0:10868">
+                  w
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81191">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81191;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">3</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81191;0:10868">
+                  e
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81190">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81190;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">4</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81190;0:10868">
+                  r
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81189">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81189;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">5</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81189;0:10868">
+                  t
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81188">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81188;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">6</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81188;0:10868">
+                  y
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81187">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81187;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">7</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81187;0:10868">
+                  u
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81186">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81186;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">8</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81186;0:10868">
+                  i
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81185">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81185;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">9</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81185;0:10868">
+                  o
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81184">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81184;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">0</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81184;0:10868">
+                  p
+                </p>
+              </div>
+            </div>
+            <KeysIPadCommand align="Right" className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀆛" />
+          </div>
+          <div className="content-stretch flex gap-[14px] h-[74px] items-center justify-center relative shrink-0 w-full" data-name="Row 2" data-node-id="I5553:20248;5915:45497;5514:25389">
+            <KeysIPadCommand className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀆡" />
+            <div className="content-stretch flex flex-[1_0_0] gap-[13.5px] h-full items-start justify-center min-h-px min-w-px relative" data-name="Middle" data-node-id="I5553:20248;5915:45497;128:81333">
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81181">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81181;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">@</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81181;0:10868">
+                  a
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81180">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81180;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">#</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81180;0:10868">
+                  s
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81179">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81179;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">$</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81179;0:10868">
+                  d
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81178">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81178;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">{`&`}</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81178;0:10868">
+                  f
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81177">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81177;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">*</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81177;0:10868">
+                  g
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81176">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81176;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">(</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81176;0:10868">
+                  h
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81175">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81175;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">)</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81175;0:10868">
+                  j
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81174">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81174;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">’</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81174;0:10868">
+                  k
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81173">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81173;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">”</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81173;0:10868">
+                  l
+                </p>
+              </div>
+            </div>
+            <KeysIPadReturn className="content-stretch flex h-full items-start pb-[10px] pr-[13px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀅇" />
+          </div>
+          <div className="content-stretch flex gap-[14px] h-[74px] items-center justify-center relative shrink-0 w-full" data-name="Row 3" data-node-id="I5553:20248;5915:45497;5514:33051">
+            <KeysIPadCommand className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀆝" />
+            <div className="content-stretch flex flex-[1_0_0] gap-[13.5px] h-full items-start min-h-px min-w-px relative" data-name="Middle" data-node-id="I5553:20248;5915:45497;128:81334">
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81170">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81170;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">%</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81170;0:10868">
+                  z
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81169">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81169;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">-</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81169;0:10868">
+                  x
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81168">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81168;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">+</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81168;0:10868">
+                  c
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81167">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81167;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">=</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81167;0:10868">
+                  v
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81166">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81166;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">/</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81166;0:10868">
+                  b
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81165">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81165;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">;</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81165;0:10868">
+                  n
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81164">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-col font-['SF_Compact:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-[color:var(--miscellaneous\/keyboards\/glyphs---secondary,#b3b3b3)] text-center w-full" data-node-id="I5553:20248;5915:45497;128:81164;0:10869">
+                  <p className="leading-[21px] whitespace-pre-wrap">:</p>
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[39px] not-italic relative shrink-0 text-[33px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81164;0:10868">
+                  m
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[4px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81162">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[36px] not-italic relative shrink-0 text-[29px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81162;0:10862">
+                  !
+                </p>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[14px] not-italic relative shrink-0 text-[29px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81162;0:10861">
+                  ,
+                </p>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pt-[4px] relative rounded-[8.5px]" data-name="_Keys - iPad - Lowercase" data-node-id="I5553:20248;5915:45497;128:81163">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[36px] not-italic relative shrink-0 text-[29px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81163;0:10862">
+                  ?
+                </p>
+                <p className="font-['SF_Compact:Regular',sans-serif] leading-[14px] not-italic relative shrink-0 text-[29px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-center w-full whitespace-pre-wrap" data-node-id="I5553:20248;5915:45497;128:81163;0:10861">
+                  .
+                </p>
+              </div>
+            </div>
+            <KeysIPadCommand align="Right" className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀆝" />
+          </div>
+          <div className="content-stretch flex gap-[14px] h-[74px] items-center justify-center relative shrink-0 w-full" data-name="Row 4" data-node-id="I5553:20248;5915:45497;5514:26933">
+            <div className="content-stretch flex gap-[14px] h-full items-center justify-center relative shrink-0 w-[182px]" data-name="Emoji and Numbers" data-node-id="I5553:20248;5915:45497;128:81365">
+              <KeysIPadCommand className="content-stretch flex flex-[1_0_0] h-full items-start min-h-px min-w-px px-[13px] py-[12px] relative rounded-[8.5px]" label="􀎸" />
+              <div className="content-stretch flex flex-[1_0_0] h-full items-start min-h-px min-w-px px-[13px] py-[12px] relative rounded-[8.5px]" data-name="_Keys - iPad - Command" data-node-id="I5553:20248;5915:45497;128:81148">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[19.5px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] tracking-[-0.4px]" data-node-id="I5553:20248;5915:45497;128:81148;204:65642">
+                  <p className="leading-[normal] whitespace-pre-wrap">.?123</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px relative" data-name="Dictation + Space + Numbers" data-node-id="I5553:20248;5915:45497;128:81139">
+              <div className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" data-name="_Keys - iPad - Command" data-node-id="I5553:20248;5915:45497;5514:18817">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[19.5px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] tracking-[-0.4px]" data-node-id="I5553:20248;5915:45497;5514:18817;204:65642">
+                  <p className="leading-[normal] whitespace-pre-wrap">􀊰</p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] h-full items-center justify-center min-h-px min-w-px px-[13.5px] relative" data-name="Space" data-node-id="I5553:20248;5915:45497;128:81960">
+                <KeysIPadLowercase alt=" " className="content-stretch flex flex-[1_0_0] flex-col h-[72px] items-start min-h-px min-w-px pt-[6px] relative rounded-[8.5px]" key=" " />
+              </div>
+              <div className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" data-name="_Keys - iPad - Command" data-node-id="I5553:20248;5915:45497;5514:18436">
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[8.5px]">
+                  <div className="absolute bg-[rgba(255,255,255,0.3)] inset-0 rounded-[8.5px]" />
+                  <div className="absolute bg-[#333] inset-0 mix-blend-plus-lighter rounded-[8.5px]" />
+                </div>
+                <div className="flex flex-[1_0_0] flex-col font-['SF_Pro:Regular',sans-serif] h-full justify-end leading-[0] min-h-px min-w-px not-italic relative text-[19.5px] text-[color:var(--miscellaneous\/keyboards\/glyphs---primary,#595959)] text-right tracking-[-0.4px]" data-node-id="I5553:20248;5915:45497;5514:18436;204:65646">
+                  <p className="leading-[normal] whitespace-pre-wrap">{` .?123`}</p>
+                </div>
+              </div>
+            </div>
+            <KeysIPadCommand align="Right" className="content-stretch flex h-full items-start px-[13px] py-[12px] relative rounded-[8.5px] shrink-0 w-[105px]" label="􀓖" />
+          </div>
+        </div>
+      </div>
+      <IPadProM className="absolute h-[834px] left-0 top-0 w-[1210px]" />
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Headline/Regular: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574), Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Sheet - iPad
+**Node ID:** 5719:30145
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+## Toolbar - Top - Sheet
+**Node ID:** 5726:33474
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+## Keyboard
+**Node ID:** 128:78692
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/onscreen-keyboards](https://developer.apple.com/design/human-interface-guidelines/onscreen-keyboards)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

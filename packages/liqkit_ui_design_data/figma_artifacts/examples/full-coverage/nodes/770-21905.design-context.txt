@@ -1,0 +1,322 @@
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/ca2fcf11-eb7c-4b1a-9f71-f8259a661eae";
+const imgCustomIconDefault = "https://www.figma.com/api/mcp/asset/20fe0454-6376-4d1a-ad60-9bd88e040214";
+const imgModeLight = "https://www.figma.com/api/mcp/asset/d0a7e182-84fb-46e7-8cba-c6ce9bc42a6b";
+const imgTime = "https://www.figma.com/api/mcp/asset/e88c3eef-24b4-4ba0-8d91-06acd26d7921";
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/1a6b675b-b5b0-4548-a118-73d5b6dc60e0";
+const imgWifi = "https://www.figma.com/api/mcp/asset/b6aa3b0a-516d-4aa9-8d86-359672435d75";
+const imgFrame = "https://www.figma.com/api/mcp/asset/7f267c70-2418-4dda-8e6b-19e2821357ff";
+
+function IPhone17Pro({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPhone 17 Pro" data-node-id="6316:14140">
+      <div className="h-[874px] relative w-[402px]" data-name="Color=Silver" data-node-id="6316:14148">
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" data-node-id="6316:14150">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CustomIcon({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="_Custom Icon" data-node-id="2402:976">
+      <div className="relative size-[66px]" data-name="Mode=Default" data-node-id="2402:981">
+        <div className="-translate-x-1/2 absolute aspect-[256/256] bottom-0 left-1/2 top-0" data-name="Custom-Icon-Default" data-node-id="5413:5936">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgCustomIconDefault} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Overlay({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Overlay" data-node-id="5551:17755">
+      <div className="size-[100px]" data-name="Mode=Light" data-node-id="5551:17757" style={{ backgroundImage: "linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%)" }} />
+    </div>
+  );
+}
+
+function WallpapersIPhone({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="Wallpapers - iPhone" data-node-id="5707:9420">
+      <div className="h-[874px] relative w-[402px]" data-name="Mode=Light" data-node-id="0:5245">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgModeLight} />
+      </div>
+    </div>
+  );
+}
+type NotificationsProps = {
+  className?: string;
+  expanded?: boolean;
+};
+
+export default function Notifications({ className, expanded = false }: NotificationsProps) {
+  const isExpanded = expanded;
+  const isNotExpanded = !expanded;
+  return (
+    <div className={className || "h-[874px] relative rounded-[32px] w-[402px]"} id={isNotExpanded ? "node-754_64315" : "node-754_64316"}>
+      <div className="absolute inset-0 overflow-clip rounded-[48px]" data-name="Lock Screen" id={isNotExpanded ? "node-754_46257" : "node-754_46210"}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgModeLight} />
+        <Overlay className="absolute left-0 size-[100px] top-0" />
+        <div className="-translate-x-1/2 absolute h-[72.898px] left-[calc(50%-8.4px)] top-[119.33px] w-[171.21px]" data-name="Time" id={isNotExpanded ? "node-754_46264" : "node-754_46217"}>
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgTime} />
+        </div>
+        <p className="-translate-x-1/2 absolute font-['SF_Pro:Medium',sans-serif] leading-[normal] left-[calc(50%-0.5px)] not-italic text-[#707070] text-[22px] text-center top-[76px] w-[215px] whitespace-pre-wrap" id={isNotExpanded ? "node-754_46265" : "node-754_46218"}>
+          Monday, June 6
+        </p>
+        <div className="absolute h-[62px] left-0 right-0 top-0" data-name="Progressive Blur" id={isNotExpanded ? "node-5551_18206" : "node-754_46220"}>
+          <div aria-hidden="true" className="absolute backdrop-blur-[0px] bg-black inset-0 mix-blend-screen pointer-events-none" />
+          <div className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] top-0 w-[402px]" data-name="Status bar - iPhone" id={isNotExpanded ? "node-5551_18207" : "node-5551_18194"}>
+            <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" id={isNotExpanded ? "node-I5551_18207-5465_16808" : "node-I5551_18194-5465_16808"}>
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" id={isNotExpanded ? "node-I5551_18207-5465_16809" : "node-I5551_18194-5465_16809"}>
+                9:41
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" id={isNotExpanded ? "node-I5551_18207-5465_16811" : "node-I5551_18194-5465_16811"}>
+              <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" id={isNotExpanded ? "node-I5551_18207-5465_16812" : "node-I5551_18194-5465_16812"}>
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+              </div>
+              <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" id={isNotExpanded ? "node-I5551_18207-5465_16813" : "node-I5551_18194-5465_16813"}>
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+              </div>
+              <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" id={isNotExpanded ? "node-I5551_18207-6325_1760" : "node-I5551_18194-6325_1760"}>
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {isExpanded && (
+        <>
+          <div className="absolute bottom-[54px] content-stretch flex flex-col gap-[15px] h-[443px] isolate items-center left-[4.5px] px-[8px] right-[4.5px]" data-name="Notification - Expanded" data-node-id="754:46236">
+            <div className="bg-[var(--backgrounds\/primary---elevated,white)] flex-[1_0_0] min-h-px min-w-px rounded-[32px] w-full z-[2]" data-name="Content Background" data-node-id="I754:46236;143:64281" />
+            <div className="content-stretch flex flex-col gap-[20px] items-start px-[26px] py-[20px] relative shrink-0 w-[250px] z-[1]" data-name="Menu" data-node-id="I754:46236;143:62995">
+              <div className="absolute left-[0.5px] size-[160px] top-0" data-name="Liquid Glass - Regular - Medium" data-node-id="I754:46236;5914:29101">
+                <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46236;5914:29101;5584:31830">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46236;5914:29101;5584:31831">
+                    <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46236;5914:29101;5584:31831;5584:31864" />
+                  </div>
+                  <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I754:46236;5914:29101;5607:81561" />
+                </div>
+                <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I754:46236;5914:29101;5607:25956">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                    <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                    <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I754:46236;5914:29101;5607:25843" />
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full" data-name="Row 1" data-node-id="I754:46236;5551:17823">
+                <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I754:46236;5551:17825">
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                </div>
+                <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I754:46236;5551:17824">
+                  <p className="leading-[22px] overflow-hidden">Action</p>
+                </div>
+              </div>
+              <div className="content-stretch flex font-['SF_Pro:Regular',sans-serif] gap-[14px] items-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] w-full" data-name="Row 2" data-node-id="I754:46236;5551:17812">
+                <div className="flex flex-col justify-center relative shrink-0 text-center w-[20px]" data-node-id="I754:46236;5551:17814">
+                  <p className="leading-[22px] whitespace-pre-wrap">􀓔</p>
+                </div>
+                <div className="flex flex-[1_0_0] flex-col justify-center min-h-px min-w-px overflow-hidden relative text-ellipsis tracking-[-0.43px] whitespace-nowrap" data-node-id="I754:46236;5551:17813">
+                  <p className="leading-[22px] overflow-hidden">Action</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <IPhone17Pro className="absolute h-[874px] left-0 top-0 w-[402px]" />
+        </>
+      )}
+      {isNotExpanded && (
+        <>
+          <div className="absolute bg-[var(--component-fill,#f5f5f5)] border border-[var(--component-stroke,#6155f5)] border-dashed bottom-[122px] content-stretch flex flex-col gap-[20px] items-start left-0 p-[20px] right-0 rounded-[5px]" data-name="Notification - Collapsed/Notification - List" data-node-id="754:46281">
+            <div className="absolute bg-[rgba(0,0,0,0.05)] blur-[50px] inset-[-11px_-1px_-18.33px_-1px]" data-name="Shadow" data-node-id="I754:46281;5551:16764" />
+            <div className="content-stretch flex gap-[10px] h-[64px] items-center justify-center pl-[14px] pr-[17px] py-[13px] relative rounded-[24px] shrink-0 w-full" data-name="Notification - Collapsed" data-node-id="I754:46281;135:73230">
+              <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;135:73230;5914:25733;5914:25447">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;135:73230;5914:25733;5914:25448">
+                  <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;135:73230;5914:25733;5914:25448;5584:31864" />
+                </div>
+                <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;135:73230;5914:25733;5914:25449" />
+              </div>
+              <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;135:73230;5914:25733;5914:23552" />
+              <CustomIcon className="overflow-clip relative shrink-0 size-[66px]" />
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px relative" data-name="Title, Time and Description" data-node-id="I754:46281;135:73230;135:79136">
+                <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Title and Time" data-node-id="I754:46281;135:73230;135:84610">
+                  <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[17px] min-h-px min-w-px not-italic relative text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] whitespace-pre-wrap" data-node-id="I754:46281;135:73230;0:11297">
+                    Title
+                  </p>
+                  <div className="content-stretch flex items-center justify-center mix-blend-plus-lighter relative self-stretch shrink-0" data-name="_Time" data-node-id="I754:46281;135:73230;533:7315">
+                    <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[#4d4d4d] text-[13px] text-right" data-node-id="I754:46281;135:73230;533:7315;533:7104">
+                      9:41 AM
+                    </p>
+                  </div>
+                </div>
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] w-full whitespace-pre-wrap" data-node-id="I754:46281;135:73230;0:11296">
+                  Description
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[10px] h-[64px] items-center justify-center pl-[14px] pr-[17px] py-[13px] relative rounded-[24px] shrink-0 w-full" data-name="Notification - Collapsed" data-node-id="I754:46281;533:8538">
+              <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;533:8538;5914:25733;5914:25447">
+                <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;533:8538;5914:25733;5914:25448">
+                  <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;533:8538;5914:25733;5914:25448;5584:31864" />
+                </div>
+                <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;533:8538;5914:25733;5914:25449" />
+              </div>
+              <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;533:8538;5914:25733;5914:23552" />
+              <CustomIcon className="overflow-clip relative shrink-0 size-[66px]" />
+              <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px relative" data-name="Title, Time and Description" data-node-id="I754:46281;533:8538;135:79136">
+                <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Title and Time" data-node-id="I754:46281;533:8538;135:84610">
+                  <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[17px] min-h-px min-w-px not-italic relative text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] whitespace-pre-wrap" data-node-id="I754:46281;533:8538;0:11297">
+                    Title
+                  </p>
+                  <div className="content-stretch flex items-center justify-center mix-blend-plus-lighter relative self-stretch shrink-0" data-name="_Time" data-node-id="I754:46281;533:8538;533:7315">
+                    <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[#4d4d4d] text-[13px] text-right" data-node-id="I754:46281;533:8538;533:7315;533:7104">
+                      9:41 AM
+                    </p>
+                  </div>
+                </div>
+                <p className="font-['SF_Pro:Regular',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] w-full whitespace-pre-wrap" data-node-id="I754:46281;533:8538;0:11296">
+                  Description
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[10px] items-center justify-center pb-[21px] pl-[14px] pr-[17px] pt-[13px] relative rounded-[24px] shrink-0 w-full" data-name="Notification - Collapsed" data-node-id="I754:46281;533:6566">
+              <div className="absolute bottom-[0.33px] content-stretch flex flex-col h-[8px] items-center justify-end left-0 opacity-90 overflow-clip px-[20px] right-0 rounded-[24px]" data-name="Banner" data-node-id="I754:46281;533:6566;5549:6259">
+                <div className="h-[160px] relative shrink-0 w-full" data-name="Liquid Glass - Clear/Light" data-node-id="I754:46281;533:6566;5914:26916">
+                  <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;533:6566;5914:26916;5914:25447">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;533:6566;5914:26916;5914:25448">
+                      <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;533:6566;5914:26916;5914:25448;5584:31864" />
+                    </div>
+                    <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;533:6566;5914:26916;5914:25449" />
+                  </div>
+                  <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;533:6566;5914:26916;5914:23552" />
+                </div>
+              </div>
+              <div className="absolute inset-[0_0_8.33px_0]" data-name="Liquid Glass - Clear/Light" data-node-id="I754:46281;533:6566;5914:26282">
+                <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;533:6566;5914:26282;5914:25447">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;533:6566;5914:26282;5914:25448">
+                    <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;533:6566;5914:26282;5914:25448;5584:31864" />
+                  </div>
+                  <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;533:6566;5914:26282;5914:25449" />
+                </div>
+                <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;533:6566;5914:26282;5914:23552" />
+              </div>
+              <CustomIcon className="overflow-clip relative shrink-0 size-[66px]" />
+              <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px relative" data-name="Title, Time and Description" data-node-id="I754:46281;533:6566;5549:4816">
+                  <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Title and Time" data-node-id="I754:46281;533:6566;5549:4817">
+                    <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[17px] min-h-px min-w-px not-italic relative text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] whitespace-pre-wrap" data-node-id="I754:46281;533:6566;5549:4818">
+                      Title
+                    </p>
+                    <div className="content-stretch flex items-center justify-center mix-blend-plus-lighter relative self-stretch shrink-0" data-name="_Time" data-node-id="I754:46281;533:6566;5549:4819">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[#4d4d4d] text-[13px] text-right" data-node-id="I754:46281;533:6566;5549:4819;533:7104">
+                        9:41 AM
+                      </p>
+                    </div>
+                  </div>
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] w-full whitespace-pre-wrap" data-node-id="I754:46281;533:6566;5549:4820">
+                    Description
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[10px] items-center justify-center pb-[27px] pl-[14px] pr-[17px] pt-[13px] relative rounded-[24px] shrink-0 w-full" data-name="Notification - Collapsed" data-node-id="I754:46281;5551:17293">
+              <div className="absolute bottom-[-1.67px] content-stretch flex flex-col h-[8px] items-center justify-end left-0 opacity-80 overflow-clip px-[40px] right-0 rounded-[24px]" data-name="Banner" data-node-id="I754:46281;5551:17293;5549:6355">
+                <div className="h-[160px] relative shrink-0 w-full" data-name="Liquid Glass - Clear/Light" data-node-id="I754:46281;5551:17293;5914:26711">
+                  <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;5551:17293;5914:26711;5914:25447">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;5551:17293;5914:26711;5914:25448">
+                      <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;5551:17293;5914:26711;5914:25448;5584:31864" />
+                    </div>
+                    <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;5551:17293;5914:26711;5914:25449" />
+                  </div>
+                  <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;5551:17293;5914:26711;5914:23552" />
+                </div>
+              </div>
+              <div className="absolute bottom-[6.33px] content-stretch flex flex-col h-[8px] items-center justify-end left-0 opacity-90 overflow-clip px-[20px] right-0 rounded-[24px]" data-name="Banner" data-node-id="I754:46281;5551:17293;5549:6357">
+                <div className="h-[160px] relative shrink-0 w-full" data-name="Liquid Glass - Clear/Light" data-node-id="I754:46281;5551:17293;5914:26530">
+                  <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;5551:17293;5914:26530;5914:25447">
+                    <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;5551:17293;5914:26530;5914:25448">
+                      <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;5551:17293;5914:26530;5914:25448;5584:31864" />
+                    </div>
+                    <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;5551:17293;5914:26530;5914:25449" />
+                  </div>
+                  <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;5551:17293;5914:26530;5914:23552" />
+                </div>
+              </div>
+              <div className="absolute inset-[0_0_14.33px_0]" data-name="Liquid Glass - Clear/Light" data-node-id="I754:46281;5551:17293;5914:26397">
+                <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I754:46281;5551:17293;5914:26397;5914:25447">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I754:46281;5551:17293;5914:26397;5914:25448">
+                    <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I754:46281;5551:17293;5914:26397;5914:25448;5584:31864" />
+                  </div>
+                  <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[24px]" data-name="Blur" data-node-id="I754:46281;5551:17293;5914:26397;5914:25449" />
+                </div>
+                <div className="absolute bg-[rgba(255,255,255,0.07)] inset-0 mix-blend-screen rounded-[24px]" data-name="Glass Effect" data-node-id="I754:46281;5551:17293;5914:26397;5914:23552" />
+              </div>
+              <CustomIcon className="overflow-clip relative shrink-0 size-[66px]" />
+              <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+                <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px relative" data-name="Title, Time and Description" data-node-id="I754:46281;5551:17293;5549:4952">
+                  <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Title and Time" data-node-id="I754:46281;5551:17293;5549:4953">
+                    <p className="flex-[1_0_0] font-['SF_Pro:Semibold',sans-serif] leading-[17px] min-h-px min-w-px not-italic relative text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] whitespace-pre-wrap" data-node-id="I754:46281;5551:17293;5549:4954">
+                      Title
+                    </p>
+                    <div className="content-stretch flex items-center justify-center mix-blend-plus-lighter relative shrink-0" data-name="_Time" data-node-id="I754:46281;5551:17293;5549:4955">
+                      <p className="font-['SF_Pro:Regular',sans-serif] leading-[20px] not-italic relative shrink-0 text-[#4d4d4d] text-[13px] text-right" data-node-id="I754:46281;5551:17293;5549:4955;533:7104">
+                        9:41 AM
+                      </p>
+                    </div>
+                  </div>
+                  <p className="font-['SF_Pro:Regular',sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--grays\/white,white)] tracking-[-0.23px] w-full whitespace-pre-wrap" data-node-id="I754:46281;5551:17293;5549:4956">
+                    Description
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <IPhone17Pro className="absolute h-[874px] left-0 top-0 w-[402px]" />
+        </>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Body/Regular: Font(family: "SF Pro", style: Regular, size: 17, weight: 400, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Notifications
+**Node ID:** 770:21905
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Notification - Collapsed/Notification - List
+**Node ID:** 135:73247
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/notifications](https://developer.apple.com/design/human-interface-guidelines/notifications)
+
+## Notification - Collapsed
+**Node ID:** 135:67787
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/notifications](https://developer.apple.com/design/human-interface-guidelines/notifications)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

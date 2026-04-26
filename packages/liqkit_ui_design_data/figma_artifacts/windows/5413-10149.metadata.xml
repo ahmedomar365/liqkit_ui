@@ -1,0 +1,11 @@
+<canvas id="5413:10149" name="Windows" x="0" y="0" width="0" height="0">
+  <section id="5589:23685" x="0" y="-100" width="590" height="600">
+    <symbol id="5588:3741" name="Window" x="100" y="100" width="400" height="400" />
+  </section>
+  <symbol id="5589:4090" name="_Window Resize" x="170" y="560" width="65" height="65" />
+  <frame id="5565:22697" name="_Window Controls" x="0" y="560" width="100" height="100">
+    <symbol id="5565:22709" name="State=Inactive" x="20" y="60" width="44" height="22" />
+    <symbol id="5565:22714" name="State=Active" x="20" y="20" width="44" height="22" />
+  </frame>
+  <instance id="5415:18079" name="Header" x="0" y="-500" width="1400" height="208" />
+</canvas>

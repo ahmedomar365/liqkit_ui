@@ -1,0 +1,567 @@
+const imgDot7 = "https://www.figma.com/api/mcp/asset/0047d511-4f81-450d-9b1d-69f839d17204";
+type PageControlProps = {
+  className?: string;
+  dots?: "2" | "3" | "4" | "5" | "6" | "7" | "8+";
+  selection?: "1" | "7" | "2" | "3" | "4" | "5" | "6" | "8";
+};
+
+export default function PageControl({ className, dots = "2", selection = "1" }: PageControlProps) {
+  if (dots === "8+" && selection === "8") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=8" data-node-id="488:54652">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54653">
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54654">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 1" data-node-id="488:54655" />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54656">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 2" data-node-id="488:54657" />
+          </div>
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54658" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54659" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54660" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54661" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 7" data-node-id="488:54662" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 8" data-node-id="488:54663" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "7") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=7" data-node-id="488:54664">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54665">
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54666">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 1" data-node-id="488:54667" />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54668">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 2" data-node-id="488:54669" />
+          </div>
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54670" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54671" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54672" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54673" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 7" data-node-id="488:54674" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 8" data-node-id="488:54675" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "6") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=6" data-node-id="488:54676">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54677">
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54678">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 1" data-node-id="488:54679" />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54680">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 2" data-node-id="488:54681" />
+          </div>
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54682" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54683" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54684" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54685" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 7" data-node-id="488:54686" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 8" data-node-id="488:54687" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "5") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=5" data-node-id="488:54688">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54689">
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54690">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 1" data-node-id="488:54691" />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54692">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 2" data-node-id="488:54693" />
+          </div>
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54694" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54695" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54697" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 7" data-node-id="488:54698" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 8" data-node-id="488:54699" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54700">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 9" data-node-id="488:54701" />
+          </div>
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54702">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 10" data-node-id="488:54703" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "4") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=4" data-node-id="488:54704">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54705">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54706" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54707" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54708" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54709" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54710" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54711" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54712">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54713" />
+          </div>
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54714">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 8" data-node-id="488:54715" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=3" data-node-id="488:54716">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54717">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54718" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54719" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54720" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54721" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54722" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54723" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54724">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54725" />
+          </div>
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54726">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 8" data-node-id="488:54727" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=2" data-node-id="488:54728">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54729">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54730" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54731" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54732" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54733" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54734" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54735" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54736">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54737" />
+          </div>
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54738">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 8" data-node-id="488:54739" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "8+" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=8+, Selection=1" data-node-id="488:54740">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54741">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54742" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54743" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54744" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54745" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54746" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54747" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54748">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54749" />
+          </div>
+          <div className="relative shrink-0 size-[6px]" data-name="Frame" data-node-id="488:54750">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[4px] top-1/2" data-name="Dot 8" data-node-id="488:54751" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "7") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=7" data-node-id="488:54752">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54753">
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54754">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 1" data-node-id="488:54755" />
+          </div>
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54756" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54757" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54758" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54759" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54760" />
+          <div className="relative shrink-0 size-[8px]" data-name="Dot 7" data-node-id="488:54761">
+            <img alt="" className="absolute block inset-0 max-w-none" src={imgDot7} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "6") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=6" data-node-id="488:54763">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54764">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54765" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54766" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54767" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54768" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54769" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54770" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54771">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54772" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "5") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=5" data-node-id="488:54773">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54774">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54775" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54776" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54777" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54778" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54779" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54780" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54781">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54782" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "4") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=4" data-node-id="488:54783">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54784">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54785" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54786" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54787" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54788" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54789" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54790" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54791">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54792" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=3" data-node-id="488:54793">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54794">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54795" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54796" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54797" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54798" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54799" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54800" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54801">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54802" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=2" data-node-id="488:54803">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54804">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54805" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54806" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54807" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54808" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54809" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54810" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54811">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54812" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "7" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=7, Selection=1" data-node-id="488:54813">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54814">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54815" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54816" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54817" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54818" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54819" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54820" />
+          <div className="relative shrink-0 size-[8px]" data-name="Frame" data-node-id="488:54821">
+            <div className="-translate-x-1/2 -translate-y-1/2 absolute bg-[var(--labels\/primary,black)] left-1/2 opacity-30 rounded-[50px] size-[6px] top-1/2" data-name="Dot 7" data-node-id="488:54822" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "6") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=6" data-node-id="488:54823">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54824">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54825" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54826" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54827" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54828" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54829" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54830" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "5") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=5" data-node-id="488:54831">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54832">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54833" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54834" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54835" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54836" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54837" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54838" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "4") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=4" data-node-id="488:54839">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54840">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54841" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54842" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54843" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54844" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54845" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54846" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=3" data-node-id="488:54847">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54848">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54849" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54850" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54851" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54852" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54853" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54854" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=2" data-node-id="488:54855">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54856">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54857" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54858" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54859" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54860" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54861" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54862" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "6" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=6, Selection=1" data-node-id="488:54863">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54864">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54865" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54866" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54867" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54868" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54869" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 6" data-node-id="488:54870" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "5" && selection === "5") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=5, Selection=5" data-node-id="488:54871">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54872">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54873" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54874" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54875" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54876" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54877" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "5" && selection === "4") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=5, Selection=4" data-node-id="488:54878">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54879">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54880" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54881" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54882" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54883" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54884" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "5" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=5, Selection=3" data-node-id="488:54885">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54886">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54887" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54888" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54889" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54890" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54891" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "5" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=5, Selection=2" data-node-id="488:54892">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54893">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54894" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54895" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54896" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54897" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54898" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "5" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=5, Selection=1" data-node-id="488:54899">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54900">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54901" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54902" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54903" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54904" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 5" data-node-id="488:54905" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "4" && selection === "4") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=4, Selection=4" data-node-id="488:54906">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54907">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54908" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54909" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54910" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54911" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "4" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=4, Selection=3" data-node-id="488:54912">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54913">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54914" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54915" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54916" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54917" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "4" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=4, Selection=2" data-node-id="488:54918">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54919">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54920" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54921" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54922" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54923" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "4" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=4, Selection=1" data-node-id="488:54924">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54925">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54926" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54927" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54928" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 4" data-node-id="488:54929" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "3" && selection === "3") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=3, Selection=3" data-node-id="488:54930">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54931">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54932" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54933" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54934" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "3" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=3, Selection=2" data-node-id="488:54935">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54936">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54937" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54938" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54939" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "3" && selection === "1") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=3, Selection=1" data-node-id="488:54940">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54941">
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54942" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54943" />
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 3" data-node-id="488:54944" />
+        </div>
+      </div>
+    );
+  }
+  if (dots === "2" && selection === "2") {
+    return (
+      <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=2, Selection=2" data-node-id="488:54945">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54946">
+          <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54947" />
+          <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54948" />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={className || "h-[44px] relative w-[402px]"} data-name="Dots=2, Selection=1" data-node-id="488:54949">
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex gap-[8px] items-center justify-center left-[calc(50%-1px)] px-[12px] py-[8px] rounded-[50px] top-1/2" data-name="Frame" data-node-id="488:54950">
+        <div className="bg-[var(--labels\/primary,black)] rounded-[50px] shrink-0 size-[8px]" data-name="Dot 1" data-node-id="488:54951" />
+        <div className="bg-[var(--labels\/primary,black)] opacity-30 rounded-[50px] shrink-0 size-[8px]" data-name="Dot 2" data-node-id="488:54952" />
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Page control
+**Node ID:** 488:51848
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/page-controls](https://developer.apple.com/design/human-interface-guidelines/page-controls)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

@@ -1,0 +1,287 @@
+const imgIPhone17ProSilverPortrait = "https://www.figma.com/api/mcp/asset/b48d3774-6707-438b-9438-6700ac46dc3c";
+const imgCellularConnection = "https://www.figma.com/api/mcp/asset/70790523-0f02-488b-8967-ae1a5c15f24e";
+const imgWifi = "https://www.figma.com/api/mcp/asset/6c7fa3bf-e11d-484e-8a2c-a1256b6c7875";
+const imgFrame = "https://www.figma.com/api/mcp/asset/23ea59d2-464f-4c6a-9bf4-c0371350be59";
+const imgBlur = "https://www.figma.com/api/mcp/asset/fa8486ad-e882-4766-b655-4e36e685a526";
+const imgBg = "https://www.figma.com/api/mcp/asset/24e071a8-feee-4eee-a593-0d207f6c40b5";
+const imgBg1 = "https://www.figma.com/api/mcp/asset/c20a46d3-1512-4480-b655-e554d386d335";
+
+function IPhone17Pro({ className }: { className?: string }) {
+  return (
+    <div className={className || ""} data-name="iPhone 17 Pro" data-node-id="6316:14140">
+      <div className="h-[874px] relative w-[402px]" data-name="Color=Silver" data-node-id="6316:14148">
+        <div className="absolute h-[920px] left-[-24px] top-[-23px] w-[450px]" data-name="iPhone 17 Pro - Silver - Portrait" data-node-id="6316:14150">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone17ProSilverPortrait} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type StatusBarIPhoneProps = {
+  className?: string;
+  time?: string;
+};
+
+function StatusBarIPhone({ className, time = "9:41" }: StatusBarIPhoneProps) {
+  return (
+    <div className={className || "content-stretch flex gap-[154px] items-center justify-center pb-[19px] pt-[21px] px-[24px] relative w-[402px]"} data-name="Status bar - iPhone" data-node-id="5465:16807">
+      <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" data-node-id="5465:16808">
+        <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="5465:16809">
+          {time}
+        </p>
+      </div>
+      <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" data-node-id="5465:16811">
+        <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" data-node-id="5465:16812">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+        </div>
+        <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" data-node-id="5465:16813">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+        </div>
+        <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" data-node-id="6325:1760">
+          <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+        </div>
+      </div>
+    </div>
+  );
+}
+type GrabberProps = {
+  className?: string;
+  mode?: "Light" | "Dark";
+};
+
+function Grabber({ className, mode = "Light" }: GrabberProps) {
+  return <div className={className || "bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] w-[36px]"} data-node-id="5827:57545" />;
+}
+type SheetsModalsProps = {
+  className?: string;
+  type?: "Fullscreen" | "Fullscreen Stack" | "Inspector";
+};
+
+export default function SheetsModals({ className, type = "Fullscreen" }: SheetsModalsProps) {
+  const isFullscreen = type === "Fullscreen";
+  const isFullscreenStack = type === "Fullscreen Stack";
+  const isInspector = type === "Inspector";
+  const isInspectorOrFullscreen = ["Inspector", "Fullscreen"].includes(type);
+  return (
+    <div className={className || "bg-[var(--backgrounds\/primary,white)] h-[874px] relative rounded-[48px] w-[402px]"} id={isFullscreen ? "node-754_64541" : isFullscreenStack ? "node-754_64543" : "node-754_64555"}>
+      <div className={`absolute inset-0 overflow-clip rounded-[44px] ${isFullscreenStack ? String.raw`bg-[var(--grays\/black,black)]` : String.raw`bg-[var(--backgrounds\/primary,white)]`}`} data-name="Screen" id={isFullscreen ? "node-5729_24437" : isFullscreenStack ? "node-5729_24438" : "node-5729_24585"}>
+        {["Fullscreen Stack", "Fullscreen"].includes(type) && (
+          <div className={`absolute inset-[62px_0_0_0] ${isFullscreen ? String.raw`bg-[var(--backgrounds\/primary---elevated,white)] content-stretch flex flex-col items-center rounded-tl-[38px] rounded-tr-[38px] shadow-[0px_15px_75px_0px_rgba(0,0,0,0.18)]` : ""}`} data-name="Sheet - Full Screen - iPhone" id={isFullscreen ? "node-5729_24127" : "node-5729_24154"}>
+            {isFullscreenStack && (
+              <>
+                <div className="absolute bg-[var(--backgrounds\/primary,white)] content-stretch flex flex-col inset-[0_16px] items-center overflow-clip rounded-tl-[38px] rounded-tr-[38px]" data-name="Background Page" data-node-id="I5729:24154;5591:74165">
+                  <div className="bg-[rgba(0,0,0,0.1)] flex-[1_0_0] min-h-px min-w-px w-full" data-name="Overlay" data-node-id="I5729:24154;6238:62821" />
+                </div>
+                <div className="absolute bg-[var(--backgrounds\/primary---elevated,white)] content-stretch flex flex-col inset-[10px_0_0_0] items-center overflow-clip rounded-tl-[38px] rounded-tr-[38px] shadow-[0px_15px_75px_0px_rgba(0,0,0,0.18)]" data-name="Sheet" data-node-id="I5729:24154;5591:74166">
+                  <div className="content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full" data-name="Toolbar - Top - Sheet" data-node-id="I5729:24154;5726:35206">
+                    <div className="content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0" data-name="Grabber" data-node-id="I5729:24154;5726:35206;5726:33527">
+                      <Grabber className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" />
+                    </div>
+                    <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5729:24154;5726:35206;5726:33529">
+                      <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24154;5726:35206;5726:33530">
+                        <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24154;5726:35206;5726:33530;5551:22138">
+                          <img alt="" className="absolute block inset-0 max-w-none" src={imgBg} />
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5729:24154;5726:35206;5726:33530;5551:22128" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[normal] whitespace-pre-wrap">􀆄</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-row items-center self-stretch">
+                        <div className="h-full shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5729:24154;5726:35206;5726:33531" />
+                      </div>
+                      <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24154;5726:35206;5726:33532">
+                        <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24154;5726:35206;5726:33532;5551:22487">
+                          <img alt="" className="absolute block inset-0 max-w-none" src={imgBg1} />
+                        </div>
+                        <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]" data-node-id="I5729:24154;5726:35206;5726:33532;5551:22126" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                          <p className="leading-[normal] whitespace-pre-wrap">􀄨</p>
+                        </div>
+                      </div>
+                      <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5729:24154;5726:35206;5827:65227">
+                        <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5729:24154;5726:35206;5827:65227;5827:56434">
+                          Title
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+            {isFullscreen && (
+              <div className="content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full" data-name="Toolbar - Top - Sheet" data-node-id="I5729:24127;5726:34303">
+                <div className="content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0" data-name="Grabber" data-node-id="I5729:24127;5726:34303;5726:33527">
+                  <Grabber className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" />
+                </div>
+                <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5729:24127;5726:34303;5726:33529">
+                  <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24127;5726:34303;5726:33530">
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24127;5726:34303;5726:33530;5551:22138">
+                      <img alt="" className="absolute block inset-0 max-w-none" src={imgBg} />
+                    </div>
+                    <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5729:24127;5726:34303;5726:33530;5551:22128" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[normal] whitespace-pre-wrap">􀆄</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center self-stretch">
+                    <div className="h-full shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5729:24127;5726:34303;5726:33531" />
+                  </div>
+                  <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24127;5726:34303;5726:33532">
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24127;5726:34303;5726:33532;5551:22487">
+                      <img alt="" className="absolute block inset-0 max-w-none" src={imgBg1} />
+                    </div>
+                    <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]" data-node-id="I5729:24127;5726:34303;5726:33532;5551:22126" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[normal] whitespace-pre-wrap">􀄨</p>
+                    </div>
+                  </div>
+                  <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5729:24127;5726:34303;5827:65227">
+                    <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5729:24127;5726:34303;5827:65227;5827:56434">
+                      Title
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {isInspector && (
+          <>
+            <div className="absolute backdrop-blur-[var(--scroll-edge-effect\/blur-radius,5px)] h-[200px] left-0 right-0 top-0" data-name="Scroll Edge Effect - Soft" data-node-id="5729:24713">
+              <div className="absolute backdrop-blur-[30px] bg-black inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0%_0%] mask-size-[100%_100%] mix-blend-screen opacity-90" data-name="Blur" data-node-id="I5729:24713;5661:28853" style={{ maskImage: `url('${imgBlur}')` }} />
+            </div>
+            <div className="absolute content-stretch flex flex-col inset-[500px_0_0_0] items-center pb-[6px] px-[6px]" data-name="Sheet - Inspector - iPhone" data-node-id="5729:24586">
+              <div className="absolute inset-[0_6px_6px_6px]" data-name="Liquid Glass - Regular - Medium" data-node-id="I5729:24586;5551:41149">
+                <div className="absolute inset-[-26px]" data-name="Shadow" data-node-id="I5729:24586;5551:41149;5584:31830">
+                  <div className="absolute bg-white inset-[-50px]" data-name="_Mask - Squircle" data-node-id="I5729:24586;5551:41149;5584:31831">
+                    <div className="absolute bg-black inset-[76px] rounded-[34px]" data-name="Shape" data-node-id="I5729:24586;5551:41149;5584:31831;5584:31864" />
+                  </div>
+                  <div className="absolute backdrop-blur-[40px] bg-[rgba(0,0,0,0.08)] blur-[20px] inset-[31px_26px_21px_26px] mix-blend-hard-light rounded-[34px]" data-name="Blur" data-node-id="I5729:24586;5551:41149;5607:81561" />
+                </div>
+                <div className="absolute inset-0 rounded-[34px]" data-name="Fill" data-node-id="I5729:24586;5551:41149;5607:25956">
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[34px]">
+                    <div className="absolute bg-[#262626] inset-0 mix-blend-color-dodge rounded-[34px]" />
+                    <div className="absolute bg-[rgba(245,245,245,0.6)] inset-0 rounded-[34px]" />
+                  </div>
+                </div>
+                <div className="absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[34px]" data-name="Glass Effect" data-node-id="I5729:24586;5551:41149;5607:25843" />
+              </div>
+              <div className="content-stretch flex flex-col items-center pb-[10px] relative shrink-0 w-full" data-name="Toolbar - Top - Sheet" data-node-id="I5729:24586;5729:24624">
+                <div className="content-stretch flex flex-col h-[16px] items-start pt-[5px] relative shrink-0" data-name="Grabber" data-node-id="I5729:24586;5729:24624;5726:33527">
+                  <Grabber className="bg-[var(--fills---vibrant\/primary,#ccc)] h-[5px] rounded-[100px] shrink-0 w-[36px]" />
+                </div>
+                <div className="content-stretch flex items-center justify-between px-[16px] relative shrink-0 w-full" data-name="Title and Controls" data-node-id="I5729:24586;5729:24624;5726:33529">
+                  <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24586;5729:24624;5726:33530">
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24586;5729:24624;5726:33530;5551:22138">
+                      <img alt="" className="absolute block inset-0 max-w-none" src={imgBg} />
+                    </div>
+                    <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--labels---vibrant\/secondary,#727272)] text-center w-[36px]" data-node-id="I5729:24586;5729:24624;5726:33530;5551:22128" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[normal] whitespace-pre-wrap">􀆄</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center self-stretch">
+                    <div className="h-full shrink-0 w-[8px]" data-name="Spacer" data-node-id="I5729:24586;5729:24624;5726:33531" />
+                  </div>
+                  <div className="content-stretch flex gap-[12px] h-[44px] items-center justify-center px-[4px] relative rounded-[296px] shrink-0" data-name="_Buttons - Top - Sheets" data-node-id="I5729:24586;5729:24624;5726:33532">
+                    <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[44px] top-1/2" data-name="BG" data-node-id="I5729:24586;5729:24624;5726:33532;5551:22487">
+                      <img alt="" className="absolute block inset-0 max-w-none" src={imgBg1} />
+                    </div>
+                    <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] h-full justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-center text-white w-[36px]" data-node-id="I5729:24586;5729:24624;5726:33532;5551:22126" style={{ fontFeatureSettings: "\'ss16\' 1" }}>
+                      <p className="leading-[normal] whitespace-pre-wrap">􀄨</p>
+                    </div>
+                  </div>
+                  <div className="-translate-x-1/2 absolute h-[22px] left-1/2 top-[13px] w-[36px]" data-name="_Title - Body" data-node-id="I5729:24586;5729:24624;5827:65227">
+                    <p className="absolute font-['SF_Pro:Semibold',sans-serif] leading-[22px] left-0 not-italic right-0 text-[17px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] top-0 tracking-[-0.43px]" data-node-id="I5729:24586;5729:24624;5827:65227;5827:56434">
+                      Title
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {isInspectorOrFullscreen && (
+        <>
+          <StatusBarIPhone className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0" />
+          <IPhone17Pro className="absolute h-[874px] left-0 top-0 w-[402px]" />
+        </>
+      )}
+      {isFullscreenStack && (
+        <>
+          <div className="absolute content-stretch flex gap-[154px] items-center justify-center left-0 pb-[19px] pt-[21px] px-[24px] right-0 top-0" data-name="Status bar - iPhone" data-node-id="5729:24116">
+            <div className="content-stretch flex flex-[1_0_0] h-[22px] items-center justify-center min-h-px min-w-px pt-[1.5px] relative" data-name="Time" data-node-id="I5729:24116;5465:16808">
+              <p className="font-['SF_Pro:Semibold',sans-serif] leading-[22px] not-italic relative shrink-0 text-[17px] text-[color:var(--labels\/primary,black)] text-center" data-node-id="I5729:24116;5465:16809">
+                9:41
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] gap-[7px] h-[22px] items-center justify-center min-h-px min-w-px pr-px pt-px relative" data-name="Levels" data-node-id="I5729:24116;5465:16811">
+              <div className="h-[12.226px] relative shrink-0 w-[19.2px]" data-name="Cellular Connection" data-node-id="I5729:24116;5465:16812">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgCellularConnection} />
+              </div>
+              <div className="h-[12.328px] relative shrink-0 w-[17.142px]" data-name="Wifi" data-node-id="I5729:24116;5465:16813">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgWifi} />
+              </div>
+              <div className="h-[13px] relative shrink-0 w-[27.328px]" data-name="Frame" data-node-id="I5729:24116;6325:1760">
+                <img alt="" className="absolute block inset-0 max-w-none" src={imgFrame} />
+              </div>
+            </div>
+          </div>
+          <IPhone17Pro className="absolute h-[874px] left-0 top-0 w-[402px]" />
+        </>
+      )}
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Headline/Regular: Font(family: "SF Pro", style: Semibold, size: 17, weight: 590, lineHeight: 22, letterSpacing: -0.4300000071525574).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Sheets (Modals)
+**Node ID:** 770:21908
+
+To switch between light and dark modes, use the apply variable mode menu in the Appearance section of the Design panel and choose an option in the System Colors submenu.
+
+## Sheet - Inspector - iPhone
+**Node ID:** 5551:41121
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+## Toolbar - Top - Sheet
+**Node ID:** 5726:33474
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Stacked=True
+**Node ID:** 5591:74164
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+## Stacked=False
+**Node ID:** 0:5085
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/sheets](https://developer.apple.com/design/human-interface-guidelines/sheets)
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

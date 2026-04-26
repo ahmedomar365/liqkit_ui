@@ -1,0 +1,1697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windows - Native HTML/CSS Render</title>
+    <style>
+      body { margin: 0; font-family: "SF Pro Text", "Segoe UI", Arial, sans-serif; background: #f7f8fa; color: #111; }
+      .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+      .card { background: #fff; border: 1px solid #d8dce3; border-radius: 12px; padding: 14px; }
+      h1 { margin: 0 0 8px; font-size: 20px; }
+      h2 { margin: 0 0 8px; font-size: 16px; }
+      .coverage { margin: 0 0 10px; font-size: 13px; color: #4f5661; }
+      pre { margin: 0; white-space: pre-wrap; font-size: 12px; line-height: 1.45; border: 1px solid #d8dce3; border-radius: 8px; padding: 10px; background: #fafbfc; overflow: auto; max-height: 70vh; }
+      img { max-width: 100%; border: 1px solid #d8dce3; border-radius: 8px; background: #fff; }
+      .component-root { min-height: 140px; display: grid; place-items: center; border: 1px dashed #c4cad3; border-radius: 10px; padding: 12px; background: #fcfdff; overflow: auto; }
+      .meta { margin: 0 0 12px; color: #4f5661; font-size: 14px; }
+      .links a { margin-right: 10px; }
+      body.ios26-fidelity-mode { background: #ffffff; }
+      body.ios26-fidelity-mode .layout { display: block; padding: 0; }
+      body.ios26-fidelity-mode .card { border: 0; border-radius: 0; background: transparent; padding: 0; box-shadow: none; }
+      body.ios26-fidelity-mode .card:first-child { width: fit-content; margin: 0 auto; }
+      body.ios26-fidelity-mode .card:last-child { display: none; }
+      body.ios26-fidelity-mode h1,
+      body.ios26-fidelity-mode h2,
+      body.ios26-fidelity-mode .meta,
+      body.ios26-fidelity-mode .links,
+      body.ios26-fidelity-mode .coverage { display: none; }
+      body.ios26-fidelity-mode .component-root {
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: block;
+      }
+      body.ios26-fidelity-mode .component-root > * { margin: 0 auto; }
+      body.ios26-fidelity-mode .ios26-node-coverage-board,
+      body.ios26-fidelity-mode .ios26-node-anchor-ledger,
+      body.ios26-fidelity-mode [data-fidelity-ignore="true"] { display: none !important; }
+      .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: currentColor;
+}
+
+.ios26-status-cell,
+.ios26-status-wifi,
+.ios26-status-battery {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ios26-status-cell {
+  width: 19px;
+  height: 12px;
+  background:
+    linear-gradient(currentColor 0 0) 1px 9px / 2px 3px no-repeat,
+    linear-gradient(currentColor 0 0) 5px 7px / 2px 5px no-repeat,
+    linear-gradient(currentColor 0 0) 9px 5px / 2px 7px no-repeat,
+    linear-gradient(currentColor 0 0) 13px 3px / 2px 9px no-repeat,
+    linear-gradient(currentColor 0 0) 17px 1px / 2px 11px no-repeat;
+  opacity: 0.88;
+}
+
+.ios26-status-wifi {
+  width: 17px;
+  height: 12px;
+  background:
+    radial-gradient(130% 100% at 50% 100%, transparent 57%, currentColor 58% 63%, transparent 64%) center / 100% 100% no-repeat,
+    radial-gradient(100% 80% at 50% 100%, transparent 56%, currentColor 57% 62%, transparent 63%) center / 82% 82% no-repeat,
+    radial-gradient(circle at 50% 100%, currentColor 0 1.7px, transparent 1.8px);
+  opacity: 0.88;
+}
+
+.ios26-status-battery {
+  width: 27px;
+  height: 13px;
+  border: 1.45px solid currentColor;
+  border-radius: 3.4px;
+  box-sizing: border-box;
+  --battery-fill: 76%;
+}
+
+.ios26-status-battery::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: var(--battery-fill);
+  border-radius: 1.9px;
+  background: currentColor;
+}
+
+.ios26-status-battery::after {
+  content: "";
+  position: absolute;
+  right: -3.5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.88;
+}
+
+.ios26-device-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(9, 12, 18, 0.36),
+    inset 0 0 0 3.5px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.ios26-device-frame--phone::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 126px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  background: rgba(11, 13, 19, 0.68);
+}
+
+.ios26-device-frame--tablet::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(18, 21, 28, 0.45);
+}
+
+
+.ios26-examples-root {
+  width: min(1240px, 100%);
+  display: grid;
+  gap: 12px;
+  color: #12161f;
+  font: 400 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-loading {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8dce3;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #3b4350;
+}
+
+.ios26-examples-head {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d8dce3;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f5f6f8;
+}
+
+.ios26-examples-head h3 {
+  margin: 0;
+  font: 590 18px/22px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-head p {
+  margin: 0;
+  color: #4d5563;
+}
+
+.ios26-examples-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios26-examples-links a {
+  color: #1c4fd6;
+  text-decoration: underline;
+}
+
+.ios26-examples-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.ios26-examples-section {
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-examples-section h4 {
+  margin: 0;
+  font: 590 14px/19px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.ios26-examples-item {
+  border: 1px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  padding: 8px;
+  display: grid;
+  gap: 3px;
+}
+
+.ios26-examples-item p {
+  margin: 0;
+}
+
+.ios26-examples-item-name {
+  color: #131922;
+  font: 500 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+
+.ios26-examples-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ios26-example-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 402 / 874;
+  border-radius: 52px;
+  overflow: hidden;
+}
+
+.ios26-example-screen {
+  position: absolute;
+  inset: 14px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.ios26-example-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #f8fafc;
+  font: 590 20px/24px "SF Pro Text", "SF Pro", sans-serif;
+  z-index: 2;
+}
+
+.ios26-example-widget {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(180deg, #64d6ff 0%, #007aff 100%);
+  box-shadow: 0 10px 22px rgba(5, 22, 78, 0.32);
+}
+
+.ios26-example-widget::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(8, 84, 166, 0.42);
+  border-radius: 18px;
+}
+
+.ios26-example-widget span {
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 500 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  color: #f4f8ff;
+  text-shadow: 0 1px 2px rgba(1, 16, 64, 0.44);
+}
+
+.ios26-example-phone.is-small .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget {
+  height: 162px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget {
+  height: 276px;
+}
+
+.ios26-example-phone.is-medium .ios26-example-widget::before {
+  inset: 16px 18px;
+}
+
+.ios26-example-phone.is-large .ios26-example-widget::before {
+  inset: 18px;
+}
+
+.ios26-example-icons {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 292px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.ios26-example-phone.is-medium .ios26-example-icons {
+  top: 332px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons {
+  top: 446px;
+}
+
+.ios26-example-icons li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ios26-example-icons img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-icons span {
+  color: #f6f8fd;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.ios26-example-icons.is-compact {
+  top: 488px;
+  gap: 14px 10px;
+}
+
+.ios26-example-phone.is-large .ios26-example-icons li:nth-child(n + 9) {
+  display: none;
+}
+
+.ios26-example-search {
+  position: absolute;
+  left: 50%;
+  bottom: 128px;
+  transform: translateX(-50%);
+  padding: 8px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(198, 230, 255, 0.62);
+  background: linear-gradient(180deg, rgba(13, 152, 238, 0.48), rgba(4, 103, 182, 0.56));
+  color: #f7fbff;
+  font: 500 14px/16px "SF Pro Text", "SF Pro", sans-serif;
+  text-shadow: 0 1px 2px rgba(2, 14, 48, 0.5);
+  z-index: 2;
+}
+
+.ios26-example-dock {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  height: 84px;
+  border-radius: 29px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(11, 45, 136, 0.76), rgba(2, 43, 160, 0.8));
+  box-shadow: inset 0 0 0 1px rgba(178, 214, 255, 0.32);
+  z-index: 2;
+}
+
+.ios26-example-dock img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: block;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+.ios26-example-shell {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 4;
+  border: 0;
+  background: transparent;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .ios26-examples-phones {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ios26-example-phone {
+    width: min(402px, 100%);
+  }
+}
+
+body.ios26-fidelity-mode .ios26-examples-phones {
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.ios26-fidelity-mode .ios26-example-phone {
+  width: 402px;
+  zoom: 0.79;
+}
+
+
+.ios26-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+  color: currentColor;
+}
+
+.ios26-icon > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.ios26-menu-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-panel {
+  width: 238px;
+  border-radius: 34px;
+  padding: 10px 0;
+  border: 1px solid #d8dce3;
+  background: rgba(245, 245, 245, 0.84);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ios26-menu-panel--light {
+  --menu-label-primary: #1a1a1a;
+  --menu-label-secondary: #727272;
+  --menu-label-tertiary: #bfbfbf;
+  --menu-label-quaternary: #d9d9d9;
+  --menu-separator: #e6e6e6;
+  --menu-quick-bg: #ededed;
+  --menu-quick-active-bg: #dbdbdb;
+  --menu-destructive: #ff383c;
+}
+
+.ios26-menu-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.ios26-menu-quick-action {
+  border: 0;
+  border-radius: 20px;
+  background: var(--menu-quick-bg);
+  color: var(--menu-label-primary);
+  padding: 6px 4px;
+  min-height: 57px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+.ios26-menu-quick-action.is-active {
+  background: var(--menu-quick-active-bg);
+}
+
+.ios26-menu-quick-action.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-quick-action-icon {
+  width: 13px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-quick-action-label {
+  font: 500 12px/18px "SF Pro Text", "SF Pro", sans-serif;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-separator {
+  margin: 0 24px;
+  height: 1px;
+  background: var(--menu-separator);
+}
+
+.ios26-menu-items {
+  display: grid;
+  gap: 0;
+  padding: 0 16px;
+}
+
+.ios26-menu-item {
+  border: 0;
+  background: transparent;
+  min-height: 52px;
+  padding: 0 8px 0 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--menu-label-primary);
+  text-align: left;
+}
+
+.ios26-menu-item[disabled],
+.ios26-menu-item.is-disabled {
+  color: var(--menu-label-tertiary);
+}
+
+.ios26-menu-item.is-destructive {
+  color: var(--menu-destructive);
+}
+
+.ios26-menu-item-leading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ios26-menu-item-icon {
+  width: 28px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+
+.ios26-menu-item-label {
+  font: 400 17px/20px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios26-menu-item-shortcut,
+.ios26-menu-item-chevron {
+  font: 500 15px/20px "SF Pro Text", "SF Pro", "Apple Symbols", "Arial Unicode MS", sans-serif;
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ios26-menu-shortcut-command {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios26-menu-shortcut-command .ios26-menu-icon-svg--command {
+  width: 14px;
+  height: 14px;
+}
+
+.ios26-menu-shortcut-letter {
+  font: inherit;
+  color: inherit;
+}
+
+.ios26-menu-item.is-disabled .ios26-menu-item-shortcut {
+  color: var(--menu-label-quaternary);
+}
+
+.ios26-menu-item.is-destructive .ios26-menu-item-shortcut {
+  color: var(--menu-label-secondary);
+}
+
+.ios26-menu-item-chevron {
+  width: 14px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--menu-label-primary);
+}
+
+.ios26-menu-icon-svg {
+  display: block;
+}
+
+.ios26-menu-icon-svg--action {
+  width: 16px;
+  height: 16px;
+}
+
+.ios26-menu-quick-action-icon .ios26-menu-icon-svg--action {
+  width: 13px;
+  height: 13px;
+}
+
+.ios26-menu-icon-svg--chevron {
+  width: 9px;
+  height: 14px;
+}
+
+.ios26-menu-section-title {
+  margin: 0;
+  padding: 4px 8px 10px;
+  font: 500 13px/15px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.08px;
+  color: var(--menu-label-tertiary);
+}
+
+
+.ios26-node-anchor-ledger {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+}
+
+.ios26-node-anchor-details {
+  width: 100%;
+}
+
+.ios26-node-anchor-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font: 590 13px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1f2937;
+}
+
+.ios26-node-anchor-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ios26-node-anchor-bank {
+  margin: 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.ios26-node-anchor-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e9f0;
+}
+
+.ios26-node-anchor-item code {
+  grid-column: 1 / 2;
+  font: 500 11px/14px ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  color: #1d4ed8;
+  background: #eaf2ff;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.ios26-node-anchor-item-name {
+  grid-column: 2 / 3;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #0f172a;
+}
+
+.ios26-node-anchor-item-reasons {
+  grid-column: 1 / 3;
+  font: 400 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #475569;
+}
+
+
+.ios26-node-coverage-board {
+  width: min(1200px, 100%);
+  border: 1px solid #d8dce3;
+  border-radius: 16px;
+  background: rgba(248, 249, 252, 0.9);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-node-coverage-header {
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-header h3,
+.ios26-node-coverage-header p {
+  margin: 0;
+}
+
+.ios26-node-coverage-header h3 {
+  font: 590 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.18px;
+  color: #1a1d23;
+}
+
+.ios26-node-coverage-header p {
+  font: 400 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #616874;
+}
+
+.ios26-node-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.ios26-node-coverage-details {
+  display: grid;
+  gap: 8px;
+}
+
+.ios26-node-coverage-details > summary {
+  cursor: pointer;
+  font: 500 12px/16px "SF Pro Text", "SF Pro", sans-serif;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item {
+  border: 1px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #ffffff;
+  display: grid;
+  gap: 2px;
+}
+
+.ios26-node-coverage-item code {
+  font: 500 11px/14px ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: #2d3442;
+}
+
+.ios26-node-coverage-item-name {
+  font: 400 11px/15px "SF Pro Text", "SF Pro", sans-serif;
+  color: #5b6270;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.ios26-dialog-root {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.ios26-dialog-surface {
+  position: relative;
+  width: 300px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 34px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ios26-dialog-surface::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(20px);
+  mix-blend-mode: hard-light;
+  z-index: 0;
+}
+
+.ios26-dialog-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(0deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6)),
+    linear-gradient(0deg, rgba(38, 38, 38, 0), rgba(38, 38, 38, 0));
+  z-index: 0;
+}
+
+.ios26-dialog-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ios26-dialog-title-stack {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 8px 8px 24px;
+}
+
+.ios26-dialog-title {
+  margin: 0;
+  color: #000000;
+  font: 590 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-description {
+  margin: 0;
+  color: #000000;
+  font: 400 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+}
+
+.ios26-dialog-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.ios26-dialog-action {
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #000000;
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  letter-spacing: -0.43px;
+  text-align: center;
+}
+
+.ios26-dialog-action.is-filled {
+  background: #08f;
+  color: #ffffff;
+}
+
+.ios26-dialog-action.is-destructive {
+  color: #ff383c;
+}
+
+      .ios26-windows-symbol-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ios26-windows-demo {
+  width: 1024px;
+  max-width: 100%;
+  display: grid;
+}
+
+.ios26-windows-canvas-wrap {
+  width: 1024px;
+  height: 730px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios26-windows-canvas {
+  width: 1320px;
+  height: 940px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(0.7757575758);
+  transform-origin: top left;
+}
+
+.ios26-windows-shell-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ios26-windows-screen {
+  position: absolute;
+  left: 55px;
+  top: 53px;
+  width: 1210px;
+  height: 834px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ios26-windows-wallpaper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ios26-windows-wallpaper-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.ios26-windows-menubar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  padding: 0 26px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  color: #000;
+  z-index: 4;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.ios26-windows-menubar-left,
+.ios26-windows-menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-windows-menubar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font: 500 14px/18px "SF Pro Text", "SF Pro", sans-serif;
+}
+
+.ios26-windows-menubar-center span {
+  padding: 2px 11px 1px;
+  border-radius: 100px;
+}
+
+.ios26-windows-menubar-right .ios26-status-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ios26-windows-menubar-right .ios26-status-icon {
+  display: inline-flex;
+  color: #000000;
+}
+
+.ios26-windows-menubar-right .ios26-status-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ios26-windows-menubar-right .ios26-status-cell {
+  width: 16px;
+  height: 10px;
+}
+
+.ios26-windows-menubar-right .ios26-status-wifi {
+  width: 14px;
+  height: 10px;
+}
+
+.ios26-windows-menubar-right .ios26-status-battery {
+  width: 27px;
+  height: 12px;
+}
+
+.ios26-window-card {
+  position: absolute;
+  left: 96px;
+  top: 97px;
+  width: 1018px;
+  height: 620px;
+  border-radius: 34px;
+  background: #fff;
+  box-shadow: 0 20px 76px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.ios26-window-toolbar {
+  height: 64px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.ios26-window-toolbar-group {
+  display: flex;
+  gap: 12px;
+}
+
+.ios26-window-toolbar-group--leading .is-back {
+  min-width: 78px;
+  padding: 0 8px;
+  justify-content: center;
+}
+
+.ios26-window-glass-btn {
+  border: 0;
+  border-radius: 296px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 4px;
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  font: 500 17px/22px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ios26-window-glass-btn.is-symbol {
+  width: 44px;
+  min-width: 44px;
+}
+
+.ios26-window-title {
+  text-align: center;
+  font: 590 15px/18px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-window-title small {
+  display: block;
+  font: 500 12px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #727272;
+}
+
+.ios26-window-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: 0;
+  background: #fff;
+}
+
+.ios26-window-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 65px;
+  height: 65px;
+  padding: 6px;
+  display: grid;
+  align-items: end;
+  justify-items: end;
+}
+
+.ios26-window-resize svg {
+  width: 55.5px;
+  height: 55.5px;
+  display: block;
+  color: #1a1a1a;
+}
+
+.ios26-windows-controls-panel {
+  position: absolute;
+  left: 96px;
+  bottom: 70px;
+  display: grid;
+  gap: 8px;
+  z-index: 5;
+}
+
+.ios26-windows-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.ios26-windows-controls-row h4 {
+  margin: 0;
+  font: 500 11px/14px "SF Pro Text", "SF Pro", sans-serif;
+  color: #1a1a1a;
+}
+
+.ios26-windows-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ios26-windows-controls span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.32);
+}
+
+.ios26-windows-controls .is-red {
+  background: #ff605c;
+}
+
+.ios26-windows-controls .is-yellow {
+  background: #ffbd44;
+}
+
+.ios26-windows-controls .is-green {
+  background: #00ca4e;
+}
+
+.ios26-windows-controls.is-inactive span {
+  opacity: 0.34;
+}
+
+      @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <h1>Windows</h1>
+        <p class="meta">Category Node <code>5413:10149</code></p>
+        <p class="links">
+          <a href="https://www.figma.com/design/zaxcqZr1Vg7oSf38Vrhulx/iOS-and-iPadOS-26--Community-?node-id=5413-10149" target="_blank" rel="noreferrer">Open in Figma</a>
+          <a href="index.html">Back to Render Index</a>
+          <a href="../index.html#windows">Back to Evidence Index</a>
+        </p>
+        <h2>Native Render (HTML + CSS)</h2>
+        <p class="coverage">Coverage scope: <strong>canonical child (5589:4058)</strong> (not the full category canvas)</p>
+        <p class="coverage">Strict exception: <strong>none</strong></p>
+        <div class="component-root"><section class="ios26-windows-root" data-node-id="5413:10149" aria-label="Windows category">
+<script src="../evidence/figma-artifacts/native/shared-image-hydration.js"></script>
+<svg class="ios26-windows-symbol-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="ios26-windows-symbol-1" viewBox="0 0 20 20">
+      <rect x="4.4" y="4.4" width="11.2" height="11.2" rx="1.9" stroke="currentColor" stroke-width="1.4" />
+    </symbol>
+    <symbol id="ios26-windows-symbol-2" viewBox="0 0 20 20">
+      <rect x="4.7" y="4.7" width="10.6" height="10.6" rx="1.8" stroke="currentColor" stroke-width="1.4" /><path d="M8.2 8.2H11.8V11.8H8.2Z" fill="currentColor" />
+    </symbol>
+    <symbol id="ios26-windows-symbol-cell" viewBox="0 0 17 10">
+      <rect x="0.5" y="5.5" width="2.5" height="4" rx="0.8" fill="currentColor" />
+      <rect x="5" y="4" width="2.5" height="5.5" rx="0.8" fill="currentColor" />
+      <rect x="9.5" y="2" width="2.5" height="7.5" rx="0.8" fill="currentColor" />
+      <rect x="14" y="0" width="2.5" height="9.5" rx="0.8" fill="currentColor" />
+    </symbol>
+    <symbol id="ios26-windows-symbol-wifi" viewBox="0 0 14 10">
+      <path d="M0.9 3.1C2.4 1.7 4.6 0.8 7 0.8C9.4 0.8 11.6 1.7 13.1 3.1" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+      <path d="M2.7 5.4C3.8 4.4 5.3 3.8 7 3.8C8.7 3.8 10.2 4.4 11.3 5.4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+      <path d="M4.7 7.7C5.3 7.1 6.1 6.8 7 6.8C7.9 6.8 8.7 7.1 9.3 7.7" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+      <circle cx="7" cy="9" r="1" fill="currentColor" />
+    </symbol>
+    <symbol id="ios26-windows-symbol-battery" viewBox="0 0 27 12">
+      <rect x="0.5" y="0.5" width="23" height="11" rx="2.2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45" />
+      <rect x="2.2" y="2.2" width="19.6" height="7.6" rx="1.4" fill="currentColor" />
+      <rect x="24.5" y="4" width="2" height="4" rx="1" fill="currentColor" />
+    </symbol>
+  </defs>
+</svg>
+<div class="ios26-windows-demo" data-node-id="5589:4058" aria-label="Windows">
+  <div class="ios26-windows-canvas-wrap">
+    <div class="ios26-windows-canvas">
+      <img
+        class="ios26-windows-shell-image"
+        data-ios26-asset="windows/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb.png"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="ios26-windows-screen">
+        <div class="ios26-windows-wallpaper" aria-hidden="true">
+          <img
+            class="ios26-windows-wallpaper-image"
+            data-ios26-asset="windows/46ca574d-0660-4208-9539-07b552d863a9.jpg"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="ios26-windows-menubar" data-node-id="5732:63758">
+          <div class="ios26-windows-menubar-left"><span>9:41</span><span>Tue Apr 1</span></div>
+          <div class="ios26-windows-menubar-center" aria-label="Menu bar">
+            <span>App</span>
+            <span>File</span>
+            <span>Edit</span>
+            <span>Format</span>
+            <span>View</span>
+            <span>Window</span>
+            <span>Help</span>
+          </div>
+          <div class="ios26-windows-menubar-right" aria-hidden="true">
+            <div class="ios26-status-glyphs">
+              <span class="ios26-status-icon ios26-status-cell" aria-hidden="true"><svg viewBox="0 0 17 10" fill="none"><use href="#ios26-windows-symbol-cell" xlink:href="#ios26-windows-symbol-cell"></use></svg></span>
+              <span class="ios26-status-icon ios26-status-wifi" aria-hidden="true"><svg viewBox="0 0 14 10" fill="none"><use href="#ios26-windows-symbol-wifi" xlink:href="#ios26-windows-symbol-wifi"></use></svg></span>
+            </div>
+            <span>100%</span>
+            <span class="ios26-status-icon ios26-status-battery" aria-hidden="true"><svg viewBox="0 0 27 12" fill="none"><use href="#ios26-windows-symbol-battery" xlink:href="#ios26-windows-symbol-battery"></use></svg></span>
+          </div>
+        </div>
+
+        <section class="ios26-window-card" data-node-id="5732:63755">
+          <header class="ios26-window-toolbar" data-node-id="5732:63757">
+            <div class="ios26-window-toolbar-group ios26-window-toolbar-group--leading">
+              <button type="button" class="ios26-window-glass-btn is-back"><span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M12.5 3.5L6 10L12.5 16.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span>Label</span></button>
+              <button type="button" class="ios26-window-glass-btn is-symbol" aria-label="More actions"><span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-windows-symbol-1" xlink:href="#ios26-windows-symbol-1"></use></svg></span></button>
+              <button type="button" class="ios26-window-glass-btn is-symbol" aria-label="More actions"><span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-windows-symbol-2" xlink:href="#ios26-windows-symbol-2"></use></svg></span></button>
+            </div>
+            <div class="ios26-window-title">Title<br /><small>Subtitle</small></div>
+            <div class="ios26-window-toolbar-group ios26-window-toolbar-group--trailing">
+              <button type="button" class="ios26-window-glass-btn is-symbol" aria-label="More actions"><span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-windows-symbol-1" xlink:href="#ios26-windows-symbol-1"></use></svg></span></button>
+              <button type="button" class="ios26-window-glass-btn is-symbol" aria-label="More actions"><span class="ios26-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><use href="#ios26-windows-symbol-2" xlink:href="#ios26-windows-symbol-2"></use></svg></span></button>
+            </div>
+          </header>
+          <div class="ios26-window-content"></div>
+          <span class="ios26-window-resize" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none">
+              <path d="M20.34 1.5C19.05 5.99 16.65 10.09 13.36 13.41C10.06 16.72 5.98 19.15 1.5 20.47" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </section>
+
+        <section class="ios26-windows-controls-panel" aria-label="Window controls states">
+          <article class="ios26-windows-controls-row" data-node-id="5565:22714">
+            <h4>Window Controls Active</h4>
+            <div class="ios26-windows-controls" aria-hidden="true">
+              <span class="is-red"></span>
+              <span class="is-yellow"></span>
+              <span class="is-green"></span>
+            </div>
+          </article>
+
+          <article class="ios26-windows-controls-row" data-node-id="5565:22709">
+            <h4>Window Controls Inactive</h4>
+            <div class="ios26-windows-controls is-inactive" aria-hidden="true">
+              <span class="is-red"></span>
+              <span class="is-yellow"></span>
+              <span class="is-green"></span>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ios26:metadata-coverage:start -->
+<section class="ios26-node-coverage-board" aria-label="Windows metadata coverage supplement" data-node-id="5413:10149">
+  <header class="ios26-node-coverage-header">
+    <h3>Windows Metadata Coverage Supplement</h3>
+    <p>Auto-generated from persisted root metadata (5413:10149). Full coverage is persisted; this supplement lists 4 non-canonical root nodes.</p>
+  </header>
+  <details class="ios26-node-coverage-details">
+    <summary>Supplement nodes (4)</summary>
+    <div class="ios26-node-coverage-grid">
+    <article class="ios26-node-coverage-item" data-node-id="5588:3741" data-node-name="Window" data-node-reasons="metadata-root-gap">
+      <code>5588:3741</code>
+      <span class="ios26-node-coverage-item-name">Window</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5589:4090" data-node-name="_Window Resize" data-node-reasons="metadata-root-gap">
+      <code>5589:4090</code>
+      <span class="ios26-node-coverage-item-name">_Window Resize</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5565:22697" data-node-name="_Window Controls" data-node-reasons="metadata-root-gap">
+      <code>5565:22697</code>
+      <span class="ios26-node-coverage-item-name">_Window Controls</span>
+    </article>
+    <article class="ios26-node-coverage-item" data-node-id="5415:18079" data-node-name="Header" data-node-reasons="metadata-root-gap">
+      <code>5415:18079</code>
+      <span class="ios26-node-coverage-item-name">Header</span>
+    </article>
+    </div>
+  </details>
+</section>
+<!-- ios26:metadata-coverage:end -->
+</div>
+      </section>
+      <section class="card">
+        <h2>Saved Artifacts</h2>
+        <p><a href="../evidence/figma-artifacts/windows/5589-4058.screenshot.png" target="_blank" rel="noreferrer">Open screenshot</a></p><img src="../evidence/figma-artifacts/windows/5589-4058.screenshot.png" alt="Windows screenshot" />
+        <p><a href="../evidence/figma-artifacts/windows/5589-4058.design-context.txt" target="_blank" rel="noreferrer">Open design-context</a> · <a href="../evidence/figma-artifacts/windows/5589-4058.variable-defs.json" target="_blank" rel="noreferrer">Open variable-defs</a></p>
+        <p><a href="source/windows.native.html" target="_blank" rel="noreferrer">Open native HTML source</a> · <a href="source/windows.native.css" target="_blank" rel="noreferrer">Open native CSS source</a> · <a href="snapshots/windows.png" target="_blank" rel="noreferrer">Open local render snapshot</a></p>
+        <h2>Saved Figma Code</h2>
+        <pre>const imgIPadPro11M4SilverLandscape = &quot;https://www.figma.com/api/mcp/asset/01ad78e8-cb51-45d3-bf26-583b3ea0d1bb&quot;;
+const imgResizeGrabber = &quot;https://www.figma.com/api/mcp/asset/7ec308fb-5ac6-44b2-aad9-ed580867a7bd&quot;;
+const imgWindow = &quot;https://www.figma.com/api/mcp/asset/46ca574d-0660-4208-9539-07b552d863a9&quot;;
+const imgCombinedShape = &quot;https://www.figma.com/api/mcp/asset/df624ee5-2324-4e95-92ce-b436a6dd616d&quot;;
+const imgCombinedShape1 = &quot;https://www.figma.com/api/mcp/asset/b301b860-e3ac-4244-bed3-7048d8f7c12f&quot;;
+const imgBatteryIcon = &quot;https://www.figma.com/api/mcp/asset/062c6834-f722-48b7-9245-67cbeabb4dd2&quot;;
+
+function IPadProM({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;iPad Pro M4 11&#39;&quot; data-node-id=&quot;6316:14229&quot;&gt;
+      &lt;div className=&quot;h-[834px] relative w-[1210px]&quot; data-name=&quot;Color=Silver&quot; data-node-id=&quot;487:11227&quot;&gt;
+        &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute h-[940px] left-1/2 top-1/2 w-[1320px]&quot; data-name=&quot;iPad Pro 11 - M4 - Silver - Landscape&quot; data-node-id=&quot;6318:14240&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgIPadPro11M4SilverLandscape} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+type MenuBarItemProps = {
+  className?: string;
+  menuName?: string;
+};
+
+function MenuBarItem({ className, menuName = &quot;Menu&quot; }: MenuBarItemProps) {
+  return (
+    &lt;div className={className || &quot;&quot;} data-name=&quot;_Menu bar item&quot; data-node-id=&quot;5413:10045&quot;&gt;
+      &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative&quot; data-name=&quot;State=Deselected&quot; data-node-id=&quot;5413:10038&quot;&gt;
+        &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;5413:10046&quot;&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;5413:10036&quot;&gt;
+            {menuName}
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function WindowResize({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;relative size-[65px]&quot;} data-name=&quot;_Window Resize&quot; data-node-id=&quot;5589:4090&quot;&gt;
+      &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute left-1/2 size-[55.5px] top-1/2&quot; data-name=&quot;Resize Grabber&quot; data-node-id=&quot;5589:4060&quot;&gt;
+        &lt;div className=&quot;absolute inset-[61.08%_-0.77%_-0.67%_61.41%]&quot;&gt;
+          &lt;img alt=&quot;&quot; className=&quot;block max-w-none size-full&quot; src={imgResizeGrabber} /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Window({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;bg-[var(--backgrounds\/primary,white)] overflow-clip relative rounded-[34px] shadow-[0px_20px_76px_0px_rgba(0,0,0,0.2)] size-[400px]&quot;} data-name=&quot;Window&quot; data-node-id=&quot;5588:3741&quot;&gt;
+      &lt;WindowResize className=&quot;absolute bottom-0 right-0 size-[65px]&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function Window1({ className }: { className?: string }) {
+  return (
+    &lt;div className={className || &quot;-translate-x-1/2 -translate-y-1/2 h-[834px] relative w-[1210px]&quot;} data-name=&quot;Window&quot; data-node-id=&quot;5589:4058&quot;&gt;
+      &lt;img alt=&quot;&quot; className=&quot;absolute inset-0 max-w-none object-cover pointer-events-none size-full&quot; src={imgWindow} /&gt;
+      &lt;div className=&quot;-translate-x-1/2 absolute h-[620px] left-1/2 top-[97px] w-[1018px]&quot; data-name=&quot;Window&quot; data-node-id=&quot;5732:63755&quot;&gt;
+        &lt;div className=&quot;absolute content-stretch flex items-start justify-between left-0 pb-[10px] px-[10px] right-0 top-[10px]&quot; data-name=&quot;Toolbar - Top - iPad&quot; data-node-id=&quot;5732:63757&quot;&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] items-center relative shrink-0&quot; data-name=&quot;Leading&quot; data-node-id=&quot;I5732:63757;5564:41844&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center justify-center min-w-[44px] px-[2px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5732:63757;5564:41846&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565&quot;&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;5575:44983&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;5575:75442&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;5575:75442;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;6491:20171&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;6491:20172&quot;&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22565;6491:20173&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[2px] h-[36px] items-center justify-center leading-[0] min-w-[36px] not-italic px-[8px] relative rounded-[100px] shrink-0 text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-[78px] whitespace-nowrap&quot; data-name=&quot;_Button - Back&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22970&quot;&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22970;5431:837&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;􀯶&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;flex flex-col justify-center relative shrink-0&quot; data-node-id=&quot;I5732:63757;5564:41846;6491:22970;5431:840&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal]&quot;&gt;Label&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5732:63757;5564:41847&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888&quot;&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;5575:44983&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;5575:75442&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;5575:75442;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;6491:20171&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;6491:20172&quot;&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5732:63757;5564:41847;5566:7888;6491:20173&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5732:63757;5564:41847;5432:23135&quot;&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; data-node-id=&quot;I5732:63757;5564:41847;5432:23135;5426:2011&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5732:63757;5564:41848&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888&quot;&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;5575:44983&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;5575:75442&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;5575:75442;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;6491:20171&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;6491:20172&quot;&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5732:63757;5564:41848;5566:7888;6491:20173&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5732:63757;5564:41848;5432:23135&quot;&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; data-node-id=&quot;I5732:63757;5564:41848;5432:23135;5426:2011&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex gap-[12px] items-center justify-end relative shrink-0&quot; data-name=&quot;Trailing&quot; data-node-id=&quot;I5732:63757;5564:41849&quot;&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5732:63757;5564:41850&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888&quot;&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;5575:44983&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;5575:75442&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;5575:75442;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;6491:20171&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;6491:20172&quot;&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5732:63757;5564:41850;5566:7888;6491:20173&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5732:63757;5564:41850;5432:23135&quot;&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; data-node-id=&quot;I5732:63757;5564:41850;5432:23135;5426:2011&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex gap-[12px] h-[44px] items-center px-[4px] relative rounded-[296px] shrink-0&quot; data-name=&quot;_Buttons - Top&quot; data-node-id=&quot;I5732:63757;5564:41851&quot;&gt;
+              &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute bg-white inset-0 mix-blend-multiply pointer-events-none rounded-[296px]&quot; /&gt;
+              &lt;div className=&quot;-translate-y-1/2 absolute h-[48px] left-0 right-0 top-1/2&quot; data-name=&quot;Liquid Glass - Regular - Small&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888&quot;&gt;
+                &lt;div className=&quot;absolute inset-[-26px] opacity-67&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;5575:44983&quot;&gt;
+                  &lt;div className=&quot;absolute bg-white inset-[-50px]&quot; data-name=&quot;_Mask - Circle&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;5575:75442&quot;&gt;
+                    &lt;div className=&quot;absolute bg-black inset-[76px] rounded-[1000px]&quot; data-name=&quot;Shape&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;5575:75442;5575:32354&quot; /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;-translate-x-1/2 -translate-y-1/2 absolute backdrop-blur-[20px] bg-[rgba(0,0,0,0.04)] blur-[10px] left-1/2 mix-blend-hard-light rounded-[1000px] size-[48px] top-1/2&quot; data-name=&quot;Blur&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;6491:20171&quot; /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; data-name=&quot;Fill&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;6491:20172&quot;&gt;
+                  &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute inset-0 pointer-events-none rounded-[296px]&quot;&gt;
+                    &lt;div className=&quot;absolute bg-[#333] inset-0 mix-blend-color-dodge rounded-[296px]&quot; /&gt;
+                    &lt;div className=&quot;absolute inset-0 rounded-[296px]&quot; style={{ backgroundImage: &quot;linear-gradient(90deg, rgb(247, 247, 247) 0%, rgb(247, 247, 247) 100%), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%)&quot; }} /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;absolute bg-[rgba(0,0,0,0)] inset-0 rounded-[296px]&quot; data-name=&quot;Glass Effect&quot; data-node-id=&quot;I5732:63757;5564:41851;5566:7888;6491:20173&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;content-stretch flex flex-col items-start relative rounded-[100px] shrink-0 size-[36px]&quot; data-name=&quot;_Button - Symbol&quot; data-node-id=&quot;I5732:63757;5564:41851;5432:23135&quot;&gt;
+                &lt;div className=&quot;flex flex-[1_0_0] flex-col font-[&#39;SF_Pro:Medium&#39;,sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[17px] text-[color:var(--labels---vibrant---controls\/primary,#1a1a1a)] text-center w-full&quot; data-node-id=&quot;I5732:63757;5564:41851;5432:23135;5426:2011&quot; style={{ fontFeatureSettings: &quot;\&#39;ss16\&#39; 1&quot; }}&gt;
+                  &lt;p className=&quot;leading-[normal] whitespace-pre-wrap&quot;&gt;􀓔&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;absolute content-stretch flex flex-col gap-[2px] h-[36px] items-center justify-center left-[20px] right-[20px] top-[5px]&quot; data-name=&quot;Title and Subtitle&quot; data-node-id=&quot;I5732:63757;5564:41882&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Title - Subheadline&quot; data-node-id=&quot;I5732:63757;5827:66834&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Semibold&#39;,sans-serif] leading-[18px] not-italic relative shrink-0 text-[15px] text-[color:var(--labels---vibrant\/primary,#1a1a1a)] tracking-[-0.23px]&quot; data-node-id=&quot;I5732:63757;5827:66834;5827:56432&quot;&gt;
+                Title
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center relative shrink-0&quot; data-name=&quot;_Subtitle - Caption&quot; data-node-id=&quot;I5732:63757;5827:66835&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels---vibrant\/secondary,#727272)]&quot; data-node-id=&quot;I5732:63757;5827:66835;5827:56433&quot;&gt;
+                Subtitle
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;Window className=&quot;absolute bg-[var(--backgrounds\/primary,white)] inset-0 overflow-clip rounded-[34px] shadow-[0px_20px_76px_0px_rgba(0,0,0,0.2)]&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;absolute content-stretch flex h-[32px] items-center justify-between left-0 px-[26px] right-0 top-0&quot; data-name=&quot;Status bar and Menu bar- iPad&quot; data-node-id=&quot;5732:63758&quot;&gt;
+        &lt;div aria-hidden=&quot;true&quot; className=&quot;absolute backdrop-blur-[0px] bg-white inset-0 mix-blend-multiply pointer-events-none&quot; /&gt;
+        &lt;div className=&quot;content-stretch flex font-[&#39;SF_Pro:Medium&#39;,sans-serif] gap-[8px] h-full items-center leading-[normal] not-italic py-[2px] relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)]&quot; data-name=&quot;Left&quot; data-node-id=&quot;I5732:63758;5413:10008&quot;&gt;
+          &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5732:63758;5413:10009&quot;&gt;
+            9:41
+          &lt;/p&gt;
+          &lt;p className=&quot;relative shrink-0&quot; data-node-id=&quot;I5732:63758;5413:10010&quot;&gt;
+            Tue Apr 1
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;content-stretch flex gap-[4px] h-full items-center py-[5px] relative shrink-0&quot; data-name=&quot;Right&quot; data-node-id=&quot;I5732:63758;5413:10011&quot;&gt;
+          &lt;div className=&quot;h-[10px] relative shrink-0 w-[16.5px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5732:63758;5413:10012&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;h-[10px] relative shrink-0 w-[14.053px]&quot; data-name=&quot;Combined Shape&quot; data-node-id=&quot;I5732:63758;5413:10013&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgCombinedShape1} /&gt;
+          &lt;/div&gt;
+          &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[14px] not-italic relative shrink-0 text-[12px] text-[color:var(--labels\/primary,black)] text-right&quot; data-node-id=&quot;I5732:63758;5413:10014&quot;&gt;
+            100%
+          &lt;/p&gt;
+          &lt;div className=&quot;h-[12px] relative shrink-0 w-[26.5px]&quot; data-name=&quot;Battery Icon&quot; data-node-id=&quot;I5732:63758;5413:10015&quot;&gt;
+            &lt;img alt=&quot;&quot; className=&quot;absolute block inset-0 max-w-none&quot; src={imgBatteryIcon} /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;absolute content-stretch flex items-center justify-center left-0 top-0 w-[1210px]&quot; data-name=&quot;Menubar&quot; data-node-id=&quot;I5732:63758;5413:10077&quot;&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10078&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10078;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10078;5413:10036&quot;&gt;
+                App
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;MenuBarItem className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; menuName=&quot;File&quot; /&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10080&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10080;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10080;5413:10036&quot;&gt;
+                Edit
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10081&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10081;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10081;5413:10036&quot;&gt;
+                Format
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10082&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10082;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10082;5413:10036&quot;&gt;
+                View
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10084&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10084;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10084;5413:10036&quot;&gt;
+                Window
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;content-stretch flex items-center justify-center py-[6px] relative shrink-0&quot; data-name=&quot;_Menu bar item&quot; data-node-id=&quot;I5732:63758;5413:10085&quot;&gt;
+            &lt;div className=&quot;content-stretch flex items-center justify-center pb-px pt-[2px] px-[11px] relative rounded-[100px] shrink-0&quot; data-name=&quot;Frame&quot; data-node-id=&quot;I5732:63758;5413:10085;5413:10046&quot;&gt;
+              &lt;p className=&quot;font-[&#39;SF_Pro:Medium&#39;,sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--labels\/primary,black)]&quot; data-node-id=&quot;I5732:63758;5413:10085;5413:10036&quot;&gt;
+                Help
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;IPadProM className=&quot;absolute h-[834px] left-0 top-0 w-[1210px]&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project&#39;s technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project&#39;s existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id=&quot;1:2&quot;`.
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Toolbar - Top - iPad
+**Node ID:** 5561:41165
+
+Guidelines: Feedback: http://feedbackassistant.apple.com/new?form=developertools.fba&amp;answers%5B:area%5D=seedx:appledesignresources
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/navigation-bars](https://developer.apple.com/design/human-interface-guidelines/navigation-bars)
+
+## Status bar and Menu bar- iPad
+**Node ID:** 5413:10006
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/status-bars](https://developer.apple.com/design/human-interface-guidelines/status-bars)
+
+Images and SVGs will be stored as constants, e.g. const image = &#39;https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000&#39;. These constants will be used in the code as the source for the image, ex: &lt;img src={image} /&gt;. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
+
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.</pre>
+      </section>
+    </main>
+    <script>
+      (function applyFidelityView() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          if (params.get("view") === "fidelity") {
+            document.body.classList.add("ios26-fidelity-mode");
+          }
+        } catch (_error) {
+          // no-op
+        }
+      })();
+    </script>
+  </body>
+</html>

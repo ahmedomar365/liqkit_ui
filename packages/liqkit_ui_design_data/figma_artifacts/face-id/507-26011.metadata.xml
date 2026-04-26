@@ -1,0 +1,7 @@
+<canvas id="507:26011" name="Face ID" x="0" y="0" width="0" height="0">
+  <frame id="123:58236" name="Face ID" x="0" y="0" width="870" height="230">
+    <symbol id="123:58197" name="State=Success" x="450" y="20" width="402" height="190" />
+    <symbol id="123:58202" name="State=Authenticating" x="23" y="20" width="402" height="190" />
+  </frame>
+  <instance id="544:191912" name="Header" x="0" y="-500" width="1400" height="142" />
+</canvas>

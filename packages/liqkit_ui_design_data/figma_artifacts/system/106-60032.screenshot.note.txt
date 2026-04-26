@@ -1,0 +1,2 @@
+Captured via Figma MCP `get_screenshot` for node `106:60032` on 2026-02-17.
+Reference image was observed in-session and corresponds to category root `507:24688` (System) canonical child node `106:60032`.
