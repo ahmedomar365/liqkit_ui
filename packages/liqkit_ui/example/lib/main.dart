@@ -1,20 +1,39 @@
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
-void main() => runApp(const _BootstrapApp());
+void main() => runApp(const _ExampleApp());
 
-class _BootstrapApp extends StatelessWidget {
-  const _BootstrapApp();
+class _ExampleApp extends StatelessWidget {
+  const _ExampleApp();
 
   @override
   Widget build(BuildContext context) {
-    return WidgetsApp(
-      title: 'liqkit_ui example',
-      color: const Color(0xFF000000),
-      builder: (context, child) => const Center(
-        child: Text(
-          liqkitUiBootstrapMarker,
-          textDirection: TextDirection.ltr,
+    return const LiqApp(
+      light: LiqThemeData.light,
+      dark: LiqThemeData.dark,
+      home: _Home(),
+    );
+  }
+}
+
+class _Home extends StatelessWidget {
+  const _Home();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: 200,
+        height: 80,
+        child: LiqGlassSurface(
+          material: LiqMaterial.regular,
+          child: Center(
+            child: Text(
+              'liqkit_ui',
+              style: LiqTheme.of(context).bodyText.toTextStyle(),
+              textDirection: TextDirection.ltr,
+            ),
+          ),
         ),
       ),
     );

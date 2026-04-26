@@ -11,12 +11,29 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WidgetsApp(
+    return const LiqApp(
       title: 'liqkit_ui demo',
-      color: const Color(0xFF000000),
-      builder: (context, child) => const Center(
+      light: LiqThemeData.light,
+      dark: LiqThemeData.dark,
+      home: _Home(),
+    );
+  }
+}
+
+class _Home extends StatelessWidget {
+  const _Home();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = LiqTheme.of(context);
+    return ColoredBox(
+      color: theme.surfaceColor.resolve(theme.brightness),
+      child: Center(
         child: Text(
-          'liqkit_ui demo - bootstrap (marker: $liqkitUiBootstrapMarker)',
+          'liqkit_ui demo',
+          style: theme.titleText.toTextStyle().copyWith(
+                color: theme.labelColor.resolve(theme.brightness),
+              ),
           textDirection: TextDirection.ltr,
         ),
       ),

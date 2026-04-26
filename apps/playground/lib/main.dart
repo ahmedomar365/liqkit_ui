@@ -10,15 +10,11 @@ class PlaygroundApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WidgetsApp(
+    return const LiqApp(
       title: 'liqkit_ui playground',
-      color: const Color(0xFF000000),
-      builder: (context, child) => const Center(
-        child: Text(
-          liqkitUiBootstrapMarker,
-          textDirection: TextDirection.ltr,
-        ),
-      ),
+      light: LiqThemeData.light,
+      dark: LiqThemeData.dark,
+      home: SizedBox(),
     );
   }
 }
