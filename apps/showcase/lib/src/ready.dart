@@ -1,6 +1,10 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
+// Conditional imports must use relative URIs - the analyzer evaluates
+// the condition at compile time and resolves both branches relative to
+// the importing file. Suppress the always_use_package_imports lint here.
+// ignore: always_use_package_imports
 import 'ready_io.dart' if (dart.library.js_interop) 'ready_web.dart';
 
 /// Wraps a child and signals readiness to Playwright once the engine
