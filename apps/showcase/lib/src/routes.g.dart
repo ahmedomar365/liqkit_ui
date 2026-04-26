@@ -20,6 +20,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/page-controls/catalog': _buildPageControlsCatalog,
   '/progress/catalog': _buildProgressCatalog,
   '/text-fields/catalog': _buildTextFieldsCatalog,
+  '/lists/catalog': _buildListsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -37,6 +38,8 @@ Widget _buildProgressCatalog(BuildContext context) => const _ProgressRoute();
 
 Widget _buildTextFieldsCatalog(BuildContext context) =>
     const _TextFieldsRoute();
+
+Widget _buildListsCatalog(BuildContext context) => const _ListsRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -870,6 +873,98 @@ class _TextFieldsRouteState extends State<_TextFieldsRoute> {
                   controller: _dark,
                   brightness: Brightness.dark,
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ListsRoute extends StatelessWidget {
+  const _ListsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF2F2F7),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('Settings-style group'),
+            const SizedBox(
+              width: 360,
+              child: LiqListGroup(
+                rows: <LiqListRow>[
+                  LiqListRow(
+                    title: 'Wi-Fi',
+                    detail: 'liqkit-net',
+                    showChevron: true,
+                  ),
+                  LiqListRow(
+                    title: 'Bluetooth',
+                    detail: 'On',
+                    showChevron: true,
+                  ),
+                  LiqListRow(
+                    title: 'Cellular',
+                    showChevron: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('Two-line rows'),
+            const SizedBox(
+              width: 360,
+              child: LiqListGroup(
+                rows: <LiqListRow>[
+                  LiqListRow(
+                    title: 'Notifications',
+                    subtitle: '8 unread',
+                    showChevron: true,
+                  ),
+                  LiqListRow(
+                    title: 'Sounds & Haptics',
+                    subtitle: 'Standard',
+                    showChevron: true,
+                  ),
+                  LiqListRow(
+                    title: 'Focus',
+                    subtitle: 'Do Not Disturb',
+                    showChevron: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('Dark surface'),
+            SizedBox(
+              width: 360,
+              child: LiqListGroup(
+                brightness: Brightness.dark,
+                rows: <LiqListRow>[
+                  LiqListRow(
+                    title: 'General',
+                    detail: 'iOS 26',
+                    showChevron: true,
+                    brightness: Brightness.dark,
+                  ),
+                  LiqListRow(
+                    title: 'Display & Brightness',
+                    showChevron: true,
+                    brightness: Brightness.dark,
+                  ),
+                  LiqListRow(
+                    title: 'Accessibility',
+                    showChevron: true,
+                    brightness: Brightness.dark,
+                  ),
+                ],
               ),
             ),
           ],
