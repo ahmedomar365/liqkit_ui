@@ -1,0 +1,76 @@
+import 'dart:io';
+
+import 'package:crypto/crypto.dart';
+
+const String _designDataRel = 'packages/liqkit_ui_design_data';
+
+Future<void> main(List<String> args) async {
+  final repoRoot = _findRepoRoot();
+  final designData = Directory('${repoRoot.path}/$_designDataRel');
+  final provenance = File('${designData.path}/PROVENANCE.md');
+  if (!provenance.existsSync()) {
+    stderr.writeln('verify_provenance: PROVENANCE.md missing.');
+    exit(2);
+  }
+  final body = provenance.readAsStringSync();
+  final block = RegExp(r'```\n([\s\S]*?)```').firstMatch(body);
+  if (block == null) {
+    stderr.writeln('verify_provenance: PROVENANCE.md has no fenced sha256 block.');
+    exit(2);
+  }
+  final expected = <String, String>{};
+  for (final line in block.group(1)!.trim().split('\n')) {
+    final parts = line.split('  ');
+    if (parts.length < 2) continue;
+    final hash = parts[0].trim();
+    final path = parts.sublist(1).join('  ').trim();
+    expected[path] = hash;
+  }
+
+  final actual = <String, String>{};
+  for (final entity in designData.listSync(recursive: true)) {
+    if (entity is! File) continue;
+    final rel = './${entity.path.substring(designData.path.length + 1)}';
+    if (rel.endsWith('PROVENANCE.md')) continue;
+    final hash = sha256.convert(entity.readAsBytesSync()).toString();
+    actual[rel] = hash;
+  }
+
+  var drift = 0;
+  for (final entry in expected.entries) {
+    final got = actual.remove(entry.key);
+    if (got == null) {
+      stderr.writeln('verify_provenance: missing ${entry.key}');
+      drift += 1;
+      continue;
+    }
+    if (got != entry.value) {
+      stderr.writeln('verify_provenance: hash mismatch ${entry.key}');
+      drift += 1;
+    }
+  }
+  for (final extra in actual.keys) {
+    stderr.writeln('verify_provenance: unexpected file $extra');
+    drift += 1;
+  }
+
+  if (drift > 0) {
+    stderr.writeln('verify_provenance: $drift mismatches.');
+    exit(1);
+  }
+  stdout.writeln(
+    'verify_provenance: ok (${expected.length} files, sha256 verified)',
+  );
+}
+
+Directory _findRepoRoot() {
+  var dir = Directory.current;
+  while (dir.parent.path != dir.path) {
+    final pubspec = File('${dir.path}/pubspec.yaml');
+    if (pubspec.existsSync() && pubspec.readAsStringSync().contains('liqkit_ui_workspace')) {
+      return dir;
+    }
+    dir = dir.parent;
+  }
+  throw StateError('Could not find liqkit_ui_workspace pubspec.yaml');
+}

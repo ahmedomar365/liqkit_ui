@@ -1,0 +1,8 @@
+{
+  "name": "liqkit-ui-tooling-gen",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "One-shot Node helpers used at migration time only.",
+  "license": "MIT"
+}
