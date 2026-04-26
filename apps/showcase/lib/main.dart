@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 import 'package:liqkit_ui_assets/liqkit_ui_assets.dart';
 import 'package:showcase/src/ready.dart';
 import 'package:showcase/src/routes.g.dart';
@@ -33,13 +34,26 @@ class ShowcaseApp extends StatelessWidget {
           ),
         );
       },
-      builder: (context, child) => child ?? const SizedBox.shrink(),
+      // Install a default LiqTheme above every route so component
+      // routes can read theme tokens via LiqTheme.of(context). The
+      // active theme is selected via MediaQuery.platformBrightnessOf
+      // so the Playwright fidelity loop can flip it via emulation.
+      builder: (context, child) {
+        final brightness = MediaQuery.platformBrightnessOf(context);
+        final data = brightness == Brightness.dark
+            ? LiqThemeData.dark
+            : LiqThemeData.light;
+        return LiqTheme(
+          data: data,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
     );
   }
 }
 
 Widget _fallbackRouteBuilder(BuildContext context) => const ColoredBox(
-      color: Color(0x00000000),
+      color: Color(0xFFFFFFFF),
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Center(
