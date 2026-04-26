@@ -7,8 +7,12 @@ import 'package:liqkit_ui/src/theme/liq_material.dart';
 import 'package:liqkit_ui/src/theme/liq_quality.dart';
 import 'package:liqkit_ui/src/theme/liq_semantics.dart';
 import 'package:liqkit_ui/src/theme/liq_text_style.dart';
+import 'package:liqkit_ui_tokens/liqkit_ui_tokens.dart';
 
 /// The single immutable theme data carried via `LiqTheme`.
+///
+/// Color values come from the canonical iOS 26 token surface in
+/// [LiqCanonicalColors] (generated from liqkit's Figma `variable-defs`).
 @immutable
 final class LiqThemeData with Diagnosticable {
   /// Creates a theme data.
@@ -29,7 +33,7 @@ final class LiqThemeData with Diagnosticable {
   /// Active brightness.
   final Brightness brightness;
 
-  /// System primary tint.
+  /// System primary tint (Accents/Blue).
   final LiqColor primaryColor;
 
   /// Default surface background.
@@ -59,14 +63,32 @@ final class LiqThemeData with Diagnosticable {
   /// Glass-rendering quality tier.
   final LiqQuality quality;
 
+  // Light/dark are paired with what liqkit's Figma capture exposed:
+  // `default_` mode is the iOS 26 dark base; `increasedContrast` is the
+  // accessibility variant. Light values for system tokens are taken
+  // from Apple's published iOS 26 system palette where they are not in
+  // the Figma capture, then validated against the rendered HTML
+  // baselines via the Playwright fidelity loop.
+
   /// Light-mode default theme.
   static const LiqThemeData light = LiqThemeData(
     brightness: Brightness.light,
-    primaryColor: LiqColor(light: Color(0xFF007AFF), dark: Color(0xFF0A84FF)),
-    surfaceColor: LiqColor(light: Color(0xFFFFFFFF), dark: Color(0xFF000000)),
-    labelColor: LiqColor(light: Color(0xFF000000), dark: Color(0xFFFFFFFF)),
-    secondaryLabelColor:
-        LiqColor(light: Color(0x993C3C43), dark: Color(0x99EBEBF5)),
+    primaryColor: LiqColor(
+      light: Color(0xFF007AFF),
+      dark: Color(0xFF0091FF), // = LiqCanonicalColors.accentsBlue.default_
+    ),
+    surfaceColor: LiqColor(
+      light: Color(0xFFFFFFFF),
+      dark: Color(0xFF000000), // = backgroundsPrimary.default_
+    ),
+    labelColor: LiqColor(
+      light: Color(0xFF000000),
+      dark: Color(0xFFFFFFFF), // = labelsPrimary.default_
+    ),
+    secondaryLabelColor: LiqColor(
+      light: Color(0x993C3C43),
+      dark: Color(0xB2EBEBF5), // labelsSecondary.default_ = #ebebf5b2
+    ),
     material: LiqMaterial.regular,
     bezel: LiqBezel(
       cornerRadius: 18,
@@ -94,11 +116,22 @@ final class LiqThemeData with Diagnosticable {
   /// Dark-mode default theme.
   static const LiqThemeData dark = LiqThemeData(
     brightness: Brightness.dark,
-    primaryColor: LiqColor(light: Color(0xFF007AFF), dark: Color(0xFF0A84FF)),
-    surfaceColor: LiqColor(light: Color(0xFFFFFFFF), dark: Color(0xFF000000)),
-    labelColor: LiqColor(light: Color(0xFF000000), dark: Color(0xFFFFFFFF)),
-    secondaryLabelColor:
-        LiqColor(light: Color(0x993C3C43), dark: Color(0x99EBEBF5)),
+    primaryColor: LiqColor(
+      light: Color(0xFF007AFF),
+      dark: Color(0xFF0091FF),
+    ),
+    surfaceColor: LiqColor(
+      light: Color(0xFFFFFFFF),
+      dark: Color(0xFF000000),
+    ),
+    labelColor: LiqColor(
+      light: Color(0xFF000000),
+      dark: Color(0xFFFFFFFF),
+    ),
+    secondaryLabelColor: LiqColor(
+      light: Color(0x993C3C43),
+      dark: Color(0xB2EBEBF5),
+    ),
     material: LiqMaterial.regular,
     bezel: LiqBezel(
       cornerRadius: 18,
@@ -209,7 +242,9 @@ final class LiqThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<LiqColor>('surfaceColor', surfaceColor))
       ..add(DiagnosticsProperty<LiqColor>('labelColor', labelColor))
       ..add(DiagnosticsProperty<LiqColor>(
-          'secondaryLabelColor', secondaryLabelColor,),)
+        'secondaryLabelColor',
+        secondaryLabelColor,
+      ),)
       ..add(DiagnosticsProperty<LiqMaterial>('material', material))
       ..add(DiagnosticsProperty<LiqBezel>('bezel', bezel))
       ..add(DiagnosticsProperty<LiqTextStyle>('bodyText', bodyText))

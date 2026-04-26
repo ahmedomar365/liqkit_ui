@@ -1,0 +1,211 @@
+{
+  "capturedAt": "2026-04-26T15:13:53.057606Z",
+  "schemaVersion": 1,
+  "modes": [
+    "default",
+    "increasedContrast"
+  ],
+  "colors": {
+    "accents/blue": {
+      "default": "FF0091FF",
+      "increasedContrast": "FF5CB8FF"
+    },
+    "accents/brown": {
+      "default": "FFB78A66",
+      "increasedContrast": "FFDBA679"
+    },
+    "accents/cyan": {
+      "default": "FF3CD3FE",
+      "increasedContrast": "FF6DD9FF"
+    },
+    "accents/green": {
+      "default": "FF30D158",
+      "increasedContrast": "FF4AE968"
+    },
+    "accents/indigo": {
+      "default": "FF6D7CFF",
+      "increasedContrast": "FFA7AAFF"
+    },
+    "accents/mint": {
+      "default": "FF00DAC3",
+      "increasedContrast": "FF54DFCB"
+    },
+    "accents/orange": {
+      "default": "FFFF9230",
+      "increasedContrast": "FFFFA056"
+    },
+    "accents/pink": {
+      "default": "FFFF375F",
+      "increasedContrast": "FFFF8AC4"
+    },
+    "accents/purple": {
+      "default": "FFDB34F2",
+      "increasedContrast": "FFEA8DFF"
+    },
+    "accents/red": {
+      "default": "FFFF4245",
+      "increasedContrast": "FFFF6165"
+    },
+    "accents/teal": {
+      "default": "FF00D2E0",
+      "increasedContrast": "FF3BDDEC"
+    },
+    "accents/yellow": {
+      "default": "FFFFD600",
+      "increasedContrast": "FFFEDF43"
+    },
+    "backgrounds/primary": {
+      "default": "FF000000",
+      "increasedContrast": "FF000000"
+    },
+    "backgrounds/primaryElevated": {
+      "default": "FF1C1C1E",
+      "increasedContrast": "FF1C1C1E"
+    },
+    "backgrounds/secondary": {
+      "default": "FF1C1C1E",
+      "increasedContrast": "FF1C1C1E"
+    },
+    "backgrounds/secondaryElevated": {
+      "default": "FF2C2C2E",
+      "increasedContrast": "FF2C2C2E"
+    },
+    "backgrounds/tertiary": {
+      "default": "FF2C2C2E",
+      "increasedContrast": "FF2C2C2E"
+    },
+    "backgrounds/tertiaryElevated": {
+      "default": "FF3A3A3C",
+      "increasedContrast": "FF3A3A3C"
+    },
+    "backgroundsGrouped/primary": {
+      "default": "FF000000",
+      "increasedContrast": "FF000000"
+    },
+    "backgroundsGrouped/primaryElevated": {
+      "default": "FF1C1C1E",
+      "increasedContrast": "FF1C1C1E"
+    },
+    "backgroundsGrouped/secondary": {
+      "default": "FF1C1C1E",
+      "increasedContrast": "FF1C1C1E"
+    },
+    "backgroundsGrouped/secondaryElevated": {
+      "default": "FF2C2C2E",
+      "increasedContrast": "FF2C2C2E"
+    },
+    "backgroundsGrouped/tertiary": {
+      "default": "FF2C2C2E",
+      "increasedContrast": "FF2C2C2E"
+    },
+    "backgroundsGrouped/tertiaryElevated": {
+      "default": "FF3A3A3C",
+      "increasedContrast": "FF3A3A3C"
+    },
+    "grays/black": {
+      "default": "FF000000",
+      "increasedContrast": "FF000000"
+    },
+    "grays/gray": {
+      "default": "FF8E8E93",
+      "increasedContrast": "FFAEAEB2"
+    },
+    "grays/gray2": {
+      "default": "FFAEAEB2",
+      "increasedContrast": "FFAEAEB2"
+    },
+    "grays/gray3": {
+      "default": "FF48484A",
+      "increasedContrast": "FF444446"
+    },
+    "grays/gray4": {
+      "default": "FF3A3A3C",
+      "increasedContrast": "FF363638"
+    },
+    "grays/gray5": {
+      "default": "FF2C2C2E",
+      "increasedContrast": "FF242426"
+    },
+    "grays/gray6": {
+      "default": "FF1C1C1E",
+      "increasedContrast": "FF000000"
+    },
+    "grays/white": {
+      "default": "FFFFFFFF",
+      "increasedContrast": "FFFFFFFF"
+    },
+    "labels/primary": {
+      "default": "FFFFFFFF",
+      "increasedContrast": "FFFFFFFF"
+    },
+    "labels/quaternary": {
+      "default": "29EBEBF5",
+      "increasedContrast": "66EBEBF5"
+    },
+    "labels/secondary": {
+      "default": "B2EBEBF5",
+      "increasedContrast": "B2EBEBF5"
+    },
+    "labels/tertiary": {
+      "default": "4DEBEBF5",
+      "increasedContrast": "8CEBEBF5"
+    },
+    "sectionFill": {
+      "default": "FFF5F5F5",
+      "increasedContrast": "FFF5F5F5"
+    },
+    "sectionStroke": {
+      "default": "66000000",
+      "increasedContrast": "66000000"
+    },
+    "separators/nonOpaque": {
+      "default": "2BFFFFFF",
+      "increasedContrast": "2BFFFFFF"
+    },
+    "separators/opaque": {
+      "default": "FF38383A",
+      "increasedContrast": "FF38383A"
+    }
+  },
+  "typography": {
+    "footnote/emphasized": {
+      "default": {
+        "family": "SF Pro",
+        "style": "Semibold",
+        "size": 13,
+        "weight": 590,
+        "lineHeight": 18,
+        "letterSpacing": -0.07999999821186066
+      },
+      "increasedContrast": {
+        "family": "SF Pro",
+        "style": "Semibold",
+        "size": 13,
+        "weight": 590,
+        "lineHeight": 18,
+        "letterSpacing": -0.07999999821186066
+      }
+    },
+    "footnote/regular": {
+      "default": {
+        "family": "SF Pro",
+        "style": "Regular",
+        "size": 13,
+        "weight": 400,
+        "lineHeight": 18,
+        "letterSpacing": -0.07999999821186066
+      },
+      "increasedContrast": {
+        "family": "SF Pro",
+        "style": "Regular",
+        "size": 13,
+        "weight": 400,
+        "lineHeight": 18,
+        "letterSpacing": -0.07999999821186066
+      }
+    }
+  },
+  "categoriesContributing": [
+    "colors"
+  ]
+}

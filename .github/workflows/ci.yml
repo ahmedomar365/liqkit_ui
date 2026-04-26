@@ -33,8 +33,9 @@ jobs:
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
       - run: dart pub get
-      - run: dart run tooling/gen/translate_tokens.dart --check
+      - run: dart run tooling/gen/generate_canonical_dart.dart --check
       - run: dart run tooling/scripts/verify_provenance.dart
+      - run: dart run tooling/scripts/audit_design_data.dart
 
   test-non-golden:
     strategy:

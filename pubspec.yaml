@@ -65,13 +65,21 @@ melos:
         dirExists: test
       description: Dart test in every pure-Dart package with a test/ folder.
 
+    gen:capture:
+      run: dart run tooling/gen/capture_canonical_tokens.dart
+      description: Capture canonical iOS 26 tokens from variable-defs into canonical_tokens.json.
+
     gen:tokens:
-      run: dart run tooling/gen/translate_tokens.dart
-      description: Translate tokens.json -> Dart constants. Runs from repo root.
+      run: dart run tooling/gen/generate_canonical_dart.dart
+      description: Generate typed Dart token classes from canonical_tokens.json.
 
     gen:check:
-      run: dart run tooling/gen/translate_tokens.dart --check
-      description: CI check that generated tokens are up to date. Runs from repo root.
+      run: dart run tooling/gen/generate_canonical_dart.dart --check
+      description: CI check that the generated token classes are up to date.
+
+    audit:design_data:
+      run: dart run tooling/scripts/audit_design_data.dart
+      description: Verify every liqkit category has all expected artifact types.
 
     verify:provenance:
       run: dart run tooling/scripts/verify_provenance.dart
