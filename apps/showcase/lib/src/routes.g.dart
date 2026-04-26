@@ -16,6 +16,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/toggles/catalog': _buildTogglesCatalog,
   '/sliders/catalog': _buildSlidersCatalog,
   '/steppers/catalog': _buildSteppersCatalog,
+  '/segmented-controls/catalog': _buildSegmentedCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -23,6 +24,8 @@ Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
 Widget _buildSlidersCatalog(BuildContext context) => const _SlidersRoute();
 
 Widget _buildSteppersCatalog(BuildContext context) => const _SteppersRoute();
+
+Widget _buildSegmentedCatalog(BuildContext context) => const _SegmentedRoute();
 
 Widget _buildHome(BuildContext context) {
   final theme = LiqTheme.of(context);
@@ -555,6 +558,108 @@ class _StepperCell extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SegmentedRoute extends StatefulWidget {
+  const _SegmentedRoute();
+  @override
+  State<_SegmentedRoute> createState() => _SegmentedRouteState();
+}
+
+class _SegmentedRouteState extends State<_SegmentedRoute> {
+  String _two = 'a';
+  int _three = 1;
+  int _four = 2;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const _SegLabel('2 segments'),
+            SizedBox(
+              width: 370,
+              child: LiqSegmentedControl<String>(
+                segments: const <({String value, String label})>[
+                  (value: 'a', label: 'Label'),
+                  (value: 'b', label: 'Label'),
+                ],
+                value: _two,
+                onChanged: (String v) => setState(() => _two = v),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('3 segments'),
+            SizedBox(
+              width: 370,
+              child: LiqSegmentedControl<int>(
+                segments: const <({int value, String label})>[
+                  (value: 0, label: 'One'),
+                  (value: 1, label: 'Two'),
+                  (value: 2, label: 'Three'),
+                ],
+                value: _three,
+                onChanged: (int v) => setState(() => _three = v),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('4 segments'),
+            SizedBox(
+              width: 370,
+              child: LiqSegmentedControl<int>(
+                segments: const <({int value, String label})>[
+                  (value: 0, label: 'Day'),
+                  (value: 1, label: 'Week'),
+                  (value: 2, label: 'Month'),
+                  (value: 3, label: 'Year'),
+                ],
+                value: _four,
+                onChanged: (int v) => setState(() => _four = v),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('disabled'),
+            SizedBox(
+              width: 370,
+              child: LiqSegmentedControl<int>(
+                segments: const <({int value, String label})>[
+                  (value: 0, label: 'A'),
+                  (value: 1, label: 'B'),
+                  (value: 2, label: 'C'),
+                ],
+                value: 1,
+                onChanged: null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SegLabel extends StatelessWidget {
+  const _SegLabel(this.text);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontFamily: 'SF Pro Text',
+          fontSize: 13,
+          color: Color(0xFF666A72),
+        ),
+        textDirection: TextDirection.ltr,
       ),
     );
   }
