@@ -5,13 +5,14 @@ environment:
   sdk: ^3.7.0
 
 workspace:
-  - packages/liqkit_ui
-  - packages/liqkit_ui_tokens
-  - packages/liqkit_ui_assets
   - packages/liqkit_ui_design_data
-  - apps/showcase
-  - apps/demo
-  - apps/playground
+  - packages/liqkit_ui_tokens
+  # Added as each package is scaffolded:
+  # - packages/liqkit_ui_assets
+  # - packages/liqkit_ui
+  # - apps/showcase
+  # - apps/demo
+  # - apps/playground
 
 dev_dependencies:
   crypto: ^3.0.0
@@ -79,7 +80,7 @@ melos:
 
     check:no_path_runtime_deps:
       run: bash tooling/scripts/check_no_path_runtime_deps.sh
-      description: CI check that no published package has a runtime path: dep.
+      description: "CI check that no published package has a runtime path: dep."
 
     fmt:
       run: dart format .

@@ -1,0 +1,20 @@
+name: liqkit_ui_tokens
+description: Typed Dart design tokens for the liqkit_ui iOS 26 Liquid Glass system - colors, materials, text styles, bezels, and per-component values. Translated once from liqkit's TypeScript sources.
+version: 0.0.1
+homepage: https://github.com/ahmedomar/liqkit_ui
+repository: https://github.com/ahmedomar/liqkit_ui
+issue_tracker: https://github.com/ahmedomar/liqkit_ui/issues
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
