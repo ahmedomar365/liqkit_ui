@@ -28,6 +28,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/action-sheets/catalog': _buildActionSheetsCatalog,
   '/notifications/catalog': _buildNotificationsCatalog,
   '/popovers/catalog': _buildPopoversCatalog,
+  '/menu/catalog': _buildMenuCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -63,6 +64,8 @@ Widget _buildNotificationsCatalog(BuildContext context) =>
     const _NotificationsRoute();
 
 Widget _buildPopoversCatalog(BuildContext context) => const _PopoversRoute();
+
+Widget _buildMenuCatalog(BuildContext context) => const _MenuRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -161,6 +164,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Popovers',
     description: 'Translucent floating panel with arrow tip on any side',
   ),
+  (
+    path: '/menu/catalog',
+    label: 'Menu',
+    description: 'iOS dropdown menu with rows, separators, and section titles',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -214,7 +222,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '17 / 37 categories ported (Popovers in this build). '
+                  '18 / 37 categories ported (Menu in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1852,6 +1860,156 @@ class _PopoverCell extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: child,
+    );
+  }
+}
+
+class _MenuRoute extends StatelessWidget {
+  const _MenuRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          alignment: WrapAlignment.start,
+          children: <Widget>[
+            _MenuCell(
+              caption: 'edit · light',
+              child: LiqMenu(
+                children: <Widget>[
+                  LiqMenuItem(
+                    label: 'Cut',
+                    onPressed: _menuNoop,
+                    trailing: Text('Cmd X', textDirection: TextDirection.ltr),
+                  ),
+                  LiqMenuItem(
+                    label: 'Copy',
+                    onPressed: _menuNoop,
+                    trailing: Text('Cmd C', textDirection: TextDirection.ltr),
+                  ),
+                  LiqMenuItem(
+                    label: 'Paste',
+                    onPressed: _menuNoop,
+                    trailing: Text('Cmd V', textDirection: TextDirection.ltr),
+                  ),
+                  LiqMenuSeparator(),
+                  LiqMenuItem(
+                    label: 'Delete',
+                    onPressed: _menuNoop,
+                    style: LiqMenuItemStyle.destructive,
+                  ),
+                ],
+              ),
+            ),
+            _MenuCell(
+              caption: 'sections · light',
+              child: LiqMenu(
+                children: <Widget>[
+                  LiqMenuSectionTitle(title: 'View'),
+                  LiqMenuItem(label: 'As Icons', onPressed: _menuNoop),
+                  LiqMenuItem(label: 'As List', onPressed: _menuNoop),
+                  LiqMenuItem(label: 'As Columns', onPressed: _menuNoop),
+                  LiqMenuSeparator(),
+                  LiqMenuSectionTitle(title: 'Sort by'),
+                  LiqMenuItem(label: 'Date Modified', onPressed: _menuNoop),
+                  LiqMenuItem(label: 'Name', onPressed: _menuNoop),
+                  LiqMenuItem(label: 'Size', onPressed: _menuNoop),
+                ],
+              ),
+            ),
+            _MenuCell(
+              caption: 'disabled rows · light',
+              child: LiqMenu(
+                children: <Widget>[
+                  LiqMenuItem(label: 'Undo', onPressed: _menuNoop),
+                  LiqMenuItem(label: 'Redo', onPressed: null),
+                  LiqMenuSeparator(),
+                  LiqMenuItem(
+                    label: 'Discard',
+                    style: LiqMenuItemStyle.destructive,
+                    onPressed: null,
+                  ),
+                ],
+              ),
+            ),
+            _MenuCell(
+              caption: 'dark surface',
+              dark: true,
+              child: LiqMenu(
+                brightness: Brightness.dark,
+                children: <Widget>[
+                  LiqMenuSectionTitle(
+                    title: 'Share',
+                    brightness: Brightness.dark,
+                  ),
+                  LiqMenuItem(
+                    label: 'AirDrop',
+                    brightness: Brightness.dark,
+                    onPressed: _menuNoop,
+                  ),
+                  LiqMenuItem(
+                    label: 'Mail',
+                    brightness: Brightness.dark,
+                    onPressed: _menuNoop,
+                  ),
+                  LiqMenuSeparator(brightness: Brightness.dark),
+                  LiqMenuItem(
+                    label: 'Remove',
+                    style: LiqMenuItemStyle.destructive,
+                    brightness: Brightness.dark,
+                    onPressed: _menuNoop,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void _menuNoop() {}
+
+class _MenuCell extends StatelessWidget {
+  const _MenuCell({
+    required this.caption,
+    required this.child,
+    this.dark = false,
+  });
+  final String caption;
+  final Widget child;
+  final bool dark;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(12),
+          color: dark ? const Color(0xFF12151C) : null,
+          child: child,
+        ),
+      ],
     );
   }
 }
