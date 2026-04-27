@@ -30,6 +30,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/popovers/catalog': _buildPopoversCatalog,
   '/menu/catalog': _buildMenuCatalog,
   '/context-menu/catalog': _buildContextMenuCatalog,
+  '/popup-buttons/catalog': _buildPopupButtonsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -70,6 +71,9 @@ Widget _buildMenuCatalog(BuildContext context) => const _MenuRoute();
 
 Widget _buildContextMenuCatalog(BuildContext context) =>
     const _ContextMenuRoute();
+
+Widget _buildPopupButtonsCatalog(BuildContext context) =>
+    const _PopupButtonsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -178,6 +182,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Context Menu',
     description: 'Preview tile + menu in vertical or beside arrangements',
   ),
+  (
+    path: '/popup-buttons/catalog',
+    label: 'Popup Buttons',
+    description: 'Inline blue label + chevron-down (32/38) — popup trigger',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -231,7 +240,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '19 / 37 categories ported (Context Menu in this build). '
+                  '20 / 37 categories ported (Popup Buttons in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2120,6 +2129,37 @@ class _ContextCell extends StatelessWidget {
         ),
         child,
       ],
+    );
+  }
+}
+
+class _PopupButtonsRoute extends StatelessWidget {
+  const _PopupButtonsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('enabled'),
+            LiqPopupButton(label: 'Sort by', onPressed: () {}),
+            const SizedBox(height: 16),
+            const _SegLabel('disabled'),
+            const LiqPopupButton(label: 'Sort by'),
+            const SizedBox(height: 16),
+            const _SegLabel('long label'),
+            LiqPopupButton(
+              label: 'Last 30 days',
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
