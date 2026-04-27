@@ -3,6 +3,7 @@ library;
 
 export 'src/components/action_sheets/liq_action_sheet.dart';
 export 'src/components/alerts/liq_alert.dart';
+export 'src/components/app_icons/liq_app_icon.dart';
 export 'src/components/buttons/liq_button.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';

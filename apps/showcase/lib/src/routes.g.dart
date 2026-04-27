@@ -36,6 +36,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/empty-states/catalog': _buildEmptyStatesCatalog,
   '/pickers/catalog': _buildPickersCatalog,
   '/color-pickers/catalog': _buildColorPickersCatalog,
+  '/app-icons/catalog': _buildAppIconsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -92,6 +93,8 @@ Widget _buildPickersCatalog(BuildContext context) => const _PickersRoute();
 
 Widget _buildColorPickersCatalog(BuildContext context) =>
     const _ColorPickersRoute();
+
+Widget _buildAppIconsCatalog(BuildContext context) => const _AppIconsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -230,6 +233,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Color Pickers',
     description: 'Conic-gradient picker button + 12-col swatch grid + dots',
   ),
+  (
+    path: '/app-icons/catalog',
+    label: 'App Icons',
+    description: 'Squircle home-screen icon with optional badge + label',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -283,7 +291,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '25 / 37 categories ported (Color Pickers in this build). '
+                  '26 / 37 categories ported (App Icons in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2622,4 +2630,163 @@ class _ColorPickersRouteState extends State<_ColorPickersRoute> {
       ),
     );
   }
+}
+
+class _AppIconsRoute extends StatelessWidget {
+  const _AppIconsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('home-screen tiles · 66pt'),
+            Wrap(
+              spacing: 22,
+              runSpacing: 22,
+              children: <Widget>[
+                LiqAppIcon(
+                  label: 'Mail',
+                  badge: LiqAppIconBadge(count: 3),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFF62CCFF), Color(0xFF0A87F5)],
+                  ),
+                  glyph: SizedBox(
+                    width: 36,
+                    height: 36,
+                    child: CustomPaint(painter: _MailGlyph()),
+                  ),
+                ),
+                LiqAppIcon(
+                  label: 'Reminders',
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFFFF6F88), Color(0xFFFF2B3F)],
+                  ),
+                  glyph: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: CustomPaint(painter: _ListGlyph()),
+                  ),
+                ),
+                LiqAppIcon(
+                  label: 'Music',
+                  badge: LiqAppIconBadge(count: 99),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFFFA5A8A), Color(0xFFC93473)],
+                  ),
+                ),
+                LiqAppIcon(
+                  label: 'Settings',
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFFCED2D9), Color(0xFF80868F)],
+                  ),
+                ),
+                LiqAppIcon(
+                  label: 'Photos',
+                  badge: LiqAppIconBadge(count: 250),
+                  color: Color(0xFFFFFFFF),
+                ),
+              ],
+            ),
+            const SizedBox(height: 28),
+            const _SegLabel('large variant · 96pt'),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                LiqAppIcon(
+                  size: 96,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFF62CCFF), Color(0xFF0A87F5)],
+                  ),
+                  glyph: SizedBox(
+                    width: 56,
+                    height: 56,
+                    child: CustomPaint(painter: _MailGlyph()),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                LiqAppIcon(
+                  size: 96,
+                  badge: LiqAppIconBadge(count: 7),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xFFFFCC00), Color(0xFFFF9500)],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MailGlyph extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFFFFFFF)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 2.4;
+    final s = size.width / 36;
+    canvas
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(3 * s, 8 * s, 30 * s, 20 * s),
+          Radius.circular(3 * s),
+        ),
+        paint,
+      )
+      ..drawPath(
+        Path()
+          ..moveTo(3 * s, 10 * s)
+          ..lineTo(18 * s, 22 * s)
+          ..lineTo(33 * s, 10 * s),
+        paint,
+      );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _ListGlyph extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final stroke = Paint()
+      ..color = const Color(0xFFFFFFFF)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 2.2;
+    final fill = Paint()..color = const Color(0xFFFFFFFF);
+    final s = size.width / 30;
+    for (var i = 0; i < 3; i++) {
+      final y = (8 + i * 7) * s;
+      canvas
+        ..drawCircle(Offset(7 * s, y), 1.6 * s, fill)
+        ..drawLine(Offset(11 * s, y), Offset(24 * s, y), stroke);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
