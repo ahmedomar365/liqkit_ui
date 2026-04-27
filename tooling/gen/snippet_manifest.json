@@ -1,0 +1,27 @@
+{
+  "$schema": "./snippet_manifest.schema.json",
+  "components": [
+    {
+      "component": "button",
+      "displayName": "Buttons",
+      "group": "inputs",
+      "variants": [
+        {
+          "variant": "regular",
+          "displayName": "Regular",
+          "dartFile": "apps/docs_snippets/lib/snippets/button/regular.dart"
+        },
+        {
+          "variant": "glass",
+          "displayName": "Glass",
+          "dartFile": "apps/docs_snippets/lib/snippets/button/glass.dart"
+        },
+        {
+          "variant": "destructive",
+          "displayName": "Destructive",
+          "dartFile": "apps/docs_snippets/lib/snippets/button/destructive.dart"
+        }
+      ]
+    }
+  ]
+}
