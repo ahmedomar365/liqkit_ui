@@ -15,6 +15,7 @@ export 'src/components/face_id/liq_face_id.dart';
 export 'src/components/keyboards/liq_keyboard.dart';
 export 'src/components/kit_helpers/liq_kit_helpers.dart';
 export 'src/components/lists/liq_list.dart';
+export 'src/components/materials/liq_material_chip.dart';
 export 'src/components/menu/liq_menu.dart';
 export 'src/components/notifications/liq_notification.dart';
 export 'src/components/page_controls/liq_page_control.dart';

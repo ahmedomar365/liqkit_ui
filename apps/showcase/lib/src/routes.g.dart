@@ -43,6 +43,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/bezels/catalog': _buildBezelsCatalog,
   '/keyboards/catalog': _buildKeyboardsCatalog,
   '/kit-helpers/catalog': _buildKitHelpersCatalog,
+  '/materials/catalog': _buildMaterialsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -116,6 +117,9 @@ Widget _buildKeyboardsCatalog(BuildContext context) =>
 
 Widget _buildKitHelpersCatalog(BuildContext context) =>
     const _KitHelpersRoute();
+
+Widget _buildMaterialsCatalog(BuildContext context) =>
+    const _MaterialsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -289,6 +293,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Kit Helpers',
     description: 'Demo-page chrome — header + dashed mode-labels card',
   ),
+  (
+    path: '/materials/catalog',
+    label: 'Materials',
+    description: 'iOS 26 material thickness presets — light + dark chips',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -342,7 +351,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '32 / 37 categories ported (Kit Helpers in this build). '
+                  '33 / 37 categories ported (Materials in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3220,6 +3229,101 @@ class _KitHelpersRoute extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MaterialsRoute extends StatelessWidget {
+  const _MaterialsRoute();
+
+  static const List<({LiqMaterialStyle style, String caption})> _styles =
+      <({LiqMaterialStyle style, String caption})>[
+    (style: LiqMaterialStyle.ultraThin, caption: 'Ultra Thin'),
+    (style: LiqMaterialStyle.thin, caption: 'Thin'),
+    (style: LiqMaterialStyle.regular, caption: 'Regular'),
+    (style: LiqMaterialStyle.thick, caption: 'Thick'),
+    (style: LiqMaterialStyle.chrome, caption: 'Chrome'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                Color(0xFFE96A95),
+                Color(0xFFFFB36B),
+                Color(0xFF59C6FF),
+                Color(0xFF8B5CFF),
+              ],
+              stops: <double>[0, 0.3, 0.65, 1],
+            ),
+          ),
+        ),
+        SingleChildScrollView(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text(
+                'Light',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 13,
+                  height: 17 / 13,
+                  color: Color(0xFFFFFFFF),
+                  fontWeight: FontWeight.w500,
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 30,
+                runSpacing: 38,
+                children: <Widget>[
+                  for (final s in _styles)
+                    LiqMaterialChipCell(
+                      caption: s.caption,
+                      chip: LiqMaterialChip(style: s.style),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              const Text(
+                'Dark',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 13,
+                  height: 17 / 13,
+                  color: Color(0xFFFFFFFF),
+                  fontWeight: FontWeight.w500,
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 30,
+                runSpacing: 38,
+                children: <Widget>[
+                  for (final s in _styles)
+                    LiqMaterialChipCell(
+                      caption: s.caption,
+                      chip: LiqMaterialChip(
+                        style: s.style,
+                        brightness: LiqMaterialBrightness.dark,
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
