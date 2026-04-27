@@ -41,6 +41,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/activity-views/catalog': _buildActivityViewsCatalog,
   '/face-id/catalog': _buildFaceIdCatalog,
   '/bezels/catalog': _buildBezelsCatalog,
+  '/keyboards/catalog': _buildKeyboardsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -108,6 +109,9 @@ Widget _buildActivityViewsCatalog(BuildContext context) =>
 Widget _buildFaceIdCatalog(BuildContext context) => const _FaceIdRoute();
 
 Widget _buildBezelsCatalog(BuildContext context) => const _BezelsRoute();
+
+Widget _buildKeyboardsCatalog(BuildContext context) =>
+    const _KeyboardsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -271,6 +275,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Bezels',
     description: 'iPhone device frame with optional Dynamic Island',
   ),
+  (
+    path: '/keyboards/catalog',
+    label: 'Keyboards',
+    description: 'iPhone keyboard surface — suggestions, keys, toolbar',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -324,7 +333,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '30 / 37 categories ported (Bezels in this build). '
+                  '31 / 37 categories ported (Keyboards in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3065,6 +3074,71 @@ class _BezelsRoute extends StatelessWidget {
 
 class _BezelCell extends StatelessWidget {
   const _BezelCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+}
+
+class _KeyboardsRoute extends StatelessWidget {
+  const _KeyboardsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: const <Widget>[
+            _KeyboardCell(
+              caption: 'default · iPhone QWERTY',
+              child: LiqKeyboard(width: 360, minHeight: 320),
+            ),
+            _KeyboardCell(
+              caption: 'numbers · custom rows',
+              child: LiqKeyboard(
+                width: 360,
+                minHeight: 320,
+                suggestions: <String>['1,000', '\$10', '99%'],
+                keyRows: <List<String>>[
+                  <String>['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+                  <String>['-', '/', ':', ';', '(', ')', '\$', '&', '@', '"'],
+                  <String>['.', ',', '?', '!', '\''],
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _KeyboardCell extends StatelessWidget {
+  const _KeyboardCell({required this.caption, required this.child});
   final String caption;
   final Widget child;
   @override
