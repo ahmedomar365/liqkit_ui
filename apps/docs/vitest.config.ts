@@ -9,6 +9,10 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['@testing-library/jest-dom/vitest'],
+    // Playwright specs live in `tests/` and use a different test
+    // runner. Vitest covers `components/__tests__/` only.
+    include: ['components/**/*.test.{ts,tsx}'],
+    exclude: ['tests/**', 'node_modules/**', '.next/**', '.source/**'],
   },
   resolve: {
     alias: {
