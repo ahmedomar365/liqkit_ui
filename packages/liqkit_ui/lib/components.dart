@@ -11,6 +11,7 @@ export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
 export 'src/components/empty_states/liq_empty_state.dart';
+export 'src/components/examples/liq_examples.dart';
 export 'src/components/face_id/liq_face_id.dart';
 export 'src/components/keyboards/liq_keyboard.dart';
 export 'src/components/kit_helpers/liq_kit_helpers.dart';

@@ -44,6 +44,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/keyboards/catalog': _buildKeyboardsCatalog,
   '/kit-helpers/catalog': _buildKitHelpersCatalog,
   '/materials/catalog': _buildMaterialsCatalog,
+  '/examples/catalog': _buildExamplesCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -120,6 +121,8 @@ Widget _buildKitHelpersCatalog(BuildContext context) =>
 
 Widget _buildMaterialsCatalog(BuildContext context) =>
     const _MaterialsRoute();
+
+Widget _buildExamplesCatalog(BuildContext context) => const _ExamplesRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -298,6 +301,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Materials',
     description: 'iOS 26 material thickness presets — light + dark chips',
   ),
+  (
+    path: '/examples/catalog',
+    label: 'Examples',
+    description: 'Doc panels — section card + meta + item grid',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -351,7 +359,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '33 / 37 categories ported (Materials in this build). '
+                  '34 / 37 categories ported (Examples in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3324,6 +3332,87 @@ class _MaterialsRoute extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ExamplesRoute extends StatelessWidget {
+  const _ExamplesRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF6F7FA),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const LiqExamplesPanel(
+              title: 'Showcase',
+              body:
+                  'Documentation chrome for liqkit_ui examples — panels, '
+                  'sections, and items.',
+              child: SizedBox.shrink(),
+            ),
+            const SizedBox(height: 12),
+            LiqExamplesSection(
+              title: 'Buttons',
+              meta: '3 examples',
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 3.2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const <Widget>[
+                  LiqExamplesItem(
+                    name: 'Default',
+                    code: 'LiqButton.regular',
+                  ),
+                  LiqExamplesItem(
+                    name: 'Plain',
+                    code: 'LiqButton.plain',
+                  ),
+                  LiqExamplesItem(
+                    name: 'Glass tinted',
+                    code: 'LiqButton.glass',
+                  ),
+                  LiqExamplesItem(
+                    name: 'Disabled',
+                    meta: 'state=',
+                    code: 'disabled',
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            LiqExamplesSection(
+              title: 'Pickers',
+              meta: '2 examples',
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 3.2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const <Widget>[
+                  LiqExamplesItem(
+                    name: 'Inline',
+                    code: 'LiqDatePicker',
+                  ),
+                  LiqExamplesItem(
+                    name: 'Range',
+                    code: 'LiqDatePickerRange',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
