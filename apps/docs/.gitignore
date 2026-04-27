@@ -4,5 +4,7 @@ node_modules/
 .wrangler/
 .dev.vars
 snippets/
+.source/
+next-env.d.ts
 out/
 *.tsbuildinfo
