@@ -33,6 +33,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/popup-buttons/catalog': _buildPopupButtonsCatalog,
   '/status-bars/catalog': _buildStatusBarsCatalog,
   '/sidebars/catalog': _buildSidebarsCatalog,
+  '/empty-states/catalog': _buildEmptyStatesCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -81,6 +82,9 @@ Widget _buildStatusBarsCatalog(BuildContext context) =>
     const _StatusBarsRoute();
 
 Widget _buildSidebarsCatalog(BuildContext context) => const _SidebarsRoute();
+
+Widget _buildEmptyStatesCatalog(BuildContext context) =>
+    const _EmptyStatesRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -204,6 +208,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Sidebars',
     description: 'iPad-style left rail: search + section headers + nav rows',
   ),
+  (
+    path: '/empty-states/catalog',
+    label: 'Empty States',
+    description: 'Centered icon + title + description + optional CTA pill',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -257,7 +266,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '22 / 37 categories ported (Sidebars in this build). '
+                  '23 / 37 categories ported (Empty States in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2295,5 +2304,123 @@ class _SidebarsRoute extends StatelessWidget {
       ),
     );
   }
+}
+
+class _EmptyStatesRoute extends StatelessWidget {
+  const _EmptyStatesRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: <Widget>[
+            _EmptyCell(
+              caption: 'icon + title + description',
+              child: LiqEmptyState(
+                title: 'No Mail',
+                description: 'New mail will appear here.',
+                iconBackground: true,
+                icon: SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CustomPaint(painter: _EnvelopePainter()),
+                ),
+              ),
+            ),
+            _EmptyCell(
+              caption: 'with CTA',
+              child: LiqEmptyState(
+                title: 'Welcome',
+                description: 'Start by composing your first message.',
+                cta: LiqEmptyStateCta(
+                  label: 'Compose',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            _EmptyCell(
+              caption: 'minimal',
+              child: LiqEmptyState(title: 'Nothing here yet'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _EmptyCell extends StatelessWidget {
+  const _EmptyCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 320,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              caption,
+              style: const TextStyle(
+                fontFamily: 'SF Pro Text',
+                fontSize: 13,
+                color: Color(0xFF666A72),
+              ),
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 12),
+            decoration: const BoxDecoration(
+              color: Color(0xFFFFFFFF),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
+              border: Border.fromBorderSide(BorderSide(color: Color(0xFFE6E9EE))),
+            ),
+            child: child,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EnvelopePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF0A84FF)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 1.7;
+    final s = size.width / 22;
+    canvas
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(2 * s, 5 * s, 18 * s, 12 * s),
+          Radius.circular(2 * s),
+        ),
+        paint,
+      )
+      ..drawPath(
+        Path()
+          ..moveTo(2 * s, 6 * s)
+          ..lineTo(11 * s, 13 * s)
+          ..lineTo(20 * s, 6 * s),
+        paint,
+      );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 

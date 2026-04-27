@@ -6,6 +6,7 @@ export 'src/components/alerts/liq_alert.dart';
 export 'src/components/buttons/liq_button.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
+export 'src/components/empty_states/liq_empty_state.dart';
 export 'src/components/lists/liq_list.dart';
 export 'src/components/menu/liq_menu.dart';
 export 'src/components/notifications/liq_notification.dart';
