@@ -1,0 +1,5 @@
+# Node carve-out for the documentation site.
+# Dart packages are NOT listed here — they live in pubspec.yaml
+# under workspace:.
+packages:
+  - 'apps/docs'
