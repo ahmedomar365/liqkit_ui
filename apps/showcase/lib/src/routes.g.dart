@@ -23,6 +23,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/lists/catalog': _buildListsCatalog,
   '/top-bars/catalog': _buildTopBarsCatalog,
   '/toolbars/catalog': _buildToolbarsCatalog,
+  '/sheets/catalog': _buildSheetsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -46,6 +47,8 @@ Widget _buildListsCatalog(BuildContext context) => const _ListsRoute();
 Widget _buildTopBarsCatalog(BuildContext context) => const _TopBarsRoute();
 
 Widget _buildToolbarsCatalog(BuildContext context) => const _ToolbarsRoute();
+
+Widget _buildSheetsCatalog(BuildContext context) => const _SheetsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -119,6 +122,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Toolbars',
     description: 'Glass action buttons + filter chips',
   ),
+  (
+    path: '/sheets/catalog',
+    label: 'Sheets',
+    description: 'Modal/inspector sheets with grabber + 44pt controls',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -172,7 +180,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '12 / 37 categories ported (Toolbars in this build). '
+                  '13 / 37 categories ported (Sheets in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1300,6 +1308,83 @@ class _ToolbarsRoute extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SheetsRoute extends StatelessWidget {
+  const _SheetsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _SheetCell(
+              caption: 'fullscreen',
+              child: LiqSheet(title: 'Title'),
+            ),
+            SizedBox(height: 24),
+            _SheetCell(
+              caption: 'stacked',
+              child: LiqSheet(
+                title: 'Title',
+                variant: LiqSheetVariant.stacked,
+              ),
+            ),
+            SizedBox(height: 24),
+            _SheetCell(
+              caption: 'inspector',
+              child: LiqSheet(
+                title: 'Title',
+                variant: LiqSheetVariant.inspector,
+                height: 220,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SheetCell extends StatelessWidget {
+  const _SheetCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        SizedBox(
+          width: 360,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.topLeft,
+            child: child,
+          ),
+        ),
+      ],
     );
   }
 }
