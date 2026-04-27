@@ -38,6 +38,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/color-pickers/catalog': _buildColorPickersCatalog,
   '/app-icons/catalog': _buildAppIconsCatalog,
   '/widgets/catalog': _buildWidgetsCatalog,
+  '/activity-views/catalog': _buildActivityViewsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -98,6 +99,9 @@ Widget _buildColorPickersCatalog(BuildContext context) =>
 Widget _buildAppIconsCatalog(BuildContext context) => const _AppIconsRoute();
 
 Widget _buildWidgetsCatalog(BuildContext context) => const _WidgetsRoute();
+
+Widget _buildActivityViewsCatalog(BuildContext context) =>
+    const _ActivityViewsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -246,6 +250,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Widgets',
     description: 'Home-screen widget cards (small/medium/large/extraLarge)',
   ),
+  (
+    path: '/activity-views/catalog',
+    label: 'Activity Views',
+    description: 'iOS share sheet — translucent panel + header + content',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -299,7 +308,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '27 / 37 categories ported (Widgets in this build). '
+                  '28 / 37 categories ported (Activity Views in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2849,6 +2858,106 @@ class _WidgetsRoute extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ActivityViewsRoute extends StatelessWidget {
+  const _ActivityViewsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('share sheet · with header + apps strip'),
+            LiqActivitySheet(
+              header: LiqActivityHeader(
+                title: 'liqkit_ui Spec.pdf',
+                subtitle: '12 pages · 2.4 MB',
+                onClose: () {},
+              ),
+              child: SizedBox(
+                height: 88,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const <Widget>[
+                    _ActivityApp(label: 'AirDrop', color: Color(0xFF4B62F8)),
+                    SizedBox(width: 18),
+                    _ActivityApp(label: 'Messages', color: Color(0xFF1CBE54)),
+                    SizedBox(width: 18),
+                    _ActivityApp(label: 'Mail', color: Color(0xFF3478F6)),
+                    SizedBox(width: 18),
+                    _ActivityApp(label: 'Notes', color: Color(0xFFFFD95A)),
+                    SizedBox(width: 18),
+                    _ActivityApp(label: 'Reminders', color: Color(0xFFFF453A)),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const _SegLabel('header only · no body'),
+            const LiqActivitySheet(
+              width: 360,
+              header: LiqActivityHeader(
+                title: 'Family vacation.heic',
+                subtitle: '4032 × 3024 · HEIC',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActivityApp extends StatelessWidget {
+  const _ActivityApp({required this.label, required this.color});
+  final String label;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 68,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            width: 66,
+            height: 66,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color(0x1F000000),
+                  offset: Offset(0, 2),
+                  blurRadius: 8,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 11,
+              height: 13 / 11,
+              color: Color(0xFF111111),
+            ),
+          ),
+        ],
       ),
     );
   }

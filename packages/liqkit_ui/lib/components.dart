@@ -2,6 +2,7 @@
 library;
 
 export 'src/components/action_sheets/liq_action_sheet.dart';
+export 'src/components/activity_views/liq_activity_sheet.dart';
 export 'src/components/alerts/liq_alert.dart';
 export 'src/components/app_icons/liq_app_icon.dart';
 export 'src/components/buttons/liq_button.dart';
