@@ -1,0 +1,37 @@
+---
+title: Buttons
+description: Tappable controls — regular, glass, and destructive variants.
+---
+
+import buttonRegularSnippet from '@/snippets/button/regular.json';
+import buttonGlassSnippet from '@/snippets/button/glass.json';
+import buttonDestructiveSnippet from '@/snippets/button/destructive.json';
+
+`LiqButton` is the primary tap target in liqkit_ui. It comes in a few
+visually distinct styles to match iOS 26 Human Interface Guidelines.
+
+## Regular
+
+A neutral pill — the default style for primary affirmative actions.
+
+<LiqPreview component="button" variant="regular" />
+
+<CodeSnippet snippet={buttonRegularSnippet} />
+
+## Glass
+
+A translucent variant that lets the background tint show through —
+intended for floating chrome (toolbars, sheets).
+
+<LiqPreview component="button" variant="glass" />
+
+<CodeSnippet snippet={buttonGlassSnippet} />
+
+## Destructive
+
+Use for actions that delete content or undo work. The label is rendered
+in the system red regardless of style.
+
+<LiqPreview component="button" variant="destructive" />
+
+<CodeSnippet snippet={buttonDestructiveSnippet} />
