@@ -36,3 +36,15 @@ tooling/playwright/playwright-report/
 # Local-only
 .env
 .env.local
+
+# apps/docs (Next.js)
+apps/docs/.next/
+apps/docs/.open-next/
+apps/docs/node_modules/
+apps/docs/snippets/
+apps/docs/.wrangler/
+apps/docs/.dev.vars
+
+# apps/docs_snippets (Flutter Web build)
+apps/docs_snippets/build/
+apps/docs_snippets/.dart_tool/
