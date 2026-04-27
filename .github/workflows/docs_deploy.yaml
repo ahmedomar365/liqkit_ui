@@ -1,0 +1,88 @@
+name: docs-deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ['liqkit_ui-v*']
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Deploy target (prod | dev)'
+        type: choice
+        options: [prod, dev]
+        default: prod
+
+env:
+  NODE_VERSION: '24'
+  PNPM_VERSION: '10'
+  FLUTTER_CHANNEL: stable
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SNIPPETS_URL: https://liqkit-snippets-prod.pages.dev
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+
+      - name: Resolve Dart workspace
+        run: dart pub get
+
+      - name: Activate melos
+        run: |
+          dart pub global activate melos
+          echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
+
+      - name: Regenerate snippet routes (must be a no-op on a clean checkout)
+        run: melos run docs:gen:routes:check
+
+      - name: Regenerate snippet JSON
+        run: melos run docs:gen:snippets
+
+      - name: Build docs_snippets (Flutter Web)
+        working-directory: apps/docs_snippets
+        run: flutter build web --no-web-resources-cdn --pwa-strategy=none --no-tree-shake-icons --base-href=/
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Vitest
+        working-directory: apps/docs
+        run: pnpm test
+
+      - name: Build docs (Next.js / OpenNext)
+        working-directory: apps/docs
+        env:
+          NEXT_PUBLIC_SNIPPETS_URL: ${{ env.SNIPPETS_URL }}
+        run: pnpm exec opennextjs-cloudflare build
+
+      - name: Deploy snippets to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/docs_snippets/build/web --project-name=liqkit-snippets-prod --branch=main
+
+      - name: Deploy docs to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: apps/docs
+          command: deploy
