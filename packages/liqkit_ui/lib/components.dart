@@ -30,6 +30,7 @@ export 'src/components/sidebars/liq_sidebar.dart';
 export 'src/components/sliders/liq_slider.dart';
 export 'src/components/status_bars/liq_status_bar.dart';
 export 'src/components/steppers/liq_stepper.dart';
+export 'src/components/system/liq_system.dart';
 export 'src/components/text_fields/liq_text_field.dart';
 export 'src/components/toggles/liq_toggle.dart';
 export 'src/components/toolbars/liq_toolbar.dart';

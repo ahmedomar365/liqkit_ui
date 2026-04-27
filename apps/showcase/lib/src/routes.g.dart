@@ -46,6 +46,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/materials/catalog': _buildMaterialsCatalog,
   '/examples/catalog': _buildExamplesCatalog,
   '/windows/catalog': _buildWindowsCatalog,
+  '/system/catalog': _buildSystemCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -126,6 +127,8 @@ Widget _buildMaterialsCatalog(BuildContext context) =>
 Widget _buildExamplesCatalog(BuildContext context) => const _ExamplesRoute();
 
 Widget _buildWindowsCatalog(BuildContext context) => const _WindowsRoute();
+
+Widget _buildSystemCatalog(BuildContext context) => const _SystemRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -314,6 +317,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Windows',
     description: 'macOS window — toolbar, glass buttons, traffic lights',
   ),
+  (
+    path: '/system/catalog',
+    label: 'System',
+    description: 'Home indicator, action pills, toggle dot',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -367,7 +375,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '35 / 37 categories ported (Windows in this build). '
+                  '36 / 37 categories ported (System in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3482,6 +3490,95 @@ class _WindowsRoute extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _SystemRoute extends StatelessWidget {
+  const _SystemRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF8F9FC),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const _SegLabel('Home Indicator'),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: const <Widget>[
+                SizedBox(
+                  width: 200,
+                  child: LiqHomeIndicator(),
+                ),
+                SizedBox(
+                  width: 280,
+                  child: LiqHomeIndicator(
+                    layout: LiqHomeIndicatorLayout.iphoneLandscape,
+                  ),
+                ),
+                SizedBox(
+                  width: 320,
+                  child: LiqHomeIndicator(
+                    layout: LiqHomeIndicatorLayout.ipadPortrait,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('Action Pills'),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: const <Widget>[
+                SizedBox(
+                  width: 140,
+                  child: LiqSystemActionPill(label: 'Mute'),
+                ),
+                SizedBox(
+                  width: 140,
+                  child: LiqSystemActionPill(
+                    label: 'Delete',
+                    style: LiqSystemActionPillStyle.destructive,
+                  ),
+                ),
+                SizedBox(
+                  width: 140,
+                  child: LiqSystemActionPill(
+                    label: 'Mute',
+                    brightness: LiqSystemBrightness.dark,
+                  ),
+                ),
+                SizedBox(
+                  width: 140,
+                  child: LiqSystemActionPill(
+                    label: 'Delete',
+                    style: LiqSystemActionPillStyle.destructive,
+                    brightness: LiqSystemBrightness.dark,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('Toggle Dots'),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const <Widget>[
+                LiqSystemToggleDot(),
+                SizedBox(width: 16),
+                LiqSystemToggleDot(selected: true),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
