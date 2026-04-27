@@ -22,6 +22,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/text-fields/catalog': _buildTextFieldsCatalog,
   '/lists/catalog': _buildListsCatalog,
   '/top-bars/catalog': _buildTopBarsCatalog,
+  '/toolbars/catalog': _buildToolbarsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -43,6 +44,8 @@ Widget _buildTextFieldsCatalog(BuildContext context) =>
 Widget _buildListsCatalog(BuildContext context) => const _ListsRoute();
 
 Widget _buildTopBarsCatalog(BuildContext context) => const _TopBarsRoute();
+
+Widget _buildToolbarsCatalog(BuildContext context) => const _ToolbarsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -111,6 +114,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Top Bars',
     description: 'Nav title + leading/trailing actions, large-title row',
   ),
+  (
+    path: '/toolbars/catalog',
+    label: 'Toolbars',
+    description: 'Glass action buttons + filter chips',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -164,7 +172,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '11 / 37 categories ported (Top Bars in this build). '
+                  '12 / 37 categories ported (Toolbars in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1183,6 +1191,115 @@ class _TopBarCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: child,
+    );
+  }
+}
+
+class _ToolbarsRoute extends StatelessWidget {
+  const _ToolbarsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('glass action buttons'),
+            SizedBox(
+              width: 380,
+              child: LiqToolbar(
+                leading: <Widget>[
+                  LiqToolbarGlassButton(
+                    label: 'Cancel',
+                    onPressed: () {},
+                  ),
+                ],
+                trailing: <Widget>[
+                  LiqToolbarGlassButton(
+                    label: 'Save',
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('symbol-only toolbar'),
+            SizedBox(
+              width: 380,
+              child: LiqToolbar(
+                leading: <Widget>[
+                  LiqToolbarGlassButton(
+                    label: '⌫',
+                    onPressed: () {},
+                    symbolOnly: true,
+                  ),
+                  LiqToolbarGlassButton(
+                    label: '↻',
+                    onPressed: () {},
+                    symbolOnly: true,
+                  ),
+                ],
+                trailing: <Widget>[
+                  LiqToolbarGlassButton(
+                    label: '⇪',
+                    onPressed: () {},
+                    symbolOnly: true,
+                  ),
+                  LiqToolbarGlassButton(
+                    label: '⌘',
+                    onPressed: () {},
+                    symbolOnly: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('chips · light'),
+            const Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                LiqToolbarChip(label: 'All'),
+                LiqToolbarChip(label: 'Unread'),
+                LiqToolbarChip(label: 'Flagged'),
+                LiqToolbarChip(label: 'Mentions'),
+                LiqToolbarChip(label: 'Recent'),
+              ],
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('chips · dark'),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                color: Color(0xFF0F1115),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: const Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: <Widget>[
+                  LiqToolbarChip(
+                    label: 'All',
+                    brightness: Brightness.dark,
+                  ),
+                  LiqToolbarChip(
+                    label: 'Unread',
+                    brightness: Brightness.dark,
+                  ),
+                  LiqToolbarChip(
+                    label: 'Flagged',
+                    brightness: Brightness.dark,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
