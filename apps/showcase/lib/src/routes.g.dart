@@ -39,6 +39,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/app-icons/catalog': _buildAppIconsCatalog,
   '/widgets/catalog': _buildWidgetsCatalog,
   '/activity-views/catalog': _buildActivityViewsCatalog,
+  '/face-id/catalog': _buildFaceIdCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -102,6 +103,8 @@ Widget _buildWidgetsCatalog(BuildContext context) => const _WidgetsRoute();
 
 Widget _buildActivityViewsCatalog(BuildContext context) =>
     const _ActivityViewsRoute();
+
+Widget _buildFaceIdCatalog(BuildContext context) => const _FaceIdRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -255,6 +258,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Activity Views',
     description: 'iOS share sheet — translucent panel + header + content',
   ),
+  (
+    path: '/face-id/catalog',
+    label: 'Face ID',
+    description: 'Black bezel with green Face ID glyph (scan/success/fail)',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -308,7 +316,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '28 / 37 categories ported (Activity Views in this build). '
+                  '29 / 37 categories ported (Face ID in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2958,6 +2966,34 @@ class _ActivityApp extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _FaceIdRoute extends StatelessWidget {
+  const _FaceIdRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('scanning'),
+            const LiqFaceIdBezel(),
+            const SizedBox(height: 28),
+            const _SegLabel('success'),
+            const LiqFaceIdBezel(state: LiqFaceIdState.success),
+            const SizedBox(height: 28),
+            const _SegLabel('fail'),
+            const LiqFaceIdBezel(state: LiqFaceIdState.fail),
+          ],
+        ),
       ),
     );
   }
