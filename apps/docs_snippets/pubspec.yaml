@@ -1,0 +1,25 @@
+name: docs_snippets
+description: Single-variant Flutter Web app iframed by apps/docs/. Routes are generated from tooling/gen/snippet_manifest.json.
+publish_to: none
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  liqkit_ui:
+    path: ../../packages/liqkit_ui
+  liqkit_ui_assets:
+    path: ../../packages/liqkit_ui_assets
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: false

@@ -1,0 +1,12 @@
+{
+  "name": "liqkit_ui docs snippets",
+  "short_name": "liqkit-snippets",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "iframe target for liqkit_ui documentation previews",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}
