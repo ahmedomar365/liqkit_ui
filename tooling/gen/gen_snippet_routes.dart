@@ -6,6 +6,18 @@ import 'dart:io';
 /// Pure functions: input is a JSON string of the manifest, output is the
 /// generated source. CLI wraps these for IO.
 
+final RegExp _validIdent = RegExp(r'^[a-zA-Z0-9_-]+$');
+
+void _checkIdent(String kind, String value, {String? component}) {
+  if (!_validIdent.hasMatch(value)) {
+    final ctx = component == null ? '' : ' (component: $component)';
+    throw FormatException(
+      'snippet_manifest.json: invalid $kind "$value"$ctx'
+      ' — only [a-zA-Z0-9_-] allowed',
+    );
+  }
+}
+
 String _camel(String s) {
   final parts = s.split(RegExp('[-_]'));
   return parts.first +
@@ -29,8 +41,10 @@ String renderDartRoutes(String manifestJson) {
 
   for (final c in components) {
     final component = c['component'] as String;
+    _checkIdent('component', component);
     for (final v in (c['variants'] as List).cast<Map<String, dynamic>>()) {
       final variant = v['variant'] as String;
+      _checkIdent('variant', variant, component: component);
       final ident = _identifier(component, variant);
       imports.add(
         "import 'package:docs_snippets/snippets/$component/$variant.dart' show $ident;",
@@ -64,8 +78,10 @@ String renderTsRoutes(String manifestJson) {
 
   for (final c in components) {
     final component = c['component'] as String;
+    _checkIdent('component', component);
     for (final v in (c['variants'] as List).cast<Map<String, dynamic>>()) {
       final variant = v['variant'] as String;
+      _checkIdent('variant', variant, component: component);
       final display = v['displayName'] as String;
       entries.add(
         "  '$component/$variant': { component: '$component', variant: '$variant', displayName: ${jsonEncode(display)}, path: '/$component/$variant' },",
@@ -97,10 +113,22 @@ export type SnippetRouteKey = keyof typeof SNIPPET_ROUTES;
 Future<void> main(List<String> args) async {
   final repoRoot = Directory.current.path;
   final manifestPath = '$repoRoot/tooling/gen/snippet_manifest.json';
-  final manifestJson = await File(manifestPath).readAsString();
-
-  final dartRoutes = renderDartRoutes(manifestJson);
-  final tsRoutes = renderTsRoutes(manifestJson);
+  String manifestJson;
+  try {
+    manifestJson = await File(manifestPath).readAsString();
+  } on FileSystemException catch (e) {
+    stderr.writeln('snippet_manifest.json not found at $manifestPath: $e');
+    exit(1);
+  }
+  String dartRoutes;
+  String tsRoutes;
+  try {
+    dartRoutes = renderDartRoutes(manifestJson);
+    tsRoutes = renderTsRoutes(manifestJson);
+  } on FormatException catch (e) {
+    stderr.writeln(e.message);
+    exit(1);
+  }
 
   final dartOutPath = '$repoRoot/apps/docs_snippets/lib/src/routes.g.dart';
   final tsOutPath = '$repoRoot/apps/docs/lib/snippet-routes.ts';

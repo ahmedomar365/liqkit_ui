@@ -56,4 +56,48 @@ void main() {
       expect(out, contains("path: '/button/regular'"));
     });
   });
+
+  group('validation', () {
+    test('rejects a component with invalid characters', () {
+      const fixture = '''
+{
+  "components": [
+    {
+      "component": "bad.name",
+      "displayName": "Bad",
+      "group": "x",
+      "variants": [
+        { "variant": "v", "displayName": "V", "dartFile": "x.dart" }
+      ]
+    }
+  ]
+}
+''';
+      expect(
+        () => renderDartRoutes(fixture),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
+    test('rejects a variant with a slash', () {
+      const fixture = '''
+{
+  "components": [
+    {
+      "component": "ok",
+      "displayName": "Ok",
+      "group": "x",
+      "variants": [
+        { "variant": "a/b", "displayName": "A", "dartFile": "x.dart" }
+      ]
+    }
+  ]
+}
+''';
+      expect(
+        () => renderTsRoutes(fixture),
+        throwsA(isA<FormatException>()),
+      );
+    });
+  });
 }
