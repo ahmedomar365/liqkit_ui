@@ -35,3 +35,4 @@ export 'src/components/toggles/liq_toggle.dart';
 export 'src/components/toolbars/liq_toolbar.dart';
 export 'src/components/top_bars/liq_top_bar.dart';
 export 'src/components/widgets/liq_widget_card.dart';
+export 'src/components/windows/liq_window.dart';

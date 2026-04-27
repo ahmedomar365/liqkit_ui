@@ -45,6 +45,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/kit-helpers/catalog': _buildKitHelpersCatalog,
   '/materials/catalog': _buildMaterialsCatalog,
   '/examples/catalog': _buildExamplesCatalog,
+  '/windows/catalog': _buildWindowsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -123,6 +124,8 @@ Widget _buildMaterialsCatalog(BuildContext context) =>
     const _MaterialsRoute();
 
 Widget _buildExamplesCatalog(BuildContext context) => const _ExamplesRoute();
+
+Widget _buildWindowsCatalog(BuildContext context) => const _WindowsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -306,6 +309,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Examples',
     description: 'Doc panels — section card + meta + item grid',
   ),
+  (
+    path: '/windows/catalog',
+    label: 'Windows',
+    description: 'macOS window — toolbar, glass buttons, traffic lights',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -359,7 +367,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '34 / 37 categories ported (Examples in this build). '
+                  '35 / 37 categories ported (Windows in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3413,6 +3421,67 @@ class _ExamplesRoute extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _WindowsRoute extends StatelessWidget {
+  const _WindowsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[Color(0xFF7FB6FF), Color(0xFFB48BFF)],
+            ),
+          ),
+        ),
+        SingleChildScrollView(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            children: <Widget>[
+              LiqWindow(
+                size: const Size(620, 360),
+                toolbar: LiqWindowToolbar(
+                  leading: <Widget>[
+                    LiqWindowGlassButton(
+                      onPressed: () {},
+                      child: const Text('‹', textDirection: TextDirection.ltr),
+                    ),
+                  ],
+                  title: 'Mail',
+                  subtitle: 'Inbox · 3 messages',
+                  trailing: <Widget>[
+                    const LiqWindowControls(),
+                  ],
+                ),
+                child: const ColoredBox(
+                  color: Color(0xFFFAFBFC),
+                  child: Center(
+                    child: Text(
+                      'Window content',
+                      textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        fontFamily: 'SF Pro Text',
+                        fontSize: 14,
+                        color: Color(0xFF727272),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const LiqWindowControls(active: false),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
