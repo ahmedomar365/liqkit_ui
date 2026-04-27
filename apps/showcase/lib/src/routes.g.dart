@@ -25,6 +25,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/toolbars/catalog': _buildToolbarsCatalog,
   '/sheets/catalog': _buildSheetsCatalog,
   '/alerts/catalog': _buildAlertsCatalog,
+  '/action-sheets/catalog': _buildActionSheetsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -52,6 +53,9 @@ Widget _buildToolbarsCatalog(BuildContext context) => const _ToolbarsRoute();
 Widget _buildSheetsCatalog(BuildContext context) => const _SheetsRoute();
 
 Widget _buildAlertsCatalog(BuildContext context) => const _AlertsRoute();
+
+Widget _buildActionSheetsCatalog(BuildContext context) =>
+    const _ActionSheetsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -135,6 +139,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Alerts',
     description: 'Centered translucent dialog with stacked or split actions',
   ),
+  (
+    path: '/action-sheets/catalog',
+    label: 'Action Sheets',
+    description: 'Bottom-anchored stack of full-width pill actions + cancel',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -188,7 +197,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '14 / 37 categories ported (Alerts in this build). '
+                  '15 / 37 categories ported (Action Sheets in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1503,6 +1512,65 @@ class _AlertCell extends StatelessWidget {
         ),
         child,
       ],
+    );
+  }
+}
+
+class _ActionSheetsRoute extends StatelessWidget {
+  const _ActionSheetsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: <Widget>[
+            _AlertCell(
+              caption: 'with header + cancel',
+              child: LiqActionSheet(
+                title: 'Sort by',
+                description: 'Choose how to order your library.',
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(label: 'Date Added'),
+                  LiqAlertAction(label: 'Name'),
+                  LiqAlertAction(label: 'Size'),
+                  LiqAlertAction(label: 'Type'),
+                ],
+                cancelAction: LiqAlertAction(label: 'Cancel'),
+              ),
+            ),
+            _AlertCell(
+              caption: 'destructive · cancel',
+              child: LiqActionSheet(
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(
+                    label: 'Delete Photo',
+                    style: LiqAlertActionStyle.destructive,
+                  ),
+                ],
+                cancelAction: LiqAlertAction(label: 'Cancel'),
+              ),
+            ),
+            _AlertCell(
+              caption: 'no header · long list',
+              child: LiqActionSheet(
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(label: 'Action 1'),
+                  LiqAlertAction(label: 'Action 2'),
+                  LiqAlertAction(label: 'Action 3'),
+                  LiqAlertAction(label: 'Action 4'),
+                  LiqAlertAction(label: 'Action 5'),
+                ],
+                cancelAction: LiqAlertAction(label: 'Cancel'),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
