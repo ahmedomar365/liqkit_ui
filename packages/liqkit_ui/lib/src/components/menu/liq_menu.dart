@@ -91,6 +91,7 @@ final class LiqMenuItem extends StatelessWidget {
   /// Creates a menu row.
   const LiqMenuItem({
     required this.label,
+    this.subtitle,
     this.icon,
     this.trailing,
     this.onPressed,
@@ -101,6 +102,9 @@ final class LiqMenuItem extends StatelessWidget {
 
   /// Row label.
   final String label;
+
+  /// Optional small subtitle rendered below [label].
+  final String? subtitle;
 
   /// Optional leading 28×22 icon slot.
   final Widget? icon;
@@ -157,23 +161,50 @@ final class LiqMenuItem extends StatelessWidget {
                     SizedBox(width: 28, height: 22, child: Center(child: icon)),
                   if (icon != null) const SizedBox(width: 8),
                   Expanded(
-                    child: Text(
-                      label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        fontFamily: 'SF Pro Text',
-                        fontFamilyFallback: const <String>[
-                          'SF Pro',
-                          'sans-serif',
-                        ],
-                        fontSize: 17,
-                        height: 20 / 17,
-                        letterSpacing: -0.43,
-                        fontWeight: FontWeight.w400,
-                        color: labelColor,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textDirection: TextDirection.ltr,
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Text',
+                            fontFamilyFallback: const <String>[
+                              'SF Pro',
+                              'sans-serif',
+                            ],
+                            fontSize: 17,
+                            height: 20 / 17,
+                            letterSpacing: -0.43,
+                            fontWeight: FontWeight.w400,
+                            color: labelColor,
+                          ),
+                        ),
+                        if (subtitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2),
+                            child: Text(
+                              subtitle!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textDirection: TextDirection.ltr,
+                              style: TextStyle(
+                                fontFamily: 'SF Pro Text',
+                                fontSize: 11,
+                                height: 13 / 11,
+                                letterSpacing: -0.08,
+                                fontWeight: FontWeight.w400,
+                                color: isDark
+                                    ? const Color(0xFF8A8A8A)
+                                    : const Color(0xFF727272),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                   if (trailing != null) ...<Widget>[

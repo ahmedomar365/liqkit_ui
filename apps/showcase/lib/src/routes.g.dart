@@ -29,6 +29,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/notifications/catalog': _buildNotificationsCatalog,
   '/popovers/catalog': _buildPopoversCatalog,
   '/menu/catalog': _buildMenuCatalog,
+  '/context-menu/catalog': _buildContextMenuCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -66,6 +67,9 @@ Widget _buildNotificationsCatalog(BuildContext context) =>
 Widget _buildPopoversCatalog(BuildContext context) => const _PopoversRoute();
 
 Widget _buildMenuCatalog(BuildContext context) => const _MenuRoute();
+
+Widget _buildContextMenuCatalog(BuildContext context) =>
+    const _ContextMenuRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -169,6 +173,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Menu',
     description: 'iOS dropdown menu with rows, separators, and section titles',
   ),
+  (
+    path: '/context-menu/catalog',
+    label: 'Context Menu',
+    description: 'Preview tile + menu in vertical or beside arrangements',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -222,7 +231,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '18 / 37 categories ported (Menu in this build). '
+                  '19 / 37 categories ported (Context Menu in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2009,6 +2018,107 @@ class _MenuCell extends StatelessWidget {
           color: dark ? const Color(0xFF12151C) : null,
           child: child,
         ),
+      ],
+    );
+  }
+}
+
+class _ContextMenuRoute extends StatelessWidget {
+  const _ContextMenuRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 28,
+          runSpacing: 28,
+          children: <Widget>[
+            _ContextCell(
+              caption: 'below · leading',
+              child: LiqContextMenu(
+                preview: LiqContextMenuPreview(size: Size(200, 200)),
+                menu: LiqMenu(
+                  width: 200,
+                  children: <Widget>[
+                    LiqMenuItem(
+                      label: 'Edit',
+                      onPressed: _menuNoop,
+                    ),
+                    LiqMenuItem(
+                      label: 'Pin',
+                      onPressed: _menuNoop,
+                    ),
+                    LiqMenuSeparator(),
+                    LiqMenuItem(
+                      label: 'Delete',
+                      style: LiqMenuItemStyle.destructive,
+                      onPressed: _menuNoop,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            _ContextCell(
+              caption: 'beside · trailing',
+              child: LiqContextMenu(
+                arrangement: LiqContextMenuArrangement.besideTrailing,
+                preview: LiqContextMenuPreview(size: Size(180, 180)),
+                menu: LiqMenu(
+                  width: 200,
+                  children: <Widget>[
+                    LiqMenuItem(
+                      label: 'Schedule Send',
+                      subtitle: 'Tomorrow at 9 AM',
+                      onPressed: _menuNoop,
+                    ),
+                    LiqMenuItem(
+                      label: 'Move to…',
+                      onPressed: _menuNoop,
+                    ),
+                    LiqMenuSeparator(),
+                    LiqMenuItem(
+                      label: 'Discard',
+                      style: LiqMenuItemStyle.destructive,
+                      onPressed: _menuNoop,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ContextCell extends StatelessWidget {
+  const _ContextCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        child,
       ],
     );
   }
