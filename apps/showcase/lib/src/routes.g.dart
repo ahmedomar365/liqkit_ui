@@ -47,6 +47,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/examples/catalog': _buildExamplesCatalog,
   '/windows/catalog': _buildWindowsCatalog,
   '/system/catalog': _buildSystemCatalog,
+  '/text-styles/catalog': _buildTextStylesCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -129,6 +130,9 @@ Widget _buildExamplesCatalog(BuildContext context) => const _ExamplesRoute();
 Widget _buildWindowsCatalog(BuildContext context) => const _WindowsRoute();
 
 Widget _buildSystemCatalog(BuildContext context) => const _SystemRoute();
+
+Widget _buildTextStylesCatalog(BuildContext context) =>
+    const _TextStylesRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -322,6 +326,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'System',
     description: 'Home indicator, action pills, toggle dot',
   ),
+  (
+    path: '/text-styles/catalog',
+    label: 'Text Styles',
+    description: 'iOS 26 type scale — 11 roles × dynamic-type sizes',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -375,7 +384,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '36 / 37 categories ported (System in this build). '
+                  '37 / 37 categories ported (Text Styles in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3575,6 +3584,112 @@ class _SystemRoute extends StatelessWidget {
                 SizedBox(width: 16),
                 LiqSystemToggleDot(selected: true),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TextStylesRoute extends StatelessWidget {
+  const _TextStylesRoute();
+
+  static const List<({LiqDynamicTypeScale scale, String label})> _scales =
+      <({LiqDynamicTypeScale scale, String label})>[
+    (scale: LiqDynamicTypeScale.xSmall, label: 'xSmall'),
+    (scale: LiqDynamicTypeScale.small, label: 'Small'),
+    (scale: LiqDynamicTypeScale.medium, label: 'Medium'),
+    (scale: LiqDynamicTypeScale.large, label: 'Large'),
+    (scale: LiqDynamicTypeScale.xLarge, label: 'xLarge'),
+    (scale: LiqDynamicTypeScale.xxLarge, label: 'xxLarge'),
+    (scale: LiqDynamicTypeScale.xxxLarge, label: 'xxxLarge'),
+  ];
+
+  static const List<({LiqDynamicTypeScale scale, String label})> _ax =
+      <({LiqDynamicTypeScale scale, String label})>[
+    (scale: LiqDynamicTypeScale.ax1, label: 'AX1'),
+    (scale: LiqDynamicTypeScale.ax2, label: 'AX2'),
+    (scale: LiqDynamicTypeScale.ax3, label: 'AX3'),
+    (scale: LiqDynamicTypeScale.ax4, label: 'AX4'),
+    (scale: LiqDynamicTypeScale.ax5, label: 'AX5'),
+  ];
+
+  static const List<({LiqTextTone tone, String label})> _tones =
+      <({LiqTextTone tone, String label})>[
+    (tone: LiqTextTone.primary, label: 'Primary'),
+    (tone: LiqTextTone.secondary, label: 'Secondary'),
+    (tone: LiqTextTone.tertiary, label: 'Tertiary'),
+    (tone: LiqTextTone.quaternary, label: 'Quaternary'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF6F7FA),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const _SegLabel('Dynamic Type'),
+            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: <Widget>[
+                  for (final s in _scales) ...<Widget>[
+                    SizedBox(
+                      width: 160,
+                      child: LiqTypeColumn(header: s.label, scale: s.scale),
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('Accessibility Sizes'),
+            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: <Widget>[
+                  for (final s in _ax) ...<Widget>[
+                    SizedBox(
+                      width: 200,
+                      child: LiqTypeColumn(header: s.label, scale: s.scale),
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('Tone'),
+            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: <Widget>[
+                  for (final t in _tones) ...<Widget>[
+                    SizedBox(
+                      width: 200,
+                      child: LiqTypeColumn(
+                        header: t.label,
+                        scale: LiqDynamicTypeScale.large,
+                        tone: t.tone,
+                        roles: const <LiqTypeRole>[
+                          LiqTypeRole.title2,
+                          LiqTypeRole.body,
+                          LiqTypeRole.footnote,
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ],
+              ),
             ),
           ],
         ),
