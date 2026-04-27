@@ -11,6 +11,7 @@ export 'src/components/lists/liq_list.dart';
 export 'src/components/menu/liq_menu.dart';
 export 'src/components/notifications/liq_notification.dart';
 export 'src/components/page_controls/liq_page_control.dart';
+export 'src/components/pickers/liq_date_picker.dart';
 export 'src/components/popovers/liq_popover.dart';
 export 'src/components/popup_buttons/liq_popup_button.dart';
 export 'src/components/progress/liq_progress_indicator.dart';

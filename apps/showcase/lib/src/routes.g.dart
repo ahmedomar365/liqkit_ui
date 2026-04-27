@@ -34,6 +34,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/status-bars/catalog': _buildStatusBarsCatalog,
   '/sidebars/catalog': _buildSidebarsCatalog,
   '/empty-states/catalog': _buildEmptyStatesCatalog,
+  '/pickers/catalog': _buildPickersCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -85,6 +86,8 @@ Widget _buildSidebarsCatalog(BuildContext context) => const _SidebarsRoute();
 
 Widget _buildEmptyStatesCatalog(BuildContext context) =>
     const _EmptyStatesRoute();
+
+Widget _buildPickersCatalog(BuildContext context) => const _PickersRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -213,6 +216,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Empty States',
     description: 'Centered icon + title + description + optional CTA pill',
   ),
+  (
+    path: '/pickers/catalog',
+    label: 'Pickers',
+    description: 'Inline calendar date picker with selection + today ring',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -266,7 +274,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '23 / 37 categories ported (Empty States in this build). '
+                  '24 / 37 categories ported (Pickers in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2423,4 +2431,79 @@ class _EnvelopePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
+class _PickersRoute extends StatefulWidget {
+  const _PickersRoute();
+  @override
+  State<_PickersRoute> createState() => _PickersRouteState();
+}
+
+class _PickersRouteState extends State<_PickersRoute> {
+  int _year = 2026;
+  int _month = 4;
+  int _selected = 27;
+
+  void _prev() {
+    setState(() {
+      if (_month == 1) {
+        _month = 12;
+        _year--;
+      } else {
+        _month--;
+      }
+    });
+  }
+
+  void _next() {
+    setState(() {
+      if (_month == 12) {
+        _month = 1;
+        _year++;
+      } else {
+        _month++;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('inline date picker · interactive'),
+            LiqDatePicker(
+              year: _year,
+              month: _month,
+              selectedDay: _selected,
+              currentDay: DateTime.now().month == _month &&
+                      DateTime.now().year == _year
+                  ? DateTime.now().day
+                  : null,
+              onPrev: _prev,
+              onNext: _next,
+              onDayTap: (d) => setState(() => _selected = d),
+            ),
+            const SizedBox(height: 20),
+            const _SegLabel('selected = today'),
+            const LiqDatePicker(
+              year: 2026,
+              month: 4,
+              selectedDay: 27,
+              currentDay: 27,
+            ),
+            const SizedBox(height: 20),
+            const _SegLabel('today ring only'),
+            const LiqDatePicker(year: 2026, month: 4, currentDay: 15),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
