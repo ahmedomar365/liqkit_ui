@@ -4,6 +4,7 @@ library;
 export 'src/components/action_sheets/liq_action_sheet.dart';
 export 'src/components/alerts/liq_alert.dart';
 export 'src/components/buttons/liq_button.dart';
+export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
 export 'src/components/empty_states/liq_empty_state.dart';

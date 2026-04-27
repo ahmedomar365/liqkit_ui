@@ -35,6 +35,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/sidebars/catalog': _buildSidebarsCatalog,
   '/empty-states/catalog': _buildEmptyStatesCatalog,
   '/pickers/catalog': _buildPickersCatalog,
+  '/color-pickers/catalog': _buildColorPickersCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -88,6 +89,9 @@ Widget _buildEmptyStatesCatalog(BuildContext context) =>
     const _EmptyStatesRoute();
 
 Widget _buildPickersCatalog(BuildContext context) => const _PickersRoute();
+
+Widget _buildColorPickersCatalog(BuildContext context) =>
+    const _ColorPickersRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -221,6 +225,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Pickers',
     description: 'Inline calendar date picker with selection + today ring',
   ),
+  (
+    path: '/color-pickers/catalog',
+    label: 'Color Pickers',
+    description: 'Conic-gradient picker button + 12-col swatch grid + dots',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -274,7 +283,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '24 / 37 categories ported (Pickers in this build). '
+                  '25 / 37 categories ported (Color Pickers in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2506,4 +2515,111 @@ class _PickersRouteState extends State<_PickersRoute> {
   }
 }
 
+class _ColorPickersRoute extends StatefulWidget {
+  const _ColorPickersRoute();
+  @override
+  State<_ColorPickersRoute> createState() => _ColorPickersRouteState();
+}
 
+class _ColorPickersRouteState extends State<_ColorPickersRoute> {
+  Color _picked = const Color(0xFFAF52DE);
+  int? _gridSelected = 17;
+  int _dotSelected = 2;
+
+  static const List<Color> _palette = <Color>[
+    Color(0xFFFF3B30),
+    Color(0xFFFF9500),
+    Color(0xFFFFCC00),
+    Color(0xFF34C759),
+    Color(0xFF00C7BE),
+    Color(0xFF30B0C7),
+    Color(0xFF32ADE6),
+    Color(0xFF007AFF),
+    Color(0xFF5856D6),
+    Color(0xFFAF52DE),
+    Color(0xFFFF2D55),
+    Color(0xFFA2845E),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final swatches = <Color>[];
+    for (final base in _palette) {
+      // 4 lightness ramps per hue (lightening) — synthesized for showcase.
+      for (var i = 0; i < 3; i++) {
+        final r = base.r;
+        final g = base.g;
+        final b = base.b;
+        final mix = i / 3.0;
+        swatches.add(Color.fromARGB(
+          255,
+          (r * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+          (g * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+          (b * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+        ));
+      }
+    }
+
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('color picker buttons'),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                LiqColorPickerButton(
+                  color: _picked,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 16),
+                LiqColorPickerButton(
+                  color: _picked,
+                  size: LiqColorPickerButtonSize.small,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('palette · selectable dots'),
+            SizedBox(
+              width: 320,
+              child: Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: <Widget>[
+                  for (var i = 0; i < _palette.length; i++)
+                    LiqColorDot(
+                      color: _palette[i],
+                      selected: i == _dotSelected,
+                      onPressed: () => setState(() {
+                        _dotSelected = i;
+                        _picked = _palette[i];
+                      }),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const _SegLabel('12-column swatch grid'),
+            SizedBox(
+              width: 360,
+              child: LiqColorGrid(
+                colors: swatches,
+                selectedIndex: _gridSelected,
+                onSelected: (i) => setState(() {
+                  _gridSelected = i;
+                  _picked = swatches[i];
+                }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
