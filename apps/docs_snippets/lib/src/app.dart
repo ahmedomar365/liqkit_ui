@@ -1,3 +1,4 @@
+import 'package:docs_snippets/src/height_post.dart';
 import 'package:docs_snippets/src/routes.g.dart';
 import 'package:docs_snippets/src/theme_query.dart';
 import 'package:flutter/widgets.dart';
@@ -24,7 +25,9 @@ class SnippetsApp extends StatelessWidget {
         final builder = snippetRoutes[settings.name ?? '/'] ?? _fallback;
         return PageRouteBuilder<void>(
           settings: settings,
-          pageBuilder: (c, _, _) => Builder(builder: builder),
+          pageBuilder: (c, _, _) => LiqHeightReporter(
+            child: Builder(builder: builder),
+          ),
         );
       },
       builder: (context, child) => LiqTheme(
