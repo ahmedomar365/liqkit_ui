@@ -27,6 +27,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/alerts/catalog': _buildAlertsCatalog,
   '/action-sheets/catalog': _buildActionSheetsCatalog,
   '/notifications/catalog': _buildNotificationsCatalog,
+  '/popovers/catalog': _buildPopoversCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -60,6 +61,8 @@ Widget _buildActionSheetsCatalog(BuildContext context) =>
 
 Widget _buildNotificationsCatalog(BuildContext context) =>
     const _NotificationsRoute();
+
+Widget _buildPopoversCatalog(BuildContext context) => const _PopoversRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -153,6 +156,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Notifications',
     description: 'Glass banner cards with icon, title, body, and time',
   ),
+  (
+    path: '/popovers/catalog',
+    label: 'Popovers',
+    description: 'Translucent floating panel with arrow tip on any side',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -206,7 +214,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '16 / 37 categories ported (Notifications in this build). '
+                  '17 / 37 categories ported (Popovers in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1728,4 +1736,122 @@ class _NotifPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _NotifPainter oldDelegate) =>
       oldDelegate.kind != kind;
+}
+
+class _PopoversRoute extends StatelessWidget {
+  const _PopoversRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF6F7F9),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('top · center'),
+            const _PopoverCell(
+              child: LiqPopover(
+                child: Text(
+                  'Tap to add a tag',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0xFF1F2937),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+            const SizedBox(height: 28),
+            const _SegLabel('bottom · trailing'),
+            const _PopoverCell(
+              child: LiqPopover(
+                side: LiqPopoverSide.bottom,
+                alignment: LiqPopoverAlignment.trailing,
+                child: Text(
+                  'Sort by date',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0xFF1F2937),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+            const SizedBox(height: 28),
+            const _SegLabel('leading · middle'),
+            const _PopoverCell(
+              child: LiqPopover(
+                side: LiqPopoverSide.leading,
+                child: Text(
+                  'Filters',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0xFF1F2937),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+            const SizedBox(height: 28),
+            const _SegLabel('trailing · top'),
+            const _PopoverCell(
+              child: LiqPopover(
+                side: LiqPopoverSide.trailing,
+                alignment: LiqPopoverAlignment.leading,
+                child: Text(
+                  'Read receipt: ON',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0xFF1F2937),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+            const SizedBox(height: 28),
+            const _SegLabel('dark surface'),
+            Container(
+              padding: const EdgeInsets.all(20),
+              color: const Color(0xFF12151C),
+              child: const LiqPopover(
+                brightness: Brightness.dark,
+                child: Text(
+                  'Hold to drag',
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 13,
+                    color: Color(0xFFE5E7EB),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PopoverCell extends StatelessWidget {
+  const _PopoverCell({required this.child});
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: const BoxDecoration(
+        color: Color(0xFFE9ECF1),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      child: child,
+    );
+  }
 }

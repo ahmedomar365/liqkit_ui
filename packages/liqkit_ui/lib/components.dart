@@ -8,6 +8,7 @@ export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/lists/liq_list.dart';
 export 'src/components/notifications/liq_notification.dart';
 export 'src/components/page_controls/liq_page_control.dart';
+export 'src/components/popovers/liq_popover.dart';
 export 'src/components/progress/liq_progress_indicator.dart';
 export 'src/components/segmented/liq_segmented_control.dart';
 export 'src/components/sheets/liq_sheet.dart';
