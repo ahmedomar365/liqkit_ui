@@ -31,6 +31,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/menu/catalog': _buildMenuCatalog,
   '/context-menu/catalog': _buildContextMenuCatalog,
   '/popup-buttons/catalog': _buildPopupButtonsCatalog,
+  '/status-bars/catalog': _buildStatusBarsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -74,6 +75,9 @@ Widget _buildContextMenuCatalog(BuildContext context) =>
 
 Widget _buildPopupButtonsCatalog(BuildContext context) =>
     const _PopupButtonsRoute();
+
+Widget _buildStatusBarsCatalog(BuildContext context) =>
+    const _StatusBarsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -187,6 +191,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Popup Buttons',
     description: 'Inline blue label + chevron-down (32/38) — popup trigger',
   ),
+  (
+    path: '/status-bars/catalog',
+    label: 'Status Bars',
+    description: 'iPhone status bar with clock + cellular/wifi/battery glyphs',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -240,7 +249,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '20 / 37 categories ported (Popup Buttons in this build). '
+                  '21 / 37 categories ported (Status Bars in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2159,6 +2168,69 @@ class _PopupButtonsRoute extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _StatusBarsRoute extends StatelessWidget {
+  const _StatusBarsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('iPhone · light · 9:41'),
+            _StatusBarFrame(child: LiqStatusBar()),
+            const SizedBox(height: 16),
+            const _SegLabel('iPhone · dark · 12:34'),
+            _StatusBarFrame(
+              dark: true,
+              child: LiqStatusBar(
+                time: '12:34',
+                brightness: Brightness.dark,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('low battery / 1 bar'),
+            _StatusBarFrame(
+              child: LiqStatusBar(
+                cellularBars: 1,
+                batteryLevel: 0.18,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StatusBarFrame extends StatelessWidget {
+  const _StatusBarFrame({required this.child, this.dark = false});
+  final Widget child;
+  final bool dark;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 402,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: dark ? const Color(0xFF13161C) : const Color(0xFFFFFFFF),
+          border: Border.all(
+            color: dark
+                ? const Color(0x2EFFFFFF)
+                : const Color(0xFFDDE2EB),
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: child,
       ),
     );
   }
