@@ -113,6 +113,7 @@ export type SnippetRouteKey = keyof typeof SNIPPET_ROUTES;
 Future<void> main(List<String> args) async {
   final repoRoot = Directory.current.path;
   final manifestPath = '$repoRoot/tooling/gen/snippet_manifest.json';
+
   String manifestJson;
   try {
     manifestJson = await File(manifestPath).readAsString();
@@ -120,8 +121,9 @@ Future<void> main(List<String> args) async {
     stderr.writeln('snippet_manifest.json not found at $manifestPath: $e');
     exit(1);
   }
-  String dartRoutes;
-  String tsRoutes;
+
+  late final String dartRoutes;
+  late final String tsRoutes;
   try {
     dartRoutes = renderDartRoutes(manifestJson);
     tsRoutes = renderTsRoutes(manifestJson);
@@ -133,23 +135,27 @@ Future<void> main(List<String> args) async {
   final dartOutPath = '$repoRoot/apps/docs_snippets/lib/src/routes.g.dart';
   final tsOutPath = '$repoRoot/apps/docs/lib/snippet-routes.ts';
 
-  await Directory('$repoRoot/apps/docs_snippets/lib/src').create(recursive: true);
-  await Directory('$repoRoot/apps/docs/lib').create(recursive: true);
-
-  await File(dartOutPath).writeAsString(dartRoutes);
-  await File(tsOutPath).writeAsString(tsRoutes);
-
   if (args.contains('--check')) {
-    // CI: re-read what's on disk and assert it matches.
-    final dartOnDisk = await File(dartOutPath).readAsString();
-    final tsOnDisk = await File(tsOutPath).readAsString();
+    final dartOnDisk = File(dartOutPath).existsSync()
+        ? File(dartOutPath).readAsStringSync()
+        : '';
+    final tsOnDisk = File(tsOutPath).existsSync()
+        ? File(tsOutPath).readAsStringSync()
+        : '';
     if (dartOnDisk != dartRoutes || tsOnDisk != tsRoutes) {
       stderr.writeln(
         'snippet routes are stale. Run: melos run docs:gen:routes',
       );
       exit(1);
     }
+    print('snippet routes are up to date');
+    return;
   }
+
+  await Directory('$repoRoot/apps/docs_snippets/lib/src').create(recursive: true);
+  await Directory('$repoRoot/apps/docs/lib').create(recursive: true);
+  await File(dartOutPath).writeAsString(dartRoutes);
+  await File(tsOutPath).writeAsString(tsRoutes);
 
   print('wrote $dartOutPath');
   print('wrote $tsOutPath');
