@@ -12,6 +12,7 @@ workspace:
   - apps/showcase
   - apps/demo
   - apps/playground
+  - tooling/gen
 
 dev_dependencies:
   crypto: ^3.0.0

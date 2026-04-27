@@ -1,0 +1,12 @@
+name: liqkit_ui_gen
+description: Internal Dart generators for liqkit_ui (snippet routes, snippet code).
+publish_to: none
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+
+dev_dependencies:
+  test: ^1.25.0
