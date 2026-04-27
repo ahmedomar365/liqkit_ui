@@ -13,6 +13,7 @@ workspace:
   - apps/demo
   - apps/playground
   - tooling/gen
+  - tooling/gen/snippet_generator
 
 dev_dependencies:
   crypto: ^3.0.0

@@ -1,0 +1,16 @@
+name: liqkit_ui_snippet_generator
+description: Dart analyzer-based extractor of {@highlight} regions from Dart source.
+publish_to: none
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  analyzer: ^6.0.0
+  path: ^1.9.0
+
+dev_dependencies:
+  test: ^1.25.0
