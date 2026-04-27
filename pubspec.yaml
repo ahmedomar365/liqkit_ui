@@ -97,3 +97,19 @@ melos:
     fmt:check:
       run: dart format --output=none --set-exit-if-changed .
       description: CI check that all Dart files are formatted.
+
+    docs:gen:routes:
+      run: dart run tooling/gen/gen_snippet_routes.dart
+      description: Regenerate snippet routes (apps/docs_snippets routes.g.dart and apps/docs snippet-routes.ts).
+
+    docs:gen:routes:check:
+      run: dart run tooling/gen/gen_snippet_routes.dart --check
+      description: CI check that snippet routes are up to date.
+
+    docs:gen:snippets:
+      run: dart run tooling/gen/snippet_generator/main.dart
+      description: Regenerate JSON code-snippet files under apps/docs/snippets/ from the Dart sources listed in the manifest.
+
+    docs:gen:snippets:check:
+      run: dart run tooling/gen/snippet_generator/main.dart --check
+      description: CI check that JSON code-snippet files are up to date.
