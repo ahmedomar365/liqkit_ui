@@ -32,6 +32,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/context-menu/catalog': _buildContextMenuCatalog,
   '/popup-buttons/catalog': _buildPopupButtonsCatalog,
   '/status-bars/catalog': _buildStatusBarsCatalog,
+  '/sidebars/catalog': _buildSidebarsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -78,6 +79,8 @@ Widget _buildPopupButtonsCatalog(BuildContext context) =>
 
 Widget _buildStatusBarsCatalog(BuildContext context) =>
     const _StatusBarsRoute();
+
+Widget _buildSidebarsCatalog(BuildContext context) => const _SidebarsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -196,6 +199,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Status Bars',
     description: 'iPhone status bar with clock + cellular/wifi/battery glyphs',
   ),
+  (
+    path: '/sidebars/catalog',
+    label: 'Sidebars',
+    description: 'iPad-style left rail: search + section headers + nav rows',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -249,7 +257,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '21 / 37 categories ported (Status Bars in this build). '
+                  '22 / 37 categories ported (Sidebars in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2235,3 +2243,57 @@ class _StatusBarFrame extends StatelessWidget {
     );
   }
 }
+
+class _SidebarsRoute extends StatelessWidget {
+  const _SidebarsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: <Widget>[
+            LiqSidebar(
+              children: <Widget>[
+                LiqSidebarSearch(),
+                SizedBox(height: 12),
+                LiqSidebarSectionHeader(title: 'Mailboxes', detail: '12'),
+                LiqSidebarRow(
+                  title: 'All Inboxes',
+                  detail: '42',
+                  selected: true,
+                ),
+                LiqSidebarRow(title: 'VIP', detail: '3'),
+                LiqSidebarRow(title: 'Flagged'),
+                LiqSidebarRow(title: 'Drafts', detail: '7'),
+                LiqSidebarSectionHeader(title: 'Folders'),
+                LiqSidebarRow(title: 'Receipts'),
+                LiqSidebarRow(title: 'Travel'),
+                LiqSidebarRow(title: '2026', nested: true),
+                LiqSidebarRow(title: '2025', nested: true),
+              ],
+            ),
+            LiqSidebar(
+              width: 280,
+              children: <Widget>[
+                LiqSidebarSectionHeader(title: 'Library'),
+                LiqSidebarRow(title: 'Recent', detail: '128'),
+                LiqSidebarRow(title: 'Photos'),
+                LiqSidebarRow(title: 'Albums'),
+                LiqSidebarRow(title: 'Trash'),
+                LiqSidebarSectionHeader(title: 'Shared'),
+                LiqSidebarRow(title: 'Family'),
+                LiqSidebarRow(title: 'Vacation 2026'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
