@@ -40,6 +40,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/widgets/catalog': _buildWidgetsCatalog,
   '/activity-views/catalog': _buildActivityViewsCatalog,
   '/face-id/catalog': _buildFaceIdCatalog,
+  '/bezels/catalog': _buildBezelsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -105,6 +106,8 @@ Widget _buildActivityViewsCatalog(BuildContext context) =>
     const _ActivityViewsRoute();
 
 Widget _buildFaceIdCatalog(BuildContext context) => const _FaceIdRoute();
+
+Widget _buildBezelsCatalog(BuildContext context) => const _BezelsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -263,6 +266,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Face ID',
     description: 'Black bezel with green Face ID glyph (scan/success/fail)',
   ),
+  (
+    path: '/bezels/catalog',
+    label: 'Bezels',
+    description: 'iPhone device frame with optional Dynamic Island',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -316,7 +324,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '29 / 37 categories ported (Face ID in this build). '
+                  '30 / 37 categories ported (Bezels in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2995,6 +3003,90 @@ class _FaceIdRoute extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _BezelsRoute extends StatelessWidget {
+  const _BezelsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: <Widget>[
+            _BezelCell(
+              caption: 'with Dynamic Island',
+              child: LiqDeviceBezel(
+                size: Size(220, 478),
+                child: Center(
+                  child: Text(
+                    'Hello iPhone',
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      fontFamily: 'SF Pro Text',
+                      fontSize: 14,
+                      color: Color(0xFF1A1A1A),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            _BezelCell(
+              caption: 'no island · custom screen',
+              child: LiqDeviceBezel(
+                size: Size(220, 478),
+                showIsland: false,
+                screenColor: Color(0xFFFEF3C7),
+                child: Center(
+                  child: Text(
+                    'Lock screen',
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      fontFamily: 'SF Pro Text',
+                      fontSize: 14,
+                      color: Color(0xFF1A1A1A),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BezelCell extends StatelessWidget {
+  const _BezelCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        child,
+      ],
     );
   }
 }
