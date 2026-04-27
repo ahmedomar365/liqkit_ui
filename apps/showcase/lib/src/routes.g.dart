@@ -37,6 +37,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/pickers/catalog': _buildPickersCatalog,
   '/color-pickers/catalog': _buildColorPickersCatalog,
   '/app-icons/catalog': _buildAppIconsCatalog,
+  '/widgets/catalog': _buildWidgetsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -95,6 +96,8 @@ Widget _buildColorPickersCatalog(BuildContext context) =>
     const _ColorPickersRoute();
 
 Widget _buildAppIconsCatalog(BuildContext context) => const _AppIconsRoute();
+
+Widget _buildWidgetsCatalog(BuildContext context) => const _WidgetsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -238,6 +241,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'App Icons',
     description: 'Squircle home-screen icon with optional badge + label',
   ),
+  (
+    path: '/widgets/catalog',
+    label: 'Widgets',
+    description: 'Home-screen widget cards (small/medium/large/extraLarge)',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -291,7 +299,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '26 / 37 categories ported (App Icons in this build). '
+                  '27 / 37 categories ported (Widgets in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -2790,3 +2798,59 @@ class _ListGlyph extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
+class _WidgetsRoute extends StatelessWidget {
+  const _WidgetsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFF7F8FB),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const _SegLabel('small (1:1)'),
+            const SizedBox(
+              width: 160,
+              child: LiqWidgetCard(
+                size: LiqWidgetSize.small,
+                caption: 'Weather',
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('medium (2:1)'),
+            const SizedBox(
+              width: 320,
+              child: LiqWidgetCard(
+                size: LiqWidgetSize.medium,
+                caption: 'Calendar',
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('large (1:1.045)'),
+            const SizedBox(
+              width: 320,
+              child: LiqWidgetCard(
+                size: LiqWidgetSize.large,
+                caption: 'Stocks',
+              ),
+            ),
+            const SizedBox(height: 16),
+            const _SegLabel('extra large (2.1:1) · iPad'),
+            const SizedBox(
+              width: 380,
+              child: LiqWidgetCard(
+                size: LiqWidgetSize.extraLarge,
+                caption: 'News',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
