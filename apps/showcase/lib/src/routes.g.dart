@@ -26,6 +26,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/sheets/catalog': _buildSheetsCatalog,
   '/alerts/catalog': _buildAlertsCatalog,
   '/action-sheets/catalog': _buildActionSheetsCatalog,
+  '/notifications/catalog': _buildNotificationsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -56,6 +57,9 @@ Widget _buildAlertsCatalog(BuildContext context) => const _AlertsRoute();
 
 Widget _buildActionSheetsCatalog(BuildContext context) =>
     const _ActionSheetsRoute();
+
+Widget _buildNotificationsCatalog(BuildContext context) =>
+    const _NotificationsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -144,6 +148,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Action Sheets',
     description: 'Bottom-anchored stack of full-width pill actions + cancel',
   ),
+  (
+    path: '/notifications/catalog',
+    label: 'Notifications',
+    description: 'Glass banner cards with icon, title, body, and time',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -197,7 +206,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '15 / 37 categories ported (Action Sheets in this build). '
+                  '16 / 37 categories ported (Notifications in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1573,4 +1582,150 @@ class _ActionSheetsRoute extends StatelessWidget {
       ),
     );
   }
+}
+
+class _NotificationsRoute extends StatelessWidget {
+  const _NotificationsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFF101418),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.only(bottom: 6),
+              child: Text(
+                'mail (blue) · with time',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 13,
+                  color: Color(0xFFC0C5CC),
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+            ),
+            LiqNotification(
+              title: 'Mail',
+              body: 'Sam: "Lunch at noon? I made a reservation."',
+              time: 'now',
+              icon: LiqNotificationIcon(
+                colors: LiqNotificationIconColors.mail,
+                glyph: _NotificationGlyph.mail(),
+              ),
+            ),
+            const SizedBox(height: 18),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 6),
+              child: Text(
+                'reminders (red) · without time',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 13,
+                  color: Color(0xFFC0C5CC),
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+            ),
+            LiqNotification(
+              title: 'Reminders',
+              body: 'Buy milk on the way home.',
+              icon: LiqNotificationIcon(
+                colors: LiqNotificationIconColors.reminders,
+                glyph: _NotificationGlyph.list(),
+              ),
+            ),
+            const SizedBox(height: 18),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 6),
+              child: Text(
+                'long body · ellipsised',
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 13,
+                  color: Color(0xFFC0C5CC),
+                ),
+                textDirection: TextDirection.ltr,
+              ),
+            ),
+            LiqNotification(
+              title: 'Mail',
+              body: 'Andy: "Could you take a look at the spec when you get '
+                  'a chance? There are a few open questions about how the '
+                  'review pipeline should handle reverts."',
+              time: '2m ago',
+              icon: LiqNotificationIcon(
+                colors: LiqNotificationIconColors.mail,
+                glyph: _NotificationGlyph.mail(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NotificationGlyph extends StatelessWidget {
+  const _NotificationGlyph._(this.kind);
+  factory _NotificationGlyph.mail() => const _NotificationGlyph._('mail');
+  factory _NotificationGlyph.list() => const _NotificationGlyph._('list');
+  final String kind;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 22,
+      height: 22,
+      child: CustomPaint(painter: _NotifPainter(kind)),
+    );
+  }
+}
+
+class _NotifPainter extends CustomPainter {
+  _NotifPainter(this.kind);
+  final String kind;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final stroke = Paint()
+      ..color = const Color(0xFAFFFFFF)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 1.6;
+    final s = size.width / 22;
+    if (kind == 'mail') {
+      final rect =
+          Rect.fromLTWH(2.5 * s, 5.5 * s, 17 * s, 11 * s);
+      canvas
+        ..drawRRect(
+          RRect.fromRectAndRadius(rect, Radius.circular(2 * s)),
+          stroke,
+        )
+        ..drawPath(
+          Path()
+            ..moveTo(2.5 * s, 6.5 * s)
+            ..lineTo(11 * s, 12 * s)
+            ..lineTo(19.5 * s, 6.5 * s),
+          stroke,
+        );
+    } else {
+      final fill = Paint()..color = const Color(0xFAFFFFFF);
+      for (var i = 0; i < 3; i++) {
+        final y = (5 + i * 5) * s;
+        canvas
+          ..drawCircle(Offset(4 * s, y), 1.2 * s, fill)
+          ..drawLine(Offset(7 * s, y), Offset(18 * s, y), stroke);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _NotifPainter oldDelegate) =>
+      oldDelegate.kind != kind;
 }
