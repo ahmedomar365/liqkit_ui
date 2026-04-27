@@ -1,6 +1,7 @@
 /// Public component exports for liqkit_ui.
 library;
 
+export 'src/components/alerts/liq_alert.dart';
 export 'src/components/buttons/liq_button.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/lists/liq_list.dart';

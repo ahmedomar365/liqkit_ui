@@ -24,6 +24,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/top-bars/catalog': _buildTopBarsCatalog,
   '/toolbars/catalog': _buildToolbarsCatalog,
   '/sheets/catalog': _buildSheetsCatalog,
+  '/alerts/catalog': _buildAlertsCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -49,6 +50,8 @@ Widget _buildTopBarsCatalog(BuildContext context) => const _TopBarsRoute();
 Widget _buildToolbarsCatalog(BuildContext context) => const _ToolbarsRoute();
 
 Widget _buildSheetsCatalog(BuildContext context) => const _SheetsRoute();
+
+Widget _buildAlertsCatalog(BuildContext context) => const _AlertsRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -127,6 +130,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Sheets',
     description: 'Modal/inspector sheets with grabber + 44pt controls',
   ),
+  (
+    path: '/alerts/catalog',
+    label: 'Alerts',
+    description: 'Centered translucent dialog with stacked or split actions',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -180,7 +188,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '13 / 37 categories ported (Sheets in this build). '
+                  '14 / 37 categories ported (Alerts in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -1384,6 +1392,116 @@ class _SheetCell extends StatelessWidget {
             child: child,
           ),
         ),
+      ],
+    );
+  }
+}
+
+class _AlertsRoute extends StatelessWidget {
+  const _AlertsRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFE9ECF1),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: <Widget>[
+            _AlertCell(
+              caption: 'stacked · 2 actions',
+              child: LiqAlert(
+                title: 'Allow Notifications',
+                description: 'liqkit_ui needs permission to send you '
+                    'updates while in the background.',
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(
+                    label: 'Allow',
+                    style: LiqAlertActionStyle.filled,
+                  ),
+                  LiqAlertAction(label: 'Not Now'),
+                ],
+              ),
+            ),
+            _AlertCell(
+              caption: 'side-by-side',
+              child: LiqAlert(
+                title: 'Discard Changes?',
+                description: 'You have unsaved changes that will be lost.',
+                layout: LiqAlertActionLayout.sideBySide,
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(label: 'Cancel'),
+                  LiqAlertAction(
+                    label: 'Discard',
+                    style: LiqAlertActionStyle.destructive,
+                  ),
+                ],
+              ),
+            ),
+            _AlertCell(
+              caption: 'destructive · stacked',
+              child: LiqAlert(
+                title: 'Delete File',
+                description: 'This action cannot be undone.',
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(
+                    label: 'Delete',
+                    style: LiqAlertActionStyle.destructive,
+                  ),
+                  LiqAlertAction(label: 'Cancel'),
+                ],
+              ),
+            ),
+            _AlertCell(
+              caption: 'three actions',
+              child: LiqAlert(
+                title: 'Unsaved Draft',
+                actions: <LiqAlertAction>[
+                  LiqAlertAction(
+                    label: 'Save',
+                    style: LiqAlertActionStyle.filled,
+                  ),
+                  LiqAlertAction(
+                    label: 'Discard',
+                    style: LiqAlertActionStyle.destructive,
+                  ),
+                  LiqAlertAction(label: 'Cancel'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AlertCell extends StatelessWidget {
+  const _AlertCell({required this.caption, required this.child});
+  final String caption;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 13,
+              color: Color(0xFF666A72),
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+        child,
       ],
     );
   }
