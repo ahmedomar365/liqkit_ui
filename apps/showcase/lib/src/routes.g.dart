@@ -42,6 +42,7 @@ const Map<String, WidgetBuilder> showcaseRoutes = <String, WidgetBuilder>{
   '/face-id/catalog': _buildFaceIdCatalog,
   '/bezels/catalog': _buildBezelsCatalog,
   '/keyboards/catalog': _buildKeyboardsCatalog,
+  '/kit-helpers/catalog': _buildKitHelpersCatalog,
 };
 
 Widget _buildTogglesCatalog(BuildContext context) => const _TogglesRoute();
@@ -112,6 +113,9 @@ Widget _buildBezelsCatalog(BuildContext context) => const _BezelsRoute();
 
 Widget _buildKeyboardsCatalog(BuildContext context) =>
     const _KeyboardsRoute();
+
+Widget _buildKitHelpersCatalog(BuildContext context) =>
+    const _KitHelpersRoute();
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
@@ -280,6 +284,11 @@ const List<({String path, String label, String description})> _homeIndex = <({
     label: 'Keyboards',
     description: 'iPhone keyboard surface — suggestions, keys, toolbar',
   ),
+  (
+    path: '/kit-helpers/catalog',
+    label: 'Kit Helpers',
+    description: 'Demo-page chrome — header + dashed mode-labels card',
+  ),
 ];
 
 class _HomeRoute extends StatelessWidget {
@@ -333,7 +342,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '31 / 37 categories ported (Keyboards in this build). '
+                  '32 / 37 categories ported (Kit Helpers in this build). '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
@@ -3161,6 +3170,56 @@ class _KeyboardCell extends StatelessWidget {
         ),
         child,
       ],
+    );
+  }
+}
+
+class _KitHelpersRoute extends StatelessWidget {
+  const _KitHelpersRoute();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFFFFFFFF),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(28),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const <Widget>[
+            LiqKitHelpersHeader(
+              title: 'Buttons',
+              description:
+                  'Tappable, intuitive controls that perform user-initiated '
+                  'actions.',
+            ),
+            SizedBox(height: 28),
+            Wrap(
+              spacing: 24,
+              runSpacing: 24,
+              children: <Widget>[
+                LiqKitHelpersModeLabels(
+                  children: <Widget>[
+                    LiqKitHelpersModePill(label: 'Light'),
+                    LiqKitHelpersModePill(
+                      label: 'Dark',
+                      brightness: LiqKitHelpersBrightness.dark,
+                    ),
+                    LiqKitHelpersModePill(label: 'A11y'),
+                  ],
+                ),
+                LiqKitHelpersModeLabels(
+                  children: <Widget>[
+                    LiqKitHelpersModePill(
+                      label: 'Dark',
+                      brightness: LiqKitHelpersBrightness.dark,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -13,6 +13,7 @@ export 'src/components/context_menu/liq_context_menu.dart';
 export 'src/components/empty_states/liq_empty_state.dart';
 export 'src/components/face_id/liq_face_id.dart';
 export 'src/components/keyboards/liq_keyboard.dart';
+export 'src/components/kit_helpers/liq_kit_helpers.dart';
 export 'src/components/lists/liq_list.dart';
 export 'src/components/menu/liq_menu.dart';
 export 'src/components/notifications/liq_notification.dart';
