@@ -142,6 +142,41 @@ const List<({String path, String label, String description})> _homeIndex = <({
   String description,
 })>[
   (
+    path: '/action-sheets/catalog',
+    label: 'Action Sheets',
+    description: 'Bottom-anchored stack of full-width pill actions + cancel',
+  ),
+  (
+    path: '/activity-views/catalog',
+    label: 'Activity Views',
+    description: 'iOS share sheet — translucent panel + header + content',
+  ),
+  (
+    path: '/alerts/catalog',
+    label: 'Alerts',
+    description: 'Centered translucent dialog with stacked or split actions',
+  ),
+  (
+    path: '/app-icons/catalog',
+    label: 'App Icons',
+    description: 'Squircle home-screen icon with optional badge + label',
+  ),
+  (
+    path: '/bezels/catalog',
+    label: 'Bezels',
+    description: 'iPhone device frame with optional Dynamic Island',
+  ),
+  (
+    path: '/buttons/catalog',
+    label: 'Buttons',
+    description: '5 styles × 3 sizes × destructive × disabled = 60 cells',
+  ),
+  (
+    path: '/color-pickers/catalog',
+    label: 'Color Pickers',
+    description: 'Conic-gradient picker button + 12-col swatch grid + dots',
+  ),
+  (
     path: '/colors/swatch-grid',
     label: 'Colors',
     description: '40 canonical iOS 26 color tokens',
@@ -152,109 +187,9 @@ const List<({String path, String label, String description})> _homeIndex = <({
     description: 'Same grid in the iOS 26 accessibility mode',
   ),
   (
-    path: '/buttons/catalog',
-    label: 'Buttons',
-    description: '5 styles × 3 sizes × destructive × disabled = 60 cells',
-  ),
-  (
-    path: '/toggles/catalog',
-    label: 'Toggles',
-    description: 'On/off/disabled on light + dark backgrounds',
-  ),
-  (
-    path: '/sliders/catalog',
-    label: 'Sliders',
-    description: 'Track + fill + pill knob, 5 light positions + 1 dark',
-  ),
-  (
-    path: '/steppers/catalog',
-    label: 'Steppers',
-    description: '−/+ pill with bound-aware disabling',
-  ),
-  (
-    path: '/segmented-controls/catalog',
-    label: 'Segmented Controls',
-    description: '2/3/4 segments + disabled',
-  ),
-  (
-    path: '/page-controls/catalog',
-    label: 'Page Controls',
-    description: 'Dot indicator with peripheral fading + dark variant',
-  ),
-  (
-    path: '/progress/catalog',
-    label: 'Progress + Spinners',
-    description: 'Linear bar at 0/25/60/100% + animated spinners',
-  ),
-  (
-    path: '/text-fields/catalog',
-    label: 'Text Fields',
-    description: 'Empty/filled/obscured/disabled + dark surface',
-  ),
-  (
-    path: '/lists/catalog',
-    label: 'Lists',
-    description: 'Settings-style grouped rows + chevrons + dark',
-  ),
-  (
-    path: '/top-bars/catalog',
-    label: 'Top Bars',
-    description: 'Nav title + leading/trailing actions, large-title row',
-  ),
-  (
-    path: '/toolbars/catalog',
-    label: 'Toolbars',
-    description: 'Glass action buttons + filter chips',
-  ),
-  (
-    path: '/sheets/catalog',
-    label: 'Sheets',
-    description: 'Modal/inspector sheets with grabber + 44pt controls',
-  ),
-  (
-    path: '/alerts/catalog',
-    label: 'Alerts',
-    description: 'Centered translucent dialog with stacked or split actions',
-  ),
-  (
-    path: '/action-sheets/catalog',
-    label: 'Action Sheets',
-    description: 'Bottom-anchored stack of full-width pill actions + cancel',
-  ),
-  (
-    path: '/notifications/catalog',
-    label: 'Notifications',
-    description: 'Glass banner cards with icon, title, body, and time',
-  ),
-  (
-    path: '/popovers/catalog',
-    label: 'Popovers',
-    description: 'Translucent floating panel with arrow tip on any side',
-  ),
-  (
-    path: '/menu/catalog',
-    label: 'Menu',
-    description: 'iOS dropdown menu with rows, separators, and section titles',
-  ),
-  (
     path: '/context-menu/catalog',
     label: 'Context Menu',
     description: 'Preview tile + menu in vertical or beside arrangements',
-  ),
-  (
-    path: '/popup-buttons/catalog',
-    label: 'Popup Buttons',
-    description: 'Inline blue label + chevron-down (32/38) — popup trigger',
-  ),
-  (
-    path: '/status-bars/catalog',
-    label: 'Status Bars',
-    description: 'iPhone status bar with clock + cellular/wifi/battery glyphs',
-  ),
-  (
-    path: '/sidebars/catalog',
-    label: 'Sidebars',
-    description: 'iPad-style left rail: search + section headers + nav rows',
   ),
   (
     path: '/empty-states/catalog',
@@ -262,39 +197,14 @@ const List<({String path, String label, String description})> _homeIndex = <({
     description: 'Centered icon + title + description + optional CTA pill',
   ),
   (
-    path: '/pickers/catalog',
-    label: 'Pickers',
-    description: 'Inline calendar date picker with selection + today ring',
-  ),
-  (
-    path: '/color-pickers/catalog',
-    label: 'Color Pickers',
-    description: 'Conic-gradient picker button + 12-col swatch grid + dots',
-  ),
-  (
-    path: '/app-icons/catalog',
-    label: 'App Icons',
-    description: 'Squircle home-screen icon with optional badge + label',
-  ),
-  (
-    path: '/widgets/catalog',
-    label: 'Widgets',
-    description: 'Home-screen widget cards (small/medium/large/extraLarge)',
-  ),
-  (
-    path: '/activity-views/catalog',
-    label: 'Activity Views',
-    description: 'iOS share sheet — translucent panel + header + content',
+    path: '/examples/catalog',
+    label: 'Examples',
+    description: 'Doc panels — section card + meta + item grid',
   ),
   (
     path: '/face-id/catalog',
     label: 'Face ID',
     description: 'Black bezel with green Face ID glyph (scan/success/fail)',
-  ),
-  (
-    path: '/bezels/catalog',
-    label: 'Bezels',
-    description: 'iPhone device frame with optional Dynamic Island',
   ),
   (
     path: '/keyboards/catalog',
@@ -307,19 +217,79 @@ const List<({String path, String label, String description})> _homeIndex = <({
     description: 'Demo-page chrome — header + dashed mode-labels card',
   ),
   (
+    path: '/lists/catalog',
+    label: 'Lists',
+    description: 'Settings-style grouped rows + chevrons + dark',
+  ),
+  (
     path: '/materials/catalog',
     label: 'Materials',
     description: 'iOS 26 material thickness presets — light + dark chips',
   ),
   (
-    path: '/examples/catalog',
-    label: 'Examples',
-    description: 'Doc panels — section card + meta + item grid',
+    path: '/menu/catalog',
+    label: 'Menu',
+    description: 'iOS dropdown menu with rows, separators, and section titles',
   ),
   (
-    path: '/windows/catalog',
-    label: 'Windows',
-    description: 'macOS window — toolbar, glass buttons, traffic lights',
+    path: '/notifications/catalog',
+    label: 'Notifications',
+    description: 'Glass banner cards with icon, title, body, and time',
+  ),
+  (
+    path: '/page-controls/catalog',
+    label: 'Page Controls',
+    description: 'Dot indicator with peripheral fading + dark variant',
+  ),
+  (
+    path: '/pickers/catalog',
+    label: 'Pickers',
+    description: 'Inline calendar date picker with selection + today ring',
+  ),
+  (
+    path: '/popovers/catalog',
+    label: 'Popovers',
+    description: 'Translucent floating panel with arrow tip on any side',
+  ),
+  (
+    path: '/popup-buttons/catalog',
+    label: 'Popup Buttons',
+    description: 'Inline blue label + chevron-down (32/38) — popup trigger',
+  ),
+  (
+    path: '/progress/catalog',
+    label: 'Progress + Spinners',
+    description: 'Linear bar at 0/25/60/100% + animated spinners',
+  ),
+  (
+    path: '/segmented-controls/catalog',
+    label: 'Segmented Controls',
+    description: '2/3/4 segments + disabled',
+  ),
+  (
+    path: '/sheets/catalog',
+    label: 'Sheets',
+    description: 'Modal/inspector sheets with grabber + 44pt controls',
+  ),
+  (
+    path: '/sidebars/catalog',
+    label: 'Sidebars',
+    description: 'iPad-style left rail: search + section headers + nav rows',
+  ),
+  (
+    path: '/sliders/catalog',
+    label: 'Sliders',
+    description: 'Track + fill + pill knob, 5 light positions + 1 dark',
+  ),
+  (
+    path: '/status-bars/catalog',
+    label: 'Status Bars',
+    description: 'iPhone status bar with clock + cellular/wifi/battery glyphs',
+  ),
+  (
+    path: '/steppers/catalog',
+    label: 'Steppers',
+    description: '−/+ pill with bound-aware disabling',
   ),
   (
     path: '/system/catalog',
@@ -327,9 +297,39 @@ const List<({String path, String label, String description})> _homeIndex = <({
     description: 'Home indicator, action pills, toggle dot',
   ),
   (
+    path: '/text-fields/catalog',
+    label: 'Text Fields',
+    description: 'Empty/filled/obscured/disabled + dark surface',
+  ),
+  (
     path: '/text-styles/catalog',
     label: 'Text Styles',
     description: 'iOS 26 type scale — 11 roles × dynamic-type sizes',
+  ),
+  (
+    path: '/toggles/catalog',
+    label: 'Toggles',
+    description: 'On/off/disabled on light + dark backgrounds',
+  ),
+  (
+    path: '/toolbars/catalog',
+    label: 'Toolbars',
+    description: 'Glass action buttons + filter chips',
+  ),
+  (
+    path: '/top-bars/catalog',
+    label: 'Top Bars',
+    description: 'Nav title + leading/trailing actions, large-title row',
+  ),
+  (
+    path: '/widgets/catalog',
+    label: 'Widgets',
+    description: 'Home-screen widget cards (small/medium/large/extraLarge)',
+  ),
+  (
+    path: '/windows/catalog',
+    label: 'Windows',
+    description: 'macOS window — toolbar, glass buttons, traffic lights',
   ),
 ];
 
@@ -384,7 +384,7 @@ class _HomeRoute extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '37 / 37 categories ported (Text Styles in this build). '
+                  '37 / 37 categories ported. '
                   'All values sourced from liqkit_ui_design_data '
                   '(variable-defs + native CSS).',
                   textAlign: TextAlign.center,
