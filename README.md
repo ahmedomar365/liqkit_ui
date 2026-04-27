@@ -4,7 +4,8 @@ iOS 26 Liquid Glass design system for Flutter.
 
 This repository is a Dart pub workspace containing the published
 component library, design tokens, asset bundle, the showcase Flutter Web
-app, the docs site, and the design-data archive ported from `liqkit`.
+app, the docs site under `apps/docs/`, the docs snippets app under
+`apps/docs_snippets/`, and the design-data archive ported from `liqkit`.
 
 See `docs/superpowers/specs/2026-04-26-liqkit_ui-design.md` for the full
 design and `docs/superpowers/plans/` for implementation plans.
