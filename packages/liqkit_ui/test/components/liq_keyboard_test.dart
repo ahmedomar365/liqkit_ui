@@ -27,16 +27,19 @@ void main() {
     expect(find.text('m'), findsOneWidget);
   });
 
-  testWidgets('LiqKeyboard accepts custom rows and suggestions',
-      (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqKeyboard(
-        suggestions: <String>['I', 'I am', 'I will'],
-        keyRows: <List<String>>[
-          <String>['1', '2', '3'],
-        ],
+  testWidgets('LiqKeyboard accepts custom rows and suggestions', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        const LiqKeyboard(
+          suggestions: <String>['I', 'I am', 'I will'],
+          keyRows: <List<String>>[
+            <String>['1', '2', '3'],
+          ],
+        ),
       ),
-    ));
+    );
     expect(find.text('I am'), findsOneWidget);
     expect(find.text('1'), findsOneWidget);
     expect(find.text('q'), findsNothing);

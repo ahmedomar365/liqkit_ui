@@ -36,9 +36,9 @@ class LiqColorSwatch extends StatelessWidget {
     final theme = LiqTheme.of(context);
     final cardBg = theme.surfaceColor.resolve(theme.brightness);
     final labelStyle = theme.bodyText.toTextStyle().copyWith(
-          fontSize: 12,
-          color: theme.labelColor.resolve(theme.brightness),
-        );
+      fontSize: 12,
+      color: theme.labelColor.resolve(theme.brightness),
+    );
 
     return Container(
       decoration: BoxDecoration(

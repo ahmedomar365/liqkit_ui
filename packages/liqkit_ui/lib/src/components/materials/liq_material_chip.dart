@@ -93,20 +93,21 @@ final class LiqMaterialChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = brightness == LiqMaterialBrightness.dark;
     final v = _styleValues;
-    final overlayBase = isDark
-        ? const Color.fromARGB(255, 16, 17, 21)
-        : const Color.fromARGB(255, 255, 255, 255);
-    final coreBase = isDark
-        ? const Color.fromARGB(255, 35, 37, 44)
-        : const Color.fromARGB(255, 255, 255, 255);
-    final overlayColor =
-        overlayBase.withValues(alpha: isDark ? 0.58 : v.overlay);
+    final overlayBase =
+        isDark
+            ? const Color.fromARGB(255, 16, 17, 21)
+            : const Color.fromARGB(255, 255, 255, 255);
+    final coreBase =
+        isDark
+            ? const Color.fromARGB(255, 35, 37, 44)
+            : const Color.fromARGB(255, 255, 255, 255);
+    final overlayColor = overlayBase.withValues(
+      alpha: isDark ? 0.58 : v.overlay,
+    );
     final coreColor = coreBase.withValues(alpha: isDark ? 0.74 : v.core);
-    final borderColor = isDark
-        ? const Color(0x33FFFFFF)
-        : const Color(0xC2FFFFFF);
-    final innerHighlight =
-        isDark ? _innerHighlightDark : _innerHighlightLight;
+    final borderColor =
+        isDark ? const Color(0x33FFFFFF) : const Color(0xC2FFFFFF);
+    final innerHighlight = isDark ? _innerHighlightDark : _innerHighlightLight;
     final shadow = isDark ? _shadowDark : _shadowLight;
 
     final chip = SizedBox.fromSize(
@@ -121,10 +122,7 @@ final class LiqMaterialChip extends StatelessWidget {
               gradient: const LinearGradient(
                 begin: Alignment(0.55, -1),
                 end: Alignment(-0.55, 1),
-                colors: <Color>[
-                  Color(0x4DFFFFFF),
-                  Color(0x00FFFFFF),
-                ],
+                colors: <Color>[Color(0x4DFFFFFF), Color(0x00FFFFFF)],
                 stops: <double>[0, 0.68],
               ),
               color: Color.alphaBlend(overlayColor, coreColor),
@@ -162,8 +160,13 @@ final class LiqMaterialChip extends StatelessWidget {
       ..add(EnumProperty<LiqMaterialStyle>('style', style))
       ..add(EnumProperty<LiqMaterialBrightness>('brightness', brightness))
       ..add(DiagnosticsProperty<Size>('size', size))
-      ..add(FlagProperty('increasedContrast',
-          value: increasedContrast, ifTrue: 'IC border'));
+      ..add(
+        FlagProperty(
+          'increasedContrast',
+          value: increasedContrast,
+          ifTrue: 'IC border',
+        ),
+      );
   }
 }
 

@@ -28,9 +28,7 @@ void main() {
   });
 
   testWidgets('LiqAppIconBadge clamps at 99+', (tester) async {
-    await tester.pumpWidget(
-      _wrap(const LiqAppIconBadge(count: 250)),
-    );
+    await tester.pumpWidget(_wrap(const LiqAppIconBadge(count: 250)));
     expect(find.text('99+'), findsOneWidget);
   });
 
@@ -38,10 +36,7 @@ void main() {
     var taps = 0;
     await tester.pumpWidget(
       _wrap(
-        LiqAppIcon(
-          color: const Color(0xFFFF3B30),
-          onPressed: () => taps++,
-        ),
+        LiqAppIcon(color: const Color(0xFFFF3B30), onPressed: () => taps++),
       ),
     );
     await tester.tap(find.byType(LiqAppIcon));

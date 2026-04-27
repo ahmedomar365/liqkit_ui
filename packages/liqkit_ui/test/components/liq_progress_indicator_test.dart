@@ -11,10 +11,7 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: Center(
-              child: SizedBox(
-                width: 200,
-                child: LiqProgressBar(value: 0.5),
-              ),
+              child: SizedBox(width: 200, child: LiqProgressBar(value: 0.5)),
             ),
           ),
         ),
@@ -29,18 +26,12 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: Center(
-              child: SizedBox(
-                width: 200,
-                child: LiqProgressBar(value: 0.42),
-              ),
+              child: SizedBox(width: 200, child: LiqProgressBar(value: 0.42)),
             ),
           ),
         ),
       );
-      expect(
-        tester.getSemantics(find.byType(LiqProgressBar)).value,
-        '42%',
-      );
+      expect(tester.getSemantics(find.byType(LiqProgressBar)).value, '42%');
     });
   });
 
@@ -55,10 +46,7 @@ void main() {
           ),
         ),
       );
-      expect(
-        tester.getSize(find.byType(LiqSpinner)),
-        const Size(30, 30),
-      );
+      expect(tester.getSize(find.byType(LiqSpinner)), const Size(30, 30));
       // Pump a frame so the animation controller doesn't keep the test
       // ticker alive.
       await tester.pump(const Duration(milliseconds: 100));
@@ -74,10 +62,7 @@ void main() {
           ),
         ),
       );
-      expect(
-        tester.getSize(find.byType(LiqSpinner)),
-        const Size(22, 22),
-      );
+      expect(tester.getSize(find.byType(LiqSpinner)), const Size(22, 22));
       await tester.pump(const Duration(milliseconds: 100));
     });
   });

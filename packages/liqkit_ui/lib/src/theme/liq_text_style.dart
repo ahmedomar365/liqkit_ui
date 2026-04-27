@@ -38,23 +38,22 @@ final class LiqTextStyle with Diagnosticable {
     FontWeight? fontWeight,
     double? letterSpacing,
     double? heightMultiplier,
-  }) =>
-      LiqTextStyle(
-        family: family ?? this.family,
-        fontSize: fontSize ?? this.fontSize,
-        fontWeight: fontWeight ?? this.fontWeight,
-        letterSpacing: letterSpacing ?? this.letterSpacing,
-        heightMultiplier: heightMultiplier ?? this.heightMultiplier,
-      );
+  }) => LiqTextStyle(
+    family: family ?? this.family,
+    fontSize: fontSize ?? this.fontSize,
+    fontWeight: fontWeight ?? this.fontWeight,
+    letterSpacing: letterSpacing ?? this.letterSpacing,
+    heightMultiplier: heightMultiplier ?? this.heightMultiplier,
+  );
 
   /// Resolves to a Flutter [TextStyle].
   TextStyle toTextStyle() => TextStyle(
-        fontFamily: family,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        letterSpacing: letterSpacing,
-        height: heightMultiplier,
-      );
+    fontFamily: family,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    letterSpacing: letterSpacing,
+    height: heightMultiplier,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -68,12 +67,12 @@ final class LiqTextStyle with Diagnosticable {
 
   @override
   int get hashCode => Object.hash(
-        family,
-        fontSize,
-        fontWeight,
-        letterSpacing,
-        heightMultiplier,
-      );
+    family,
+    fontSize,
+    fontWeight,
+    letterSpacing,
+    heightMultiplier,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

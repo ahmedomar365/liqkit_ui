@@ -12,10 +12,7 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: Center(
-              child: LiqButton(
-                label: 'Confirm',
-                onPressed: () => taps += 1,
-              ),
+              child: LiqButton(label: 'Confirm', onPressed: () => taps += 1),
             ),
           ),
         ),
@@ -31,9 +28,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqButton(label: 'Off', onPressed: null),
-            ),
+            child: Center(child: LiqButton(label: 'Off', onPressed: null)),
           ),
         ),
       );
@@ -43,22 +38,19 @@ void main() {
     });
 
     testWidgets('applies the right height per size axis', (tester) async {
-      for (final entry in <LiqButtonSize, double>{
-        LiqButtonSize.small: 28,
-        LiqButtonSize.medium: 34,
-        LiqButtonSize.large: 50,
-      }.entries) {
+      for (final entry
+          in <LiqButtonSize, double>{
+            LiqButtonSize.small: 28,
+            LiqButtonSize.medium: 34,
+            LiqButtonSize.large: 50,
+          }.entries) {
         await tester.pumpWidget(
           LiqTheme(
             data: LiqThemeData.light,
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Center(
-                child: LiqButton(
-                  label: '_',
-                  onPressed: () {},
-                  size: entry.key,
-                ),
+                child: LiqButton(label: '_', onPressed: () {}, size: entry.key),
               ),
             ),
           ),

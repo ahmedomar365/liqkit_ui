@@ -32,8 +32,8 @@ class _Home extends StatelessWidget {
         child: Text(
           'liqkit_ui demo',
           style: theme.titleText.toTextStyle().copyWith(
-                color: theme.labelColor.resolve(theme.brightness),
-              ),
+            color: theme.labelColor.resolve(theme.brightness),
+          ),
           textDirection: TextDirection.ltr,
         ),
       ),

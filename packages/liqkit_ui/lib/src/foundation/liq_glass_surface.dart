@@ -42,7 +42,8 @@ final class LiqGlassSurface extends StatelessWidget {
         MediaQuery.maybeOf(context)?.platformBrightness ?? theme.brightness;
     final tint = material.tint.resolve(brightness);
 
-    final clipShape = shape ??
+    final clipShape =
+        shape ??
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(theme.bezel.cornerRadius - 0.5),
@@ -71,9 +72,9 @@ final class LiqGlassSurface extends StatelessWidget {
   }
 
   Widget _solid(ShapeBorder shape, Color tint) => ClipPath(
-        clipper: ShapeBorderClipper(shape: shape),
-        child: ColoredBox(color: tint, child: child),
-      );
+    clipper: ShapeBorderClipper(shape: shape),
+    child: ColoredBox(color: tint, child: child),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

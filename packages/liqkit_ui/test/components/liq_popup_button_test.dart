@@ -29,11 +29,8 @@ void main() {
     expect(taps, 1);
   });
 
-  testWidgets('LiqPopupButton disables when onPressed is null',
-      (tester) async {
-    await tester.pumpWidget(
-      _wrap(const LiqPopupButton(label: 'X')),
-    );
+  testWidgets('LiqPopupButton disables when onPressed is null', (tester) async {
+    await tester.pumpWidget(_wrap(const LiqPopupButton(label: 'X')));
     expect(find.text('X'), findsOneWidget);
   });
 }

@@ -50,15 +50,12 @@ final class LiqContextMenuPreview extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(30)),
         border: Border.fromBorderSide(BorderSide(color: _border)),
         boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: _shadow,
-            offset: Offset(0, 16),
-            blurRadius: 28,
-          ),
+          BoxShadow(color: _shadow, offset: Offset(0, 16), blurRadius: 28),
         ],
       ),
       alignment: Alignment.center,
-      child: child ??
+      child:
+          child ??
           const Text(
             'Content area',
             textDirection: TextDirection.ltr,
@@ -104,41 +101,25 @@ final class LiqContextMenu extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            preview,
-            SizedBox(height: gap),
-            menu,
-          ],
+          children: <Widget>[preview, SizedBox(height: gap), menu],
         );
       case LiqContextMenuArrangement.belowTrailing:
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            preview,
-            SizedBox(height: gap),
-            menu,
-          ],
+          children: <Widget>[preview, SizedBox(height: gap), menu],
         );
       case LiqContextMenuArrangement.besideLeading:
         return Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            menu,
-            SizedBox(width: gap),
-            preview,
-          ],
+          children: <Widget>[menu, SizedBox(width: gap), preview],
         );
       case LiqContextMenuArrangement.besideTrailing:
         return Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            preview,
-            SizedBox(width: gap),
-            menu,
-          ],
+          children: <Widget>[preview, SizedBox(width: gap), menu],
         );
     }
   }

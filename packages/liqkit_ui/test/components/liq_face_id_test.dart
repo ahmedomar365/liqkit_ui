@@ -15,9 +15,7 @@ Widget _wrap(Widget child) {
 void main() {
   testWidgets('LiqFaceIdBezel renders for all states', (tester) async {
     for (final state in LiqFaceIdState.values) {
-      await tester.pumpWidget(
-        _wrap(LiqFaceIdBezel(state: state, size: 100)),
-      );
+      await tester.pumpWidget(_wrap(LiqFaceIdBezel(state: state, size: 100)));
       expect(find.byType(LiqFaceIdBezel), findsOneWidget);
     }
   });

@@ -39,14 +39,11 @@ void main(List<String> args) {
     exit(2);
   }
 
-  final categoryDirs = figmaArtifacts
-      .listSync()
-      .whereType<Directory>()
-      .where((d) {
+  final categoryDirs =
+      figmaArtifacts.listSync().whereType<Directory>().where((d) {
         final name = d.uri.pathSegments.where((s) => s.isNotEmpty).last;
         return !<String>{'native', 'assets', 'history', 'raw'}.contains(name);
-      })
-      .toList();
+      }).toList();
 
   final colors = <String, Map<String, String>>{};
   final typography = <String, Map<String, Map<String, Object?>>>{};
@@ -80,8 +77,11 @@ void main(List<String> args) {
           } else if (v.startsWith('Font(')) {
             final parsed = _parseFontSpec(v);
             if (parsed != null) {
-              typography
-                  .putIfAbsent(key, () => <String, Map<String, Object?>>{})[modeName] = parsed;
+              typography.putIfAbsent(
+                    key,
+                    () => <String, Map<String, Object?>>{},
+                  )[modeName] =
+                  parsed;
               contributed = true;
             }
           }
@@ -100,8 +100,7 @@ void main(List<String> args) {
     'categoriesContributing': categoriesContributing..sort(),
   };
 
-  final outFile =
-      File('${root.path}/manifests/canonical_tokens.json');
+  final outFile = File('${root.path}/manifests/canonical_tokens.json');
   outFile.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(out));
 
   print('capture_canonical_tokens: wrote ${outFile.path}');
@@ -116,19 +115,16 @@ void main(List<String> args) {
 /// punctuation are normalized; the slash is preserved as the path
 /// separator so the Dart emitter can fan it out into nested classes.
 String _normalizeKey(String raw) {
-  return raw
-      .split('/')
-      .map(_camel)
-      .where((s) => s.isNotEmpty)
-      .join('/');
+  return raw.split('/').map(_camel).where((s) => s.isNotEmpty).join('/');
 }
 
 String _camel(String segment) {
   // Replace ' - ' / ' & ' / ' (' / ')' / non-alpha with spaces.
-  final cleaned = segment
-      .replaceAll(RegExp(r'[^A-Za-z0-9 ]'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
+  final cleaned =
+      segment
+          .replaceAll(RegExp(r'[^A-Za-z0-9 ]'), ' ')
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim();
   if (cleaned.isEmpty) return '';
   final words = cleaned.split(' ');
   final first = words.first.toLowerCase();
@@ -210,9 +206,10 @@ Map<String, Map<String, String>> _sortedNested(
 ) {
   final keys = input.keys.toList()..sort();
   return <String, Map<String, String>>{
-    for (final k in keys) k: Map<String, String>.fromEntries(
-      input[k]!.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),
-    ),
+    for (final k in keys)
+      k: Map<String, String>.fromEntries(
+        input[k]!.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),
+      ),
   };
 }
 
@@ -221,9 +218,10 @@ Map<String, Map<String, Map<String, Object?>>> _sortedNestedTypography(
 ) {
   final keys = input.keys.toList()..sort();
   return <String, Map<String, Map<String, Object?>>>{
-    for (final k in keys) k: Map<String, Map<String, Object?>>.fromEntries(
-      input[k]!.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),
-    ),
+    for (final k in keys)
+      k: Map<String, Map<String, Object?>>.fromEntries(
+        input[k]!.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),
+      ),
   };
 }
 

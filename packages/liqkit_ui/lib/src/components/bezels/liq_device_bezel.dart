@@ -57,11 +57,7 @@ final class LiqDeviceBezel extends StatelessWidget {
               stops: <double>[0, 0.46, 1],
             ),
             boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: _shadow,
-                offset: Offset(0, 20),
-                blurRadius: 42,
-              ),
+              BoxShadow(color: _shadow, offset: Offset(0, 20), blurRadius: 42),
             ],
           ),
           child: Stack(
@@ -113,8 +109,7 @@ final class LiqDeviceBezel extends StatelessWidget {
                       height: 37,
                       decoration: const BoxDecoration(
                         color: _islandBg,
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(24)),
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
                         border: Border.fromBorderSide(
                           BorderSide(color: _islandRim),
                         ),
@@ -159,7 +154,8 @@ final class LiqDeviceBezel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<Size>('size', size))
-      ..add(FlagProperty('showIsland',
-          value: showIsland, ifTrue: 'with island'));
+      ..add(
+        FlagProperty('showIsland', value: showIsland, ifTrue: 'with island'),
+      );
   }
 }

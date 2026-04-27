@@ -8,27 +8,29 @@ void main() {
       var v = 0.0;
       await tester.pumpWidget(
         StatefulBuilder(
-          builder: (context, setState) => LiqTheme(
-            data: LiqThemeData.light,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Center(
-                child: SizedBox(
-                  width: 240,
-                  child: LiqSlider(
-                    value: v,
-                    onChanged: (double next) => setState(() => v = next),
+          builder:
+              (context, setState) => LiqTheme(
+                data: LiqThemeData.light,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Center(
+                    child: SizedBox(
+                      width: 240,
+                      child: LiqSlider(
+                        value: v,
+                        onChanged: (double next) => setState(() => v = next),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
         ),
       );
       // Tap roughly at the right end of the row (240px wide, 16px insets).
       // Tap at x=224 (240-16) should set value to ~1.0.
-      await tester.tapAt(tester.getCenter(find.byType(LiqSlider))
-          .translate(240 / 2 - 16 - 1, 0));
+      await tester.tapAt(
+        tester.getCenter(find.byType(LiqSlider)).translate(240 / 2 - 16 - 1, 0),
+      );
       await tester.pumpAndSettle();
       expect(v, closeTo(1.0, 0.05));
     });

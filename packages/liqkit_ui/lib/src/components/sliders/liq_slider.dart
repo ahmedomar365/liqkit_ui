@@ -84,12 +84,14 @@ class _LiqSliderState extends State<LiqSlider> {
               constraints.hasBoundedWidth ? constraints.maxWidth : 240.0;
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTapDown: disabled
-                ? null
-                : (details) => _emitFromX(details.localPosition.dx, width),
-            onHorizontalDragUpdate: disabled
-                ? null
-                : (details) => _emitFromX(details.localPosition.dx, width),
+            onTapDown:
+                disabled
+                    ? null
+                    : (details) => _emitFromX(details.localPosition.dx, width),
+            onHorizontalDragUpdate:
+                disabled
+                    ? null
+                    : (details) => _emitFromX(details.localPosition.dx, width),
             child: Opacity(
               opacity: disabled ? 0.5 : 1,
               child: SizedBox(
@@ -105,33 +107,35 @@ class _LiqSliderState extends State<LiqSlider> {
                       child: Container(
                         height: LiqSlider._trackHeight,
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? LiqSlider._trackDark
-                              : LiqSlider._trackLight,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(3)),
+                          color:
+                              isDark
+                                  ? LiqSlider._trackDark
+                                  : LiqSlider._trackLight,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(3),
+                          ),
                         ),
                       ),
                     ),
                     // Filled portion left of the knob.
                     Positioned(
                       left: LiqSlider._hInset,
-                      right: LiqSlider._hInset +
-                          (1 - t) *
-                              (width - 2 * LiqSlider._hInset),
+                      right:
+                          LiqSlider._hInset +
+                          (1 - t) * (width - 2 * LiqSlider._hInset),
                       top: (LiqSlider._rowHeight - LiqSlider._trackHeight) / 2,
                       child: Container(
                         height: LiqSlider._trackHeight,
                         decoration: const BoxDecoration(
                           color: LiqSlider._fill,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(3)),
+                          borderRadius: BorderRadius.all(Radius.circular(3)),
                         ),
                       ),
                     ),
                     // Knob — centered on the value's pixel position.
                     Positioned(
-                      left: LiqSlider._hInset +
+                      left:
+                          LiqSlider._hInset +
                           t * (width - 2 * LiqSlider._hInset) -
                           LiqSlider._knobWidth / 2,
                       top: (LiqSlider._rowHeight - LiqSlider._knobHeight) / 2,
@@ -139,11 +143,13 @@ class _LiqSliderState extends State<LiqSlider> {
                         width: LiqSlider._knobWidth,
                         height: LiqSlider._knobHeight,
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? LiqSlider._knobDark
-                              : LiqSlider._knobLight,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100)),
+                          color:
+                              isDark
+                                  ? LiqSlider._knobDark
+                                  : LiqSlider._knobLight,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
                               color: Color.fromRGBO(

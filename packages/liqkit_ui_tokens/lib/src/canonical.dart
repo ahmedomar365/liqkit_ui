@@ -15,6 +15,7 @@ import 'dart:ui' show Color, FontWeight;
 enum LiqColorMode {
   /// `default_` mode (Figma key: `default`).
   default_,
+
   /// `increasedContrast` mode (Figma key: `increasedContrast`).
   increasedContrast,
 }
@@ -23,10 +24,7 @@ enum LiqColorMode {
 @pragma('vm:prefer-inline')
 final class LiqColorRef {
   /// Creates a color reference.
-  const LiqColorRef({
-    required this.default_,
-    required this.increasedContrast,
-  });
+  const LiqColorRef({required this.default_, required this.increasedContrast});
 
   /// Value in `default_` mode.
   final Color default_;
@@ -316,11 +314,20 @@ class LiqCanonicalColors {
         MapEntry('backgrounds/tertiary', backgroundsTertiary),
         MapEntry('backgrounds/tertiaryElevated', backgroundsTertiaryElevated),
         MapEntry('backgroundsGrouped/primary', backgroundsGroupedPrimary),
-        MapEntry('backgroundsGrouped/primaryElevated', backgroundsGroupedPrimaryElevated),
+        MapEntry(
+          'backgroundsGrouped/primaryElevated',
+          backgroundsGroupedPrimaryElevated,
+        ),
         MapEntry('backgroundsGrouped/secondary', backgroundsGroupedSecondary),
-        MapEntry('backgroundsGrouped/secondaryElevated', backgroundsGroupedSecondaryElevated),
+        MapEntry(
+          'backgroundsGrouped/secondaryElevated',
+          backgroundsGroupedSecondaryElevated,
+        ),
         MapEntry('backgroundsGrouped/tertiary', backgroundsGroupedTertiary),
-        MapEntry('backgroundsGrouped/tertiaryElevated', backgroundsGroupedTertiaryElevated),
+        MapEntry(
+          'backgroundsGrouped/tertiaryElevated',
+          backgroundsGroupedTertiaryElevated,
+        ),
         MapEntry('grays/black', graysBlack),
         MapEntry('grays/gray', graysGray),
         MapEntry('grays/gray2', graysGray2),
@@ -447,4 +454,3 @@ class LiqCanonicalTypography {
         MapEntry('footnote/regular', footnoteRegular),
       ];
 }
-

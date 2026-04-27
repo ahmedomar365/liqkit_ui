@@ -18,9 +18,9 @@ final class LiqMaterial with Diagnosticable {
     required this.tint,
     required this.vibrancy,
   }) : assert(
-          blurRadius >= 0 && blurRadius <= 18,
-          'LiqMaterial.blurRadius must be in [0, 18]',
-        );
+         blurRadius >= 0 && blurRadius <= 18,
+         'LiqMaterial.blurRadius must be in [0, 18]',
+       );
 
   /// Runtime check for the 4x5-matrix invariant.
   bool debugAssertVibrancy() {
@@ -95,12 +95,11 @@ final class LiqMaterial with Diagnosticable {
     double? blurRadius,
     LiqColor? tint,
     List<double>? vibrancy,
-  }) =>
-      LiqMaterial(
-        blurRadius: blurRadius ?? this.blurRadius,
-        tint: tint ?? this.tint,
-        vibrancy: vibrancy ?? this.vibrancy,
-      );
+  }) => LiqMaterial(
+    blurRadius: blurRadius ?? this.blurRadius,
+    tint: tint ?? this.tint,
+    vibrancy: vibrancy ?? this.vibrancy,
+  );
 
   /// Linear interpolation; vibrancy interpolates element-wise.
   // ignore: prefer_constructors_over_static_methods

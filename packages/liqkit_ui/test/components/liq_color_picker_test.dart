@@ -29,9 +29,7 @@ void main() {
 
   testWidgets('LiqColorDot toggles selection ring', (tester) async {
     await tester.pumpWidget(
-      _wrap(
-        const LiqColorDot(color: Color(0xFFFF0000), selected: true),
-      ),
+      _wrap(const LiqColorDot(color: Color(0xFFFF0000), selected: true)),
     );
     expect(find.byType(LiqColorDot), findsOneWidget);
   });

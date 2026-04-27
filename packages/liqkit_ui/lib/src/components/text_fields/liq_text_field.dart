@@ -105,17 +105,16 @@ class _LiqTextFieldState extends State<LiqTextField> {
   Widget build(BuildContext context) {
     final isDark = widget.brightness == Brightness.dark;
     final filled = widget.variant == LiqTextFieldVariant.filled;
-    final bg = !filled
-        ? const Color(0x00000000)
-        : (isDark ? LiqTextField._bgDark : LiqTextField._bgLight);
+    final bg =
+        !filled
+            ? const Color(0x00000000)
+            : (isDark ? LiqTextField._bgDark : LiqTextField._bgLight);
     final primary =
         isDark ? LiqTextField._primaryDark : LiqTextField._primaryLight;
-    final placeholder = isDark
-        ? LiqTextField._placeholderDark
-        : LiqTextField._placeholderLight;
-    final separator = isDark
-        ? LiqTextField._separatorDark
-        : LiqTextField._separatorLight;
+    final placeholder =
+        isDark ? LiqTextField._placeholderDark : LiqTextField._placeholderLight;
+    final separator =
+        isDark ? LiqTextField._separatorDark : LiqTextField._separatorLight;
     final accent =
         isDark ? LiqTextField._accentDark : LiqTextField._accentLight;
 
@@ -136,9 +135,7 @@ class _LiqTextFieldState extends State<LiqTextField> {
         padding: const EdgeInsets.symmetric(horizontal: LiqTextField._padding),
         decoration: BoxDecoration(
           color: bg,
-          border: filled
-              ? Border(bottom: BorderSide(color: separator))
-              : null,
+          border: filled ? Border(bottom: BorderSide(color: separator)) : null,
         ),
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,

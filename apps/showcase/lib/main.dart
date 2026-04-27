@@ -20,18 +20,19 @@ class ShowcaseApp extends StatelessWidget {
     return WidgetsApp(
       title: 'liqkit_ui showcase',
       color: const Color(0xFF000000),
-      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
-        settings: settings,
-        pageBuilder: (c, _, _) => builder(c),
-      ),
+      pageRouteBuilder:
+          <T>(settings, builder) => PageRouteBuilder<T>(
+            settings: settings,
+            pageBuilder: (c, _, _) => builder(c),
+          ),
       onGenerateRoute: (settings) {
         final builder =
             showcaseRoutes[settings.name ?? '/'] ?? _fallbackRouteBuilder;
         return PageRouteBuilder<void>(
           settings: settings,
-          pageBuilder: (context, _, _) => ShowcaseReadinessGate(
-            child: Builder(builder: builder),
-          ),
+          pageBuilder:
+              (context, _, _) =>
+                  ShowcaseReadinessGate(child: Builder(builder: builder)),
         );
       },
       // Install a default LiqTheme above every route so component
@@ -40,30 +41,28 @@ class ShowcaseApp extends StatelessWidget {
       // so the Playwright fidelity loop can flip it via emulation.
       builder: (context, child) {
         final brightness = MediaQuery.platformBrightnessOf(context);
-        final data = brightness == Brightness.dark
-            ? LiqThemeData.dark
-            : LiqThemeData.light;
-        return LiqTheme(
-          data: data,
-          child: child ?? const SizedBox.shrink(),
-        );
+        final data =
+            brightness == Brightness.dark
+                ? LiqThemeData.dark
+                : LiqThemeData.light;
+        return LiqTheme(data: data, child: child ?? const SizedBox.shrink());
       },
     );
   }
 }
 
 Widget _fallbackRouteBuilder(BuildContext context) => const ColoredBox(
-      color: Color(0xFFFFFFFF),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Center(
-          child: Text(
-            showcaseFallbackMarker,
-            style: TextStyle(color: Color(0xFF777777), fontSize: 14),
-          ),
-        ),
+  color: Color(0xFFFFFFFF),
+  child: Directionality(
+    textDirection: TextDirection.ltr,
+    child: Center(
+      child: Text(
+        showcaseFallbackMarker,
+        style: TextStyle(color: Color(0xFF777777), fontSize: 14),
       ),
-    );
+    ),
+  ),
+);
 
 /// Marker text rendered when no route matches.
 const String showcaseFallbackMarker = 'liqkit_ui-showcase-empty';

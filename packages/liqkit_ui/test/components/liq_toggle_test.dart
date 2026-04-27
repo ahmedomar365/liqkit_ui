@@ -8,18 +8,19 @@ void main() {
       var v = false;
       await tester.pumpWidget(
         StatefulBuilder(
-          builder: (context, setState) => LiqTheme(
-            data: LiqThemeData.light,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Center(
-                child: LiqToggle(
-                  value: v,
-                  onChanged: (next) => setState(() => v = next),
+          builder:
+              (context, setState) => LiqTheme(
+                data: LiqThemeData.light,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Center(
+                    child: LiqToggle(
+                      value: v,
+                      onChanged: (next) => setState(() => v = next),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
         ),
       );
       expect(v, isFalse);
@@ -37,9 +38,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqToggle(value: true, onChanged: (_) {}),
-            ),
+            child: Center(child: LiqToggle(value: true, onChanged: (_) {})),
           ),
         ),
       );
@@ -54,9 +53,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqToggle(value: false, onChanged: null),
-            ),
+            child: Center(child: LiqToggle(value: false, onChanged: null)),
           ),
         ),
       );

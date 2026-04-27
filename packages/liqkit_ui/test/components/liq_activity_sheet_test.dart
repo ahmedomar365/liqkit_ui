@@ -17,10 +17,7 @@ void main() {
     await tester.pumpWidget(
       _wrap(
         const LiqActivitySheet(
-          header: LiqActivityHeader(
-            title: 'Document.pdf',
-            subtitle: '2.4 MB',
-          ),
+          header: LiqActivityHeader(title: 'Document.pdf', subtitle: '2.4 MB'),
         ),
       ),
     );
@@ -33,10 +30,7 @@ void main() {
     await tester.pumpWidget(
       _wrap(
         LiqActivitySheet(
-          header: LiqActivityHeader(
-            title: 'X',
-            onClose: () => taps++,
-          ),
+          header: LiqActivityHeader(title: 'X', onClose: () => taps++),
         ),
       ),
     );

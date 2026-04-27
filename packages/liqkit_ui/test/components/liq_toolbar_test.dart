@@ -23,10 +23,7 @@ void main() {
       );
       await tester.tap(find.byType(LiqToolbarGlassButton));
       expect(taps, 1);
-      expect(
-        tester.getSize(find.byType(LiqToolbarGlassButton)).height,
-        44,
-      );
+      expect(tester.getSize(find.byType(LiqToolbarGlassButton)).height, 44);
     });
   });
 

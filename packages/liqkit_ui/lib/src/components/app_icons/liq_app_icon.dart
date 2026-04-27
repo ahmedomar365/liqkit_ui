@@ -18,10 +18,10 @@ final class LiqAppIcon extends StatelessWidget {
     this.label,
     this.onPressed,
     super.key,
-  })  : assert(
-          color != null || gradient != null,
-          'LiqAppIcon needs either color or gradient.',
-        );
+  }) : assert(
+         color != null || gradient != null,
+         'LiqAppIcon needs either color or gradient.',
+       );
 
   /// Tile dimension (square).
   final double size;
@@ -73,8 +73,7 @@ final class LiqAppIcon extends StatelessWidget {
         clipBehavior: Clip.none,
         children: <Widget>[
           tile,
-          if (badge != null)
-            Positioned(top: -4, right: -4, child: badge!),
+          if (badge != null) Positioned(top: -4, right: -4, child: badge!),
         ],
       ),
     );

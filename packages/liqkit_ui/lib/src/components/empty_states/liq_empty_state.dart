@@ -44,17 +44,18 @@ final class LiqEmptyState extends StatelessWidget {
         SizedBox(
           width: 50,
           height: 50,
-          child: iconBackground
-              ? DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: _iconCircleBg,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: SizedBox(width: 22, height: 22, child: icon),
-                  ),
-                )
-              : Center(child: icon),
+          child:
+              iconBackground
+                  ? DecoratedBox(
+                    decoration: const BoxDecoration(
+                      color: _iconCircleBg,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: SizedBox(width: 22, height: 22, child: icon),
+                    ),
+                  )
+                  : Center(child: icon),
         ),
         const SizedBox(height: 16),
       ],
@@ -94,14 +95,8 @@ final class LiqEmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: children,
-          ),
-          if (cta != null) ...<Widget>[
-            const SizedBox(height: 24),
-            cta!,
-          ],
+          Column(mainAxisSize: MainAxisSize.min, children: children),
+          if (cta != null) ...<Widget>[const SizedBox(height: 24), cta!],
         ],
       ),
     );
@@ -113,22 +108,20 @@ final class LiqEmptyState extends StatelessWidget {
     properties
       ..add(StringProperty('title', title))
       ..add(StringProperty('description', description))
-      ..add(FlagProperty(
-        'iconBackground',
-        value: iconBackground,
-        ifTrue: 'with circle',
-      ));
+      ..add(
+        FlagProperty(
+          'iconBackground',
+          value: iconBackground,
+          ifTrue: 'with circle',
+        ),
+      );
   }
 }
 
 /// Default 48pt full-width CTA used in [LiqEmptyState].
 final class LiqEmptyStateCta extends StatelessWidget {
   /// Creates a CTA.
-  const LiqEmptyStateCta({
-    required this.label,
-    this.onPressed,
-    super.key,
-  });
+  const LiqEmptyStateCta({required this.label, this.onPressed, super.key});
 
   /// Label.
   final String label;
@@ -159,11 +152,7 @@ final class LiqEmptyStateCta extends StatelessWidget {
               color: _bg,
               borderRadius: BorderRadius.all(Radius.circular(1000)),
               boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: _shadow,
-                  offset: Offset(0, 1),
-                  blurRadius: 8,
-                ),
+                BoxShadow(color: _shadow, offset: Offset(0, 1), blurRadius: 8),
               ],
             ),
             alignment: Alignment.center,

@@ -100,16 +100,11 @@ final class LiqAlert extends StatelessWidget {
     return SizedBox(
       width: _surfaceWidth,
       child: ClipRRect(
-        borderRadius:
-            const BorderRadius.all(Radius.circular(_surfaceRadius)),
+        borderRadius: const BorderRadius.all(Radius.circular(_surfaceRadius)),
         child: Stack(
           children: <Widget>[
-            const Positioned.fill(
-              child: ColoredBox(color: _innerScrim),
-            ),
-            const Positioned.fill(
-              child: ColoredBox(color: _surfaceFill),
-            ),
+            const Positioned.fill(child: ColoredBox(color: _innerScrim)),
+            const Positioned.fill(child: ColoredBox(color: _surfaceFill)),
             Padding(
               padding: const EdgeInsets.all(14),
               child: Column(
@@ -197,9 +192,8 @@ class _LiqAlertActionButton extends StatelessWidget {
     final isFilled = action.style == LiqAlertActionStyle.filled;
     final isDestructive = action.style == LiqAlertActionStyle.destructive;
     final disabled = action.onPressed == null;
-    final fg = isFilled
-        ? _filledFg
-        : (isDestructive ? _destructiveFg : _regularFg);
+    final fg =
+        isFilled ? _filledFg : (isDestructive ? _destructiveFg : _regularFg);
     final bg = isFilled ? _filledBg : _bg;
     return Semantics(
       button: true,

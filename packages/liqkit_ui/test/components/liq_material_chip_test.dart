@@ -19,22 +19,23 @@ void main() {
   });
 
   testWidgets('LiqMaterialChip renders dark variant', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqMaterialChip(
-        style: LiqMaterialStyle.thick,
-        brightness: LiqMaterialBrightness.dark,
+    await tester.pumpWidget(
+      _wrap(
+        const LiqMaterialChip(
+          style: LiqMaterialStyle.thick,
+          brightness: LiqMaterialBrightness.dark,
+        ),
       ),
-    ));
+    );
     expect(find.byType(LiqMaterialChip), findsOneWidget);
   });
 
   testWidgets('LiqMaterialChipCell renders caption', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqMaterialChipCell(
-        caption: 'Regular',
-        chip: LiqMaterialChip(),
+    await tester.pumpWidget(
+      _wrap(
+        const LiqMaterialChipCell(caption: 'Regular', chip: LiqMaterialChip()),
       ),
-    ));
+    );
     expect(find.text('Regular'), findsOneWidget);
   });
 }

@@ -19,9 +19,7 @@ void main() {
   });
 
   testWidgets('LiqSystemActionPill renders label', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqSystemActionPill(label: 'Mute'),
-    ));
+    await tester.pumpWidget(_wrap(const LiqSystemActionPill(label: 'Mute')));
     expect(find.text('Mute'), findsOneWidget);
   });
 

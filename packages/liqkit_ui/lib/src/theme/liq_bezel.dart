@@ -24,12 +24,11 @@ final class LiqBezel with Diagnosticable {
     double? cornerRadius,
     double? innerHighlight,
     double? outerShadowOpacity,
-  }) =>
-      LiqBezel(
-        cornerRadius: cornerRadius ?? this.cornerRadius,
-        innerHighlight: innerHighlight ?? this.innerHighlight,
-        outerShadowOpacity: outerShadowOpacity ?? this.outerShadowOpacity,
-      );
+  }) => LiqBezel(
+    cornerRadius: cornerRadius ?? this.cornerRadius,
+    innerHighlight: innerHighlight ?? this.innerHighlight,
+    outerShadowOpacity: outerShadowOpacity ?? this.outerShadowOpacity,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -40,11 +39,8 @@ final class LiqBezel with Diagnosticable {
           other.outerShadowOpacity == outerShadowOpacity;
 
   @override
-  int get hashCode => Object.hash(
-        cornerRadius,
-        innerHighlight,
-        outerShadowOpacity,
-      );
+  int get hashCode =>
+      Object.hash(cornerRadius, innerHighlight, outerShadowOpacity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

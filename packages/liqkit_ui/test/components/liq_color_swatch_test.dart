@@ -30,10 +30,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: SizedBox(
-              width: 1000,
-              child: LiqColorSwatchGrid(),
-            ),
+            child: SizedBox(width: 1000, child: LiqColorSwatchGrid()),
           ),
         ),
       );

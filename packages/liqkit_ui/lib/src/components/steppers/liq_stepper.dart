@@ -61,25 +61,23 @@ final class LiqStepper extends StatelessWidget {
               ),
             ),
             Row(
-                children: <Widget>[
-                  Expanded(
-                    child: _StepperButton(
-                      label: '−',
-                      enabled: _canDecrement,
-                      onTap: _canDecrement
-                          ? () => onChanged!(value - step)
-                          : null,
-                    ),
+              children: <Widget>[
+                Expanded(
+                  child: _StepperButton(
+                    label: '−',
+                    enabled: _canDecrement,
+                    onTap:
+                        _canDecrement ? () => onChanged!(value - step) : null,
                   ),
-                  Expanded(
-                    child: _StepperButton(
-                      label: '+',
-                      enabled: _canIncrement,
-                      onTap: _canIncrement
-                          ? () => onChanged!(value + step)
-                          : null,
-                    ),
+                ),
+                Expanded(
+                  child: _StepperButton(
+                    label: '+',
+                    enabled: _canIncrement,
+                    onTap:
+                        _canIncrement ? () => onChanged!(value + step) : null,
                   ),
+                ),
               ],
             ),
             const Positioned(
@@ -147,9 +145,7 @@ class _StepperButton extends StatelessWidget {
               height: 22 / 17,
               letterSpacing: -0.43,
               fontWeight: FontWeight.w600,
-              color: enabled
-                  ? LiqStepper._label
-                  : LiqStepper._labelDisabled,
+              color: enabled ? LiqStepper._label : LiqStepper._labelDisabled,
             ),
             textDirection: TextDirection.ltr,
           ),

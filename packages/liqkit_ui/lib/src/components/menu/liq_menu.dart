@@ -57,10 +57,7 @@ final class LiqMenu extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: children,
-            ),
+            child: Column(mainAxisSize: MainAxisSize.min, children: children),
           ),
         ),
       ),
@@ -198,9 +195,10 @@ final class LiqMenuItem extends StatelessWidget {
                                 height: 13 / 11,
                                 letterSpacing: -0.08,
                                 fontWeight: FontWeight.w400,
-                                color: isDark
-                                    ? const Color(0xFF8A8A8A)
-                                    : const Color(0xFF727272),
+                                color:
+                                    isDark
+                                        ? const Color(0xFF8A8A8A)
+                                        : const Color(0xFF727272),
                               ),
                             ),
                           ),
@@ -236,12 +234,14 @@ final class LiqMenuItem extends StatelessWidget {
       ..add(StringProperty('label', label))
       ..add(EnumProperty<LiqMenuItemStyle>('style', style))
       ..add(EnumProperty<Brightness>('brightness', brightness))
-      ..add(FlagProperty(
-        'enabled',
-        value: onPressed != null,
-        ifTrue: 'enabled',
-        ifFalse: 'disabled',
-      ));
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: onPressed != null,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 

@@ -48,11 +48,7 @@ final class LiqFaceIdBezel extends StatelessWidget {
           color: _bezel,
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           boxShadow: const <BoxShadow>[
-            BoxShadow(
-              color: _shadow,
-              offset: Offset(0, 12),
-              blurRadius: 74,
-            ),
+            BoxShadow(color: _shadow, offset: Offset(0, 12), blurRadius: 74),
           ],
         ),
         child: Center(
@@ -84,12 +80,13 @@ class _FaceIdGlyphPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = size.width * 0.07;
+    final stroke =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = size.width * 0.07;
     final s = size.width / 70;
     switch (state) {
       case LiqFaceIdState.scanning:

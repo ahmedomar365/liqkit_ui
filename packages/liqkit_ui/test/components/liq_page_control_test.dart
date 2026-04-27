@@ -10,9 +10,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqPageControl(count: 5, activeIndex: 2),
-            ),
+            child: Center(child: LiqPageControl(count: 5, activeIndex: 2)),
           ),
         ),
       );
@@ -23,19 +21,15 @@ void main() {
       expect(semantics.value, '3 of 5');
     });
 
-    testWidgets('count > maxVisible centers around activeIndex',
-        (tester) async {
+    testWidgets('count > maxVisible centers around activeIndex', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         const LiqTheme(
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqPageControl(
-                count: 20,
-                activeIndex: 10,
-              ),
-            ),
+            child: Center(child: LiqPageControl(count: 20, activeIndex: 10)),
           ),
         ),
       );
@@ -49,9 +43,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqPageControl(count: 0, activeIndex: 0),
-            ),
+            child: Center(child: LiqPageControl(count: 0, activeIndex: 0)),
           ),
         ),
       );

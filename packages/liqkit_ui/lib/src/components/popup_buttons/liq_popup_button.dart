@@ -8,11 +8,7 @@ import 'package:flutter/widgets.dart';
 /// disabled = rgba(60,60,67,0.3). 14×14 chevron-down icon, 3pt gap.
 final class LiqPopupButton extends StatelessWidget {
   /// Creates a popup button.
-  const LiqPopupButton({
-    required this.label,
-    this.onPressed,
-    super.key,
-  });
+  const LiqPopupButton({required this.label, this.onPressed, super.key});
 
   /// Label.
   final String label;
@@ -76,12 +72,14 @@ final class LiqPopupButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('label', label))
-      ..add(FlagProperty(
-        'enabled',
-        value: onPressed != null,
-        ifTrue: 'enabled',
-        ifFalse: 'disabled',
-      ));
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: onPressed != null,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
@@ -91,16 +89,18 @@ class _ChevronDownPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1.7;
-    final path = Path()
-      ..moveTo(size.width * 0.2, size.height * 0.4)
-      ..lineTo(size.width * 0.5, size.height * 0.7)
-      ..lineTo(size.width * 0.8, size.height * 0.4);
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = 1.7;
+    final path =
+        Path()
+          ..moveTo(size.width * 0.2, size.height * 0.4)
+          ..lineTo(size.width * 0.5, size.height * 0.7)
+          ..lineTo(size.width * 0.8, size.height * 0.4);
     canvas.drawPath(path, paint);
   }
 

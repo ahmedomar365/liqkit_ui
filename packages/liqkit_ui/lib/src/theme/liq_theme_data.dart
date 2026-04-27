@@ -116,18 +116,9 @@ final class LiqThemeData with Diagnosticable {
   /// Dark-mode default theme.
   static const LiqThemeData dark = LiqThemeData(
     brightness: Brightness.dark,
-    primaryColor: LiqColor(
-      light: Color(0xFF007AFF),
-      dark: Color(0xFF0091FF),
-    ),
-    surfaceColor: LiqColor(
-      light: Color(0xFFFFFFFF),
-      dark: Color(0xFF000000),
-    ),
-    labelColor: LiqColor(
-      light: Color(0xFF000000),
-      dark: Color(0xFFFFFFFF),
-    ),
+    primaryColor: LiqColor(light: Color(0xFF007AFF), dark: Color(0xFF0091FF)),
+    surfaceColor: LiqColor(light: Color(0xFFFFFFFF), dark: Color(0xFF000000)),
+    labelColor: LiqColor(light: Color(0xFF000000), dark: Color(0xFFFFFFFF)),
     secondaryLabelColor: LiqColor(
       light: Color(0x993C3C43),
       dark: Color(0xB2EBEBF5),
@@ -169,20 +160,19 @@ final class LiqThemeData with Diagnosticable {
     LiqTextStyle? titleText,
     LiqSemantics? semantics,
     LiqQuality? quality,
-  }) =>
-      LiqThemeData(
-        brightness: brightness ?? this.brightness,
-        primaryColor: primaryColor ?? this.primaryColor,
-        surfaceColor: surfaceColor ?? this.surfaceColor,
-        labelColor: labelColor ?? this.labelColor,
-        secondaryLabelColor: secondaryLabelColor ?? this.secondaryLabelColor,
-        material: material ?? this.material,
-        bezel: bezel ?? this.bezel,
-        bodyText: bodyText ?? this.bodyText,
-        titleText: titleText ?? this.titleText,
-        semantics: semantics ?? this.semantics,
-        quality: quality ?? this.quality,
-      );
+  }) => LiqThemeData(
+    brightness: brightness ?? this.brightness,
+    primaryColor: primaryColor ?? this.primaryColor,
+    surfaceColor: surfaceColor ?? this.surfaceColor,
+    labelColor: labelColor ?? this.labelColor,
+    secondaryLabelColor: secondaryLabelColor ?? this.secondaryLabelColor,
+    material: material ?? this.material,
+    bezel: bezel ?? this.bezel,
+    bodyText: bodyText ?? this.bodyText,
+    titleText: titleText ?? this.titleText,
+    semantics: semantics ?? this.semantics,
+    quality: quality ?? this.quality,
+  );
 
   /// Linearly interpolates between two themes.
   // ignore: prefer_constructors_over_static_methods
@@ -192,8 +182,11 @@ final class LiqThemeData with Diagnosticable {
         primaryColor: LiqColor.lerp(a.primaryColor, b.primaryColor, t),
         surfaceColor: LiqColor.lerp(a.surfaceColor, b.surfaceColor, t),
         labelColor: LiqColor.lerp(a.labelColor, b.labelColor, t),
-        secondaryLabelColor:
-            LiqColor.lerp(a.secondaryLabelColor, b.secondaryLabelColor, t),
+        secondaryLabelColor: LiqColor.lerp(
+          a.secondaryLabelColor,
+          b.secondaryLabelColor,
+          t,
+        ),
         material: LiqMaterial.lerp(a.material, b.material, t),
         bezel: t < 0.5 ? a.bezel : b.bezel,
         bodyText: t < 0.5 ? a.bodyText : b.bodyText,
@@ -220,18 +213,18 @@ final class LiqThemeData with Diagnosticable {
 
   @override
   int get hashCode => Object.hash(
-        brightness,
-        primaryColor,
-        surfaceColor,
-        labelColor,
-        secondaryLabelColor,
-        material,
-        bezel,
-        bodyText,
-        titleText,
-        semantics,
-        quality,
-      );
+    brightness,
+    primaryColor,
+    surfaceColor,
+    labelColor,
+    secondaryLabelColor,
+    material,
+    bezel,
+    bodyText,
+    titleText,
+    semantics,
+    quality,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -241,10 +234,12 @@ final class LiqThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<LiqColor>('primaryColor', primaryColor))
       ..add(DiagnosticsProperty<LiqColor>('surfaceColor', surfaceColor))
       ..add(DiagnosticsProperty<LiqColor>('labelColor', labelColor))
-      ..add(DiagnosticsProperty<LiqColor>(
-        'secondaryLabelColor',
-        secondaryLabelColor,
-      ),)
+      ..add(
+        DiagnosticsProperty<LiqColor>(
+          'secondaryLabelColor',
+          secondaryLabelColor,
+        ),
+      )
       ..add(DiagnosticsProperty<LiqMaterial>('material', material))
       ..add(DiagnosticsProperty<LiqBezel>('bezel', bezel))
       ..add(DiagnosticsProperty<LiqTextStyle>('bodyText', bodyText))

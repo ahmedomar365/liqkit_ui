@@ -22,10 +22,7 @@ void main() {
             LiqMenuItem(label: 'Cut'),
             LiqMenuItem(label: 'Copy'),
             LiqMenuSeparator(),
-            LiqMenuItem(
-              label: 'Delete',
-              style: LiqMenuItemStyle.destructive,
-            ),
+            LiqMenuItem(label: 'Delete', style: LiqMenuItemStyle.destructive),
           ],
         ),
       ),

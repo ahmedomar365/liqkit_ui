@@ -14,19 +14,21 @@ Widget _wrap(Widget child) {
 
 void main() {
   testWidgets('LiqWindow renders default size', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const SizedBox(width: 1024, height: 720, child: LiqWindow()),
-    ));
+    await tester.pumpWidget(
+      _wrap(const SizedBox(width: 1024, height: 720, child: LiqWindow())),
+    );
     expect(find.byType(LiqWindow), findsOneWidget);
   });
 
   testWidgets('LiqWindowToolbar renders title and subtitle', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const SizedBox(
-        width: 800,
-        child: LiqWindowToolbar(title: 'Mail', subtitle: 'Inbox'),
+    await tester.pumpWidget(
+      _wrap(
+        const SizedBox(
+          width: 800,
+          child: LiqWindowToolbar(title: 'Mail', subtitle: 'Inbox'),
+        ),
       ),
-    ));
+    );
     expect(find.text('Mail'), findsOneWidget);
     expect(find.text('Inbox'), findsOneWidget);
   });

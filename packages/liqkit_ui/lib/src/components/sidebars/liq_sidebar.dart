@@ -8,11 +8,7 @@ import 'package:flutter/widgets.dart';
 /// translucent `rgba(250,250,250,0.7)`, inner white rim, drop shadow.
 final class LiqSidebar extends StatelessWidget {
   /// Creates a sidebar.
-  const LiqSidebar({
-    required this.children,
-    this.width = 320,
-    super.key,
-  });
+  const LiqSidebar({required this.children, this.width = 320, super.key});
 
   /// Children — typically [LiqSidebarSearch], [LiqSidebarSectionHeader], and
   /// [LiqSidebarRow]s.
@@ -37,11 +33,7 @@ final class LiqSidebar extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(34)),
             border: Border.fromBorderSide(BorderSide(color: _rim)),
             boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: _shadow,
-                offset: Offset(0, 16),
-                blurRadius: 48,
-              ),
+              BoxShadow(color: _shadow, offset: Offset(0, 16), blurRadius: 48),
             ],
           ),
           child: Padding(
@@ -122,11 +114,12 @@ final class LiqSidebarSearch extends StatelessWidget {
 class _SearchGlyphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF727272)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 1.6;
+    final paint =
+        Paint()
+          ..color = const Color(0xFF727272)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeWidth = 1.6;
     final cx = size.width * 0.42;
     final cy = size.height * 0.42;
     final r = size.width * 0.30;
@@ -260,11 +253,7 @@ final class LiqSidebarRow extends StatelessWidget {
 /// Section header rendered above a group of [LiqSidebarRow]s.
 final class LiqSidebarSectionHeader extends StatelessWidget {
   /// Creates a section header.
-  const LiqSidebarSectionHeader({
-    required this.title,
-    this.detail,
-    super.key,
-  });
+  const LiqSidebarSectionHeader({required this.title, this.detail, super.key});
 
   /// Title.
   final String title;

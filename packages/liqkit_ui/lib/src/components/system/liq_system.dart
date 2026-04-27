@@ -133,21 +133,23 @@ final class LiqSystemActionPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = brightness == LiqSystemBrightness.dark;
     final isDestructive = style == LiqSystemActionPillStyle.destructive;
-    final color = isDestructive
-        ? (isDark ? _darkDestructive : _lightDestructive)
-        : (isDark ? _darkLabel : _lightLabel);
+    final color =
+        isDestructive
+            ? (isDark ? _darkDestructive : _lightDestructive)
+            : (isDark ? _darkLabel : _lightLabel);
     final borderColor = isDark ? _darkBorder : _lightBorder;
-    final gradient = isDark
-        ? const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xB8565C6B), Color(0xE6323744)],
-          )
-        : const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[Color(0xB8FFFFFF), Color(0xE6E6E9EE)],
-          );
+    final gradient =
+        isDark
+            ? const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Color(0xB8565C6B), Color(0xE6323744)],
+            )
+            : const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Color(0xB8FFFFFF), Color(0xE6E6E9EE)],
+            );
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onPressed,
@@ -187,11 +189,7 @@ final class LiqSystemActionPill extends StatelessWidget {
 /// rows. Selected state fills with system blue + 2pt halo.
 final class LiqSystemToggleDot extends StatelessWidget {
   /// Creates a toggle dot.
-  const LiqSystemToggleDot({
-    this.selected = false,
-    this.onPressed,
-    super.key,
-  });
+  const LiqSystemToggleDot({this.selected = false, this.onPressed, super.key});
 
   /// When true, dot fills with #0A84FF + halo.
   final bool selected;
@@ -216,11 +214,10 @@ final class LiqSystemToggleDot extends StatelessWidget {
           color: selected ? _selected : _bg,
           shape: BoxShape.circle,
           border: Border.all(color: _border),
-          boxShadow: selected
-              ? const <BoxShadow>[
-                  BoxShadow(color: _halo, spreadRadius: 2),
-                ]
-              : null,
+          boxShadow:
+              selected
+                  ? const <BoxShadow>[BoxShadow(color: _halo, spreadRadius: 2)]
+                  : null,
         ),
       ),
     );

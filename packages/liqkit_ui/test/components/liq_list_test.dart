@@ -11,10 +11,7 @@ void main() {
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: Center(
-              child: SizedBox(
-                width: 320,
-                child: LiqListRow(title: 'Hello'),
-              ),
+              child: SizedBox(width: 320, child: LiqListRow(title: 'Hello')),
             ),
           ),
         ),
@@ -62,10 +59,7 @@ void main() {
             child: Center(
               child: SizedBox(
                 width: 320,
-                child: LiqListRow(
-                  title: 'Tap',
-                  onTap: () => taps += 1,
-                ),
+                child: LiqListRow(title: 'Tap', onTap: () => taps += 1),
               ),
             ),
           ),

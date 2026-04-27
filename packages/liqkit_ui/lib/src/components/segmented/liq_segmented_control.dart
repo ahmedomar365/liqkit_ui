@@ -56,13 +56,14 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: disabled
-                        ? null
-                        : () {
-                            if (segments[i].value != value) {
-                              onChanged!(segments[i].value);
-                            }
-                          },
+                    onTap:
+                        disabled
+                            ? null
+                            : () {
+                              if (segments[i].value != value) {
+                                onChanged!(segments[i].value);
+                              }
+                            },
                     child: _Segment(
                       label: segments[i].label,
                       selected: segments[i].value == value,
@@ -81,10 +82,7 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty<String>(
-        'segments',
-        segments.map((s) => s.label),
-      ))
+      ..add(IterableProperty<String>('segments', segments.map((s) => s.label)))
       ..add(DiagnosticsProperty<T>('value', value))
       ..add(
         FlagProperty(

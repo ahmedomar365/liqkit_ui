@@ -24,8 +24,8 @@ final class LiqDatePicker extends StatelessWidget {
     this.onPrev,
     this.onNext,
     super.key,
-  })  : assert(month >= 1 && month <= 12, 'month must be 1..12'),
-        assert(year >= 1, 'year must be ≥ 1');
+  }) : assert(month >= 1 && month <= 12, 'month must be 1..12'),
+       assert(year >= 1, 'year must be ≥ 1');
 
   /// Year (gregorian).
   final int year;
@@ -98,8 +98,7 @@ final class LiqDatePicker extends StatelessWidget {
       case 11:
         return 30;
       case 2:
-        final isLeap =
-            (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        final isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
         return isLeap ? 29 : 28;
     }
     return 30;
@@ -132,11 +131,7 @@ final class LiqDatePicker extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(13)),
             border: Border.fromBorderSide(BorderSide(color: _rim)),
             boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: _shadow,
-                offset: Offset(0, 10),
-                blurRadius: 40,
-              ),
+              BoxShadow(color: _shadow, offset: Offset(0, 10), blurRadius: 40),
             ],
           ),
           child: Padding(
@@ -250,10 +245,7 @@ final class LiqDatePicker extends StatelessWidget {
     final BoxDecoration? decoration;
     final Color textColor;
     if (isSelected && isCurrent) {
-      decoration = const BoxDecoration(
-        color: _accent,
-        shape: BoxShape.circle,
-      );
+      decoration = const BoxDecoration(color: _accent, shape: BoxShape.circle);
       textColor = const Color(0xFFFFFFFF);
     } else if (isSelected) {
       decoration = const BoxDecoration(
@@ -338,12 +330,13 @@ class _ArrowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF0088FF)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1.8;
+    final paint =
+        Paint()
+          ..color = const Color(0xFF0088FF)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = 1.8;
     final path = Path();
     if (direction == _ArrowDir.left) {
       path

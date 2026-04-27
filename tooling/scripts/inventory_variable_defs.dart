@@ -43,18 +43,14 @@ void main(List<String> args) {
   final fontKeys = <String>{};
   final otherKeys = <String>{};
 
-  final categoryDirs = figmaArtifacts
-      .listSync()
-      .whereType<Directory>()
-      .where((d) {
+  final categoryDirs =
+      figmaArtifacts.listSync().whereType<Directory>().where((d) {
         final n = d.uri.pathSegments.where((s) => s.isNotEmpty).last;
         return n != 'native' && n != 'assets' && n != 'history' && n != 'raw';
-      })
-      .toList();
+      }).toList();
 
   for (final cat in categoryDirs) {
-    final catName =
-        cat.uri.pathSegments.where((s) => s.isNotEmpty).last;
+    final catName = cat.uri.pathSegments.where((s) => s.isNotEmpty).last;
     for (final f in cat.listSync().whereType<File>()) {
       if (!f.path.endsWith('.variable-defs.json')) continue;
       final raw = f.readAsStringSync();
@@ -90,8 +86,7 @@ void main(List<String> args) {
   }
 
   // Compare to tokens.json captured from TS.
-  final tokensFile =
-      File('${root.path}/manifests/tokens.json');
+  final tokensFile = File('${root.path}/manifests/tokens.json');
   Map<String, dynamic>? capturedTs;
   if (tokensFile.existsSync()) {
     capturedTs =
@@ -102,31 +97,34 @@ void main(List<String> args) {
   final tsSpacingCount = _capturedSpacingCount(capturedTs);
 
   // Build report.
-  final buf = StringBuffer()
-    ..writeln('# liqkit token surface inventory')
-    ..writeln()
-    ..writeln(
-      'Compares the *true* iOS 26 token surface (extracted from every '
-      'Figma variable-defs.json across all 37 categories) against what '
-      "the TS \\`foundationTokens\\` capture in \\`tokens.json\\` exposes.",
-    )
-    ..writeln()
-    ..writeln('## Summary')
-    ..writeln()
-    ..writeln('- Categories scanned: ${categoryDirs.length}')
-    ..writeln('- Modes encountered: ${byMode.keys.toList()..sort()}')
-    ..writeln('- Unique color tokens (across all modes): ${colorKeys.length}')
-    ..writeln('- Unique typography tokens: ${fontKeys.length}')
-    ..writeln('- Unique other tokens: ${otherKeys.length}')
-    ..writeln()
-    ..writeln('## TS-captured vs. Figma-defined')
-    ..writeln()
-    ..writeln('| Surface | TS tokens.json | Figma variable-defs |')
-    ..writeln('|---|---:|---:|')
-    ..writeln('| Colors | $tsColorCount | ${colorKeys.length} |')
-    ..writeln('| Radii | $tsRadiiCount | n/a (in component CSS only) |')
-    ..writeln('| Spacing | $tsSpacingCount | n/a (in component CSS only) |')
-    ..writeln('| Typography | 0 | ${fontKeys.length} |');
+  final buf =
+      StringBuffer()
+        ..writeln('# liqkit token surface inventory')
+        ..writeln()
+        ..writeln(
+          'Compares the *true* iOS 26 token surface (extracted from every '
+          'Figma variable-defs.json across all 37 categories) against what '
+          "the TS \\`foundationTokens\\` capture in \\`tokens.json\\` exposes.",
+        )
+        ..writeln()
+        ..writeln('## Summary')
+        ..writeln()
+        ..writeln('- Categories scanned: ${categoryDirs.length}')
+        ..writeln('- Modes encountered: ${byMode.keys.toList()..sort()}')
+        ..writeln(
+          '- Unique color tokens (across all modes): ${colorKeys.length}',
+        )
+        ..writeln('- Unique typography tokens: ${fontKeys.length}')
+        ..writeln('- Unique other tokens: ${otherKeys.length}')
+        ..writeln()
+        ..writeln('## TS-captured vs. Figma-defined')
+        ..writeln()
+        ..writeln('| Surface | TS tokens.json | Figma variable-defs |')
+        ..writeln('|---|---:|---:|')
+        ..writeln('| Colors | $tsColorCount | ${colorKeys.length} |')
+        ..writeln('| Radii | $tsRadiiCount | n/a (in component CSS only) |')
+        ..writeln('| Spacing | $tsSpacingCount | n/a (in component CSS only) |')
+        ..writeln('| Typography | 0 | ${fontKeys.length} |');
 
   for (final mode in byMode.keys.toList()..sort()) {
     final perMode = byMode[mode]!;
@@ -134,14 +132,12 @@ void main(List<String> args) {
       ..writeln()
       ..writeln('## Mode: `$mode` (${perMode.length} tokens)')
       ..writeln();
-    final colorEntries = perMode.entries
-        .where((e) => colorKeys.contains(e.key))
-        .toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
-    final fontEntries = perMode.entries
-        .where((e) => fontKeys.contains(e.key))
-        .toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
+    final colorEntries =
+        perMode.entries.where((e) => colorKeys.contains(e.key)).toList()
+          ..sort((a, b) => a.key.compareTo(b.key));
+    final fontEntries =
+        perMode.entries.where((e) => fontKeys.contains(e.key)).toList()
+          ..sort((a, b) => a.key.compareTo(b.key));
 
     if (colorEntries.isNotEmpty) {
       buf
@@ -176,23 +172,23 @@ void main(List<String> args) {
     ..writeln();
 
   final sortedColorKeys = colorKeys.toList()..sort();
-  final sortedCats = categoryDirs
-      .map((d) => d.uri.pathSegments.where((s) => s.isNotEmpty).last)
-      .toList()
-    ..sort();
+  final sortedCats =
+      categoryDirs
+          .map((d) => d.uri.pathSegments.where((s) => s.isNotEmpty).last)
+          .toList()
+        ..sort();
 
   buf.writeln(
     '_Listed: top 30 most cross-category-shared tokens. Full data in `manifests/token_inventory.json`._',
   );
   buf.writeln();
-  final ranked = sortedColorKeys
-      .map((k) => MapEntry(k, keyCategories[k]?.length ?? 0))
-      .toList()
-    ..sort((a, b) => b.value.compareTo(a.value));
+  final ranked =
+      sortedColorKeys
+          .map((k) => MapEntry(k, keyCategories[k]?.length ?? 0))
+          .toList()
+        ..sort((a, b) => b.value.compareTo(a.value));
   for (final r in ranked.take(30)) {
-    buf.writeln(
-      '- `${r.key}` — present in ${r.value} categories',
-    );
+    buf.writeln('- `${r.key}` — present in ${r.value} categories');
   }
 
   File('${root.path}/TOKEN_INVENTORY.md').writeAsStringSync(buf.toString());
@@ -212,16 +208,15 @@ void main(List<String> args) {
     'modes': byMode.map(
       (mode, perMode) => MapEntry(
         mode,
-        perMode.map(
-          (k, v) => MapEntry(k, v.toList()..sort()),
-        ),
+        perMode.map((k, v) => MapEntry(k, v.toList()..sort())),
       ),
     ),
     'colorKeys': sortedColorKeys,
     'fontKeys': fontKeys.toList()..sort(),
     'otherKeys': otherKeys.toList()..sort(),
-    'keyCategories':
-        keyCategories.map((k, v) => MapEntry(k, v.toList()..sort())),
+    'keyCategories': keyCategories.map(
+      (k, v) => MapEntry(k, v.toList()..sort()),
+    ),
   });
   File('${root.path}/manifests/token_inventory.json').writeAsStringSync(json);
   stdout.writeln(
@@ -239,31 +234,40 @@ bool _isHexAlphaColor(String value) {
 
 int _capturedColorCount(Map<String, dynamic>? tokens) {
   if (tokens == null) return 0;
-  final foundation = (tokens['foundation'] as Map<String, dynamic>?) ??
+  final foundation =
+      (tokens['foundation'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final ft = (foundation['foundationTokens'] as Map<String, dynamic>?) ??
+  final ft =
+      (foundation['foundationTokens'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final color = (ft['color'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
+  final color =
+      (ft['color'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
   return color.length;
 }
 
 int _capturedRadiiCount(Map<String, dynamic>? tokens) {
   if (tokens == null) return 0;
-  final foundation = (tokens['foundation'] as Map<String, dynamic>?) ??
+  final foundation =
+      (tokens['foundation'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final ft = (foundation['foundationTokens'] as Map<String, dynamic>?) ??
+  final ft =
+      (foundation['foundationTokens'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final r = (ft['radius'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
+  final r =
+      (ft['radius'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
   return r.length;
 }
 
 int _capturedSpacingCount(Map<String, dynamic>? tokens) {
   if (tokens == null) return 0;
-  final foundation = (tokens['foundation'] as Map<String, dynamic>?) ??
+  final foundation =
+      (tokens['foundation'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final ft = (foundation['foundationTokens'] as Map<String, dynamic>?) ??
+  final ft =
+      (foundation['foundationTokens'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
-  final s = (ft['spacing'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
+  final s =
+      (ft['spacing'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
   return s.length;
 }
 

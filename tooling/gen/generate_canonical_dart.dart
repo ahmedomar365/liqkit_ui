@@ -41,14 +41,14 @@ Future<void> main(List<String> args) async {
   final hash = sha256.convert(bytes).toString();
   final tokens = jsonDecode(utf8.decode(bytes)) as Map<String, dynamic>;
 
-  final modes = (tokens['modes'] as List?)
-          ?.cast<String>()
-          .toList(growable: false) ??
+  final modes =
+      (tokens['modes'] as List?)?.cast<String>().toList(growable: false) ??
       const <String>['default'];
 
-  final colors = (tokens['colors'] as Map<String, dynamic>?) ??
-      const <String, dynamic>{};
-  final typography = (tokens['typography'] as Map<String, dynamic>?) ??
+  final colors =
+      (tokens['colors'] as Map<String, dynamic>?) ?? const <String, dynamic>{};
+  final typography =
+      (tokens['typography'] as Map<String, dynamic>?) ??
       const <String, dynamic>{};
 
   final canonicalDart = _emitCanonical(modes, colors, typography, hash);
@@ -69,24 +69,20 @@ Future<void> main(List<String> args) async {
     var drift = false;
     outputs.forEach((name, body) {
       final committed = File('${repoRoot.path}/$_outDirRel/$name');
-      if (!committed.existsSync() ||
-          committed.readAsStringSync() != body) {
+      if (!committed.existsSync() || committed.readAsStringSync() != body) {
         drift = true;
         stderr.writeln('generate_canonical_dart --check: $name out of date.');
       }
     });
     final hashFile = File('${repoRoot.path}/$_hashFileRel');
-    if (!hashFile.existsSync() ||
-        hashFile.readAsStringSync().trim() != hash) {
+    if (!hashFile.existsSync() || hashFile.readAsStringSync().trim() != hash) {
       drift = true;
       stderr.writeln(
         'generate_canonical_dart --check: canonical_tokens.json sha256 sidecar is out of date.',
       );
     }
     if (drift) {
-      stderr.writeln(
-        'Run: dart run tooling/gen/generate_canonical_dart.dart',
-      );
+      stderr.writeln('Run: dart run tooling/gen/generate_canonical_dart.dart');
       exit(1);
     }
     print('generate_canonical_dart --check: ok');
@@ -122,16 +118,21 @@ String _emitCanonical(
   Map<String, dynamic> typography,
   String hash,
 ) {
-  final buf = StringBuffer()
-    ..write(_header('canonical', hash))
-    ..writeln("import 'dart:ui' show Color, FontWeight;")
-    ..writeln()
-    ..writeln('/// Active iOS 26 token mode.')
-    ..writeln('///')
-    ..writeln('/// Captured from liqkit\'s Figma extraction. Values come from')
-    ..writeln('/// `figma_artifacts/<category>/<node>.variable-defs.json` across')
-    ..writeln('/// all 37 categories.')
-    ..writeln('enum LiqColorMode {');
+  final buf =
+      StringBuffer()
+        ..write(_header('canonical', hash))
+        ..writeln("import 'dart:ui' show Color, FontWeight;")
+        ..writeln()
+        ..writeln('/// Active iOS 26 token mode.')
+        ..writeln('///')
+        ..writeln(
+          '/// Captured from liqkit\'s Figma extraction. Values come from',
+        )
+        ..writeln(
+          '/// `figma_artifacts/<category>/<node>.variable-defs.json` across',
+        )
+        ..writeln('/// all 37 categories.')
+        ..writeln('enum LiqColorMode {');
   for (final mode in modes) {
     buf
       ..writeln('  /// `${_dartIdent(mode)}` mode (Figma key: `$mode`).')
@@ -140,7 +141,9 @@ String _emitCanonical(
   buf
     ..writeln('}')
     ..writeln()
-    ..writeln('/// A canonical iOS 26 color reference resolved per [LiqColorMode].')
+    ..writeln(
+      '/// A canonical iOS 26 color reference resolved per [LiqColorMode].',
+    )
     ..writeln('@pragma(\'vm:prefer-inline\')')
     ..writeln('final class LiqColorRef {')
     ..writeln('  /// Creates a color reference.')
@@ -199,7 +202,9 @@ String _emitCanonical(
         perMode[mode] = raw;
       }
     }
-    allColorEntries.add(_ColorEntry(path: path, fieldName: fieldName, perMode: perMode));
+    allColorEntries.add(
+      _ColorEntry(path: path, fieldName: fieldName, perMode: perMode),
+    );
   });
   for (final e in allColorEntries) {
     buf
@@ -258,7 +263,9 @@ String _emitCanonical(
     ..writeln('  }')
     ..writeln('}')
     ..writeln()
-    ..writeln('/// One canonical typography record (family + size + weight + …).')
+    ..writeln(
+      '/// One canonical typography record (family + size + weight + …).',
+    )
     ..writeln('final class LiqTypographySpec {')
     ..writeln('  /// Creates a typography spec.')
     ..writeln('  const LiqTypographySpec({')
@@ -273,7 +280,9 @@ String _emitCanonical(
     ..writeln('  /// Font family (e.g. "SF Pro").')
     ..writeln('  final String family;')
     ..writeln()
-    ..writeln('  /// Style label as captured from Figma (e.g. "Regular", "Semibold").')
+    ..writeln(
+      '  /// Style label as captured from Figma (e.g. "Regular", "Semibold").',
+    )
     ..writeln('  final String style;')
     ..writeln()
     ..writeln('  /// Font size in logical pixels.')
@@ -304,16 +313,20 @@ String _emitCanonical(
       final body = modeMap[mode];
       if (body is! Map) {
         // Fall back to any available mode.
-        final any = modeMap.values.firstWhere(
-              (v) => v is Map,
-              orElse: () => const <String, Object?>{},
-            ) as Map;
+        final any =
+            modeMap.values.firstWhere(
+                  (v) => v is Map,
+                  orElse: () => const <String, Object?>{},
+                )
+                as Map;
         perMode[mode] = _Spec.from(any);
       } else {
         perMode[mode] = _Spec.from(body);
       }
     }
-    typoEntries.add(_TypoEntry(path: path, fieldName: fieldName, perMode: perMode));
+    typoEntries.add(
+      _TypoEntry(path: path, fieldName: fieldName, perMode: perMode),
+    );
   });
   for (final e in typoEntries) {
     buf
@@ -339,9 +352,7 @@ String _emitCanonical(
   }
   buf
     ..writeln('  /// Iterable view over every canonical typography token.')
-    ..writeln(
-      '  static const List<MapEntry<String, LiqTypographyRef>> all =',
-    )
+    ..writeln('  static const List<MapEntry<String, LiqTypographyRef>> all =')
     ..writeln('      <MapEntry<String, LiqTypographyRef>>[');
   for (final e in typoEntries) {
     buf.writeln("        MapEntry('${e.path}', ${e.fieldName}),");
@@ -421,8 +432,7 @@ class _Spec {
     final size = (body['size'] as num?)?.toDouble() ?? 14.0;
     final weightRaw = (body['weight'] as num?)?.toDouble() ?? 400.0;
     final lineHeight = (body['lineHeight'] as num?)?.toDouble() ?? size * 1.2;
-    final letterSpacing =
-        (body['letterSpacing'] as num?)?.toDouble() ?? 0.0;
+    final letterSpacing = (body['letterSpacing'] as num?)?.toDouble() ?? 0.0;
     return _Spec(
       family: family,
       style: style,
@@ -459,8 +469,8 @@ int _roundFontWeight(double weight) {
 }
 
 double _roundDouble(double v, int decimals) {
-  final factor = 1.0 *
-      List<int>.filled(decimals, 10).fold<int>(1, (a, b) => a * b);
+  final factor =
+      1.0 * List<int>.filled(decimals, 10).fold<int>(1, (a, b) => a * b);
   return (v * factor).round() / factor;
 }
 
@@ -474,7 +484,10 @@ String _dartIdent(String s) {
   if (s == 'default') return 'default_';
   // Normalize: split on non-alpha, camel-case words.
   final cleaned =
-      s.replaceAll(RegExp(r'[^A-Za-z0-9]'), ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+      s
+          .replaceAll(RegExp(r'[^A-Za-z0-9]'), ' ')
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim();
   if (cleaned.isEmpty) return 'value';
   final words = cleaned.split(' ');
   final first = words.first[0].toLowerCase() + words.first.substring(1);

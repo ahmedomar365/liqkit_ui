@@ -8,26 +8,27 @@ void main() {
       var v = 'a';
       await tester.pumpWidget(
         StatefulBuilder(
-          builder: (context, setState) => LiqTheme(
-            data: LiqThemeData.light,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Center(
-                child: SizedBox(
-                  width: 300,
-                  child: LiqSegmentedControl<String>(
-                    segments: const <({String value, String label})>[
-                      (value: 'a', label: 'One'),
-                      (value: 'b', label: 'Two'),
-                      (value: 'c', label: 'Three'),
-                    ],
-                    value: v,
-                    onChanged: (String next) => setState(() => v = next),
+          builder:
+              (context, setState) => LiqTheme(
+                data: LiqThemeData.light,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Center(
+                    child: SizedBox(
+                      width: 300,
+                      child: LiqSegmentedControl<String>(
+                        segments: const <({String value, String label})>[
+                          (value: 'a', label: 'One'),
+                          (value: 'b', label: 'Two'),
+                          (value: 'c', label: 'Three'),
+                        ],
+                        value: v,
+                        onChanged: (String next) => setState(() => v = next),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
         ),
       );
       await tester.tap(find.text('Two'));
@@ -84,10 +85,7 @@ void main() {
           ),
         ),
       );
-      expect(
-        tester.getSize(find.byType(LiqSegmentedControl<int>)).height,
-        32,
-      );
+      expect(tester.getSize(find.byType(LiqSegmentedControl<int>)).height, 32);
     });
   });
 }

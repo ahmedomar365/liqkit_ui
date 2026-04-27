@@ -169,12 +169,7 @@ final class LiqExamplesSection extends StatelessWidget {
 /// Compact item card — name (590 12/16) + optional meta (500 11/14).
 final class LiqExamplesItem extends StatelessWidget {
   /// Creates an item.
-  const LiqExamplesItem({
-    required this.name,
-    this.meta,
-    this.code,
-    super.key,
-  });
+  const LiqExamplesItem({required this.name, this.meta, this.code, super.key});
 
   /// Item display name.
   final String name;

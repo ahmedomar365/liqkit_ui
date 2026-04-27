@@ -13,16 +13,15 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('LiqAlert renders title, description, and a single action',
-      (tester) async {
+  testWidgets('LiqAlert renders title, description, and a single action', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(
         const LiqAlert(
           title: 'Confirm',
           description: 'Are you sure?',
-          actions: <LiqAlertAction>[
-            LiqAlertAction(label: 'OK'),
-          ],
+          actions: <LiqAlertAction>[LiqAlertAction(label: 'OK')],
         ),
       ),
     );
@@ -31,16 +30,15 @@ void main() {
     expect(find.text('OK'), findsOneWidget);
   });
 
-  testWidgets('LiqAlert sideBySide layout requires exactly two actions',
-      (tester) async {
+  testWidgets('LiqAlert sideBySide layout requires exactly two actions', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(
         const LiqAlert(
           title: 'X',
           layout: LiqAlertActionLayout.sideBySide,
-          actions: <LiqAlertAction>[
-            LiqAlertAction(label: 'Only'),
-          ],
+          actions: <LiqAlertAction>[LiqAlertAction(label: 'Only')],
         ),
       ),
     );

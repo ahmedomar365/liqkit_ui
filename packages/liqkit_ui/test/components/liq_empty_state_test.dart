@@ -32,10 +32,7 @@ void main() {
       _wrap(
         LiqEmptyState(
           title: 'X',
-          cta: LiqEmptyStateCta(
-            label: 'Compose',
-            onPressed: () => taps++,
-          ),
+          cta: LiqEmptyStateCta(label: 'Compose', onPressed: () => taps++),
         ),
       ),
     );

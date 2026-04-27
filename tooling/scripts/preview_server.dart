@@ -50,10 +50,7 @@ Future<void> main(List<String> args) async {
       prefix: '/source/',
       root: Directory('${dataRoot.path}/rendered/source'),
     ),
-    _Mount(
-      prefix: '/',
-      root: Directory('${dataRoot.path}/rendered'),
-    ),
+    _Mount(prefix: '/', root: Directory('${dataRoot.path}/rendered')),
   ];
 
   final server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);

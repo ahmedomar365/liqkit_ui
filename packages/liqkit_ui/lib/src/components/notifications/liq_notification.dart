@@ -72,11 +72,7 @@ final class LiqNotificationIcon extends StatelessWidget {
             ),
             border: const Border.fromBorderSide(BorderSide(color: _topRim)),
             boxShadow: const <BoxShadow>[
-              BoxShadow(
-                color: _shadow15,
-                offset: Offset(0, 4),
-                blurRadius: 9,
-              ),
+              BoxShadow(color: _shadow15, offset: Offset(0, 4), blurRadius: 9),
             ],
           ),
           alignment: Alignment.center,
@@ -140,11 +136,7 @@ final class LiqNotification extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(24)),
             border: Border.fromBorderSide(BorderSide(color: _rim)),
             boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: _shadow,
-                offset: Offset(0, 24),
-                blurRadius: 50,
-              ),
+              BoxShadow(color: _shadow, offset: Offset(0, 24), blurRadius: 50),
             ],
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -212,10 +204,7 @@ final class LiqNotification extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         style: const TextStyle(
                           fontFamily: 'SF Pro Text',
-                          fontFamilyFallback: <String>[
-                            'SF Pro',
-                            'sans-serif',
-                          ],
+                          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
                           fontSize: 15,
                           height: 18 / 15,
                           letterSpacing: -0.23,

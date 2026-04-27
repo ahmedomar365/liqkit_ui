@@ -23,12 +23,7 @@ void main() {
   testWidgets('LiqWidgetCard invokes onPressed', (tester) async {
     var taps = 0;
     await tester.pumpWidget(
-      _wrap(
-        LiqWidgetCard(
-          size: LiqWidgetSize.small,
-          onPressed: () => taps++,
-        ),
-      ),
+      _wrap(LiqWidgetCard(size: LiqWidgetSize.small, onPressed: () => taps++)),
     );
     await tester.tap(find.byType(LiqWidgetCard));
     expect(taps, 1);

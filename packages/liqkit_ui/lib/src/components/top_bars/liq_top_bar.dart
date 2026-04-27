@@ -143,9 +143,8 @@ final class LiqTopBarSymbolButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = brightness == Brightness.dark;
-    final color = onPressed == null
-        ? _disabled
-        : (isDark ? _accentDark : _accentLight);
+    final color =
+        onPressed == null ? _disabled : (isDark ? _accentDark : _accentLight);
     return Semantics(
       button: true,
       enabled: onPressed != null,

@@ -44,9 +44,8 @@ final class LiqToolbarGlassButton extends StatelessWidget {
           child: Container(
             height: 44,
             constraints: const BoxConstraints(minWidth: 44),
-            padding: symbolOnly
-                ? null
-                : const EdgeInsets.symmetric(horizontal: 16),
+            padding:
+                symbolOnly ? null : const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: _bg,
               borderRadius: const BorderRadius.all(Radius.circular(296)),
@@ -78,11 +77,9 @@ final class LiqToolbarGlassButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('label', label))
-      ..add(FlagProperty(
-        'symbolOnly',
-        value: symbolOnly,
-        ifTrue: 'symbol-only',
-      ))
+      ..add(
+        FlagProperty('symbolOnly', value: symbolOnly, ifTrue: 'symbol-only'),
+      )
       ..add(
         FlagProperty(
           'enabled',
@@ -178,8 +175,7 @@ final class LiqToolbarChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: isDark ? _bgDark : _bgLight,
           borderRadius: const BorderRadius.all(Radius.circular(9)),
-          border:
-              Border.all(color: isDark ? _borderDark : _borderLight),
+          border: Border.all(color: isDark ? _borderDark : _borderLight),
         ),
         alignment: Alignment.center,
         child: Text(

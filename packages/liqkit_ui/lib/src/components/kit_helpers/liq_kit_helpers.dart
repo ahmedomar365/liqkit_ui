@@ -172,10 +172,7 @@ class _ModeDot extends StatelessWidget {
           child: Container(
             width: 3,
             height: 3,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
         ),
       ),
@@ -232,10 +229,11 @@ class _DashedBorderPainter extends CustomPainter {
       Rect.fromLTWH(0.5, 0.5, size.width - 1, size.height - 1),
       const Radius.circular(6),
     );
-    final stroke = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
+    final stroke =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1;
     final path = Path()..addRRect(rrect);
     final metrics = path.computeMetrics();
     const dash = 4.0;

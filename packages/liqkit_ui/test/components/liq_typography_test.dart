@@ -26,8 +26,7 @@ void main() {
     expect(s.fontFamily, 'SF Pro Display');
   });
 
-  testWidgets('LiqTypeColumn renders header and one sample',
-      (tester) async {
+  testWidgets('LiqTypeColumn renders header and one sample', (tester) async {
     await tester.pumpWidget(
       const Directionality(
         textDirection: TextDirection.ltr,

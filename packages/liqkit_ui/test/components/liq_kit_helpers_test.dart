@@ -13,14 +13,17 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('LiqKitHelpersHeader renders title and description',
-      (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqKitHelpersHeader(
-        title: 'Buttons',
-        description: 'Tappable controls.',
+  testWidgets('LiqKitHelpersHeader renders title and description', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        const LiqKitHelpersHeader(
+          title: 'Buttons',
+          description: 'Tappable controls.',
+        ),
       ),
-    ));
+    );
     expect(find.text('Buttons'), findsOneWidget);
     expect(find.text('Tappable controls.'), findsOneWidget);
   });
@@ -31,17 +34,19 @@ void main() {
   });
 
   testWidgets('LiqKitHelpersModeLabels stacks pills', (tester) async {
-    await tester.pumpWidget(_wrap(
-      const LiqKitHelpersModeLabels(
-        children: <Widget>[
-          LiqKitHelpersModePill(label: 'Light'),
-          LiqKitHelpersModePill(
-            label: 'Dark',
-            brightness: LiqKitHelpersBrightness.dark,
-          ),
-        ],
+    await tester.pumpWidget(
+      _wrap(
+        const LiqKitHelpersModeLabels(
+          children: <Widget>[
+            LiqKitHelpersModePill(label: 'Light'),
+            LiqKitHelpersModePill(
+              label: 'Dark',
+              brightness: LiqKitHelpersBrightness.dark,
+            ),
+          ],
+        ),
       ),
-    ));
+    );
     expect(find.text('Light'), findsOneWidget);
     expect(find.text('Dark'), findsOneWidget);
   });

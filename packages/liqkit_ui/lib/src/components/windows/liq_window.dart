@@ -90,42 +90,41 @@ final class LiqWindowToolbar extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
-          if (leading.isNotEmpty)
-            _WindowToolbarGroup(children: leading),
+          if (leading.isNotEmpty) _WindowToolbarGroup(children: leading),
           Expanded(
             child: Center(
-              child: title == null
-                  ? const SizedBox.shrink()
-                  : Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          title!,
-                          style: const TextStyle(
-                            color: _titleColor,
-                            fontFamily: 'SF Pro Text',
-                            fontSize: 15,
-                            height: 18 / 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        if (subtitle != null)
+              child:
+                  title == null
+                      ? const SizedBox.shrink()
+                      : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
                           Text(
-                            subtitle!,
+                            title!,
                             style: const TextStyle(
-                              color: _subtitleColor,
+                              color: _titleColor,
                               fontFamily: 'SF Pro Text',
-                              fontSize: 12,
-                              height: 14 / 12,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              height: 18 / 15,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                      ],
-                    ),
+                          if (subtitle != null)
+                            Text(
+                              subtitle!,
+                              style: const TextStyle(
+                                color: _subtitleColor,
+                                fontFamily: 'SF Pro Text',
+                                fontSize: 12,
+                                height: 14 / 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                        ],
+                      ),
             ),
           ),
-          if (trailing.isNotEmpty)
-            _WindowToolbarGroup(children: trailing),
+          if (trailing.isNotEmpty) _WindowToolbarGroup(children: trailing),
         ],
       ),
     );
@@ -197,9 +196,7 @@ final class LiqWindowGlassButton extends StatelessWidget {
           decoration: const BoxDecoration(
             color: _bg,
             borderRadius: BorderRadius.all(Radius.circular(296)),
-            border: Border.fromBorderSide(
-              BorderSide(color: _innerHighlight),
-            ),
+            border: Border.fromBorderSide(BorderSide(color: _innerHighlight)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -211,11 +208,7 @@ final class LiqWindowGlassButton extends StatelessWidget {
                 height: 22 / 17,
                 fontWeight: FontWeight.w500,
               ),
-              child: Center(
-                widthFactor: 1,
-                heightFactor: 1,
-                child: child,
-              ),
+              child: Center(widthFactor: 1, heightFactor: 1, child: child),
             ),
           ),
         ),
@@ -228,8 +221,9 @@ final class LiqWindowGlassButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DoubleProperty('minWidth', minWidth))
-      ..add(FlagProperty('enabled',
-          value: onPressed != null, ifFalse: 'disabled'));
+      ..add(
+        FlagProperty('enabled', value: onPressed != null, ifFalse: 'disabled'),
+      );
   }
 }
 

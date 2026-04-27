@@ -13,8 +13,9 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('LiqContextMenuPreview renders default placeholder',
-      (tester) async {
+  testWidgets('LiqContextMenuPreview renders default placeholder', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(const LiqContextMenuPreview(size: Size(200, 200))),
     );
@@ -26,9 +27,7 @@ void main() {
       _wrap(
         const LiqContextMenu(
           preview: LiqContextMenuPreview(size: Size(180, 180)),
-          menu: LiqMenu(
-            children: <Widget>[LiqMenuItem(label: 'Action')],
-          ),
+          menu: LiqMenu(children: <Widget>[LiqMenuItem(label: 'Action')]),
         ),
       ),
     );
@@ -41,10 +40,7 @@ void main() {
       _wrap(
         const LiqMenu(
           children: <Widget>[
-            LiqMenuItem(
-              label: 'Schedule Send',
-              subtitle: 'Tomorrow at 9 AM',
-            ),
+            LiqMenuItem(label: 'Schedule Send', subtitle: 'Tomorrow at 9 AM'),
           ],
         ),
       ),

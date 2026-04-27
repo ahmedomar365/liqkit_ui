@@ -15,7 +15,9 @@ Future<void> main(List<String> args) async {
   final body = provenance.readAsStringSync();
   final block = RegExp(r'```\n([\s\S]*?)```').firstMatch(body);
   if (block == null) {
-    stderr.writeln('verify_provenance: PROVENANCE.md has no fenced sha256 block.');
+    stderr.writeln(
+      'verify_provenance: PROVENANCE.md has no fenced sha256 block.',
+    );
     exit(2);
   }
   final expected = <String, String>{};
@@ -80,7 +82,8 @@ Directory _findRepoRoot() {
   var dir = Directory.current;
   while (dir.parent.path != dir.path) {
     final pubspec = File('${dir.path}/pubspec.yaml');
-    if (pubspec.existsSync() && pubspec.readAsStringSync().contains('liqkit_ui_workspace')) {
+    if (pubspec.existsSync() &&
+        pubspec.readAsStringSync().contains('liqkit_ui_workspace')) {
       return dir;
     }
     dir = dir.parent;

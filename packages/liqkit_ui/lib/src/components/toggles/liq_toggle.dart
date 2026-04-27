@@ -10,11 +10,7 @@ import 'package:flutter/widgets.dart';
 ///   - off : background rgba(60,60,67,0.3), label "○" on right
 final class LiqToggle extends StatelessWidget {
   /// Creates a toggle.
-  const LiqToggle({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
+  const LiqToggle({required this.value, required this.onChanged, super.key});
 
   /// Current on/off state.
   final bool value;
@@ -67,9 +63,10 @@ final class LiqToggle extends StatelessWidget {
                 AnimatedAlign(
                   duration: _animDuration,
                   curve: _animCurve,
-                  alignment: effectiveValue
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
+                  alignment:
+                      effectiveValue
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                   child: Container(
                     width: _knobWidth,
                     height: _knobHeight,
@@ -82,27 +79,32 @@ final class LiqToggle extends StatelessWidget {
                 AnimatedAlign(
                   duration: _animDuration,
                   curve: _animCurve,
-                  alignment: effectiveValue
-                      ? const Alignment(-0.78, 0)
-                      : const Alignment(0.78, 0),
-                  child: effectiveValue
-                      ? Container(
-                          width: 2,
-                          height: 10,
-                          decoration: const BoxDecoration(
-                            color: _knob,
-                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                  alignment:
+                      effectiveValue
+                          ? const Alignment(-0.78, 0)
+                          : const Alignment(0.78, 0),
+                  child:
+                      effectiveValue
+                          ? Container(
+                            width: 2,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                              color: _knob,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                            ),
+                          )
+                          : Container(
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: _offRing, width: 1.4),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(50),
+                              ),
+                            ),
                           ),
-                        )
-                      : Container(
-                          width: 10,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: _offRing, width: 1.4),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(50)),
-                          ),
-                        ),
                 ),
               ],
             ),

@@ -4,8 +4,9 @@ import 'package:liqkit_ui/theme.dart';
 
 void main() {
   group('LiqTheme', () {
-    testWidgets('LiqTheme.of returns the data installed by an ancestor',
-        (tester) async {
+    testWidgets('LiqTheme.of returns the data installed by an ancestor', (
+      tester,
+    ) async {
       late LiqThemeData captured;
       await tester.pumpWidget(
         LiqTheme(
@@ -21,8 +22,9 @@ void main() {
       expect(captured, LiqThemeData.dark);
     });
 
-    testWidgets('LiqTheme.maybeOf returns null when no ancestor installed',
-        (tester) async {
+    testWidgets('LiqTheme.maybeOf returns null when no ancestor installed', (
+      tester,
+    ) async {
       LiqThemeData? captured = LiqThemeData.light;
       await tester.pumpWidget(
         Builder(
@@ -35,8 +37,9 @@ void main() {
       expect(captured, isNull);
     });
 
-    testWidgets('LiqTheme.of throws an assertion when no ancestor installed',
-        (tester) async {
+    testWidgets('LiqTheme.of throws an assertion when no ancestor installed', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         Builder(
           builder: (context) {
@@ -50,15 +53,15 @@ void main() {
     testWidgets('updateShouldNotify reports when data changes', (tester) async {
       var builds = 0;
       Widget build(LiqThemeData data) => LiqTheme(
-            data: data,
-            child: Builder(
-              builder: (context) {
-                LiqTheme.of(context);
-                builds += 1;
-                return const SizedBox();
-              },
-            ),
-          );
+        data: data,
+        child: Builder(
+          builder: (context) {
+            LiqTheme.of(context);
+            builds += 1;
+            return const SizedBox();
+          },
+        ),
+      );
 
       await tester.pumpWidget(build(LiqThemeData.light));
       await tester.pumpWidget(build(LiqThemeData.dark));

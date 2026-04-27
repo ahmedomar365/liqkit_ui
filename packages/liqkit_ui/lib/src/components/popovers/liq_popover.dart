@@ -97,12 +97,10 @@ final class LiqPopover extends StatelessWidget {
     );
 
     final tip = SizedBox(
-      width: side == LiqPopoverSide.top || side == LiqPopoverSide.bottom
-          ? 56
-          : 13,
-      height: side == LiqPopoverSide.top || side == LiqPopoverSide.bottom
-          ? 13
-          : 56,
+      width:
+          side == LiqPopoverSide.top || side == LiqPopoverSide.bottom ? 56 : 13,
+      height:
+          side == LiqPopoverSide.top || side == LiqPopoverSide.bottom ? 13 : 56,
       child: CustomPaint(painter: tipPainter),
     );
 
@@ -146,10 +144,7 @@ class _PopoverLayout extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: _crossAxis(),
           children: <Widget>[
-            Padding(
-              padding: _horizontalAlignmentInset(),
-              child: tip,
-            ),
+            Padding(padding: _horizontalAlignmentInset(), child: tip),
             bubble,
           ],
         );
@@ -159,10 +154,7 @@ class _PopoverLayout extends StatelessWidget {
           crossAxisAlignment: _crossAxis(),
           children: <Widget>[
             bubble,
-            Padding(
-              padding: _horizontalAlignmentInset(),
-              child: tip,
-            ),
+            Padding(padding: _horizontalAlignmentInset(), child: tip),
           ],
         );
       case LiqPopoverSide.leading:
@@ -170,10 +162,7 @@ class _PopoverLayout extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: _verticalCrossAxis(),
           children: <Widget>[
-            Padding(
-              padding: _verticalAlignmentInset(),
-              child: tip,
-            ),
+            Padding(padding: _verticalAlignmentInset(), child: tip),
             bubble,
           ],
         );
@@ -183,10 +172,7 @@ class _PopoverLayout extends StatelessWidget {
           crossAxisAlignment: _verticalCrossAxis(),
           children: <Widget>[
             bubble,
-            Padding(
-              padding: _verticalAlignmentInset(),
-              child: tip,
-            ),
+            Padding(padding: _verticalAlignmentInset(), child: tip),
           ],
         );
     }
@@ -244,9 +230,10 @@ class _PopoverTipPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
     final path = Path();
     switch (side) {
       case LiqPopoverSide.top:
@@ -258,8 +245,12 @@ class _PopoverTipPainter extends CustomPainter {
             size.width / 2 - 6,
             size.height * 0.4,
           )
-          ..quadraticBezierTo(size.width / 2, 0, size.width / 2 + 6,
-              size.height * 0.4)
+          ..quadraticBezierTo(
+            size.width / 2,
+            0,
+            size.width / 2 + 6,
+            size.height * 0.4,
+          )
           ..quadraticBezierTo(
             size.width / 2,
             size.height,
@@ -276,8 +267,12 @@ class _PopoverTipPainter extends CustomPainter {
             size.width / 2 - 6,
             size.height * 0.6,
           )
-          ..quadraticBezierTo(size.width / 2, size.height, size.width / 2 + 6,
-              size.height * 0.6)
+          ..quadraticBezierTo(
+            size.width / 2,
+            size.height,
+            size.width / 2 + 6,
+            size.height * 0.6,
+          )
           ..quadraticBezierTo(size.width / 2, 0, size.width, 0)
           ..close();
       case LiqPopoverSide.leading:
@@ -289,10 +284,18 @@ class _PopoverTipPainter extends CustomPainter {
             size.width * 0.4,
             size.height / 2 - 6,
           )
-          ..quadraticBezierTo(0, size.height / 2, size.width * 0.4,
-              size.height / 2 + 6)
-          ..quadraticBezierTo(size.width, size.height / 2, size.width,
-              size.height)
+          ..quadraticBezierTo(
+            0,
+            size.height / 2,
+            size.width * 0.4,
+            size.height / 2 + 6,
+          )
+          ..quadraticBezierTo(
+            size.width,
+            size.height / 2,
+            size.width,
+            size.height,
+          )
           ..close();
       case LiqPopoverSide.trailing:
         path
@@ -303,8 +306,12 @@ class _PopoverTipPainter extends CustomPainter {
             size.width * 0.6,
             size.height / 2 - 6,
           )
-          ..quadraticBezierTo(size.width, size.height / 2, size.width * 0.6,
-              size.height / 2 + 6)
+          ..quadraticBezierTo(
+            size.width,
+            size.height / 2,
+            size.width * 0.6,
+            size.height / 2 + 6,
+          )
           ..quadraticBezierTo(0, size.height / 2, 0, size.height)
           ..close();
     }

@@ -28,8 +28,8 @@ final class LiqPageControl extends StatelessWidget {
     this.brightness = LiqPageControlBrightness.light,
     this.maxVisible = 7,
     super.key,
-  })  : assert(count >= 0, 'count must be non-negative'),
-        assert(maxVisible >= 3, 'maxVisible must be at least 3');
+  }) : assert(count >= 0, 'count must be non-negative'),
+       assert(maxVisible >= 3, 'maxVisible must be at least 3');
 
   /// Total number of pages.
   final int count;

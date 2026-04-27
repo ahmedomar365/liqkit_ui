@@ -21,8 +21,9 @@ void main() {
       expect(find.text('hi'), findsOneWidget);
     });
 
-    testWidgets('respects LiqQuality.minimal by skipping the BackdropFilter',
-        (tester) async {
+    testWidgets('respects LiqQuality.minimal by skipping the BackdropFilter', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         LiqTheme(
           data: LiqThemeData.light.copyWith(quality: LiqQuality.minimal),

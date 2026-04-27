@@ -72,48 +72,50 @@ final class LiqSheet extends StatelessWidget {
       trailing: trailing ?? const _LiqSheetConfirmButton(),
     );
     final isInspector = variant == LiqSheetVariant.inspector;
-    final radius = isInspector
-        ? const BorderRadius.all(Radius.circular(_inspectorRadius))
-        : const BorderRadius.only(
-            topLeft: Radius.circular(_sheetTopRadius),
-            topRight: Radius.circular(_sheetTopRadius),
-          );
+    final radius =
+        isInspector
+            ? const BorderRadius.all(Radius.circular(_inspectorRadius))
+            : const BorderRadius.only(
+              topLeft: Radius.circular(_sheetTopRadius),
+              topRight: Radius.circular(_sheetTopRadius),
+            );
 
     return SizedBox(
       width: 402,
       height: height,
-      child: variant == LiqSheetVariant.stacked
-          ? Stack(
-              children: <Widget>[
-                const Positioned(
-                  left: 16,
-                  right: 16,
-                  top: 0,
-                  bottom: 0,
-                  child: _BackgroundPage(),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 10,
-                  bottom: 0,
-                  child: _SheetSurface(
-                    radius: radius,
-                    background: _white,
-                    rim: null,
-                    body: child,
-                    child: controls,
+      child:
+          variant == LiqSheetVariant.stacked
+              ? Stack(
+                children: <Widget>[
+                  const Positioned(
+                    left: 16,
+                    right: 16,
+                    top: 0,
+                    bottom: 0,
+                    child: _BackgroundPage(),
                   ),
-                ),
-              ],
-            )
-          : _SheetSurface(
-              radius: radius,
-              background: isInspector ? _glass60 : _white,
-              rim: isInspector ? _rim35 : null,
-              body: child,
-              child: controls,
-            ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 10,
+                    bottom: 0,
+                    child: _SheetSurface(
+                      radius: radius,
+                      background: _white,
+                      rim: null,
+                      body: child,
+                      child: controls,
+                    ),
+                  ),
+                ],
+              )
+              : _SheetSurface(
+                radius: radius,
+                background: isInspector ? _glass60 : _white,
+                rim: isInspector ? _rim35 : null,
+                body: child,
+                child: controls,
+              ),
     );
   }
 
@@ -148,9 +150,8 @@ class _SheetSurface extends StatelessWidget {
       decoration: BoxDecoration(
         color: background,
         borderRadius: radius,
-        border: rim == null
-            ? null
-            : Border.fromBorderSide(BorderSide(color: rim!)),
+        border:
+            rim == null ? null : Border.fromBorderSide(BorderSide(color: rim!)),
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: LiqSheet._shadow18,
@@ -163,10 +164,7 @@ class _SheetSurface extends StatelessWidget {
         borderRadius: radius,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            child,
-            if (body != null) Expanded(child: body!),
-          ],
+          children: <Widget>[child, if (body != null) Expanded(child: body!)],
         ),
       ),
     );
@@ -191,9 +189,7 @@ class _BackgroundPage extends StatelessWidget {
             ),
           ),
         ),
-        Positioned.fill(
-          child: ColoredBox(color: LiqSheet._scrim10),
-        ),
+        Positioned.fill(child: ColoredBox(color: LiqSheet._scrim10)),
       ],
     );
   }
@@ -362,24 +358,27 @@ final class LiqSheetTopButton extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: isPrimary
-                    ? const <Color>[_primaryTop, _primaryBottom]
-                    : const <Color>[_standardTop, _standardBottom],
+                colors:
+                    isPrimary
+                        ? const <Color>[_primaryTop, _primaryBottom]
+                        : const <Color>[_standardTop, _standardBottom],
               ),
-              border: isPrimary
-                  ? null
-                  : const Border.fromBorderSide(
-                      BorderSide(color: _standardRim),
-                    ),
-              boxShadow: isPrimary
-                  ? const <BoxShadow>[
-                      BoxShadow(
-                        color: _primaryShadow,
-                        offset: Offset(0, 1),
-                        blurRadius: 8,
+              border:
+                  isPrimary
+                      ? null
+                      : const Border.fromBorderSide(
+                        BorderSide(color: _standardRim),
                       ),
-                    ]
-                  : null,
+              boxShadow:
+                  isPrimary
+                      ? const <BoxShadow>[
+                        BoxShadow(
+                          color: _primaryShadow,
+                          offset: Offset(0, 1),
+                          blurRadius: 8,
+                        ),
+                      ]
+                      : null,
             ),
             alignment: Alignment.center,
             child: SizedBox(width: 18, height: 18, child: Center(child: glyph)),
@@ -395,12 +394,14 @@ final class LiqSheetTopButton extends StatelessWidget {
     properties
       ..add(EnumProperty<LiqSheetTopButtonStyle>('style', style))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty(
-        'enabled',
-        value: onPressed != null,
-        ifTrue: 'enabled',
-        ifFalse: 'disabled',
-      ));
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: onPressed != null,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
@@ -439,8 +440,7 @@ class _SheetCloseGlyph extends StatelessWidget {
       child: CustomPaint(
         painter: _GlyphPainter(
           _GlyphKind.close,
-          DefaultTextStyle.of(context).style.color ??
-              const Color(0xFF727272),
+          DefaultTextStyle.of(context).style.color ?? const Color(0xFF727272),
         ),
       ),
     );
@@ -457,8 +457,7 @@ class _SheetCheckGlyph extends StatelessWidget {
       child: CustomPaint(
         painter: _GlyphPainter(
           _GlyphKind.check,
-          DefaultTextStyle.of(context).style.color ??
-              const Color(0xFFFFFFFF),
+          DefaultTextStyle.of(context).style.color ?? const Color(0xFFFFFFFF),
         ),
       ),
     );
@@ -474,22 +473,24 @@ class _GlyphPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 1.9
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..style = PaintingStyle.stroke;
+    final paint =
+        Paint()
+          ..color = color
+          ..strokeWidth = 1.9
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..style = PaintingStyle.stroke;
     final s = size.width / 20;
     if (kind == _GlyphKind.close) {
       canvas
         ..drawLine(Offset(6 * s, 6 * s), Offset(14 * s, 14 * s), paint)
         ..drawLine(Offset(14 * s, 6 * s), Offset(6 * s, 14 * s), paint);
     } else {
-      final path = Path()
-        ..moveTo(5 * s, 10.2 * s)
-        ..lineTo(8.7 * s, 13.6 * s)
-        ..lineTo(15 * s, 7.4 * s);
+      final path =
+          Path()
+            ..moveTo(5 * s, 10.2 * s)
+            ..lineTo(8.7 * s, 13.6 * s)
+            ..lineTo(15 * s, 7.4 * s);
       canvas.drawPath(path, paint);
     }
   }

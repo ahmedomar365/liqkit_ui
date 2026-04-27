@@ -25,9 +25,9 @@ final class LiqColor with Diagnosticable {
   /// Linearly interpolates between two pairs at [t].
   // ignore: prefer_constructors_over_static_methods
   static LiqColor lerp(LiqColor a, LiqColor b, double t) => LiqColor(
-        light: Color.lerp(a.light, b.light, t) ?? a.light,
-        dark: Color.lerp(a.dark, b.dark, t) ?? a.dark,
-      );
+    light: Color.lerp(a.light, b.light, t) ?? a.light,
+    dark: Color.lerp(a.dark, b.dark, t) ?? a.dark,
+  );
 
   @override
   bool operator ==(Object other) =>

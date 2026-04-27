@@ -99,24 +99,29 @@ class _Suggestions extends StatelessWidget {
     final cells = <Widget>[];
     for (var i = 0; i < 3; i++) {
       final label = i < suggestions.length ? suggestions[i] : '';
-      cells.add(Expanded(
-        child: Padding(
-          padding: EdgeInsets.only(left: i == 0 ? 0 : 4, right: i == 2 ? 0 : 4),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            softWrap: false,
-            style: const TextStyle(
-              color: LiqKeyboard._suggestionText,
-              fontSize: 17,
-              height: 22 / 17,
-              letterSpacing: -0.43,
-              fontWeight: FontWeight.w400,
+      cells.add(
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: i == 0 ? 0 : 4,
+              right: i == 2 ? 0 : 4,
+            ),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              style: const TextStyle(
+                color: LiqKeyboard._suggestionText,
+                fontSize: 17,
+                height: 22 / 17,
+                letterSpacing: -0.43,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ),
-      ));
+      );
     }
     return Container(
       constraints: const BoxConstraints(minHeight: 27),
@@ -170,10 +175,7 @@ class _KeyPill extends StatelessWidget {
             BorderSide(color: LiqKeyboard._keyBorder),
           ),
           boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: LiqKeyboard._keyShadow,
-              offset: Offset(0, 1),
-            ),
+            BoxShadow(color: LiqKeyboard._keyShadow, offset: Offset(0, 1)),
           ],
         ),
         child: Center(
@@ -241,10 +243,7 @@ class _Toolbar extends StatelessWidget {
           SizedBox(
             width: 40,
             height: 24,
-            child: CustomPaint(
-              painter: _MicGlyphPainter(),
-              size: Size(24, 24),
-            ),
+            child: CustomPaint(painter: _MicGlyphPainter(), size: Size(24, 24)),
           ),
         ],
       ),
@@ -262,20 +261,26 @@ class _EmojiGlyphPainter extends CustomPainter {
     final dy = (size.height - s) / 2;
     final c = Offset(dx + s / 2, dy + s / 2);
     final r = s / 2 - 1;
-    final stroke = Paint()
-      ..color = LiqKeyboard._glyph
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.4;
+    final stroke =
+        Paint()
+          ..color = LiqKeyboard._glyph
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.4;
     final fill = Paint()..color = LiqKeyboard._glyph;
     final eyeDy = c.dy - s * 0.12;
     canvas
       ..drawCircle(c, r, stroke)
       ..drawCircle(Offset(c.dx - s * 0.18, eyeDy), s * 0.05, fill)
       ..drawCircle(Offset(c.dx + s * 0.18, eyeDy), s * 0.05, fill);
-    final mouth = Path()
-      ..moveTo(c.dx - s * 0.22, c.dy + s * 0.05)
-      ..quadraticBezierTo(
-          c.dx, c.dy + s * 0.28, c.dx + s * 0.22, c.dy + s * 0.05);
+    final mouth =
+        Path()
+          ..moveTo(c.dx - s * 0.22, c.dy + s * 0.05)
+          ..quadraticBezierTo(
+            c.dx,
+            c.dy + s * 0.28,
+            c.dx + s * 0.22,
+            c.dy + s * 0.05,
+          );
     canvas.drawPath(mouth, stroke);
   }
 
@@ -290,22 +295,25 @@ class _MicGlyphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final cx = size.width / 2;
     final cy = size.height / 2;
-    final stroke = Paint()
-      ..color = LiqKeyboard._glyph
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.6
-      ..strokeCap = StrokeCap.round;
+    final stroke =
+        Paint()
+          ..color = LiqKeyboard._glyph
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.6
+          ..strokeCap = StrokeCap.round;
     final fill = Paint()..color = LiqKeyboard._glyph;
     final capsule = RRect.fromRectAndRadius(
       Rect.fromCenter(center: Offset(cx, cy - 3), width: 8, height: 13),
       const Radius.circular(4),
     );
     final arc = Rect.fromCenter(
-        center: Offset(cx, cy + 1), width: 14, height: 14);
+      center: Offset(cx, cy + 1),
+      width: 14,
+      height: 14,
+    );
     canvas
       ..drawRRect(capsule, fill)
-      ..drawArc(
-          arc, math.pi * 0.12, math.pi - math.pi * 0.24, false, stroke)
+      ..drawArc(arc, math.pi * 0.12, math.pi - math.pi * 0.24, false, stroke)
       ..drawLine(Offset(cx, cy + 7), Offset(cx, cy + 10), stroke)
       ..drawLine(Offset(cx - 3, cy + 10), Offset(cx + 3, cy + 10), stroke);
   }

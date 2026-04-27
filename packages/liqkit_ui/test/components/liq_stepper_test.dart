@@ -8,18 +8,19 @@ void main() {
       var v = 5;
       await tester.pumpWidget(
         StatefulBuilder(
-          builder: (context, setState) => LiqTheme(
-            data: LiqThemeData.light,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Center(
-                child: LiqStepper(
-                  value: v,
-                  onChanged: (int next) => setState(() => v = next),
+          builder:
+              (context, setState) => LiqTheme(
+                data: LiqThemeData.light,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Center(
+                    child: LiqStepper(
+                      value: v,
+                      onChanged: (int next) => setState(() => v = next),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
         ),
       );
       await tester.tap(find.text('+'));
@@ -36,19 +37,20 @@ void main() {
       var v = 0;
       await tester.pumpWidget(
         StatefulBuilder(
-          builder: (context, setState) => LiqTheme(
-            data: LiqThemeData.light,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Center(
-                child: LiqStepper(
-                  value: v,
-                  max: 1,
-                  onChanged: (int next) => setState(() => v = next),
+          builder:
+              (context, setState) => LiqTheme(
+                data: LiqThemeData.light,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Center(
+                    child: LiqStepper(
+                      value: v,
+                      max: 1,
+                      onChanged: (int next) => setState(() => v = next),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
         ),
       );
       // Tap minus at value=0 — should NOT decrement past min.
@@ -71,9 +73,7 @@ void main() {
           data: LiqThemeData.light,
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: Center(
-              child: LiqStepper(value: 5, onChanged: (int _) {}),
-            ),
+            child: Center(child: LiqStepper(value: 5, onChanged: (int _) {})),
           ),
         ),
       );

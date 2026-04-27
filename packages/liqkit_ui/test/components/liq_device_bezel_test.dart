@@ -14,9 +14,7 @@ Widget _wrap(Widget child) {
 
 void main() {
   testWidgets('LiqDeviceBezel renders with default island', (tester) async {
-    await tester.pumpWidget(
-      _wrap(const LiqDeviceBezel(size: Size(220, 480))),
-    );
+    await tester.pumpWidget(_wrap(const LiqDeviceBezel(size: Size(220, 480))));
     expect(find.byType(LiqDeviceBezel), findsOneWidget);
   });
 
@@ -26,9 +24,7 @@ void main() {
         const LiqDeviceBezel(
           size: Size(220, 480),
           showIsland: false,
-          child: Center(
-            child: Text('Hello', textDirection: TextDirection.ltr),
-          ),
+          child: Center(child: Text('Hello', textDirection: TextDirection.ltr)),
         ),
       ),
     );

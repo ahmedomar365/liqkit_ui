@@ -111,10 +111,7 @@ final class LiqWidgetCard extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         style: const TextStyle(
                           fontFamily: 'SF Pro Text',
-                          fontFamilyFallback: <String>[
-                            'SF Pro',
-                            'sans-serif',
-                          ],
+                          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
                           fontSize: 11,
                           height: 14 / 11,
                           fontWeight: FontWeight.w600,
@@ -152,17 +149,16 @@ class _HighlightPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width * 0.22, size.height * 0.20);
     final radius = size.width * 0.6;
-    final paint = Paint()
-      ..shader = const RadialGradient(
-        colors: <Color>[
-          Color(0xE0FFFFFF),
-          Color(0x1FFFFFFF),
-          Color(0x00FFFFFF),
-        ],
-        stops: <double>[0, 0.5, 0.6],
-      ).createShader(
-        Rect.fromCircle(center: center, radius: radius),
-      );
+    final paint =
+        Paint()
+          ..shader = const RadialGradient(
+            colors: <Color>[
+              Color(0xE0FFFFFF),
+              Color(0x1FFFFFFF),
+              Color(0x00FFFFFF),
+            ],
+            stops: <double>[0, 0.5, 0.6],
+          ).createShader(Rect.fromCircle(center: center, radius: radius));
     canvas.drawRect(Offset.zero & size, paint);
   }
 

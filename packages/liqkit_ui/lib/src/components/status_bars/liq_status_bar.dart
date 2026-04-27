@@ -105,10 +105,9 @@ class _CellularPainter extends CustomPainter {
     final w = (size.width - gap * (count - 1)) / count;
     for (var i = 0; i < count; i++) {
       final filled = i < bars;
-      final paint = Paint()
-        ..color = filled
-            ? color
-            : color.withValues(alpha: color.a * 0.3);
+      final paint =
+          Paint()
+            ..color = filled ? color : color.withValues(alpha: color.a * 0.3);
       final h = (i + 1) * (size.height / count);
       final rect = RRect.fromRectAndRadius(
         Rect.fromLTWH(i * (w + gap), size.height - h, w, h),
@@ -143,11 +142,12 @@ class _WifiPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.4
-      ..strokeCap = StrokeCap.round;
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.4
+          ..strokeCap = StrokeCap.round;
     final cx = size.width / 2;
     final cy = size.height * 0.95;
     for (var i = 0; i < 3; i++) {
@@ -160,11 +160,7 @@ class _WifiPainter extends CustomPainter {
         paint,
       );
     }
-    canvas.drawCircle(
-      Offset(cx, cy),
-      0.9,
-      Paint()..color = color,
-    );
+    canvas.drawCircle(Offset(cx, cy), 0.9, Paint()..color = color);
   }
 
   @override
@@ -194,14 +190,14 @@ class _BatteryPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = Paint()
-      ..color = color.withValues(alpha: color.a * 0.5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
+    final stroke =
+        Paint()
+          ..color = color.withValues(alpha: color.a * 0.5)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.0;
     final fill = Paint()..color = color;
     final body = Rect.fromLTWH(0, 0, size.width - 2, size.height);
-    final rrect =
-        RRect.fromRectAndRadius(body, const Radius.circular(2.5));
+    final rrect = RRect.fromRectAndRadius(body, const Radius.circular(2.5));
     canvas.drawRRect(rrect, stroke);
     final innerW = (body.width - 4) * level.clamp(0.0, 1.0);
     final inner = RRect.fromRectAndRadius(
@@ -209,8 +205,12 @@ class _BatteryPainter extends CustomPainter {
       const Radius.circular(1.5),
     );
     canvas.drawRRect(inner, fill);
-    final cap = Rect.fromLTWH(size.width - 1.6, size.height * 0.32,
-        1.6, size.height * 0.36);
+    final cap = Rect.fromLTWH(
+      size.width - 1.6,
+      size.height * 0.32,
+      1.6,
+      size.height * 0.36,
+    );
     canvas.drawRRect(
       RRect.fromRectAndRadius(cap, const Radius.circular(0.8)),
       fill,

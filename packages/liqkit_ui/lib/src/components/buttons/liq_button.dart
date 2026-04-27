@@ -86,35 +86,35 @@ final class LiqButton extends StatelessWidget {
   static const Color _white = Color(0xFFFFFFFF);
 
   static double _height(LiqButtonSize size) => switch (size) {
-        LiqButtonSize.small => 28,
-        LiqButtonSize.medium => 34,
-        LiqButtonSize.large => 50,
-      };
+    LiqButtonSize.small => 28,
+    LiqButtonSize.medium => 34,
+    LiqButtonSize.large => 50,
+  };
 
   static EdgeInsets _padding(LiqButtonSize size) => switch (size) {
-        LiqButtonSize.small => const EdgeInsets.symmetric(horizontal: 12),
-        LiqButtonSize.medium => const EdgeInsets.symmetric(horizontal: 14),
-        LiqButtonSize.large => const EdgeInsets.symmetric(horizontal: 18),
-      };
+    LiqButtonSize.small => const EdgeInsets.symmetric(horizontal: 12),
+    LiqButtonSize.medium => const EdgeInsets.symmetric(horizontal: 14),
+    LiqButtonSize.large => const EdgeInsets.symmetric(horizontal: 18),
+  };
 
   static TextStyle _textStyle(LiqButtonSize size) => switch (size) {
-        LiqButtonSize.small || LiqButtonSize.medium => const TextStyle(
-            fontFamily: 'SF Pro Text',
-            fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-            fontSize: 15,
-            height: 20 / 15,
-            letterSpacing: -0.24,
-            fontWeight: FontWeight.w400,
-          ),
-        LiqButtonSize.large => const TextStyle(
-            fontFamily: 'SF Pro Text',
-            fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-            fontSize: 17,
-            height: 22 / 17,
-            letterSpacing: -0.43,
-            fontWeight: FontWeight.w400,
-          ),
-      };
+    LiqButtonSize.small || LiqButtonSize.medium => const TextStyle(
+      fontFamily: 'SF Pro Text',
+      fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+      fontSize: 15,
+      height: 20 / 15,
+      letterSpacing: -0.24,
+      fontWeight: FontWeight.w400,
+    ),
+    LiqButtonSize.large => const TextStyle(
+      fontFamily: 'SF Pro Text',
+      fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+      fontSize: 17,
+      height: 22 / 17,
+      letterSpacing: -0.43,
+      fontWeight: FontWeight.w400,
+    ),
+  };
 
   /// Resolved fill and label color for this style/state combo.
   ({Color fill, Color label, BoxDecoration? decoration}) _resolve() {
@@ -137,8 +137,7 @@ final class LiqButton extends StatelessWidget {
         if (disabled) {
           return (
             fill: destructive ? _destructiveBg : _fillSecondary,
-            label:
-                destructive ? _destructiveDisabled : _labelTertiary,
+            label: destructive ? _destructiveDisabled : _labelTertiary,
             decoration: null,
           );
         }
@@ -151,8 +150,7 @@ final class LiqButton extends StatelessWidget {
         if (disabled) {
           return (
             fill: destructive ? _destructiveBg : _fillTertiary,
-            label:
-                destructive ? _destructiveDisabled : _labelTertiary,
+            label: destructive ? _destructiveDisabled : _labelTertiary,
             decoration: null,
           );
         }
@@ -164,17 +162,19 @@ final class LiqButton extends StatelessWidget {
       case LiqButtonStyle.borderless:
         return (
           fill: const Color(0x00000000),
-          label: disabled
-              ? _labelTertiary
-              : (destructive ? _accentRed : _accentBlue),
+          label:
+              disabled
+                  ? _labelTertiary
+                  : (destructive ? _accentRed : _accentBlue),
           decoration: null,
         );
       case LiqButtonStyle.liquid:
         return (
           fill: const Color(0x00000000),
-          label: disabled
-              ? _labelTertiary
-              : (destructive ? _accentRed : _labelPrimary),
+          label:
+              disabled
+                  ? _labelTertiary
+                  : (destructive ? _accentRed : _labelPrimary),
           // The "liquid" variant layers a vertical white gradient over a
           // translucent gray fill plus an inner-highlight 1px border —
           // matches `linear-gradient(180deg, rgba(255,255,255,0.58),
@@ -186,10 +186,7 @@ final class LiqButton extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color(0x94FFFFFF),
-                Color(0x1FFFFFFF),
-              ],
+              colors: <Color>[Color(0x94FFFFFF), Color(0x1FFFFFFF)],
             ),
             border: Border.all(color: _liquidHighlight),
           ),
@@ -201,7 +198,8 @@ final class LiqButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final resolved = _resolve();
     final textStyle = _textStyle(size).copyWith(color: resolved.label);
-    final decoration = resolved.decoration ??
+    final decoration =
+        resolved.decoration ??
         BoxDecoration(
           color: resolved.fill,
           borderRadius: const BorderRadius.all(Radius.circular(999)),
@@ -246,11 +244,7 @@ final class LiqButton extends StatelessWidget {
       ..add(EnumProperty<LiqButtonStyle>('style', style))
       ..add(EnumProperty<LiqButtonSize>('size', size))
       ..add(
-        FlagProperty(
-          'destructive',
-          value: destructive,
-          ifTrue: 'destructive',
-        ),
+        FlagProperty('destructive', value: destructive, ifTrue: 'destructive'),
       )
       ..add(
         FlagProperty(

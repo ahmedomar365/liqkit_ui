@@ -12,19 +12,13 @@ void main() {
             textDirection: TextDirection.ltr,
             child: Align(
               alignment: Alignment.topCenter,
-              child: SizedBox(
-                width: 360,
-                child: LiqTopBar(title: 'Settings'),
-              ),
+              child: SizedBox(width: 360, child: LiqTopBar(title: 'Settings')),
             ),
           ),
         ),
       );
       expect(find.text('Settings'), findsOneWidget);
-      expect(
-        tester.getSize(find.byType(LiqTopBar)).height,
-        44,
-      );
+      expect(tester.getSize(find.byType(LiqTopBar)).height, 44);
     });
 
     testWidgets('large title adds a second row', (tester) async {
@@ -44,10 +38,7 @@ void main() {
         ),
       );
       expect(find.text('Inbox'), findsNWidgets(2));
-      expect(
-        tester.getSize(find.byType(LiqTopBar)).height,
-        greaterThan(44),
-      );
+      expect(tester.getSize(find.byType(LiqTopBar)).height, greaterThan(44));
     });
 
     testWidgets('symbol button taps fire', (tester) async {

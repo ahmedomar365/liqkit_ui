@@ -13,8 +13,9 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('LiqSidebar renders rows + section headers + search',
-      (tester) async {
+  testWidgets('LiqSidebar renders rows + section headers + search', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(
         const LiqSidebar(

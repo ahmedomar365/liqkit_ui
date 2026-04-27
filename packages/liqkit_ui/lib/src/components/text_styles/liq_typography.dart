@@ -124,13 +124,8 @@ double liqDynamicTypeMultiplier(LiqDynamicTypeScale scale) {
   }
 }
 
-({
-  double size,
-  double line,
-  double track,
-  String family,
-  FontWeight weight,
-}) _baseFor(LiqTypeRole role) {
+({double size, double line, double track, String family, FontWeight weight})
+_baseFor(LiqTypeRole role) {
   const display = 'SF Pro Display';
   const text = 'SF Pro Text';
   switch (role) {
@@ -319,9 +314,7 @@ final class LiqTypeColumn extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8),
             child: DecoratedBox(
               decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: _hairline),
-                ),
+                border: Border(bottom: BorderSide(color: _hairline)),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8),
@@ -346,7 +339,10 @@ final class LiqTypeColumn extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: liqResolveTextStyle(
-                    role: role, scale: scale, tone: tone),
+                  role: role,
+                  scale: scale,
+                  tone: tone,
+                ),
               ),
             ),
           ],

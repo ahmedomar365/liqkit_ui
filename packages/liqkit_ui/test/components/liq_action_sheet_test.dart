@@ -13,8 +13,9 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('LiqActionSheet renders title, actions, and cancel',
-      (tester) async {
+  testWidgets('LiqActionSheet renders title, actions, and cancel', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(
         const LiqActionSheet(
@@ -33,8 +34,9 @@ void main() {
     expect(find.text('Cancel'), findsOneWidget);
   });
 
-  testWidgets('LiqActionSheet without header renders only actions',
-      (tester) async {
+  testWidgets('LiqActionSheet without header renders only actions', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _wrap(
         const LiqActionSheet(

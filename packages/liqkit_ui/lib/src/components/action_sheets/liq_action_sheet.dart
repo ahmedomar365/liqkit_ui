@@ -50,16 +50,13 @@ final class LiqActionSheet extends StatelessWidget {
         SizedBox(
           width: _surfaceWidth,
           child: ClipRRect(
-            borderRadius:
-                const BorderRadius.all(Radius.circular(_surfaceRadius)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(_surfaceRadius),
+            ),
             child: Stack(
               children: <Widget>[
-                const Positioned.fill(
-                  child: ColoredBox(color: _innerScrim),
-                ),
-                const Positioned.fill(
-                  child: ColoredBox(color: _surfaceFill),
-                ),
+                const Positioned.fill(child: ColoredBox(color: _innerScrim)),
+                const Positioned.fill(child: ColoredBox(color: _surfaceFill)),
                 Padding(
                   padding: const EdgeInsets.all(14),
                   child: Column(
@@ -133,8 +130,9 @@ final class LiqActionSheet extends StatelessWidget {
           SizedBox(
             width: _surfaceWidth,
             child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(_surfaceRadius)),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(_surfaceRadius),
+              ),
               child: ColoredBox(
                 color: _cancelBg,
                 child: Padding(
@@ -160,11 +158,13 @@ final class LiqActionSheet extends StatelessWidget {
       ..add(StringProperty('title', title))
       ..add(StringProperty('description', description))
       ..add(IntProperty('actionCount', actions.length))
-      ..add(FlagProperty(
-        'hasCancel',
-        value: cancelAction != null,
-        ifTrue: 'with cancel',
-      ));
+      ..add(
+        FlagProperty(
+          'hasCancel',
+          value: cancelAction != null,
+          ifTrue: 'with cancel',
+        ),
+      );
   }
 }
 
@@ -190,10 +190,9 @@ class _ActionButton extends StatelessWidget {
     final isFilled = action.style == LiqAlertActionStyle.filled;
     final isDestructive = action.style == LiqAlertActionStyle.destructive;
     final disabled = action.onPressed == null;
-    final fg = fgOverride ??
-        (isFilled
-            ? _filledFg
-            : (isDestructive ? _destructiveFg : _regularFg));
+    final fg =
+        fgOverride ??
+        (isFilled ? _filledFg : (isDestructive ? _destructiveFg : _regularFg));
     final bg = isFilled ? _filledBg : _bg;
     return Semantics(
       button: true,

@@ -48,10 +48,7 @@ final class LiqColorPickerButton extends StatelessWidget {
               Container(
                 width: inner,
                 height: inner,
-                decoration: BoxDecoration(
-                  color: color,
-                  shape: BoxShape.circle,
-                ),
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
               ),
             ],
           ),
@@ -82,27 +79,24 @@ class _ColorWheelPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final paint = Paint()
-      ..shader = const SweepGradient(
-        startAngle: 1.5708,
-        endAngle: 1.5708 + 6.2832,
-        colors: <Color>[
-          Color(0xFFE7E040),
-          Color(0xFFEEAA3C),
-          Color(0xFFE8403B),
-          Color(0xFFB33ED5),
-          Color(0xFF694AE8),
-          Color(0xFF3CCAE7),
-          Color(0xFF3CE885),
-          Color(0xFF89E743),
-          Color(0xFFE7E040),
-        ],
-      ).createShader(rect);
-    canvas.drawCircle(
-      rect.center,
-      size.width / 2,
-      paint,
-    );
+    final paint =
+        Paint()
+          ..shader = const SweepGradient(
+            startAngle: 1.5708,
+            endAngle: 1.5708 + 6.2832,
+            colors: <Color>[
+              Color(0xFFE7E040),
+              Color(0xFFEEAA3C),
+              Color(0xFFE8403B),
+              Color(0xFFB33ED5),
+              Color(0xFF694AE8),
+              Color(0xFF3CCAE7),
+              Color(0xFF3CE885),
+              Color(0xFF89E743),
+              Color(0xFFE7E040),
+            ],
+          ).createShader(rect);
+    canvas.drawCircle(rect.center, size.width / 2, paint);
   }
 
   @override
@@ -139,22 +133,22 @@ final class LiqColorDot extends StatelessWidget {
         child: Container(
           width: 30,
           height: 30,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           alignment: Alignment.center,
-          child: selected
-              ? Container(
-                  width: 22,
-                  height: 22,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border:
-                        Border.all(color: const Color(0xFFFFFFFF), width: 2),
-                  ),
-                )
-              : null,
+          child:
+              selected
+                  ? Container(
+                    width: 22,
+                    height: 22,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFFFFFFFF),
+                        width: 2,
+                      ),
+                    ),
+                  )
+                  : null,
         ),
       ),
     );
@@ -219,9 +213,10 @@ final class LiqColorGrid extends StatelessWidget {
                           height: swatchHeight,
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: onSelected == null
-                                ? null
-                                : () => onSelected!(r * columns + c),
+                            onTap:
+                                onSelected == null
+                                    ? null
+                                    : () => onSelected!(r * columns + c),
                             child: Stack(
                               children: <Widget>[
                                 Positioned.fill(

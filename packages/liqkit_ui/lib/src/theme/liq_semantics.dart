@@ -19,12 +19,11 @@ final class LiqSemantics with Diagnosticable {
   LiqSemantics copyWith({
     bool? respectReduceMotion,
     bool? respectAccessibleNavigation,
-  }) =>
-      LiqSemantics(
-        respectReduceMotion: respectReduceMotion ?? this.respectReduceMotion,
-        respectAccessibleNavigation:
-            respectAccessibleNavigation ?? this.respectAccessibleNavigation,
-      );
+  }) => LiqSemantics(
+    respectReduceMotion: respectReduceMotion ?? this.respectReduceMotion,
+    respectAccessibleNavigation:
+        respectAccessibleNavigation ?? this.respectAccessibleNavigation,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -34,10 +33,8 @@ final class LiqSemantics with Diagnosticable {
           other.respectAccessibleNavigation == respectAccessibleNavigation;
 
   @override
-  int get hashCode => Object.hash(
-        respectReduceMotion,
-        respectAccessibleNavigation,
-      );
+  int get hashCode =>
+      Object.hash(respectReduceMotion, respectAccessibleNavigation);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

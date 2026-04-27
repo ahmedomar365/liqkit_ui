@@ -116,14 +116,12 @@ Widget _buildFaceIdCatalog(BuildContext context) => const _FaceIdRoute();
 
 Widget _buildBezelsCatalog(BuildContext context) => const _BezelsRoute();
 
-Widget _buildKeyboardsCatalog(BuildContext context) =>
-    const _KeyboardsRoute();
+Widget _buildKeyboardsCatalog(BuildContext context) => const _KeyboardsRoute();
 
 Widget _buildKitHelpersCatalog(BuildContext context) =>
     const _KitHelpersRoute();
 
-Widget _buildMaterialsCatalog(BuildContext context) =>
-    const _MaterialsRoute();
+Widget _buildMaterialsCatalog(BuildContext context) => const _MaterialsRoute();
 
 Widget _buildExamplesCatalog(BuildContext context) => const _ExamplesRoute();
 
@@ -136,11 +134,8 @@ Widget _buildTextStylesCatalog(BuildContext context) =>
 
 Widget _buildHome(BuildContext context) => const _HomeRoute();
 
-const List<({String path, String label, String description})> _homeIndex = <({
-  String path,
-  String label,
-  String description,
-})>[
+const List<({String path, String label, String description})>
+_homeIndex = <({String path, String label, String description})>[
   (
     path: '/action-sheets/catalog',
     label: 'Action Sheets',
@@ -354,9 +349,9 @@ class _HomeRoute extends StatelessWidget {
                 Text(
                   'liqkit_ui showcase',
                   style: theme.titleText.toTextStyle().copyWith(
-                        color: titleColor,
-                        fontSize: 28,
-                      ),
+                    color: titleColor,
+                    fontSize: 28,
+                  ),
                   textDirection: TextDirection.ltr,
                 ),
                 const SizedBox(height: 6),
@@ -378,7 +373,8 @@ class _HomeRoute extends StatelessWidget {
                         title: entry.label,
                         subtitle: entry.description,
                         showChevron: true,
-                        onTap: () => Navigator.of(context).pushNamed(entry.path),
+                        onTap:
+                            () => Navigator.of(context).pushNamed(entry.path),
                       ),
                   ],
                 ),
@@ -456,8 +452,7 @@ class _ButtonsBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        for (final style in LiqButtonStyle.values)
-          _StyleSection(style: style),
+        for (final style in LiqButtonStyle.values) _StyleSection(style: style),
       ],
     );
   }
@@ -530,10 +525,10 @@ class _StyleSection extends StatelessWidget {
   static void _noop() {}
 
   String _label(LiqButtonSize size) => switch (size) {
-        LiqButtonSize.small => 'Small',
-        LiqButtonSize.medium => 'Medium',
-        LiqButtonSize.large => 'Large',
-      };
+    LiqButtonSize.small => 'Small',
+    LiqButtonSize.medium => 'Medium',
+    LiqButtonSize.large => 'Large',
+  };
 }
 
 class _TogglesRoute extends StatefulWidget {
@@ -636,9 +631,10 @@ class _Cell extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'SF Pro Text',
               fontSize: 13,
-              color: labelLight
-                  ? const Color(0xFF666A72)
-                  : const Color(0xFFE5E7EB),
+              color:
+                  labelLight
+                      ? const Color(0xFF666A72)
+                      : const Color(0xFFE5E7EB),
             ),
             textDirection: TextDirection.ltr,
           ),
@@ -796,9 +792,10 @@ class _SliderRow extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'SF Pro Text',
                 fontSize: 13,
-                color: labelLight
-                    ? const Color(0xFF666A72)
-                    : const Color(0xFFE5E7EB),
+                color:
+                    labelLight
+                        ? const Color(0xFF666A72)
+                        : const Color(0xFFE5E7EB),
               ),
               textDirection: TextDirection.ltr,
             ),
@@ -1074,10 +1071,7 @@ class _PageControlsRoute extends StatelessWidget {
 }
 
 class _PageControlCard extends StatelessWidget {
-  const _PageControlCard({
-    required this.brightness,
-    required this.child,
-  });
+  const _PageControlCard({required this.brightness, required this.child});
   final LiqPageControlBrightness brightness;
   final Widget child;
 
@@ -1149,14 +1143,18 @@ class _TextFieldsRoute extends StatefulWidget {
 
 class _TextFieldsRouteState extends State<_TextFieldsRoute> {
   late final TextEditingController _empty = TextEditingController();
-  late final TextEditingController _filled =
-      TextEditingController(text: 'Sample text');
-  late final TextEditingController _password =
-      TextEditingController(text: 'hunter2');
-  late final TextEditingController _disabled =
-      TextEditingController(text: 'Read only');
-  late final TextEditingController _dark =
-      TextEditingController(text: 'Dark surface');
+  late final TextEditingController _filled = TextEditingController(
+    text: 'Sample text',
+  );
+  late final TextEditingController _password = TextEditingController(
+    text: 'hunter2',
+  );
+  late final TextEditingController _disabled = TextEditingController(
+    text: 'Read only',
+  );
+  late final TextEditingController _dark = TextEditingController(
+    text: 'Dark surface',
+  );
 
   @override
   void dispose() {
@@ -1188,27 +1186,18 @@ class _TextFieldsRouteState extends State<_TextFieldsRoute> {
             ),
             const SizedBox(height: 12),
             const _SegLabel('filled'),
-            SizedBox(
-              width: 320,
-              child: LiqTextField(controller: _filled),
-            ),
+            SizedBox(width: 320, child: LiqTextField(controller: _filled)),
             const SizedBox(height: 12),
             const _SegLabel('obscured'),
             SizedBox(
               width: 320,
-              child: LiqTextField(
-                controller: _password,
-                obscureText: true,
-              ),
+              child: LiqTextField(controller: _password, obscureText: true),
             ),
             const SizedBox(height: 12),
             const _SegLabel('disabled'),
             SizedBox(
               width: 320,
-              child: LiqTextField(
-                controller: _disabled,
-                enabled: false,
-              ),
+              child: LiqTextField(controller: _disabled, enabled: false),
             ),
             const SizedBox(height: 12),
             const _SegLabel('dark surface'),
@@ -1257,10 +1246,7 @@ class _ListsRoute extends StatelessWidget {
                     detail: 'On',
                     showChevron: true,
                   ),
-                  LiqListRow(
-                    title: 'Cellular',
-                    showChevron: true,
-                  ),
+                  LiqListRow(title: 'Cellular', showChevron: true),
                 ],
               ),
             ),
@@ -1341,14 +1327,8 @@ class _TopBarsRoute extends StatelessWidget {
             _TopBarCard(
               child: LiqTopBar(
                 title: 'Wi-Fi',
-                leading: LiqTopBarSymbolButton(
-                  glyph: '‹',
-                  onPressed: () {},
-                ),
-                trailing: LiqTopBarAccentButton(
-                  glyph: '+',
-                  onPressed: () {},
-                ),
+                leading: LiqTopBarSymbolButton(glyph: '‹', onPressed: () {}),
+                trailing: LiqTopBarAccentButton(glyph: '+', onPressed: () {}),
               ),
             ),
             const SizedBox(height: 16),
@@ -1357,10 +1337,7 @@ class _TopBarsRoute extends StatelessWidget {
               child: LiqTopBar(
                 title: 'Inbox',
                 largeTitle: 'Inbox',
-                trailing: LiqTopBarSymbolButton(
-                  glyph: '⌕',
-                  onPressed: () {},
-                ),
+                trailing: LiqTopBarSymbolButton(glyph: '⌕', onPressed: () {}),
               ),
             ),
             const SizedBox(height: 16),
@@ -1425,16 +1402,10 @@ class _ToolbarsRoute extends StatelessWidget {
               width: 380,
               child: LiqToolbar(
                 leading: <Widget>[
-                  LiqToolbarGlassButton(
-                    label: 'Cancel',
-                    onPressed: () {},
-                  ),
+                  LiqToolbarGlassButton(label: 'Cancel', onPressed: () {}),
                 ],
                 trailing: <Widget>[
-                  LiqToolbarGlassButton(
-                    label: 'Save',
-                    onPressed: () {},
-                  ),
+                  LiqToolbarGlassButton(label: 'Save', onPressed: () {}),
                 ],
               ),
             ),
@@ -1494,18 +1465,9 @@ class _ToolbarsRoute extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: <Widget>[
-                  LiqToolbarChip(
-                    label: 'All',
-                    brightness: Brightness.dark,
-                  ),
-                  LiqToolbarChip(
-                    label: 'Unread',
-                    brightness: Brightness.dark,
-                  ),
-                  LiqToolbarChip(
-                    label: 'Flagged',
-                    brightness: Brightness.dark,
-                  ),
+                  LiqToolbarChip(label: 'All', brightness: Brightness.dark),
+                  LiqToolbarChip(label: 'Unread', brightness: Brightness.dark),
+                  LiqToolbarChip(label: 'Flagged', brightness: Brightness.dark),
                 ],
               ),
             ),
@@ -1529,17 +1491,11 @@ class _SheetsRoute extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            _SheetCell(
-              caption: 'fullscreen',
-              child: LiqSheet(title: 'Title'),
-            ),
+            _SheetCell(caption: 'fullscreen', child: LiqSheet(title: 'Title')),
             SizedBox(height: 24),
             _SheetCell(
               caption: 'stacked',
-              child: LiqSheet(
-                title: 'Title',
-                variant: LiqSheetVariant.stacked,
-              ),
+              child: LiqSheet(title: 'Title', variant: LiqSheetVariant.stacked),
             ),
             SizedBox(height: 24),
             _SheetCell(
@@ -1610,7 +1566,8 @@ class _AlertsRoute extends StatelessWidget {
               caption: 'stacked · 2 actions',
               child: LiqAlert(
                 title: 'Allow Notifications',
-                description: 'liqkit_ui needs permission to send you '
+                description:
+                    'liqkit_ui needs permission to send you '
                     'updates while in the background.',
                 actions: <LiqAlertAction>[
                   LiqAlertAction(
@@ -1832,7 +1789,8 @@ class _NotificationsRoute extends StatelessWidget {
             ),
             LiqNotification(
               title: 'Mail',
-              body: 'Andy: "Could you take a look at the spec when you get '
+              body:
+                  'Andy: "Could you take a look at the spec when you get '
                   'a chance? There are a few open questions about how the '
                   'review pipeline should handle reverts."',
               time: '2m ago',
@@ -1870,16 +1828,16 @@ class _NotifPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = Paint()
-      ..color = const Color(0xFAFFFFFF)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1.6;
+    final stroke =
+        Paint()
+          ..color = const Color(0xFAFFFFFF)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = 1.6;
     final s = size.width / 22;
     if (kind == 'mail') {
-      final rect =
-          Rect.fromLTWH(2.5 * s, 5.5 * s, 17 * s, 11 * s);
+      final rect = Rect.fromLTWH(2.5 * s, 5.5 * s, 17 * s, 11 * s);
       canvas
         ..drawRRect(
           RRect.fromRectAndRadius(rect, Radius.circular(2 * s)),
@@ -2196,14 +2154,8 @@ class _ContextMenuRoute extends StatelessWidget {
                 menu: LiqMenu(
                   width: 200,
                   children: <Widget>[
-                    LiqMenuItem(
-                      label: 'Edit',
-                      onPressed: _menuNoop,
-                    ),
-                    LiqMenuItem(
-                      label: 'Pin',
-                      onPressed: _menuNoop,
-                    ),
+                    LiqMenuItem(label: 'Edit', onPressed: _menuNoop),
+                    LiqMenuItem(label: 'Pin', onPressed: _menuNoop),
                     LiqMenuSeparator(),
                     LiqMenuItem(
                       label: 'Delete',
@@ -2227,10 +2179,7 @@ class _ContextMenuRoute extends StatelessWidget {
                       subtitle: 'Tomorrow at 9 AM',
                       onPressed: _menuNoop,
                     ),
-                    LiqMenuItem(
-                      label: 'Move to…',
-                      onPressed: _menuNoop,
-                    ),
+                    LiqMenuItem(label: 'Move to…', onPressed: _menuNoop),
                     LiqMenuSeparator(),
                     LiqMenuItem(
                       label: 'Discard',
@@ -2297,10 +2246,7 @@ class _PopupButtonsRoute extends StatelessWidget {
             const LiqPopupButton(label: 'Sort by'),
             const SizedBox(height: 16),
             const _SegLabel('long label'),
-            LiqPopupButton(
-              label: 'Last 30 days',
-              onPressed: () {},
-            ),
+            LiqPopupButton(label: 'Last 30 days', onPressed: () {}),
           ],
         ),
       ),
@@ -2327,18 +2273,12 @@ class _StatusBarsRoute extends StatelessWidget {
             const _SegLabel('iPhone · dark · 12:34'),
             _StatusBarFrame(
               dark: true,
-              child: LiqStatusBar(
-                time: '12:34',
-                brightness: Brightness.dark,
-              ),
+              child: LiqStatusBar(time: '12:34', brightness: Brightness.dark),
             ),
             const SizedBox(height: 16),
             const _SegLabel('low battery / 1 bar'),
             _StatusBarFrame(
-              child: LiqStatusBar(
-                cellularBars: 1,
-                batteryLevel: 0.18,
-              ),
+              child: LiqStatusBar(cellularBars: 1, batteryLevel: 0.18),
             ),
           ],
         ),
@@ -2359,9 +2299,7 @@ class _StatusBarFrame extends StatelessWidget {
         decoration: BoxDecoration(
           color: dark ? const Color(0xFF13161C) : const Color(0xFFFFFFFF),
           border: Border.all(
-            color: dark
-                ? const Color(0x2EFFFFFF)
-                : const Color(0xFFDDE2EB),
+            color: dark ? const Color(0x2EFFFFFF) : const Color(0xFFDDE2EB),
           ),
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
@@ -2455,10 +2393,7 @@ class _EmptyStatesRoute extends StatelessWidget {
               child: LiqEmptyState(
                 title: 'Welcome',
                 description: 'Start by composing your first message.',
-                cta: LiqEmptyStateCta(
-                  label: 'Compose',
-                  onPressed: () {},
-                ),
+                cta: LiqEmptyStateCta(label: 'Compose', onPressed: () {}),
               ),
             ),
             _EmptyCell(
@@ -2501,7 +2436,9 @@ class _EmptyCell extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Color(0xFFFFFFFF),
               borderRadius: BorderRadius.all(Radius.circular(28)),
-              border: Border.fromBorderSide(BorderSide(color: Color(0xFFE6E9EE))),
+              border: Border.fromBorderSide(
+                BorderSide(color: Color(0xFFE6E9EE)),
+              ),
             ),
             child: child,
           ),
@@ -2514,12 +2451,13 @@ class _EmptyCell extends StatelessWidget {
 class _EnvelopePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF0A84FF)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1.7;
+    final paint =
+        Paint()
+          ..color = const Color(0xFF0A84FF)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = 1.7;
     final s = size.width / 22;
     canvas
       ..drawRRect(
@@ -2590,10 +2528,10 @@ class _PickersRouteState extends State<_PickersRoute> {
               year: _year,
               month: _month,
               selectedDay: _selected,
-              currentDay: DateTime.now().month == _month &&
-                      DateTime.now().year == _year
-                  ? DateTime.now().day
-                  : null,
+              currentDay:
+                  DateTime.now().month == _month && DateTime.now().year == _year
+                      ? DateTime.now().day
+                      : null,
               onPrev: _prev,
               onNext: _next,
               onDayTap: (d) => setState(() => _selected = d),
@@ -2652,12 +2590,14 @@ class _ColorPickersRouteState extends State<_ColorPickersRoute> {
         final g = base.g;
         final b = base.b;
         final mix = i / 3.0;
-        swatches.add(Color.fromARGB(
-          255,
-          (r * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
-          (g * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
-          (b * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
-        ));
+        swatches.add(
+          Color.fromARGB(
+            255,
+            (r * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+            (g * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+            (b * 255 * (1 - mix) + 255 * mix).round().clamp(0, 255),
+          ),
+        );
       }
     }
 
@@ -2673,10 +2613,7 @@ class _ColorPickersRouteState extends State<_ColorPickersRoute> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                LiqColorPickerButton(
-                  color: _picked,
-                  onPressed: () {},
-                ),
+                LiqColorPickerButton(color: _picked, onPressed: () {}),
                 const SizedBox(width: 16),
                 LiqColorPickerButton(
                   color: _picked,
@@ -2697,10 +2634,11 @@ class _ColorPickersRouteState extends State<_ColorPickersRoute> {
                     LiqColorDot(
                       color: _palette[i],
                       selected: i == _dotSelected,
-                      onPressed: () => setState(() {
-                        _dotSelected = i;
-                        _picked = _palette[i];
-                      }),
+                      onPressed:
+                          () => setState(() {
+                            _dotSelected = i;
+                            _picked = _palette[i];
+                          }),
                     ),
                 ],
               ),
@@ -2712,10 +2650,11 @@ class _ColorPickersRouteState extends State<_ColorPickersRoute> {
               child: LiqColorGrid(
                 colors: swatches,
                 selectedIndex: _gridSelected,
-                onSelected: (i) => setState(() {
-                  _gridSelected = i;
-                  _picked = swatches[i];
-                }),
+                onSelected:
+                    (i) => setState(() {
+                      _gridSelected = i;
+                      _picked = swatches[i];
+                    }),
               ),
             ),
           ],
@@ -2834,12 +2773,13 @@ class _AppIconsRoute extends StatelessWidget {
 class _MailGlyph extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFFFFFFF)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 2.4;
+    final paint =
+        Paint()
+          ..color = const Color(0xFFFFFFFF)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..strokeWidth = 2.4;
     final s = size.width / 36;
     canvas
       ..drawRRect(
@@ -2865,11 +2805,12 @@ class _MailGlyph extends CustomPainter {
 class _ListGlyph extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = Paint()
-      ..color = const Color(0xFFFFFFFF)
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 2.2;
+    final stroke =
+        Paint()
+          ..color = const Color(0xFFFFFFFF)
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeWidth = 2.2;
     final fill = Paint()..color = const Color(0xFFFFFFFF);
     final s = size.width / 30;
     for (var i = 0; i < 3; i++) {
@@ -3271,12 +3212,12 @@ class _MaterialsRoute extends StatelessWidget {
 
   static const List<({LiqMaterialStyle style, String caption})> _styles =
       <({LiqMaterialStyle style, String caption})>[
-    (style: LiqMaterialStyle.ultraThin, caption: 'Ultra Thin'),
-    (style: LiqMaterialStyle.thin, caption: 'Thin'),
-    (style: LiqMaterialStyle.regular, caption: 'Regular'),
-    (style: LiqMaterialStyle.thick, caption: 'Thick'),
-    (style: LiqMaterialStyle.chrome, caption: 'Chrome'),
-  ];
+        (style: LiqMaterialStyle.ultraThin, caption: 'Ultra Thin'),
+        (style: LiqMaterialStyle.thin, caption: 'Thin'),
+        (style: LiqMaterialStyle.regular, caption: 'Regular'),
+        (style: LiqMaterialStyle.thick, caption: 'Thick'),
+        (style: LiqMaterialStyle.chrome, caption: 'Chrome'),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -3392,14 +3333,8 @@ class _ExamplesRoute extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const <Widget>[
-                  LiqExamplesItem(
-                    name: 'Default',
-                    code: 'LiqButton.regular',
-                  ),
-                  LiqExamplesItem(
-                    name: 'Plain',
-                    code: 'LiqButton.plain',
-                  ),
+                  LiqExamplesItem(name: 'Default', code: 'LiqButton.regular'),
+                  LiqExamplesItem(name: 'Plain', code: 'LiqButton.plain'),
                   LiqExamplesItem(
                     name: 'Glass tinted',
                     code: 'LiqButton.glass',
@@ -3424,14 +3359,8 @@ class _ExamplesRoute extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const <Widget>[
-                  LiqExamplesItem(
-                    name: 'Inline',
-                    code: 'LiqDatePicker',
-                  ),
-                  LiqExamplesItem(
-                    name: 'Range',
-                    code: 'LiqDatePickerRange',
-                  ),
+                  LiqExamplesItem(name: 'Inline', code: 'LiqDatePicker'),
+                  LiqExamplesItem(name: 'Range', code: 'LiqDatePickerRange'),
                 ],
               ),
             ),
@@ -3474,9 +3403,7 @@ class _WindowsRoute extends StatelessWidget {
                   ],
                   title: 'Mail',
                   subtitle: 'Inbox · 3 messages',
-                  trailing: <Widget>[
-                    const LiqWindowControls(),
-                  ],
+                  trailing: <Widget>[const LiqWindowControls()],
                 ),
                 child: const ColoredBox(
                   color: Color(0xFFFAFBFC),
@@ -3521,10 +3448,7 @@ class _SystemRoute extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: const <Widget>[
-                SizedBox(
-                  width: 200,
-                  child: LiqHomeIndicator(),
-                ),
+                SizedBox(width: 200, child: LiqHomeIndicator()),
                 SizedBox(
                   width: 280,
                   child: LiqHomeIndicator(
@@ -3546,10 +3470,7 @@ class _SystemRoute extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: const <Widget>[
-                SizedBox(
-                  width: 140,
-                  child: LiqSystemActionPill(label: 'Mute'),
-                ),
+                SizedBox(width: 140, child: LiqSystemActionPill(label: 'Mute')),
                 SizedBox(
                   width: 140,
                   child: LiqSystemActionPill(
@@ -3597,31 +3518,31 @@ class _TextStylesRoute extends StatelessWidget {
 
   static const List<({LiqDynamicTypeScale scale, String label})> _scales =
       <({LiqDynamicTypeScale scale, String label})>[
-    (scale: LiqDynamicTypeScale.xSmall, label: 'xSmall'),
-    (scale: LiqDynamicTypeScale.small, label: 'Small'),
-    (scale: LiqDynamicTypeScale.medium, label: 'Medium'),
-    (scale: LiqDynamicTypeScale.large, label: 'Large'),
-    (scale: LiqDynamicTypeScale.xLarge, label: 'xLarge'),
-    (scale: LiqDynamicTypeScale.xxLarge, label: 'xxLarge'),
-    (scale: LiqDynamicTypeScale.xxxLarge, label: 'xxxLarge'),
-  ];
+        (scale: LiqDynamicTypeScale.xSmall, label: 'xSmall'),
+        (scale: LiqDynamicTypeScale.small, label: 'Small'),
+        (scale: LiqDynamicTypeScale.medium, label: 'Medium'),
+        (scale: LiqDynamicTypeScale.large, label: 'Large'),
+        (scale: LiqDynamicTypeScale.xLarge, label: 'xLarge'),
+        (scale: LiqDynamicTypeScale.xxLarge, label: 'xxLarge'),
+        (scale: LiqDynamicTypeScale.xxxLarge, label: 'xxxLarge'),
+      ];
 
   static const List<({LiqDynamicTypeScale scale, String label})> _ax =
       <({LiqDynamicTypeScale scale, String label})>[
-    (scale: LiqDynamicTypeScale.ax1, label: 'AX1'),
-    (scale: LiqDynamicTypeScale.ax2, label: 'AX2'),
-    (scale: LiqDynamicTypeScale.ax3, label: 'AX3'),
-    (scale: LiqDynamicTypeScale.ax4, label: 'AX4'),
-    (scale: LiqDynamicTypeScale.ax5, label: 'AX5'),
-  ];
+        (scale: LiqDynamicTypeScale.ax1, label: 'AX1'),
+        (scale: LiqDynamicTypeScale.ax2, label: 'AX2'),
+        (scale: LiqDynamicTypeScale.ax3, label: 'AX3'),
+        (scale: LiqDynamicTypeScale.ax4, label: 'AX4'),
+        (scale: LiqDynamicTypeScale.ax5, label: 'AX5'),
+      ];
 
   static const List<({LiqTextTone tone, String label})> _tones =
       <({LiqTextTone tone, String label})>[
-    (tone: LiqTextTone.primary, label: 'Primary'),
-    (tone: LiqTextTone.secondary, label: 'Secondary'),
-    (tone: LiqTextTone.tertiary, label: 'Tertiary'),
-    (tone: LiqTextTone.quaternary, label: 'Quaternary'),
-  ];
+        (tone: LiqTextTone.primary, label: 'Primary'),
+        (tone: LiqTextTone.secondary, label: 'Secondary'),
+        (tone: LiqTextTone.tertiary, label: 'Tertiary'),
+        (tone: LiqTextTone.quaternary, label: 'Quaternary'),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -3697,4 +3618,3 @@ class _TextStylesRoute extends StatelessWidget {
     );
   }
 }
-

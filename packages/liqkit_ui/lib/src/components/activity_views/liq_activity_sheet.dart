@@ -41,11 +41,7 @@ final class LiqActivitySheet extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(34)),
             border: Border.fromBorderSide(BorderSide(color: _rim)),
             boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: _shadow,
-                offset: Offset(0, 14),
-                blurRadius: 40,
-              ),
+              BoxShadow(color: _shadow, offset: Offset(0, 14), blurRadius: 40),
             ],
           ),
           child: Padding(
@@ -55,8 +51,7 @@ final class LiqActivitySheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 if (header != null) header!,
-                if (header != null && child != null)
-                  const SizedBox(height: 14),
+                if (header != null && child != null) const SizedBox(height: 14),
                 if (child != null) child!,
               ],
             ),
@@ -105,11 +100,7 @@ final class LiqActivityHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        SizedBox(
-          width: 64,
-          height: 64,
-          child: thumb ?? const _DefaultThumb(),
-        ),
+        SizedBox(width: 64, height: 64, child: thumb ?? const _DefaultThumb()),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
@@ -231,11 +222,12 @@ class _CloseGlyphPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 1.7;
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round
+          ..strokeWidth = 1.7;
     canvas
       ..drawLine(
         Offset(size.width * 0.25, size.height * 0.25),

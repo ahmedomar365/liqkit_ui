@@ -30,9 +30,8 @@ final class LiqProgressBar extends StatelessWidget {
       value: '${(v * 100).round()}%',
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final width = constraints.hasBoundedWidth
-              ? constraints.maxWidth
-              : 240.0;
+          final width =
+              constraints.hasBoundedWidth ? constraints.maxWidth : 240.0;
           return SizedBox(
             width: width,
             height: _trackHeight,
@@ -96,12 +95,10 @@ final class LiqSpinner extends StatefulWidget {
   static const Duration _period = Duration(milliseconds: 900);
 
   /// Diameter in logical px.
-  double get diameter =>
-      size == LiqSpinnerSize.regular ? 30.0 : 22.0;
+  double get diameter => size == LiqSpinnerSize.regular ? 30.0 : 22.0;
 
   /// Border width.
-  double get borderWidth =>
-      size == LiqSpinnerSize.regular ? 2.5 : 2.0;
+  double get borderWidth => size == LiqSpinnerSize.regular ? 2.5 : 2.0;
 
   @override
   State<LiqSpinner> createState() => _LiqSpinnerState();
@@ -168,34 +165,24 @@ class _SpinnerPainter extends CustomPainter {
       rect.width - borderWidth,
       rect.height - borderWidth,
     );
-    final mainPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = borderWidth
-      ..strokeCap = StrokeCap.butt
-      ..color = color;
-    final faintPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = borderWidth
-      ..strokeCap = StrokeCap.butt
-      ..color = faint;
+    final mainPaint =
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = borderWidth
+          ..strokeCap = StrokeCap.butt
+          ..color = color;
+    final faintPaint =
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = borderWidth
+          ..strokeCap = StrokeCap.butt
+          ..color = faint;
 
     canvas
       // Main: ~270deg sweep starting from -135deg.
-      ..drawArc(
-        ringRect,
-        -math.pi * 0.75,
-        math.pi * 1.5,
-        false,
-        mainPaint,
-      )
+      ..drawArc(ringRect, -math.pi * 0.75, math.pi * 1.5, false, mainPaint)
       // Faint: the remaining arc (right side).
-      ..drawArc(
-        ringRect,
-        math.pi * 0.75,
-        math.pi * 0.5,
-        false,
-        faintPaint,
-      );
+      ..drawArc(ringRect, math.pi * 0.75, math.pi * 0.5, false, faintPaint);
   }
 
   @override

@@ -49,17 +49,15 @@ class LiqApp extends StatelessWidget {
     return WidgetsApp(
       title: title,
       color: const Color(0xFF000000),
-      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
-        settings: settings,
-        pageBuilder: (c, _, _) => builder(c),
-      ),
+      pageRouteBuilder:
+          <T>(settings, builder) => PageRouteBuilder<T>(
+            settings: settings,
+            pageBuilder: (c, _, _) => builder(c),
+          ),
       builder: (context, child) {
         final brightness = _resolveBrightness(context);
         final data = brightness == Brightness.dark ? dark : light;
-        return LiqTheme(
-          data: data,
-          child: child ?? const SizedBox.shrink(),
-        );
+        return LiqTheme(data: data, child: child ?? const SizedBox.shrink());
       },
       home: home,
     );
