@@ -4,7 +4,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget segmentedTwoBuilder(BuildContext context) {
-  return Center(
+  return Align(
+    heightFactor: 1,
     child: LiqDemo<int>(
       initial: 0,
       builder: (v, set) {

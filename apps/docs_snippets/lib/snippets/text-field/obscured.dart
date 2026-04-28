@@ -4,7 +4,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget textFieldObscuredBuilder(BuildContext context) {
   // {@highlight}
-  return Center(child: _TextFieldObscuredExample());
+  return Align(heightFactor: 1, child: _TextFieldObscuredExample());
   // {@endhighlight}
 }
 

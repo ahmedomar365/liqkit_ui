@@ -5,6 +5,9 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget keyboardQwertyBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(child: LiqKeyboard(width: 360, minHeight: 320));
+  return const Align(
+    heightFactor: 1,
+    child: LiqKeyboard(width: 360, minHeight: 320),
+  );
   // {@endhighlight}
 }

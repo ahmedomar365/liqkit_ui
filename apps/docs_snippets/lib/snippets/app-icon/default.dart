@@ -5,6 +5,9 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget appIconDefaultBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(child: LiqAppIcon(color: Color(0xFF007AFF)));
+  return const Align(
+    heightFactor: 1,
+    child: LiqAppIcon(color: Color(0xFF007AFF)),
+  );
   // {@endhighlight}
 }

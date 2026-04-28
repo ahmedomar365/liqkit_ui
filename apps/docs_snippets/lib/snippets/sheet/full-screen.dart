@@ -5,6 +5,6 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget sheetFullScreenBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(child: LiqSheet(title: 'Sheet Title'));
+  return const Align(heightFactor: 1, child: LiqSheet(title: 'Sheet Title'));
   // {@endhighlight}
 }

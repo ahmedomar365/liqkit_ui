@@ -5,7 +5,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget emptyStateDefaultBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(
+  return const Align(
+    heightFactor: 1,
     child: LiqEmptyState(
       title: 'No Results',
       description: 'Try adjusting your search or filters.',

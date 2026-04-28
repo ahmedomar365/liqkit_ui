@@ -17,7 +17,7 @@ export function LiqPreview({
   component,
   variant,
   snippetsBaseUrl,
-  initialHeight = 200,
+  initialHeight = 120,
 }: LiqPreviewProps) {
   const key = `${component}/${variant}` as SnippetRouteKey;
   if (!(key in SNIPPET_ROUTES)) {

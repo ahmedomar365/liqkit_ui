@@ -4,7 +4,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget sliderDefaultBuilder(BuildContext context) {
-  return Center(
+  return Align(
+    heightFactor: 1,
     child: LiqDemo<double>(
       initial: 0.4,
       builder: (v, set) {

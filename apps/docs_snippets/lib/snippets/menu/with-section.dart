@@ -5,7 +5,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget menuWithSectionBuilder(BuildContext context) {
   // {@highlight}
-  return Center(
+  return Align(
+    heightFactor: 1,
     child: LiqMenu(
       children: <Widget>[
         const LiqMenuSectionTitle(title: 'Edit'),

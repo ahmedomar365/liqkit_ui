@@ -5,7 +5,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget widgetSmallBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(
+  return const Align(
+    heightFactor: 1,
     child: SizedBox(
       width: 160,
       child: LiqWidgetCard(size: LiqWidgetSize.small, caption: 'Weather'),

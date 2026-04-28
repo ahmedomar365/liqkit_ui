@@ -4,7 +4,8 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget segmentedThreeBuilder(BuildContext context) {
-  return Center(
+  return Align(
+    heightFactor: 1,
     child: LiqDemo<int>(
       initial: 1,
       builder: (v, set) {
