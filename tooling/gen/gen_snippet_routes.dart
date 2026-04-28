@@ -136,12 +136,12 @@ Future<void> main(List<String> args) async {
   final tsOutPath = '$repoRoot/apps/docs/lib/snippet-routes.ts';
 
   if (args.contains('--check')) {
-    final dartOnDisk = File(dartOutPath).existsSync()
-        ? File(dartOutPath).readAsStringSync()
-        : '';
-    final tsOnDisk = File(tsOutPath).existsSync()
-        ? File(tsOutPath).readAsStringSync()
-        : '';
+    final dartOnDisk =
+        File(dartOutPath).existsSync()
+            ? File(dartOutPath).readAsStringSync()
+            : '';
+    final tsOnDisk =
+        File(tsOutPath).existsSync() ? File(tsOutPath).readAsStringSync() : '';
     if (dartOnDisk != dartRoutes || tsOnDisk != tsRoutes) {
       stderr.writeln(
         'snippet routes are stale. Run: melos run docs:gen:routes',
@@ -152,7 +152,9 @@ Future<void> main(List<String> args) async {
     return;
   }
 
-  await Directory('$repoRoot/apps/docs_snippets/lib/src').create(recursive: true);
+  await Directory(
+    '$repoRoot/apps/docs_snippets/lib/src',
+  ).create(recursive: true);
   await Directory('$repoRoot/apps/docs/lib').create(recursive: true);
   await File(dartOutPath).writeAsString(dartRoutes);
   await File(tsOutPath).writeAsString(tsRoutes);

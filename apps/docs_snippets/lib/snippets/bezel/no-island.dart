@@ -6,10 +6,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget bezelNoIslandBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: LiqDeviceBezel(
-      size: Size(220, 478),
-      showIsland: false,
-    ),
+    child: LiqDeviceBezel(size: Size(220, 478), showIsland: false),
   );
   // {@endhighlight}
 }

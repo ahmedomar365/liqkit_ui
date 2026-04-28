@@ -6,10 +6,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget appIconWithCaptionBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: LiqAppIcon(
-      color: Color(0xFFFF9500),
-      label: 'Messages',
-    ),
+    child: LiqAppIcon(color: Color(0xFFFF9500), label: 'Messages'),
   );
   // {@endhighlight}
 }

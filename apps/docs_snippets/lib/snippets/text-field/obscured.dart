@@ -4,9 +4,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget textFieldObscuredBuilder(BuildContext context) {
   // {@highlight}
-  return Center(
-    child: _TextFieldObscuredExample(),
-  );
+  return Center(child: _TextFieldObscuredExample());
   // {@endhighlight}
 }
 
@@ -16,10 +14,10 @@ class _TextFieldObscuredExample extends StatefulWidget {
       _TextFieldObscuredExampleState();
 }
 
-class _TextFieldObscuredExampleState
-    extends State<_TextFieldObscuredExample> {
-  final TextEditingController _controller =
-      TextEditingController(text: 'password123');
+class _TextFieldObscuredExampleState extends State<_TextFieldObscuredExample> {
+  final TextEditingController _controller = TextEditingController(
+    text: 'password123',
+  );
 
   @override
   void dispose() {

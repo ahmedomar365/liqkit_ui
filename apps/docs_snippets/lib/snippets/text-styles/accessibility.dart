@@ -5,10 +5,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget textStylesAccessibilityBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: LiqTypeColumn(
-      header: 'AX2',
-      scale: LiqDynamicTypeScale.ax2,
-    ),
+    child: LiqTypeColumn(header: 'AX2', scale: LiqDynamicTypeScale.ax2),
   );
   // {@endhighlight}
 }

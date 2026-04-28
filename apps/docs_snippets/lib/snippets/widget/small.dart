@@ -8,10 +8,7 @@ Widget widgetSmallBuilder(BuildContext context) {
   return const Center(
     child: SizedBox(
       width: 160,
-      child: LiqWidgetCard(
-        size: LiqWidgetSize.small,
-        caption: 'Weather',
-      ),
+      child: LiqWidgetCard(size: LiqWidgetSize.small, caption: 'Weather'),
     ),
   );
   // {@endhighlight}

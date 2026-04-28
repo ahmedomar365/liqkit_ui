@@ -17,36 +17,35 @@ class SnippetsApp extends StatelessWidget {
     return WidgetsApp(
       title: 'liqkit_ui — snippet',
       color: const Color(0xFF000000),
-      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
-        settings: settings,
-        pageBuilder: (c, _, _) => builder(c),
-      ),
+      pageRouteBuilder:
+          <T>(settings, builder) => PageRouteBuilder<T>(
+            settings: settings,
+            pageBuilder: (c, _, _) => builder(c),
+          ),
       onGenerateRoute: (settings) {
         final builder = snippetRoutes[settings.name ?? '/'] ?? _fallback;
         return PageRouteBuilder<void>(
           settings: settings,
-          pageBuilder: (c, _, _) => LiqHeightReporter(
-            child: Builder(builder: builder),
-          ),
+          pageBuilder:
+              (c, _, _) => LiqHeightReporter(child: Builder(builder: builder)),
         );
       },
-      builder: (context, child) => LiqTheme(
-        data: data,
-        child: child ?? const SizedBox.shrink(),
-      ),
+      builder:
+          (context, child) =>
+              LiqTheme(data: data, child: child ?? const SizedBox.shrink()),
     );
   }
 }
 
 Widget _fallback(BuildContext context) => const ColoredBox(
-      color: Color(0xFFFFFFFF),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Center(
-          child: Text(
-            'liqkit-snippets-empty',
-            style: TextStyle(color: Color(0xFF777777), fontSize: 14),
-          ),
-        ),
+  color: Color(0xFFFFFFFF),
+  child: Directionality(
+    textDirection: TextDirection.ltr,
+    child: Center(
+      child: Text(
+        'liqkit-snippets-empty',
+        style: TextStyle(color: Color(0xFF777777), fontSize: 14),
       ),
-    );
+    ),
+  ),
+);

@@ -7,9 +7,7 @@ Widget statusBarDarkBuilder(BuildContext context) {
   // {@highlight}
   return const ColoredBox(
     color: Color(0xFF1C1C1E),
-    child: LiqStatusBar(
-      brightness: Brightness.dark,
-    ),
+    child: LiqStatusBar(brightness: Brightness.dark),
   );
   // {@endhighlight}
 }

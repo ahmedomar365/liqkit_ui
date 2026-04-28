@@ -5,11 +5,6 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget systemHomeIndicatorBuilder(BuildContext context) {
   // {@highlight}
-  return const Center(
-    child: SizedBox(
-      width: 200,
-      child: LiqHomeIndicator(),
-    ),
-  );
+  return const Center(child: SizedBox(width: 200, child: LiqHomeIndicator()));
   // {@endhighlight}
 }

@@ -4,9 +4,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget textFieldEmptyBuilder(BuildContext context) {
   // {@highlight}
-  return Center(
-    child: _TextFieldEmptyExample(),
-  );
+  return Center(child: _TextFieldEmptyExample());
   // {@endhighlight}
 }
 
@@ -26,9 +24,6 @@ class _TextFieldEmptyExampleState extends State<_TextFieldEmptyExample> {
 
   @override
   Widget build(BuildContext context) {
-    return LiqTextField(
-      controller: _controller,
-      placeholder: 'Placeholder',
-    );
+    return LiqTextField(controller: _controller, placeholder: 'Placeholder');
   }
 }

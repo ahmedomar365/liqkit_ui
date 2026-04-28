@@ -21,11 +21,7 @@ Widget listGroupedBuilder(BuildContext context) {
             showChevron: true,
             onTap: () {},
           ),
-          LiqListRow(
-            title: 'Badge App Icon',
-            showChevron: true,
-            onTap: () {},
-          ),
+          LiqListRow(title: 'Badge App Icon', showChevron: true, onTap: () {}),
         ],
       ),
     ),

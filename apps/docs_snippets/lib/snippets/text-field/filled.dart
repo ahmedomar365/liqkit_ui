@@ -4,9 +4,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget textFieldFilledBuilder(BuildContext context) {
   // {@highlight}
-  return Center(
-    child: _TextFieldFilledExample(),
-  );
+  return Center(child: _TextFieldFilledExample());
   // {@endhighlight}
 }
 
@@ -17,8 +15,9 @@ class _TextFieldFilledExample extends StatefulWidget {
 }
 
 class _TextFieldFilledExampleState extends State<_TextFieldFilledExample> {
-  final TextEditingController _controller =
-      TextEditingController(text: 'Hello, World!');
+  final TextEditingController _controller = TextEditingController(
+    text: 'Hello, World!',
+  );
 
   @override
   void dispose() {
@@ -28,9 +27,6 @@ class _TextFieldFilledExampleState extends State<_TextFieldFilledExample> {
 
   @override
   Widget build(BuildContext context) {
-    return LiqTextField(
-      controller: _controller,
-      placeholder: 'Placeholder',
-    );
+    return LiqTextField(controller: _controller, placeholder: 'Placeholder');
   }
 }

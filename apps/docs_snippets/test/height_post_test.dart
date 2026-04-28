@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('LiqHeightReporter publishes the laid-out height once',
-      (tester) async {
+  testWidgets('LiqHeightReporter publishes the laid-out height once', (
+    tester,
+  ) async {
     final reports = <int>[];
     await tester.pumpWidget(
       Directionality(

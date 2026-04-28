@@ -6,10 +6,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget systemActionPillBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: SizedBox(
-      width: 200,
-      child: LiqSystemActionPill(label: 'Open App'),
-    ),
+    child: SizedBox(width: 200, child: LiqSystemActionPill(label: 'Open App')),
   );
   // {@endhighlight}
 }

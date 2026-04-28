@@ -6,12 +6,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget widgetMediumBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: SizedBox(
-      width: 320,
-      child: LiqWidgetCard(
-        caption: 'Calendar',
-      ),
-    ),
+    child: SizedBox(width: 320, child: LiqWidgetCard(caption: 'Calendar')),
   );
   // {@endhighlight}
 }

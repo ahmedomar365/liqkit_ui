@@ -8,10 +8,7 @@ Widget segmentedTwoBuilder(BuildContext context) {
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: LiqSegmentedControl<int>(
-        segments: const [
-          (value: 0, label: 'Day'),
-          (value: 1, label: 'Night'),
-        ],
+        segments: const [(value: 0, label: 'Day'), (value: 1, label: 'Night')],
         value: 0,
         onChanged: (_) {},
       ),

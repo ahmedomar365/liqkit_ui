@@ -5,10 +5,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget sheetStackedBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: LiqSheet(
-      title: 'Sheet Title',
-      variant: LiqSheetVariant.stacked,
-    ),
+    child: LiqSheet(title: 'Sheet Title', variant: LiqSheetVariant.stacked),
   );
   // {@endhighlight}
 }

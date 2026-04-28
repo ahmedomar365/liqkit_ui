@@ -9,10 +9,7 @@ Widget topBarLargeTitleBuilder(BuildContext context) {
     child: LiqTopBar(
       title: 'Messages',
       largeTitle: 'Messages',
-      trailing: LiqTopBarAccentButton(
-        glyph: '+',
-        onPressed: () {},
-      ),
+      trailing: LiqTopBarAccentButton(glyph: '+', onPressed: () {}),
     ),
   );
   // {@endhighlight}

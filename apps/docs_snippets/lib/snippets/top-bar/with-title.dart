@@ -8,14 +8,8 @@ Widget topBarWithTitleBuilder(BuildContext context) {
   return Center(
     child: LiqTopBar(
       title: 'Inbox',
-      leading: LiqTopBarSymbolButton(
-        glyph: '‹',
-        onPressed: () {},
-      ),
-      trailing: LiqTopBarAccentButton(
-        glyph: '+',
-        onPressed: () {},
-      ),
+      leading: LiqTopBarSymbolButton(glyph: '‹', onPressed: () {}),
+      trailing: LiqTopBarAccentButton(glyph: '+', onPressed: () {}),
     ),
   );
   // {@endhighlight}

@@ -8,10 +8,7 @@ Widget widgetLargeBuilder(BuildContext context) {
   return const Center(
     child: SizedBox(
       width: 160,
-      child: LiqWidgetCard(
-        size: LiqWidgetSize.large,
-        caption: 'Maps',
-      ),
+      child: LiqWidgetCard(size: LiqWidgetSize.large, caption: 'Maps'),
     ),
   );
   // {@endhighlight}

@@ -3,8 +3,7 @@ import '../gen_snippet_routes.dart';
 
 void main() {
   group('renderDartRoutes', () {
-    test('emits a Map<String, WidgetBuilder> for one component variant',
-        () {
+    test('emits a Map<String, WidgetBuilder> for one component variant', () {
       const fixture = '''
 {
   "components": [
@@ -24,7 +23,10 @@ void main() {
 }
 ''';
       final out = renderDartRoutes(fixture);
-      expect(out, contains("import 'package:docs_snippets/snippets/button/regular.dart'"));
+      expect(
+        out,
+        contains("import 'package:docs_snippets/snippets/button/regular.dart'"),
+      );
       expect(out, contains("'/button/regular':"));
       expect(out, contains('buttonRegularBuilder'));
     });
@@ -73,10 +75,7 @@ void main() {
   ]
 }
 ''';
-      expect(
-        () => renderDartRoutes(fixture),
-        throwsA(isA<FormatException>()),
-      );
+      expect(() => renderDartRoutes(fixture), throwsA(isA<FormatException>()));
     });
 
     test('rejects a variant with a slash', () {
@@ -94,10 +93,7 @@ void main() {
   ]
 }
 ''';
-      expect(
-        () => renderTsRoutes(fixture),
-        throwsA(isA<FormatException>()),
-      );
+      expect(() => renderTsRoutes(fixture), throwsA(isA<FormatException>()));
     });
   });
 }

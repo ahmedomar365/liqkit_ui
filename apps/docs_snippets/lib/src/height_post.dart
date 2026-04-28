@@ -2,7 +2,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 // ignore: always_use_package_imports, conditional_uri_does_not_exist // relative URIs are required for conditional dart.library imports
 import 'height_post_io.dart'
-    if (dart.library.js_interop) 'height_post_web.dart' as platform;
+    if (dart.library.js_interop) 'height_post_web.dart'
+    as platform;
 
 /// Wraps [child] and forwards the laid-out height (rounded to int pixels)
 /// to [publish] after each layout pass.
@@ -12,11 +13,7 @@ import 'height_post_io.dart'
 /// is a no-op.
 class LiqHeightReporter extends StatelessWidget {
   /// Creates a [LiqHeightReporter].
-  const LiqHeightReporter({
-    required this.child,
-    this.publish,
-    super.key,
-  });
+  const LiqHeightReporter({required this.child, this.publish, super.key});
 
   /// The widget whose laid-out height is reported.
   final Widget child;
@@ -40,7 +37,7 @@ class LiqHeightReporter extends StatelessWidget {
 
 class _SizeReporter extends SingleChildRenderObjectWidget {
   const _SizeReporter({required this.onLayout, required Widget child})
-      : super(child: child);
+    : super(child: child);
 
   final void Function(Size) onLayout;
 

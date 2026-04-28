@@ -15,10 +15,7 @@ Widget activityViewDefaultBuilder(BuildContext context) {
       child: const Text(
         'Share this file with your team.',
         textDirection: TextDirection.ltr,
-        style: TextStyle(
-          fontSize: 15,
-          color: Color(0xFF1A1A1A),
-        ),
+        style: TextStyle(fontSize: 15, color: Color(0xFF1A1A1A)),
       ),
     ),
   );

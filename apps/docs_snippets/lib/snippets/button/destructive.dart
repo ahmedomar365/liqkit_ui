@@ -5,11 +5,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget buttonDestructiveBuilder(BuildContext context) {
   // {@highlight}
   return Center(
-    child: LiqButton(
-      label: 'Delete',
-      destructive: true,
-      onPressed: () {},
-    ),
+    child: LiqButton(label: 'Delete', destructive: true, onPressed: () {}),
   );
   // {@endhighlight}
 }

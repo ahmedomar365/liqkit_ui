@@ -7,10 +7,7 @@ Widget sliderDefaultBuilder(BuildContext context) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: LiqSlider(
-        value: 0.4,
-        onChanged: (_) {},
-      ),
+      child: LiqSlider(value: 0.4, onChanged: (_) {}),
     ),
   );
   // {@endhighlight}

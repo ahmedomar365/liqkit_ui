@@ -9,10 +9,7 @@ Widget emptyStateWithCtaBuilder(BuildContext context) {
     child: LiqEmptyState(
       title: 'No Photos Yet',
       description: 'Photos you take will appear here.',
-      cta: LiqEmptyStateCta(
-        label: 'Open Camera',
-        onPressed: () {},
-      ),
+      cta: LiqEmptyStateCta(label: 'Open Camera', onPressed: () {}),
     ),
   );
   // {@endhighlight}

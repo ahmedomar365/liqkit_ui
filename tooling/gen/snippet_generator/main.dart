@@ -7,10 +7,7 @@ import 'dart:io';
 /// Extract a snippet record from raw Dart source.
 ///
 /// Public surface: tested directly by snippet_generator_test.dart.
-String extractSnippet({
-  required String sourcePath,
-  required String source,
-}) {
+String extractSnippet({required String sourcePath, required String source}) {
   final lines = source.split('\n');
   final highlights = <Map<String, int>>[];
   int? openLine;
@@ -47,14 +44,15 @@ String extractSnippet({
     lineMap[i + 1] = stripped.length;
   }
 
-  final renumbered = highlights
-      .map(
-        (h) => {
-          'start': lineMap[h['start']!] ?? 0,
-          'end': lineMap[h['end']!] ?? 0,
-        },
-      )
-      .toList();
+  final renumbered =
+      highlights
+          .map(
+            (h) => {
+              'start': lineMap[h['start']!] ?? 0,
+              'end': lineMap[h['end']!] ?? 0,
+            },
+          )
+          .toList();
 
   return const JsonEncoder.withIndent('  ').convert({
     'file': sourcePath,
@@ -75,22 +73,16 @@ void main(List<String> args) {
   final outputs = <String, String>{};
   for (final c in components) {
     final component = c['component'] as String;
-    for (final v
-        in (c['variants'] as List).cast<Map<String, dynamic>>()) {
+    for (final v in (c['variants'] as List).cast<Map<String, dynamic>>()) {
       final variant = v['variant'] as String;
       final dartFile = v['dartFile'] as String;
       final fullPath = '$repoRoot/$dartFile';
       if (!File(fullPath).existsSync()) {
-        stderr.writeln(
-          'snippet_manifest.json: $dartFile does not exist',
-        );
+        stderr.writeln('snippet_manifest.json: $dartFile does not exist');
         exit(1);
       }
       final source = File(fullPath).readAsStringSync();
-      final json = extractSnippet(
-        sourcePath: dartFile,
-        source: source,
-      );
+      final json = extractSnippet(sourcePath: dartFile, source: source);
       outputs['apps/docs/snippets/$component/$variant.json'] = json;
     }
   }
@@ -99,8 +91,7 @@ void main(List<String> args) {
     var stale = false;
     for (final entry in outputs.entries) {
       final p = '$repoRoot/${entry.key}';
-      if (!File(p).existsSync() ||
-          File(p).readAsStringSync() != entry.value) {
+      if (!File(p).existsSync() || File(p).readAsStringSync() != entry.value) {
         stale = true;
         stderr.writeln('stale: ${entry.key}');
       }

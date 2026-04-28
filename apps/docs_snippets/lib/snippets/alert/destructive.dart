@@ -9,10 +9,7 @@ Widget alertDestructiveBuilder(BuildContext context) {
       title: 'Delete Item',
       description: 'This action cannot be undone.',
       actions: <LiqAlertAction>[
-        LiqAlertAction(
-          label: 'Delete',
-          style: LiqAlertActionStyle.destructive,
-        ),
+        LiqAlertAction(label: 'Delete', style: LiqAlertActionStyle.destructive),
         LiqAlertAction(label: 'Cancel'),
       ],
     ),

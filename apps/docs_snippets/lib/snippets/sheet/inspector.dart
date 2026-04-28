@@ -5,10 +5,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget sheetInspectorBuilder(BuildContext context) {
   // {@highlight}
   return const Center(
-    child: LiqSheet(
-      title: 'Inspector',
-      variant: LiqSheetVariant.inspector,
-    ),
+    child: LiqSheet(title: 'Inspector', variant: LiqSheetVariant.inspector),
   );
   // {@endhighlight}
 }

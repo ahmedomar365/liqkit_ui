@@ -9,16 +9,10 @@ Widget toolbarActionsBuilder(BuildContext context) {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: LiqToolbar(
         leading: <Widget>[
-          LiqToolbarGlassButton(
-            label: 'Back',
-            onPressed: () {},
-          ),
+          LiqToolbarGlassButton(label: 'Back', onPressed: () {}),
         ],
         trailing: <Widget>[
-          LiqToolbarGlassButton(
-            label: 'Done',
-            onPressed: () {},
-          ),
+          LiqToolbarGlassButton(label: 'Done', onPressed: () {}),
         ],
       ),
     ),

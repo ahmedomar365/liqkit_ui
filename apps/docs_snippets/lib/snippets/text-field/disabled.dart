@@ -4,9 +4,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget textFieldDisabledBuilder(BuildContext context) {
   // {@highlight}
-  return Center(
-    child: _TextFieldDisabledExample(),
-  );
+  return Center(child: _TextFieldDisabledExample());
   // {@endhighlight}
 }
 
@@ -16,10 +14,10 @@ class _TextFieldDisabledExample extends StatefulWidget {
       _TextFieldDisabledExampleState();
 }
 
-class _TextFieldDisabledExampleState
-    extends State<_TextFieldDisabledExample> {
-  final TextEditingController _controller =
-      TextEditingController(text: 'Read only');
+class _TextFieldDisabledExampleState extends State<_TextFieldDisabledExample> {
+  final TextEditingController _controller = TextEditingController(
+    text: 'Read only',
+  );
 
   @override
   void dispose() {

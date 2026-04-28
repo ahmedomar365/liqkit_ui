@@ -24,11 +24,13 @@ Widget sampleBuilder() {
     final decoded = jsonDecode(json) as Map<String, dynamic>;
 
     expect(decoded['language'], 'dart');
-    expect(decoded['file'],
-        'apps/docs_snippets/lib/snippets/button/regular.dart');
+    expect(
+      decoded['file'],
+      'apps/docs_snippets/lib/snippets/button/regular.dart',
+    );
     expect(decoded['source'], contains("Text('hello')"));
-    final highlights = (decoded['highlights'] as List)
-        .cast<Map<String, dynamic>>();
+    final highlights =
+        (decoded['highlights'] as List).cast<Map<String, dynamic>>();
     expect(highlights, hasLength(1));
     final start = highlights.single['start'] as int;
     final end = highlights.single['end'] as int;
