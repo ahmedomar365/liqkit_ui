@@ -1,0 +1,30 @@
+---
+title: Overview
+description: liqkit_ui is the iOS 26 Liquid Glass design system, ported to idiomatic Dart and Flutter.
+---
+
+`liqkit_ui` is a Flutter component library that mirrors the iOS 26
+"Liquid Glass" aesthetic established by Apple. It contains 37
+component categories — buttons, sheets, popovers, status bars,
+keyboards, and more — each implemented in pure Dart with no platform
+plugins.
+
+## Why liqkit_ui?
+
+- **Pixel-faithful.** Components are sourced from the same CSS/Figma
+  spec as the original `liqkit` web library; every category is
+  visually verified by Playwright.
+- **Pure Dart.** No FFI, no platform channels, no JS interop in the
+  components themselves. The library compiles to web, iOS, Android,
+  macOS, Linux, and Windows.
+- **Themeable.** Every component reads from `LiqThemeData` for
+  colors, typography, and spacing. Light and dark variants ship out
+  of the box.
+
+## What's in the box
+
+- 37 component categories under `package:liqkit_ui/components.dart`
+- Tokens under `package:liqkit_ui_tokens/`
+- Pre-bundled SF Pro fonts via `package:liqkit_ui_assets/`
+
+Read the [Installation](/docs/getting-started/installation) page next.
