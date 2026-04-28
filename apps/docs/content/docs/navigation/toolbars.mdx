@@ -1,0 +1,29 @@
+---
+title: Toolbars
+description: iOS 26 toolbars — glass action buttons and chip filter rows.
+---
+
+import toolbarActionsSnippet from '@/snippets/toolbar/actions.json';
+import toolbarChipsSnippet from '@/snippets/toolbar/chips.json';
+
+`LiqToolbar` is a 44pt horizontal bar of `LiqToolbarGlassButton`s or
+`LiqToolbarChip`s. Leading items are pinned to the start; trailing items are
+pinned to the end with a `Spacer` in between.
+
+## Actions
+
+A toolbar with glass pill buttons — use for primary navigation actions such
+as Back and Done.
+
+<LiqPreview component="toolbar" variant="actions" />
+
+<CodeSnippet snippet={toolbarActionsSnippet} />
+
+## Chips
+
+A toolbar populated with `LiqToolbarChip` filter tags. Use for inbox-style
+category filters at the top of a list.
+
+<LiqPreview component="toolbar" variant="chips" />
+
+<CodeSnippet snippet={toolbarChipsSnippet} />

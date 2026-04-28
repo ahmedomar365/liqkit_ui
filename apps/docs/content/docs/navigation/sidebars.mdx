@@ -1,0 +1,30 @@
+---
+title: Sidebars
+description: iOS 26 translucent sidebar panel — default and search variants.
+---
+
+import sidebarDefaultSnippet from '@/snippets/sidebar/default.json';
+import sidebarWithSearchSnippet from '@/snippets/sidebar/with-search.json';
+
+`LiqSidebar` is a 320pt translucent rounded panel (34pt corner radius,
+`rgba(250,250,250,0.7)` background). Place `LiqSidebarSectionHeader` and
+`LiqSidebarRow` children inside. Optionally prepend `LiqSidebarSearch` for
+a filtering search bar.
+
+## Default
+
+A sidebar with section headers and selectable rows. The selected row is
+highlighted with `#EDEDED`.
+
+<LiqPreview component="sidebar" variant="default" />
+
+<CodeSnippet snippet={sidebarDefaultSnippet} />
+
+## With Search
+
+Prepend `LiqSidebarSearch` to add the iOS 26 glass search field at the top
+of the panel.
+
+<LiqPreview component="sidebar" variant="with-search" />
+
+<CodeSnippet snippet={sidebarWithSearchSnippet} />

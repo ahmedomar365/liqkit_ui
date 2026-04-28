@@ -1,0 +1,30 @@
+---
+title: Lists
+description: iOS 26 grouped list rows — light and dark surface variants.
+---
+
+import listGroupedSnippet from '@/snippets/list/grouped.json';
+import listDarkSnippet from '@/snippets/list/dark.json';
+
+`LiqListGroup` renders a rounded card containing `LiqListRow`s separated
+by hairline dividers. Each row supports a title, optional subtitle, leading
+widget, trailing widget, detail text, and chevron.
+
+## Grouped
+
+A standard grouped list on a white surface. Use for settings-style grouped
+content.
+
+<LiqPreview component="list" variant="grouped" />
+
+<CodeSnippet snippet={listGroupedSnippet} />
+
+## Dark
+
+The same grouped list wrapped in a dark background. Pass
+`brightness: Brightness.dark` to both `LiqListGroup` and each `LiqListRow`
+to switch to dark-mode colours.
+
+<LiqPreview component="list" variant="dark" />
+
+<CodeSnippet snippet={listDarkSnippet} />

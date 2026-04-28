@@ -1,0 +1,29 @@
+---
+title: Popup Buttons
+description: iOS 26 inline popup button with a trailing chevron-down indicator.
+---
+
+import popupButtonRegularSnippet from '@/snippets/popup-button/regular.json';
+import popupButtonLargeSnippet from '@/snippets/popup-button/large.json';
+
+`LiqPopupButton` renders a 32pt label in system blue with a 14pt chevron-down
+icon. When `onPressed` is null the button is rendered in the disabled
+`rgba(60,60,67,0.3)` colour. Typically used inline to surface a picker or
+action sheet.
+
+## Regular
+
+A popup button label with the default enabled appearance.
+
+<LiqPreview component="popup-button" variant="regular" />
+
+<CodeSnippet snippet={popupButtonRegularSnippet} />
+
+## Large
+
+A second popup button instance demonstrating the same component with a
+longer label string.
+
+<LiqPreview component="popup-button" variant="large" />
+
+<CodeSnippet snippet={popupButtonLargeSnippet} />

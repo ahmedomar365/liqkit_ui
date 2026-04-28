@@ -20,6 +20,8 @@ import 'package:docs_snippets/snippets/context-menu/below-trailing.dart' show co
 import 'package:docs_snippets/snippets/context-menu/beside-leading.dart' show contextMenuBesideLeadingBuilder;
 import 'package:docs_snippets/snippets/empty-state/default.dart' show emptyStateDefaultBuilder;
 import 'package:docs_snippets/snippets/empty-state/with-cta.dart' show emptyStateWithCtaBuilder;
+import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
+import 'package:docs_snippets/snippets/list/grouped.dart' show listGroupedBuilder;
 import 'package:docs_snippets/snippets/materials/dark.dart' show materialsDarkBuilder;
 import 'package:docs_snippets/snippets/materials/light.dart' show materialsLightBuilder;
 import 'package:docs_snippets/snippets/menu/default.dart' show menuDefaultBuilder;
@@ -33,12 +35,16 @@ import 'package:docs_snippets/snippets/popover/bottom.dart' show popoverBottomBu
 import 'package:docs_snippets/snippets/popover/leading.dart' show popoverLeadingBuilder;
 import 'package:docs_snippets/snippets/popover/top.dart' show popoverTopBuilder;
 import 'package:docs_snippets/snippets/popover/trailing.dart' show popoverTrailingBuilder;
+import 'package:docs_snippets/snippets/popup-button/large.dart' show popupButtonLargeBuilder;
+import 'package:docs_snippets/snippets/popup-button/regular.dart' show popupButtonRegularBuilder;
 import 'package:docs_snippets/snippets/segmented/four.dart' show segmentedFourBuilder;
 import 'package:docs_snippets/snippets/segmented/three.dart' show segmentedThreeBuilder;
 import 'package:docs_snippets/snippets/segmented/two.dart' show segmentedTwoBuilder;
 import 'package:docs_snippets/snippets/sheet/full-screen.dart' show sheetFullScreenBuilder;
 import 'package:docs_snippets/snippets/sheet/inspector.dart' show sheetInspectorBuilder;
 import 'package:docs_snippets/snippets/sheet/stacked.dart' show sheetStackedBuilder;
+import 'package:docs_snippets/snippets/sidebar/default.dart' show sidebarDefaultBuilder;
+import 'package:docs_snippets/snippets/sidebar/with-search.dart' show sidebarWithSearchBuilder;
 import 'package:docs_snippets/snippets/slider/dark.dart' show sliderDarkBuilder;
 import 'package:docs_snippets/snippets/slider/default.dart' show sliderDefaultBuilder;
 import 'package:docs_snippets/snippets/stepper/default.dart' show stepperDefaultBuilder;
@@ -52,6 +58,10 @@ import 'package:docs_snippets/snippets/text-styles/dynamic.dart' show textStyles
 import 'package:docs_snippets/snippets/toggle/disabled.dart' show toggleDisabledBuilder;
 import 'package:docs_snippets/snippets/toggle/off.dart' show toggleOffBuilder;
 import 'package:docs_snippets/snippets/toggle/on.dart' show toggleOnBuilder;
+import 'package:docs_snippets/snippets/toolbar/actions.dart' show toolbarActionsBuilder;
+import 'package:docs_snippets/snippets/toolbar/chips.dart' show toolbarChipsBuilder;
+import 'package:docs_snippets/snippets/top-bar/large-title.dart' show topBarLargeTitleBuilder;
+import 'package:docs_snippets/snippets/top-bar/with-title.dart' show topBarWithTitleBuilder;
 
 const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/action-sheet/default': actionSheetDefaultBuilder,
@@ -71,6 +81,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
   '/empty-state/default': emptyStateDefaultBuilder,
   '/empty-state/with-cta': emptyStateWithCtaBuilder,
+  '/list/dark': listDarkBuilder,
+  '/list/grouped': listGroupedBuilder,
   '/materials/dark': materialsDarkBuilder,
   '/materials/light': materialsLightBuilder,
   '/menu/default': menuDefaultBuilder,
@@ -84,12 +96,16 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/popover/leading': popoverLeadingBuilder,
   '/popover/top': popoverTopBuilder,
   '/popover/trailing': popoverTrailingBuilder,
+  '/popup-button/large': popupButtonLargeBuilder,
+  '/popup-button/regular': popupButtonRegularBuilder,
   '/segmented/four': segmentedFourBuilder,
   '/segmented/three': segmentedThreeBuilder,
   '/segmented/two': segmentedTwoBuilder,
   '/sheet/full-screen': sheetFullScreenBuilder,
   '/sheet/inspector': sheetInspectorBuilder,
   '/sheet/stacked': sheetStackedBuilder,
+  '/sidebar/default': sidebarDefaultBuilder,
+  '/sidebar/with-search': sidebarWithSearchBuilder,
   '/slider/dark': sliderDarkBuilder,
   '/slider/default': sliderDefaultBuilder,
   '/stepper/default': stepperDefaultBuilder,
@@ -103,4 +119,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/toggle/disabled': toggleDisabledBuilder,
   '/toggle/off': toggleOffBuilder,
   '/toggle/on': toggleOnBuilder,
+  '/toolbar/actions': toolbarActionsBuilder,
+  '/toolbar/chips': toolbarChipsBuilder,
+  '/top-bar/large-title': topBarLargeTitleBuilder,
+  '/top-bar/with-title': topBarWithTitleBuilder,
 };

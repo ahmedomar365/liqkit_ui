@@ -201,6 +201,51 @@
         { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/default.dart" },
         { "variant": "with-cta", "displayName": "With CTA", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/with-cta.dart" }
       ]
+    },
+    {
+      "component": "top-bar",
+      "displayName": "Top Bars",
+      "group": "navigation",
+      "variants": [
+        { "variant": "with-title", "displayName": "With Title", "dartFile": "apps/docs_snippets/lib/snippets/top-bar/with-title.dart" },
+        { "variant": "large-title", "displayName": "Large Title", "dartFile": "apps/docs_snippets/lib/snippets/top-bar/large-title.dart" }
+      ]
+    },
+    {
+      "component": "toolbar",
+      "displayName": "Toolbars",
+      "group": "navigation",
+      "variants": [
+        { "variant": "actions", "displayName": "Actions", "dartFile": "apps/docs_snippets/lib/snippets/toolbar/actions.dart" },
+        { "variant": "chips", "displayName": "Chips", "dartFile": "apps/docs_snippets/lib/snippets/toolbar/chips.dart" }
+      ]
+    },
+    {
+      "component": "sidebar",
+      "displayName": "Sidebars",
+      "group": "navigation",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/sidebar/default.dart" },
+        { "variant": "with-search", "displayName": "With Search", "dartFile": "apps/docs_snippets/lib/snippets/sidebar/with-search.dart" }
+      ]
+    },
+    {
+      "component": "list",
+      "displayName": "Lists",
+      "group": "navigation",
+      "variants": [
+        { "variant": "grouped", "displayName": "Grouped", "dartFile": "apps/docs_snippets/lib/snippets/list/grouped.dart" },
+        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/list/dark.dart" }
+      ]
+    },
+    {
+      "component": "popup-button",
+      "displayName": "Popup Buttons",
+      "group": "navigation",
+      "variants": [
+        { "variant": "regular", "displayName": "Regular", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/regular.dart" },
+        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/large.dart" }
+      ]
     }
   ]
 }

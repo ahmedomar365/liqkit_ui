@@ -1,0 +1,11 @@
+{
+  "title": "Navigation",
+  "defaultOpen": true,
+  "pages": [
+    "top-bars",
+    "toolbars",
+    "sidebars",
+    "lists",
+    "popup-buttons"
+  ]
+}

@@ -1,0 +1,30 @@
+---
+title: Top Bars
+description: iOS 26 navigation top bars — centered title and large-title variants.
+---
+
+import topBarWithTitleSnippet from '@/snippets/top-bar/with-title.json';
+import topBarLargeTitleSnippet from '@/snippets/top-bar/large-title.json';
+
+`LiqTopBar` is the iOS 26 navigation top bar. It renders a 44pt centered
+title row with optional leading and trailing buttons. Supply `largeTitle`
+to add the 34pt display-weight title row beneath.
+
+## With Title
+
+A standard navigation bar with a centered title and optional leading/trailing
+action buttons (symbol or accent pill style).
+
+<LiqPreview component="top-bar" variant="with-title" />
+
+<CodeSnippet snippet={topBarWithTitleSnippet} />
+
+## Large Title
+
+When `largeTitle` is provided, a second row is rendered beneath the nav bar
+with the title in 34pt SF Pro Display weight. Use at the root level of a
+navigation hierarchy.
+
+<LiqPreview component="top-bar" variant="large-title" />
+
+<CodeSnippet snippet={topBarLargeTitleSnippet} />
