@@ -19,7 +19,7 @@ describe('LiqPreview', () => {
     expect(iframe.tagName).toBe('IFRAME');
     expect(iframe).toHaveAttribute(
       'src',
-      'https://snippets.example.com/button/regular?theme=light',
+      'https://snippets.example.com/?theme=light#/button/regular',
     );
   });
 

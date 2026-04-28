@@ -20,25 +20,22 @@ test.describe('Buttons docs page', () => {
     const snippets = page.locator('[data-testid="code-snippet"]');
     await expect(snippets).toHaveCount(3);
 
-    // The iframe must load a Flutter app, not a 404. A correctly-served
-    // snippets origin (Cloudflare Pages or `flutter run -d web-server`)
-    // does SPA-fallback for unknown paths; `python3 -m http.server` does
-    // not. Without this assertion, the original e2e silently passed even
-    // when the iframe origin returned a 404 page from Python.
-    const regularFrame = page.frameLocator(
-      'iframe[title="liqkit_ui — button/regular"]',
-    );
-    await expect(regularFrame.locator('html')).toBeVisible();
-    const frameTitle = await page
+    // The iframe must load a Flutter app, not a 404. We can't read the
+    // iframe's contentDocument because the snippets origin
+    // (NEXT_PUBLIC_SNIPPETS_URL) is a different port than the docs
+    // origin, which counts as cross-origin. Instead, fetch the iframe
+    // URL directly via the page's request context and assert the
+    // response body contains Flutter's web-shell title and not the
+    // python http.server 404 page.
+    const iframeSrc = await page
       .locator('iframe[title="liqkit_ui — button/regular"]')
-      .evaluate((iframe: HTMLIFrameElement) =>
-        iframe.contentDocument?.title ?? null,
-      );
-    // Flutter's web shell sets <title>liqkit_ui — snippet</title> from
-    // index.html; the Python http.server 404 page sets <title>Error response</title>.
-    expect(frameTitle, 'iframe must serve the Flutter app, not a 404').not.toMatch(
-      /Error response/i,
-    );
+      .getAttribute('src');
+    expect(iframeSrc).toBeTruthy();
+    const iframeResp = await page.request.get(iframeSrc!);
+    expect(iframeResp.status()).toBe(200);
+    const iframeHtml = await iframeResp.text();
+    expect(iframeHtml).toMatch(/liqkit_ui/i);
+    expect(iframeHtml).not.toMatch(/Error response/i);
 
     expect(consoleErrors, consoleErrors.join('; ')).toEqual([]);
   });

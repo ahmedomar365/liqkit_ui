@@ -4,6 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui_assets/liqkit_ui_assets.dart';
 
 /// Entry point for the docs_snippets Flutter Web app.
+///
+/// We use Flutter Web's default hash URL strategy. The iframe origin
+/// in apps/docs/components/liq-preview.tsx constructs URLs like
+/// `${SNIPPETS_URL}/?theme=light#/button/regular`. The hash fragment
+/// becomes the Navigator initial route, so the snippets app routes
+/// without depending on the serving origin doing SPA-fallback.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LiqFontLoader.loadAll();

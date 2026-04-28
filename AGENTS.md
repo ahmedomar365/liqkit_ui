@@ -46,24 +46,26 @@ canonical design spec.
 ## Docs site dev loop
 
 The docs site (`apps/docs/`) iframes single-variant Flutter Web routes
-served by `apps/docs_snippets/`. Those routes use Flutter's path-based
-URL strategy (`/button/regular`, not `/#/button/regular`), so the
-serving origin MUST do SPA-fallback (any unknown path serves
-`index.html`). Cloudflare Pages does this by default, which is why the
-production deploy works.
+served by `apps/docs_snippets/`. The iframe URL is shaped
+`${SNIPPETS_URL}/?theme=light#/button/regular` — query string before
+the `#`, route in the hash. The snippets app uses Flutter's default
+hash URL strategy and reads the route from `window.location.hash`.
 
-Locally, **do not** use `python3 -m http.server` for the snippets app
-— it returns a 404 for any path other than `/`, so iframe contents
-render as Python's "Error response" page. The correct local workflow
-is one of:
+Why hash instead of path: hash routing works against any static
+origin (Cloudflare Pages, `serve -s`, plain `python3 -m http.server`,
+even `flutter run -d web-server`) without depending on SPA-fallback
+rewrites. The browser doesn't send the fragment to the server, so
+the server only ever serves `/` (which is `index.html`). The Flutter
+client then routes locally based on the hash.
 
-- `cd apps/docs_snippets && flutter run -d web-server --web-port=4174`
-  (preferred — also gives you hot reload).
-- `cd apps/docs_snippets/build/web && npx serve -s -l 4174` after a
-  `flutter build web`.
+Local dev:
 
-For the docs site itself: `cd apps/docs && NEXT_PUBLIC_SNIPPETS_URL=http://localhost:4174 npx pnpm@10 dev` (port 3000).
+1. `cd apps/docs_snippets && flutter build web --no-web-resources-cdn --pwa-strategy=none --no-tree-shake-icons --base-href=/`
+2. `cd apps/docs_snippets/build/web && python3 -m http.server 4174 &`
+   (or `flutter run -d web-server --web-port=4174` for hot reload)
+3. `cd apps/docs && NEXT_PUBLIC_SNIPPETS_URL=http://localhost:4174 npx pnpm@10 dev`
+4. Visit <http://localhost:3000/docs/inputs/buttons>.
 
 The Playwright e2e at `apps/docs/tests/buttons-page.spec.ts` asserts
-the iframe content is the Flutter app (not a 404), so this regression
-class is covered in CI.
+the iframe `<title>` matches `/liqkit_ui/i` and not `/Error response/i`,
+covering the iframe-404 regression class in CI.

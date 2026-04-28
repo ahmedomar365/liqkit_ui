@@ -30,7 +30,13 @@ export function LiqPreview({
     snippetsBaseUrl ?? process.env.NEXT_PUBLIC_SNIPPETS_URL ?? '';
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light';
-  const src = `${baseUrl}${route.path}?theme=${theme}`;
+  // Hash-based routing: the snippets Flutter app reads
+  // `window.location.hash` to pick the route. This keeps it working
+  // against ANY static origin (Cloudflare Pages, `serve -s`, plain
+  // Python http.server) without depending on SPA-fallback rewrites.
+  // The `?theme=` query is placed BEFORE the `#` so it's available
+  // via window.location.search, not buried inside the fragment.
+  const src = `${baseUrl}/?theme=${theme}#${route.path}`;
   const [height, setHeight] = useState(initialHeight);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 

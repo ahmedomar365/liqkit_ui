@@ -8,3 +8,4 @@ snippets/
 next-env.d.ts
 out/
 *.tsbuildinfo
+test-results/
