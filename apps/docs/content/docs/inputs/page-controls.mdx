@@ -1,0 +1,28 @@
+---
+title: Page Controls
+description: Dot indicators with peripheral fading.
+---
+
+import pageControlsLightSnippet from '@/snippets/page-controls/light.json';
+import pageControlsDarkSnippet from '@/snippets/page-controls/dark.json';
+
+`LiqPageControl` renders a row of dots indicating paged content. When the
+page count exceeds `maxVisible`, peripheral dots shrink to guide the eye
+towards the active page.
+
+## Light
+
+Black dots on a light surface — the default brightness.
+
+<LiqPreview component="page-controls" variant="light" />
+
+<CodeSnippet snippet={pageControlsLightSnippet} />
+
+## Dark
+
+White/light dots on a dark surface — pass
+`brightness: LiqPageControlBrightness.dark`.
+
+<LiqPreview component="page-controls" variant="dark" />
+
+<CodeSnippet snippet={pageControlsDarkSnippet} />

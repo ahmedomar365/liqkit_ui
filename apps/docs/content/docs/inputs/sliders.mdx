@@ -1,0 +1,27 @@
+---
+title: Sliders
+description: Track + fill + pill knob with dark variant.
+---
+
+import sliderDefaultSnippet from '@/snippets/slider/default.json';
+import sliderDarkSnippet from '@/snippets/slider/dark.json';
+
+`LiqSlider` is the iOS 26 horizontal slider. It renders a track, filled
+portion, and pill-shaped knob. Drag or tap to change the value.
+
+## Default
+
+Light-surface slider at 40% value.
+
+<LiqPreview component="slider" variant="default" />
+
+<CodeSnippet snippet={sliderDefaultSnippet} />
+
+## Dark
+
+The same slider on a dark surface — pass `brightness: Brightness.dark` to
+switch to the dark track and knob colours.
+
+<LiqPreview component="slider" variant="dark" />
+
+<CodeSnippet snippet={sliderDarkSnippet} />

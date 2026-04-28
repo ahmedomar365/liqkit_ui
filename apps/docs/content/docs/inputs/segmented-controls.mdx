@@ -1,0 +1,37 @@
+---
+title: Segmented Controls
+description: 2/3/4-segment selectors.
+---
+
+import segmentedTwoSnippet from '@/snippets/segmented/two.json';
+import segmentedThreeSnippet from '@/snippets/segmented/three.json';
+import segmentedFourSnippet from '@/snippets/segmented/four.json';
+
+`LiqSegmentedControl` is a generic pill-shaped selector that supports
+any value type. The selected segment shows a white pill; others are
+transparent.
+
+## Two Segments
+
+Two-option selector — useful for binary choices like Day / Night.
+
+<LiqPreview component="segmented" variant="two" />
+
+<CodeSnippet snippet={segmentedTwoSnippet} />
+
+## Three Segments
+
+Three-option selector — common for time-range pickers.
+
+<LiqPreview component="segmented" variant="three" />
+
+<CodeSnippet snippet={segmentedThreeSnippet} />
+
+## Four Segments
+
+Four-option selector — fills more horizontal space, keeping each segment
+legible.
+
+<LiqPreview component="segmented" variant="four" />
+
+<CodeSnippet snippet={segmentedFourSnippet} />

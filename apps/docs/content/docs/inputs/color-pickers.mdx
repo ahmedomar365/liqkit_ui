@@ -1,0 +1,36 @@
+---
+title: Color Pickers
+description: Conic-gradient ring button + swatch grid.
+---
+
+import colorPickerLargeSnippet from '@/snippets/color-picker/large.json';
+import colorPickerSmallSnippet from '@/snippets/color-picker/small.json';
+import colorPickerGridSnippet from '@/snippets/color-picker/grid.json';
+
+liqkit_ui ships two colour-picker widgets. `LiqColorPickerButton` is a
+circular button with a conic-gradient hue ring and an inset swatch.
+`LiqColorGrid` is a scrollable grid of solid colour swatches.
+
+## Large
+
+The 36pt button — the default size for prominent colour controls.
+
+<LiqPreview component="color-picker" variant="large" />
+
+<CodeSnippet snippet={colorPickerLargeSnippet} />
+
+## Small
+
+The 28pt button — suited for compact contexts such as toolbars.
+
+<LiqPreview component="color-picker" variant="small" />
+
+<CodeSnippet snippet={colorPickerSmallSnippet} />
+
+## Grid
+
+A 12-column swatch grid with a selection ring on the active colour.
+
+<LiqPreview component="color-picker" variant="grid" />
+
+<CodeSnippet snippet={colorPickerGridSnippet} />

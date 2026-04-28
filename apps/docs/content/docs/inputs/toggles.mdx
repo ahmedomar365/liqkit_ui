@@ -1,0 +1,36 @@
+---
+title: Toggles
+description: On/off switch with disabled state.
+---
+
+import toggleOnSnippet from '@/snippets/toggle/on.json';
+import toggleOffSnippet from '@/snippets/toggle/off.json';
+import toggleDisabledSnippet from '@/snippets/toggle/disabled.json';
+
+`LiqToggle` is the iOS 26 toggle switch. It animates between on and off
+states and renders with 40% opacity when disabled.
+
+## On
+
+The toggle in its active state — green track, knob slid to the right.
+
+<LiqPreview component="toggle" variant="on" />
+
+<CodeSnippet snippet={toggleOnSnippet} />
+
+## Off
+
+The toggle in its inactive state — grey track, knob slid to the left.
+
+<LiqPreview component="toggle" variant="off" />
+
+<CodeSnippet snippet={toggleOffSnippet} />
+
+## Disabled
+
+Pass `onChanged: null` to render the control in a non-interactive, dimmed
+state. Useful when an option is unavailable.
+
+<LiqPreview component="toggle" variant="disabled" />
+
+<CodeSnippet snippet={toggleDisabledSnippet} />

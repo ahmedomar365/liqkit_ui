@@ -48,6 +48,82 @@
         { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/materials/light.dart" },
         { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/materials/dark.dart" }
       ]
+    },
+    {
+      "component": "toggle",
+      "displayName": "Toggles",
+      "group": "inputs",
+      "variants": [
+        { "variant": "on", "displayName": "On", "dartFile": "apps/docs_snippets/lib/snippets/toggle/on.dart" },
+        { "variant": "off", "displayName": "Off", "dartFile": "apps/docs_snippets/lib/snippets/toggle/off.dart" },
+        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/toggle/disabled.dart" }
+      ]
+    },
+    {
+      "component": "slider",
+      "displayName": "Sliders",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/slider/default.dart" },
+        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/slider/dark.dart" }
+      ]
+    },
+    {
+      "component": "stepper",
+      "displayName": "Steppers",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/stepper/default.dart" },
+        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/stepper/disabled.dart" }
+      ]
+    },
+    {
+      "component": "segmented",
+      "displayName": "Segmented Controls",
+      "group": "inputs",
+      "variants": [
+        { "variant": "two", "displayName": "Two Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/two.dart" },
+        { "variant": "three", "displayName": "Three Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/three.dart" },
+        { "variant": "four", "displayName": "Four Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/four.dart" }
+      ]
+    },
+    {
+      "component": "page-controls",
+      "displayName": "Page Controls",
+      "group": "inputs",
+      "variants": [
+        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/page-controls/light.dart" },
+        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/page-controls/dark.dart" }
+      ]
+    },
+    {
+      "component": "color-picker",
+      "displayName": "Color Pickers",
+      "group": "inputs",
+      "variants": [
+        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/large.dart" },
+        { "variant": "small", "displayName": "Small", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/small.dart" },
+        { "variant": "grid", "displayName": "Grid", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/grid.dart" }
+      ]
+    },
+    {
+      "component": "picker",
+      "displayName": "Pickers",
+      "group": "inputs",
+      "variants": [
+        { "variant": "inline-calendar", "displayName": "Inline Calendar", "dartFile": "apps/docs_snippets/lib/snippets/picker/inline-calendar.dart" }
+      ]
+    },
+    {
+      "component": "text-field",
+      "displayName": "Text Fields",
+      "group": "inputs",
+      "variants": [
+        { "variant": "empty", "displayName": "Empty", "dartFile": "apps/docs_snippets/lib/snippets/text-field/empty.dart" },
+        { "variant": "filled", "displayName": "Filled", "dartFile": "apps/docs_snippets/lib/snippets/text-field/filled.dart" },
+        { "variant": "obscured", "displayName": "Obscured", "dartFile": "apps/docs_snippets/lib/snippets/text-field/obscured.dart" },
+        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/text-field/disabled.dart" }
+      ]
     }
   ]
 }

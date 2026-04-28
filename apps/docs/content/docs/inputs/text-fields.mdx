@@ -1,0 +1,46 @@
+---
+title: Text Fields
+description: Single-line input with empty/filled/obscured/disabled states.
+---
+
+import textFieldEmptySnippet from '@/snippets/text-field/empty.json';
+import textFieldFilledSnippet from '@/snippets/text-field/filled.json';
+import textFieldObscuredSnippet from '@/snippets/text-field/obscured.json';
+import textFieldDisabledSnippet from '@/snippets/text-field/disabled.json';
+
+`LiqTextField` is the iOS 26 single-line text input. It requires a
+`TextEditingController` and supports placeholder text, password masking,
+and a disabled (read-only) mode.
+
+## Empty
+
+An empty field showing the placeholder — the typical initial state.
+
+<LiqPreview component="text-field" variant="empty" />
+
+<CodeSnippet snippet={textFieldEmptySnippet} />
+
+## Filled
+
+A field with existing text — the controller is pre-populated.
+
+<LiqPreview component="text-field" variant="filled" />
+
+<CodeSnippet snippet={textFieldFilledSnippet} />
+
+## Obscured
+
+Pass `obscureText: true` to mask characters — used for passwords.
+
+<LiqPreview component="text-field" variant="obscured" />
+
+<CodeSnippet snippet={textFieldObscuredSnippet} />
+
+## Disabled
+
+Pass `enabled: false` to make the field non-interactive. The text renders
+in the placeholder colour to signal that it cannot be edited.
+
+<LiqPreview component="text-field" variant="disabled" />
+
+<CodeSnippet snippet={textFieldDisabledSnippet} />

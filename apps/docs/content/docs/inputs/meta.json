@@ -2,6 +2,14 @@
   "title": "Inputs",
   "defaultOpen": true,
   "pages": [
-    "buttons"
+    "buttons",
+    "toggles",
+    "sliders",
+    "steppers",
+    "segmented-controls",
+    "page-controls",
+    "color-pickers",
+    "pickers",
+    "text-fields"
   ]
 }
