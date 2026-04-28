@@ -1,0 +1,38 @@
+---
+title: Alerts
+description: iOS 26 alert dialogs with stacked, side-by-side, and destructive action layouts.
+---
+
+import alertStackedSnippet from '@/snippets/alert/stacked.json';
+import alertSideBySideSnippet from '@/snippets/alert/side-by-side.json';
+import alertDestructiveSnippet from '@/snippets/alert/destructive.json';
+
+`LiqAlert` is the iOS 26 alert dialog — a 300pt translucent surface with
+a bold title, optional description, and one or more action buttons.
+
+## Stacked
+
+Actions rendered in a vertical stack (one per row). The default layout for
+alerts with two or more actions.
+
+<LiqPreview component="alert" variant="stacked" />
+
+<CodeSnippet snippet={alertStackedSnippet} />
+
+## Side by Side
+
+Two equal-width actions placed side-by-side. Use
+`layout: LiqAlertActionLayout.sideBySide` with exactly two actions.
+
+<LiqPreview component="alert" variant="side-by-side" />
+
+<CodeSnippet snippet={alertSideBySideSnippet} />
+
+## Destructive
+
+An action rendered with `LiqAlertActionStyle.destructive` shows the label
+in system red, signalling an irreversible operation.
+
+<LiqPreview component="alert" variant="destructive" />
+
+<CodeSnippet snippet={alertDestructiveSnippet} />

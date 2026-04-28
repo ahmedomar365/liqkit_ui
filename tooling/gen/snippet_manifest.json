@@ -124,6 +124,83 @@
         { "variant": "obscured", "displayName": "Obscured", "dartFile": "apps/docs_snippets/lib/snippets/text-field/obscured.dart" },
         { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/text-field/disabled.dart" }
       ]
+    },
+    {
+      "component": "sheet",
+      "displayName": "Sheets",
+      "group": "containers",
+      "variants": [
+        { "variant": "full-screen", "displayName": "Full Screen", "dartFile": "apps/docs_snippets/lib/snippets/sheet/full-screen.dart" },
+        { "variant": "stacked", "displayName": "Stacked", "dartFile": "apps/docs_snippets/lib/snippets/sheet/stacked.dart" },
+        { "variant": "inspector", "displayName": "Inspector", "dartFile": "apps/docs_snippets/lib/snippets/sheet/inspector.dart" }
+      ]
+    },
+    {
+      "component": "alert",
+      "displayName": "Alerts",
+      "group": "containers",
+      "variants": [
+        { "variant": "stacked", "displayName": "Stacked", "dartFile": "apps/docs_snippets/lib/snippets/alert/stacked.dart" },
+        { "variant": "side-by-side", "displayName": "Side by Side", "dartFile": "apps/docs_snippets/lib/snippets/alert/side-by-side.dart" },
+        { "variant": "destructive", "displayName": "Destructive", "dartFile": "apps/docs_snippets/lib/snippets/alert/destructive.dart" }
+      ]
+    },
+    {
+      "component": "action-sheet",
+      "displayName": "Action Sheets",
+      "group": "containers",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/default.dart" },
+        { "variant": "with-cancel", "displayName": "With Cancel", "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-cancel.dart" }
+      ]
+    },
+    {
+      "component": "notification",
+      "displayName": "Notifications",
+      "group": "containers",
+      "variants": [
+        { "variant": "mail", "displayName": "Mail", "dartFile": "apps/docs_snippets/lib/snippets/notification/mail.dart" },
+        { "variant": "reminders", "displayName": "Reminders", "dartFile": "apps/docs_snippets/lib/snippets/notification/reminders.dart" }
+      ]
+    },
+    {
+      "component": "popover",
+      "displayName": "Popovers",
+      "group": "containers",
+      "variants": [
+        { "variant": "top", "displayName": "Top", "dartFile": "apps/docs_snippets/lib/snippets/popover/top.dart" },
+        { "variant": "bottom", "displayName": "Bottom", "dartFile": "apps/docs_snippets/lib/snippets/popover/bottom.dart" },
+        { "variant": "leading", "displayName": "Leading", "dartFile": "apps/docs_snippets/lib/snippets/popover/leading.dart" },
+        { "variant": "trailing", "displayName": "Trailing", "dartFile": "apps/docs_snippets/lib/snippets/popover/trailing.dart" }
+      ]
+    },
+    {
+      "component": "menu",
+      "displayName": "Menu",
+      "group": "containers",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/menu/default.dart" },
+        { "variant": "with-section", "displayName": "With Section", "dartFile": "apps/docs_snippets/lib/snippets/menu/with-section.dart" }
+      ]
+    },
+    {
+      "component": "context-menu",
+      "displayName": "Context Menu",
+      "group": "containers",
+      "variants": [
+        { "variant": "below-leading", "displayName": "Below Leading", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-leading.dart" },
+        { "variant": "below-trailing", "displayName": "Below Trailing", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-trailing.dart" },
+        { "variant": "beside-leading", "displayName": "Beside Leading", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/beside-leading.dart" }
+      ]
+    },
+    {
+      "component": "empty-state",
+      "displayName": "Empty States",
+      "group": "containers",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/default.dart" },
+        { "variant": "with-cta", "displayName": "With CTA", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/with-cta.dart" }
+      ]
     }
   ]
 }

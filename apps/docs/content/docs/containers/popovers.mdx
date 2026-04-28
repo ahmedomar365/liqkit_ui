@@ -1,0 +1,45 @@
+---
+title: Popovers
+description: Translucent popover bubbles with a tip on any of the four sides.
+---
+
+import popoverTopSnippet from '@/snippets/popover/top.json';
+import popoverBottomSnippet from '@/snippets/popover/bottom.json';
+import popoverLeadingSnippet from '@/snippets/popover/leading.json';
+import popoverTrailingSnippet from '@/snippets/popover/trailing.json';
+
+`LiqPopover` renders a translucent rounded bubble (13pt radius) with a
+56×13pt triangular tip on the chosen `LiqPopoverSide`. The tip position
+along the edge is controlled by `LiqPopoverAlignment`.
+
+## Top
+
+Tip on the top edge, pointing upward. This is the default side.
+
+<LiqPreview component="popover" variant="top" />
+
+<CodeSnippet snippet={popoverTopSnippet} />
+
+## Bottom
+
+Tip on the bottom edge, pointing downward.
+
+<LiqPreview component="popover" variant="bottom" />
+
+<CodeSnippet snippet={popoverBottomSnippet} />
+
+## Leading
+
+Tip on the leading (left) edge, pointing left.
+
+<LiqPreview component="popover" variant="leading" />
+
+<CodeSnippet snippet={popoverLeadingSnippet} />
+
+## Trailing
+
+Tip on the trailing (right) edge, pointing right.
+
+<LiqPreview component="popover" variant="trailing" />
+
+<CodeSnippet snippet={popoverTrailingSnippet} />

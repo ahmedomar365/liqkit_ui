@@ -1,0 +1,39 @@
+---
+title: Sheets
+description: Modal sheet surfaces — full-screen, stacked, and inspector variants.
+---
+
+import sheetFullScreenSnippet from '@/snippets/sheet/full-screen.json';
+import sheetStackedSnippet from '@/snippets/sheet/stacked.json';
+import sheetInspectorSnippet from '@/snippets/sheet/inspector.json';
+
+`LiqSheet` is the iOS 26 modal sheet container. It renders the grabber,
+controls row, and body for the chosen `LiqSheetVariant`. The host is
+responsible for animating presentation and dimming the parent scrim.
+
+## Full Screen
+
+A single sheet on a white surface — the default variant for primary modal
+content.
+
+<LiqPreview component="sheet" variant="full-screen" />
+
+<CodeSnippet snippet={sheetFullScreenSnippet} />
+
+## Stacked
+
+A sheet stacked over a dimmed background page preview (10pt inset). Use
+when presenting a sheet on top of an already-modal screen.
+
+<LiqPreview component="sheet" variant="stacked" />
+
+<CodeSnippet snippet={sheetStackedSnippet} />
+
+## Inspector
+
+A bottom inspector with a translucent glass background (34pt corner radius,
+white inset rim). Use for contextual inspector panels.
+
+<LiqPreview component="sheet" variant="inspector" />
+
+<CodeSnippet snippet={sheetInspectorSnippet} />

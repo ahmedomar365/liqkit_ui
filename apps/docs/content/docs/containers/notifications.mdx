@@ -1,0 +1,27 @@
+---
+title: Notifications
+description: iOS 26 banner-style notification cards with app icon palettes.
+---
+
+import notificationMailSnippet from '@/snippets/notification/mail.json';
+import notificationRemindersSnippet from '@/snippets/notification/reminders.json';
+
+`LiqNotification` renders a 386pt glass card with a `LiqNotificationIcon`,
+source title, body text, and an optional time chip. The icon surface uses a
+`LiqNotificationIconColors` gradient pair to match standard app palettes.
+
+## Mail
+
+The Mail (blue) palette — `LiqNotificationIconColors.mail`.
+
+<LiqPreview component="notification" variant="mail" />
+
+<CodeSnippet snippet={notificationMailSnippet} />
+
+## Reminders
+
+The Reminders (red) palette — `LiqNotificationIconColors.reminders`.
+
+<LiqPreview component="notification" variant="reminders" />
+
+<CodeSnippet snippet={notificationRemindersSnippet} />

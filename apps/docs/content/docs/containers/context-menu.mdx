@@ -1,0 +1,38 @@
+---
+title: Context Menu
+description: iOS 26 context menu combining a preview tile with a menu panel in three arrangements.
+---
+
+import contextMenuBelowLeadingSnippet from '@/snippets/context-menu/below-leading.json';
+import contextMenuBelowTrailingSnippet from '@/snippets/context-menu/below-trailing.json';
+import contextMenuBesideLeadingSnippet from '@/snippets/context-menu/beside-leading.json';
+
+`LiqContextMenu` composes a `LiqContextMenuPreview` tile and a `LiqMenu`
+panel. The `LiqContextMenuArrangement` enum controls whether the menu sits
+below or beside the preview, and which edge it aligns to.
+
+## Below Leading
+
+Menu below the preview, aligned to the leading (left) edge. This is the
+default arrangement.
+
+<LiqPreview component="context-menu" variant="below-leading" />
+
+<CodeSnippet snippet={contextMenuBelowLeadingSnippet} />
+
+## Below Trailing
+
+Menu below the preview, aligned to the trailing (right) edge.
+
+<LiqPreview component="context-menu" variant="below-trailing" />
+
+<CodeSnippet snippet={contextMenuBelowTrailingSnippet} />
+
+## Beside Leading
+
+Menu beside the preview on the leading side — useful for wider viewports
+where vertical space is limited.
+
+<LiqPreview component="context-menu" variant="beside-leading" />
+
+<CodeSnippet snippet={contextMenuBesideLeadingSnippet} />

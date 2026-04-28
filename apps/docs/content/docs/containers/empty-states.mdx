@@ -1,0 +1,28 @@
+---
+title: Empty States
+description: Centered placeholder with title, description, and an optional call-to-action button.
+---
+
+import emptyStateDefaultSnippet from '@/snippets/empty-state/default.json';
+import emptyStateWithCtaSnippet from '@/snippets/empty-state/with-cta.json';
+
+`LiqEmptyState` renders a centered column of title and optional description
+text. An optional `icon` widget can be shown above the copy, and a `cta`
+slot accepts a `LiqEmptyStateCta` call-to-action button.
+
+## Default
+
+Title and description only — the minimal empty-state placeholder.
+
+<LiqPreview component="empty-state" variant="default" />
+
+<CodeSnippet snippet={emptyStateDefaultSnippet} />
+
+## With CTA
+
+Add a `LiqEmptyStateCta` button below the copy to guide the user toward a
+primary action.
+
+<LiqPreview component="empty-state" variant="with-cta" />
+
+<CodeSnippet snippet={emptyStateWithCtaSnippet} />

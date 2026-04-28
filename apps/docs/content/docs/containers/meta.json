@@ -1,0 +1,14 @@
+{
+  "title": "Containers",
+  "defaultOpen": true,
+  "pages": [
+    "sheets",
+    "alerts",
+    "action-sheets",
+    "notifications",
+    "popovers",
+    "menu",
+    "context-menu",
+    "empty-states"
+  ]
+}

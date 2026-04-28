@@ -1,0 +1,29 @@
+---
+title: Action Sheets
+description: Bottom-anchored stacks of full-width actions with an optional separated cancel button.
+---
+
+import actionSheetDefaultSnippet from '@/snippets/action-sheet/default.json';
+import actionSheetWithCancelSnippet from '@/snippets/action-sheet/with-cancel.json';
+
+`LiqActionSheet` renders a translucent rounded panel of full-width action
+rows. When `cancelAction` is provided, it is shown in a separate surface
+below the main actions — matching the native iOS action sheet pattern.
+
+## Default
+
+A basic action sheet with a title and a list of actions. No cancel button
+is separated from the main surface.
+
+<LiqPreview component="action-sheet" variant="default" />
+
+<CodeSnippet snippet={actionSheetDefaultSnippet} />
+
+## With Cancel
+
+Pass `cancelAction` to add a second translucent cancel surface below the
+main actions. The cancel label is rendered in system blue with bold weight.
+
+<LiqPreview component="action-sheet" variant="with-cancel" />
+
+<CodeSnippet snippet={actionSheetWithCancelSnippet} />
