@@ -1,0 +1,35 @@
+---
+title: Windows
+description: macOS-style window card with toolbar, traffic-light controls, and glass buttons.
+---
+
+import windowDefaultSnippet from '@/snippets/window/default.json';
+import windowInactiveControlsSnippet from '@/snippets/window/inactive-controls.json';
+
+`LiqWindow` renders a 34pt rounded-rect white window card with a soft drop
+shadow. Compose `LiqWindowToolbar`, `LiqWindowControls`, and
+`LiqWindowGlassButton` to build the toolbar content.
+
+| Component | Description |
+|-----------|-------------|
+| `LiqWindow` | Outer window container (configurable `size`) |
+| `LiqWindowToolbar` | 64pt toolbar with leading, center, and trailing slots |
+| `LiqWindowControls` | Traffic-light close/minimise/maximise dots |
+| `LiqWindowGlassButton` | Glass-style 44pt button for toolbar actions |
+
+## Default
+
+Active traffic-light controls and a centered title.
+
+<LiqPreview component="window" variant="default" />
+
+<CodeSnippet snippet={windowDefaultSnippet} />
+
+## Inactive Controls
+
+Pass `active: false` to `LiqWindowControls` to dim the dots — shown when
+the window is not in focus.
+
+<LiqPreview component="window" variant="inactive-controls" />
+
+<CodeSnippet snippet={windowInactiveControlsSnippet} />

@@ -1,0 +1,41 @@
+---
+title: Kit Helpers
+description: Kit demo scaffolding — large header, mode pill, and mode-labels card.
+---
+
+import kitHelpersHeaderSnippet from '@/snippets/kit-helpers/header.json';
+import kitHelpersModePillSnippet from '@/snippets/kit-helpers/mode-pill.json';
+import kitHelpersModeLabelsSnippet from '@/snippets/kit-helpers/mode-labels.json';
+
+The `LiqKitHelpers*` family provides the page-level chrome for component kit
+demo pages: a large bold title block, small mode-indicator pills, and a
+dashed-border card that stacks multiple mode pills together.
+
+## Header
+
+`LiqKitHelpersHeader` renders a 700-weight 56pt title and a 400-weight 28pt
+description — used at the top of each kit demo page.
+
+<LiqPreview component="kit-helpers" variant="header" />
+
+<CodeSnippet snippet={kitHelpersHeaderSnippet} />
+
+## Mode Pill
+
+`LiqKitHelpersModePill` renders a 54×19 rounded pill with a ring-and-dot
+glyph and a label. Use `brightness` to switch between light and dark
+variants.
+
+<LiqPreview component="kit-helpers" variant="mode-pill" />
+
+<CodeSnippet snippet={kitHelpersModePillSnippet} />
+
+## Mode Labels
+
+`LiqKitHelpersModeLabels` wraps a stack of `LiqKitHelpersModePill` widgets
+inside an 88pt dashed-border card — the canonical way to label light/dark
+preview pairs.
+
+<LiqPreview component="kit-helpers" variant="mode-labels" />
+
+<CodeSnippet snippet={kitHelpersModeLabelsSnippet} />

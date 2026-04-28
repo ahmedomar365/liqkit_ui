@@ -1,0 +1,35 @@
+---
+title: Keyboards
+description: iOS 26 keyboard surface — QWERTY and custom numeric key rows.
+---
+
+import keyboardQwertySnippet from '@/snippets/keyboard/qwerty.json';
+import keyboardNumbersSnippet from '@/snippets/keyboard/numbers.json';
+
+`LiqKeyboard` renders an iOS 26 keyboard surface: a 402×874 rounded-rect
+light surface with an autocomplete suggestions strip, a key-flow area of
+30×40 white pills, and a bottom toolbar with emoji, space bar, and mic glyphs.
+Pass custom `keyRows` to swap out the QWERTY layout for any other arrangement.
+
+| Parameter | Description |
+|-----------|-------------|
+| `suggestions` | List of up to three suggestion strings (default QWERTY suggestions) |
+| `keyRows` | List of key-label rows (default `liqKeyboardQwertyRows`) |
+| `width` | Outer width in logical pixels (default 402) |
+| `minHeight` | Minimum height in logical pixels (default 874) |
+
+## QWERTY
+
+The default configuration using `liqKeyboardQwertyRows`.
+
+<LiqPreview component="keyboard" variant="qwerty" />
+
+<CodeSnippet snippet={keyboardQwertySnippet} />
+
+## Numbers
+
+A custom numeric layout using four rows of digit keys.
+
+<LiqPreview component="keyboard" variant="numbers" />
+
+<CodeSnippet snippet={keyboardNumbersSnippet} />

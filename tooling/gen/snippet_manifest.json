@@ -282,6 +282,84 @@
         { "variant": "success", "displayName": "Success", "dartFile": "apps/docs_snippets/lib/snippets/face-id/success.dart" },
         { "variant": "fail", "displayName": "Fail", "dartFile": "apps/docs_snippets/lib/snippets/face-id/fail.dart" }
       ]
+    },
+    {
+      "component": "app-icon",
+      "displayName": "App Icons",
+      "group": "decoration",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/default.dart" },
+        { "variant": "with-badge", "displayName": "With Badge", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-badge.dart" },
+        { "variant": "with-caption", "displayName": "With Caption", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-caption.dart" }
+      ]
+    },
+    {
+      "component": "bezel",
+      "displayName": "Bezels",
+      "group": "decoration",
+      "variants": [
+        { "variant": "with-island", "displayName": "With Island", "dartFile": "apps/docs_snippets/lib/snippets/bezel/with-island.dart" },
+        { "variant": "no-island", "displayName": "No Island", "dartFile": "apps/docs_snippets/lib/snippets/bezel/no-island.dart" }
+      ]
+    },
+    {
+      "component": "keyboard",
+      "displayName": "Keyboards",
+      "group": "decoration",
+      "variants": [
+        { "variant": "qwerty", "displayName": "QWERTY", "dartFile": "apps/docs_snippets/lib/snippets/keyboard/qwerty.dart" },
+        { "variant": "numbers", "displayName": "Numbers", "dartFile": "apps/docs_snippets/lib/snippets/keyboard/numbers.dart" }
+      ]
+    },
+    {
+      "component": "widget",
+      "displayName": "Widgets",
+      "group": "decoration",
+      "variants": [
+        { "variant": "small", "displayName": "Small", "dartFile": "apps/docs_snippets/lib/snippets/widget/small.dart" },
+        { "variant": "medium", "displayName": "Medium", "dartFile": "apps/docs_snippets/lib/snippets/widget/medium.dart" },
+        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/widget/large.dart" },
+        { "variant": "extra-large", "displayName": "Extra Large", "dartFile": "apps/docs_snippets/lib/snippets/widget/extra-large.dart" }
+      ]
+    },
+    {
+      "component": "window",
+      "displayName": "Windows",
+      "group": "decoration",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/window/default.dart" },
+        { "variant": "inactive-controls", "displayName": "Inactive Controls", "dartFile": "apps/docs_snippets/lib/snippets/window/inactive-controls.dart" }
+      ]
+    },
+    {
+      "component": "system",
+      "displayName": "System",
+      "group": "decoration",
+      "variants": [
+        { "variant": "home-indicator", "displayName": "Home Indicator", "dartFile": "apps/docs_snippets/lib/snippets/system/home-indicator.dart" },
+        { "variant": "action-pill", "displayName": "Action Pill", "dartFile": "apps/docs_snippets/lib/snippets/system/action-pill.dart" },
+        { "variant": "toggle-dot", "displayName": "Toggle Dot", "dartFile": "apps/docs_snippets/lib/snippets/system/toggle-dot.dart" }
+      ]
+    },
+    {
+      "component": "examples",
+      "displayName": "Examples",
+      "group": "decoration",
+      "variants": [
+        { "variant": "panel", "displayName": "Panel", "dartFile": "apps/docs_snippets/lib/snippets/examples/panel.dart" },
+        { "variant": "section", "displayName": "Section", "dartFile": "apps/docs_snippets/lib/snippets/examples/section.dart" },
+        { "variant": "item", "displayName": "Item", "dartFile": "apps/docs_snippets/lib/snippets/examples/item.dart" }
+      ]
+    },
+    {
+      "component": "kit-helpers",
+      "displayName": "Kit Helpers",
+      "group": "decoration",
+      "variants": [
+        { "variant": "header", "displayName": "Header", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/header.dart" },
+        { "variant": "mode-pill", "displayName": "Mode Pill", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-pill.dart" },
+        { "variant": "mode-labels", "displayName": "Mode Labels", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-labels.dart" }
+      ]
     }
   ]
 }

@@ -1,0 +1,35 @@
+---
+title: Bezels
+description: iOS 26 device bezel — iPhone-style chrome with optional Dynamic Island.
+---
+
+import bezelWithIslandSnippet from '@/snippets/bezel/with-island.json';
+import bezelNoIslandSnippet from '@/snippets/bezel/no-island.json';
+
+`LiqDeviceBezel` renders a 402×874 iPhone-style outer chrome: dark gradient
+body, inner light rim and dark mid-rim, and a 111×37 Dynamic Island pill at
+the top when `showIsland` is true. The child widget is clipped to the inner
+screen rounded rect (46pt radius).
+
+| Parameter | Description |
+|-----------|-------------|
+| `size` | Outer dimensions (default `Size(402, 874)`) |
+| `showIsland` | Whether to render the Dynamic Island pill (default `true`) |
+| `screenColor` | Background color of the inner screen (default `0xFFECECEF`) |
+| `child` | Optional content rendered inside the screen |
+
+## With Island
+
+The default configuration includes the Dynamic Island pill and camera dot.
+
+<LiqPreview component="bezel" variant="with-island" />
+
+<CodeSnippet snippet={bezelWithIslandSnippet} />
+
+## No Island
+
+Pass `showIsland: false` to omit the pill — useful for older device mockups.
+
+<LiqPreview component="bezel" variant="no-island" />
+
+<CodeSnippet snippet={bezelNoIslandSnippet} />

@@ -1,0 +1,52 @@
+---
+title: Widgets
+description: iOS 26 home-screen widget card — four size variants.
+---
+
+import widgetSmallSnippet from '@/snippets/widget/small.json';
+import widgetMediumSnippet from '@/snippets/widget/medium.json';
+import widgetLargeSnippet from '@/snippets/widget/large.json';
+import widgetExtraLargeSnippet from '@/snippets/widget/extra-large.json';
+
+`LiqWidgetCard` renders an iOS 26 home-screen widget card: a 14pt rounded
+surface with a radial-highlighted blue gradient and an optional bottom-left
+caption. The `size` parameter controls the aspect ratio.
+
+| Size | Aspect ratio | Use case |
+|------|-------------|---------|
+| `small` | 1:1 | Single-cell square widget |
+| `medium` | 2:1 | Two-cell wide widget |
+| `large` | ~1:1.045 | Two-cell tall widget |
+| `extraLarge` | 2.1:1 | iPad extra-wide widget |
+
+## Small
+
+Square (1:1) — the most compact size.
+
+<LiqPreview component="widget" variant="small" />
+
+<CodeSnippet snippet={widgetSmallSnippet} />
+
+## Medium
+
+Wide (2:1) — the default size.
+
+<LiqPreview component="widget" variant="medium" />
+
+<CodeSnippet snippet={widgetMediumSnippet} />
+
+## Large
+
+Nearly square, slightly taller than 1:1.
+
+<LiqPreview component="widget" variant="large" />
+
+<CodeSnippet snippet={widgetLargeSnippet} />
+
+## Extra Large
+
+iPad-only extra-wide format at 2.1:1.
+
+<LiqPreview component="widget" variant="extra-large" />
+
+<CodeSnippet snippet={widgetExtraLargeSnippet} />

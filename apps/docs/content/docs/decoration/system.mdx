@@ -1,0 +1,41 @@
+---
+title: System
+description: iOS 26 system primitives — home indicator, action pill, and toggle dot.
+---
+
+import systemHomeIndicatorSnippet from '@/snippets/system/home-indicator.json';
+import systemActionPillSnippet from '@/snippets/system/action-pill.json';
+import systemToggleDotSnippet from '@/snippets/system/toggle-dot.json';
+
+Low-level system chrome components used inside Quick Actions rows and device
+mockups. All three are purely decorative — they do not carry their own state
+management.
+
+## Home Indicator
+
+`LiqHomeIndicator` renders the 144×5 black pill inside a device-tinted 11pt
+rounded slot. Use `layout` to switch between iPhone portrait/landscape and
+iPad portrait/landscape sizes.
+
+<LiqPreview component="system" variant="home-indicator" />
+
+<CodeSnippet snippet={systemHomeIndicatorSnippet} />
+
+## Action Pill
+
+`LiqSystemActionPill` renders a 42pt gradient pill used in Home Screen Quick
+Action rows. Supports `regular` and `destructive` styles and `light`/`dark`
+brightness variants.
+
+<LiqPreview component="system" variant="action-pill" />
+
+<CodeSnippet snippet={systemActionPillSnippet} />
+
+## Toggle Dot
+
+`LiqSystemToggleDot` renders a 38×38 circle that fills with system blue when
+`selected` is true.
+
+<LiqPreview component="system" variant="toggle-dot" />
+
+<CodeSnippet snippet={systemToggleDotSnippet} />

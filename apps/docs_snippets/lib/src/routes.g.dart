@@ -9,6 +9,11 @@ import 'package:docs_snippets/snippets/activity-view/default.dart' show activity
 import 'package:docs_snippets/snippets/alert/destructive.dart' show alertDestructiveBuilder;
 import 'package:docs_snippets/snippets/alert/side-by-side.dart' show alertSideBySideBuilder;
 import 'package:docs_snippets/snippets/alert/stacked.dart' show alertStackedBuilder;
+import 'package:docs_snippets/snippets/app-icon/default.dart' show appIconDefaultBuilder;
+import 'package:docs_snippets/snippets/app-icon/with-badge.dart' show appIconWithBadgeBuilder;
+import 'package:docs_snippets/snippets/app-icon/with-caption.dart' show appIconWithCaptionBuilder;
+import 'package:docs_snippets/snippets/bezel/no-island.dart' show bezelNoIslandBuilder;
+import 'package:docs_snippets/snippets/bezel/with-island.dart' show bezelWithIslandBuilder;
 import 'package:docs_snippets/snippets/button/destructive.dart' show buttonDestructiveBuilder;
 import 'package:docs_snippets/snippets/button/glass.dart' show buttonGlassBuilder;
 import 'package:docs_snippets/snippets/button/regular.dart' show buttonRegularBuilder;
@@ -21,9 +26,17 @@ import 'package:docs_snippets/snippets/context-menu/below-trailing.dart' show co
 import 'package:docs_snippets/snippets/context-menu/beside-leading.dart' show contextMenuBesideLeadingBuilder;
 import 'package:docs_snippets/snippets/empty-state/default.dart' show emptyStateDefaultBuilder;
 import 'package:docs_snippets/snippets/empty-state/with-cta.dart' show emptyStateWithCtaBuilder;
+import 'package:docs_snippets/snippets/examples/item.dart' show examplesItemBuilder;
+import 'package:docs_snippets/snippets/examples/panel.dart' show examplesPanelBuilder;
+import 'package:docs_snippets/snippets/examples/section.dart' show examplesSectionBuilder;
 import 'package:docs_snippets/snippets/face-id/fail.dart' show faceIdFailBuilder;
 import 'package:docs_snippets/snippets/face-id/scanning.dart' show faceIdScanningBuilder;
 import 'package:docs_snippets/snippets/face-id/success.dart' show faceIdSuccessBuilder;
+import 'package:docs_snippets/snippets/keyboard/numbers.dart' show keyboardNumbersBuilder;
+import 'package:docs_snippets/snippets/keyboard/qwerty.dart' show keyboardQwertyBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/header.dart' show kitHelpersHeaderBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/mode-labels.dart' show kitHelpersModeLabelsBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/mode-pill.dart' show kitHelpersModePillBuilder;
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
 import 'package:docs_snippets/snippets/list/grouped.dart' show listGroupedBuilder;
 import 'package:docs_snippets/snippets/materials/dark.dart' show materialsDarkBuilder;
@@ -57,6 +70,9 @@ import 'package:docs_snippets/snippets/status-bar/dark.dart' show statusBarDarkB
 import 'package:docs_snippets/snippets/status-bar/light.dart' show statusBarLightBuilder;
 import 'package:docs_snippets/snippets/stepper/default.dart' show stepperDefaultBuilder;
 import 'package:docs_snippets/snippets/stepper/disabled.dart' show stepperDisabledBuilder;
+import 'package:docs_snippets/snippets/system/action-pill.dart' show systemActionPillBuilder;
+import 'package:docs_snippets/snippets/system/home-indicator.dart' show systemHomeIndicatorBuilder;
+import 'package:docs_snippets/snippets/system/toggle-dot.dart' show systemToggleDotBuilder;
 import 'package:docs_snippets/snippets/text-field/disabled.dart' show textFieldDisabledBuilder;
 import 'package:docs_snippets/snippets/text-field/empty.dart' show textFieldEmptyBuilder;
 import 'package:docs_snippets/snippets/text-field/filled.dart' show textFieldFilledBuilder;
@@ -70,6 +86,12 @@ import 'package:docs_snippets/snippets/toolbar/actions.dart' show toolbarActions
 import 'package:docs_snippets/snippets/toolbar/chips.dart' show toolbarChipsBuilder;
 import 'package:docs_snippets/snippets/top-bar/large-title.dart' show topBarLargeTitleBuilder;
 import 'package:docs_snippets/snippets/top-bar/with-title.dart' show topBarWithTitleBuilder;
+import 'package:docs_snippets/snippets/widget/extra-large.dart' show widgetExtraLargeBuilder;
+import 'package:docs_snippets/snippets/widget/large.dart' show widgetLargeBuilder;
+import 'package:docs_snippets/snippets/widget/medium.dart' show widgetMediumBuilder;
+import 'package:docs_snippets/snippets/widget/small.dart' show widgetSmallBuilder;
+import 'package:docs_snippets/snippets/window/default.dart' show windowDefaultBuilder;
+import 'package:docs_snippets/snippets/window/inactive-controls.dart' show windowInactiveControlsBuilder;
 
 const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/action-sheet/default': actionSheetDefaultBuilder,
@@ -78,6 +100,11 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/alert/destructive': alertDestructiveBuilder,
   '/alert/side-by-side': alertSideBySideBuilder,
   '/alert/stacked': alertStackedBuilder,
+  '/app-icon/default': appIconDefaultBuilder,
+  '/app-icon/with-badge': appIconWithBadgeBuilder,
+  '/app-icon/with-caption': appIconWithCaptionBuilder,
+  '/bezel/no-island': bezelNoIslandBuilder,
+  '/bezel/with-island': bezelWithIslandBuilder,
   '/button/destructive': buttonDestructiveBuilder,
   '/button/glass': buttonGlassBuilder,
   '/button/regular': buttonRegularBuilder,
@@ -90,9 +117,17 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
   '/empty-state/default': emptyStateDefaultBuilder,
   '/empty-state/with-cta': emptyStateWithCtaBuilder,
+  '/examples/item': examplesItemBuilder,
+  '/examples/panel': examplesPanelBuilder,
+  '/examples/section': examplesSectionBuilder,
   '/face-id/fail': faceIdFailBuilder,
   '/face-id/scanning': faceIdScanningBuilder,
   '/face-id/success': faceIdSuccessBuilder,
+  '/keyboard/numbers': keyboardNumbersBuilder,
+  '/keyboard/qwerty': keyboardQwertyBuilder,
+  '/kit-helpers/header': kitHelpersHeaderBuilder,
+  '/kit-helpers/mode-labels': kitHelpersModeLabelsBuilder,
+  '/kit-helpers/mode-pill': kitHelpersModePillBuilder,
   '/list/dark': listDarkBuilder,
   '/list/grouped': listGroupedBuilder,
   '/materials/dark': materialsDarkBuilder,
@@ -126,6 +161,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/status-bar/light': statusBarLightBuilder,
   '/stepper/default': stepperDefaultBuilder,
   '/stepper/disabled': stepperDisabledBuilder,
+  '/system/action-pill': systemActionPillBuilder,
+  '/system/home-indicator': systemHomeIndicatorBuilder,
+  '/system/toggle-dot': systemToggleDotBuilder,
   '/text-field/disabled': textFieldDisabledBuilder,
   '/text-field/empty': textFieldEmptyBuilder,
   '/text-field/filled': textFieldFilledBuilder,
@@ -139,4 +177,10 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/toolbar/chips': toolbarChipsBuilder,
   '/top-bar/large-title': topBarLargeTitleBuilder,
   '/top-bar/with-title': topBarWithTitleBuilder,
+  '/widget/extra-large': widgetExtraLargeBuilder,
+  '/widget/large': widgetLargeBuilder,
+  '/widget/medium': widgetMediumBuilder,
+  '/widget/small': widgetSmallBuilder,
+  '/window/default': windowDefaultBuilder,
+  '/window/inactive-controls': windowInactiveControlsBuilder,
 };

@@ -1,0 +1,39 @@
+---
+title: Examples
+description: Documentation scaffolding components — panel, section, and item cards.
+---
+
+import examplesPanelSnippet from '@/snippets/examples/panel.json';
+import examplesSectionSnippet from '@/snippets/examples/section.json';
+import examplesItemSnippet from '@/snippets/examples/item.json';
+
+The `LiqExamples*` family provides the white-card scaffolding used to lay
+out component showcase pages. Nest sections and items inside a panel for a
+consistent documentation layout.
+
+## Panel
+
+`LiqExamplesPanel` is the outermost container — a 12pt rounded white card
+with an optional heading and body paragraph above the slot content.
+
+<LiqPreview component="examples" variant="panel" />
+
+<CodeSnippet snippet={examplesPanelSnippet} />
+
+## Section
+
+`LiqExamplesSection` is a subsection card with a 590-weight title and an
+optional meta caption.
+
+<LiqPreview component="examples" variant="section" />
+
+<CodeSnippet snippet={examplesSectionSnippet} />
+
+## Item
+
+`LiqExamplesItem` is a compact item card showing a component name, optional
+meta string, and an optional inline code label rendered in blue monospace.
+
+<LiqPreview component="examples" variant="item" />
+
+<CodeSnippet snippet={examplesItemSnippet} />

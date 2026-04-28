@@ -1,0 +1,46 @@
+---
+title: App Icons
+description: iOS 26 home-screen app icon tile — solid color, badge, and caption variants.
+---
+
+import appIconDefaultSnippet from '@/snippets/app-icon/default.json';
+import appIconWithBadgeSnippet from '@/snippets/app-icon/with-badge.json';
+import appIconWithCaptionSnippet from '@/snippets/app-icon/with-caption.json';
+
+`LiqAppIcon` renders a 66pt squircle tile (14pt corner radius) with an
+optional glyph centered inside. Use `LiqAppIconBadge` to overlay a red
+notification count at the top-right, and the `label` parameter to show a
+caption below the tile.
+
+| Parameter | Description |
+|-----------|-------------|
+| `size` | Tile dimension in logical pixels (default 66) |
+| `color` | Solid background color |
+| `gradient` | Optional vertical gradient (overrides `color`) |
+| `glyph` | Widget centered inside the tile |
+| `badge` | Optional `LiqAppIconBadge` widget |
+| `label` | Caption string shown beneath the tile |
+
+## Default
+
+A plain colored tile — the simplest usage.
+
+<LiqPreview component="app-icon" variant="default" />
+
+<CodeSnippet snippet={appIconDefaultSnippet} />
+
+## With Badge
+
+Add `LiqAppIconBadge(count: n)` to overlay a notification count badge.
+
+<LiqPreview component="app-icon" variant="with-badge" />
+
+<CodeSnippet snippet={appIconWithBadgeSnippet} />
+
+## With Caption
+
+Pass `label` to show a title string below the tile.
+
+<LiqPreview component="app-icon" variant="with-caption" />
+
+<CodeSnippet snippet={appIconWithCaptionSnippet} />

@@ -1,0 +1,8 @@
+{
+  "title": "Decoration",
+  "defaultOpen": true,
+  "pages": [
+    "app-icons", "bezels", "keyboards", "widgets",
+    "windows", "system", "examples", "kit-helpers"
+  ]
+}
