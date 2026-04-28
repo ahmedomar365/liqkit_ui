@@ -65,7 +65,7 @@ export function LiqPreview({
       height={height}
       loading="lazy"
       sandbox="allow-scripts allow-same-origin"
-      style={{ border: '1px solid var(--color-fd-border)', borderRadius: 12 }}
+      style={{ border: '1px solid var(--color-fd-border)', borderRadius: 12, transition: 'height 220ms ease-out' }}
     />
   );
 }
