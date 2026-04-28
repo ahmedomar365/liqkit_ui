@@ -1,0 +1,44 @@
+---
+title: Installation
+description: Add liqkit_ui to your Flutter app in three lines.
+---
+
+```yaml title="pubspec.yaml"
+dependencies:
+  flutter:
+    sdk: flutter
+  liqkit_ui: ^0.1.0
+  liqkit_ui_assets: ^0.1.0
+```
+
+Then run:
+
+```bash
+flutter pub get
+```
+
+In your app entrypoint, load the bundled SF Pro fonts before
+`runApp`:
+
+```dart title="lib/main.dart"
+import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
+import 'package:liqkit_ui_assets/liqkit_ui_assets.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LiqFontLoader.loadAll();
+  runApp(const MyApp());
+}
+```
+
+Wrap any subtree that uses liqkit_ui widgets in a `LiqTheme`:
+
+```dart
+LiqTheme(
+  data: LiqThemeData.light,
+  child: const MyButton(),
+)
+```
+
+That's it. Browse the sidebar for component examples.
