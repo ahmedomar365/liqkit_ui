@@ -5,6 +5,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:docs_snippets/snippets/action-sheet/default.dart' show actionSheetDefaultBuilder;
 import 'package:docs_snippets/snippets/action-sheet/with-cancel.dart' show actionSheetWithCancelBuilder;
+import 'package:docs_snippets/snippets/activity-view/default.dart' show activityViewDefaultBuilder;
 import 'package:docs_snippets/snippets/alert/destructive.dart' show alertDestructiveBuilder;
 import 'package:docs_snippets/snippets/alert/side-by-side.dart' show alertSideBySideBuilder;
 import 'package:docs_snippets/snippets/alert/stacked.dart' show alertStackedBuilder;
@@ -20,6 +21,9 @@ import 'package:docs_snippets/snippets/context-menu/below-trailing.dart' show co
 import 'package:docs_snippets/snippets/context-menu/beside-leading.dart' show contextMenuBesideLeadingBuilder;
 import 'package:docs_snippets/snippets/empty-state/default.dart' show emptyStateDefaultBuilder;
 import 'package:docs_snippets/snippets/empty-state/with-cta.dart' show emptyStateWithCtaBuilder;
+import 'package:docs_snippets/snippets/face-id/fail.dart' show faceIdFailBuilder;
+import 'package:docs_snippets/snippets/face-id/scanning.dart' show faceIdScanningBuilder;
+import 'package:docs_snippets/snippets/face-id/success.dart' show faceIdSuccessBuilder;
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
 import 'package:docs_snippets/snippets/list/grouped.dart' show listGroupedBuilder;
 import 'package:docs_snippets/snippets/materials/dark.dart' show materialsDarkBuilder;
@@ -37,6 +41,8 @@ import 'package:docs_snippets/snippets/popover/top.dart' show popoverTopBuilder;
 import 'package:docs_snippets/snippets/popover/trailing.dart' show popoverTrailingBuilder;
 import 'package:docs_snippets/snippets/popup-button/large.dart' show popupButtonLargeBuilder;
 import 'package:docs_snippets/snippets/popup-button/regular.dart' show popupButtonRegularBuilder;
+import 'package:docs_snippets/snippets/progress/linear.dart' show progressLinearBuilder;
+import 'package:docs_snippets/snippets/progress/spinner.dart' show progressSpinnerBuilder;
 import 'package:docs_snippets/snippets/segmented/four.dart' show segmentedFourBuilder;
 import 'package:docs_snippets/snippets/segmented/three.dart' show segmentedThreeBuilder;
 import 'package:docs_snippets/snippets/segmented/two.dart' show segmentedTwoBuilder;
@@ -47,6 +53,8 @@ import 'package:docs_snippets/snippets/sidebar/default.dart' show sidebarDefault
 import 'package:docs_snippets/snippets/sidebar/with-search.dart' show sidebarWithSearchBuilder;
 import 'package:docs_snippets/snippets/slider/dark.dart' show sliderDarkBuilder;
 import 'package:docs_snippets/snippets/slider/default.dart' show sliderDefaultBuilder;
+import 'package:docs_snippets/snippets/status-bar/dark.dart' show statusBarDarkBuilder;
+import 'package:docs_snippets/snippets/status-bar/light.dart' show statusBarLightBuilder;
 import 'package:docs_snippets/snippets/stepper/default.dart' show stepperDefaultBuilder;
 import 'package:docs_snippets/snippets/stepper/disabled.dart' show stepperDisabledBuilder;
 import 'package:docs_snippets/snippets/text-field/disabled.dart' show textFieldDisabledBuilder;
@@ -66,6 +74,7 @@ import 'package:docs_snippets/snippets/top-bar/with-title.dart' show topBarWithT
 const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/action-sheet/default': actionSheetDefaultBuilder,
   '/action-sheet/with-cancel': actionSheetWithCancelBuilder,
+  '/activity-view/default': activityViewDefaultBuilder,
   '/alert/destructive': alertDestructiveBuilder,
   '/alert/side-by-side': alertSideBySideBuilder,
   '/alert/stacked': alertStackedBuilder,
@@ -81,6 +90,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
   '/empty-state/default': emptyStateDefaultBuilder,
   '/empty-state/with-cta': emptyStateWithCtaBuilder,
+  '/face-id/fail': faceIdFailBuilder,
+  '/face-id/scanning': faceIdScanningBuilder,
+  '/face-id/success': faceIdSuccessBuilder,
   '/list/dark': listDarkBuilder,
   '/list/grouped': listGroupedBuilder,
   '/materials/dark': materialsDarkBuilder,
@@ -98,6 +110,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/popover/trailing': popoverTrailingBuilder,
   '/popup-button/large': popupButtonLargeBuilder,
   '/popup-button/regular': popupButtonRegularBuilder,
+  '/progress/linear': progressLinearBuilder,
+  '/progress/spinner': progressSpinnerBuilder,
   '/segmented/four': segmentedFourBuilder,
   '/segmented/three': segmentedThreeBuilder,
   '/segmented/two': segmentedTwoBuilder,
@@ -108,6 +122,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/sidebar/with-search': sidebarWithSearchBuilder,
   '/slider/dark': sliderDarkBuilder,
   '/slider/default': sliderDefaultBuilder,
+  '/status-bar/dark': statusBarDarkBuilder,
+  '/status-bar/light': statusBarLightBuilder,
   '/stepper/default': stepperDefaultBuilder,
   '/stepper/disabled': stepperDisabledBuilder,
   '/text-field/disabled': textFieldDisabledBuilder,

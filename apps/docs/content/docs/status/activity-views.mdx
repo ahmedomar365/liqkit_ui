@@ -1,0 +1,23 @@
+---
+title: Activity Views
+description: iOS 26 share/activity sheet — translucent panel with optional header and body content.
+---
+
+import activityViewDefaultSnippet from '@/snippets/activity-view/default.json';
+
+`LiqActivitySheet` is the iOS 26 share/activity bottom panel. It renders a
+402pt wide translucent surface (34pt corner radius, `rgba(247,247,247,0.875)`
+background) with an inner white rim and drop shadow.
+
+Compose it with `LiqActivityHeader` to add a 64pt thumbnail, a title,
+an optional subtitle, and a close button. Pass any widget as `child` for
+the body area below the header.
+
+## Default
+
+An activity sheet with a header showing a file thumbnail, title, and subtitle,
+plus a close button and a simple body paragraph.
+
+<LiqPreview component="activity-view" variant="default" />
+
+<CodeSnippet snippet={activityViewDefaultSnippet} />

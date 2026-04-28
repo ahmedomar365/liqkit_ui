@@ -1,0 +1,29 @@
+---
+title: Status Bars
+description: iOS 26 status bar with clock, signal, Wi-Fi, and battery — light and dark variants.
+---
+
+import statusBarLightSnippet from '@/snippets/status-bar/light.json';
+import statusBarDarkSnippet from '@/snippets/status-bar/dark.json';
+
+`LiqStatusBar` is the iOS 26 phone status bar. It renders the clock label on
+the left and signal bars, Wi-Fi glyph, and battery indicator on the right.
+Control the foreground color with `brightness` — `Brightness.light` for dark
+glyphs on a light surface, `Brightness.dark` for light glyphs on a dark surface.
+
+## Light
+
+The default variant with dark glyphs on a light background.
+
+<LiqPreview component="status-bar" variant="light" />
+
+<CodeSnippet snippet={statusBarLightSnippet} />
+
+## Dark
+
+Pass `brightness: Brightness.dark` to switch to light glyphs for use over a
+dark surface.
+
+<LiqPreview component="status-bar" variant="dark" />
+
+<CodeSnippet snippet={statusBarDarkSnippet} />

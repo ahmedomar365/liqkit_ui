@@ -1,0 +1,43 @@
+---
+title: Face ID
+description: iOS 26 Face ID bezel — scanning, success, and failure states.
+---
+
+import faceIdScanningSnippet from '@/snippets/face-id/scanning.json';
+import faceIdSuccessSnippet from '@/snippets/face-id/success.json';
+import faceIdFailSnippet from '@/snippets/face-id/fail.json';
+
+`LiqFaceIdBezel` renders a 145pt square black bezel (40pt corner radius) with
+a 70pt green glyph centered inside. Switch between states using the `state`
+parameter with values from `LiqFaceIdState`.
+
+| State | Glyph |
+|-------|-------|
+| `scanning` | Face outline with cross-hair lines (default) |
+| `success` | Checkmark |
+| `fail` | Face outline with a diagonal slash |
+
+## Scanning
+
+The default state showing the Face ID face outline with corner guides.
+
+<LiqPreview component="face-id" variant="scanning" />
+
+<CodeSnippet snippet={faceIdScanningSnippet} />
+
+## Success
+
+Shown after successful authentication — a simple checkmark glyph.
+
+<LiqPreview component="face-id" variant="success" />
+
+<CodeSnippet snippet={faceIdSuccessSnippet} />
+
+## Fail
+
+Shown when authentication fails — the face outline with a diagonal slash
+through it.
+
+<LiqPreview component="face-id" variant="fail" />
+
+<CodeSnippet snippet={faceIdFailSnippet} />

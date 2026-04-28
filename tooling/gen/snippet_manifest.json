@@ -246,6 +246,42 @@
         { "variant": "regular", "displayName": "Regular", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/regular.dart" },
         { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/large.dart" }
       ]
+    },
+    {
+      "component": "status-bar",
+      "displayName": "Status Bars",
+      "group": "status",
+      "variants": [
+        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/status-bar/light.dart" },
+        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/status-bar/dark.dart" }
+      ]
+    },
+    {
+      "component": "progress",
+      "displayName": "Progress",
+      "group": "status",
+      "variants": [
+        { "variant": "linear", "displayName": "Linear", "dartFile": "apps/docs_snippets/lib/snippets/progress/linear.dart" },
+        { "variant": "spinner", "displayName": "Spinner", "dartFile": "apps/docs_snippets/lib/snippets/progress/spinner.dart" }
+      ]
+    },
+    {
+      "component": "activity-view",
+      "displayName": "Activity Views",
+      "group": "status",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/activity-view/default.dart" }
+      ]
+    },
+    {
+      "component": "face-id",
+      "displayName": "Face ID",
+      "group": "status",
+      "variants": [
+        { "variant": "scanning", "displayName": "Scanning", "dartFile": "apps/docs_snippets/lib/snippets/face-id/scanning.dart" },
+        { "variant": "success", "displayName": "Success", "dartFile": "apps/docs_snippets/lib/snippets/face-id/success.dart" },
+        { "variant": "fail", "displayName": "Fail", "dartFile": "apps/docs_snippets/lib/snippets/face-id/fail.dart" }
+      ]
     }
   ]
 }
