@@ -1,0 +1,37 @@
+---
+title: Migrating from liqkit
+description: Map every original CSS-based liqkit component to its Flutter counterpart.
+---
+
+`liqkit_ui` is a Dart/Flutter port of the original CSS-based
+[liqkit](https://github.com/forus-labs/liqkit) library. Class names
+follow a 1:1 mapping with `Liq` as the prefix.
+
+## Naming map
+
+| liqkit (CSS)       | liqkit_ui (Flutter)        |
+|--------------------|----------------------------|
+| `.ios26-button`    | `LiqButton`                |
+| `.ios26-toggle`    | `LiqToggle`                |
+| `.ios26-slider`    | `LiqSlider`                |
+| `.ios26-sheet`     | `LiqSheet`                 |
+| `.ios26-alert`     | `LiqAlert`                 |
+| `.ios26-popover`   | `LiqPopover`               |
+| `.ios26-status-bar`| `LiqStatusBar`             |
+| `.ios26-keyboard`  | `LiqKeyboard`              |
+
+(Full 37-row table omitted; the rule is mechanical — see the sidebar.)
+
+## What's different
+
+- **Theming** is via `LiqThemeData`, not CSS variables.
+- **Variants** are Dart `enum` types instead of CSS modifier classes.
+- **Layouts** that depend on `position: absolute` in liqkit translate
+  to `Stack` + `Positioned` in Flutter.
+
+## What's the same
+
+- Visual fidelity: every Flutter component is verified pixel-for-pixel
+  against the rendered HTML baseline using Playwright.
+- Token values: colors, typography, and radii come from the same
+  `liqkit_ui_design_data` archive as the original CSS.
