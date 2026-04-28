@@ -12,10 +12,7 @@ Widget popupButtonRegularBuilder(BuildContext context) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            LiqPopupButton(
-              label: 'Today',
-              onPressed: () => set(v + 1),
-            ),
+            LiqPopupButton(label: 'Today', onPressed: () => set(v + 1)),
             if (v > 0)
               Padding(
                 padding: const EdgeInsets.only(top: 8),

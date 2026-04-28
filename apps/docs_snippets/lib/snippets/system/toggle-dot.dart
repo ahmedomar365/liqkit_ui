@@ -13,15 +13,9 @@ Widget systemToggleDotBuilder(BuildContext context) {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            LiqSystemToggleDot(
-              selected: !v,
-              onPressed: () => set(true),
-            ),
+            LiqSystemToggleDot(selected: !v, onPressed: () => set(true)),
             const SizedBox(width: 16),
-            LiqSystemToggleDot(
-              selected: v,
-              onPressed: () => set(false),
-            ),
+            LiqSystemToggleDot(selected: v, onPressed: () => set(false)),
           ],
         );
         // {@endhighlight}
