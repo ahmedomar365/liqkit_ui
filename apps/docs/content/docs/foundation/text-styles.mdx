@@ -1,0 +1,31 @@
+---
+title: Text Styles
+description: iOS 26 Dynamic Type roles — from xSmall through the five accessibility sizes.
+---
+
+import textStylesDynamicSnippet from '@/snippets/text-styles/dynamic.json';
+import textStylesAccessibilitySnippet from '@/snippets/text-styles/accessibility.json';
+
+`liqkit_ui` exposes the full iOS 26 text-style system through
+`LiqTypeColumn`. Each column renders all eleven semantic roles
+(`largeTitle` → `caption2`) at the requested Dynamic Type scale, letting
+you preview exactly how your typography responds to the user's size
+preference.
+
+## Dynamic Type (Large — default)
+
+The standard scale at `LiqDynamicTypeScale.large` (1.0×) — the
+system default that matches what users see out of the box.
+
+<LiqPreview component="text-styles" variant="dynamic" />
+
+<CodeSnippet snippet={textStylesDynamicSnippet} />
+
+## Accessibility sizes
+
+`LiqDynamicTypeScale.ax2` (1.65×) — the second accessibility scale,
+illustrating how layouts must accommodate significantly larger text.
+
+<LiqPreview component="text-styles" variant="accessibility" />
+
+<CodeSnippet snippet={textStylesAccessibilitySnippet} />

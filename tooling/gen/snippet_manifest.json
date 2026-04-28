@@ -22,6 +22,32 @@
           "dartFile": "apps/docs_snippets/lib/snippets/button/destructive.dart"
         }
       ]
+    },
+    {
+      "component": "colors",
+      "displayName": "Colors",
+      "group": "foundation",
+      "variants": [
+        { "variant": "swatch-grid", "displayName": "Swatch grid", "dartFile": "apps/docs_snippets/lib/snippets/colors/swatch-grid.dart" }
+      ]
+    },
+    {
+      "component": "text-styles",
+      "displayName": "Text Styles",
+      "group": "foundation",
+      "variants": [
+        { "variant": "dynamic", "displayName": "Dynamic Type", "dartFile": "apps/docs_snippets/lib/snippets/text-styles/dynamic.dart" },
+        { "variant": "accessibility", "displayName": "Accessibility sizes", "dartFile": "apps/docs_snippets/lib/snippets/text-styles/accessibility.dart" }
+      ]
+    },
+    {
+      "component": "materials",
+      "displayName": "Materials",
+      "group": "foundation",
+      "variants": [
+        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/materials/light.dart" },
+        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/materials/dark.dart" }
+      ]
     }
   ]
 }

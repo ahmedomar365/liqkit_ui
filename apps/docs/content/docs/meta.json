@@ -2,6 +2,8 @@
   "title": "Documentation",
   "pages": [
     "index",
+    "---Foundation---",
+    "foundation",
     "---Inputs---",
     "inputs"
   ]

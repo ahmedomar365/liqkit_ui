@@ -1,0 +1,32 @@
+---
+title: Materials
+description: iOS 26 material chips — frosted-glass backdrops in light and dark variants.
+---
+
+import materialsLightSnippet from '@/snippets/materials/light.json';
+import materialsDarkSnippet from '@/snippets/materials/dark.json';
+
+`LiqMaterialChip` renders an iOS 26 frosted-glass surface. It uses
+`BackdropFilter` to blur whatever sits behind it, then layers the
+brightness-appropriate tint and highlight border on top — matching the
+CSS `backdrop-filter` spec from Apple's HIG exactly.
+
+Five thickness presets (`ultraThin` → `chrome`) control overlay alpha
+and blur radius; the examples below use the default `regular` preset.
+
+## Light
+
+The light variant renders white-tinted overlay with a bright hairline border.
+
+<LiqPreview component="materials" variant="light" />
+
+<CodeSnippet snippet={materialsLightSnippet} />
+
+## Dark
+
+The dark variant renders a black-tinted overlay on a dark background
+so the chip is clearly visible.
+
+<LiqPreview component="materials" variant="dark" />
+
+<CodeSnippet snippet={materialsDarkSnippet} />
