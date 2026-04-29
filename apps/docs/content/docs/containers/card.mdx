@@ -1,0 +1,40 @@
+---
+title: Card
+description: Generic Liquid Glass content surface with optional header and footer slots.
+---
+
+import cardDefaultSnippet from '@/snippets/card/default.json';
+import cardWithHeaderSnippet from '@/snippets/card/with-header.json';
+import cardWithFooterSnippet from '@/snippets/card/with-footer.json';
+
+`LiqCard` is a rounded glass panel for grouping arbitrary children. It
+renders a 16pt-radius surface with a 0.5pt hairline border, a soft drop
+shadow, and optional `header` and `footer` slots separated from the body
+by full-bleed hairline dividers. Pass `onTap` to make the entire surface
+tappable; the card briefly dims to 85% while pressed.
+
+## Default
+
+A bare card wraps any child in a padded glass panel.
+
+<LiqPreview component="card" variant="default" />
+
+<CodeSnippet snippet={cardDefaultSnippet} />
+
+## With header
+
+Pass `header` to render a titled section above the body, separated by a
+full-bleed hairline divider. Header content has its own 16pt padding.
+
+<LiqPreview component="card" variant="with-header" />
+
+<CodeSnippet snippet={cardWithHeaderSnippet} />
+
+## With footer
+
+Pass both `header` and `footer` to bookend the body with metadata, action
+rows, or timestamps. The footer divider mirrors the header divider.
+
+<LiqPreview component="card" variant="with-footer" />
+
+<CodeSnippet snippet={cardWithFooterSnippet} />

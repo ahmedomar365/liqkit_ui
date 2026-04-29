@@ -3,6 +3,7 @@
   "defaultOpen": true,
   "pages": [
     "accordion",
+    "card",
     "sheets",
     "alerts",
     "action-sheets",

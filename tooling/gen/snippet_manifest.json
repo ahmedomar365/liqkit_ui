@@ -54,6 +54,16 @@
       ]
     },
     {
+      "component": "card",
+      "displayName": "Card",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/card/default.dart" },
+        { "variant": "with-header", "displayName": "With header", "dartFile": "apps/docs_snippets/lib/snippets/card/with-header.dart" },
+        { "variant": "with-footer", "displayName": "With footer", "dartFile": "apps/docs_snippets/lib/snippets/card/with-footer.dart" }
+      ]
+    },
+    {
       "component": "colors",
       "displayName": "Colors",
       "group": "foundation",

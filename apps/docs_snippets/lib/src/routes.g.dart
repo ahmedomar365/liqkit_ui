@@ -3,104 +3,202 @@
 // Regenerate: melos run docs:gen:routes
 
 import 'package:flutter/widgets.dart';
-import 'package:docs_snippets/snippets/accordion/default.dart' show accordionDefaultBuilder;
-import 'package:docs_snippets/snippets/accordion/multiple.dart' show accordionMultipleBuilder;
-import 'package:docs_snippets/snippets/accordion/single.dart' show accordionSingleBuilder;
-import 'package:docs_snippets/snippets/action-sheet/default.dart' show actionSheetDefaultBuilder;
-import 'package:docs_snippets/snippets/action-sheet/with-cancel.dart' show actionSheetWithCancelBuilder;
-import 'package:docs_snippets/snippets/activity-view/default.dart' show activityViewDefaultBuilder;
-import 'package:docs_snippets/snippets/alert/destructive.dart' show alertDestructiveBuilder;
-import 'package:docs_snippets/snippets/alert/side-by-side.dart' show alertSideBySideBuilder;
-import 'package:docs_snippets/snippets/alert/stacked.dart' show alertStackedBuilder;
-import 'package:docs_snippets/snippets/app-icon/default.dart' show appIconDefaultBuilder;
-import 'package:docs_snippets/snippets/app-icon/with-badge.dart' show appIconWithBadgeBuilder;
-import 'package:docs_snippets/snippets/app-icon/with-caption.dart' show appIconWithCaptionBuilder;
-import 'package:docs_snippets/snippets/avatar/group.dart' show avatarGroupBuilder;
-import 'package:docs_snippets/snippets/avatar/image.dart' show avatarImageBuilder;
-import 'package:docs_snippets/snippets/avatar/initials.dart' show avatarInitialsBuilder;
-import 'package:docs_snippets/snippets/badge/counter.dart' show badgeCounterBuilder;
+import 'package:docs_snippets/snippets/accordion/default.dart'
+    show accordionDefaultBuilder;
+import 'package:docs_snippets/snippets/accordion/multiple.dart'
+    show accordionMultipleBuilder;
+import 'package:docs_snippets/snippets/accordion/single.dart'
+    show accordionSingleBuilder;
+import 'package:docs_snippets/snippets/action-sheet/default.dart'
+    show actionSheetDefaultBuilder;
+import 'package:docs_snippets/snippets/action-sheet/with-cancel.dart'
+    show actionSheetWithCancelBuilder;
+import 'package:docs_snippets/snippets/activity-view/default.dart'
+    show activityViewDefaultBuilder;
+import 'package:docs_snippets/snippets/alert/destructive.dart'
+    show alertDestructiveBuilder;
+import 'package:docs_snippets/snippets/alert/side-by-side.dart'
+    show alertSideBySideBuilder;
+import 'package:docs_snippets/snippets/alert/stacked.dart'
+    show alertStackedBuilder;
+import 'package:docs_snippets/snippets/app-icon/default.dart'
+    show appIconDefaultBuilder;
+import 'package:docs_snippets/snippets/app-icon/with-badge.dart'
+    show appIconWithBadgeBuilder;
+import 'package:docs_snippets/snippets/app-icon/with-caption.dart'
+    show appIconWithCaptionBuilder;
+import 'package:docs_snippets/snippets/avatar/group.dart'
+    show avatarGroupBuilder;
+import 'package:docs_snippets/snippets/avatar/image.dart'
+    show avatarImageBuilder;
+import 'package:docs_snippets/snippets/avatar/initials.dart'
+    show avatarInitialsBuilder;
+import 'package:docs_snippets/snippets/badge/counter.dart'
+    show badgeCounterBuilder;
 import 'package:docs_snippets/snippets/badge/dot.dart' show badgeDotBuilder;
-import 'package:docs_snippets/snippets/badge/status.dart' show badgeStatusBuilder;
-import 'package:docs_snippets/snippets/bezel/no-island.dart' show bezelNoIslandBuilder;
-import 'package:docs_snippets/snippets/bezel/with-island.dart' show bezelWithIslandBuilder;
-import 'package:docs_snippets/snippets/button/destructive.dart' show buttonDestructiveBuilder;
-import 'package:docs_snippets/snippets/button/glass.dart' show buttonGlassBuilder;
-import 'package:docs_snippets/snippets/button/regular.dart' show buttonRegularBuilder;
-import 'package:docs_snippets/snippets/color-picker/grid.dart' show colorPickerGridBuilder;
-import 'package:docs_snippets/snippets/color-picker/large.dart' show colorPickerLargeBuilder;
-import 'package:docs_snippets/snippets/color-picker/small.dart' show colorPickerSmallBuilder;
-import 'package:docs_snippets/snippets/colors/swatch-grid.dart' show colorsSwatchGridBuilder;
-import 'package:docs_snippets/snippets/context-menu/below-leading.dart' show contextMenuBelowLeadingBuilder;
-import 'package:docs_snippets/snippets/context-menu/below-trailing.dart' show contextMenuBelowTrailingBuilder;
-import 'package:docs_snippets/snippets/context-menu/beside-leading.dart' show contextMenuBesideLeadingBuilder;
-import 'package:docs_snippets/snippets/empty-state/default.dart' show emptyStateDefaultBuilder;
-import 'package:docs_snippets/snippets/empty-state/with-cta.dart' show emptyStateWithCtaBuilder;
-import 'package:docs_snippets/snippets/examples/item.dart' show examplesItemBuilder;
-import 'package:docs_snippets/snippets/examples/panel.dart' show examplesPanelBuilder;
-import 'package:docs_snippets/snippets/examples/section.dart' show examplesSectionBuilder;
-import 'package:docs_snippets/snippets/face-id/fail.dart' show faceIdFailBuilder;
-import 'package:docs_snippets/snippets/face-id/scanning.dart' show faceIdScanningBuilder;
-import 'package:docs_snippets/snippets/face-id/success.dart' show faceIdSuccessBuilder;
-import 'package:docs_snippets/snippets/keyboard/numbers.dart' show keyboardNumbersBuilder;
-import 'package:docs_snippets/snippets/keyboard/qwerty.dart' show keyboardQwertyBuilder;
-import 'package:docs_snippets/snippets/kit-helpers/header.dart' show kitHelpersHeaderBuilder;
-import 'package:docs_snippets/snippets/kit-helpers/mode-labels.dart' show kitHelpersModeLabelsBuilder;
-import 'package:docs_snippets/snippets/kit-helpers/mode-pill.dart' show kitHelpersModePillBuilder;
+import 'package:docs_snippets/snippets/badge/status.dart'
+    show badgeStatusBuilder;
+import 'package:docs_snippets/snippets/bezel/no-island.dart'
+    show bezelNoIslandBuilder;
+import 'package:docs_snippets/snippets/bezel/with-island.dart'
+    show bezelWithIslandBuilder;
+import 'package:docs_snippets/snippets/button/destructive.dart'
+    show buttonDestructiveBuilder;
+import 'package:docs_snippets/snippets/button/glass.dart'
+    show buttonGlassBuilder;
+import 'package:docs_snippets/snippets/button/regular.dart'
+    show buttonRegularBuilder;
+import 'package:docs_snippets/snippets/card/default.dart'
+    show cardDefaultBuilder;
+import 'package:docs_snippets/snippets/card/with-footer.dart'
+    show cardWithFooterBuilder;
+import 'package:docs_snippets/snippets/card/with-header.dart'
+    show cardWithHeaderBuilder;
+import 'package:docs_snippets/snippets/color-picker/grid.dart'
+    show colorPickerGridBuilder;
+import 'package:docs_snippets/snippets/color-picker/large.dart'
+    show colorPickerLargeBuilder;
+import 'package:docs_snippets/snippets/color-picker/small.dart'
+    show colorPickerSmallBuilder;
+import 'package:docs_snippets/snippets/colors/swatch-grid.dart'
+    show colorsSwatchGridBuilder;
+import 'package:docs_snippets/snippets/context-menu/below-leading.dart'
+    show contextMenuBelowLeadingBuilder;
+import 'package:docs_snippets/snippets/context-menu/below-trailing.dart'
+    show contextMenuBelowTrailingBuilder;
+import 'package:docs_snippets/snippets/context-menu/beside-leading.dart'
+    show contextMenuBesideLeadingBuilder;
+import 'package:docs_snippets/snippets/empty-state/default.dart'
+    show emptyStateDefaultBuilder;
+import 'package:docs_snippets/snippets/empty-state/with-cta.dart'
+    show emptyStateWithCtaBuilder;
+import 'package:docs_snippets/snippets/examples/item.dart'
+    show examplesItemBuilder;
+import 'package:docs_snippets/snippets/examples/panel.dart'
+    show examplesPanelBuilder;
+import 'package:docs_snippets/snippets/examples/section.dart'
+    show examplesSectionBuilder;
+import 'package:docs_snippets/snippets/face-id/fail.dart'
+    show faceIdFailBuilder;
+import 'package:docs_snippets/snippets/face-id/scanning.dart'
+    show faceIdScanningBuilder;
+import 'package:docs_snippets/snippets/face-id/success.dart'
+    show faceIdSuccessBuilder;
+import 'package:docs_snippets/snippets/keyboard/numbers.dart'
+    show keyboardNumbersBuilder;
+import 'package:docs_snippets/snippets/keyboard/qwerty.dart'
+    show keyboardQwertyBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/header.dart'
+    show kitHelpersHeaderBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/mode-labels.dart'
+    show kitHelpersModeLabelsBuilder;
+import 'package:docs_snippets/snippets/kit-helpers/mode-pill.dart'
+    show kitHelpersModePillBuilder;
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
-import 'package:docs_snippets/snippets/list/grouped.dart' show listGroupedBuilder;
-import 'package:docs_snippets/snippets/materials/dark.dart' show materialsDarkBuilder;
-import 'package:docs_snippets/snippets/materials/light.dart' show materialsLightBuilder;
-import 'package:docs_snippets/snippets/menu/default.dart' show menuDefaultBuilder;
-import 'package:docs_snippets/snippets/menu/with-section.dart' show menuWithSectionBuilder;
-import 'package:docs_snippets/snippets/notification/mail.dart' show notificationMailBuilder;
-import 'package:docs_snippets/snippets/notification/reminders.dart' show notificationRemindersBuilder;
-import 'package:docs_snippets/snippets/page-controls/dark.dart' show pageControlsDarkBuilder;
-import 'package:docs_snippets/snippets/page-controls/light.dart' show pageControlsLightBuilder;
-import 'package:docs_snippets/snippets/picker/inline-calendar.dart' show pickerInlineCalendarBuilder;
-import 'package:docs_snippets/snippets/popover/bottom.dart' show popoverBottomBuilder;
-import 'package:docs_snippets/snippets/popover/leading.dart' show popoverLeadingBuilder;
+import 'package:docs_snippets/snippets/list/grouped.dart'
+    show listGroupedBuilder;
+import 'package:docs_snippets/snippets/materials/dark.dart'
+    show materialsDarkBuilder;
+import 'package:docs_snippets/snippets/materials/light.dart'
+    show materialsLightBuilder;
+import 'package:docs_snippets/snippets/menu/default.dart'
+    show menuDefaultBuilder;
+import 'package:docs_snippets/snippets/menu/with-section.dart'
+    show menuWithSectionBuilder;
+import 'package:docs_snippets/snippets/notification/mail.dart'
+    show notificationMailBuilder;
+import 'package:docs_snippets/snippets/notification/reminders.dart'
+    show notificationRemindersBuilder;
+import 'package:docs_snippets/snippets/page-controls/dark.dart'
+    show pageControlsDarkBuilder;
+import 'package:docs_snippets/snippets/page-controls/light.dart'
+    show pageControlsLightBuilder;
+import 'package:docs_snippets/snippets/picker/inline-calendar.dart'
+    show pickerInlineCalendarBuilder;
+import 'package:docs_snippets/snippets/popover/bottom.dart'
+    show popoverBottomBuilder;
+import 'package:docs_snippets/snippets/popover/leading.dart'
+    show popoverLeadingBuilder;
 import 'package:docs_snippets/snippets/popover/top.dart' show popoverTopBuilder;
-import 'package:docs_snippets/snippets/popover/trailing.dart' show popoverTrailingBuilder;
-import 'package:docs_snippets/snippets/popup-button/large.dart' show popupButtonLargeBuilder;
-import 'package:docs_snippets/snippets/popup-button/regular.dart' show popupButtonRegularBuilder;
-import 'package:docs_snippets/snippets/progress/linear.dart' show progressLinearBuilder;
-import 'package:docs_snippets/snippets/progress/spinner.dart' show progressSpinnerBuilder;
-import 'package:docs_snippets/snippets/segmented/four.dart' show segmentedFourBuilder;
-import 'package:docs_snippets/snippets/segmented/three.dart' show segmentedThreeBuilder;
-import 'package:docs_snippets/snippets/segmented/two.dart' show segmentedTwoBuilder;
-import 'package:docs_snippets/snippets/sheet/full-screen.dart' show sheetFullScreenBuilder;
-import 'package:docs_snippets/snippets/sheet/inspector.dart' show sheetInspectorBuilder;
-import 'package:docs_snippets/snippets/sheet/stacked.dart' show sheetStackedBuilder;
-import 'package:docs_snippets/snippets/sidebar/default.dart' show sidebarDefaultBuilder;
-import 'package:docs_snippets/snippets/sidebar/with-search.dart' show sidebarWithSearchBuilder;
+import 'package:docs_snippets/snippets/popover/trailing.dart'
+    show popoverTrailingBuilder;
+import 'package:docs_snippets/snippets/popup-button/large.dart'
+    show popupButtonLargeBuilder;
+import 'package:docs_snippets/snippets/popup-button/regular.dart'
+    show popupButtonRegularBuilder;
+import 'package:docs_snippets/snippets/progress/linear.dart'
+    show progressLinearBuilder;
+import 'package:docs_snippets/snippets/progress/spinner.dart'
+    show progressSpinnerBuilder;
+import 'package:docs_snippets/snippets/segmented/four.dart'
+    show segmentedFourBuilder;
+import 'package:docs_snippets/snippets/segmented/three.dart'
+    show segmentedThreeBuilder;
+import 'package:docs_snippets/snippets/segmented/two.dart'
+    show segmentedTwoBuilder;
+import 'package:docs_snippets/snippets/sheet/full-screen.dart'
+    show sheetFullScreenBuilder;
+import 'package:docs_snippets/snippets/sheet/inspector.dart'
+    show sheetInspectorBuilder;
+import 'package:docs_snippets/snippets/sheet/stacked.dart'
+    show sheetStackedBuilder;
+import 'package:docs_snippets/snippets/sidebar/default.dart'
+    show sidebarDefaultBuilder;
+import 'package:docs_snippets/snippets/sidebar/with-search.dart'
+    show sidebarWithSearchBuilder;
 import 'package:docs_snippets/snippets/slider/dark.dart' show sliderDarkBuilder;
-import 'package:docs_snippets/snippets/slider/default.dart' show sliderDefaultBuilder;
-import 'package:docs_snippets/snippets/status-bar/dark.dart' show statusBarDarkBuilder;
-import 'package:docs_snippets/snippets/status-bar/light.dart' show statusBarLightBuilder;
-import 'package:docs_snippets/snippets/stepper/default.dart' show stepperDefaultBuilder;
-import 'package:docs_snippets/snippets/stepper/disabled.dart' show stepperDisabledBuilder;
-import 'package:docs_snippets/snippets/system/action-pill.dart' show systemActionPillBuilder;
-import 'package:docs_snippets/snippets/system/home-indicator.dart' show systemHomeIndicatorBuilder;
-import 'package:docs_snippets/snippets/system/toggle-dot.dart' show systemToggleDotBuilder;
-import 'package:docs_snippets/snippets/text-field/disabled.dart' show textFieldDisabledBuilder;
-import 'package:docs_snippets/snippets/text-field/empty.dart' show textFieldEmptyBuilder;
-import 'package:docs_snippets/snippets/text-field/filled.dart' show textFieldFilledBuilder;
-import 'package:docs_snippets/snippets/text-field/obscured.dart' show textFieldObscuredBuilder;
-import 'package:docs_snippets/snippets/text-styles/accessibility.dart' show textStylesAccessibilityBuilder;
-import 'package:docs_snippets/snippets/text-styles/dynamic.dart' show textStylesDynamicBuilder;
-import 'package:docs_snippets/snippets/toggle/disabled.dart' show toggleDisabledBuilder;
+import 'package:docs_snippets/snippets/slider/default.dart'
+    show sliderDefaultBuilder;
+import 'package:docs_snippets/snippets/status-bar/dark.dart'
+    show statusBarDarkBuilder;
+import 'package:docs_snippets/snippets/status-bar/light.dart'
+    show statusBarLightBuilder;
+import 'package:docs_snippets/snippets/stepper/default.dart'
+    show stepperDefaultBuilder;
+import 'package:docs_snippets/snippets/stepper/disabled.dart'
+    show stepperDisabledBuilder;
+import 'package:docs_snippets/snippets/system/action-pill.dart'
+    show systemActionPillBuilder;
+import 'package:docs_snippets/snippets/system/home-indicator.dart'
+    show systemHomeIndicatorBuilder;
+import 'package:docs_snippets/snippets/system/toggle-dot.dart'
+    show systemToggleDotBuilder;
+import 'package:docs_snippets/snippets/text-field/disabled.dart'
+    show textFieldDisabledBuilder;
+import 'package:docs_snippets/snippets/text-field/empty.dart'
+    show textFieldEmptyBuilder;
+import 'package:docs_snippets/snippets/text-field/filled.dart'
+    show textFieldFilledBuilder;
+import 'package:docs_snippets/snippets/text-field/obscured.dart'
+    show textFieldObscuredBuilder;
+import 'package:docs_snippets/snippets/text-styles/accessibility.dart'
+    show textStylesAccessibilityBuilder;
+import 'package:docs_snippets/snippets/text-styles/dynamic.dart'
+    show textStylesDynamicBuilder;
+import 'package:docs_snippets/snippets/toggle/disabled.dart'
+    show toggleDisabledBuilder;
 import 'package:docs_snippets/snippets/toggle/off.dart' show toggleOffBuilder;
 import 'package:docs_snippets/snippets/toggle/on.dart' show toggleOnBuilder;
-import 'package:docs_snippets/snippets/toolbar/actions.dart' show toolbarActionsBuilder;
-import 'package:docs_snippets/snippets/toolbar/chips.dart' show toolbarChipsBuilder;
-import 'package:docs_snippets/snippets/top-bar/large-title.dart' show topBarLargeTitleBuilder;
-import 'package:docs_snippets/snippets/top-bar/with-title.dart' show topBarWithTitleBuilder;
-import 'package:docs_snippets/snippets/widget/extra-large.dart' show widgetExtraLargeBuilder;
-import 'package:docs_snippets/snippets/widget/large.dart' show widgetLargeBuilder;
-import 'package:docs_snippets/snippets/widget/medium.dart' show widgetMediumBuilder;
-import 'package:docs_snippets/snippets/widget/small.dart' show widgetSmallBuilder;
-import 'package:docs_snippets/snippets/window/default.dart' show windowDefaultBuilder;
-import 'package:docs_snippets/snippets/window/inactive-controls.dart' show windowInactiveControlsBuilder;
+import 'package:docs_snippets/snippets/toolbar/actions.dart'
+    show toolbarActionsBuilder;
+import 'package:docs_snippets/snippets/toolbar/chips.dart'
+    show toolbarChipsBuilder;
+import 'package:docs_snippets/snippets/top-bar/large-title.dart'
+    show topBarLargeTitleBuilder;
+import 'package:docs_snippets/snippets/top-bar/with-title.dart'
+    show topBarWithTitleBuilder;
+import 'package:docs_snippets/snippets/widget/extra-large.dart'
+    show widgetExtraLargeBuilder;
+import 'package:docs_snippets/snippets/widget/large.dart'
+    show widgetLargeBuilder;
+import 'package:docs_snippets/snippets/widget/medium.dart'
+    show widgetMediumBuilder;
+import 'package:docs_snippets/snippets/widget/small.dart'
+    show widgetSmallBuilder;
+import 'package:docs_snippets/snippets/window/default.dart'
+    show windowDefaultBuilder;
+import 'package:docs_snippets/snippets/window/inactive-controls.dart'
+    show windowInactiveControlsBuilder;
 
 const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/accordion/default': accordionDefaultBuilder,
@@ -126,6 +224,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/button/destructive': buttonDestructiveBuilder,
   '/button/glass': buttonGlassBuilder,
   '/button/regular': buttonRegularBuilder,
+  '/card/default': cardDefaultBuilder,
+  '/card/with-footer': cardWithFooterBuilder,
+  '/card/with-header': cardWithHeaderBuilder,
   '/color-picker/grid': colorPickerGridBuilder,
   '/color-picker/large': colorPickerLargeBuilder,
   '/color-picker/small': colorPickerSmallBuilder,

@@ -10,6 +10,7 @@ export 'src/components/avatars/liq_avatar.dart';
 export 'src/components/badges/liq_badge.dart';
 export 'src/components/bezels/liq_device_bezel.dart';
 export 'src/components/buttons/liq_button.dart';
+export 'src/components/cards/liq_card.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
