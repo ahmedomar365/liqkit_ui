@@ -68,6 +68,10 @@ import 'package:docs_snippets/snippets/checkbox/indeterminate.dart'
     show checkboxIndeterminateBuilder;
 import 'package:docs_snippets/snippets/checkbox/unchecked.dart'
     show checkboxUncheckedBuilder;
+import 'package:docs_snippets/snippets/chip/dismissible.dart'
+    show chipDismissibleBuilder;
+import 'package:docs_snippets/snippets/chip/group.dart' show chipGroupBuilder;
+import 'package:docs_snippets/snippets/chip/single.dart' show chipSingleBuilder;
 import 'package:docs_snippets/snippets/color-picker/grid.dart'
     show colorPickerGridBuilder;
 import 'package:docs_snippets/snippets/color-picker/large.dart'
@@ -311,6 +315,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/checkbox/checked': checkboxCheckedBuilder,
   '/checkbox/indeterminate': checkboxIndeterminateBuilder,
   '/checkbox/unchecked': checkboxUncheckedBuilder,
+  '/chip/dismissible': chipDismissibleBuilder,
+  '/chip/group': chipGroupBuilder,
+  '/chip/single': chipSingleBuilder,
   '/color-picker/grid': colorPickerGridBuilder,
   '/color-picker/large': colorPickerLargeBuilder,
   '/color-picker/small': colorPickerSmallBuilder,

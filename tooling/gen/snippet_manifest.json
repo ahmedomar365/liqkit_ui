@@ -92,6 +92,16 @@
       ]
     },
     {
+      "component": "chip",
+      "displayName": "Chip",
+      "group": "inputs",
+      "variants": [
+        { "variant": "single",      "displayName": "Single",      "dartFile": "apps/docs_snippets/lib/snippets/chip/single.dart" },
+        { "variant": "group",       "displayName": "Group",       "dartFile": "apps/docs_snippets/lib/snippets/chip/group.dart" },
+        { "variant": "dismissible", "displayName": "Dismissible", "dartFile": "apps/docs_snippets/lib/snippets/chip/dismissible.dart" }
+      ]
+    },
+    {
       "component": "colors",
       "displayName": "Colors",
       "group": "foundation",

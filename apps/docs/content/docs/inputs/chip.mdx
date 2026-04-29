@@ -1,0 +1,42 @@
+---
+title: Chip
+description: iOS 26 selectable / dismissible tag pill — for tag inputs, filter pills, and multi-select facets.
+---
+
+import chipSingleSnippet from '@/snippets/chip/single.json';
+import chipGroupSnippet from '@/snippets/chip/group.json';
+import chipDismissibleSnippet from '@/snippets/chip/dismissible.json';
+
+`LiqChip` is an interactive tag pill. It can render in a selected state
+(filled blue), accept taps via `onPressed`, and carry an inline delete
+affordance via `onDeleted`. Use it for tag inputs, filter pills, and
+multi-select facets. For read-only counters or status indicators, reach
+for `LiqBadge` instead.
+
+## Single
+
+A free-standing chip. Mark one as `selected` to flip its fill to the
+iOS system blue.
+
+<LiqPreview component="chip" variant="single" />
+
+<CodeSnippet snippet={chipSingleSnippet} />
+
+## Group
+
+`LiqChipGroup` lays a list of chips out in a wrap with iOS-correct
+spacing. Pair it with `selected` + `onPressed` to build a multi-select
+facet.
+
+<LiqPreview component="chip" variant="group" />
+
+<CodeSnippet snippet={chipGroupSnippet} />
+
+## Dismissible
+
+Pass `onDeleted` to render an inline "x" button. Tapping the affordance
+fires `onDeleted` only — it never bubbles to `onPressed`.
+
+<LiqPreview component="chip" variant="dismissible" />
+
+<CodeSnippet snippet={chipDismissibleSnippet} />
