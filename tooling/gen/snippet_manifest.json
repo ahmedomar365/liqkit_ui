@@ -2,6 +2,16 @@
   "$schema": "./snippet_manifest.schema.json",
   "components": [
     {
+      "component": "accordion",
+      "displayName": "Accordion",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/accordion/default.dart" },
+        { "variant": "single",   "displayName": "Single",   "dartFile": "apps/docs_snippets/lib/snippets/accordion/single.dart" },
+        { "variant": "multiple", "displayName": "Multiple", "dartFile": "apps/docs_snippets/lib/snippets/accordion/multiple.dart" }
+      ]
+    },
+    {
       "component": "button",
       "displayName": "Buttons",
       "group": "inputs",

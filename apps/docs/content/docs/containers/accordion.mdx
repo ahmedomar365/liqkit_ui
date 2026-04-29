@@ -1,0 +1,38 @@
+---
+title: Accordion
+description: Vertical expandable panel for grouped content.
+---
+
+import accordionDefaultSnippet from '@/snippets/accordion/default.json';
+import accordionSingleSnippet from '@/snippets/accordion/single.json';
+import accordionMultipleSnippet from '@/snippets/accordion/multiple.json';
+
+`LiqAccordion` is a vertically stacked set of expandable panels. Tap a
+header to reveal its content. Single mode keeps only one panel open;
+multiple mode allows several at once.
+
+## Default
+
+Two-panel accordion in single mode. None are expanded initially.
+
+<LiqPreview component="accordion" variant="default" />
+
+<CodeSnippet snippet={accordionDefaultSnippet} />
+
+## Single
+
+Common FAQ pattern — only one panel can be open at a time. The first
+item is expanded on first paint.
+
+<LiqPreview component="accordion" variant="single" />
+
+<CodeSnippet snippet={accordionSingleSnippet} />
+
+## Multiple
+
+Pass `type: LiqAccordionType.multiple` to allow several panels open
+simultaneously.
+
+<LiqPreview component="accordion" variant="multiple" />
+
+<CodeSnippet snippet={accordionMultipleSnippet} />

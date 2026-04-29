@@ -3,6 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  // The reporter wraps its child in `Padding(symmetric vertical: 24)` so the
+  // reported height includes 48px of breathing room around the snippet.
+  const verticalPadding = 48;
+
   testWidgets('LiqHeightReporter publishes the laid-out height once', (
     tester,
   ) async {
@@ -17,7 +21,7 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(reports, equals(<int>[120]));
+    expect(reports, equals(<int>[120 + verticalPadding]));
   });
 
   testWidgets('LiqHeightReporter republishes on size change', (tester) async {
@@ -30,7 +34,7 @@ void main() {
           publish: reports.add,
           child: ValueListenableBuilder<double>(
             valueListenable: controller,
-            builder: (_, h, __) => SizedBox(height: h, width: 200),
+            builder: (_, h, _) => SizedBox(height: h, width: 200),
           ),
         ),
       ),
@@ -38,6 +42,9 @@ void main() {
     await tester.pump();
     controller.value = 200;
     await tester.pump();
-    expect(reports, equals(<int>[80, 200]));
+    expect(
+      reports,
+      equals(<int>[80 + verticalPadding, 200 + verticalPadding]),
+    );
   });
 }

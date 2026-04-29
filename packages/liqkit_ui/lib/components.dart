@@ -1,6 +1,7 @@
 /// Public component exports for liqkit_ui.
 library;
 
+export 'src/components/accordion/liq_accordion.dart';
 export 'src/components/action_sheets/liq_action_sheet.dart';
 export 'src/components/activity_views/liq_activity_sheet.dart';
 export 'src/components/alerts/liq_alert.dart';

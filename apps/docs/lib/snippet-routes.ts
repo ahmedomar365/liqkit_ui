@@ -10,6 +10,9 @@ export interface SnippetRoute {
 }
 
 export const SNIPPET_ROUTES = {
+  'accordion/default': { component: 'accordion', variant: 'default', displayName: "Default", path: '/accordion/default' },
+  'accordion/multiple': { component: 'accordion', variant: 'multiple', displayName: "Multiple", path: '/accordion/multiple' },
+  'accordion/single': { component: 'accordion', variant: 'single', displayName: "Single", path: '/accordion/single' },
   'action-sheet/default': { component: 'action-sheet', variant: 'default', displayName: "Default", path: '/action-sheet/default' },
   'action-sheet/with-cancel': { component: 'action-sheet', variant: 'with-cancel', displayName: "With Cancel", path: '/action-sheet/with-cancel' },
   'activity-view/default': { component: 'activity-view', variant: 'default', displayName: "Default", path: '/activity-view/default' },

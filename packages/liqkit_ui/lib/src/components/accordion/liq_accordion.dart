@@ -1,0 +1,258 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+/// Behavior of [LiqAccordion] when expanding multiple items.
+enum LiqAccordionType {
+  /// Only one item can be expanded at a time. Expanding a new item
+  /// collapses the previously expanded one.
+  single,
+
+  /// Any number of items can be expanded simultaneously.
+  multiple,
+}
+
+/// A single panel inside a [LiqAccordion].
+final class LiqAccordionItem {
+  /// Creates an accordion item.
+  const LiqAccordionItem({
+    required this.title,
+    required this.child,
+    this.subtitle,
+  });
+
+  /// Header title shown at all times.
+  final String title;
+
+  /// Optional smaller subtitle rendered beneath [title].
+  final String? subtitle;
+
+  /// Body revealed when the item is expanded.
+  final Widget child;
+}
+
+/// iOS 26 vertical expandable-panel control in Liquid Glass styling.
+///
+/// Wraps a list of [LiqAccordionItem]s in a rounded surface with a hairline
+/// border and 0.33pt dividers. Tapping a header toggles its expansion;
+/// when [type] is [LiqAccordionType.single] (the default) opening a new
+/// panel collapses the previously open one.
+final class LiqAccordion extends StatefulWidget {
+  /// Creates an accordion.
+  const LiqAccordion({
+    required this.items,
+    this.type = LiqAccordionType.single,
+    this.initialExpanded = const <int>{},
+    super.key,
+  });
+
+  /// Items rendered top-to-bottom.
+  final List<LiqAccordionItem> items;
+
+  /// Single- vs multiple-expansion behavior.
+  final LiqAccordionType type;
+
+  /// Indices that should start expanded on first build.
+  final Set<int> initialExpanded;
+
+  static const double _radius = 16;
+  static const Color _surface = Color(0xFFFAFAFA);
+  static const Color _border = Color(0x14000000);
+  static const Color _divider = Color(0x29000000);
+  static const double _dividerThickness = 0.33;
+  static const double _dividerInset = 16;
+  static const double _headerMinHeight = 56;
+  static const double _headerHPad = 16;
+  static const double _bodyPad = 16;
+  static const Color _titleColor = Color(0xFF000000);
+  static const Color _subtitleColor = Color(0xFF8E8E93);
+  static const Color _chevronColor = Color(0xFF8E8E93);
+  static const double _chevronSize = 13;
+  static const Duration _rotateDuration = Duration(milliseconds: 220);
+  static const Duration _expandDuration = Duration(milliseconds: 280);
+  static const Curve _curve = Curves.easeOutCubic;
+
+  @override
+  State<LiqAccordion> createState() => _LiqAccordionState();
+}
+
+class _LiqAccordionState extends State<LiqAccordion> {
+  late Set<int> _expanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _expanded = <int>{...widget.initialExpanded};
+  }
+
+  void _onHeaderTap(int index) {
+    setState(() {
+      final isOpen = _expanded.contains(index);
+      if (isOpen) {
+        _expanded.remove(index);
+      } else {
+        if (widget.type == LiqAccordionType.single) {
+          _expanded
+            ..clear()
+            ..add(index);
+        } else {
+          _expanded.add(index);
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final children = <Widget>[];
+    for (var i = 0; i < widget.items.length; i++) {
+      if (i > 0) {
+        children.add(
+          const Padding(
+            padding: EdgeInsets.only(left: LiqAccordion._dividerInset),
+            child: SizedBox(
+              height: LiqAccordion._dividerThickness,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: LiqAccordion._divider),
+              ),
+            ),
+          ),
+        );
+      }
+      children.add(_buildItem(i, widget.items[i]));
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: LiqAccordion._surface,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(LiqAccordion._radius),
+        ),
+        border: Border.all(color: LiqAccordion._border),
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(LiqAccordion._radius),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildItem(int index, LiqAccordionItem item) {
+    final expanded = _expanded.contains(index);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => _onHeaderTap(index),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minHeight: LiqAccordion._headerMinHeight,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: LiqAccordion._headerHPad,
+                vertical: 8,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          item.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: LiqAccordion._titleColor,
+                          ),
+                        ),
+                        if (item.subtitle != null) ...<Widget>[
+                          const SizedBox(height: 2),
+                          Text(
+                            item.subtitle!,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: LiqAccordion._subtitleColor,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  AnimatedRotation(
+                    duration: LiqAccordion._rotateDuration,
+                    curve: LiqAccordion._curve,
+                    turns: expanded ? 0.25 : 0,
+                    child: const SizedBox(
+                      width: LiqAccordion._chevronSize,
+                      height: LiqAccordion._chevronSize,
+                      child: CustomPaint(painter: _ChevronPainter()),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        AnimatedSize(
+          duration: LiqAccordion._expandDuration,
+          curve: LiqAccordion._curve,
+          alignment: Alignment.topCenter,
+          child:
+              expanded
+                  ? Padding(
+                    padding: const EdgeInsets.all(LiqAccordion._bodyPad),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: item.child,
+                    ),
+                  )
+                  : const SizedBox(width: double.infinity),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty<LiqAccordionType>('type', widget.type))
+      ..add(IntProperty('expandedCount', _expanded.length));
+  }
+}
+
+class _ChevronPainter extends CustomPainter {
+  const _ChevronPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint =
+        Paint()
+          ..color = LiqAccordion._chevronColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.6
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round;
+    final w = size.width;
+    final h = size.height;
+    // A right-pointing ">" glyph: two strokes meeting at the right-mid.
+    final path =
+        Path()
+          ..moveTo(w * 0.30, h * 0.15)
+          ..lineTo(w * 0.72, h * 0.50)
+          ..lineTo(w * 0.30, h * 0.85);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _ChevronPainter oldDelegate) => false;
+}

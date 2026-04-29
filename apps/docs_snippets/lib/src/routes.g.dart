@@ -3,6 +3,12 @@
 // Regenerate: melos run docs:gen:routes
 
 import 'package:flutter/widgets.dart';
+import 'package:docs_snippets/snippets/accordion/default.dart'
+    show accordionDefaultBuilder;
+import 'package:docs_snippets/snippets/accordion/multiple.dart'
+    show accordionMultipleBuilder;
+import 'package:docs_snippets/snippets/accordion/single.dart'
+    show accordionSingleBuilder;
 import 'package:docs_snippets/snippets/action-sheet/default.dart'
     show actionSheetDefaultBuilder;
 import 'package:docs_snippets/snippets/action-sheet/with-cancel.dart'
@@ -178,6 +184,9 @@ import 'package:docs_snippets/snippets/window/inactive-controls.dart'
     show windowInactiveControlsBuilder;
 
 const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
+  '/accordion/default': accordionDefaultBuilder,
+  '/accordion/multiple': accordionMultipleBuilder,
+  '/accordion/single': accordionSingleBuilder,
   '/action-sheet/default': actionSheetDefaultBuilder,
   '/action-sheet/with-cancel': actionSheetWithCancelBuilder,
   '/activity-view/default': activityViewDefaultBuilder,

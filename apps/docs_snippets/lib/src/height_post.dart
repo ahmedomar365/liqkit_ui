@@ -71,8 +71,6 @@ class _RenderSizeReporter extends RenderProxyBox {
 
   void Function(Size) onLayout;
   Size? _lastEmitted;
-  Size? _pending;
-  int _stableFrames = 0;
   bool _scheduled = false;
 
   void _scheduleEmit(Size size) {
@@ -97,22 +95,15 @@ class _RenderSizeReporter extends RenderProxyBox {
     // even when the content needs more room (sidebars, lists, etc).
     final childConstraints = BoxConstraints(maxWidth: constraints.maxWidth);
     child!.layout(childConstraints, parentUsesSize: true);
-    size = Size(
-      constraints.constrainWidth(child!.size.width),
-      child!.size.height,
-    );
-    final next = child!.size;
-    if (next == _pending) {
-      _stableFrames++;
-    } else {
-      _pending = next;
-      _stableFrames = 1;
-    }
-    final firstReport = _lastEmitted == null;
-    final stable = _stableFrames >= 2;
-    if ((firstReport || stable) && _lastEmitted != next) {
-      _lastEmitted = next;
-      _scheduleEmit(next);
+    final natural = child!.size;
+    // Our render-box size must satisfy the parent's constraints (the
+    // browser viewport / test surface), so clamp. The natural size is
+    // what we report to the iframe parent — once the parent grows the
+    // iframe to that height, this clamp becomes a no-op.
+    size = constraints.constrain(natural);
+    if (_lastEmitted != natural) {
+      _lastEmitted = natural;
+      _scheduleEmit(natural);
     }
   }
 }
