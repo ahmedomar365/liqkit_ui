@@ -30,6 +30,8 @@ export const SNIPPET_ROUTES = {
   'badge/status': { component: 'badge', variant: 'status', displayName: "Status", path: '/badge/status' },
   'bezel/no-island': { component: 'bezel', variant: 'no-island', displayName: "No Island", path: '/bezel/no-island' },
   'bezel/with-island': { component: 'bezel', variant: 'with-island', displayName: "With Island", path: '/bezel/with-island' },
+  'breadcrumb/default': { component: 'breadcrumb', variant: 'default', displayName: "Default", path: '/breadcrumb/default' },
+  'breadcrumb/with-separator': { component: 'breadcrumb', variant: 'with-separator', displayName: "With separator", path: '/breadcrumb/with-separator' },
   'button/destructive': { component: 'button', variant: 'destructive', displayName: "Destructive", path: '/button/destructive' },
   'button/glass': { component: 'button', variant: 'glass', displayName: "Glass", path: '/button/glass' },
   'button/regular': { component: 'button', variant: 'regular', displayName: "Regular", path: '/button/regular' },

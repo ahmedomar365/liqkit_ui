@@ -42,6 +42,10 @@ import 'package:docs_snippets/snippets/bezel/no-island.dart'
     show bezelNoIslandBuilder;
 import 'package:docs_snippets/snippets/bezel/with-island.dart'
     show bezelWithIslandBuilder;
+import 'package:docs_snippets/snippets/breadcrumb/default.dart'
+    show breadcrumbDefaultBuilder;
+import 'package:docs_snippets/snippets/breadcrumb/with-separator.dart'
+    show breadcrumbWithSeparatorBuilder;
 import 'package:docs_snippets/snippets/button/destructive.dart'
     show buttonDestructiveBuilder;
 import 'package:docs_snippets/snippets/button/glass.dart'
@@ -266,6 +270,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/badge/status': badgeStatusBuilder,
   '/bezel/no-island': bezelNoIslandBuilder,
   '/bezel/with-island': bezelWithIslandBuilder,
+  '/breadcrumb/default': breadcrumbDefaultBuilder,
+  '/breadcrumb/with-separator': breadcrumbWithSeparatorBuilder,
   '/button/destructive': buttonDestructiveBuilder,
   '/button/glass': buttonGlassBuilder,
   '/button/regular': buttonRegularBuilder,

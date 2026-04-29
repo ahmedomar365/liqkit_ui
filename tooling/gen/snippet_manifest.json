@@ -32,6 +32,15 @@
       ]
     },
     {
+      "component": "breadcrumb",
+      "displayName": "Breadcrumb",
+      "group": "navigation",
+      "variants": [
+        { "variant": "default",        "displayName": "Default",        "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/default.dart" },
+        { "variant": "with-separator", "displayName": "With separator", "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/with-separator.dart" }
+      ]
+    },
+    {
       "component": "button",
       "displayName": "Buttons",
       "group": "inputs",

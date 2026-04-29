@@ -2,6 +2,7 @@
   "title": "Navigation",
   "defaultOpen": true,
   "pages": [
+    "breadcrumb",
     "top-bars",
     "toolbars",
     "tabs",

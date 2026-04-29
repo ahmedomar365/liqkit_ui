@@ -1,0 +1,31 @@
+---
+title: Breadcrumb
+description: iOS 26 navigation trail — a horizontal list of links separated by a divider showing the current page hierarchy.
+---
+
+import breadcrumbDefaultSnippet from '@/snippets/breadcrumb/default.json';
+import breadcrumbWithSeparatorSnippet from '@/snippets/breadcrumb/with-separator.json';
+
+`LiqBreadcrumb` is the iOS 26 navigation trail used to surface where a
+view sits in a page hierarchy. Each `LiqBreadcrumbItem` renders as a
+tappable link in iOS system blue when its `onPressed` is non-null. The
+final crumb is rendered in semibold iOS primary-label color and is
+never a link — it represents the current page.
+
+## Default
+
+The default separator is a forward slash in iOS tertiary-label grey.
+Tap any non-final crumb to fire its `onPressed` callback.
+
+<LiqPreview component="breadcrumb" variant="default" />
+
+<CodeSnippet snippet={breadcrumbDefaultSnippet} />
+
+## With separator
+
+Pass any widget as `separator` to replace the default slash. A common
+choice is a chevron from a Material or Cupertino icon set.
+
+<LiqPreview component="breadcrumb" variant="with-separator" />
+
+<CodeSnippet snippet={breadcrumbWithSeparatorSnippet} />
