@@ -11,6 +11,7 @@ export 'src/components/badges/liq_badge.dart';
 export 'src/components/bezels/liq_device_bezel.dart';
 export 'src/components/breadcrumbs/liq_breadcrumb.dart';
 export 'src/components/buttons/liq_button.dart';
+export 'src/components/calendars/liq_calendar.dart';
 export 'src/components/cards/liq_card.dart';
 export 'src/components/checkboxes/liq_checkbox.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';

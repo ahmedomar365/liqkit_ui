@@ -1,0 +1,33 @@
+---
+title: Calendar
+description: Standalone month-grid date picker for inline date selection.
+---
+
+import calendarDefaultSnippet from '@/snippets/calendar/default.json';
+import calendarWithBoundsSnippet from '@/snippets/calendar/with-bounds.json';
+
+`LiqCalendar` is the iOS 26 month-grid calendar — a 7-column grid of
+date cells with weekday headers, prev/next month controls, and a
+month/year title. It is a top-level component you can drop anywhere
+without the chrome that wraps `LiqDatePicker`.
+
+## Default
+
+The calendar in its default state. Tap a day to select it; the
+focused month follows the selection. The month/year title sits to the
+left, with chevrons on the right to step forward and back.
+
+<LiqPreview component="calendar" variant="default" />
+
+<CodeSnippet snippet={calendarDefaultSnippet} />
+
+## With bounds
+
+Pass `firstDate` and `lastDate` to constrain the selectable range.
+Days outside the bounds render in a dim gray and are non-tappable;
+chevrons still work so the grid can scroll past the bounds for
+context.
+
+<LiqPreview component="calendar" variant="with-bounds" />
+
+<CodeSnippet snippet={calendarWithBoundsSnippet} />

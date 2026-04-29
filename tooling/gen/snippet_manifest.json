@@ -63,6 +63,15 @@
       ]
     },
     {
+      "component": "calendar",
+      "displayName": "Calendar",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/calendar/default.dart" },
+        { "variant": "with-bounds",  "displayName": "With bounds",  "dartFile": "apps/docs_snippets/lib/snippets/calendar/with-bounds.dart" }
+      ]
+    },
+    {
       "component": "card",
       "displayName": "Card",
       "group": "containers",

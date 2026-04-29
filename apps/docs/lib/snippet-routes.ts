@@ -35,6 +35,8 @@ export const SNIPPET_ROUTES = {
   'button/destructive': { component: 'button', variant: 'destructive', displayName: "Destructive", path: '/button/destructive' },
   'button/glass': { component: 'button', variant: 'glass', displayName: "Glass", path: '/button/glass' },
   'button/regular': { component: 'button', variant: 'regular', displayName: "Regular", path: '/button/regular' },
+  'calendar/default': { component: 'calendar', variant: 'default', displayName: "Default", path: '/calendar/default' },
+  'calendar/with-bounds': { component: 'calendar', variant: 'with-bounds', displayName: "With bounds", path: '/calendar/with-bounds' },
   'card/default': { component: 'card', variant: 'default', displayName: "Default", path: '/card/default' },
   'card/with-footer': { component: 'card', variant: 'with-footer', displayName: "With footer", path: '/card/with-footer' },
   'card/with-header': { component: 'card', variant: 'with-header', displayName: "With header", path: '/card/with-header' },

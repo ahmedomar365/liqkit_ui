@@ -52,6 +52,10 @@ import 'package:docs_snippets/snippets/button/glass.dart'
     show buttonGlassBuilder;
 import 'package:docs_snippets/snippets/button/regular.dart'
     show buttonRegularBuilder;
+import 'package:docs_snippets/snippets/calendar/default.dart'
+    show calendarDefaultBuilder;
+import 'package:docs_snippets/snippets/calendar/with-bounds.dart'
+    show calendarWithBoundsBuilder;
 import 'package:docs_snippets/snippets/card/default.dart'
     show cardDefaultBuilder;
 import 'package:docs_snippets/snippets/card/with-footer.dart'
@@ -279,6 +283,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/button/destructive': buttonDestructiveBuilder,
   '/button/glass': buttonGlassBuilder,
   '/button/regular': buttonRegularBuilder,
+  '/calendar/default': calendarDefaultBuilder,
+  '/calendar/with-bounds': calendarWithBoundsBuilder,
   '/card/default': cardDefaultBuilder,
   '/card/with-footer': cardWithFooterBuilder,
   '/card/with-header': cardWithHeaderBuilder,

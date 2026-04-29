@@ -3,6 +3,7 @@
   "defaultOpen": true,
   "pages": [
     "buttons",
+    "calendar",
     "checkbox",
     "toggles",
     "sliders",
