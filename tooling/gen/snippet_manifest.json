@@ -82,6 +82,16 @@
       ]
     },
     {
+      "component": "carousel",
+      "displayName": "Carousel",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/carousel/default.dart" },
+        { "variant": "autoplay",     "displayName": "Autoplay",     "dartFile": "apps/docs_snippets/lib/snippets/carousel/autoplay.dart" },
+        { "variant": "no-indicator", "displayName": "No indicator", "dartFile": "apps/docs_snippets/lib/snippets/carousel/no-indicator.dart" }
+      ]
+    },
+    {
       "component": "checkbox",
       "displayName": "Checkbox",
       "group": "inputs",

@@ -4,6 +4,7 @@
   "pages": [
     "accordion",
     "card",
+    "carousel",
     "dialog",
     "drawer",
     "sheets",

@@ -13,6 +13,7 @@ export 'src/components/breadcrumbs/liq_breadcrumb.dart';
 export 'src/components/buttons/liq_button.dart';
 export 'src/components/calendars/liq_calendar.dart';
 export 'src/components/cards/liq_card.dart';
+export 'src/components/carousels/liq_carousel.dart';
 export 'src/components/checkboxes/liq_checkbox.dart';
 export 'src/components/chips/liq_chip.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';

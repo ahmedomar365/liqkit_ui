@@ -1,0 +1,47 @@
+---
+title: Carousel
+description: Horizontal snap-to-page slider with optional auto-play and a page-dot indicator.
+---
+
+import carouselDefaultSnippet from '@/snippets/carousel/default.json';
+import carouselAutoplaySnippet from '@/snippets/carousel/autoplay.json';
+import carouselNoIndicatorSnippet from '@/snippets/carousel/no-indicator.json';
+
+`LiqCarousel` is the iOS 26 horizontal carousel — a paged, snap-to-page
+slider for browsing cards, photos, or arbitrary widgets. The viewport
+defaults to `0.92` so the next and previous edges peek in on either
+side, and a `LiqPageControl` page-dot indicator renders beneath the
+viewport.
+
+Auto-advance is opt-in. When enabled, the carousel ticks to the next
+item every `autoplayInterval`; auto-advance pauses while the user is
+dragging and resumes one interval after the drag ends.
+
+## Default
+
+A static carousel with three slides. The page indicator updates as the
+user swipes between items.
+
+<LiqPreview component="carousel" variant="default" />
+
+<CodeSnippet snippet={carouselDefaultSnippet} />
+
+## Autoplay
+
+Pass `autoplay: true` to advance the carousel automatically. Combine
+with `autoplayInterval` to control the pace. Auto-advance pauses while
+the user is interacting and resumes once they let go.
+
+<LiqPreview component="carousel" variant="autoplay" />
+
+<CodeSnippet snippet={carouselAutoplaySnippet} />
+
+## No indicator
+
+Set `showIndicator: false` to hide the `LiqPageControl` dots — useful
+when the surrounding chrome already communicates the current page, or
+when the carousel is driving an external indicator.
+
+<LiqPreview component="carousel" variant="no-indicator" />
+
+<CodeSnippet snippet={carouselNoIndicatorSnippet} />
