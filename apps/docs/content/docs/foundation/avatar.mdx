@@ -1,0 +1,42 @@
+---
+title: Avatar
+description: Circular profile imagery with initials and group fallbacks.
+---
+
+import avatarInitialsSnippet from '@/snippets/avatar/initials.json';
+import avatarImageSnippet from '@/snippets/avatar/image.json';
+import avatarGroupSnippet from '@/snippets/avatar/group.json';
+
+`LiqAvatar` is the iOS 26 circular profile mark. It accepts an optional
+photo, optional initials, and a size preset. When no photo is supplied
+it paints up to two initials over a deterministic iOS pastel; when both
+are missing it falls back to a neutral grey person glyph.
+
+## Initials
+
+Pass `initials` to render up to 2 white characters over a deterministic
+pastel background. The same input always picks the same color.
+
+<LiqPreview component="avatar" variant="initials" />
+
+<CodeSnippet snippet={avatarInitialsSnippet} />
+
+## Image
+
+Pass an `ImageProvider` to render a photo, clipped to a circle with
+`BoxFit.cover`. If the image fails to load, the supplied `initials`
+render as the fallback.
+
+<LiqPreview component="avatar" variant="image" />
+
+<CodeSnippet snippet={avatarImageSnippet} />
+
+## Group
+
+`LiqAvatarGroup` overlaps a list of avatars left-to-right. When the
+group has more avatars than `maxVisible`, the trailing slot becomes a
+neutral `+N` pill.
+
+<LiqPreview component="avatar" variant="group" />
+
+<CodeSnippet snippet={avatarGroupSnippet} />

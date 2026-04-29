@@ -12,6 +12,16 @@
       ]
     },
     {
+      "component": "avatar",
+      "displayName": "Avatar",
+      "group": "foundation",
+      "variants": [
+        { "variant": "initials", "displayName": "Initials", "dartFile": "apps/docs_snippets/lib/snippets/avatar/initials.dart" },
+        { "variant": "image",    "displayName": "Image",    "dartFile": "apps/docs_snippets/lib/snippets/avatar/image.dart" },
+        { "variant": "group",    "displayName": "Group",    "dartFile": "apps/docs_snippets/lib/snippets/avatar/group.dart" }
+      ]
+    },
+    {
       "component": "button",
       "displayName": "Buttons",
       "group": "inputs",

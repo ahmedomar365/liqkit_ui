@@ -27,6 +27,12 @@ import 'package:docs_snippets/snippets/app-icon/with-badge.dart'
     show appIconWithBadgeBuilder;
 import 'package:docs_snippets/snippets/app-icon/with-caption.dart'
     show appIconWithCaptionBuilder;
+import 'package:docs_snippets/snippets/avatar/group.dart'
+    show avatarGroupBuilder;
+import 'package:docs_snippets/snippets/avatar/image.dart'
+    show avatarImageBuilder;
+import 'package:docs_snippets/snippets/avatar/initials.dart'
+    show avatarInitialsBuilder;
 import 'package:docs_snippets/snippets/bezel/no-island.dart'
     show bezelNoIslandBuilder;
 import 'package:docs_snippets/snippets/bezel/with-island.dart'
@@ -196,6 +202,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/app-icon/default': appIconDefaultBuilder,
   '/app-icon/with-badge': appIconWithBadgeBuilder,
   '/app-icon/with-caption': appIconWithCaptionBuilder,
+  '/avatar/group': avatarGroupBuilder,
+  '/avatar/image': avatarImageBuilder,
+  '/avatar/initials': avatarInitialsBuilder,
   '/bezel/no-island': bezelNoIslandBuilder,
   '/bezel/with-island': bezelWithIslandBuilder,
   '/button/destructive': buttonDestructiveBuilder,
