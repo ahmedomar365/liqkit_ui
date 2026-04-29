@@ -109,6 +109,16 @@
       ]
     },
     {
+      "component": "time-picker",
+      "displayName": "Time Picker",
+      "group": "inputs",
+      "variants": [
+        { "variant": "12-hour",   "displayName": "12-hour",  "dartFile": "apps/docs_snippets/lib/snippets/time-picker/12-hour.dart" },
+        { "variant": "24-hour",   "displayName": "24-hour",  "dartFile": "apps/docs_snippets/lib/snippets/time-picker/24-hour.dart" },
+        { "variant": "intervals", "displayName": "Intervals","dartFile": "apps/docs_snippets/lib/snippets/time-picker/intervals.dart" }
+      ]
+    },
+    {
       "component": "materials",
       "displayName": "Materials",
       "group": "foundation",

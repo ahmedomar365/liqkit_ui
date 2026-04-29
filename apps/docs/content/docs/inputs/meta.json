@@ -13,6 +13,7 @@
     "page-controls",
     "color-pickers",
     "pickers",
-    "text-fields"
+    "text-fields",
+    "time-picker"
   ]
 }

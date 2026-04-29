@@ -223,6 +223,12 @@ import 'package:docs_snippets/snippets/text-styles/accessibility.dart'
     show textStylesAccessibilityBuilder;
 import 'package:docs_snippets/snippets/text-styles/dynamic.dart'
     show textStylesDynamicBuilder;
+import 'package:docs_snippets/snippets/time-picker/12-hour.dart'
+    show timePicker12HourBuilder;
+import 'package:docs_snippets/snippets/time-picker/24-hour.dart'
+    show timePicker24HourBuilder;
+import 'package:docs_snippets/snippets/time-picker/intervals.dart'
+    show timePickerIntervalsBuilder;
 import 'package:docs_snippets/snippets/toast/error.dart' show toastErrorBuilder;
 import 'package:docs_snippets/snippets/toast/info.dart' show toastInfoBuilder;
 import 'package:docs_snippets/snippets/toast/success.dart'
@@ -372,6 +378,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/text-field/obscured': textFieldObscuredBuilder,
   '/text-styles/accessibility': textStylesAccessibilityBuilder,
   '/text-styles/dynamic': textStylesDynamicBuilder,
+  '/time-picker/12-hour': timePicker12HourBuilder,
+  '/time-picker/24-hour': timePicker24HourBuilder,
+  '/time-picker/intervals': timePickerIntervalsBuilder,
   '/toast/error': toastErrorBuilder,
   '/toast/info': toastInfoBuilder,
   '/toast/success': toastSuccessBuilder,

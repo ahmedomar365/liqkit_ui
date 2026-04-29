@@ -48,6 +48,7 @@ export 'src/components/system/liq_system.dart';
 export 'src/components/tabs/liq_tabs.dart';
 export 'src/components/text_fields/liq_text_field.dart';
 export 'src/components/text_styles/liq_typography.dart';
+export 'src/components/time_pickers/liq_time_picker.dart';
 export 'src/components/toasts/liq_toast.dart';
 export 'src/components/toggles/liq_toggle.dart';
 export 'src/components/toolbars/liq_toolbar.dart';

@@ -1,0 +1,41 @@
+---
+title: Time Picker
+description: iOS 26 wheel-style time picker with hours, minutes, and AM/PM columns.
+---
+
+import timePicker12HourSnippet from '@/snippets/time-picker/12-hour.json';
+import timePicker24HourSnippet from '@/snippets/time-picker/24-hour.json';
+import timePickerIntervalsSnippet from '@/snippets/time-picker/intervals.json';
+
+`LiqTimePicker` is the iOS 26 3-column scroll-wheel time picker. Each
+column is an infinite-scrolling wheel that snaps to the nearest tick;
+the centered row is framed by a pair of hairline dividers.
+
+## 12-hour
+
+The default. Three wheels — hours (1-12), minutes (00-59), and AM/PM —
+laid out side-by-side. Hours and minutes loop infinitely; AM/PM is a
+finite 2-entry wheel.
+
+<LiqPreview component="time-picker" variant="12-hour" />
+
+<CodeSnippet snippet={timePicker12HourSnippet} />
+
+## 24-hour
+
+Set `use24HourFormat: true` to render hours 0-23 and hide the AM/PM
+column. The picker collapses to a 2-column layout.
+
+<LiqPreview component="time-picker" variant="24-hour" />
+
+<CodeSnippet snippet={timePicker24HourSnippet} />
+
+## Intervals
+
+Pass `minuteInterval` to step the minute wheel by larger increments.
+The value must evenly divide 60 (e.g. 1, 5, 10, 15, 20, 30). Initial
+minute values are snapped down to the nearest tick.
+
+<LiqPreview component="time-picker" variant="intervals" />
+
+<CodeSnippet snippet={timePickerIntervalsSnippet} />
