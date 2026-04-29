@@ -78,6 +78,8 @@ export const SNIPPET_ROUTES = {
   'popup-button/regular': { component: 'popup-button', variant: 'regular', displayName: "Regular", path: '/popup-button/regular' },
   'progress/linear': { component: 'progress', variant: 'linear', displayName: "Linear", path: '/progress/linear' },
   'progress/spinner': { component: 'progress', variant: 'spinner', displayName: "Spinner", path: '/progress/spinner' },
+  'radio/group': { component: 'radio', variant: 'group', displayName: "Group", path: '/radio/group' },
+  'radio/single': { component: 'radio', variant: 'single', displayName: "Single", path: '/radio/single' },
   'segmented/four': { component: 'segmented', variant: 'four', displayName: "Four Segments", path: '/segmented/four' },
   'segmented/three': { component: 'segmented', variant: 'three', displayName: "Three Segments", path: '/segmented/three' },
   'segmented/two': { component: 'segmented', variant: 'two', displayName: "Two Segments", path: '/segmented/two' },

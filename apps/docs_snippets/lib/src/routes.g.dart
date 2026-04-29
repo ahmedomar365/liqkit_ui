@@ -136,6 +136,9 @@ import 'package:docs_snippets/snippets/progress/linear.dart'
     show progressLinearBuilder;
 import 'package:docs_snippets/snippets/progress/spinner.dart'
     show progressSpinnerBuilder;
+import 'package:docs_snippets/snippets/radio/group.dart' show radioGroupBuilder;
+import 'package:docs_snippets/snippets/radio/single.dart'
+    show radioSingleBuilder;
 import 'package:docs_snippets/snippets/segmented/four.dart'
     show segmentedFourBuilder;
 import 'package:docs_snippets/snippets/segmented/three.dart'
@@ -275,6 +278,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/popup-button/regular': popupButtonRegularBuilder,
   '/progress/linear': progressLinearBuilder,
   '/progress/spinner': progressSpinnerBuilder,
+  '/radio/group': radioGroupBuilder,
+  '/radio/single': radioSingleBuilder,
   '/segmented/four': segmentedFourBuilder,
   '/segmented/three': segmentedThreeBuilder,
   '/segmented/two': segmentedTwoBuilder,

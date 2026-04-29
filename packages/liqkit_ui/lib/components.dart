@@ -29,6 +29,7 @@ export 'src/components/pickers/liq_date_picker.dart';
 export 'src/components/popovers/liq_popover.dart';
 export 'src/components/popup_buttons/liq_popup_button.dart';
 export 'src/components/progress/liq_progress_indicator.dart';
+export 'src/components/radios/liq_radio.dart';
 export 'src/components/segmented/liq_segmented_control.dart';
 export 'src/components/sheets/liq_sheet.dart';
 export 'src/components/sidebars/liq_sidebar.dart';

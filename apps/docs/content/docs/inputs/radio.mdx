@@ -1,0 +1,30 @@
+---
+title: Radio
+description: iOS 26 single-select radio control, available as a free-standing widget or a vertical group with labels.
+---
+
+import radioSingleSnippet from '@/snippets/radio/single.json';
+import radioGroupSnippet from '@/snippets/radio/group.json';
+
+`LiqRadio` is the iOS 26 radio circle. It is a 22pt ring that animates
+in a centered 12pt filled dot when its `value` matches the surrounding
+`groupValue`. The visible ring sits inside a 44pt tap target for
+comfortable hit testing and renders at 40% opacity when disabled.
+
+## Single
+
+Three free-standing `LiqRadio` widgets sharing a single selection
+state. Tap any one to make it the active value.
+
+<LiqPreview component="radio" variant="single" />
+
+<CodeSnippet snippet={radioSingleSnippet} />
+
+## Group
+
+`LiqRadioGroup` lays out a vertical list of `(value, label)` pairs as
+tappable rows. Tapping anywhere on a row selects that row's value.
+
+<LiqPreview component="radio" variant="group" />
+
+<CodeSnippet snippet={radioGroupSnippet} />

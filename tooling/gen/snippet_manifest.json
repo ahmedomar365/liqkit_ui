@@ -316,6 +316,15 @@
       ]
     },
     {
+      "component": "radio",
+      "displayName": "Radio",
+      "group": "inputs",
+      "variants": [
+        { "variant": "single", "displayName": "Single", "dartFile": "apps/docs_snippets/lib/snippets/radio/single.dart" },
+        { "variant": "group",  "displayName": "Group",  "dartFile": "apps/docs_snippets/lib/snippets/radio/group.dart" }
+      ]
+    },
+    {
       "component": "activity-view",
       "displayName": "Activity Views",
       "group": "status",
