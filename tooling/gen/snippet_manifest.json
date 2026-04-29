@@ -254,6 +254,15 @@
       ]
     },
     {
+      "component": "dialog",
+      "displayName": "Dialog",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/dialog/default.dart" },
+        { "variant": "with-actions", "displayName": "With actions", "dartFile": "apps/docs_snippets/lib/snippets/dialog/with-actions.dart" }
+      ]
+    },
+    {
       "component": "drawer",
       "displayName": "Drawer",
       "group": "containers",

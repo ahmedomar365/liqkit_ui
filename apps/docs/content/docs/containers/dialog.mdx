@@ -1,0 +1,35 @@
+---
+title: Dialog
+description: Center-anchored modal box for confirmations and short content.
+---
+
+import dialogDefaultSnippet from '@/snippets/dialog/default.json';
+import dialogWithActionsSnippet from '@/snippets/dialog/with-actions.json';
+
+`LiqDialog` is the iOS 26 center-anchored modal box. It renders a glass
+card with a title, optional message, and an optional row of action
+buttons — well-suited to confirmations and short, focused decisions.
+
+The widget itself renders a static dialog surface — useful for static
+demos and tests. For programmatic presentation with the scale-and-fade
+animation, dimmed scrim, and dismiss-on-scrim-tap or Escape key, use
+`LiqDialogOverlay.show()`.
+
+## Default
+
+A title-and-message dialog with no actions. Use this for purely
+informational moments where the surrounding chrome handles dismissal.
+
+<LiqPreview component="dialog" variant="default" />
+
+<CodeSnippet snippet={dialogDefaultSnippet} />
+
+## With actions
+
+Add a horizontal action row beneath the message. Mark the destructive
+action with `destructive: true` to render its label in red, and the
+primary action with `isDefault: true` to render its label in semibold.
+
+<LiqPreview component="dialog" variant="with-actions" />
+
+<CodeSnippet snippet={dialogWithActionsSnippet} />
