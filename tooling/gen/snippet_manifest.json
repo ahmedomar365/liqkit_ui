@@ -100,6 +100,15 @@
       ]
     },
     {
+      "component": "combobox",
+      "displayName": "Combobox",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/combobox/default.dart" },
+        { "variant": "preselected", "displayName": "Preselected", "dartFile": "apps/docs_snippets/lib/snippets/combobox/preselected.dart" }
+      ]
+    },
+    {
       "component": "text-styles",
       "displayName": "Text Styles",
       "group": "foundation",

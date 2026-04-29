@@ -1,0 +1,34 @@
+---
+title: Combobox
+description: iOS 26 typeahead-filtered dropdown — text field on top with a filtered options panel beneath.
+---
+
+import comboboxDefaultSnippet from '@/snippets/combobox/default.json';
+import comboboxPreselectedSnippet from '@/snippets/combobox/preselected.json';
+
+`LiqCombobox` is a typeahead-filtered dropdown. The user types a query
+into the text field and matching options are listed beneath. Distinct
+from `LiqPopupButton`, which is a static dropdown of preset options.
+Matching is a case-insensitive substring on the option label by default;
+pass a custom `filter` callback to change that.
+
+## Default
+
+The default — an empty field with a placeholder. Tap to focus, then
+type to filter. Selection is committed by tapping a row; typing a
+non-matching string does not call `onChanged`.
+
+<LiqPreview component="combobox" variant="default" />
+
+<CodeSnippet snippet={comboboxDefaultSnippet} />
+
+## Preselected
+
+When `value` is set, the field renders the matching option's label and
+that row gets a trailing checkmark when the dropdown is open. The user
+can clear the selection by typing — selection is only committed via
+tap.
+
+<LiqPreview component="combobox" variant="preselected" />
+
+<CodeSnippet snippet={comboboxPreselectedSnippet} />

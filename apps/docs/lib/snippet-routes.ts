@@ -47,6 +47,8 @@ export const SNIPPET_ROUTES = {
   'color-picker/large': { component: 'color-picker', variant: 'large', displayName: "Large", path: '/color-picker/large' },
   'color-picker/small': { component: 'color-picker', variant: 'small', displayName: "Small", path: '/color-picker/small' },
   'colors/swatch-grid': { component: 'colors', variant: 'swatch-grid', displayName: "Swatch grid", path: '/colors/swatch-grid' },
+  'combobox/default': { component: 'combobox', variant: 'default', displayName: "Default", path: '/combobox/default' },
+  'combobox/preselected': { component: 'combobox', variant: 'preselected', displayName: "Preselected", path: '/combobox/preselected' },
   'context-menu/below-leading': { component: 'context-menu', variant: 'below-leading', displayName: "Below Leading", path: '/context-menu/below-leading' },
   'context-menu/below-trailing': { component: 'context-menu', variant: 'below-trailing', displayName: "Below Trailing", path: '/context-menu/below-trailing' },
   'context-menu/beside-leading': { component: 'context-menu', variant: 'beside-leading', displayName: "Beside Leading", path: '/context-menu/beside-leading' },

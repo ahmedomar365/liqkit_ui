@@ -76,6 +76,10 @@ import 'package:docs_snippets/snippets/color-picker/small.dart'
     show colorPickerSmallBuilder;
 import 'package:docs_snippets/snippets/colors/swatch-grid.dart'
     show colorsSwatchGridBuilder;
+import 'package:docs_snippets/snippets/combobox/default.dart'
+    show comboboxDefaultBuilder;
+import 'package:docs_snippets/snippets/combobox/preselected.dart'
+    show comboboxPreselectedBuilder;
 import 'package:docs_snippets/snippets/context-menu/below-leading.dart'
     show contextMenuBelowLeadingBuilder;
 import 'package:docs_snippets/snippets/context-menu/below-trailing.dart'
@@ -311,6 +315,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/color-picker/large': colorPickerLargeBuilder,
   '/color-picker/small': colorPickerSmallBuilder,
   '/colors/swatch-grid': colorsSwatchGridBuilder,
+  '/combobox/default': comboboxDefaultBuilder,
+  '/combobox/preselected': comboboxPreselectedBuilder,
   '/context-menu/below-leading': contextMenuBelowLeadingBuilder,
   '/context-menu/below-trailing': contextMenuBelowTrailingBuilder,
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,

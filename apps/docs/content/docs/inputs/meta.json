@@ -5,6 +5,7 @@
     "buttons",
     "calendar",
     "checkbox",
+    "combobox",
     "toggles",
     "sliders",
     "steppers",

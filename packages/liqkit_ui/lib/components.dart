@@ -16,6 +16,7 @@ export 'src/components/cards/liq_card.dart';
 export 'src/components/checkboxes/liq_checkbox.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';
+export 'src/components/comboboxes/liq_combobox.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
 export 'src/components/dialogs/liq_dialog.dart';
 export 'src/components/dividers/liq_divider.dart';
