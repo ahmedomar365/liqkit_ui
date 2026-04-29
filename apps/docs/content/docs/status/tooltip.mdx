@@ -1,0 +1,42 @@
+---
+title: Tooltip
+description: iOS 26 contextual tooltips that appear on long-press or hover.
+---
+
+import tooltipTopSnippet from '@/snippets/tooltip/top.json';
+import tooltipBottomSnippet from '@/snippets/tooltip/bottom.json';
+import tooltipWithArrowSnippet from '@/snippets/tooltip/with-arrow.json';
+
+`LiqTooltip` is a small contextual hint that appears on long-press
+(touch) or hover (mouse) over its child. It is rendered in the nearest
+overlay so it floats above all other content. Tooltips are smaller and
+lighter than `LiqPopover` — meant for short hints, not full content
+panels. The tooltip auto-flips to the opposite edge if the preferred
+`LiqTooltipPlacement` would overflow the screen.
+
+## Top
+
+Default placement — the tooltip appears above the child with a small
+arrow pointing down toward the target.
+
+<LiqPreview component="tooltip" variant="top" />
+
+<CodeSnippet snippet={tooltipTopSnippet} />
+
+## Bottom
+
+Place the tooltip below the child by passing
+`placement: LiqTooltipPlacement.bottom`.
+
+<LiqPreview component="tooltip" variant="bottom" />
+
+<CodeSnippet snippet={tooltipBottomSnippet} />
+
+## With arrow
+
+`showArrow` defaults to `true`. Long messages wrap to multiple lines
+inside the 240pt maximum width.
+
+<LiqPreview component="tooltip" variant="with-arrow" />
+
+<CodeSnippet snippet={tooltipWithArrowSnippet} />

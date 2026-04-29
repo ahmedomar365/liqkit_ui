@@ -208,6 +208,11 @@ import 'package:docs_snippets/snippets/toolbar/actions.dart'
     show toolbarActionsBuilder;
 import 'package:docs_snippets/snippets/toolbar/chips.dart'
     show toolbarChipsBuilder;
+import 'package:docs_snippets/snippets/tooltip/bottom.dart'
+    show tooltipBottomBuilder;
+import 'package:docs_snippets/snippets/tooltip/top.dart' show tooltipTopBuilder;
+import 'package:docs_snippets/snippets/tooltip/with-arrow.dart'
+    show tooltipWithArrowBuilder;
 import 'package:docs_snippets/snippets/top-bar/large-title.dart'
     show topBarLargeTitleBuilder;
 import 'package:docs_snippets/snippets/top-bar/with-title.dart'
@@ -333,6 +338,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/toggle/on': toggleOnBuilder,
   '/toolbar/actions': toolbarActionsBuilder,
   '/toolbar/chips': toolbarChipsBuilder,
+  '/tooltip/bottom': tooltipBottomBuilder,
+  '/tooltip/top': tooltipTopBuilder,
+  '/tooltip/with-arrow': tooltipWithArrowBuilder,
   '/top-bar/large-title': topBarLargeTitleBuilder,
   '/top-bar/with-title': topBarWithTitleBuilder,
   '/widget/extra-large': widgetExtraLargeBuilder,

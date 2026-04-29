@@ -431,6 +431,16 @@
       ]
     },
     {
+      "component": "tooltip",
+      "displayName": "Tooltip",
+      "group": "status",
+      "variants": [
+        { "variant": "top",         "displayName": "Top",         "dartFile": "apps/docs_snippets/lib/snippets/tooltip/top.dart" },
+        { "variant": "bottom",      "displayName": "Bottom",      "dartFile": "apps/docs_snippets/lib/snippets/tooltip/bottom.dart" },
+        { "variant": "with-arrow",  "displayName": "With arrow",  "dartFile": "apps/docs_snippets/lib/snippets/tooltip/with-arrow.dart" }
+      ]
+    },
+    {
       "component": "examples",
       "displayName": "Examples",
       "group": "decoration",
