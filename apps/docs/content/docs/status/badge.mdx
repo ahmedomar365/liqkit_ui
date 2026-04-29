@@ -1,0 +1,43 @@
+---
+title: Badge
+description: Pill-shaped count and status indicators with iOS 26 system colors.
+---
+
+import badgeCounterSnippet from '@/snippets/badge/counter.json';
+import badgeStatusSnippet from '@/snippets/badge/status.json';
+import badgeDotSnippet from '@/snippets/badge/dot.json';
+
+`LiqBadge` is the iOS 26 pill-shaped count or status indicator. It accepts an
+optional free-form label, an optional numeric counter, and a `dot` flag that
+collapses the pill into an 8×8 circle. The variant chooses one of five
+system colors for the background and a matching foreground.
+
+## Counter
+
+Pass `count` to render a numeric counter inside the pill. Values 0–99 render
+literally; anything past 99 clamps to `99+`, and negative counts are treated
+as 0.
+
+<LiqPreview component="badge" variant="counter" />
+
+<CodeSnippet snippet={badgeCounterSnippet} />
+
+## Status
+
+Pass `label` and `variant` to render a free-form status pill. Use it for
+short tags like `New`, `Online`, `Beta`, or `Draft`. The neutral variant is
+the default and renders dark text over a light grey pill.
+
+<LiqPreview component="badge" variant="status" />
+
+<CodeSnippet snippet={badgeStatusSnippet} />
+
+## Dot
+
+Pass `dot: true` to collapse the badge to an 8×8 colored circle. Useful as
+a subtle presence indicator next to an avatar, list row, or tab title. The
+dot mode ignores `label` and `count`.
+
+<LiqPreview component="badge" variant="dot" />
+
+<CodeSnippet snippet={badgeDotSnippet} />

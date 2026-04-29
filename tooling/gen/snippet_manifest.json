@@ -22,6 +22,16 @@
       ]
     },
     {
+      "component": "badge",
+      "displayName": "Badge",
+      "group": "status",
+      "variants": [
+        { "variant": "counter", "displayName": "Counter", "dartFile": "apps/docs_snippets/lib/snippets/badge/counter.dart" },
+        { "variant": "status",  "displayName": "Status",  "dartFile": "apps/docs_snippets/lib/snippets/badge/status.dart" },
+        { "variant": "dot",     "displayName": "Dot",     "dartFile": "apps/docs_snippets/lib/snippets/badge/dot.dart" }
+      ]
+    },
+    {
       "component": "button",
       "displayName": "Buttons",
       "group": "inputs",
