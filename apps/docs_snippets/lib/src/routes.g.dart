@@ -54,6 +54,12 @@ import 'package:docs_snippets/snippets/card/with-footer.dart'
     show cardWithFooterBuilder;
 import 'package:docs_snippets/snippets/card/with-header.dart'
     show cardWithHeaderBuilder;
+import 'package:docs_snippets/snippets/checkbox/checked.dart'
+    show checkboxCheckedBuilder;
+import 'package:docs_snippets/snippets/checkbox/indeterminate.dart'
+    show checkboxIndeterminateBuilder;
+import 'package:docs_snippets/snippets/checkbox/unchecked.dart'
+    show checkboxUncheckedBuilder;
 import 'package:docs_snippets/snippets/color-picker/grid.dart'
     show colorPickerGridBuilder;
 import 'package:docs_snippets/snippets/color-picker/large.dart'
@@ -227,6 +233,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/card/default': cardDefaultBuilder,
   '/card/with-footer': cardWithFooterBuilder,
   '/card/with-header': cardWithHeaderBuilder,
+  '/checkbox/checked': checkboxCheckedBuilder,
+  '/checkbox/indeterminate': checkboxIndeterminateBuilder,
+  '/checkbox/unchecked': checkboxUncheckedBuilder,
   '/color-picker/grid': colorPickerGridBuilder,
   '/color-picker/large': colorPickerLargeBuilder,
   '/color-picker/small': colorPickerSmallBuilder,

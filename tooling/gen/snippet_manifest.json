@@ -64,6 +64,16 @@
       ]
     },
     {
+      "component": "checkbox",
+      "displayName": "Checkbox",
+      "group": "inputs",
+      "variants": [
+        { "variant": "unchecked",     "displayName": "Unchecked",     "dartFile": "apps/docs_snippets/lib/snippets/checkbox/unchecked.dart" },
+        { "variant": "checked",       "displayName": "Checked",       "dartFile": "apps/docs_snippets/lib/snippets/checkbox/checked.dart" },
+        { "variant": "indeterminate", "displayName": "Indeterminate", "dartFile": "apps/docs_snippets/lib/snippets/checkbox/indeterminate.dart" }
+      ]
+    },
+    {
       "component": "colors",
       "displayName": "Colors",
       "group": "foundation",

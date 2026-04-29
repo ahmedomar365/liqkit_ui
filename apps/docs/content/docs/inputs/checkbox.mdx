@@ -1,0 +1,41 @@
+---
+title: Checkbox
+description: Tri-state iOS 26 checkbox with checked, unchecked, and indeterminate states.
+---
+
+import checkboxUncheckedSnippet from '@/snippets/checkbox/unchecked.json';
+import checkboxCheckedSnippet from '@/snippets/checkbox/checked.json';
+import checkboxIndeterminateSnippet from '@/snippets/checkbox/indeterminate.json';
+
+`LiqCheckbox` is the iOS 26 checkbox. It is a 22pt squircle that
+animates between unchecked, checked, and indeterminate states. The
+visible box sits inside a 44pt tap target for comfortable hit testing
+and renders at 40% opacity when disabled.
+
+## Unchecked
+
+The checkbox in its empty state — white background with a hairline
+border. Tap to advance to the checked state.
+
+<LiqPreview component="checkbox" variant="unchecked" />
+
+<CodeSnippet snippet={checkboxUncheckedSnippet} />
+
+## Checked
+
+The checkbox in its filled state — system blue background with a white
+checkmark glyph. Tap to clear back to unchecked.
+
+<LiqPreview component="checkbox" variant="checked" />
+
+<CodeSnippet snippet={checkboxCheckedSnippet} />
+
+## Indeterminate
+
+A "mixed" state — system blue background with a white horizontal bar.
+Use it for parent rows whose children are partially selected. Tapping
+advances to the checked state.
+
+<LiqPreview component="checkbox" variant="indeterminate" />
+
+<CodeSnippet snippet={checkboxIndeterminateSnippet} />
