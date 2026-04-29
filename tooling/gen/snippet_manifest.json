@@ -421,6 +421,16 @@
       ]
     },
     {
+      "component": "tabs",
+      "displayName": "Tabs",
+      "group": "navigation",
+      "variants": [
+        { "variant": "underline", "displayName": "Underline", "dartFile": "apps/docs_snippets/lib/snippets/tabs/underline.dart" },
+        { "variant": "pill",      "displayName": "Pill",      "dartFile": "apps/docs_snippets/lib/snippets/tabs/pill.dart" },
+        { "variant": "icons",     "displayName": "Icons only", "dartFile": "apps/docs_snippets/lib/snippets/tabs/icons.dart" }
+      ]
+    },
+    {
       "component": "examples",
       "displayName": "Examples",
       "group": "decoration",

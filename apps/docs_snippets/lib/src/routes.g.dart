@@ -184,6 +184,10 @@ import 'package:docs_snippets/snippets/system/home-indicator.dart'
     show systemHomeIndicatorBuilder;
 import 'package:docs_snippets/snippets/system/toggle-dot.dart'
     show systemToggleDotBuilder;
+import 'package:docs_snippets/snippets/tabs/icons.dart' show tabsIconsBuilder;
+import 'package:docs_snippets/snippets/tabs/pill.dart' show tabsPillBuilder;
+import 'package:docs_snippets/snippets/tabs/underline.dart'
+    show tabsUnderlineBuilder;
 import 'package:docs_snippets/snippets/text-field/disabled.dart'
     show textFieldDisabledBuilder;
 import 'package:docs_snippets/snippets/text-field/empty.dart'
@@ -315,6 +319,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/system/action-pill': systemActionPillBuilder,
   '/system/home-indicator': systemHomeIndicatorBuilder,
   '/system/toggle-dot': systemToggleDotBuilder,
+  '/tabs/icons': tabsIconsBuilder,
+  '/tabs/pill': tabsPillBuilder,
+  '/tabs/underline': tabsUnderlineBuilder,
   '/text-field/disabled': textFieldDisabledBuilder,
   '/text-field/empty': textFieldEmptyBuilder,
   '/text-field/filled': textFieldFilledBuilder,

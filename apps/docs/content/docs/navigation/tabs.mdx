@@ -1,0 +1,40 @@
+---
+title: Tabs
+description: iOS 26 page-navigation tab strip — underline and pill variants.
+---
+
+import tabsUnderlineSnippet from '@/snippets/tabs/underline.json';
+import tabsPillSnippet from '@/snippets/tabs/pill.json';
+import tabsIconsSnippet from '@/snippets/tabs/icons.json';
+
+`LiqTabs` is the iOS 26 page-navigation tab strip used to switch between
+views or sections. It is distinct from `LiqSegmentedControl`, which picks
+a value within a setting. Pick a [LiqTabsVariant] to choose between an
+underline indicator and a sliding glass pill.
+
+## Underline
+
+A row of equal-flex tabs with a 2pt blue underline beneath the active
+tab. The underline animates between tabs over 220ms.
+
+<LiqPreview component="tabs" variant="underline" />
+
+<CodeSnippet snippet={tabsUnderlineSnippet} />
+
+## Pill
+
+A row of equal-flex tabs inside a translucent pill container. The active
+tab is highlighted with a white sliding pill and a soft drop shadow.
+
+<LiqPreview component="tabs" variant="pill" />
+
+<CodeSnippet snippet={tabsPillSnippet} />
+
+## Icons only
+
+Pass `icon` instead of `label` on `LiqTabItem` to render an icon-only tab
+strip. Combine with `LiqTabsVariant.pill` for a compact bottom-bar style.
+
+<LiqPreview component="tabs" variant="icons" />
+
+<CodeSnippet snippet={tabsIconsSnippet} />

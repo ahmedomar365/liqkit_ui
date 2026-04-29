@@ -4,6 +4,7 @@
   "pages": [
     "top-bars",
     "toolbars",
+    "tabs",
     "sidebars",
     "lists",
     "popup-buttons"
