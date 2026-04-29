@@ -441,6 +441,16 @@
       ]
     },
     {
+      "component": "toast",
+      "displayName": "Toast",
+      "group": "status",
+      "variants": [
+        { "variant": "success", "displayName": "Success", "dartFile": "apps/docs_snippets/lib/snippets/toast/success.dart" },
+        { "variant": "error",   "displayName": "Error",   "dartFile": "apps/docs_snippets/lib/snippets/toast/error.dart" },
+        { "variant": "info",    "displayName": "Info",    "dartFile": "apps/docs_snippets/lib/snippets/toast/info.dart" }
+      ]
+    },
+    {
       "component": "examples",
       "displayName": "Examples",
       "group": "decoration",

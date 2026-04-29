@@ -200,6 +200,10 @@ import 'package:docs_snippets/snippets/text-styles/accessibility.dart'
     show textStylesAccessibilityBuilder;
 import 'package:docs_snippets/snippets/text-styles/dynamic.dart'
     show textStylesDynamicBuilder;
+import 'package:docs_snippets/snippets/toast/error.dart' show toastErrorBuilder;
+import 'package:docs_snippets/snippets/toast/info.dart' show toastInfoBuilder;
+import 'package:docs_snippets/snippets/toast/success.dart'
+    show toastSuccessBuilder;
 import 'package:docs_snippets/snippets/toggle/disabled.dart'
     show toggleDisabledBuilder;
 import 'package:docs_snippets/snippets/toggle/off.dart' show toggleOffBuilder;
@@ -333,6 +337,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/text-field/obscured': textFieldObscuredBuilder,
   '/text-styles/accessibility': textStylesAccessibilityBuilder,
   '/text-styles/dynamic': textStylesDynamicBuilder,
+  '/toast/error': toastErrorBuilder,
+  '/toast/info': toastInfoBuilder,
+  '/toast/success': toastSuccessBuilder,
   '/toggle/disabled': toggleDisabledBuilder,
   '/toggle/off': toggleOffBuilder,
   '/toggle/on': toggleOnBuilder,

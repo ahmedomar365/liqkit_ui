@@ -1,0 +1,48 @@
+---
+title: Toast
+description: iOS 26 transient bottom-anchored toasts that auto-dismiss.
+---
+
+import toastSuccessSnippet from '@/snippets/toast/success.json';
+import toastErrorSnippet from '@/snippets/toast/error.json';
+import toastInfoSnippet from '@/snippets/toast/info.json';
+
+`LiqToast` is a transient pill-shaped notification typically anchored
+to the bottom of the screen and dismissed automatically after a few
+seconds. It is different from `LiqNotification` — that one models a
+persistent iOS lock-screen banner anchored to the top, while a toast
+exists only briefly to acknowledge an action or surface a quick
+status.
+
+The `LiqToast` widget renders a single static pill. To show a toast
+imperatively over the nearest `Overlay` and auto-dismiss it, use
+`LiqToastOverlay.show(context, message, variant: …, duration: …)`.
+Calling `show` again while a previous toast is still visible
+dismisses the previous one first — only one toast is on screen at a
+time.
+
+## Success
+
+Green pill with a check-circle icon, used to confirm a positive
+action.
+
+<LiqPreview component="toast" variant="success" />
+
+<CodeSnippet snippet={toastSuccessSnippet} />
+
+## Error
+
+Red pill with an error-outline icon, used to flag a failure.
+
+<LiqPreview component="toast" variant="error" />
+
+<CodeSnippet snippet={toastErrorSnippet} />
+
+## Info
+
+Dark glass pill with an info-outline icon, used for neutral
+status messages.
+
+<LiqPreview component="toast" variant="info" />
+
+<CodeSnippet snippet={toastInfoSnippet} />
