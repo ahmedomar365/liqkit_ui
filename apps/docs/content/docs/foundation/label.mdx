@@ -1,0 +1,30 @@
+---
+title: Label
+description: iOS 26 form-field caption rendered above an input control, with required and optional variants.
+---
+
+import labelRequiredSnippet from '@/snippets/label/required.json';
+import labelOptionalSnippet from '@/snippets/label/optional.json';
+
+`LiqLabel` is the iOS 26 form-field caption — a small, semibold, slightly
+tinted line of text rendered above an input such as `LiqTextField` or
+`LiqCheckbox`. `LiqFormField` composes a `LiqLabel`, the input control,
+and an optional helper or error line into a vertical stack.
+
+## Required
+
+Pass `required: true` to append a red asterisk after the label. Helper
+text is shown beneath the field in iOS secondary-label grey.
+
+<LiqPreview component="label" variant="required" />
+
+<CodeSnippet snippet={labelRequiredSnippet} />
+
+## Optional
+
+Pass `optional: true` to append a muted " (optional)" suffix in regular
+weight. The two flags are mutually exclusive.
+
+<LiqPreview component="label" variant="optional" />
+
+<CodeSnippet snippet={labelOptionalSnippet} />

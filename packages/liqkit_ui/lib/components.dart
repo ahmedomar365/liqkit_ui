@@ -23,6 +23,7 @@ export 'src/components/examples/liq_examples.dart';
 export 'src/components/face_id/liq_face_id.dart';
 export 'src/components/keyboards/liq_keyboard.dart';
 export 'src/components/kit_helpers/liq_kit_helpers.dart';
+export 'src/components/labels/liq_label.dart';
 export 'src/components/lists/liq_list.dart';
 export 'src/components/materials/liq_material_chip.dart';
 export 'src/components/menu/liq_menu.dart';

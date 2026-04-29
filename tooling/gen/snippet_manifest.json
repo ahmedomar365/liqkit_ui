@@ -487,6 +487,15 @@
         { "variant": "mode-pill", "displayName": "Mode Pill", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-pill.dart" },
         { "variant": "mode-labels", "displayName": "Mode Labels", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-labels.dart" }
       ]
+    },
+    {
+      "component": "label",
+      "displayName": "Label",
+      "group": "foundation",
+      "variants": [
+        { "variant": "required", "displayName": "Required", "dartFile": "apps/docs_snippets/lib/snippets/label/required.dart" },
+        { "variant": "optional", "displayName": "Optional", "dartFile": "apps/docs_snippets/lib/snippets/label/optional.dart" }
+      ]
     }
   ]
 }

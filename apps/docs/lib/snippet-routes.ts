@@ -66,6 +66,8 @@ export const SNIPPET_ROUTES = {
   'kit-helpers/header': { component: 'kit-helpers', variant: 'header', displayName: "Header", path: '/kit-helpers/header' },
   'kit-helpers/mode-labels': { component: 'kit-helpers', variant: 'mode-labels', displayName: "Mode Labels", path: '/kit-helpers/mode-labels' },
   'kit-helpers/mode-pill': { component: 'kit-helpers', variant: 'mode-pill', displayName: "Mode Pill", path: '/kit-helpers/mode-pill' },
+  'label/optional': { component: 'label', variant: 'optional', displayName: "Optional", path: '/label/optional' },
+  'label/required': { component: 'label', variant: 'required', displayName: "Required", path: '/label/required' },
   'list/dark': { component: 'list', variant: 'dark', displayName: "Dark", path: '/list/dark' },
   'list/grouped': { component: 'list', variant: 'grouped', displayName: "Grouped", path: '/list/grouped' },
   'materials/dark': { component: 'materials', variant: 'dark', displayName: "Dark", path: '/materials/dark' },

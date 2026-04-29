@@ -113,6 +113,10 @@ import 'package:docs_snippets/snippets/kit-helpers/mode-labels.dart'
     show kitHelpersModeLabelsBuilder;
 import 'package:docs_snippets/snippets/kit-helpers/mode-pill.dart'
     show kitHelpersModePillBuilder;
+import 'package:docs_snippets/snippets/label/optional.dart'
+    show labelOptionalBuilder;
+import 'package:docs_snippets/snippets/label/required.dart'
+    show labelRequiredBuilder;
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
 import 'package:docs_snippets/snippets/list/grouped.dart'
     show listGroupedBuilder;
@@ -298,6 +302,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/kit-helpers/header': kitHelpersHeaderBuilder,
   '/kit-helpers/mode-labels': kitHelpersModeLabelsBuilder,
   '/kit-helpers/mode-pill': kitHelpersModePillBuilder,
+  '/label/optional': labelOptionalBuilder,
+  '/label/required': labelRequiredBuilder,
   '/list/dark': listDarkBuilder,
   '/list/grouped': listGroupedBuilder,
   '/materials/dark': materialsDarkBuilder,
