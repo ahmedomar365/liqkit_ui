@@ -1,0 +1,44 @@
+---
+title: Skeleton
+description: iOS 26 shimmer placeholders for async-loading content.
+---
+
+import skeletonRectSnippet from '@/snippets/skeleton/rect.json';
+import skeletonCircleSnippet from '@/snippets/skeleton/circle.json';
+import skeletonTextSnippet from '@/snippets/skeleton/text.json';
+
+`LiqSkeleton` is the iOS 26 shimmer placeholder used while async
+content loads. It animates a soft highlight sliding left-to-right
+across a tinted base, in a rectangle, circle, or text bar shape.
+`LiqSkeletonText` stacks multiple text bars into a paragraph-shaped
+block.
+
+## Rectangle
+
+Pass `width` and `height` to render a rounded rectangle. The default
+corner radius is 6pt; override with `borderRadius`.
+
+<LiqPreview component="skeleton" variant="rect" />
+
+<CodeSnippet snippet={skeletonRectSnippet} />
+
+## Circle
+
+Pass `shape: LiqSkeletonShape.circle` and a `width` to render a
+circular placeholder. Circles use `width` for both axes and ignore
+`height` and `borderRadius`.
+
+<LiqPreview component="skeleton" variant="circle" />
+
+<CodeSnippet snippet={skeletonCircleSnippet} />
+
+## Text
+
+`LiqSkeletonText` renders multiple text bars stacked into a
+paragraph-shaped block. The final bar is shrunk to read like real
+wrapped text; tune the shape with `lines`, `lineHeight`,
+`lineSpacing`, and `lastLineWidthFraction`.
+
+<LiqPreview component="skeleton" variant="text" />
+
+<CodeSnippet snippet={skeletonTextSnippet} />

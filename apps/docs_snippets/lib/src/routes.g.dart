@@ -161,6 +161,12 @@ import 'package:docs_snippets/snippets/sidebar/default.dart'
     show sidebarDefaultBuilder;
 import 'package:docs_snippets/snippets/sidebar/with-search.dart'
     show sidebarWithSearchBuilder;
+import 'package:docs_snippets/snippets/skeleton/circle.dart'
+    show skeletonCircleBuilder;
+import 'package:docs_snippets/snippets/skeleton/rect.dart'
+    show skeletonRectBuilder;
+import 'package:docs_snippets/snippets/skeleton/text.dart'
+    show skeletonTextBuilder;
 import 'package:docs_snippets/snippets/slider/dark.dart' show sliderDarkBuilder;
 import 'package:docs_snippets/snippets/slider/default.dart'
     show sliderDefaultBuilder;
@@ -297,6 +303,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/sheet/stacked': sheetStackedBuilder,
   '/sidebar/default': sidebarDefaultBuilder,
   '/sidebar/with-search': sidebarWithSearchBuilder,
+  '/skeleton/circle': skeletonCircleBuilder,
+  '/skeleton/rect': skeletonRectBuilder,
+  '/skeleton/text': skeletonTextBuilder,
   '/slider/dark': sliderDarkBuilder,
   '/slider/default': sliderDefaultBuilder,
   '/status-bar/dark': statusBarDarkBuilder,

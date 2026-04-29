@@ -1,5 +1,5 @@
 {
   "title": "Status",
   "defaultOpen": true,
-  "pages": ["status-bars", "progress", "activity-views", "face-id", "badge"]
+  "pages": ["status-bars", "progress", "activity-views", "face-id", "badge", "skeleton"]
 }

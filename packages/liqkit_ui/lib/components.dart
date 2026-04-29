@@ -34,6 +34,7 @@ export 'src/components/radios/liq_radio.dart';
 export 'src/components/segmented/liq_segmented_control.dart';
 export 'src/components/sheets/liq_sheet.dart';
 export 'src/components/sidebars/liq_sidebar.dart';
+export 'src/components/skeletons/liq_skeleton.dart';
 export 'src/components/sliders/liq_slider.dart';
 export 'src/components/status_bars/liq_status_bar.dart';
 export 'src/components/steppers/liq_stepper.dart';

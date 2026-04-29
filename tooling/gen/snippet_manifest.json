@@ -290,6 +290,16 @@
       ]
     },
     {
+      "component": "skeleton",
+      "displayName": "Skeleton",
+      "group": "status",
+      "variants": [
+        { "variant": "rect",   "displayName": "Rectangle", "dartFile": "apps/docs_snippets/lib/snippets/skeleton/rect.dart" },
+        { "variant": "circle", "displayName": "Circle",    "dartFile": "apps/docs_snippets/lib/snippets/skeleton/circle.dart" },
+        { "variant": "text",   "displayName": "Text",      "dartFile": "apps/docs_snippets/lib/snippets/skeleton/text.dart" }
+      ]
+    },
+    {
       "component": "list",
       "displayName": "Lists",
       "group": "navigation",
