@@ -119,6 +119,15 @@
       ]
     },
     {
+      "component": "command-palette",
+      "displayName": "Command Palette",
+      "group": "navigation",
+      "variants": [
+        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/command-palette/default.dart" },
+        { "variant": "sections", "displayName": "Sections", "dartFile": "apps/docs_snippets/lib/snippets/command-palette/sections.dart" }
+      ]
+    },
+    {
       "component": "text-styles",
       "displayName": "Text Styles",
       "group": "foundation",

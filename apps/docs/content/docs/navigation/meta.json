@@ -3,6 +3,7 @@
   "defaultOpen": true,
   "pages": [
     "breadcrumb",
+    "command-palette",
     "top-bars",
     "toolbars",
     "tabs",

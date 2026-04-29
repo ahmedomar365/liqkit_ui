@@ -52,6 +52,8 @@ export const SNIPPET_ROUTES = {
   'colors/swatch-grid': { component: 'colors', variant: 'swatch-grid', displayName: "Swatch grid", path: '/colors/swatch-grid' },
   'combobox/default': { component: 'combobox', variant: 'default', displayName: "Default", path: '/combobox/default' },
   'combobox/preselected': { component: 'combobox', variant: 'preselected', displayName: "Preselected", path: '/combobox/preselected' },
+  'command-palette/default': { component: 'command-palette', variant: 'default', displayName: "Default", path: '/command-palette/default' },
+  'command-palette/sections': { component: 'command-palette', variant: 'sections', displayName: "Sections", path: '/command-palette/sections' },
   'context-menu/below-leading': { component: 'context-menu', variant: 'below-leading', displayName: "Below Leading", path: '/context-menu/below-leading' },
   'context-menu/below-trailing': { component: 'context-menu', variant: 'below-trailing', displayName: "Below Trailing", path: '/context-menu/below-trailing' },
   'context-menu/beside-leading': { component: 'context-menu', variant: 'beside-leading', displayName: "Beside Leading", path: '/context-menu/beside-leading' },

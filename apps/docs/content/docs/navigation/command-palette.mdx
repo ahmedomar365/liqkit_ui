@@ -1,0 +1,32 @@
+---
+title: Command Palette
+description: Spotlight-style searcher for global app commands.
+---
+
+import commandPaletteDefaultSnippet from '@/snippets/command-palette/default.json';
+import commandPaletteSectionsSnippet from '@/snippets/command-palette/sections.json';
+
+`LiqCommandPalette` is a modal floating panel with a search field on
+top and a filtered list of commands beneath. Each command can carry an
+icon, a keyboard shortcut hint, and free-text keywords to broaden
+fuzzy matches. Show it imperatively with `LiqCommandPalette.show(...)`
+or embed the widget directly. Up/Down arrows move the active row,
+Enter triggers it, Escape dismisses.
+
+## Default
+
+A flat list of commands with shortcut pills.
+
+<LiqPreview component="command-palette" variant="default" />
+
+<CodeSnippet snippet={commandPaletteDefaultSnippet} />
+
+## Sections
+
+Set the `section` field on each `LiqCommand` to group related commands
+under uppercase headers — the palette renders one header per group in
+order of first appearance.
+
+<LiqPreview component="command-palette" variant="sections" />
+
+<CodeSnippet snippet={commandPaletteSectionsSnippet} />
