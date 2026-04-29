@@ -1,0 +1,45 @@
+---
+title: Divider
+description: iOS 26 hairline separator, available horizontal, vertical, or with a centered text label.
+---
+
+import dividerHorizontalSnippet from '@/snippets/divider/horizontal.json';
+import dividerVerticalSnippet from '@/snippets/divider/vertical.json';
+import dividerWithLabelSnippet from '@/snippets/divider/with-label.json';
+
+`LiqDivider` is the iOS 26 hairline rule. It paints at the platform
+physical thickness of 0.33pt in 16% black on white, fills its parent
+along the long axis, and accepts symmetric `indent` / `endIndent`
+insets. `LiqLabeledDivider` lays out two hairlines flanking a
+centered text label such as "OR".
+
+## Horizontal
+
+The default orientation. The hairline stretches to fill its parent's
+width; `indent` insets the leading edge and `endIndent` the trailing
+edge.
+
+<LiqPreview component="divider" variant="horizontal" />
+
+<CodeSnippet snippet={dividerHorizontalSnippet} />
+
+## Vertical
+
+Pass `LiqDividerOrientation.vertical` to render a 0.33pt-wide rule
+that fills its parent's height. The parent must constrain the
+divider's height — wrap it in a fixed-height container or place it
+inside an `IntrinsicHeight`.
+
+<LiqPreview component="divider" variant="vertical" />
+
+<CodeSnippet snippet={dividerVerticalSnippet} />
+
+## With label
+
+`LiqLabeledDivider` centers a text label between two hairlines. The
+default style is SF 13pt in iOS secondary-label grey; pass
+`textStyle` to override.
+
+<LiqPreview component="divider" variant="with-label" />
+
+<CodeSnippet snippet={dividerWithLabelSnippet} />

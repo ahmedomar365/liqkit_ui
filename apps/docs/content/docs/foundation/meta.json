@@ -1,5 +1,5 @@
 {
   "title": "Foundation",
   "defaultOpen": true,
-  "pages": ["colors", "text-styles", "materials", "avatar"]
+  "pages": ["colors", "divider", "text-styles", "materials", "avatar"]
 }

@@ -74,6 +74,12 @@ import 'package:docs_snippets/snippets/context-menu/below-trailing.dart'
     show contextMenuBelowTrailingBuilder;
 import 'package:docs_snippets/snippets/context-menu/beside-leading.dart'
     show contextMenuBesideLeadingBuilder;
+import 'package:docs_snippets/snippets/divider/horizontal.dart'
+    show dividerHorizontalBuilder;
+import 'package:docs_snippets/snippets/divider/vertical.dart'
+    show dividerVerticalBuilder;
+import 'package:docs_snippets/snippets/divider/with-label.dart'
+    show dividerWithLabelBuilder;
 import 'package:docs_snippets/snippets/empty-state/default.dart'
     show emptyStateDefaultBuilder;
 import 'package:docs_snippets/snippets/empty-state/with-cta.dart'
@@ -246,6 +252,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/below-leading': contextMenuBelowLeadingBuilder,
   '/context-menu/below-trailing': contextMenuBelowTrailingBuilder,
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
+  '/divider/horizontal': dividerHorizontalBuilder,
+  '/divider/vertical': dividerVerticalBuilder,
+  '/divider/with-label': dividerWithLabelBuilder,
   '/empty-state/default': emptyStateDefaultBuilder,
   '/empty-state/with-cta': emptyStateWithCtaBuilder,
   '/examples/item': examplesItemBuilder,

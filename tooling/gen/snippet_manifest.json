@@ -244,6 +244,16 @@
       ]
     },
     {
+      "component": "divider",
+      "displayName": "Divider",
+      "group": "foundation",
+      "variants": [
+        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/divider/horizontal.dart" },
+        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/divider/vertical.dart" },
+        { "variant": "with-label", "displayName": "With label", "dartFile": "apps/docs_snippets/lib/snippets/divider/with-label.dart" }
+      ]
+    },
+    {
       "component": "empty-state",
       "displayName": "Empty States",
       "group": "containers",
