@@ -49,6 +49,8 @@ export const SNIPPET_ROUTES = {
   'divider/horizontal': { component: 'divider', variant: 'horizontal', displayName: "Horizontal", path: '/divider/horizontal' },
   'divider/vertical': { component: 'divider', variant: 'vertical', displayName: "Vertical", path: '/divider/vertical' },
   'divider/with-label': { component: 'divider', variant: 'with-label', displayName: "With label", path: '/divider/with-label' },
+  'drawer/left': { component: 'drawer', variant: 'left', displayName: "Left", path: '/drawer/left' },
+  'drawer/right': { component: 'drawer', variant: 'right', displayName: "Right", path: '/drawer/right' },
   'empty-state/default': { component: 'empty-state', variant: 'default', displayName: "Default", path: '/empty-state/default' },
   'empty-state/with-cta': { component: 'empty-state', variant: 'with-cta', displayName: "With CTA", path: '/empty-state/with-cta' },
   'examples/item': { component: 'examples', variant: 'item', displayName: "Item", path: '/examples/item' },

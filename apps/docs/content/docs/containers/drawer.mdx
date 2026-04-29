@@ -1,0 +1,34 @@
+---
+title: Drawer
+description: Side-anchored panel — slides in from the leading or trailing screen edge.
+---
+
+import drawerLeftSnippet from '@/snippets/drawer/left.json';
+import drawerRightSnippet from '@/snippets/drawer/right.json';
+
+`LiqDrawer` is the iOS 26 side-anchored panel surface. It slides in
+from the left or right screen edge over a dimmed scrim and is typically
+used for navigation or secondary content.
+
+The widget itself renders a static drawer surface — useful for static
+demos and tests. For programmatic presentation with the slide-in
+animation, dimmed scrim, and dismiss-on-scrim-tap or Escape key, use
+`LiqDrawerOverlay.show()`.
+
+## Left
+
+A drawer anchored to the leading edge — the default for primary
+navigation.
+
+<LiqPreview component="drawer" variant="left" />
+
+<CodeSnippet snippet={drawerLeftSnippet} />
+
+## Right
+
+A drawer anchored to the trailing edge. Use for filters, inspectors, or
+secondary content that complements the main view.
+
+<LiqPreview component="drawer" variant="right" />
+
+<CodeSnippet snippet={drawerRightSnippet} />

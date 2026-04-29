@@ -4,6 +4,7 @@
   "pages": [
     "accordion",
     "card",
+    "drawer",
     "sheets",
     "alerts",
     "action-sheets",
