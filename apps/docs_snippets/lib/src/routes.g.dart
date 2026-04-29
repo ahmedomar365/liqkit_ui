@@ -140,6 +140,12 @@ import 'package:docs_snippets/snippets/notification/mail.dart'
     show notificationMailBuilder;
 import 'package:docs_snippets/snippets/notification/reminders.dart'
     show notificationRemindersBuilder;
+import 'package:docs_snippets/snippets/number-field/default.dart'
+    show numberFieldDefaultBuilder;
+import 'package:docs_snippets/snippets/number-field/no-buttons.dart'
+    show numberFieldNoButtonsBuilder;
+import 'package:docs_snippets/snippets/number-field/with-suffix.dart'
+    show numberFieldWithSuffixBuilder;
 import 'package:docs_snippets/snippets/otp/default.dart' show otpDefaultBuilder;
 import 'package:docs_snippets/snippets/otp/four-digit.dart'
     show otpFourDigitBuilder;
@@ -338,6 +344,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/menu/with-section': menuWithSectionBuilder,
   '/notification/mail': notificationMailBuilder,
   '/notification/reminders': notificationRemindersBuilder,
+  '/number-field/default': numberFieldDefaultBuilder,
+  '/number-field/no-buttons': numberFieldNoButtonsBuilder,
+  '/number-field/with-suffix': numberFieldWithSuffixBuilder,
   '/otp/default': otpDefaultBuilder,
   '/otp/four-digit': otpFourDigitBuilder,
   '/otp/obscure': otpObscureBuilder,

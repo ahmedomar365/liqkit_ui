@@ -251,6 +251,16 @@
       ]
     },
     {
+      "component": "number-field",
+      "displayName": "Number Field",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/number-field/default.dart" },
+        { "variant": "with-suffix", "displayName": "With suffix", "dartFile": "apps/docs_snippets/lib/snippets/number-field/with-suffix.dart" },
+        { "variant": "no-buttons",  "displayName": "No buttons",  "dartFile": "apps/docs_snippets/lib/snippets/number-field/no-buttons.dart" }
+      ]
+    },
+    {
       "component": "otp",
       "displayName": "OTP Input",
       "group": "inputs",

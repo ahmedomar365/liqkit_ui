@@ -1,0 +1,42 @@
+---
+title: Number Field
+description: iOS 26 numeric input with optional plus/minus stepper buttons for quantities and settings values.
+---
+
+import numberFieldDefaultSnippet from '@/snippets/number-field/default.json';
+import numberFieldWithSuffixSnippet from '@/snippets/number-field/with-suffix.json';
+import numberFieldNoButtonsSnippet from '@/snippets/number-field/no-buttons.json';
+
+`LiqNumberField` is a numeric text field with optional ± stepper buttons
+flanking the input. Useful for quantity inputs (cart items), settings
+values, or anywhere a number is required. Values are clamped to
+`[min, max]` and the parent receives the parsed `num` via `onChanged`.
+
+## Default
+
+The default — a numeric field flanked by circular `−` and `+` stepper
+buttons. Tapping a button increments or decrements by `step` (defaults
+to `1`), clamped to `[min, max]`.
+
+<LiqPreview component="number-field" variant="default" />
+
+<CodeSnippet snippet={numberFieldDefaultSnippet} />
+
+## With suffix
+
+Pass `suffix` to render a unit label inside the field — e.g. ` kg`, ` %`,
+or ` °C`. Combine with a fractional `step` (like `0.5`) for fine-grained
+input.
+
+<LiqPreview component="number-field" variant="with-suffix" />
+
+<CodeSnippet snippet={numberFieldWithSuffixSnippet} />
+
+## No buttons
+
+Set `showButtons: false` for a plain numeric input without flanking
+± buttons — useful when keyboard entry is the primary interaction.
+
+<LiqPreview component="number-field" variant="no-buttons" />
+
+<CodeSnippet snippet={numberFieldNoButtonsSnippet} />
