@@ -251,6 +251,16 @@
       ]
     },
     {
+      "component": "otp",
+      "displayName": "OTP Input",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",    "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/otp/default.dart" },
+        { "variant": "four-digit", "displayName": "Four digits", "dartFile": "apps/docs_snippets/lib/snippets/otp/four-digit.dart" },
+        { "variant": "obscure",    "displayName": "Obscure",     "dartFile": "apps/docs_snippets/lib/snippets/otp/obscure.dart" }
+      ]
+    },
+    {
       "component": "popover",
       "displayName": "Popovers",
       "group": "containers",

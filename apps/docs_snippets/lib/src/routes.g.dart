@@ -140,6 +140,10 @@ import 'package:docs_snippets/snippets/notification/mail.dart'
     show notificationMailBuilder;
 import 'package:docs_snippets/snippets/notification/reminders.dart'
     show notificationRemindersBuilder;
+import 'package:docs_snippets/snippets/otp/default.dart' show otpDefaultBuilder;
+import 'package:docs_snippets/snippets/otp/four-digit.dart'
+    show otpFourDigitBuilder;
+import 'package:docs_snippets/snippets/otp/obscure.dart' show otpObscureBuilder;
 import 'package:docs_snippets/snippets/page-controls/dark.dart'
     show pageControlsDarkBuilder;
 import 'package:docs_snippets/snippets/page-controls/light.dart'
@@ -334,6 +338,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/menu/with-section': menuWithSectionBuilder,
   '/notification/mail': notificationMailBuilder,
   '/notification/reminders': notificationRemindersBuilder,
+  '/otp/default': otpDefaultBuilder,
+  '/otp/four-digit': otpFourDigitBuilder,
+  '/otp/obscure': otpObscureBuilder,
   '/page-controls/dark': pageControlsDarkBuilder,
   '/page-controls/light': pageControlsLightBuilder,
   '/pagination/compact': paginationCompactBuilder,

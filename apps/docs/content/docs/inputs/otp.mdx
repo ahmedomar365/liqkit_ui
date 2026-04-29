@@ -1,0 +1,39 @@
+---
+title: OTP Input
+description: iOS 26 fixed-length numeric code entry for SMS verification, 2FA tokens, and PIN entry.
+---
+
+import otpDefaultSnippet from '@/snippets/otp/default.json';
+import otpFourDigitSnippet from '@/snippets/otp/four-digit.json';
+import otpObscureSnippet from '@/snippets/otp/obscure.json';
+
+`LiqOtpInput` is a fixed-length numeric code entry field. It renders
+N separate boxes that auto-advance focus as the user types — backspace
+on an empty box moves focus back, and pasting a string of digits fills
+all boxes at once.
+
+## Default
+
+The default — six boxes for SMS verification codes.
+
+<LiqPreview component="otp" variant="default" />
+
+<CodeSnippet snippet={otpDefaultSnippet} />
+
+## Four digits
+
+Pass `length: 4` for shorter codes (e.g. legacy 4-digit one-time
+passwords). The component supports any length between 2 and 12.
+
+<LiqPreview component="otp" variant="four-digit" />
+
+<CodeSnippet snippet={otpFourDigitSnippet} />
+
+## Obscure
+
+Set `obscure: true` to render typed digits as filled circles instead
+of glyphs — useful for PIN entry.
+
+<LiqPreview component="otp" variant="obscure" />
+
+<CodeSnippet snippet={otpObscureSnippet} />
