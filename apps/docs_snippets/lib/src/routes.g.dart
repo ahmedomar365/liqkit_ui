@@ -140,6 +140,10 @@ import 'package:docs_snippets/snippets/page-controls/dark.dart'
     show pageControlsDarkBuilder;
 import 'package:docs_snippets/snippets/page-controls/light.dart'
     show pageControlsLightBuilder;
+import 'package:docs_snippets/snippets/pagination/compact.dart'
+    show paginationCompactBuilder;
+import 'package:docs_snippets/snippets/pagination/default.dart'
+    show paginationDefaultBuilder;
 import 'package:docs_snippets/snippets/picker/inline-calendar.dart'
     show pickerInlineCalendarBuilder;
 import 'package:docs_snippets/snippets/popover/bottom.dart'
@@ -320,6 +324,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/notification/reminders': notificationRemindersBuilder,
   '/page-controls/dark': pageControlsDarkBuilder,
   '/page-controls/light': pageControlsLightBuilder,
+  '/pagination/compact': paginationCompactBuilder,
+  '/pagination/default': paginationDefaultBuilder,
   '/picker/inline-calendar': pickerInlineCalendarBuilder,
   '/popover/bottom': popoverBottomBuilder,
   '/popover/leading': popoverLeadingBuilder,

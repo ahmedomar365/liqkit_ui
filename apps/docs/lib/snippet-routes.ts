@@ -80,6 +80,8 @@ export const SNIPPET_ROUTES = {
   'notification/reminders': { component: 'notification', variant: 'reminders', displayName: "Reminders", path: '/notification/reminders' },
   'page-controls/dark': { component: 'page-controls', variant: 'dark', displayName: "Dark", path: '/page-controls/dark' },
   'page-controls/light': { component: 'page-controls', variant: 'light', displayName: "Light", path: '/page-controls/light' },
+  'pagination/compact': { component: 'pagination', variant: 'compact', displayName: "Compact", path: '/pagination/compact' },
+  'pagination/default': { component: 'pagination', variant: 'default', displayName: "Default", path: '/pagination/default' },
   'picker/inline-calendar': { component: 'picker', variant: 'inline-calendar', displayName: "Inline Calendar", path: '/picker/inline-calendar' },
   'popover/bottom': { component: 'popover', variant: 'bottom', displayName: "Bottom", path: '/popover/bottom' },
   'popover/leading': { component: 'popover', variant: 'leading', displayName: "Leading", path: '/popover/leading' },

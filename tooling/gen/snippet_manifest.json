@@ -156,6 +156,15 @@
       ]
     },
     {
+      "component": "pagination",
+      "displayName": "Pagination",
+      "group": "navigation",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/pagination/default.dart" },
+        { "variant": "compact", "displayName": "Compact", "dartFile": "apps/docs_snippets/lib/snippets/pagination/compact.dart" }
+      ]
+    },
+    {
       "component": "color-picker",
       "displayName": "Color Pickers",
       "group": "inputs",

@@ -1,0 +1,37 @@
+---
+title: Pagination
+description: iOS 26 page-number selector for paged content — prev / page numbers / next, with ellipses around the current page when there are many pages.
+---
+
+import paginationDefaultSnippet from '@/snippets/pagination/default.json';
+import paginationCompactSnippet from '@/snippets/pagination/compact.json';
+
+`LiqPagination` is the iOS 26 page-number selector used to navigate
+paged content such as a table of results or a photo album. It renders
+a previous-page button, a list of page numbers, and a next-page
+button. When there are many pages the page-number list collapses with
+ellipses around `currentPage` (e.g. `1 … 4 5 6 … 12`).
+
+When `onPageChanged` is `null` the entire control is rendered at 40%
+opacity and taps are no-ops.
+
+## Default
+
+The 32×32 squircle buttons render the first page, the last page, and
+a window around the current page. Tap a number to jump to that page,
+or use the chevrons to step.
+
+<LiqPreview component="pagination" variant="default" />
+
+<CodeSnippet snippet={paginationDefaultSnippet} />
+
+## Compact
+
+In compact mode the control collapses to `[prev] {currentPage} /
+{totalPages} [next]` — the middle is a non-tappable text label. Use
+this on narrow surfaces, or when the absolute page number is less
+important than stepping forward and back.
+
+<LiqPreview component="pagination" variant="compact" />
+
+<CodeSnippet snippet={paginationCompactSnippet} />
