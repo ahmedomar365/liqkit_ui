@@ -32,6 +32,16 @@
       ]
     },
     {
+      "component": "bar-chart",
+      "displayName": "Bar Chart",
+      "group": "status",
+      "variants": [
+        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/default.dart" },
+        { "variant": "multi-color", "displayName": "Multi-color", "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/multi-color.dart" },
+        { "variant": "no-labels",   "displayName": "No labels",   "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/no-labels.dart" }
+      ]
+    },
+    {
       "component": "breadcrumb",
       "displayName": "Breadcrumb",
       "group": "navigation",

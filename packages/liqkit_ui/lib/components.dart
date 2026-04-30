@@ -14,6 +14,7 @@ export 'src/components/buttons/liq_button.dart';
 export 'src/components/calendars/liq_calendar.dart';
 export 'src/components/cards/liq_card.dart';
 export 'src/components/carousels/liq_carousel.dart';
+export 'src/components/charts/liq_bar_chart.dart';
 export 'src/components/charts/liq_line_chart.dart';
 export 'src/components/checkboxes/liq_checkbox.dart';
 export 'src/components/chips/liq_chip.dart';

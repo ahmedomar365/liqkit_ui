@@ -1,0 +1,51 @@
+---
+title: Bar Chart
+description: iOS 26 minimal single-series bar chart for weekly summaries and dashboard tiles.
+---
+
+import barChartDefaultSnippet from '@/snippets/bar-chart/default.json';
+import barChartMultiColorSnippet from '@/snippets/bar-chart/multi-color.json';
+import barChartNoLabelsSnippet from '@/snippets/bar-chart/no-labels.json';
+
+`LiqBarChart` is a deliberately minimal single-series bar chart. It
+auto-scales the y-axis to `[min, max]` (where `max` defaults to the
+tallest bar value with a small visual headroom), renders entirely via
+`CustomPaint`, and ships zero external dependencies. Optional 11pt
+category labels render in a 24pt strip beneath each bar.
+
+By design the widget has **a single series, vertical bars only, no
+legends, no axes, and no grid lines**. Wrap it in your own labels or
+annotations when you need more — the goal is a clean primitive that
+drops into dashboard tiles, list-cell summaries, and weekly summary
+widgets.
+
+## Default
+
+The default rendering is an iOS-blue series of rounded-top bars with a
+24pt label strip beneath. Bars take the full width of the surrounding
+box, separated by 8pt gaps; the y-axis bottom is `0` and the top is
+sized to the tallest bar with a 5% headroom.
+
+<LiqPreview component="bar-chart" variant="default" />
+
+<CodeSnippet snippet={barChartDefaultSnippet} />
+
+## Multi-color
+
+Each `LiqBar` can override the chart's default color, which is handy
+for "above threshold" highlights. Below, days under 15 are tinted iOS
+green; the rest stay iOS blue.
+
+<LiqPreview component="bar-chart" variant="multi-color" />
+
+<CodeSnippet snippet={barChartMultiColorSnippet} />
+
+## No labels
+
+Set `showLabels: false` and shrink the surrounding box to embed the
+chart as a sparkline-style mini in list cells, table rows, or
+dashboard tiles where the legend lives elsewhere.
+
+<LiqPreview component="bar-chart" variant="no-labels" />
+
+<CodeSnippet snippet={barChartNoLabelsSnippet} />

@@ -38,6 +38,12 @@ import 'package:docs_snippets/snippets/badge/counter.dart'
 import 'package:docs_snippets/snippets/badge/dot.dart' show badgeDotBuilder;
 import 'package:docs_snippets/snippets/badge/status.dart'
     show badgeStatusBuilder;
+import 'package:docs_snippets/snippets/bar-chart/default.dart'
+    show barChartDefaultBuilder;
+import 'package:docs_snippets/snippets/bar-chart/multi-color.dart'
+    show barChartMultiColorBuilder;
+import 'package:docs_snippets/snippets/bar-chart/no-labels.dart'
+    show barChartNoLabelsBuilder;
 import 'package:docs_snippets/snippets/bezel/no-island.dart'
     show bezelNoIslandBuilder;
 import 'package:docs_snippets/snippets/bezel/with-island.dart'
@@ -336,6 +342,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/badge/counter': badgeCounterBuilder,
   '/badge/dot': badgeDotBuilder,
   '/badge/status': badgeStatusBuilder,
+  '/bar-chart/default': barChartDefaultBuilder,
+  '/bar-chart/multi-color': barChartMultiColorBuilder,
+  '/bar-chart/no-labels': barChartNoLabelsBuilder,
   '/bezel/no-island': bezelNoIslandBuilder,
   '/bezel/with-island': bezelWithIslandBuilder,
   '/breadcrumb/default': breadcrumbDefaultBuilder,

@@ -1,5 +1,5 @@
 {
   "title": "Status",
   "defaultOpen": true,
-  "pages": ["status-bars", "progress", "activity-views", "face-id", "badge", "skeleton", "tooltip", "toast", "hover-card", "line-chart"]
+  "pages": ["status-bars", "progress", "activity-views", "face-id", "badge", "bar-chart", "skeleton", "tooltip", "toast", "hover-card", "line-chart"]
 }
