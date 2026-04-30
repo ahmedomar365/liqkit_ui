@@ -290,6 +290,10 @@ import 'package:docs_snippets/snippets/top-bar/large-title.dart'
     show topBarLargeTitleBuilder;
 import 'package:docs_snippets/snippets/top-bar/with-title.dart'
     show topBarWithTitleBuilder;
+import 'package:docs_snippets/snippets/tree-view/files.dart'
+    show treeViewFilesBuilder;
+import 'package:docs_snippets/snippets/tree-view/outline.dart'
+    show treeViewOutlineBuilder;
 import 'package:docs_snippets/snippets/widget/extra-large.dart'
     show widgetExtraLargeBuilder;
 import 'package:docs_snippets/snippets/widget/large.dart'
@@ -456,6 +460,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/tooltip/with-arrow': tooltipWithArrowBuilder,
   '/top-bar/large-title': topBarLargeTitleBuilder,
   '/top-bar/with-title': topBarWithTitleBuilder,
+  '/tree-view/files': treeViewFilesBuilder,
+  '/tree-view/outline': treeViewOutlineBuilder,
   '/widget/extra-large': widgetExtraLargeBuilder,
   '/widget/large': widgetLargeBuilder,
   '/widget/medium': widgetMediumBuilder,

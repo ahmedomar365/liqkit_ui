@@ -412,6 +412,15 @@
       ]
     },
     {
+      "component": "tree-view",
+      "displayName": "Tree View",
+      "group": "navigation",
+      "variants": [
+        { "variant": "files",   "displayName": "File explorer", "dartFile": "apps/docs_snippets/lib/snippets/tree-view/files.dart" },
+        { "variant": "outline", "displayName": "Outline",       "dartFile": "apps/docs_snippets/lib/snippets/tree-view/outline.dart" }
+      ]
+    },
+    {
       "component": "sidebar",
       "displayName": "Sidebars",
       "group": "navigation",

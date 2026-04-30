@@ -162,6 +162,8 @@ export const SNIPPET_ROUTES = {
   'tooltip/with-arrow': { component: 'tooltip', variant: 'with-arrow', displayName: "With arrow", path: '/tooltip/with-arrow' },
   'top-bar/large-title': { component: 'top-bar', variant: 'large-title', displayName: "Large Title", path: '/top-bar/large-title' },
   'top-bar/with-title': { component: 'top-bar', variant: 'with-title', displayName: "With Title", path: '/top-bar/with-title' },
+  'tree-view/files': { component: 'tree-view', variant: 'files', displayName: "File explorer", path: '/tree-view/files' },
+  'tree-view/outline': { component: 'tree-view', variant: 'outline', displayName: "Outline", path: '/tree-view/outline' },
   'widget/extra-large': { component: 'widget', variant: 'extra-large', displayName: "Extra Large", path: '/widget/extra-large' },
   'widget/large': { component: 'widget', variant: 'large', displayName: "Large", path: '/widget/large' },
   'widget/medium': { component: 'widget', variant: 'medium', displayName: "Medium", path: '/widget/medium' },

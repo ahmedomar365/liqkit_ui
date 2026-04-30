@@ -1,0 +1,40 @@
+---
+title: Tree View
+description: iOS 26 hierarchical list with collapsible folders — file explorer and outline variants.
+---
+
+import treeViewFilesSnippet from '@/snippets/tree-view/files.json';
+import treeViewOutlineSnippet from '@/snippets/tree-view/outline.json';
+
+`LiqTreeView` is the iOS 26 hierarchical list — a column of indented
+rows with collapsible folders. Distinct from `LiqAccordion` (flat
+top-level expand/collapse panels), the tree supports arbitrarily
+nested children and is the right primitive for a file-explorer pane,
+a document outline, or an org chart.
+
+The widget owns its expansion state internally — pass
+`initialExpanded` to seed which folder ids are open on first paint.
+Selection is owned by the consumer: pass `selectedId` to highlight a
+row and listen to `onSelected` to update it. Tapping a folder row
+toggles expansion and does **not** fire `onSelected`; that callback
+fires only for leaves.
+
+## File explorer
+
+Decorate each node with a leading `IconData` (folder vs file) and let
+the consumer track which leaf is selected. The selected row gets
+`#E5E5EA` background and a semibold label.
+
+<LiqPreview component="tree-view" variant="files" />
+
+<CodeSnippet snippet={treeViewFilesSnippet} />
+
+## Outline
+
+Skip the leading icon for a document-outline look — chevrons are
+still rendered for folder rows. Use the same selection pattern to
+sync the outline with whatever section is currently in view.
+
+<LiqPreview component="tree-view" variant="outline" />
+
+<CodeSnippet snippet={treeViewOutlineSnippet} />
