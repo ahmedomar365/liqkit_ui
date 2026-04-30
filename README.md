@@ -1,34 +1,135 @@
 # liqkit_ui
 
-iOS 26 Liquid Glass design system for Flutter.
+**iOS 26 Liquid Glass design system for Flutter — 69 components, every one
+with goldens, snippets, and live docs.**
 
-This repository is a Dart pub workspace containing the published
-component library, design tokens, asset bundle, the showcase Flutter Web
-app, the docs site under `apps/docs/`, the docs snippets app under
-`apps/docs_snippets/`, and the design-data archive ported from `liqkit`.
+A pure-Dart pub workspace under Melos. Steady-state dependencies are
+Dart-only; Node/pnpm only show up under `apps/docs/` for the Fumadocs
+documentation site. The component library, design tokens, asset bundle,
+showcase, and snippets app all live in a single workspace.
 
-See `docs/superpowers/specs/2026-04-26-liqkit_ui-design.md` for the full
-design and `docs/superpowers/plans/` for implementation plans.
+## Highlights
 
-## Documentation
+- **69 components** across 7 categories — buttons, toggles, sliders,
+  steppers, sheets, alerts, sidebars, lists, popovers, menus, popup
+  buttons, segmented controls, page controls, progress, text fields,
+  pickers, color pickers, top bars, toolbars, tabs, breadcrumbs,
+  pagination, command palette, tree view, status bars, notifications,
+  skeletons, toasts, tooltips, hover cards, badges, app icons, bezels,
+  keyboards, kit helpers, materials, widgets, windows, system, examples,
+  face ID, activity views, accordion, avatar, card, carousel, dialog,
+  drawer, resizable, data table, kanban, empty states, divider, label,
+  text styles, colors, checkbox, radio, chip, calendar, time picker,
+  number field, OTP input, combobox, line chart, bar chart, rich editor.
+- **Liquid Glass** throughout — translucent surfaces, hairline rims,
+  soft shadows, iOS spring animations, San Francisco type scale.
+- **Goldens for every component** — widget tests assert exact pixel
+  dimensions and behavior in `packages/liqkit_ui/test/components/`.
+- **Live docs** at `apps/docs/` (Fumadocs 16 + Next 16 + Tailwind 4)
+  with Preview/Code tabs per page, ⌘K Orama search, and a snippets
+  Flutter Web app iframed in for the live previews.
+- **Playwright e2e** — single-page smoke (`buttons-page.spec.ts`),
+  representative-pages sweep (`sample-pages.spec.ts`), Phase-4 27-page
+  audit (`phase4-audit.spec.ts`), search regression
+  (`search.spec.ts`).
+- **Canonical tokens generated** from Figma variable-defs into typed
+  Dart classes — never edited by hand.
 
-Once deployed, the live docs site lives at
-**<https://liqkit-docs-prod.workers.dev>** (Cloudflare Workers) and
-the iframed component previews at
-**<https://liqkit-snippets-prod.pages.dev>** (Cloudflare Pages).
+## Layout
 
-Deploy is wired in `.github/workflows/docs_deploy.yaml`. To activate,
-add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to the repo's
-GitHub Actions secrets and push to `main`.
+```
+.
+├── packages/
+│   ├── liqkit_ui/             # the published component library
+│   ├── liqkit_ui_tokens/      # generated colors + typography
+│   ├── liqkit_ui_assets/      # SF Pro fonts + asset manifest
+│   └── liqkit_ui_design_data/ # frozen archive from upstream liqkit
+├── apps/
+│   ├── docs/                  # Fumadocs Next.js docs site
+│   ├── docs_snippets/         # Flutter Web app iframed by docs previews
+│   ├── showcase/              # full-coverage Flutter Web demo
+│   └── playground/            # ad-hoc Flutter dev sandbox
+├── tooling/
+│   └── gen/                   # token capture, snippet manifest, snippet codegen
+└── docs/superpowers/          # specs and implementation plans
+```
 
-The custom domain (`liqkit.dev` → docs, `snippets.liqkit.dev` → iframe
-origin) is wired in the plan but deferred until the domain is
-registered.
+## Local development
 
-## Status
+```bash
+# 1. Build the snippets Flutter Web app (iframed by docs)
+cd apps/docs_snippets
+flutter build web --no-web-resources-cdn --pwa-strategy=none --no-tree-shake-icons --base-href=/
 
-Pre-1.0 — bootstrap in progress.
+# 2. Serve it on :4174
+cd build/web && python3 -m http.server 4174 &
+
+# 3. Run the Fumadocs docs app on :3000
+cd apps/docs
+NEXT_PUBLIC_SNIPPETS_URL=http://localhost:4174 npx pnpm@10 dev
+```
+
+Open <http://localhost:3000>.
+
+For hot-reloading the Flutter side, replace step 1+2 with:
+
+```bash
+cd apps/docs_snippets
+flutter run -d web-server --web-port=4174
+```
+
+## Quality gates
+
+Run before every commit:
+
+```bash
+melos run fmt
+melos run analyze
+melos run analyze:flutter
+melos run test
+```
+
+Plus, for docs-affecting changes:
+
+```bash
+cd apps/docs && pnpm e2e
+```
+
+## Adding a component
+
+Each component follows a fixed template. See
+`docs/superpowers/plans/2026-04-29-phase4a-component-parity.md` for
+the bite-sized steps. In short:
+
+1. `packages/liqkit_ui/lib/src/components/<name>/liq_<name>.dart` — the
+   widget. `final class … with Diagnosticable`. Static `const` design
+   constants. `debugFillProperties`.
+2. `packages/liqkit_ui/lib/components.dart` — alphabetically-positioned
+   export.
+3. `packages/liqkit_ui/test/components/liq_<name>_test.dart` — widget
+   tests covering behavior + canonical dimensions.
+4. `apps/docs_snippets/lib/snippets/<kebab>/<variant>.dart` — interactive
+   builders. Wrap in `Align(heightFactor: 1, child: …)`, mark the
+   highlighted region with `// {@highlight} … // {@endhighlight}`.
+5. Append the component entry to `tooling/gen/snippet_manifest.json`.
+6. From repo root: `melos run docs:gen:routes && melos run docs:gen:snippets`.
+7. `apps/docs/content/docs/<category>/<kebab>.mdx` — docs page.
+8. Append the page slug to the matching
+   `apps/docs/content/docs/<category>/meta.json`.
+
+## Tokens
+
+Canonical tokens live in `packages/liqkit_ui_design_data/` (frozen
+archive) and are captured into typed Dart by:
+
+```bash
+dart run tooling/gen/capture_canonical_tokens.dart
+dart run tooling/gen/generate_canonical_dart.dart
+```
+
+`packages/liqkit_ui_tokens/lib/src/` is **never edited by hand** —
+it's generator output.
 
 ## License
 
-MIT (see `LICENSE`).
+MIT — see `LICENSE`.
