@@ -414,6 +414,15 @@
       ]
     },
     {
+      "component": "kanban",
+      "displayName": "Kanban",
+      "group": "containers",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/kanban/default.dart" },
+        { "variant": "dense",   "displayName": "Dense",   "dartFile": "apps/docs_snippets/lib/snippets/kanban/dense.dart" }
+      ]
+    },
+    {
       "component": "top-bar",
       "displayName": "Top Bars",
       "group": "navigation",

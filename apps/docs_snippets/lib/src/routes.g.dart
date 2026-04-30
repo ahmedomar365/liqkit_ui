@@ -143,6 +143,10 @@ import 'package:docs_snippets/snippets/hover-card/bottom.dart'
     show hoverCardBottomBuilder;
 import 'package:docs_snippets/snippets/hover-card/default.dart'
     show hoverCardDefaultBuilder;
+import 'package:docs_snippets/snippets/kanban/default.dart'
+    show kanbanDefaultBuilder;
+import 'package:docs_snippets/snippets/kanban/dense.dart'
+    show kanbanDenseBuilder;
 import 'package:docs_snippets/snippets/keyboard/numbers.dart'
     show keyboardNumbersBuilder;
 import 'package:docs_snippets/snippets/keyboard/qwerty.dart'
@@ -396,6 +400,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/face-id/success': faceIdSuccessBuilder,
   '/hover-card/bottom': hoverCardBottomBuilder,
   '/hover-card/default': hoverCardDefaultBuilder,
+  '/kanban/default': kanbanDefaultBuilder,
+  '/kanban/dense': kanbanDenseBuilder,
   '/keyboard/numbers': keyboardNumbersBuilder,
   '/keyboard/qwerty': keyboardQwertyBuilder,
   '/kit-helpers/header': kitHelpersHeaderBuilder,

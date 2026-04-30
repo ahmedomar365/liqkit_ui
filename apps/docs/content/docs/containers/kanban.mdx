@@ -1,0 +1,43 @@
+---
+title: Kanban
+description: iOS 26 multi-column drag-and-drop board for ordering cards across status lanes.
+---
+
+import kanbanDefaultSnippet from '@/snippets/kanban/default.json';
+import kanbanDenseSnippet from '@/snippets/kanban/dense.json';
+
+`LiqKanban` is a Trello-style board: N fixed-width columns laid out
+horizontally, each holding an ordered list of cards. The user drags a
+card from one column to another, or to a different slot in the same
+column, and the parent receives an `onMove(cardId, fromColumnId,
+toColumnId, toIndex)` callback to update its own state.
+
+The widget is fully **stateless** — the parent owns the card list and
+column membership, `LiqKanban` only renders the layout and emits move
+events. Drag-and-drop is implemented with Flutter's built-in
+`Draggable` and `DragTarget`, so it works everywhere Flutter does (web,
+desktop, mobile).
+
+Scope is deliberately narrow: a single dragged card at a time, no
+inline edit, no card-creation UI, no swimlanes. Compose your own
+controls around the board for richer behaviour.
+
+## Default
+
+Three columns, five cards. Drag any card by its body to another column
+or another slot in the same column; while hovering a target slot, an
+iOS-blue hint line shows where the card will land.
+
+<LiqPreview component="kanban" variant="default" />
+
+<CodeSnippet snippet={kanbanDefaultSnippet} />
+
+## Dense
+
+For boards with many short cards, narrow `columnWidth` to fit more
+columns on screen. Below, four columns with eight cards in a 180pt
+column width.
+
+<LiqPreview component="kanban" variant="dense" />
+
+<CodeSnippet snippet={kanbanDenseSnippet} />
