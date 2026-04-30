@@ -1,0 +1,49 @@
+---
+title: Line Chart
+description: iOS 26 minimal single-series line chart for sparklines and dashboards.
+---
+
+import lineChartDefaultSnippet from '@/snippets/line-chart/default.json';
+import lineChartDotsSnippet from '@/snippets/line-chart/dots.json';
+import lineChartSparklineSnippet from '@/snippets/line-chart/sparkline.json';
+
+`LiqLineChart` is a deliberately minimal single-series line chart. It
+auto-scales the y-axis to the data extents (or to explicit `min` /
+`max` bounds), renders entirely via `CustomPaint`, and ships zero
+external dependencies. Dot markers and a soft gradient area fill are
+optional.
+
+By design the widget has **no axes labels, no legend, and no zoom**.
+Wrap it in your own labels or annotations when you need more — the
+goal is a clean primitive that drops into sparkline cells, dashboard
+tiles, and inline trend indicators.
+
+## Default
+
+The default rendering is a smooth (Catmull-Rom) iOS-blue line with a
+vertical gradient area fill below it. Y-axis bounds default to the
+minimum and maximum of the input values.
+
+<LiqPreview component="line-chart" variant="default" />
+
+<CodeSnippet snippet={lineChartDefaultSnippet} />
+
+## With dots
+
+Set `showDots: true` to draw a small filled circle (with a white inner
+ring) at each data point. Combine with `smooth: false` for a crisp
+line-segment look.
+
+<LiqPreview component="line-chart" variant="dots" />
+
+<CodeSnippet snippet={lineChartDotsSnippet} />
+
+## Sparkline
+
+Drop the area fill and use a thinner stroke to make a compact
+sparkline that reads at a glance inside list cells, table rows, or
+top-bar widgets.
+
+<LiqPreview component="line-chart" variant="sparkline" />
+
+<CodeSnippet snippet={lineChartSparklineSnippet} />

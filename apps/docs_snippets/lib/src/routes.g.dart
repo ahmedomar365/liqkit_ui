@@ -151,6 +151,12 @@ import 'package:docs_snippets/snippets/label/optional.dart'
     show labelOptionalBuilder;
 import 'package:docs_snippets/snippets/label/required.dart'
     show labelRequiredBuilder;
+import 'package:docs_snippets/snippets/line-chart/default.dart'
+    show lineChartDefaultBuilder;
+import 'package:docs_snippets/snippets/line-chart/dots.dart'
+    show lineChartDotsBuilder;
+import 'package:docs_snippets/snippets/line-chart/sparkline.dart'
+    show lineChartSparklineBuilder;
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
 import 'package:docs_snippets/snippets/list/grouped.dart'
     show listGroupedBuilder;
@@ -388,6 +394,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/kit-helpers/mode-pill': kitHelpersModePillBuilder,
   '/label/optional': labelOptionalBuilder,
   '/label/required': labelRequiredBuilder,
+  '/line-chart/default': lineChartDefaultBuilder,
+  '/line-chart/dots': lineChartDotsBuilder,
+  '/line-chart/sparkline': lineChartSparklineBuilder,
   '/list/dark': listDarkBuilder,
   '/list/grouped': listGroupedBuilder,
   '/materials/dark': materialsDarkBuilder,

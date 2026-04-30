@@ -92,6 +92,16 @@
       ]
     },
     {
+      "component": "line-chart",
+      "displayName": "Line Chart",
+      "group": "status",
+      "variants": [
+        { "variant": "default",   "displayName": "Default",   "dartFile": "apps/docs_snippets/lib/snippets/line-chart/default.dart" },
+        { "variant": "dots",      "displayName": "With dots", "dartFile": "apps/docs_snippets/lib/snippets/line-chart/dots.dart" },
+        { "variant": "sparkline", "displayName": "Sparkline", "dartFile": "apps/docs_snippets/lib/snippets/line-chart/sparkline.dart" }
+      ]
+    },
+    {
       "component": "checkbox",
       "displayName": "Checkbox",
       "group": "inputs",
