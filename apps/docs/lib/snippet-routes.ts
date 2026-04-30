@@ -75,6 +75,8 @@ export const SNIPPET_ROUTES = {
   'face-id/fail': { component: 'face-id', variant: 'fail', displayName: "Fail", path: '/face-id/fail' },
   'face-id/scanning': { component: 'face-id', variant: 'scanning', displayName: "Scanning", path: '/face-id/scanning' },
   'face-id/success': { component: 'face-id', variant: 'success', displayName: "Success", path: '/face-id/success' },
+  'hover-card/bottom': { component: 'hover-card', variant: 'bottom', displayName: "Bottom", path: '/hover-card/bottom' },
+  'hover-card/default': { component: 'hover-card', variant: 'default', displayName: "Default", path: '/hover-card/default' },
   'keyboard/numbers': { component: 'keyboard', variant: 'numbers', displayName: "Numbers", path: '/keyboard/numbers' },
   'keyboard/qwerty': { component: 'keyboard', variant: 'qwerty', displayName: "QWERTY", path: '/keyboard/qwerty' },
   'kit-helpers/header': { component: 'kit-helpers', variant: 'header', displayName: "Header", path: '/kit-helpers/header' },

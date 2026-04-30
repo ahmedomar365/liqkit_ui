@@ -27,6 +27,7 @@ export 'src/components/drawers/liq_drawer.dart';
 export 'src/components/empty_states/liq_empty_state.dart';
 export 'src/components/examples/liq_examples.dart';
 export 'src/components/face_id/liq_face_id.dart';
+export 'src/components/hover_cards/liq_hover_card.dart';
 export 'src/components/keyboards/liq_keyboard.dart';
 export 'src/components/kit_helpers/liq_kit_helpers.dart';
 export 'src/components/labels/liq_label.dart';

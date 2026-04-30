@@ -129,6 +129,10 @@ import 'package:docs_snippets/snippets/face-id/scanning.dart'
     show faceIdScanningBuilder;
 import 'package:docs_snippets/snippets/face-id/success.dart'
     show faceIdSuccessBuilder;
+import 'package:docs_snippets/snippets/hover-card/bottom.dart'
+    show hoverCardBottomBuilder;
+import 'package:docs_snippets/snippets/hover-card/default.dart'
+    show hoverCardDefaultBuilder;
 import 'package:docs_snippets/snippets/keyboard/numbers.dart'
     show keyboardNumbersBuilder;
 import 'package:docs_snippets/snippets/keyboard/qwerty.dart'
@@ -357,6 +361,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/face-id/fail': faceIdFailBuilder,
   '/face-id/scanning': faceIdScanningBuilder,
   '/face-id/success': faceIdSuccessBuilder,
+  '/hover-card/bottom': hoverCardBottomBuilder,
+  '/hover-card/default': hoverCardDefaultBuilder,
   '/keyboard/numbers': keyboardNumbersBuilder,
   '/keyboard/qwerty': keyboardQwertyBuilder,
   '/kit-helpers/header': kitHelpersHeaderBuilder,

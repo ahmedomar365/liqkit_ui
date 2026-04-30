@@ -376,6 +376,15 @@
       ]
     },
     {
+      "component": "hover-card",
+      "displayName": "Hover Card",
+      "group": "status",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/hover-card/default.dart" },
+        { "variant": "bottom",  "displayName": "Bottom",  "dartFile": "apps/docs_snippets/lib/snippets/hover-card/bottom.dart" }
+      ]
+    },
+    {
       "component": "top-bar",
       "displayName": "Top Bars",
       "group": "navigation",

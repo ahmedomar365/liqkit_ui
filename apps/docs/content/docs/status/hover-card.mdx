@@ -1,0 +1,37 @@
+---
+title: Hover Card
+description: Rich preview popover that opens on hover with a small dismiss delay.
+---
+
+import hoverCardDefaultSnippet from '@/snippets/hover-card/default.json';
+import hoverCardBottomSnippet from '@/snippets/hover-card/bottom.json';
+
+`LiqHoverCard` is an iOS 26 rich-content popover triggered by hovering
+over a target. Common pattern: hover a username to see a preview of
+the user's profile. The popover opens after a short `openDelay` and
+dismisses after a small `closeDelay` once the pointer leaves both the
+target and the popover surface — that delay lets the user move the
+pointer from the target into the popover without it disappearing.
+The popover auto-flips to the opposite edge if the preferred
+`LiqHoverCardPlacement` would overflow the viewport.
+
+Hover-only, by design — touch devices do not trigger the popover.
+
+## Default
+
+The default placement is above the target. The popover renders as a
+clean rounded panel (no arrow, unlike `LiqTooltip`) with a hairline
+border and an iOS 26 light-glass surface.
+
+<LiqPreview component="hover-card" variant="default" />
+
+<CodeSnippet snippet={hoverCardDefaultSnippet} />
+
+## Bottom
+
+Place the popover below the target by passing
+`placement: LiqHoverCardPlacement.bottom`.
+
+<LiqPreview component="hover-card" variant="bottom" />
+
+<CodeSnippet snippet={hoverCardBottomSnippet} />
