@@ -113,6 +113,8 @@ export const SNIPPET_ROUTES = {
   'progress/spinner': { component: 'progress', variant: 'spinner', displayName: "Spinner", path: '/progress/spinner' },
   'radio/group': { component: 'radio', variant: 'group', displayName: "Group", path: '/radio/group' },
   'radio/single': { component: 'radio', variant: 'single', displayName: "Single", path: '/radio/single' },
+  'resizable/horizontal': { component: 'resizable', variant: 'horizontal', displayName: "Horizontal", path: '/resizable/horizontal' },
+  'resizable/vertical': { component: 'resizable', variant: 'vertical', displayName: "Vertical", path: '/resizable/vertical' },
   'segmented/four': { component: 'segmented', variant: 'four', displayName: "Four Segments", path: '/segmented/four' },
   'segmented/three': { component: 'segmented', variant: 'three', displayName: "Three Segments", path: '/segmented/three' },
   'segmented/two': { component: 'segmented', variant: 'two', displayName: "Two Segments", path: '/segmented/two' },

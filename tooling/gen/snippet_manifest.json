@@ -467,6 +467,15 @@
       ]
     },
     {
+      "component": "resizable",
+      "displayName": "Resizable",
+      "group": "containers",
+      "variants": [
+        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/resizable/horizontal.dart" },
+        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/resizable/vertical.dart" }
+      ]
+    },
+    {
       "component": "activity-view",
       "displayName": "Activity Views",
       "group": "status",

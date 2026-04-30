@@ -1,0 +1,37 @@
+---
+title: Resizable
+description: Two-pane container with a draggable divider that lets users adjust the split ratio along a horizontal or vertical axis.
+---
+
+import resizableHorizontalSnippet from '@/snippets/resizable/horizontal.json';
+import resizableVerticalSnippet from '@/snippets/resizable/vertical.json';
+
+`LiqResizable` is the iOS 26 split-pane container — two children
+separated by a draggable divider. Dragging the divider adjusts the
+split ratio, clamped between `minRatio` and `maxRatio`. Useful for
+IDE-style left-sidebar / main / right-inspector layouts.
+
+The divider renders an idle 8% black band that animates to system blue
+on hover and during drag, with a small grip rectangle centered inside.
+On desktop the cursor switches to a column- or row-resize cursor when
+the pointer enters the divider.
+
+## Horizontal
+
+The default layout — `first` on the left, `second` on the right, with
+a vertical divider between them. `initialRatio` controls the starting
+fraction of the width that `first` occupies.
+
+<LiqPreview component="resizable" variant="horizontal" />
+
+<CodeSnippet snippet={resizableHorizontalSnippet} />
+
+## Vertical
+
+Pass `direction: LiqResizableDirection.vertical` to stack the panes
+top-to-bottom with a horizontal divider between them. Drag the divider
+up or down to adjust the height split.
+
+<LiqPreview component="resizable" variant="vertical" />
+
+<CodeSnippet snippet={resizableVerticalSnippet} />
