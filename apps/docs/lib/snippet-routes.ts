@@ -117,6 +117,8 @@ export const SNIPPET_ROUTES = {
   'radio/single': { component: 'radio', variant: 'single', displayName: "Single", path: '/radio/single' },
   'resizable/horizontal': { component: 'resizable', variant: 'horizontal', displayName: "Horizontal", path: '/resizable/horizontal' },
   'resizable/vertical': { component: 'resizable', variant: 'vertical', displayName: "Vertical", path: '/resizable/vertical' },
+  'rich-editor/default': { component: 'rich-editor', variant: 'default', displayName: "Default", path: '/rich-editor/default' },
+  'rich-editor/empty': { component: 'rich-editor', variant: 'empty', displayName: "Empty", path: '/rich-editor/empty' },
   'segmented/four': { component: 'segmented', variant: 'four', displayName: "Four Segments", path: '/segmented/four' },
   'segmented/three': { component: 'segmented', variant: 'three', displayName: "Three Segments", path: '/segmented/three' },
   'segmented/two': { component: 'segmented', variant: 'two', displayName: "Two Segments", path: '/segmented/two' },

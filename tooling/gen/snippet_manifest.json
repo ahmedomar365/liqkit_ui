@@ -494,6 +494,15 @@
       ]
     },
     {
+      "component": "rich-editor",
+      "displayName": "Rich Editor",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/default.dart" },
+        { "variant": "empty",   "displayName": "Empty",   "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/empty.dart" }
+      ]
+    },
+    {
       "component": "activity-view",
       "displayName": "Activity Views",
       "group": "status",

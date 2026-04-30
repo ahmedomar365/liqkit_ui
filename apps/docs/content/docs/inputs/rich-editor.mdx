@@ -1,0 +1,35 @@
+---
+title: Rich Editor
+description: Inline rich-text editor with bold, italic, and underline formatting.
+---
+
+import richEditorDefaultSnippet from '@/snippets/rich-editor/default.json';
+import richEditorEmptySnippet from '@/snippets/rich-editor/empty.json';
+
+`LiqRichEditor` is a small inline rich-text editor with a 3-button
+toolbar above the editable area. It supports three character formats —
+**bold**, _italic_, and underline — over a single paragraph.
+
+The scope is deliberately tight. Block formats (headings, lists),
+images, and links are out of scope for this component; reach for a
+full WYSIWYG when you need them.
+
+State lives on a `LiqRichEditorController`, which owns the current
+`LiqRichValue` (plain text + a list of `LiqRichRange`s) and exposes
+`toggleFormat` / `selectionHasFormat` for selection-aware operations.
+
+## Default
+
+A pre-populated editor with bold and italic ranges already applied.
+
+<LiqPreview component="rich-editor" variant="default" />
+
+<CodeSnippet snippet={richEditorDefaultSnippet} />
+
+## Empty
+
+A blank editor — the placeholder is shown until the user types.
+
+<LiqPreview component="rich-editor" variant="empty" />
+
+<CodeSnippet snippet={richEditorEmptySnippet} />
