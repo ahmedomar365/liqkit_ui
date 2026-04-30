@@ -1,0 +1,39 @@
+---
+title: Data Table
+description: Simple tabular display with column headers, body rows, optional row taps, and optional sortable columns.
+---
+
+import dataTableDefaultSnippet from '@/snippets/data-table/default.json';
+import dataTableSortableSnippet from '@/snippets/data-table/sortable.json';
+
+`LiqDataTable` is the iOS 26 simple data table — a header row plus body
+rows with hairline separators inside a rounded card. Width is provided
+by the parent constraints; columns share that width using the `flex`
+factor on each `LiqDataColumn`.
+
+The table is intentionally not a full-blown spreadsheet. It does not
+sort, paginate, or virtualize the data on its own — the consumer
+reorders the `rows` list in response to `onSortChanged` and passes the
+updated list back in. Sort cycle is `none → ascending → descending →
+none`.
+
+## Default
+
+A static three-column table. `numeric: true` right-aligns the column
+and renders cell text with tabular numerals so digits line up.
+
+<LiqPreview component="data-table" variant="default" />
+
+<CodeSnippet snippet={dataTableDefaultSnippet} />
+
+## Sortable
+
+Mark a column with `sortable: true` to make its header tappable. The
+table fires `onSortChanged(columnIndex, nextDirection)` on each tap;
+the consumer is responsible for reordering the `rows` array and
+passing back the new `sortColumnIndex` + `sortDirection`. Tapping the
+same column three times cycles back to `none`.
+
+<LiqPreview component="data-table" variant="sortable" />
+
+<CodeSnippet snippet={dataTableSortableSnippet} />

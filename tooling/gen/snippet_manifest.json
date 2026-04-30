@@ -339,6 +339,15 @@
       ]
     },
     {
+      "component": "data-table",
+      "displayName": "Data Table",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/data-table/default.dart" },
+        { "variant": "sortable", "displayName": "Sortable", "dartFile": "apps/docs_snippets/lib/snippets/data-table/sortable.dart" }
+      ]
+    },
+    {
       "component": "divider",
       "displayName": "Divider",
       "group": "foundation",

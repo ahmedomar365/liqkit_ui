@@ -21,6 +21,7 @@ export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/comboboxes/liq_combobox.dart';
 export 'src/components/command_palette/liq_command_palette.dart';
 export 'src/components/context_menu/liq_context_menu.dart';
+export 'src/components/data_tables/liq_data_table.dart';
 export 'src/components/dialogs/liq_dialog.dart';
 export 'src/components/dividers/liq_divider.dart';
 export 'src/components/drawers/liq_drawer.dart';

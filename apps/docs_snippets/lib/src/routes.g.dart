@@ -100,6 +100,10 @@ import 'package:docs_snippets/snippets/context-menu/below-trailing.dart'
     show contextMenuBelowTrailingBuilder;
 import 'package:docs_snippets/snippets/context-menu/beside-leading.dart'
     show contextMenuBesideLeadingBuilder;
+import 'package:docs_snippets/snippets/data-table/default.dart'
+    show dataTableDefaultBuilder;
+import 'package:docs_snippets/snippets/data-table/sortable.dart'
+    show dataTableSortableBuilder;
 import 'package:docs_snippets/snippets/dialog/default.dart'
     show dialogDefaultBuilder;
 import 'package:docs_snippets/snippets/dialog/with-actions.dart'
@@ -350,6 +354,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/below-leading': contextMenuBelowLeadingBuilder,
   '/context-menu/below-trailing': contextMenuBelowTrailingBuilder,
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
+  '/data-table/default': dataTableDefaultBuilder,
+  '/data-table/sortable': dataTableSortableBuilder,
   '/dialog/default': dialogDefaultBuilder,
   '/dialog/with-actions': dialogWithActionsBuilder,
   '/divider/horizontal': dividerHorizontalBuilder,
