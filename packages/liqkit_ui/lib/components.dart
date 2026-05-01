@@ -51,6 +51,7 @@ export 'src/components/progress/liq_progress_indicator.dart';
 export 'src/components/radios/liq_radio.dart';
 export 'src/components/resizable/liq_resizable.dart';
 export 'src/components/rich_editors/liq_rich_editor.dart';
+export 'src/components/scroll_areas/liq_scroll_area.dart';
 export 'src/components/segmented/liq_segmented_control.dart';
 export 'src/components/sheets/liq_sheet.dart';
 export 'src/components/sidebars/liq_sidebar.dart';

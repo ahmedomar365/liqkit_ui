@@ -232,6 +232,10 @@ import 'package:docs_snippets/snippets/rich-editor/default.dart'
     show richEditorDefaultBuilder;
 import 'package:docs_snippets/snippets/rich-editor/empty.dart'
     show richEditorEmptyBuilder;
+import 'package:docs_snippets/snippets/scroll-area/horizontal.dart'
+    show scrollAreaHorizontalBuilder;
+import 'package:docs_snippets/snippets/scroll-area/vertical.dart'
+    show scrollAreaVerticalBuilder;
 import 'package:docs_snippets/snippets/segmented/four.dart'
     show segmentedFourBuilder;
 import 'package:docs_snippets/snippets/segmented/three.dart'
@@ -455,6 +459,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/resizable/vertical': resizableVerticalBuilder,
   '/rich-editor/default': richEditorDefaultBuilder,
   '/rich-editor/empty': richEditorEmptyBuilder,
+  '/scroll-area/horizontal': scrollAreaHorizontalBuilder,
+  '/scroll-area/vertical': scrollAreaVerticalBuilder,
   '/segmented/four': segmentedFourBuilder,
   '/segmented/three': segmentedThreeBuilder,
   '/segmented/two': segmentedTwoBuilder,

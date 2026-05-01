@@ -541,6 +541,15 @@
       ]
     },
     {
+      "component": "scroll-area",
+      "displayName": "Scroll Area",
+      "group": "containers",
+      "variants": [
+        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/vertical.dart" },
+        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/horizontal.dart" }
+      ]
+    },
+    {
       "component": "rich-editor",
       "displayName": "Rich Editor",
       "group": "inputs",

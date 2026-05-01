@@ -129,6 +129,8 @@ export const SNIPPET_ROUTES = {
   'resizable/vertical': { component: 'resizable', variant: 'vertical', displayName: "Vertical", path: '/resizable/vertical' },
   'rich-editor/default': { component: 'rich-editor', variant: 'default', displayName: "Default", path: '/rich-editor/default' },
   'rich-editor/empty': { component: 'rich-editor', variant: 'empty', displayName: "Empty", path: '/rich-editor/empty' },
+  'scroll-area/horizontal': { component: 'scroll-area', variant: 'horizontal', displayName: "Horizontal", path: '/scroll-area/horizontal' },
+  'scroll-area/vertical': { component: 'scroll-area', variant: 'vertical', displayName: "Vertical", path: '/scroll-area/vertical' },
   'segmented/four': { component: 'segmented', variant: 'four', displayName: "Four Segments", path: '/segmented/four' },
   'segmented/three': { component: 'segmented', variant: 'three', displayName: "Three Segments", path: '/segmented/three' },
   'segmented/two': { component: 'segmented', variant: 'two', displayName: "Two Segments", path: '/segmented/two' },

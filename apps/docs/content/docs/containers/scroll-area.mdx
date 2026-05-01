@@ -1,0 +1,39 @@
+---
+title: Scroll Area
+description: Themed scroll container that replaces the default platform scrollbar with the iOS 26 hairline pill, auto-fading after 600ms of inactivity.
+---
+
+import scrollAreaVerticalSnippet from '@/snippets/scroll-area/vertical.json';
+import scrollAreaHorizontalSnippet from '@/snippets/scroll-area/horizontal.json';
+
+`LiqScrollArea` is the iOS 26 themed-scrollbar wrapper — a
+`SingleChildScrollView` whose default platform scrollbar is replaced
+with a 4pt-thick hairline pill that appears while scrolling and fades
+after 600ms of inactivity. Use it whenever the default OS scrollbar
+would feel intrusive — typically desktop scroll regions inside cards,
+sidebars, or modal content.
+
+The thumb idles at 40% black and deepens to 80% black on hover or
+drag. The track is invisible — no rail is painted. Consumers can
+provide an external `ScrollController` to drive scrolling; otherwise
+an internal one is created and disposed alongside the widget. Inner
+`padding` is applied to the viewport so the scrollbar paints over the
+gutter.
+
+## Vertical
+
+The default axis. Pair `LiqScrollArea` with a fixed-height `SizedBox`
+to bound the viewport so the inner content can overflow.
+
+<LiqPreview component="scroll-area" variant="vertical" />
+
+<CodeSnippet snippet={scrollAreaVerticalSnippet} />
+
+## Horizontal
+
+Pass `axis: Axis.horizontal` to flip the scroll direction. The
+hairline pill renders along the bottom edge instead of the right.
+
+<LiqPreview component="scroll-area" variant="horizontal" />
+
+<CodeSnippet snippet={scrollAreaHorizontalSnippet} />
