@@ -140,6 +140,15 @@
       ]
     },
     {
+      "component": "collapsible",
+      "displayName": "Collapsible",
+      "group": "containers",
+      "variants": [
+        { "variant": "default",   "displayName": "Default",   "dartFile": "apps/docs_snippets/lib/snippets/collapsible/default.dart" },
+        { "variant": "expanded",  "displayName": "Expanded",  "dartFile": "apps/docs_snippets/lib/snippets/collapsible/expanded.dart" }
+      ]
+    },
+    {
       "component": "combobox",
       "displayName": "Combobox",
       "group": "inputs",

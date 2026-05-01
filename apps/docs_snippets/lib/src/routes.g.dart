@@ -84,6 +84,10 @@ import 'package:docs_snippets/snippets/chip/dismissible.dart'
     show chipDismissibleBuilder;
 import 'package:docs_snippets/snippets/chip/group.dart' show chipGroupBuilder;
 import 'package:docs_snippets/snippets/chip/single.dart' show chipSingleBuilder;
+import 'package:docs_snippets/snippets/collapsible/default.dart'
+    show collapsibleDefaultBuilder;
+import 'package:docs_snippets/snippets/collapsible/expanded.dart'
+    show collapsibleExpandedBuilder;
 import 'package:docs_snippets/snippets/color-picker/grid.dart'
     show colorPickerGridBuilder;
 import 'package:docs_snippets/snippets/color-picker/large.dart'
@@ -370,6 +374,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/chip/dismissible': chipDismissibleBuilder,
   '/chip/group': chipGroupBuilder,
   '/chip/single': chipSingleBuilder,
+  '/collapsible/default': collapsibleDefaultBuilder,
+  '/collapsible/expanded': collapsibleExpandedBuilder,
   '/color-picker/grid': colorPickerGridBuilder,
   '/color-picker/large': colorPickerLargeBuilder,
   '/color-picker/small': colorPickerSmallBuilder,

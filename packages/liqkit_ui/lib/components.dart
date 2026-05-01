@@ -18,6 +18,7 @@ export 'src/components/charts/liq_bar_chart.dart';
 export 'src/components/charts/liq_line_chart.dart';
 export 'src/components/checkboxes/liq_checkbox.dart';
 export 'src/components/chips/liq_chip.dart';
+export 'src/components/collapsibles/liq_collapsible.dart';
 export 'src/components/color_pickers/liq_color_picker.dart';
 export 'src/components/colors/liq_color_swatch.dart';
 export 'src/components/comboboxes/liq_combobox.dart';

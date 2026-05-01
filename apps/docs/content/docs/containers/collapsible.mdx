@@ -1,0 +1,40 @@
+---
+title: Collapsible
+description: Single toggleable region with an animated chevron and smoothly expanding body.
+---
+
+import collapsibleDefaultSnippet from '@/snippets/collapsible/default.json';
+import collapsibleExpandedSnippet from '@/snippets/collapsible/expanded.json';
+
+`LiqCollapsible` is a single toggleable region — the standard
+"Show more / Show less" or single-question FAQ primitive. The header is
+fully tappable; tapping toggles the body open or closed and rotates the
+trailing chevron 90° clockwise. The body smoothly resizes via
+`AnimatedSize`.
+
+This is **distinct** from [`LiqAccordion`](/docs/containers/accordion),
+which manages a list of `LiqAccordionItem` rows inside a shared
+rounded surface. Use `LiqCollapsible` when you only need one
+expand/collapse target.
+
+`LiqCollapsible` is a **primitive**: it does not draw its own outer
+border or background. Wrap it in whatever surface you want (a
+`LiqCard`, a hairline-bordered `Container`, or nothing at all).
+
+## Default
+
+The body is hidden on first paint. Tap the header to expand.
+
+<LiqPreview component="collapsible" variant="default" />
+
+<CodeSnippet snippet={collapsibleDefaultSnippet} />
+
+## Expanded
+
+Pass `initiallyExpanded: true` to render the body open on first build.
+The state is owned by `LiqCollapsible` after that — `initiallyExpanded`
+only seeds the first frame.
+
+<LiqPreview component="collapsible" variant="expanded" />
+
+<CodeSnippet snippet={collapsibleExpandedSnippet} />

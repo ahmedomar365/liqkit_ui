@@ -52,6 +52,8 @@ export const SNIPPET_ROUTES = {
   'chip/dismissible': { component: 'chip', variant: 'dismissible', displayName: "Dismissible", path: '/chip/dismissible' },
   'chip/group': { component: 'chip', variant: 'group', displayName: "Group", path: '/chip/group' },
   'chip/single': { component: 'chip', variant: 'single', displayName: "Single", path: '/chip/single' },
+  'collapsible/default': { component: 'collapsible', variant: 'default', displayName: "Default", path: '/collapsible/default' },
+  'collapsible/expanded': { component: 'collapsible', variant: 'expanded', displayName: "Expanded", path: '/collapsible/expanded' },
   'color-picker/grid': { component: 'color-picker', variant: 'grid', displayName: "Grid", path: '/color-picker/grid' },
   'color-picker/large': { component: 'color-picker', variant: 'large', displayName: "Large", path: '/color-picker/large' },
   'color-picker/small': { component: 'color-picker', variant: 'small', displayName: "Small", path: '/color-picker/small' },
