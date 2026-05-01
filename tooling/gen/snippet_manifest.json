@@ -395,6 +395,15 @@
       ]
     },
     {
+      "component": "date-picker-field",
+      "displayName": "Date Picker Field",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/default.dart" },
+        { "variant": "preselected",  "displayName": "Preselected",  "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/preselected.dart" }
+      ]
+    },
+    {
       "component": "divider",
       "displayName": "Divider",
       "group": "foundation",

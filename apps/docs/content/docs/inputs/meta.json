@@ -4,6 +4,7 @@
   "pages": [
     "buttons",
     "calendar",
+    "date-picker-field",
     "checkbox",
     "chip",
     "combobox",

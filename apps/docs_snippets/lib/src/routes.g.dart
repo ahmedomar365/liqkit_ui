@@ -118,6 +118,10 @@ import 'package:docs_snippets/snippets/data-table/default.dart'
     show dataTableDefaultBuilder;
 import 'package:docs_snippets/snippets/data-table/sortable.dart'
     show dataTableSortableBuilder;
+import 'package:docs_snippets/snippets/date-picker-field/default.dart'
+    show datePickerFieldDefaultBuilder;
+import 'package:docs_snippets/snippets/date-picker-field/preselected.dart'
+    show datePickerFieldPreselectedBuilder;
 import 'package:docs_snippets/snippets/dialog/default.dart'
     show dialogDefaultBuilder;
 import 'package:docs_snippets/snippets/dialog/with-actions.dart'
@@ -403,6 +407,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/context-menu/beside-leading': contextMenuBesideLeadingBuilder,
   '/data-table/default': dataTableDefaultBuilder,
   '/data-table/sortable': dataTableSortableBuilder,
+  '/date-picker-field/default': datePickerFieldDefaultBuilder,
+  '/date-picker-field/preselected': datePickerFieldPreselectedBuilder,
   '/dialog/default': dialogDefaultBuilder,
   '/dialog/with-actions': dialogWithActionsBuilder,
   '/divider/horizontal': dividerHorizontalBuilder,

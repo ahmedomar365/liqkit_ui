@@ -69,6 +69,8 @@ export const SNIPPET_ROUTES = {
   'context-menu/beside-leading': { component: 'context-menu', variant: 'beside-leading', displayName: "Beside Leading", path: '/context-menu/beside-leading' },
   'data-table/default': { component: 'data-table', variant: 'default', displayName: "Default", path: '/data-table/default' },
   'data-table/sortable': { component: 'data-table', variant: 'sortable', displayName: "Sortable", path: '/data-table/sortable' },
+  'date-picker-field/default': { component: 'date-picker-field', variant: 'default', displayName: "Default", path: '/date-picker-field/default' },
+  'date-picker-field/preselected': { component: 'date-picker-field', variant: 'preselected', displayName: "Preselected", path: '/date-picker-field/preselected' },
   'dialog/default': { component: 'dialog', variant: 'default', displayName: "Default", path: '/dialog/default' },
   'dialog/with-actions': { component: 'dialog', variant: 'with-actions', displayName: "With actions", path: '/dialog/with-actions' },
   'divider/horizontal': { component: 'divider', variant: 'horizontal', displayName: "Horizontal", path: '/divider/horizontal' },

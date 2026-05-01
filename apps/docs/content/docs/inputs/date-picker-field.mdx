@@ -1,0 +1,38 @@
+---
+title: Date Picker Field
+description: iOS 26 text-field-like trigger that opens a calendar in a popover for date selection.
+---
+
+import datePickerFieldDefaultSnippet from '@/snippets/date-picker-field/default.json';
+import datePickerFieldPreselectedSnippet from '@/snippets/date-picker-field/preselected.json';
+
+`LiqDatePickerField` is the shadcn/ui-style date picker — a 44pt-tall
+pill trigger that displays the formatted date (or a placeholder) and
+opens a `LiqCalendar` in a popover beneath the field when tapped.
+Selecting a day commits the new value through `onChanged` and closes
+the popover; clicking outside dismisses without committing.
+
+Distinct from:
+
+- `LiqCalendar` — the standalone month grid with no surrounding chrome.
+  Drop it inline anywhere you want a permanently visible date picker.
+- `LiqDatePicker` — the wheel-style inline picker exposed under the
+  pickers category.
+
+## Default
+
+The default — an empty trigger with a placeholder. Tap the trigger to
+open the popover; pick a day to commit the selection.
+
+<LiqPreview component="date-picker-field" variant="default" />
+
+<CodeSnippet snippet={datePickerFieldDefaultSnippet} />
+
+## Preselected
+
+When `value` is set, the trigger renders the formatted date and the
+popover opens centered on the selected day's month.
+
+<LiqPreview component="date-picker-field" variant="preselected" />
+
+<CodeSnippet snippet={datePickerFieldPreselectedSnippet} />
