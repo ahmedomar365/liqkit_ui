@@ -208,6 +208,73 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
 
   @override
   Widget build(BuildContext context) {
+    // Fixed per-column widths so the wheel cluster sits as a tight
+    // unit (iOS style). flex/Expanded would push AM/PM far to the
+    // right and leave a dead gap between minute and AM/PM.
+    const hourWidth = 64.0;
+    const minuteWidth = 64.0;
+    const colonWidth = 14.0;
+    const amPmWidth = 56.0;
+    const amPmGap = 6.0;
+
+    final children = <Widget>[
+      SizedBox(
+        width: hourWidth,
+        child: _Wheel(
+          controller: _hourController,
+          itemCount: _hourCount,
+          looping: true,
+          onSelectedItemChanged: _onHourChanged,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 4),
+          builder: _hourLabel,
+        ),
+      ),
+      const SizedBox(
+        width: colonWidth,
+        child: Center(
+          child: Text(
+            ':',
+            textDirection: TextDirection.ltr,
+            style: LiqTimePicker.textStyle,
+          ),
+        ),
+      ),
+      SizedBox(
+        width: minuteWidth,
+        child: _Wheel(
+          controller: _minuteController,
+          itemCount: _minuteCount,
+          looping: true,
+          onSelectedItemChanged: _onMinuteChanged,
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 4),
+          builder: _minuteLabel,
+        ),
+      ),
+      if (!widget.use24HourFormat) ...<Widget>[
+        const SizedBox(width: amPmGap),
+        SizedBox(
+          width: amPmWidth,
+          child: _Wheel(
+            controller: _amPmController,
+            itemCount: 2,
+            looping: false,
+            onSelectedItemChanged: _onAmPmChanged,
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            builder: (i) => i == 0 ? 'AM' : 'PM',
+          ),
+        ),
+      ],
+    ];
+
+    final clusterWidth =
+        hourWidth +
+        colonWidth +
+        minuteWidth +
+        (widget.use24HourFormat ? 0 : amPmGap + amPmWidth);
+
     return ScrollConfiguration(
       behavior: const _AnyDeviceScrollBehavior(),
       child: SizedBox(
@@ -217,67 +284,22 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
             color: LiqTimePicker.backgroundColor,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Stack(
-            children: <Widget>[
-              const Positioned.fill(child: _SelectionBand()),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 3,
-                      child: _Wheel(
-                        controller: _hourController,
-                        itemCount: _hourCount,
-                        looping: true,
-                        onSelectedItemChanged: _onHourChanged,
-                        alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.only(right: 6),
-                        builder: _hourLabel,
-                      ),
+          child: Center(
+            child: SizedBox(
+              width: clusterWidth + 16, // 8pt breathing on each side
+              child: Stack(
+                children: <Widget>[
+                  const Positioned.fill(child: _SelectionBand()),
+                  Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: children,
                     ),
-                    const SizedBox(
-                      width: 14,
-                      child: Center(
-                        child: Text(
-                          ':',
-                          textDirection: TextDirection.ltr,
-                          style: LiqTimePicker.textStyle,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: _Wheel(
-                        controller: _minuteController,
-                        itemCount: _minuteCount,
-                        looping: true,
-                        onSelectedItemChanged: _onMinuteChanged,
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.only(left: 6),
-                        builder: _minuteLabel,
-                      ),
-                    ),
-                    if (!widget.use24HourFormat) ...<Widget>[
-                      const SizedBox(width: 8),
-                      Expanded(
-                        flex: 2,
-                        child: _Wheel(
-                          controller: _amPmController,
-                          itemCount: 2,
-                          looping: false,
-                          onSelectedItemChanged: _onAmPmChanged,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.zero,
-                          builder: (i) => i == 0 ? 'AM' : 'PM',
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
