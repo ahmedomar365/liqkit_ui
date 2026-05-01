@@ -49,6 +49,10 @@ const SNIPPETS: Array<{ slug: string; viewport: { width: number; height: number 
   { slug: 'toggle-group/labels',  viewport: { width: 400, height: 80  } },
   { slug: 'bottom-nav/four-tabs', viewport: { width: 400, height: 120 } },
   { slug: 'time-field/twenty-four-hour', viewport: { width: 280, height: 100 } },
+  // Time picker — locks in the iOS wheel look (gradient fade,
+  // selection band, magnification, mouse-drag scroll behavior).
+  { slug: 'time-picker/12-hour', viewport: { width: 480, height: 280 } },
+  { slug: 'time-picker/24-hour', viewport: { width: 480, height: 280 } },
   // Material-icon coverage — these fail-closed if MaterialIcons font
   // isn't bundled (uses-material-design: false in snippets pubspec).
   // The X / +/− / chevrons would render as tofu boxes; the goldens

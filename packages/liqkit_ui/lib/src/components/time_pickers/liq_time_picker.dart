@@ -1,15 +1,21 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-/// iOS 26 3-column scroll-wheel time picker.
+/// iOS-26 scroll-wheel time picker.
 ///
 /// Renders hours / minutes / (AM-PM) when [use24HourFormat] is false;
 /// hours / minutes only when true.
 ///
 /// Each column is a [ListWheelScrollView] with [FixedExtentScrollPhysics]
-/// that snaps to the nearest tick. The hour and minute wheels loop
-/// infinitely (via [ListWheelChildLoopingListDelegate]); the AM/PM
-/// column is a finite 2-entry wheel.
+/// that snaps to the nearest tick. Hour and minute wheels loop
+/// infinitely; the AM/PM column is a finite 2-entry wheel.
+///
+/// The picker accepts mouse drag and trackpad scroll on web/desktop in
+/// addition to touch on mobile (via a custom [ScrollBehavior]). The
+/// centered row is highlighted with a soft fill and framed by two
+/// hairlines; rows above/below fade out via a top-bottom gradient mask
+/// for the classic iOS picker look.
 final class LiqTimePicker extends StatefulWidget {
   /// Creates a wheel-style time picker.
   ///
@@ -43,20 +49,26 @@ final class LiqTimePicker extends StatefulWidget {
   /// Defaults to 1.
   final int minuteInterval;
 
-  /// Per-row pixel height. Also dictates the diameter of each wheel.
-  static const double itemExtent = 32;
+  /// Per-row pixel height.
+  static const double itemExtent = 36;
 
   /// Total height of the picker container.
-  static const double wheelHeight = 240;
+  static const double wheelHeight = 216;
 
   /// Wheel curvature; matches iOS 26 wheel pickers.
-  static const double diameterRatio = 1.5;
+  static const double diameterRatio = 1.4;
+
+  /// Magnification of the centered row.
+  static const double magnification = 1.08;
 
   /// Color of the hairline pair that frames the centered row.
   static const Color hairlineColor = Color(0x29000000);
 
   /// Hairline thickness in logical pixels (matches iOS 0.33pt).
-  static const double hairlineThickness = 0.33;
+  static const double hairlineThickness = 0.5;
+
+  /// Soft fill behind the centered row.
+  static const Color selectionFillColor = Color(0x0F000000);
 
   /// Subtle group fill behind the wheels.
   static const Color backgroundColor = Color(0x0A000000);
@@ -68,7 +80,7 @@ final class LiqTimePicker extends StatefulWidget {
   static const TextStyle textStyle = TextStyle(
     fontFamily: 'SF Pro Text',
     fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-    fontSize: 21,
+    fontSize: 22,
     fontWeight: FontWeight.w400,
     color: textColor,
   );
@@ -113,8 +125,6 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
       _amPmController.jumpToItem(_amPmIndex);
       return;
     }
-    // Otherwise, only follow the parent if the parent changed value
-    // and the wheel is currently parked on the *old* index.
     final old = oldWidget.value;
     final next = widget.value;
     if (old.hour == next.hour && old.minute == next.minute) return;
@@ -131,8 +141,7 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
     } else {
       _amPmIndex = v.hour >= 12 ? 1 : 0;
       final twelveHour = v.hour % 12;
-      // Display order is 12, 1, 2, ..., 11. Index 0 = "12".
-      _hourIndex = twelveHour; // 0 maps to "12", 1..11 map to "1".."11".
+      _hourIndex = twelveHour;
     }
     final snappedMinute =
         (v.minute ~/ widget.minuteInterval) * widget.minuteInterval;
@@ -151,7 +160,6 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
     final mod = rawIndex % _hourCount;
     final idx = mod < 0 ? mod + _hourCount : mod;
     if (widget.use24HourFormat) return idx;
-    // 12-hour: index 0 displays "12", indices 1..11 display "1".."11".
     final twelveHour = idx == 0 ? 12 : idx;
     final isPm = _amPmIndex == 1;
     if (twelveHour == 12) return isPm ? 12 : 0;
@@ -200,71 +208,77 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final columns = <Widget>[
-      Expanded(
-        child: _Wheel(
-          controller: _hourController,
-          itemCount: _hourCount,
-          looping: true,
-          onSelectedItemChanged: _onHourChanged,
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 8),
-          builder: _hourLabel,
-        ),
-      ),
-      const SizedBox(
-        width: 12,
-        child: Center(
-          child: Text(
-            ':',
-            textDirection: TextDirection.ltr,
-            style: LiqTimePicker.textStyle,
+    return ScrollConfiguration(
+      behavior: const _AnyDeviceScrollBehavior(),
+      child: SizedBox(
+        height: LiqTimePicker.wheelHeight,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: LiqTimePicker.backgroundColor,
+            borderRadius: BorderRadius.circular(12),
           ),
-        ),
-      ),
-      Expanded(
-        child: _Wheel(
-          controller: _minuteController,
-          itemCount: _minuteCount,
-          looping: true,
-          onSelectedItemChanged: _onMinuteChanged,
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 8),
-          builder: _minuteLabel,
-        ),
-      ),
-      if (!widget.use24HourFormat)
-        Expanded(
-          child: _Wheel(
-            controller: _amPmController,
-            itemCount: 2,
-            looping: false,
-            onSelectedItemChanged: _onAmPmChanged,
-            alignment: Alignment.center,
-            padding: EdgeInsets.zero,
-            builder: (i) => i == 0 ? 'AM' : 'PM',
-          ),
-        ),
-    ];
-
-    return SizedBox(
-      height: LiqTimePicker.wheelHeight,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: LiqTimePicker.backgroundColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: columns,
+          child: Stack(
+            children: <Widget>[
+              const Positioned.fill(child: _SelectionBand()),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: _Wheel(
+                        controller: _hourController,
+                        itemCount: _hourCount,
+                        looping: true,
+                        onSelectedItemChanged: _onHourChanged,
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 6),
+                        builder: _hourLabel,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 14,
+                      child: Center(
+                        child: Text(
+                          ':',
+                          textDirection: TextDirection.ltr,
+                          style: LiqTimePicker.textStyle,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: _Wheel(
+                        controller: _minuteController,
+                        itemCount: _minuteCount,
+                        looping: true,
+                        onSelectedItemChanged: _onMinuteChanged,
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 6),
+                        builder: _minuteLabel,
+                      ),
+                    ),
+                    if (!widget.use24HourFormat) ...<Widget>[
+                      const SizedBox(width: 8),
+                      Expanded(
+                        flex: 2,
+                        child: _Wheel(
+                          controller: _amPmController,
+                          itemCount: 2,
+                          looping: false,
+                          onSelectedItemChanged: _onAmPmChanged,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.zero,
+                          builder: (i) => i == 0 ? 'AM' : 'PM',
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
               ),
-            ),
-            const Positioned.fill(child: _SelectionHairlines()),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -290,7 +304,25 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
   }
 }
 
-/// A single wheel column.
+/// Allows mouse and trackpad scrolls / drags to drive the wheels on
+/// non-touch platforms. Without this Flutter Web's default
+/// [ScrollBehavior] only accepts touch input on `ListWheelScrollView`.
+class _AnyDeviceScrollBehavior extends ScrollBehavior {
+  const _AnyDeviceScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.invertedStylus,
+  };
+}
+
+/// A single wheel column. Wraps a [ListWheelScrollView] in a
+/// gradient [ShaderMask] so items above/below the centered row fade
+/// out toward the edges.
 class _Wheel extends StatelessWidget {
   const _Wheel({
     required this.controller,
@@ -335,46 +367,64 @@ class _Wheel extends StatelessWidget {
       );
     }
 
-    return ListWheelScrollView.useDelegate(
+    final wheel = ListWheelScrollView.useDelegate(
       controller: controller,
       itemExtent: LiqTimePicker.itemExtent,
       diameterRatio: LiqTimePicker.diameterRatio,
+      useMagnifier: true,
+      magnification: LiqTimePicker.magnification,
       physics: const FixedExtentScrollPhysics(),
       onSelectedItemChanged: onSelectedItemChanged,
       childDelegate: childDelegate,
     );
-  }
-}
 
-/// Two horizontal hairlines that frame the centered row of the wheels.
-class _SelectionHairlines extends StatelessWidget {
-  const _SelectionHairlines();
-
-  @override
-  Widget build(BuildContext context) {
-    return const IgnorePointer(
-      child: Center(
-        child: SizedBox(
-          height: LiqTimePicker.itemExtent,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[_Hairline(), _Hairline()],
-          ),
-        ),
-      ),
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback:
+          (bounds) => const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Color(0x00000000),
+              Color(0x99000000),
+              Color(0xFF000000),
+              Color(0xFF000000),
+              Color(0x99000000),
+              Color(0x00000000),
+            ],
+            // ignore: prefer_int_literals — Flutter's LinearGradient stops are doubles.
+            stops: <double>[0, 0.18, 0.36, 0.64, 0.82, 1],
+          ).createShader(bounds),
+      child: wheel,
     );
   }
 }
 
-class _Hairline extends StatelessWidget {
-  const _Hairline();
+/// The horizontal soft-fill band + two hairlines that frame the
+/// centered row. Sits behind the wheels via a [Stack].
+class _SelectionBand extends StatelessWidget {
+  const _SelectionBand();
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: LiqTimePicker.hairlineThickness,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: LiqTimePicker.hairlineColor),
+    return IgnorePointer(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Container(
+            height: LiqTimePicker.itemExtent * LiqTimePicker.magnification,
+            decoration: BoxDecoration(
+              color: LiqTimePicker.selectionFillColor,
+              borderRadius: BorderRadius.circular(8),
+              border: const Border.symmetric(
+                horizontal: BorderSide(
+                  color: LiqTimePicker.hairlineColor,
+                  width: LiqTimePicker.hairlineThickness,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
