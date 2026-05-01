@@ -49,6 +49,16 @@ const SNIPPETS: Array<{ slug: string; viewport: { width: number; height: number 
   { slug: 'toggle-group/labels',  viewport: { width: 400, height: 80  } },
   { slug: 'bottom-nav/four-tabs', viewport: { width: 400, height: 120 } },
   { slug: 'time-field/twenty-four-hour', viewport: { width: 280, height: 100 } },
+  // Material-icon coverage — these fail-closed if MaterialIcons font
+  // isn't bundled (uses-material-design: false in snippets pubspec).
+  // The X / +/− / chevrons would render as tofu boxes; the goldens
+  // capture the real glyphs so the diff blows up immediately.
+  { slug: 'chip/dismissible',          viewport: { width: 400, height: 100 } },
+  { slug: 'number-field/with-suffix',  viewport: { width: 360, height: 100 } },
+  { slug: 'command-palette/default',   viewport: { width: 600, height: 360 } },
+  { slug: 'toggle-group/text-style',   viewport: { width: 280, height: 100 } },
+  { slug: 'pagination/compact',        viewport: { width: 360, height: 100 } },
+  { slug: 'date-picker-field/preselected', viewport: { width: 320, height: 100 } },
 ];
 
 for (const s of SNIPPETS) {

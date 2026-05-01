@@ -22,4 +22,8 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: false
+  # Bundle the MaterialIcons font. Several Liq components reference
+  # Icons.* (close, add, remove, chevron_right, format_bold, …) so
+  # `uses-material-design: false` would render those glyphs as tofu
+  # boxes in the iframe previews. Keep this true for the snippets app.
+  uses-material-design: true
