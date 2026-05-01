@@ -25,6 +25,7 @@
     "shiki": "4.0.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@opennextjs/cloudflare": "1.19.4",
     "@playwright/test": "1.50.0",
     "@tailwindcss/postcss": "4.2.4",

@@ -1,3 +1,20 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+/* Accessibility overrides over Fumadocs UI defaults.
+ *
+ * `--color-fd-muted-foreground` in the stock palette lands ~4.0:1
+ * against `--color-fd-card` / `--color-fd-secondary` in both light
+ * and dark modes — under WCAG AA's 4.5:1 floor for normal text.
+ * Darkening (light) and lightening (dark) by a couple of L*-units
+ * lifts every affected button/card description above 4.5:1 without
+ * disturbing the visual hierarchy.
+ */
+:root {
+  --color-fd-muted-foreground: oklch(0.43 0 0);
+}
+
+.dark {
+  --color-fd-muted-foreground: oklch(0.74 0 0);
+}
