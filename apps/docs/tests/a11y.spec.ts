@@ -41,6 +41,14 @@ const PAGES: PageSpec[] = [
   { slug: 'status/hover-card', title: 'Hover Card' },
   { slug: 'containers/resizable', title: 'Resizable' },
   { slug: 'containers/data-table', title: 'Data Table' },
+  // Phase 6
+  { slug: 'containers/collapsible', title: 'Collapsible' },
+  { slug: 'inputs/toggle-group', title: 'Toggle Group' },
+  { slug: 'containers/scroll-area', title: 'Scroll Area' },
+  { slug: 'navigation/bottom-nav', title: 'Bottom Navigation' },
+  { slug: 'inputs/date-picker-field', title: 'Date Picker Field' },
+  { slug: 'inputs/time-field', title: 'Time Field' },
+  { slug: 'inputs/textarea', title: 'Textarea' },
 ];
 
 for (const p of PAGES) {

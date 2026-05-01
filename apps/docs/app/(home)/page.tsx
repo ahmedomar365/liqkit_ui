@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const FEATURES: Array<{ title: string; body: string }> = [
   {
-    title: '69 components',
+    title: '76 components',
     body:
       'Every primitive forui and shadcn/ui ship — accordion, dialog, ' +
       'tabs, toast, breadcrumb, command palette, tree view, kanban — ' +
@@ -34,11 +34,12 @@ const FEATURES: Array<{ title: string; body: string }> = [
 ];
 
 const PHASES: Array<{ label: string; count: number; sample: string }> = [
-  { label: 'iOS chrome', count: 37, sample: 'Face ID, status bar, bezel, app icon, keyboard, material' },
-  { label: 'Foundation', count: 16, sample: 'Accordion, dialog, drawer, tabs, toast, tooltip, badge, card' },
-  { label: 'Form/input', count: 6, sample: 'Calendar, time picker, OTP, number field, combobox, chip' },
-  { label: 'Advanced',   count: 5, sample: 'Command palette, carousel, hover card, resizable, data table' },
-  { label: 'Phase 5',    count: 5, sample: 'Tree view, rich editor, line chart, bar chart, kanban' },
+  { label: 'iOS chrome',   count: 37, sample: 'Face ID, status bar, bezel, app icon, keyboard, material' },
+  { label: 'Foundation',   count: 16, sample: 'Accordion, dialog, drawer, tabs, toast, tooltip, badge, card' },
+  { label: 'Form/input',   count: 6,  sample: 'Calendar, time picker, OTP, number field, combobox, chip' },
+  { label: 'Advanced',     count: 5,  sample: 'Command palette, carousel, hover card, resizable, data table' },
+  { label: 'Phase 5',      count: 5,  sample: 'Tree view, rich editor, line chart, bar chart, kanban' },
+  { label: 'Parity gaps',  count: 7,  sample: 'Collapsible, toggle group, scroll area, bottom nav, date picker field, time field, textarea' },
 ];
 
 export default function HomePage() {
@@ -50,7 +51,7 @@ export default function HomePage() {
           liqkit_ui
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-fd-muted-foreground md:text-xl">
-          The iOS&nbsp;26 Liquid Glass design system for Flutter. 69
+          The iOS&nbsp;26 Liquid Glass design system for Flutter. 76
           components, every one with goldens, live previews, and
           interactive code snippets.
         </p>
@@ -103,7 +104,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-5xl">
           <h2 className="text-2xl font-semibold">What’s in the box</h2>
           <p className="mt-2 text-sm text-fd-muted-foreground">
-            69 components across five build phases. Every category linked
+            76 components across six build phases. Every category linked
             from the sidebar.
           </p>
           <div className="mt-8 overflow-hidden rounded-lg border border-fd-border bg-fd-card">
@@ -139,7 +140,7 @@ export default function HomePage() {
                 <tr className="border-t border-fd-border bg-fd-muted/20">
                   <td className="px-4 py-3 font-semibold">Total</td>
                   <td className="px-4 py-3 text-right font-semibold tabular-nums">
-                    69
+                    76
                   </td>
                   <td className="px-4 py-3" />
                 </tr>

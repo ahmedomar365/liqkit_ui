@@ -1,6 +1,6 @@
 # liqkit_ui
 
-**iOS 26 Liquid Glass design system for Flutter — 69 components, every one
+**iOS 26 Liquid Glass design system for Flutter — 76 components, every one
 with goldens, snippets, and live docs.**
 
 A pure-Dart pub workspace under Melos. Steady-state dependencies are
@@ -10,17 +10,19 @@ showcase, and snippets app all live in a single workspace.
 
 ## Highlights
 
-- **69 components** across 7 categories — buttons, toggles, sliders,
-  steppers, sheets, alerts, sidebars, lists, popovers, menus, popup
-  buttons, segmented controls, page controls, progress, text fields,
-  pickers, color pickers, top bars, toolbars, tabs, breadcrumbs,
-  pagination, command palette, tree view, status bars, notifications,
-  skeletons, toasts, tooltips, hover cards, badges, app icons, bezels,
-  keyboards, kit helpers, materials, widgets, windows, system, examples,
-  face ID, activity views, accordion, avatar, card, carousel, dialog,
-  drawer, resizable, data table, kanban, empty states, divider, label,
-  text styles, colors, checkbox, radio, chip, calendar, time picker,
-  number field, OTP input, combobox, line chart, bar chart, rich editor.
+- **76 components** across 7 categories — buttons, toggles, toggle
+  groups, sliders, steppers, sheets, alerts, sidebars, lists,
+  popovers, menus, popup buttons, segmented controls, page controls,
+  progress, text fields, textareas, pickers, color pickers, top bars,
+  toolbars, bottom nav, tabs, breadcrumbs, pagination, command
+  palette, tree view, status bars, notifications, skeletons, toasts,
+  tooltips, hover cards, badges, app icons, bezels, keyboards, kit
+  helpers, materials, widgets, windows, system, examples, face ID,
+  activity views, accordion, collapsible, avatar, card, carousel,
+  dialog, drawer, resizable, scroll area, data table, kanban, empty
+  states, divider, label, text styles, colors, checkbox, radio, chip,
+  calendar, date picker field, time picker, time field, number field,
+  OTP input, combobox, line chart, bar chart, rich editor.
 - **Liquid Glass** throughout — translucent surfaces, hairline rims,
   soft shadows, iOS spring animations, San Francisco type scale.
 - **Goldens for every component** — widget tests assert exact pixel

@@ -42,6 +42,14 @@ const PHASE_4_PAGES: PageSpec[] = [
   { slug: 'status/hover-card', title: 'Hover Card', iframes: 2 },
   { slug: 'containers/resizable', title: 'Resizable', iframes: 2 },
   { slug: 'containers/data-table', title: 'Data Table', iframes: 2 },
+  // Phase 6
+  { slug: 'containers/collapsible', title: 'Collapsible', iframes: 2 },
+  { slug: 'inputs/toggle-group', title: 'Toggle Group', iframes: 2 },
+  { slug: 'containers/scroll-area', title: 'Scroll Area', iframes: 2 },
+  { slug: 'navigation/bottom-nav', title: 'Bottom Navigation', iframes: 2 },
+  { slug: 'inputs/date-picker-field', title: 'Date Picker Field', iframes: 2 },
+  { slug: 'inputs/time-field', title: 'Time Field', iframes: 2 },
+  { slug: 'inputs/textarea', title: 'Textarea', iframes: 2 },
 ];
 
 // Force dark mode by clicking Fumadocs's "Toggle Theme" button on
