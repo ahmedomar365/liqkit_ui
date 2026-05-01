@@ -1,0 +1,37 @@
+---
+title: Time Field
+description: iOS 26 typeable HH:MM time input with auto-formatting colon and optional AM/PM segment.
+---
+
+import timeFieldTwelveHourSnippet from '@/snippets/time-field/twelve-hour.json';
+import timeFieldTwentyFourHourSnippet from '@/snippets/time-field/twenty-four-hour.json';
+
+`LiqTimeField` is a typeable HH:MM time input. The user types digits
+directly and the field auto-formats with a colon separator. In 12-hour
+mode (the default) a small inset segmented AM/PM pill renders to the
+right of the input and toggles the period.
+
+Distinct from `LiqTimePicker` — which is a wheel-style scroll picker.
+Use `LiqTimeField` for forms where keyboard entry is the primary
+interaction; use `LiqTimePicker` when you want the iOS-native scrolling
+wheel UI.
+
+## 12-hour
+
+The default. The user types `H:MM` or `HH:MM` (1-12); the trailing
+AM/PM pill toggles the period and shifts the underlying 24-hour value
+by ±12 when a value is set.
+
+<LiqPreview component="time-field" variant="twelve-hour" />
+
+<CodeSnippet snippet={timeFieldTwelveHourSnippet} />
+
+## 24-hour
+
+Set `use24HourFormat: true` for `HH:MM` input (00-23) without the AM/PM
+segment. Useful for international or technical contexts where 24-hour
+time is the convention.
+
+<LiqPreview component="time-field" variant="twenty-four-hour" />
+
+<CodeSnippet snippet={timeFieldTwentyFourHourSnippet} />

@@ -164,6 +164,8 @@ export const SNIPPET_ROUTES = {
   'text-field/obscured': { component: 'text-field', variant: 'obscured', displayName: "Obscured", path: '/text-field/obscured' },
   'text-styles/accessibility': { component: 'text-styles', variant: 'accessibility', displayName: "Accessibility sizes", path: '/text-styles/accessibility' },
   'text-styles/dynamic': { component: 'text-styles', variant: 'dynamic', displayName: "Dynamic Type", path: '/text-styles/dynamic' },
+  'time-field/twelve-hour': { component: 'time-field', variant: 'twelve-hour', displayName: "12-hour", path: '/time-field/twelve-hour' },
+  'time-field/twenty-four-hour': { component: 'time-field', variant: 'twenty-four-hour', displayName: "24-hour", path: '/time-field/twenty-four-hour' },
   'time-picker/12-hour': { component: 'time-picker', variant: '12-hour', displayName: "12-hour", path: '/time-picker/12-hour' },
   'time-picker/24-hour': { component: 'time-picker', variant: '24-hour', displayName: "24-hour", path: '/time-picker/24-hour' },
   'time-picker/intervals': { component: 'time-picker', variant: 'intervals', displayName: "Intervals", path: '/time-picker/intervals' },

@@ -185,6 +185,15 @@
       ]
     },
     {
+      "component": "time-field",
+      "displayName": "Time Field",
+      "group": "inputs",
+      "variants": [
+        { "variant": "twelve-hour",      "displayName": "12-hour", "dartFile": "apps/docs_snippets/lib/snippets/time-field/twelve-hour.dart" },
+        { "variant": "twenty-four-hour", "displayName": "24-hour", "dartFile": "apps/docs_snippets/lib/snippets/time-field/twenty-four-hour.dart" }
+      ]
+    },
+    {
       "component": "time-picker",
       "displayName": "Time Picker",
       "group": "inputs",

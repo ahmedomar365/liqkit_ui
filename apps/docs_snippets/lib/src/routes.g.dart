@@ -299,6 +299,10 @@ import 'package:docs_snippets/snippets/text-styles/accessibility.dart'
     show textStylesAccessibilityBuilder;
 import 'package:docs_snippets/snippets/text-styles/dynamic.dart'
     show textStylesDynamicBuilder;
+import 'package:docs_snippets/snippets/time-field/twelve-hour.dart'
+    show timeFieldTwelveHourBuilder;
+import 'package:docs_snippets/snippets/time-field/twenty-four-hour.dart'
+    show timeFieldTwentyFourHourBuilder;
 import 'package:docs_snippets/snippets/time-picker/12-hour.dart'
     show timePicker12HourBuilder;
 import 'package:docs_snippets/snippets/time-picker/24-hour.dart'
@@ -502,6 +506,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/text-field/obscured': textFieldObscuredBuilder,
   '/text-styles/accessibility': textStylesAccessibilityBuilder,
   '/text-styles/dynamic': textStylesDynamicBuilder,
+  '/time-field/twelve-hour': timeFieldTwelveHourBuilder,
+  '/time-field/twenty-four-hour': timeFieldTwentyFourHourBuilder,
   '/time-picker/12-hour': timePicker12HourBuilder,
   '/time-picker/24-hour': timePicker24HourBuilder,
   '/time-picker/intervals': timePickerIntervalsBuilder,

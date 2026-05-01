@@ -20,6 +20,7 @@
     "pickers",
     "text-fields",
     "time-picker",
+    "time-field",
     "otp",
     "number-field"
   ]
