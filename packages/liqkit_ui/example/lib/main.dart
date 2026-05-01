@@ -25,7 +25,7 @@ class _Home extends StatelessWidget {
       child: SizedBox(
         width: 200,
         height: 80,
-        child: LiqGlassSurface(
+        child: LiqMaterialSurface(
           material: LiqMaterial.regular,
           child: Center(
             child: Text(

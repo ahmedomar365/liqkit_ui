@@ -6,10 +6,19 @@ import 'package:liqkit_ui/src/theme/liq_material.dart';
 import 'package:liqkit_ui/src/theme/liq_quality.dart';
 import 'package:liqkit_ui/src/theme/liq_theme.dart';
 
-/// A glass surface: blur + tint + bezel-clipped child.
-final class LiqGlassSurface extends StatelessWidget {
-  /// Creates a glass surface.
-  const LiqGlassSurface({
+/// A theme-aware glass surface backed by a [LiqMaterial] spec.
+///
+/// Renders a backdrop blur, the material's tint, and clips the child to
+/// the supplied [shape]. Honors [LiqQuality.minimal] by skipping the
+/// [BackdropFilter] in favor of a flat tinted [ColoredBox].
+///
+/// Most components should prefer the higher-level `LiqGlassSurface`
+/// primitive in `package:liqkit_ui/components.dart`, which exposes the
+/// canonical iOS-26 tint / elevation presets without requiring callers
+/// to mix a [LiqMaterial] spec.
+final class LiqMaterialSurface extends StatelessWidget {
+  /// Creates a material-driven glass surface.
+  const LiqMaterialSurface({
     required this.material,
     required this.child,
     this.shape,
@@ -28,7 +37,7 @@ final class LiqGlassSurface extends StatelessWidget {
 
   /// Reserved for future BackdropFilter compositor optimization.
   ///
-  /// The intent (per spec §6.1) is that two glass surfaces sharing the
+  /// The intent (per spec §6.1) is that two surfaces sharing the
   /// same `backdropGroup` collapse to a single engine-level blur pass.
   /// Flutter does not yet expose an API for this; the parameter is
   /// accepted now so the public API is stable, but it has no runtime

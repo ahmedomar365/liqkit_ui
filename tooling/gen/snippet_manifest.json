@@ -459,6 +459,16 @@
       ]
     },
     {
+      "component": "glass-surface",
+      "displayName": "Glass Surface",
+      "group": "foundation",
+      "variants": [
+        { "variant": "floating", "displayName": "Floating", "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/floating.dart" },
+        { "variant": "flat",     "displayName": "Flat",     "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/flat.dart" },
+        { "variant": "dark",     "displayName": "Dark",     "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/dark.dart" }
+      ]
+    },
+    {
       "component": "hover-card",
       "displayName": "Hover Card",
       "group": "status",

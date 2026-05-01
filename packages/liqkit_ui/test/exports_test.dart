@@ -13,5 +13,7 @@ void main() {
     expect(LiqTheme, isNotNull);
     expect(LiqApp, isNotNull);
     expect(LiqGlassSurface, isNotNull);
+    expect(LiqMaterialSurface, isNotNull);
+    expect(LiqMotion, isNotNull);
   });
 }

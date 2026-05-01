@@ -1,0 +1,239 @@
+import 'dart:ui' show ImageFilter;
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+/// Tint preset for [LiqGlassSurface].
+enum LiqGlassTint {
+  /// iOS 26 chrome / popover glass — light translucent.
+  light,
+
+  /// iOS 26 dark surfaces (action sheet on dark, status bar dark
+  /// mode, etc.).
+  dark,
+
+  /// For controls layered over arbitrary content where backdrop blur
+  /// would muddy text. Falls back to a near-opaque surface with no
+  /// [BackdropFilter].
+  opaque,
+}
+
+/// Elevation preset for [LiqGlassSurface]. Drives the outer shadow.
+enum LiqGlassElevation {
+  /// Sits flat on its parent (sidebars, inline panels).
+  flat,
+
+  /// Floats above content (dialogs, popovers, hover cards, drawers).
+  floating,
+
+  /// Modal overlay with a heavier shadow (sheets at full screen).
+  modal,
+}
+
+/// iOS 26 Liquid Glass material primitive.
+///
+/// Renders a translucent surface with proper backdrop blur, a hairline
+/// rim, and a vibrancy highlight gradient at the top edge. Use this
+/// everywhere a component needs an iOS-26 glass panel — instead of
+/// hand-rolling the colors and shadows.
+///
+/// The widget paints, in order:
+/// 1. A [BackdropFilter] that samples whatever sits behind the surface
+///    (skipped for [LiqGlassTint.opaque]).
+/// 2. A tint-specific base fill.
+/// 3. A subtle vibrancy highlight gradient at the top edge.
+/// 4. A 0.5pt hairline rim.
+/// 5. The [child] wrapped in [padding].
+///
+/// An outer drop shadow is layered behind the clipped surface. The
+/// shadow weight is driven by [elevation].
+final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
+  /// Creates a Liquid Glass surface.
+  const LiqGlassSurface({
+    required this.child,
+    this.borderRadius = const BorderRadius.all(Radius.circular(14)),
+    this.padding = EdgeInsets.zero,
+    this.tint = LiqGlassTint.light,
+    this.elevation = LiqGlassElevation.floating,
+    this.clipBehavior = Clip.antiAlias,
+    super.key,
+  });
+
+  /// Content rendered inside the glass surface.
+  final Widget child;
+
+  /// Outer corner radius. Drives both the [ClipRRect] and the rim
+  /// hairline. Defaults to a 14pt rounded rectangle, the iOS 26 default
+  /// for popover glass.
+  final BorderRadius borderRadius;
+
+  /// Padding applied around [child] inside the glass surface.
+  final EdgeInsetsGeometry padding;
+
+  /// Tint preset. Drives the base fill and rim colors.
+  final LiqGlassTint tint;
+
+  /// Elevation preset. Drives the outer drop shadow.
+  final LiqGlassElevation elevation;
+
+  /// Clip behavior for the inner [ClipRRect]. Defaults to
+  /// [Clip.antiAlias] for crisp rounded corners.
+  final Clip clipBehavior;
+
+  // -- iOS 26 spec values ----------------------------------------------------
+
+  /// Light tint base fill: 80% opaque off-white.
+  static const Color lightTintBase = Color(0xCCFAFAFA);
+
+  /// Dark tint base fill: 80% opaque dark gray.
+  static const Color darkTintBase = Color(0xCC1C1C1E);
+
+  /// Opaque tint base fill: no transparency, no blur.
+  static const Color opaqueTintBase = Color(0xFFFAFAFA);
+
+  /// Light-tint inner border (rim) hairline color: 8% black.
+  static const Color lightRimColor = Color(0x14000000);
+
+  /// Dark-tint inner border (rim) hairline color: 8% white.
+  static const Color darkRimColor = Color(0x14FFFFFF);
+
+  /// Top vibrancy highlight start color (light tint): 16% white.
+  static const Color lightHighlightStart = Color(0x28FFFFFF);
+
+  /// Top vibrancy highlight start color (dark tint): 16% white.
+  static const Color darkHighlightStart = Color(0x28FFFFFF);
+
+  /// Vibrancy highlight end color (transparent white).
+  static const Color highlightEnd = Color(0x00FFFFFF);
+
+  /// Backdrop blur sigma. Matches `UIBlurEffect.systemMaterial`.
+  static const double blurSigma = 30;
+
+  /// Floating drop shadow.
+  static const BoxShadow floatingShadow = BoxShadow(
+    color: Color(0x33000000),
+    offset: Offset(0, 8),
+    blurRadius: 24,
+  );
+
+  /// Modal drop shadow.
+  static const BoxShadow modalShadow = BoxShadow(
+    color: Color(0x4D000000),
+    offset: Offset(0, 16),
+    blurRadius: 40,
+  );
+
+  Color get _baseFill {
+    switch (tint) {
+      case LiqGlassTint.light:
+        return lightTintBase;
+      case LiqGlassTint.dark:
+        return darkTintBase;
+      case LiqGlassTint.opaque:
+        return opaqueTintBase;
+    }
+  }
+
+  Color get _rimColor {
+    switch (tint) {
+      case LiqGlassTint.light:
+      case LiqGlassTint.opaque:
+        return lightRimColor;
+      case LiqGlassTint.dark:
+        return darkRimColor;
+    }
+  }
+
+  Color get _highlightStart {
+    switch (tint) {
+      case LiqGlassTint.light:
+      case LiqGlassTint.opaque:
+        return lightHighlightStart;
+      case LiqGlassTint.dark:
+        return darkHighlightStart;
+    }
+  }
+
+  List<BoxShadow> get _shadows {
+    switch (elevation) {
+      case LiqGlassElevation.flat:
+        return const <BoxShadow>[];
+      case LiqGlassElevation.floating:
+        return const <BoxShadow>[floatingShadow];
+      case LiqGlassElevation.modal:
+        return const <BoxShadow>[modalShadow];
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final layers = <Widget>[];
+
+    if (tint != LiqGlassTint.opaque) {
+      layers.add(
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
+            child: const SizedBox.expand(),
+          ),
+        ),
+      );
+    }
+
+    layers
+      ..add(Positioned.fill(child: ColoredBox(color: _baseFill)))
+      ..add(
+        Positioned.fill(
+          child: IgnorePointer(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[_highlightStart, highlightEnd],
+                  stops: const <double>[0, 0.4],
+                ),
+              ),
+            ),
+          ),
+        ),
+      )
+      ..add(
+        Positioned.fill(
+          child: IgnorePointer(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: borderRadius,
+                border: Border.all(width: 0.5, color: _rimColor),
+              ),
+            ),
+          ),
+        ),
+      )
+      ..add(Padding(padding: padding, child: child));
+
+    final clipped = ClipRRect(
+      borderRadius: borderRadius,
+      clipBehavior: clipBehavior,
+      child: Stack(children: layers),
+    );
+
+    final shadows = _shadows;
+    if (shadows.isEmpty) {
+      return clipped;
+    }
+
+    return DecoratedBox(
+      decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: shadows),
+      child: clipped,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty<LiqGlassTint>('tint', tint))
+      ..add(EnumProperty<LiqGlassElevation>('elevation', elevation));
+  }
+}

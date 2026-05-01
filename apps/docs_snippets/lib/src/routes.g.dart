@@ -151,6 +151,12 @@ import 'package:docs_snippets/snippets/face-id/scanning.dart'
     show faceIdScanningBuilder;
 import 'package:docs_snippets/snippets/face-id/success.dart'
     show faceIdSuccessBuilder;
+import 'package:docs_snippets/snippets/glass-surface/dark.dart'
+    show glassSurfaceDarkBuilder;
+import 'package:docs_snippets/snippets/glass-surface/flat.dart'
+    show glassSurfaceFlatBuilder;
+import 'package:docs_snippets/snippets/glass-surface/floating.dart'
+    show glassSurfaceFloatingBuilder;
 import 'package:docs_snippets/snippets/hover-card/bottom.dart'
     show hoverCardBottomBuilder;
 import 'package:docs_snippets/snippets/hover-card/default.dart'
@@ -432,6 +438,9 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/face-id/fail': faceIdFailBuilder,
   '/face-id/scanning': faceIdScanningBuilder,
   '/face-id/success': faceIdSuccessBuilder,
+  '/glass-surface/dark': glassSurfaceDarkBuilder,
+  '/glass-surface/flat': glassSurfaceFlatBuilder,
+  '/glass-surface/floating': glassSurfaceFloatingBuilder,
   '/hover-card/bottom': hoverCardBottomBuilder,
   '/hover-card/default': hoverCardDefaultBuilder,
   '/kanban/default': kanbanDefaultBuilder,

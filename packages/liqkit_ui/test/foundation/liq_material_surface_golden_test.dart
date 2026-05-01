@@ -13,7 +13,7 @@ void main() {
     return;
   }
 
-  group('LiqGlassSurface goldens', () {
+  group('LiqMaterialSurface goldens', () {
     testWidgets('light', (tester) async {
       await tester.pumpWidget(
         LiqTheme(
@@ -23,7 +23,7 @@ void main() {
             child: SizedBox(
               width: 240,
               height: 120,
-              child: LiqGlassSurface(
+              child: LiqMaterialSurface(
                 material: LiqMaterial.solid,
                 child: Center(child: Text('liqkit_ui')),
               ),
@@ -32,8 +32,8 @@ void main() {
         ),
       );
       await expectLater(
-        find.byType(LiqGlassSurface),
-        matchesGoldenFile('${_platformDir()}/liq_glass_surface_light.png'),
+        find.byType(LiqMaterialSurface),
+        matchesGoldenFile('${_platformDir()}/liq_material_surface_light.png'),
       );
     });
 
@@ -46,7 +46,7 @@ void main() {
             child: SizedBox(
               width: 240,
               height: 120,
-              child: LiqGlassSurface(
+              child: LiqMaterialSurface(
                 material: LiqMaterial.solid,
                 child: Center(child: Text('liqkit_ui')),
               ),
@@ -55,8 +55,8 @@ void main() {
         ),
       );
       await expectLater(
-        find.byType(LiqGlassSurface),
-        matchesGoldenFile('${_platformDir()}/liq_glass_surface_dark.png'),
+        find.byType(LiqMaterialSurface),
+        matchesGoldenFile('${_platformDir()}/liq_material_surface_dark.png'),
       );
     });
   });
