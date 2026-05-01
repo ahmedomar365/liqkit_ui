@@ -9,6 +9,7 @@ export 'src/components/app_icons/liq_app_icon.dart';
 export 'src/components/avatars/liq_avatar.dart';
 export 'src/components/badges/liq_badge.dart';
 export 'src/components/bezels/liq_device_bezel.dart';
+export 'src/components/bottom_nav_bars/liq_bottom_nav_bar.dart';
 export 'src/components/breadcrumbs/liq_breadcrumb.dart';
 export 'src/components/buttons/liq_button.dart';
 export 'src/components/calendars/liq_calendar.dart';

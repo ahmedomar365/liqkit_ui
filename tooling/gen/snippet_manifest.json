@@ -42,6 +42,15 @@
       ]
     },
     {
+      "component": "bottom-nav",
+      "displayName": "Bottom Navigation",
+      "group": "navigation",
+      "variants": [
+        { "variant": "four-tabs", "displayName": "Four tabs", "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/four-tabs.dart" },
+        { "variant": "five-tabs", "displayName": "Five tabs", "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/five-tabs.dart" }
+      ]
+    },
+    {
       "component": "breadcrumb",
       "displayName": "Breadcrumb",
       "group": "navigation",

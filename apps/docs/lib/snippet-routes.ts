@@ -33,6 +33,8 @@ export const SNIPPET_ROUTES = {
   'bar-chart/no-labels': { component: 'bar-chart', variant: 'no-labels', displayName: "No labels", path: '/bar-chart/no-labels' },
   'bezel/no-island': { component: 'bezel', variant: 'no-island', displayName: "No Island", path: '/bezel/no-island' },
   'bezel/with-island': { component: 'bezel', variant: 'with-island', displayName: "With Island", path: '/bezel/with-island' },
+  'bottom-nav/five-tabs': { component: 'bottom-nav', variant: 'five-tabs', displayName: "Five tabs", path: '/bottom-nav/five-tabs' },
+  'bottom-nav/four-tabs': { component: 'bottom-nav', variant: 'four-tabs', displayName: "Four tabs", path: '/bottom-nav/four-tabs' },
   'breadcrumb/default': { component: 'breadcrumb', variant: 'default', displayName: "Default", path: '/breadcrumb/default' },
   'breadcrumb/with-separator': { component: 'breadcrumb', variant: 'with-separator', displayName: "With separator", path: '/breadcrumb/with-separator' },
   'button/destructive': { component: 'button', variant: 'destructive', displayName: "Destructive", path: '/button/destructive' },

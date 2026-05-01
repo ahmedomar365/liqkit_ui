@@ -1,0 +1,32 @@
+---
+title: Bottom Navigation
+description: iOS 26 tab bar pinned to the bottom of the screen — stacked icon and label tabs selecting between top-level app sections.
+---
+
+import bottomNavFourTabsSnippet from '@/snippets/bottom-nav/four-tabs.json';
+import bottomNavFiveTabsSnippet from '@/snippets/bottom-nav/five-tabs.json';
+
+`LiqBottomNavBar` is the iOS 26 tab bar — a 49pt high horizontal row of
+2 to 5 stacked icon + label tabs, sitting flush with the bottom safe
+area. The active tab is rendered in iOS system blue; the others stay
+in iOS system grey. Pass `onChanged: null` to render the bar in a
+disabled, dimmed state.
+
+## Four tabs
+
+The most common configuration: Home, Search, Inbox, Profile. Tapping a
+tab fires `onChanged` with the new index — there is no built-in
+animation per iOS HIG, selection is instant.
+
+<LiqPreview component="bottom-nav" variant="four-tabs" />
+
+<CodeSnippet snippet={bottomNavFourTabsSnippet} />
+
+## Five tabs
+
+Five is the maximum — past that, iOS HIG recommends a `More` tab that
+opens a list. Each tab takes equal width, so labels should stay short.
+
+<LiqPreview component="bottom-nav" variant="five-tabs" />
+
+<CodeSnippet snippet={bottomNavFiveTabsSnippet} />

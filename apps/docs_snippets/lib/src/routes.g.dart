@@ -48,6 +48,10 @@ import 'package:docs_snippets/snippets/bezel/no-island.dart'
     show bezelNoIslandBuilder;
 import 'package:docs_snippets/snippets/bezel/with-island.dart'
     show bezelWithIslandBuilder;
+import 'package:docs_snippets/snippets/bottom-nav/five-tabs.dart'
+    show bottomNavFiveTabsBuilder;
+import 'package:docs_snippets/snippets/bottom-nav/four-tabs.dart'
+    show bottomNavFourTabsBuilder;
 import 'package:docs_snippets/snippets/breadcrumb/default.dart'
     show breadcrumbDefaultBuilder;
 import 'package:docs_snippets/snippets/breadcrumb/with-separator.dart'
@@ -363,6 +367,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/bar-chart/no-labels': barChartNoLabelsBuilder,
   '/bezel/no-island': bezelNoIslandBuilder,
   '/bezel/with-island': bezelWithIslandBuilder,
+  '/bottom-nav/five-tabs': bottomNavFiveTabsBuilder,
+  '/bottom-nav/four-tabs': bottomNavFourTabsBuilder,
   '/breadcrumb/default': breadcrumbDefaultBuilder,
   '/breadcrumb/with-separator': breadcrumbWithSeparatorBuilder,
   '/button/destructive': buttonDestructiveBuilder,
