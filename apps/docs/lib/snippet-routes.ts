@@ -164,6 +164,8 @@ export const SNIPPET_ROUTES = {
   'toast/error': { component: 'toast', variant: 'error', displayName: "Error", path: '/toast/error' },
   'toast/info': { component: 'toast', variant: 'info', displayName: "Info", path: '/toast/info' },
   'toast/success': { component: 'toast', variant: 'success', displayName: "Success", path: '/toast/success' },
+  'toggle-group/labels': { component: 'toggle-group', variant: 'labels', displayName: "Labels", path: '/toggle-group/labels' },
+  'toggle-group/text-style': { component: 'toggle-group', variant: 'text-style', displayName: "Text style", path: '/toggle-group/text-style' },
   'toggle/disabled': { component: 'toggle', variant: 'disabled', displayName: "Disabled", path: '/toggle/disabled' },
   'toggle/off': { component: 'toggle', variant: 'off', displayName: "Off", path: '/toggle/off' },
   'toggle/on': { component: 'toggle', variant: 'on', displayName: "On", path: '/toggle/on' },

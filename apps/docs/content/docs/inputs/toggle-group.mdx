@@ -1,0 +1,39 @@
+---
+title: Toggle Group
+description: Multi-select segmented pill — any subset of options can be active simultaneously.
+---
+
+import toggleGroupTextStyleSnippet from '@/snippets/toggle-group/text-style.json';
+import toggleGroupLabelsSnippet from '@/snippets/toggle-group/labels.json';
+
+`LiqToggleGroup` is a row of buttons where any subset can be active at
+the same time — for example, a text-style toolbar where Bold, Italic,
+and Underline can each be on or off independently.
+
+This is distinct from `LiqSegmentedControl`, which is mutually exclusive
+(exactly one segment is selected at a time). Reach for `LiqToggleGroup`
+when "none", "one", or "many" are all valid selection states; reach for
+`LiqSegmentedControl` when the choice is a strict either/or.
+
+Pass `selected` (a `Set<T>`) for the currently active values. Whenever
+the user taps a segment, the widget hands you the new full set via
+`onChanged` — add the value if absent, remove it if present.
+
+## Text style
+
+A classic Bold / Italic / Underline toolbar — icon-only segments. Tap
+each to toggle independently.
+
+<LiqPreview component="toggle-group" variant="text-style" />
+
+<CodeSnippet snippet={toggleGroupTextStyleSnippet} />
+
+## Labels
+
+Label-only segments work the same way. Here a weekday picker with
+multiple days pre-selected demonstrates that `selected` may contain any
+subset of the items.
+
+<LiqPreview component="toggle-group" variant="labels" />
+
+<CodeSnippet snippet={toggleGroupLabelsSnippet} />

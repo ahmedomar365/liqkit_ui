@@ -205,6 +205,15 @@
       ]
     },
     {
+      "component": "toggle-group",
+      "displayName": "Toggle Group",
+      "group": "inputs",
+      "variants": [
+        { "variant": "text-style", "displayName": "Text style", "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/text-style.dart" },
+        { "variant": "labels",     "displayName": "Labels",     "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/labels.dart" }
+      ]
+    },
+    {
       "component": "slider",
       "displayName": "Sliders",
       "group": "inputs",

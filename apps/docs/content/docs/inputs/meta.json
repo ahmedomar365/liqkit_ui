@@ -8,6 +8,7 @@
     "chip",
     "combobox",
     "toggles",
+    "toggle-group",
     "sliders",
     "steppers",
     "segmented-controls",

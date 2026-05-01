@@ -297,6 +297,10 @@ import 'package:docs_snippets/snippets/toast/error.dart' show toastErrorBuilder;
 import 'package:docs_snippets/snippets/toast/info.dart' show toastInfoBuilder;
 import 'package:docs_snippets/snippets/toast/success.dart'
     show toastSuccessBuilder;
+import 'package:docs_snippets/snippets/toggle-group/labels.dart'
+    show toggleGroupLabelsBuilder;
+import 'package:docs_snippets/snippets/toggle-group/text-style.dart'
+    show toggleGroupTextStyleBuilder;
 import 'package:docs_snippets/snippets/toggle/disabled.dart'
     show toggleDisabledBuilder;
 import 'package:docs_snippets/snippets/toggle/off.dart' show toggleOffBuilder;
@@ -486,6 +490,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/toast/error': toastErrorBuilder,
   '/toast/info': toastInfoBuilder,
   '/toast/success': toastSuccessBuilder,
+  '/toggle-group/labels': toggleGroupLabelsBuilder,
+  '/toggle-group/text-style': toggleGroupTextStyleBuilder,
   '/toggle/disabled': toggleDisabledBuilder,
   '/toggle/off': toggleOffBuilder,
   '/toggle/on': toggleOnBuilder,
