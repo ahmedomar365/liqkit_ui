@@ -1,0 +1,37 @@
+---
+title: Textarea
+description: iOS 26 multi-line text input with optional character counter.
+---
+
+import textareaDefaultSnippet from '@/snippets/textarea/default.json';
+import textareaWithCounterSnippet from '@/snippets/textarea/with-counter.json';
+
+`LiqTextarea` is the iOS 26 multi-line text input. It renders a
+rounded-rectangle surface that grows from `minLines` up to `maxLines`
+before the editor starts to scroll internally.
+
+Distinct from `LiqTextField` — which is a single-line pill input that
+hardcodes `maxLines: 1`. Use `LiqTextarea` for paragraphs, comments,
+posts, and any multi-line free-form input; use `LiqTextField` when the
+content is a single line (search, email, password, name).
+
+## Default
+
+A bare textarea bound to a `TextEditingController`. The placeholder
+fades out as soon as the user types. The field starts at `minLines: 4`
+and grows to a maximum of `maxLines: 8`.
+
+<LiqPreview component="textarea" variant="default" />
+
+<CodeSnippet snippet={textareaDefaultSnippet} />
+
+## With counter
+
+Set `maxLength` to enforce a hard cap on input length and pair it with
+`showCounter: true` to render an `N / max` indicator in the bottom
+right. The counter switches to the destructive red colour the moment
+the field is at or over the limit.
+
+<LiqPreview component="textarea" variant="with-counter" />
+
+<CodeSnippet snippet={textareaWithCounterSnippet} />

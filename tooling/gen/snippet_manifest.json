@@ -307,6 +307,15 @@
       ]
     },
     {
+      "component": "textarea",
+      "displayName": "Textarea",
+      "group": "inputs",
+      "variants": [
+        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/textarea/default.dart" },
+        { "variant": "with-counter", "displayName": "With counter", "dartFile": "apps/docs_snippets/lib/snippets/textarea/with-counter.dart" }
+      ]
+    },
+    {
       "component": "sheet",
       "displayName": "Sheets",
       "group": "containers",

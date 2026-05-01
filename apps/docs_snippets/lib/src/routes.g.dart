@@ -299,6 +299,10 @@ import 'package:docs_snippets/snippets/text-styles/accessibility.dart'
     show textStylesAccessibilityBuilder;
 import 'package:docs_snippets/snippets/text-styles/dynamic.dart'
     show textStylesDynamicBuilder;
+import 'package:docs_snippets/snippets/textarea/default.dart'
+    show textareaDefaultBuilder;
+import 'package:docs_snippets/snippets/textarea/with-counter.dart'
+    show textareaWithCounterBuilder;
 import 'package:docs_snippets/snippets/time-field/twelve-hour.dart'
     show timeFieldTwelveHourBuilder;
 import 'package:docs_snippets/snippets/time-field/twenty-four-hour.dart'
@@ -506,6 +510,8 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/text-field/obscured': textFieldObscuredBuilder,
   '/text-styles/accessibility': textStylesAccessibilityBuilder,
   '/text-styles/dynamic': textStylesDynamicBuilder,
+  '/textarea/default': textareaDefaultBuilder,
+  '/textarea/with-counter': textareaWithCounterBuilder,
   '/time-field/twelve-hour': timeFieldTwelveHourBuilder,
   '/time-field/twenty-four-hour': timeFieldTwentyFourHourBuilder,
   '/time-picker/12-hour': timePicker12HourBuilder,
