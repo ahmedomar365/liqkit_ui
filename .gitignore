@@ -36,6 +36,7 @@ tooling/playwright/playwright-report/
 # Local-only
 .env
 .env.local
+.worktrees/
 
 # apps/docs (Next.js)
 apps/docs/.next/
