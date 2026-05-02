@@ -23,8 +23,18 @@ showcase, and snippets app all live in a single workspace.
   states, divider, label, text styles, colors, checkbox, radio, chip,
   calendar, date picker field, time picker, time field, number field,
   OTP input, combobox, line chart, bar chart, rich editor.
-- **Liquid Glass** throughout — translucent surfaces, hairline rims,
-  soft shadows, iOS spring animations, San Francisco type scale.
+- **Liquid Glass** throughout — every glass-bearing component (dialog,
+  drawer, card, accordion, hover card, command palette, bottom nav,
+  toast info) routes through a single `LiqGlassSurface` primitive
+  with proper backdrop blur, hairline rim, and vibrancy highlight,
+  so surfaces correctly translucent-tint whatever sits behind them.
+- **iOS-26 motion** — animations centralised in `LiqMotion`
+  (`standard` / `snappy` / `smooth` curves, `fast` / `normal` /
+  `slow` durations) so a future swap to true `SpringSimulation`
+  curves is a one-file change.
+- **SF Pro Text/Display auto-switch** — typography helper picks the
+  right family by size (Apple's 20pt rule) so headlines get the
+  refined Display glyphs and body copy gets Text's sturdier strokes.
 - **Goldens for every component** — widget tests assert exact pixel
   dimensions and behavior in `packages/liqkit_ui/test/components/`.
 - **Live docs** at `apps/docs/` (Fumadocs 16 + Next 16 + Tailwind 4)

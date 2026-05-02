@@ -13,9 +13,11 @@ const FEATURES: Array<{ title: string; body: string }> = [
   {
     title: 'Liquid Glass throughout',
     body:
-      'Translucent surfaces, hairline rims, soft drop shadows, iOS ' +
-      'spring animations, and the San Francisco type scale — sourced ' +
-      'directly from Apple’s iOS 26 design language.',
+      'Every glass-bearing surface routes through a single ' +
+      '`LiqGlassSurface` primitive — proper backdrop blur, hairline ' +
+      'rim, vibrancy highlight. Animations centralise in `LiqMotion`; ' +
+      'typography auto-switches between SF Pro Text and SF Pro ' +
+      'Display per Apple’s 20pt rule.',
   },
   {
     title: 'Pure Dart, golden-tested',

@@ -1,0 +1,69 @@
+---
+title: Motion
+description: iOS-26 spring curves and standard durations for component animations.
+---
+
+`LiqMotion` is the foundation namespace every component pulls its
+animation curves and durations from. Centralising motion lets us
+swap implementations in one place — today the curves map to
+existing Flutter easings, but the public API is shaped to accept
+true `SpringSimulation` springs in a follow-up release without any
+caller changes.
+
+## Curves
+
+| Constant | Today | Use for |
+|---|---|---|
+| `LiqMotion.standard` | `Curves.easeOutCubic` | Modal presentation, scale-ins, dialog enter, drawer slide |
+| `LiqMotion.snappy`   | `Curves.easeOutQuint` | Taps, transient feedback (toasts, tooltips) |
+| `LiqMotion.smooth`   | `Curves.easeInOutCubic` | Slow / playful affordances (carousel page transitions) |
+
+## Durations
+
+| Constant | Value | Use for |
+|---|---|---|
+| `LiqMotion.fast`   | 200 ms | Tap feedback, dialog enter, hover-card fade |
+| `LiqMotion.normal` | 280 ms | Accordion expand, drawer slide, sheet present |
+| `LiqMotion.slow`   | 380 ms | Cross-page transitions, carousel auto-advance |
+
+## Usage
+
+```dart
+import 'package:liqkit_ui/liqkit_ui.dart';
+
+AnimatedContainer(
+  duration: LiqMotion.normal,
+  curve: LiqMotion.standard,
+  decoration: BoxDecoration(/* … */),
+  child: child,
+);
+```
+
+Or with a `Tween`:
+
+```dart
+TweenAnimationBuilder<double>(
+  tween: Tween<double>(begin: 0, end: 1),
+  duration: LiqMotion.fast,
+  curve: LiqMotion.snappy,
+  builder: (context, t, _) => Opacity(opacity: t, child: child),
+);
+```
+
+## Why centralise
+
+The 9 components routed through `LiqMotion` today (accordion,
+collapsible, dialog, drawer, hover card, toast, tabs, carousel,
+command palette) all previously hand-rolled the same
+`Curves.easeOutCubic` + `Duration(milliseconds: 280)` pair. Pulling
+those literals into a single source of truth means:
+
+- iOS-26 spring physics is a one-file upgrade away. Subclassing
+  `Curve` to solve a critically-damped spring at a given (stiffness,
+  damping) gives interpolating-spring behavior; swapping the
+  `LiqMotion.standard` constant rolls that out across every consumer.
+- Consumers who want to match the library's motion language don't
+  guess at curves — they just import the namespace.
+- Catalogue-quality animation tuning lives in one place. If we
+  decide tap feedback should feel slightly snappier, one constant
+  changes.
