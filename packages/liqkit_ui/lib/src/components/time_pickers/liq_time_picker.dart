@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 
 /// iOS-26 scroll-wheel time picker.
 ///
@@ -78,7 +79,7 @@ final class LiqTimePicker extends StatefulWidget {
 
   /// Default text style for wheel items.
   static const TextStyle textStyle = TextStyle(
-    fontFamily: 'SF Pro Text',
+    fontFamily: LiqFontFamily.display,
     fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
     fontSize: 22,
     fontWeight: FontWeight.w400,

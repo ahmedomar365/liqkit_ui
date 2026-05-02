@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 
 /// Semantic typography role from iOS 26 Human Interface Guidelines.
 ///
@@ -126,15 +127,13 @@ double liqDynamicTypeMultiplier(LiqDynamicTypeScale scale) {
 
 ({double size, double line, double track, String family, FontWeight weight})
 _baseFor(LiqTypeRole role) {
-  const display = 'SF Pro Display';
-  const text = 'SF Pro Text';
   switch (role) {
     case LiqTypeRole.largeTitle:
       return (
         size: 34,
         line: 41,
         track: 0.4,
-        family: display,
+        family: LiqFontFamily.forSize(34),
         weight: FontWeight.w700,
       );
     case LiqTypeRole.title1:
@@ -142,7 +141,7 @@ _baseFor(LiqTypeRole role) {
         size: 28,
         line: 34,
         track: 0.36,
-        family: display,
+        family: LiqFontFamily.forSize(28),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.title2:
@@ -150,7 +149,7 @@ _baseFor(LiqTypeRole role) {
         size: 22,
         line: 28,
         track: 0.35,
-        family: display,
+        family: LiqFontFamily.forSize(22),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.title3:
@@ -158,7 +157,7 @@ _baseFor(LiqTypeRole role) {
         size: 20,
         line: 25,
         track: 0.38,
-        family: display,
+        family: LiqFontFamily.forSize(20),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.headline:
@@ -166,7 +165,7 @@ _baseFor(LiqTypeRole role) {
         size: 17,
         line: 22,
         track: -0.43,
-        family: text,
+        family: LiqFontFamily.forSize(17),
         weight: FontWeight.w600,
       );
     case LiqTypeRole.body:
@@ -174,7 +173,7 @@ _baseFor(LiqTypeRole role) {
         size: 17,
         line: 22,
         track: -0.43,
-        family: text,
+        family: LiqFontFamily.forSize(17),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.callout:
@@ -182,7 +181,7 @@ _baseFor(LiqTypeRole role) {
         size: 16,
         line: 21,
         track: -0.32,
-        family: text,
+        family: LiqFontFamily.forSize(16),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.subhead:
@@ -190,7 +189,7 @@ _baseFor(LiqTypeRole role) {
         size: 15,
         line: 20,
         track: -0.24,
-        family: text,
+        family: LiqFontFamily.forSize(15),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.footnote:
@@ -198,7 +197,7 @@ _baseFor(LiqTypeRole role) {
         size: 13,
         line: 18,
         track: -0.08,
-        family: text,
+        family: LiqFontFamily.forSize(13),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.caption1:
@@ -206,7 +205,7 @@ _baseFor(LiqTypeRole role) {
         size: 12,
         line: 16,
         track: 0,
-        family: text,
+        family: LiqFontFamily.forSize(12),
         weight: FontWeight.w400,
       );
     case LiqTypeRole.caption2:
@@ -214,7 +213,7 @@ _baseFor(LiqTypeRole role) {
         size: 11,
         line: 13,
         track: 0.06,
-        family: text,
+        family: LiqFontFamily.forSize(11),
         weight: FontWeight.w400,
       );
   }

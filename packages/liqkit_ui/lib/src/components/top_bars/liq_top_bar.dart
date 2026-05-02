@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 
 /// iOS 26 navigation top bar.
 ///
@@ -158,7 +159,7 @@ final class LiqTopBarSymbolButton extends StatelessWidget {
             child: Text(
               glyph,
               style: TextStyle(
-                fontFamily: 'SF Pro Text',
+                fontFamily: LiqFontFamily.display,
                 fontSize: 22,
                 height: 1,
                 color: color,

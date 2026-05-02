@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 
 /// iOS 26 empty-state placeholder — centered icon + title + description.
 ///
@@ -64,7 +65,7 @@ final class LiqEmptyState extends StatelessWidget {
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
         style: const TextStyle(
-          fontFamily: 'SF Pro Text',
+          fontFamily: LiqFontFamily.display,
           fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
           fontSize: 22,
           height: 28 / 22,
@@ -79,7 +80,7 @@ final class LiqEmptyState extends StatelessWidget {
           textAlign: TextAlign.center,
           textDirection: TextDirection.ltr,
           style: const TextStyle(
-            fontFamily: 'SF Pro Text',
+            fontFamily: LiqFontFamily.display,
             fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
             fontSize: 22,
             height: 28 / 22,
