@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// iOS 26 Liquid Glass content surface for grouping arbitrary children.
 ///
 /// Renders a rounded glass panel with optional [header] and [footer] slots
@@ -84,20 +86,14 @@ final class LiqCard extends StatelessWidget {
         ..add(Padding(padding: slotPadding, child: footer));
     }
 
-    final Widget surface = DecoratedBox(
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(cornerRadius),
-        border: Border.all(color: borderColor, width: borderThickness),
-        boxShadow: const <BoxShadow>[shadow],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(cornerRadius),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: columnChildren,
-        ),
+    final Widget surface = LiqGlassSurface(
+      tint: LiqGlassTint.opaque,
+      elevation: LiqGlassElevation.flat,
+      borderRadius: BorderRadius.circular(cornerRadius),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: columnChildren,
       ),
     );
 

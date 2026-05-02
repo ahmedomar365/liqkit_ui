@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// One tab in [LiqBottomNavBar].
 ///
 /// Each item is a stacked icon + label pair selecting between top-level
@@ -85,22 +87,28 @@ final class LiqBottomNavBar extends StatelessWidget {
     final disabled = onChanged == null;
     final bottomInset = MediaQuery.maybeOf(context)?.padding.bottom ?? 0;
 
-    final bar = Container(
-      decoration: const BoxDecoration(
-        color: barBackground,
-        border: Border(
-          top: BorderSide(color: hairlineColor, width: hairlineThickness),
-        ),
-      ),
+    final bar = LiqGlassSurface(
+      elevation: LiqGlassElevation.flat,
+      borderRadius: BorderRadius.zero,
       padding: EdgeInsets.only(bottom: bottomInset),
-      child: SizedBox(
-        height: contentHeight,
-        child: Row(
-          children: <Widget>[
-            for (var i = 0; i < items.length; i++)
-              Expanded(child: _buildTab(context, i, disabled: disabled)),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const SizedBox(
+            height: hairlineThickness,
+            width: double.infinity,
+            child: ColoredBox(color: hairlineColor),
+          ),
+          SizedBox(
+            height: contentHeight,
+            child: Row(
+              children: <Widget>[
+                for (var i = 0; i < items.length; i++)
+                  Expanded(child: _buildTab(context, i, disabled: disabled)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
 

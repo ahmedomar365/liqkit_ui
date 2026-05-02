@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// The screen edge a [LiqDrawer] is anchored to.
 enum LiqDrawerSide {
   /// Anchored to the leading edge (left in LTR layouts).
@@ -74,38 +76,13 @@ final class LiqDrawer extends StatelessWidget {
             ? (width > screenWidth ? screenWidth : width)
             : width;
 
-    final isLeft = side == LiqDrawerSide.left;
-    final shadowOffset = Offset(
-      isLeft ? shadowOffsetMagnitude : -shadowOffsetMagnitude,
-      0,
-    );
-
-    final border = Border(
-      left:
-          isLeft
-              ? BorderSide.none
-              : const BorderSide(color: hairlineColor, width: hairlineWidth),
-      right:
-          isLeft
-              ? const BorderSide(color: hairlineColor, width: hairlineWidth)
-              : BorderSide.none,
-    );
-
     return SizedBox(
       width: clampedWidth,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          border: border,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: shadowColor,
-              offset: shadowOffset,
-              blurRadius: shadowBlurRadius,
-            ),
-          ],
-        ),
-        child: Padding(padding: padding, child: child),
+      child: LiqGlassSurface(
+        elevation: LiqGlassElevation.modal,
+        borderRadius: BorderRadius.zero,
+        padding: padding,
+        child: child,
       ),
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// Visual variant of a [LiqToast].
 enum LiqToastVariant {
   /// Green success toast.
@@ -114,6 +116,40 @@ final class LiqToast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolvedIcon = icon ?? defaultIconFor(variant);
+    final body = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Icon(resolvedIcon, color: foregroundColor, size: iconSize),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            message,
+            textDirection: TextDirection.ltr,
+            style: const TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+              fontSize: fontSize,
+              fontWeight: FontWeight.w600,
+              color: foregroundColor,
+              height: 1.25,
+            ),
+          ),
+        ),
+      ],
+    );
+
+    if (variant == LiqToastVariant.info) {
+      return ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: maxWidth),
+        child: LiqGlassSurface(
+          tint: LiqGlassTint.dark,
+          borderRadius: const BorderRadius.all(Radius.circular(radius)),
+          padding: padding,
+          child: body,
+        ),
+      );
+    }
+
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: maxWidth),
       child: DecoratedBox(
@@ -122,30 +158,7 @@ final class LiqToast extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(radius)),
           boxShadow: const <BoxShadow>[shadow],
         ),
-        child: Padding(
-          padding: padding,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(resolvedIcon, color: foregroundColor, size: iconSize),
-              const SizedBox(width: 8),
-              Flexible(
-                child: Text(
-                  message,
-                  textDirection: TextDirection.ltr,
-                  style: const TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w600,
-                    color: foregroundColor,
-                    height: 1.25,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        child: Padding(padding: padding, child: body),
       ),
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// A button shown in the action row of a [LiqDialog].
 ///
 /// Set [destructive] to render the label in red. Set [isDefault] to
@@ -127,47 +129,37 @@ final class LiqDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(radius)),
-          border: Border.all(color: borderColor, width: borderWidth),
-          boxShadow: const <BoxShadow>[shadow],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(radius)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(
-                padding: contentPadding,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: _titleStyle,
-                      textDirection: TextDirection.ltr,
-                    ),
-                    if (message != null) ...<Widget>[
-                      const SizedBox(height: 4),
-                      Text(
-                        message!,
-                        textAlign: TextAlign.center,
-                        style: _messageStyle,
-                        textDirection: TextDirection.ltr,
-                      ),
-                    ],
-                  ],
+      child: LiqGlassSurface(
+        elevation: LiqGlassElevation.modal,
+        padding: contentPadding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: _titleStyle,
+                  textDirection: TextDirection.ltr,
                 ),
-              ),
-              if (actions.isNotEmpty) ...<Widget>[
-                const _LiqDialogSeparator(horizontal: true),
-                _LiqDialogActions(actions: actions),
+                if (message != null) ...<Widget>[
+                  const SizedBox(height: 4),
+                  Text(
+                    message!,
+                    textAlign: TextAlign.center,
+                    style: _messageStyle,
+                    textDirection: TextDirection.ltr,
+                  ),
+                ],
               ],
+            ),
+            if (actions.isNotEmpty) ...<Widget>[
+              const _LiqDialogSeparator(horizontal: true),
+              _LiqDialogActions(actions: actions),
             ],
-          ),
+          ],
         ),
       ),
     );

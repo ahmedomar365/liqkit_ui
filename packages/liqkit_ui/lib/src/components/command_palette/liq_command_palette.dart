@@ -5,6 +5,8 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// One row inside a [LiqCommandPalette].
 ///
 /// A command is a label + callback, optionally tagged with a leading
@@ -352,51 +354,40 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
         maxWidth: LiqCommandPalette.maxWidth,
         maxHeight: widget.maxHeight,
       ),
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: LiqCommandPalette.backgroundColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(LiqCommandPalette.radius),
-          ),
-          boxShadow: <BoxShadow>[LiqCommandPalette.shadow],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(LiqCommandPalette.radius),
-          ),
-          child: Focus(
-            focusNode: _keyFocusNode,
-            onKeyEvent: _onKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                _SearchField(
-                  controller: _controller,
-                  focusNode: _searchFocusNode,
-                  placeholder: widget.placeholder,
-                  showClear: _query.isNotEmpty,
-                  onClear: _clearQuery,
-                ),
-                const _Hairline(),
-                Flexible(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: (widget.maxHeight -
-                              LiqCommandPalette.searchFieldHeight)
-                          .clamp(0.0, double.infinity),
-                    ),
-                    child: _Results(
-                      filtered: _filtered,
-                      activeIndex: _activeIndex,
-                      onTap: (LiqCommand cmd, int index) {
-                        setState(() => _activeIndex = index);
-                        cmd.onSelected();
-                      },
-                    ),
+      child: LiqGlassSurface(
+        elevation: LiqGlassElevation.modal,
+        child: Focus(
+          focusNode: _keyFocusNode,
+          onKeyEvent: _onKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _SearchField(
+                controller: _controller,
+                focusNode: _searchFocusNode,
+                placeholder: widget.placeholder,
+                showClear: _query.isNotEmpty,
+                onClear: _clearQuery,
+              ),
+              const _Hairline(),
+              Flexible(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: (widget.maxHeight -
+                            LiqCommandPalette.searchFieldHeight)
+                        .clamp(0.0, double.infinity),
+                  ),
+                  child: _Results(
+                    filtered: _filtered,
+                    activeIndex: _activeIndex,
+                    onTap: (LiqCommand cmd, int index) {
+                      setState(() => _activeIndex = index);
+                      cmd.onSelected();
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

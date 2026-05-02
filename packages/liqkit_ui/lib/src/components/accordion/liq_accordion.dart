@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// Behavior of [LiqAccordion] when expanding multiple items.
 enum LiqAccordionType {
   /// Only one item can be expanded at a time. Expanding a new item
@@ -55,8 +57,6 @@ final class LiqAccordion extends StatefulWidget {
   final Set<int> initialExpanded;
 
   static const double _radius = 16;
-  static const Color _surface = Color(0xFFFAFAFA);
-  static const Color _border = Color(0x14000000);
   static const Color _divider = Color(0x29000000);
   static const double _dividerThickness = 0.33;
   static const double _dividerInset = 16;
@@ -120,23 +120,16 @@ class _LiqAccordionState extends State<LiqAccordion> {
       }
       children.add(_buildItem(i, widget.items[i]));
     }
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: LiqAccordion._surface,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(LiqAccordion._radius),
-        ),
-        border: Border.all(color: LiqAccordion._border),
+    return LiqGlassSurface(
+      tint: LiqGlassTint.opaque,
+      elevation: LiqGlassElevation.flat,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(LiqAccordion._radius),
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(LiqAccordion._radius),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: children,
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: children,
       ),
     );
   }

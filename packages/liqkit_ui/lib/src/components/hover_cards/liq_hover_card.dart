@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+
 /// Preferred edge of [LiqHoverCard] relative to its child.
 enum LiqHoverCardPlacement {
   /// Hover card above the child.
@@ -420,27 +422,15 @@ class _LiqHoverCardSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth),
-      padding: padding,
-      decoration: const BoxDecoration(
-        color: LiqHoverCard.backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(LiqHoverCard.radius)),
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: LiqHoverCard.borderColor,
-            width: LiqHoverCard.borderWidth,
-          ),
+      child: LiqGlassSurface(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(LiqHoverCard.radius),
         ),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: LiqHoverCard.shadowColor,
-            offset: LiqHoverCard.shadowOffset,
-            blurRadius: LiqHoverCard.shadowBlurRadius,
-          ),
-        ],
+        padding: padding,
+        child: child,
       ),
-      child: child,
     );
   }
 }
