@@ -84,6 +84,10 @@ melos:
       run: dart run tooling/scripts/audit_design_data.dart
       description: Verify every liqkit category has all expected artifact types.
 
+    audit:components:
+      run: dart run tooling/scripts/check_component_audit.dart
+      description: Verify docs/audits/ios26_component_checklist.md covers every exported Liq component.
+
     verify:provenance:
       run: dart run tooling/scripts/verify_provenance.dart
       description: Re-hash design_data and assert PROVENANCE.md matches.
