@@ -47,7 +47,15 @@ void main(List<String> args) {
   for (final file in dartFiles) {
     final source = file.readAsStringSync();
     final relative = file.path.substring(showcase.path.length + 1);
-    if (RegExp(r'class\s+Liquid[A-Za-z0-9_]+').hasMatch(source)) {
+    final isDesignSystemPath =
+        relative.startsWith('lib/components/') ||
+        relative.startsWith('lib/core/animations/') ||
+        relative.startsWith('lib/core/effects/') ||
+        relative.startsWith('lib/core/platform/') ||
+        relative.startsWith('lib/core/theme/') ||
+        relative.startsWith('lib/core/widgets/');
+    if (isDesignSystemPath &&
+        RegExp(r'class\s+Liquid[A-Za-z0-9_]+').hasMatch(source)) {
       problems.add('$relative declares a Liquid* class');
     }
     if (source.contains("import '../components/") ||
