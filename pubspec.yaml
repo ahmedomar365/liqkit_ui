@@ -88,6 +88,10 @@ melos:
       run: dart run tooling/scripts/check_component_audit.dart
       description: Verify docs/audits/ios26_component_checklist.md covers every exported Liq component.
 
+    audit:showcase:
+      run: dart run tooling/scripts/check_showcase_migration.dart
+      description: Verify the App Store showcase consumes liqkit_ui instead of duplicated Liquid* components.
+
     verify:provenance:
       run: dart run tooling/scripts/verify_provenance.dart
       description: Re-hash design_data and assert PROVENANCE.md matches.
