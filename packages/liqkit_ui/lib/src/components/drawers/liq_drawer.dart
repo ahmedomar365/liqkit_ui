@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// The screen edge a [LiqDrawer] is anchored to.
 enum LiqDrawerSide {
@@ -103,10 +104,10 @@ final class LiqDrawerOverlay {
   LiqDrawerOverlay._();
 
   /// Slide-in animation duration.
-  static const Duration animationDuration = Duration(milliseconds: 280);
+  static const Duration animationDuration = LiqMotion.normal;
 
   /// Animation curve for both directions.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   /// Default scrim color (~40% black).
   static const Color defaultScrimColor = Color(0x66000000);

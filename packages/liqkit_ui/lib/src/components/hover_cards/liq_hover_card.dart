@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// Preferred edge of [LiqHoverCard] relative to its child.
 enum LiqHoverCardPlacement {
@@ -95,10 +96,10 @@ final class LiqHoverCard extends StatefulWidget {
   static const double shadowBlurRadius = 24;
 
   /// Show/hide animation duration.
-  static const Duration animationDuration = Duration(milliseconds: 200);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Show/hide animation curve.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

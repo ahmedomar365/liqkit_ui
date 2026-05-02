@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// One row inside a [LiqCommandPalette].
 ///
@@ -138,10 +139,10 @@ final class LiqCommandPalette extends StatefulWidget {
   static const double emptyStateVerticalPadding = 32;
 
   /// Animation duration for the show/hide transition.
-  static const Duration animationDuration = Duration(milliseconds: 200);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Animation curve for the show/hide transition.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   /// Default scrim color used by [LiqCommandPalette.show].
   static const Color defaultScrimColor = Color(0x66000000);

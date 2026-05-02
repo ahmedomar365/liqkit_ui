@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// iOS 26 single-region collapsible.
 ///
 /// `LiqCollapsible` shows a tappable header with a trailing chevron above
@@ -62,10 +64,10 @@ final class LiqCollapsible extends StatefulWidget {
   static const Duration rotateDuration = Duration(milliseconds: 220);
 
   /// Duration of the body expand/collapse animation.
-  static const Duration expandDuration = Duration(milliseconds: 280);
+  static const Duration expandDuration = LiqMotion.normal;
 
   /// Curve used for both the chevron rotation and body resize.
-  static const Curve curve = Curves.easeOutCubic;
+  static const Curve curve = LiqMotion.standard;
 
   @override
   State<LiqCollapsible> createState() => _LiqCollapsibleState();

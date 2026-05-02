@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// Visual variant of [LiqTabs].
 enum LiqTabsVariant {
   /// Underline indicator beneath the active tab. Headers sit on a
@@ -89,7 +91,7 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
   static const Duration animationDuration = Duration(milliseconds: 220);
 
   /// Animation curve for the indicator.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   @override
   Widget build(BuildContext context) {

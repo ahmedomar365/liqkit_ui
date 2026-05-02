@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// Behavior of [LiqAccordion] when expanding multiple items.
 enum LiqAccordionType {
@@ -68,8 +69,8 @@ final class LiqAccordion extends StatefulWidget {
   static const Color _chevronColor = Color(0xFF8E8E93);
   static const double _chevronSize = 13;
   static const Duration _rotateDuration = Duration(milliseconds: 220);
-  static const Duration _expandDuration = Duration(milliseconds: 280);
-  static const Curve _curve = Curves.easeOutCubic;
+  static const Duration _expandDuration = LiqMotion.normal;
+  static const Curve _curve = LiqMotion.standard;
 
   @override
   State<LiqAccordion> createState() => _LiqAccordionState();

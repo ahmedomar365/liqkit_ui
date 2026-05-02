@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// A button shown in the action row of a [LiqDialog].
 ///
@@ -266,10 +267,10 @@ final class LiqDialogOverlay {
   LiqDialogOverlay._();
 
   /// Animation duration for both directions.
-  static const Duration animationDuration = Duration(milliseconds: 200);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Animation curve for both directions.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   /// Default scrim color (~40% black).
   static const Color defaultScrimColor = Color(0x66000000);

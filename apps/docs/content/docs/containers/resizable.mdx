@@ -3,6 +3,12 @@ title: Resizable
 description: Two-pane container with a draggable divider that lets users adjust the split ratio along a horizontal or vertical axis.
 ---
 
+> **Cross-platform extension.** Draggable split-pane layouts live on iPadOS in split-view, but iOS itself has no
+> equivalent. The closest references are [shadcn/ui](https://ui.shadcn.com) and [forui.dev](https://forui.dev).
+> liqkit_ui ships this rendered in iOS 26 visual language (Liquid Glass surfaces, San Francisco type, iOS color
+> palette) so it composes cleanly with the rest of the library, but the interaction model itself is web-native
+> rather than iOS-canonical.
+
 import resizableHorizontalSnippet from '@/snippets/resizable/horizontal.json';
 import resizableVerticalSnippet from '@/snippets/resizable/vertical.json';
 

@@ -3,6 +3,12 @@ title: Hover Card
 description: Rich preview popover that opens on hover with a small dismiss delay.
 ---
 
+> **Cross-platform extension.** iOS 26 is touch-first and has no hover affordance — there is no system equivalent
+> for a hover-triggered preview. The closest references are [shadcn/ui](https://ui.shadcn.com) and
+> [forui.dev](https://forui.dev). liqkit_ui ships this rendered in iOS 26 visual language (Liquid Glass surfaces,
+> San Francisco type, iOS color palette) so it composes cleanly with the rest of the library on web/desktop targets,
+> but the interaction model itself is web-native rather than iOS-canonical.
+
 import hoverCardDefaultSnippet from '@/snippets/hover-card/default.json';
 import hoverCardBottomSnippet from '@/snippets/hover-card/bottom.json';
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/page_controls/liq_page_control.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// iOS 26 horizontal carousel.
 ///
@@ -61,7 +62,7 @@ final class LiqCarousel extends StatefulWidget {
   static const double indicatorGap = 12;
 
   /// Page-transition curve used by the auto-advance animator.
-  static const Curve pageCurve = Curves.easeOutCubic;
+  static const Curve pageCurve = LiqMotion.standard;
 
   /// Page-transition duration used by the auto-advance animator.
   static const Duration pageDuration = Duration(milliseconds: 320);

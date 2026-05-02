@@ -3,6 +3,12 @@ title: Kanban
 description: iOS 26 multi-column drag-and-drop board for ordering cards across status lanes.
 ---
 
+> **Cross-platform extension.** iOS 26 has no native kanban primitive — iPadOS Reminders ships a column-based view
+> but iOS itself does not. The closest references are [shadcn/ui](https://ui.shadcn.com) and
+> [forui.dev](https://forui.dev). liqkit_ui ships this rendered in iOS 26 visual language (Liquid Glass surfaces,
+> San Francisco type, iOS color palette) so it composes cleanly with the rest of the library, but the interaction
+> model itself is web-native rather than iOS-canonical.
+
 import kanbanDefaultSnippet from '@/snippets/kanban/default.json';
 import kanbanDenseSnippet from '@/snippets/kanban/dense.json';
 

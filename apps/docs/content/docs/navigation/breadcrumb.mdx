@@ -3,6 +3,11 @@ title: Breadcrumb
 description: iOS 26 navigation trail — a horizontal list of links separated by a divider showing the current page hierarchy.
 ---
 
+> **Cross-platform extension.** Native iOS 26 navigates with a stack drill-down (back-button + title), not crumb trails — there is no system equivalent for this control. The closest references are
+> [shadcn/ui](https://ui.shadcn.com) and [forui.dev](https://forui.dev). liqkit_ui ships it rendered in iOS 26 visual
+> language (Liquid Glass surfaces, San Francisco type, iOS color palette) so it composes cleanly with the rest of the
+> library, but the interaction model itself is web-native rather than iOS-canonical.
+
 import breadcrumbDefaultSnippet from '@/snippets/breadcrumb/default.json';
 import breadcrumbWithSeparatorSnippet from '@/snippets/breadcrumb/with-separator.json';
 

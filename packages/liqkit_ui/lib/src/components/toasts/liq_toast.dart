@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// Visual variant of a [LiqToast].
 enum LiqToastVariant {
@@ -192,7 +193,7 @@ final class LiqToastOverlay {
   static const Duration animationDuration = Duration(milliseconds: 240);
 
   /// Animation curve for both directions.
-  static const Curve animationCurve = Curves.easeOutCubic;
+  static const Curve animationCurve = LiqMotion.standard;
 
   /// Vertical offset applied to the toast at the start of the slide-up
   /// animation (and at the end of the dismiss animation).

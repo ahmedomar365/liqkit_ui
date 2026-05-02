@@ -3,6 +3,12 @@ title: Data Table
 description: Simple tabular display with column headers, body rows, optional row taps, and optional sortable columns.
 ---
 
+> **Cross-platform extension.** iOS 26 surfaces tabular data as grouped lists (`LiqList` / Settings-style sections),
+> not as classic header-plus-body tables — the system has no native equivalent. The closest references are
+> [shadcn/ui](https://ui.shadcn.com) and [forui.dev](https://forui.dev). liqkit_ui ships this rendered in iOS 26
+> visual language (Liquid Glass surfaces, San Francisco type, iOS color palette) so it composes cleanly with the
+> rest of the library, but the interaction model itself is web-native rather than iOS-canonical.
+
 import dataTableDefaultSnippet from '@/snippets/data-table/default.json';
 import dataTableSortableSnippet from '@/snippets/data-table/sortable.json';
 

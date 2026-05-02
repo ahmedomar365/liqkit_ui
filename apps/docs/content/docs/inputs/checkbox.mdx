@@ -3,6 +3,12 @@ title: Checkbox
 description: Tri-state iOS 26 checkbox with checked, unchecked, and indeterminate states.
 ---
 
+> **Cross-platform extension.** iOS 26 patterns this differently — Settings, Reminders and the system selection UI
+> all use tinted-circle checkmarks rendered inside list rows (see `LiqList`), not classic squares. This component
+> ships the more familiar [shadcn/ui](https://ui.shadcn.com) / [forui.dev](https://forui.dev) square checkbox for
+> cross-library parity, dressed in iOS 26 visual language (Liquid Glass surfaces, San Francisco type, iOS color
+> palette) so it composes cleanly with the rest of the library.
+
 import checkboxUncheckedSnippet from '@/snippets/checkbox/unchecked.json';
 import checkboxCheckedSnippet from '@/snippets/checkbox/checked.json';
 import checkboxIndeterminateSnippet from '@/snippets/checkbox/indeterminate.json';

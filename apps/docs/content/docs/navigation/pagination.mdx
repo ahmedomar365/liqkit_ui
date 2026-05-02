@@ -3,6 +3,12 @@ title: Pagination
 description: iOS 26 page-number selector for paged content — prev / page numbers / next, with ellipses around the current page when there are many pages.
 ---
 
+> **Cross-platform extension.** iOS 26 doesn't surface explicit page numbers — paged content uses an infinite scroll
+> with `LiqPageControl` dots instead. This control follows the
+> [shadcn/ui](https://ui.shadcn.com) and [forui.dev](https://forui.dev) page-number convention. liqkit_ui ships it
+> rendered in iOS 26 visual language (Liquid Glass surfaces, San Francisco type, iOS color palette) so it composes
+> cleanly with the rest of the library, but the interaction model itself is web-native rather than iOS-canonical.
+
 import paginationDefaultSnippet from '@/snippets/pagination/default.json';
 import paginationCompactSnippet from '@/snippets/pagination/compact.json';
 
