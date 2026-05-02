@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// Axis along which a [LiqResizable] arranges its two panes.
 enum LiqResizableDirection {
   /// Panes are arranged left-to-right with a vertical divider between
@@ -87,7 +89,7 @@ final class LiqResizable extends StatefulWidget {
   static const double gripShort = 3;
 
   /// Color tween duration for hover/active state.
-  static const Duration animationDuration = Duration(milliseconds: 120);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Stable [Key] for the divider — exposed so tests and consumers can
   /// locate it without depending on internal widget classes.

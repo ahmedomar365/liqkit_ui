@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// Tri-state value for [LiqCheckbox].
 enum LiqCheckboxState {
   /// The checkbox is empty.
@@ -61,10 +63,10 @@ final class LiqCheckbox extends StatelessWidget {
   static const Color glyphColor = Color(0xFFFFFFFF);
 
   /// Animation duration for state changes.
-  static const Duration animationDuration = Duration(milliseconds: 160);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Animation curve for state changes.
-  static const Curve animationCurve = Curves.easeOut;
+  static const Curve animationCurve = LiqMotion.snappy;
 
   LiqCheckboxState get _next {
     switch (value) {

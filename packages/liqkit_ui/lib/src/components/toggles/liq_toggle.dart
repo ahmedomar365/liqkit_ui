@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// iOS 26 toggle switch.
 ///
 /// All values sourced from liqkit's `native/components/toggles.css`:
@@ -27,8 +29,8 @@ final class LiqToggle extends StatelessWidget {
   static const Color _offBg = Color(0x4D3C3C43);
   static const Color _knob = Color(0xFFFFFFFF);
   static const Color _offRing = Color(0xFF8F9097);
-  static const Duration _animDuration = Duration(milliseconds: 200);
-  static const Curve _animCurve = Curves.easeOut;
+  static const Duration _animDuration = LiqMotion.fast;
+  static const Curve _animCurve = LiqMotion.snappy;
 
   /// Total track width (test helper).
   static double get trackWidth => _trackWidth;

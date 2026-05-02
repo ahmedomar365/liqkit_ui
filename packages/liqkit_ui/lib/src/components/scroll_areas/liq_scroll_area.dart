@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// iOS 26 themed-scrollbar scroll container.
 ///
 /// `LiqScrollArea` wraps any vertically (or horizontally) overflowing
@@ -54,7 +56,7 @@ final class LiqScrollArea extends StatefulWidget {
   static const Radius thumbRadius = Radius.circular(2);
 
   /// Opacity-fade duration when the scrollbar appears or disappears.
-  static const Duration fadeDuration = Duration(milliseconds: 200);
+  static const Duration fadeDuration = LiqMotion.fast;
 
   /// Idle delay before the thumb begins fading after scrolling stops.
   static const Duration timeToFade = Duration(milliseconds: 600);

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// One option in a [LiqToggleGroup].
 ///
 /// Each item carries an opaque [value] (used for selection state) and at
@@ -103,10 +105,10 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
   static const double iconLabelGap = 4;
 
   /// Color/shadow transition duration.
-  static const Duration animationDuration = Duration(milliseconds: 160);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Color/shadow transition curve.
-  static const Curve animationCurve = Curves.easeOut;
+  static const Curve animationCurve = LiqMotion.snappy;
 
   /// Opacity used when the entire control is disabled.
   static const double disabledOpacity = 0.4;

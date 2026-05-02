@@ -68,7 +68,7 @@ final class LiqAccordion extends StatefulWidget {
   static const Color _subtitleColor = Color(0xFF8E8E93);
   static const Color _chevronColor = Color(0xFF8E8E93);
   static const double _chevronSize = 13;
-  static const Duration _rotateDuration = Duration(milliseconds: 220);
+  static const Duration _rotateDuration = LiqMotion.fast;
   static const Duration _expandDuration = LiqMotion.normal;
   static const Curve _curve = LiqMotion.standard;
 

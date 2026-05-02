@@ -61,7 +61,7 @@ final class LiqCollapsible extends StatefulWidget {
   static const double headerHPad = 16;
 
   /// Duration of the chevron rotation animation.
-  static const Duration rotateDuration = Duration(milliseconds: 220);
+  static const Duration rotateDuration = LiqMotion.fast;
 
   /// Duration of the body expand/collapse animation.
   static const Duration expandDuration = LiqMotion.normal;

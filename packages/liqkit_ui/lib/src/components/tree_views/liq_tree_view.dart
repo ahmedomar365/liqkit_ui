@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// One node in a [LiqTreeView].
 ///
 /// A node with a non-empty [children] list is rendered as a "folder" —
@@ -113,13 +115,13 @@ final class LiqTreeView<T> extends StatefulWidget {
   static const double chevronGap = 6;
 
   /// Chevron rotation animation duration.
-  static const Duration rotateDuration = Duration(milliseconds: 220);
+  static const Duration rotateDuration = LiqMotion.fast;
 
   /// Children expansion animation duration.
-  static const Duration expandDuration = Duration(milliseconds: 280);
+  static const Duration expandDuration = LiqMotion.normal;
 
   /// Animation curve shared by both the rotation and the expansion.
-  static const Curve curve = Curves.easeOutCubic;
+  static const Curve curve = LiqMotion.standard;
 
   static const String _fontFamily = 'SF Pro Text';
   static const List<String> _fontFamilyFallback = <String>[

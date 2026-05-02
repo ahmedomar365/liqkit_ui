@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// iOS 26 selectable / dismissible tag pill.
 ///
 /// `LiqChip` is an interactive pill used for tag inputs, filter pills,
@@ -94,7 +96,7 @@ final class LiqChip extends StatelessWidget {
   static const double deleteLabelGap = 6;
 
   /// Color transition duration.
-  static const Duration animationDuration = Duration(milliseconds: 120);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Label text style.
   static const TextStyle textStyle = TextStyle(

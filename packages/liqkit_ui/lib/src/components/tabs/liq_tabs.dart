@@ -88,7 +88,7 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
   static const Color pillActiveLabelColor = Color(0xFF000000);
 
   /// Animation duration for the indicator.
-  static const Duration animationDuration = Duration(milliseconds: 220);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Animation curve for the indicator.
   static const Curve animationCurve = LiqMotion.standard;

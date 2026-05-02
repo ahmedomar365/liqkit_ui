@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// iOS 26 Liquid Glass content surface for grouping arbitrary children.
 ///
@@ -146,8 +147,8 @@ class _PressableSurfaceState extends State<_PressableSurface> {
       onTap: widget.onTap,
       child: AnimatedOpacity(
         opacity: _pressed ? 0.85 : 1,
-        duration: const Duration(milliseconds: 120),
-        curve: Curves.easeOut,
+        duration: LiqMotion.fast,
+        curve: LiqMotion.snappy,
         child: widget.child,
       ),
     );

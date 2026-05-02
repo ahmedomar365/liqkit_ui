@@ -190,7 +190,7 @@ final class LiqToastOverlay {
   LiqToastOverlay._();
 
   /// Slide-up + fade animation duration.
-  static const Duration animationDuration = Duration(milliseconds: 240);
+  static const Duration animationDuration = LiqMotion.normal;
 
   /// Animation curve for both directions.
   static const Curve animationCurve = LiqMotion.standard;

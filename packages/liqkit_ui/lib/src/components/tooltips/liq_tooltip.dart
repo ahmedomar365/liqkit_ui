@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// Preferred edge of [LiqTooltip] relative to its child.
 enum LiqTooltipPlacement {
   /// Tooltip above the child.
@@ -79,10 +81,10 @@ final class LiqTooltip extends StatefulWidget {
   static const double maxWidth = 240;
 
   /// Show/hide animation duration.
-  static const Duration animationDuration = Duration(milliseconds: 160);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Show/hide animation curve.
-  static const Curve animationCurve = Curves.easeOut;
+  static const Curve animationCurve = LiqMotion.snappy;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

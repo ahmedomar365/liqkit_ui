@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/calendars/liq_calendar.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// iOS 26 date-picker field — a 44pt-tall pill trigger that, when tapped,
 /// opens a `LiqCalendar` in a popover beneath the field.
@@ -108,7 +109,7 @@ final class LiqDatePickerField extends StatefulWidget {
   static const double disabledOpacity = 0.4;
 
   /// Popover open/close animation duration.
-  static const Duration animationDuration = Duration(milliseconds: 200);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Popover panel shadow.
   static const BoxShadow panelShadow = BoxShadow(
@@ -284,7 +285,7 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
                     child: AnimatedRotation(
                       turns: _open ? 0.5 : 0,
                       duration: LiqDatePickerField.animationDuration,
-                      curve: Curves.easeOutCubic,
+                      curve: LiqMotion.standard,
                       child: const Icon(
                         Icons.keyboard_arrow_down,
                         size: 18,
@@ -369,7 +370,7 @@ class _AnimatedPanelState extends State<_AnimatedPanel>
     );
     final curved = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeOutCubic,
+      curve: LiqMotion.standard,
     );
     _scale = Tween<double>(begin: 0.95, end: 1).animate(curved);
     _fade = Tween<double>(begin: 0, end: 1).animate(curved);

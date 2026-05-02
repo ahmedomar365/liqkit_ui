@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+
 /// iOS 26 single-select radio circle.
 ///
 /// A 22x22 ring that animates in a centered 12x12 dot when its [value]
@@ -49,10 +51,10 @@ final class LiqRadio<T> extends StatelessWidget {
   static const Color unselectedBorder = Color(0xFFC7C7CC);
 
   /// Animation duration for selection state changes.
-  static const Duration animationDuration = Duration(milliseconds: 160);
+  static const Duration animationDuration = LiqMotion.fast;
 
   /// Animation curve for selection state changes.
-  static const Curve animationCurve = Curves.easeOut;
+  static const Curve animationCurve = LiqMotion.snappy;
 
   bool get _selected => value == groupValue;
 

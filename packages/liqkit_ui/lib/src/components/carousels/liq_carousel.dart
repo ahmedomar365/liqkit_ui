@@ -65,7 +65,7 @@ final class LiqCarousel extends StatefulWidget {
   static const Curve pageCurve = LiqMotion.standard;
 
   /// Page-transition duration used by the auto-advance animator.
-  static const Duration pageDuration = Duration(milliseconds: 320);
+  static const Duration pageDuration = LiqMotion.normal;
 
   /// Default per-item rounded-corner radius applied around the child.
   static const double itemBorderRadius = 14;
