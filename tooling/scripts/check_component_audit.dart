@@ -1,6 +1,7 @@
 import 'dart:io';
 
-void main() {
+void main(List<String> args) {
+  final strict = args.contains('--strict');
   final repo = Directory.current;
   final exportsFile = File(
     '${repo.path}/packages/liqkit_ui/lib/components.dart',
@@ -53,6 +54,7 @@ void main() {
       classes.where((name) => !checklist.contains('| $name |')).toList()
         ..sort();
   final invalidStatuses = <String>[];
+  final unresolvedFixes = <String>[];
   final rows =
       checklist.split('\n').where((line) => line.startsWith('| Liq')).toList();
 
@@ -80,10 +82,15 @@ void main() {
           !status.startsWith('Pending')) {
         invalidStatuses.add('Invalid status "$status" in row: ${cells[1]}');
       }
+      if (strict && status.startsWith('Fix')) {
+        unresolvedFixes.add('${cells[1]}: $status');
+      }
     }
   }
 
-  if (missing.isNotEmpty || invalidStatuses.isNotEmpty) {
+  if (missing.isNotEmpty ||
+      invalidStatuses.isNotEmpty ||
+      unresolvedFixes.isNotEmpty) {
     if (missing.isNotEmpty) {
       stderr.writeln('Checklist missing exported classes:');
       for (final name in missing) {
@@ -96,10 +103,19 @@ void main() {
         stderr.writeln('- $problem');
       }
     }
+    if (unresolvedFixes.isNotEmpty) {
+      stderr.writeln('Strict audit has unresolved Fix statuses:');
+      for (final problem in unresolvedFixes) {
+        stderr.writeln('- $problem');
+      }
+    }
     exit(1);
   }
 
   stdout.writeln(
     'Component audit covers ${classes.length} exported Liq classes.',
   );
+  if (strict) {
+    stdout.writeln('Strict component audit has no unresolved Fix statuses.');
+  }
 }
