@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 standalone month-grid calendar.
 ///
@@ -82,7 +84,7 @@ final class LiqCalendar extends StatefulWidget {
   static const Color titleColor = Color(0xFF000000);
 
   /// Side length of each prev/next chevron tap target.
-  static const double chevronSize = 28;
+  static const double chevronSize = 44;
 
   /// Two-letter weekday labels in Sunday-first order.
   static const List<String> weekdayLabels = <String>[
@@ -213,6 +215,7 @@ class _LiqCalendarState extends State<LiqCalendar> {
   }
 
   Widget _buildHeader() {
+    final palette = _CalendarPalette.resolve(context);
     final name = LiqCalendar.monthNames[_focusedMonth.month - 1];
     final monthLabel = '$name ${_focusedMonth.year}';
     return Row(
@@ -221,7 +224,7 @@ class _LiqCalendarState extends State<LiqCalendar> {
           child: Text(
             monthLabel,
             textDirection: TextDirection.ltr,
-            style: LiqCalendar.titleTextStyle,
+            style: LiqCalendar.titleTextStyle.copyWith(color: palette.title),
           ),
         ),
         _ChevronButton(
@@ -240,6 +243,7 @@ class _LiqCalendarState extends State<LiqCalendar> {
   }
 
   Widget _buildWeekdayRow() {
+    final palette = _CalendarPalette.resolve(context);
     return Row(
       children: <Widget>[
         for (final label in LiqCalendar.weekdayLabels)
@@ -250,7 +254,9 @@ class _LiqCalendarState extends State<LiqCalendar> {
                 child: Text(
                   label,
                   textDirection: TextDirection.ltr,
-                  style: LiqCalendar.weekdayTextStyle,
+                  style: LiqCalendar.weekdayTextStyle.copyWith(
+                    color: palette.weekday,
+                  ),
                 ),
               ),
             ),
@@ -291,6 +297,7 @@ class _LiqCalendarState extends State<LiqCalendar> {
   }
 
   Widget _buildDayCell(DateTime date) {
+    final palette = _CalendarPalette.resolve(context);
     final inFocusedMonth =
         date.month == _focusedMonth.month && date.year == _focusedMonth.year;
     final isSelected = _isDateOnly(date, widget.selectedDate);
@@ -301,18 +308,18 @@ class _LiqCalendarState extends State<LiqCalendar> {
     final Color bg;
     final Color textColor;
     if (isSelected) {
-      bg = LiqCalendar.accent;
+      bg = palette.accent;
       textColor = LiqCalendar.selectedTextColor;
     } else {
       bg = const Color(0x00000000);
       if (isOutOfBounds) {
-        textColor = LiqCalendar.outOfBoundsTextColor;
+        textColor = palette.outOfBounds;
       } else if (!inFocusedMonth) {
-        textColor = LiqCalendar.outOfMonthTextColor;
+        textColor = palette.outOfMonth;
       } else if (isToday) {
-        textColor = LiqCalendar.accent;
+        textColor = palette.accent;
       } else {
-        textColor = LiqCalendar.dayTextColor;
+        textColor = palette.day;
       }
     }
 
@@ -352,10 +359,12 @@ class _LiqCalendarState extends State<LiqCalendar> {
         enabled: true,
         selected: isSelected,
         label: 'Day ${date.day}',
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _handleTap(date),
-          child: cell,
+        child: LiqPointerCursor(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => _handleTap(date),
+            child: cell,
+          ),
         ),
       ),
     );
@@ -385,19 +394,64 @@ class _ChevronButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _CalendarPalette.resolve(context);
     return Semantics(
       button: true,
       enabled: true,
       label: semanticLabel,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: SizedBox(
-          width: LiqCalendar.chevronSize,
-          height: LiqCalendar.chevronSize,
-          child: Center(child: Icon(icon, size: 18, color: LiqCalendar.accent)),
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: SizedBox(
+            width: LiqCalendar.chevronSize,
+            height: LiqCalendar.chevronSize,
+            child: Center(child: Icon(icon, size: 18, color: palette.accent)),
+          ),
         ),
       ),
     );
   }
+}
+
+class _CalendarPalette {
+  const _CalendarPalette({
+    required this.accent,
+    required this.title,
+    required this.day,
+    required this.weekday,
+    required this.outOfMonth,
+    required this.outOfBounds,
+  });
+
+  factory _CalendarPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _CalendarPalette(
+        accent: LiqCalendar.accent,
+        title: LiqCalendar.titleColor,
+        day: LiqCalendar.dayTextColor,
+        weekday: LiqCalendar.weekdayColor,
+        outOfMonth: LiqCalendar.outOfMonthTextColor,
+        outOfBounds: LiqCalendar.outOfBoundsTextColor,
+      );
+    }
+
+    final label = context.liqLabelColor;
+    final secondary = context.liqSecondaryLabelColor;
+    return _CalendarPalette(
+      accent: context.liqPrimaryColor,
+      title: label,
+      day: label,
+      weekday: secondary,
+      outOfMonth: secondary.withValues(alpha: 0.48),
+      outOfBounds: secondary.withValues(alpha: 0.24),
+    );
+  }
+
+  final Color accent;
+  final Color title;
+  final Color day;
+  final Color weekday;
+  final Color outOfMonth;
+  final Color outOfBounds;
 }

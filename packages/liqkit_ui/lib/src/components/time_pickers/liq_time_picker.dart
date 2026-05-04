@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS-26 scroll-wheel time picker.
 ///
@@ -51,16 +53,16 @@ final class LiqTimePicker extends StatefulWidget {
   final int minuteInterval;
 
   /// Per-row pixel height.
-  static const double itemExtent = 36;
+  static const double itemExtent = 44;
 
   /// Total height of the picker container.
-  static const double wheelHeight = 216;
+  static const double wheelHeight = 236;
 
   /// Wheel curvature; matches iOS 26 wheel pickers.
-  static const double diameterRatio = 1.4;
+  static const double diameterRatio = 1.72;
 
   /// Magnification of the centered row.
-  static const double magnification = 1.08;
+  static const double magnification = 1.06;
 
   /// Color of the hairline pair that frames the centered row.
   static const Color hairlineColor = Color(0x29000000);
@@ -69,7 +71,7 @@ final class LiqTimePicker extends StatefulWidget {
   static const double hairlineThickness = 0.5;
 
   /// Soft fill behind the centered row.
-  static const Color selectionFillColor = Color(0x0F000000);
+  static const Color selectionFillColor = Color(0x14767680);
 
   /// Subtle group fill behind the wheels.
   static const Color backgroundColor = Color(0x0A000000);
@@ -81,7 +83,8 @@ final class LiqTimePicker extends StatefulWidget {
   static const TextStyle textStyle = TextStyle(
     fontFamily: LiqFontFamily.display,
     fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-    fontSize: 22,
+    fontSize: 30,
+    height: 36 / 30,
     fontWeight: FontWeight.w400,
     color: textColor,
   );
@@ -129,24 +132,53 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
     final old = oldWidget.value;
     final next = widget.value;
     if (old.hour == next.hour && old.minute == next.minute) return;
-    _seedFromValue(next);
-    _hourController.jumpToItem(_hourIndex);
-    _minuteController.jumpToItem(_minuteIndex);
-    _amPmController.jumpToItem(_amPmIndex);
+
+    final desired = _indicesForValue(next);
+    final currentHour = _hourFromIndex(_hourIndex);
+    final currentMinute = _minuteFromIndex(_minuteIndex);
+    final nextMatchesCurrent =
+        next.hour == currentHour &&
+        next.minute == currentMinute &&
+        (widget.use24HourFormat || desired.amPm == _amPmIndex);
+    if (nextMatchesCurrent) return;
+
+    _hourIndex = desired.hour;
+    _minuteIndex = desired.minute;
+    _amPmIndex = desired.amPm;
+    _hourController.animateToItem(
+      _hourIndex,
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOutCubic,
+    );
+    _minuteController.animateToItem(
+      _minuteIndex,
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOutCubic,
+    );
+    _amPmController.animateToItem(
+      _amPmIndex,
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOutCubic,
+    );
   }
 
   void _seedFromValue(DateTime v) {
-    if (widget.use24HourFormat) {
-      _hourIndex = v.hour;
-      _amPmIndex = 0;
-    } else {
-      _amPmIndex = v.hour >= 12 ? 1 : 0;
-      final twelveHour = v.hour % 12;
-      _hourIndex = twelveHour;
-    }
+    final indices = _indicesForValue(v);
+    _hourIndex = indices.hour;
+    _minuteIndex = indices.minute;
+    _amPmIndex = indices.amPm;
+  }
+
+  _TimePickerIndices _indicesForValue(DateTime v) {
+    final hourIndex = widget.use24HourFormat ? v.hour : v.hour % 12;
+    final amPmIndex = widget.use24HourFormat ? 0 : (v.hour >= 12 ? 1 : 0);
     final snappedMinute =
         (v.minute ~/ widget.minuteInterval) * widget.minuteInterval;
-    _minuteIndex = snappedMinute ~/ widget.minuteInterval;
+    return _TimePickerIndices(
+      hour: hourIndex,
+      minute: snappedMinute ~/ widget.minuteInterval,
+      amPm: amPmIndex,
+    );
   }
 
   @override
@@ -209,14 +241,14 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TimePickerPalette.resolve(context);
     // Fixed per-column widths so the wheel cluster sits as a tight
     // unit (iOS style). flex/Expanded would push AM/PM far to the
     // right and leave a dead gap between minute and AM/PM.
-    const hourWidth = 64.0;
-    const minuteWidth = 64.0;
-    const colonWidth = 14.0;
-    const amPmWidth = 56.0;
-    const amPmGap = 6.0;
+    const hourWidth = 78.0;
+    const minuteWidth = 78.0;
+    const amPmWidth = 78.0;
+    const columnGap = 8.0;
 
     final children = <Widget>[
       SizedBox(
@@ -226,21 +258,12 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
           itemCount: _hourCount,
           looping: true,
           onSelectedItemChanged: _onHourChanged,
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 4),
+          alignment: Alignment.center,
+          padding: EdgeInsets.zero,
           builder: _hourLabel,
         ),
       ),
-      const SizedBox(
-        width: colonWidth,
-        child: Center(
-          child: Text(
-            ':',
-            textDirection: TextDirection.ltr,
-            style: LiqTimePicker.textStyle,
-          ),
-        ),
-      ),
+      const SizedBox(width: columnGap),
       SizedBox(
         width: minuteWidth,
         child: _Wheel(
@@ -248,13 +271,13 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
           itemCount: _minuteCount,
           looping: true,
           onSelectedItemChanged: _onMinuteChanged,
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 4),
+          alignment: Alignment.center,
+          padding: EdgeInsets.zero,
           builder: _minuteLabel,
         ),
       ),
       if (!widget.use24HourFormat) ...<Widget>[
-        const SizedBox(width: amPmGap),
+        const SizedBox(width: columnGap),
         SizedBox(
           width: amPmWidth,
           child: _Wheel(
@@ -272,9 +295,9 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
 
     final clusterWidth =
         hourWidth +
-        colonWidth +
+        columnGap +
         minuteWidth +
-        (widget.use24HourFormat ? 0 : amPmGap + amPmWidth);
+        (widget.use24HourFormat ? 0 : columnGap + amPmWidth);
 
     return ScrollConfiguration(
       behavior: const _AnyDeviceScrollBehavior(),
@@ -282,15 +305,15 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
         height: LiqTimePicker.wheelHeight,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: LiqTimePicker.backgroundColor,
+            color: palette.background,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
             child: SizedBox(
-              width: clusterWidth + 16, // 8pt breathing on each side
+              width: clusterWidth + 28,
               child: Stack(
                 children: <Widget>[
-                  const Positioned.fill(child: _SelectionBand()),
+                  Positioned.fill(child: _SelectionBand(palette: palette)),
                   Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -343,6 +366,18 @@ class _AnyDeviceScrollBehavior extends ScrollBehavior {
   };
 }
 
+final class _TimePickerIndices {
+  const _TimePickerIndices({
+    required this.hour,
+    required this.minute,
+    required this.amPm,
+  });
+
+  final int hour;
+  final int minute;
+  final int amPm;
+}
+
 /// A single wheel column. Wraps a [ListWheelScrollView] in a
 /// gradient [ShaderMask] so items above/below the centered row fade
 /// out toward the edges.
@@ -367,6 +402,7 @@ class _Wheel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TimePickerPalette.resolve(context);
     Widget itemAt(int index) {
       return Container(
         alignment: alignment,
@@ -374,7 +410,7 @@ class _Wheel extends StatelessWidget {
         child: Text(
           builder(index),
           textDirection: TextDirection.ltr,
-          style: LiqTimePicker.textStyle,
+          style: LiqTimePicker.textStyle.copyWith(color: palette.text),
         ),
       );
     }
@@ -394,31 +430,36 @@ class _Wheel extends StatelessWidget {
       controller: controller,
       itemExtent: LiqTimePicker.itemExtent,
       diameterRatio: LiqTimePicker.diameterRatio,
+      squeeze: 1.08,
       useMagnifier: true,
       magnification: LiqTimePicker.magnification,
+      overAndUnderCenterOpacity: 0.36,
       physics: const FixedExtentScrollPhysics(),
       onSelectedItemChanged: onSelectedItemChanged,
       childDelegate: childDelegate,
     );
 
-    return ShaderMask(
-      blendMode: BlendMode.dstIn,
-      shaderCallback:
-          (bounds) => const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[
-              Color(0x00000000),
-              Color(0x99000000),
-              Color(0xFF000000),
-              Color(0xFF000000),
-              Color(0x99000000),
-              Color(0x00000000),
-            ],
-            // ignore: prefer_int_literals — Flutter's LinearGradient stops are doubles.
-            stops: <double>[0, 0.18, 0.36, 0.64, 0.82, 1],
-          ).createShader(bounds),
-      child: wheel,
+    return LiqPointerCursor(
+      cursor: SystemMouseCursors.resizeUpDown,
+      child: ShaderMask(
+        blendMode: BlendMode.dstIn,
+        shaderCallback:
+            (bounds) => const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color(0x00000000),
+                Color(0x73000000),
+                Color(0xFF000000),
+                Color(0xFF000000),
+                Color(0x73000000),
+                Color(0x00000000),
+              ],
+              // ignore: prefer_int_literals — Flutter's LinearGradient stops are doubles.
+              stops: <double>[0, 0.22, 0.39, 0.61, 0.78, 1],
+            ).createShader(bounds),
+        child: wheel,
+      ),
     );
   }
 }
@@ -426,7 +467,9 @@ class _Wheel extends StatelessWidget {
 /// The horizontal soft-fill band + two hairlines that frame the
 /// centered row. Sits behind the wheels via a [Stack].
 class _SelectionBand extends StatelessWidget {
-  const _SelectionBand();
+  const _SelectionBand({required this.palette});
+
+  final _TimePickerPalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -437,11 +480,11 @@ class _SelectionBand extends StatelessWidget {
           child: Container(
             height: LiqTimePicker.itemExtent * LiqTimePicker.magnification,
             decoration: BoxDecoration(
-              color: LiqTimePicker.selectionFillColor,
+              color: palette.selectionFill,
               borderRadius: BorderRadius.circular(8),
-              border: const Border.symmetric(
+              border: Border.symmetric(
                 horizontal: BorderSide(
-                  color: LiqTimePicker.hairlineColor,
+                  color: palette.hairline,
                   width: LiqTimePicker.hairlineThickness,
                 ),
               ),
@@ -451,4 +494,37 @@ class _SelectionBand extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _TimePickerPalette {
+  const _TimePickerPalette({
+    required this.background,
+    required this.selectionFill,
+    required this.hairline,
+    required this.text,
+  });
+
+  factory _TimePickerPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _TimePickerPalette(
+        background: LiqTimePicker.backgroundColor,
+        selectionFill: LiqTimePicker.selectionFillColor,
+        hairline: LiqTimePicker.hairlineColor,
+        text: LiqTimePicker.textColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _TimePickerPalette(
+      background: secondary.withValues(alpha: 0.10),
+      selectionFill: secondary.withValues(alpha: 0.14),
+      hairline: secondary.withValues(alpha: 0.18),
+      text: context.liqLabelColor,
+    );
+  }
+
+  final Color background;
+  final Color selectionFill;
+  final Color hairline;
+  final Color text;
 }

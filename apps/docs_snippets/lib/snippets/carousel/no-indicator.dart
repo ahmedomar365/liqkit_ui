@@ -1,4 +1,5 @@
 // ignore_for_file: file_names // hyphenated name required by snippet manifest convention
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -25,16 +26,10 @@ const List<Widget> _items = <Widget>[
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget carouselNoIndicatorBuilder(BuildContext context) {
-  return Align(
-    heightFactor: 1,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: SizedBox(
-        width: 360,
-        // {@highlight}
-        child: LiqCarousel(height: 180, showIndicator: false, items: _items),
-        // {@endhighlight}
-      ),
-    ),
+  return SnippetFrame(
+    maxWidth: 360,
+    // {@highlight}
+    child: LiqCarousel(height: 180, showIndicator: false, items: _items),
+    // {@endhighlight}
   );
 }

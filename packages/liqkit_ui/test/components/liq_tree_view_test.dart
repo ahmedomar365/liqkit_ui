@@ -165,5 +165,30 @@ void main() {
       final padding = container.padding! as EdgeInsets;
       expect(padding.left, 16 * 2 + 12);
     });
+
+    testWidgets('uses dark theme colors for labels and selected row', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: LiqTreeView<String>(nodes: sample, selectedId: 'foo'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final label = tester.widget<Text>(find.text('foo'));
+      expect(label.style?.color, const Color(0xFFFFFFFF));
+
+      final container = tester.widget<Container>(
+        find
+            .ancestor(of: find.text('foo'), matching: find.byType(Container))
+            .first,
+      );
+      expect(container.color, const Color(0xB2EBEBF5).withValues(alpha: 0.14));
+    });
   });
 }

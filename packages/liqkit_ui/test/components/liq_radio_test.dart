@@ -87,6 +87,31 @@ void main() {
       expect(size.width, LiqRadio.ringSize);
       expect(size.height, LiqRadio.ringSize);
     });
+
+    testWidgets('uses dark theme colors for unselected ring', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqRadio<String>(
+                value: 'a',
+                groupValue: 'b',
+                onChanged: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final ring = tester.widget<Container>(
+        visibleRing(find.byType(LiqRadio<String>)),
+      );
+      final decoration = ring.decoration! as BoxDecoration;
+      expect(decoration.color, const Color(0xFF000000));
+    });
   });
 
   group('LiqRadioGroup', () {
@@ -144,6 +169,31 @@ void main() {
       await tester.tap(find.text('Charlie'));
       await tester.pumpAndSettle();
       expect(received, 'c');
+    });
+
+    testWidgets('uses dark theme color for row labels', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: SizedBox(
+                width: 320,
+                child: LiqRadioGroup<String>(
+                  options: options,
+                  value: 'a',
+                  onChanged: (_) {},
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final label = tester.widget<Text>(find.text('Alpha'));
+      expect(label.style?.color, const Color(0xFFFFFFFF));
     });
   });
 }

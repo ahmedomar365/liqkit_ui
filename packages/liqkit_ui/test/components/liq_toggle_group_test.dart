@@ -151,6 +151,39 @@ void main() {
       expect(find.byIcon(Icons.format_bold), findsOneWidget);
     });
 
+    testWidgets('uses dark theme colors for active and inactive labels', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqToggleGroup<String>(
+                selected: const <String>{'a'},
+                onChanged: (_) {},
+                items: const <LiqToggleGroupItem<String>>[
+                  LiqToggleGroupItem(value: 'a', label: 'Alpha'),
+                  LiqToggleGroupItem(value: 'b', label: 'Beta'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump(LiqToggleGroup.animationDuration);
+
+      expect(
+        tester.widget<Text>(find.text('Alpha')).style?.color,
+        const Color(0xFFFFFFFF),
+      );
+      expect(
+        tester.widget<Text>(find.text('Beta')).style?.color,
+        const Color(0xB2EBEBF5),
+      );
+    });
+
     test('asserts when an item has both label AND icon null', () {
       expect(
         () => LiqToggleGroupItem<String>(value: 'x'),

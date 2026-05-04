@@ -1,17 +1,20 @@
 // ignore_for_file: file_names // hyphenated name required by snippet manifest convention
 
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget tooltipWithArrowBuilder(BuildContext context) {
-  return Align(
-    heightFactor: 1,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+  return SnippetFrame(
+    maxWidth: 360,
+    height: 260,
+    child: Stack(
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Positioned(
+          top: 124,
+          child:
           // {@highlight}
           LiqTooltip(
             message:
@@ -20,19 +23,15 @@ Widget tooltipWithArrowBuilder(BuildContext context) {
             child: LiqButton(label: 'New', onPressed: () {}),
           ),
           // {@endhighlight}
-          const SizedBox(height: 12),
-          const Text(
+        ),
+        const Positioned(
+          bottom: 24,
+          child: SnippetLabel(
             'Long-press or hover to reveal the tooltip.',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontFamily: 'SF Pro Text',
-              fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-              color: Color(0xFF8E8E93),
-              fontSize: 13,
-            ),
+            fontSize: 13,
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Immutable hour/minute pair consumed by [LiqTimeField].
 ///
@@ -327,12 +328,10 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TimeFieldPalette.resolve(context);
     final disabled = widget.onChanged == null;
     final hasFocus = _focusNode.hasFocus;
-    final borderColor =
-        hasFocus
-            ? LiqTimeField.activeBorderColor
-            : LiqTimeField.inactiveBorderColor;
+    final borderColor = hasFocus ? palette.activeBorder : palette.border;
     final borderWidth =
         hasFocus
             ? LiqTimeField.activeBorderWidth
@@ -349,13 +348,13 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
         horizontal: LiqTimeField.horizontalPadding,
       ),
       decoration: BoxDecoration(
-        color: LiqTimeField.backgroundColor,
+        color: palette.background,
         borderRadius: BorderRadius.circular(LiqTimeField.fieldRadius),
         border: Border.all(color: borderColor, width: borderWidth),
       ),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _focusNode.requestFocus,
+      child: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown: disabled ? null : (_) => _focusNode.requestFocus(),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -371,7 +370,7 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
                       return Text(
                         _placeholder,
                         style: LiqTimeField.textStyle.copyWith(
-                          color: LiqTimeField.placeholderColor,
+                          color: palette.placeholder,
                         ),
                         maxLines: 1,
                         textAlign: TextAlign.center,
@@ -382,10 +381,10 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
                   EditableText(
                     controller: _controller,
                     focusNode: _focusNode,
-                    style: LiqTimeField.textStyle,
-                    cursorColor: LiqTimeField.activeBorderColor,
-                    backgroundCursorColor: LiqTimeField.placeholderColor,
-                    selectionColor: LiqTimeField.activeBorderColor.withValues(
+                    style: LiqTimeField.textStyle.copyWith(color: palette.text),
+                    cursorColor: palette.activeBorder,
+                    backgroundCursorColor: palette.placeholder,
+                    selectionColor: palette.activeBorder.withValues(
                       alpha: 0.25,
                     ),
                     keyboardType: TextInputType.datetime,
@@ -431,24 +430,45 @@ class _PeriodSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: LiqTimeField.segmentHeight,
-      decoration: BoxDecoration(
-        color: LiqTimeField.segmentBackgroundColor,
-        borderRadius: BorderRadius.circular(LiqTimeField.segmentRadius),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+    final palette = _TimeFieldPalette.resolve(context);
+    return SizedBox(
+      height: LiqTimeField.fieldHeight,
+      child: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
-          _PeriodCell(
-            label: 'AM',
-            isActive: period == _Period.am,
-            onTap: period == _Period.am ? null : onToggle,
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                width:
+                    2 *
+                    ((LiqTimeField.segmentHorizontalPadding * 2) +
+                        _periodCellLabelWidth),
+                height: LiqTimeField.segmentHeight,
+                decoration: BoxDecoration(
+                  color: palette.segmentBackground,
+                  borderRadius: BorderRadius.circular(
+                    LiqTimeField.segmentRadius,
+                  ),
+                ),
+              ),
+            ),
           ),
-          _PeriodCell(
-            label: 'PM',
-            isActive: period == _Period.pm,
-            onTap: period == _Period.pm ? null : onToggle,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _PeriodCell(
+                label: 'AM',
+                isActive: period == _Period.am,
+                onTap: period == _Period.am ? null : onToggle,
+                palette: palette,
+              ),
+              _PeriodCell(
+                label: 'PM',
+                isActive: period == _Period.pm,
+                onTap: period == _Period.pm ? null : onToggle,
+                palette: palette,
+              ),
+            ],
           ),
         ],
       ),
@@ -461,44 +481,101 @@ class _PeriodCell extends StatelessWidget {
     required this.label,
     required this.isActive,
     required this.onTap,
+    required this.palette,
   });
 
   final String label;
   final bool isActive;
   final VoidCallback? onTap;
+  final _TimeFieldPalette palette;
 
   @override
   Widget build(BuildContext context) {
-    const activeBg = LiqTimeField.backgroundColor;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
-      child: Container(
-        height: LiqTimeField.segmentHeight,
-        padding: const EdgeInsets.symmetric(
-          horizontal: LiqTimeField.segmentHorizontalPadding,
-        ),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isActive ? activeBg : const Color(0x00000000),
-          borderRadius: BorderRadius.circular(LiqTimeField.segmentRadius),
-          boxShadow:
-              isActive
-                  ? const <BoxShadow>[LiqTimeField.activeSegmentShadow]
-                  : null,
-        ),
-        child: Text(
-          label,
-          style: LiqTimeField.segmentTextStyle.copyWith(
-            color:
-                isActive
-                    ? LiqTimeField.textColor
-                    : LiqTimeField.segmentInactiveColor,
+      child: SizedBox(
+        height: LiqTimeField.fieldHeight,
+        width:
+            (LiqTimeField.segmentHorizontalPadding * 2) + _periodCellLabelWidth,
+        child: Center(
+          child: Container(
+            height: LiqTimeField.segmentHeight,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color:
+                  isActive
+                      ? palette.segmentActiveBackground
+                      : const Color(0x00000000),
+              borderRadius: BorderRadius.circular(LiqTimeField.segmentRadius),
+              boxShadow:
+                  isActive
+                      ? const <BoxShadow>[LiqTimeField.activeSegmentShadow]
+                      : null,
+            ),
+            child: Text(
+              label,
+              style: LiqTimeField.segmentTextStyle.copyWith(
+                color: isActive ? palette.text : palette.segmentInactive,
+              ),
+              maxLines: 1,
+              textDirection: TextDirection.ltr,
+            ),
           ),
-          maxLines: 1,
-          textDirection: TextDirection.ltr,
         ),
       ),
     );
   }
+}
+
+const double _periodCellLabelWidth = 22;
+
+final class _TimeFieldPalette {
+  const _TimeFieldPalette({
+    required this.background,
+    required this.text,
+    required this.placeholder,
+    required this.border,
+    required this.activeBorder,
+    required this.segmentBackground,
+    required this.segmentActiveBackground,
+    required this.segmentInactive,
+  });
+
+  factory _TimeFieldPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _TimeFieldPalette(
+        background: LiqTimeField.backgroundColor,
+        text: LiqTimeField.textColor,
+        placeholder: LiqTimeField.placeholderColor,
+        border: LiqTimeField.inactiveBorderColor,
+        activeBorder: LiqTimeField.activeBorderColor,
+        segmentBackground: LiqTimeField.segmentBackgroundColor,
+        segmentActiveBackground: LiqTimeField.backgroundColor,
+        segmentInactive: LiqTimeField.segmentInactiveColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _TimeFieldPalette(
+      background: context.liqSurfaceColor,
+      text: context.liqLabelColor,
+      placeholder: secondary.withValues(alpha: 0.48),
+      border: secondary.withValues(alpha: 0.24),
+      activeBorder: context.liqPrimaryColor,
+      segmentBackground: secondary.withValues(alpha: 0.16),
+      segmentActiveBackground:
+          context.liqIsDark ? const Color(0xFF1C1C1E) : context.liqSurfaceColor,
+      segmentInactive: secondary,
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color placeholder;
+  final Color border;
+  final Color activeBorder;
+  final Color segmentBackground;
+  final Color segmentActiveBackground;
+  final Color segmentInactive;
 }

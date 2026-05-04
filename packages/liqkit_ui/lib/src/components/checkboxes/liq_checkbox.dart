@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Tri-state value for [LiqCheckbox].
 enum LiqCheckboxState {
@@ -85,17 +87,20 @@ final class LiqCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _CheckboxPalette.resolve(context);
     final disabled = onChanged == null;
 
     final Widget glyph;
     switch (value) {
       case LiqCheckboxState.checked:
-        glyph = const _CheckGlyph(
-          key: ValueKey<LiqCheckboxState>(LiqCheckboxState.checked),
+        glyph = _CheckGlyph(
+          key: const ValueKey<LiqCheckboxState>(LiqCheckboxState.checked),
+          color: palette.glyph,
         );
       case LiqCheckboxState.indeterminate:
-        glyph = const _IndeterminateGlyph(
-          key: ValueKey<LiqCheckboxState>(LiqCheckboxState.indeterminate),
+        glyph = _IndeterminateGlyph(
+          key: const ValueKey<LiqCheckboxState>(LiqCheckboxState.indeterminate),
+          color: palette.glyph,
         );
       case LiqCheckboxState.unchecked:
         glyph = const SizedBox.shrink(
@@ -109,12 +114,15 @@ final class LiqCheckbox extends StatelessWidget {
       width: boxSize,
       height: boxSize,
       decoration: BoxDecoration(
-        color: _filled ? filledColor : uncheckedBackground,
+        color: _filled ? palette.filled : palette.uncheckedBackground,
         borderRadius: const BorderRadius.all(Radius.circular(cornerRadius)),
         border:
             _filled
                 ? null
-                : Border.all(color: uncheckedBorder, width: borderWidth),
+                : Border.all(
+                  color: palette.uncheckedBorder,
+                  width: borderWidth,
+                ),
       ),
       child: Center(
         child: AnimatedSwitcher(
@@ -131,14 +139,17 @@ final class LiqCheckbox extends StatelessWidget {
       mixed: value == LiqCheckboxState.indeterminate,
       enabled: !disabled,
       label: 'checkbox',
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: disabled ? null : () => onChanged!(_next),
-        child: SizedBox(
-          width: hitSize,
-          height: hitSize,
-          child: Center(
-            child: Opacity(opacity: disabled ? 0.4 : 1, child: box),
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: disabled ? null : () => onChanged!(_next),
+          child: SizedBox(
+            width: hitSize,
+            height: hitSize,
+            child: Center(
+              child: Opacity(opacity: disabled ? 0.4 : 1, child: box),
+            ),
           ),
         ),
       ),
@@ -162,26 +173,30 @@ final class LiqCheckbox extends StatelessWidget {
 }
 
 class _CheckGlyph extends StatelessWidget {
-  const _CheckGlyph({super.key});
+  const _CheckGlyph({required this.color, super.key});
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: LiqCheckbox.boxSize,
       height: LiqCheckbox.boxSize,
-      child: CustomPaint(painter: _CheckPainter()),
+      child: CustomPaint(painter: _CheckPainter(color)),
     );
   }
 }
 
 class _CheckPainter extends CustomPainter {
-  const _CheckPainter();
+  const _CheckPainter(this.color);
+
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint =
         Paint()
-          ..color = LiqCheckbox.glyphColor
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..strokeCap = StrokeCap.round
@@ -202,21 +217,55 @@ class _CheckPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_CheckPainter oldDelegate) => false;
+  bool shouldRepaint(_CheckPainter oldDelegate) => color != oldDelegate.color;
 }
 
 class _IndeterminateGlyph extends StatelessWidget {
-  const _IndeterminateGlyph({super.key});
+  const _IndeterminateGlyph({required this.color, super.key});
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 12,
       height: 2,
-      decoration: const BoxDecoration(
-        color: LiqCheckbox.glyphColor,
-        borderRadius: BorderRadius.all(Radius.circular(1)),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: const BorderRadius.all(Radius.circular(1)),
       ),
     );
   }
+}
+
+final class _CheckboxPalette {
+  const _CheckboxPalette({
+    required this.filled,
+    required this.uncheckedBackground,
+    required this.uncheckedBorder,
+    required this.glyph,
+  });
+
+  factory _CheckboxPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _CheckboxPalette(
+        filled: LiqCheckbox.filledColor,
+        uncheckedBackground: LiqCheckbox.uncheckedBackground,
+        uncheckedBorder: LiqCheckbox.uncheckedBorder,
+        glyph: LiqCheckbox.glyphColor,
+      );
+    }
+
+    return _CheckboxPalette(
+      filled: context.liqPrimaryColor,
+      uncheckedBackground: context.liqSurfaceColor,
+      uncheckedBorder: context.liqSecondaryLabelColor.withValues(alpha: 0.36),
+      glyph: LiqCheckbox.glyphColor,
+    );
+  }
+
+  final Color filled;
+  final Color uncheckedBackground;
+  final Color uncheckedBorder;
+  final Color glyph;
 }

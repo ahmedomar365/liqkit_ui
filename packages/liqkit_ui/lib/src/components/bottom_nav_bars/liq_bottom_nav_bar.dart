@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One tab in [LiqBottomNavBar].
 ///
@@ -84,6 +85,7 @@ final class LiqBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _BottomNavPalette.resolve(context);
     final disabled = onChanged == null;
     final bottomInset = MediaQuery.maybeOf(context)?.padding.bottom ?? 0;
 
@@ -94,17 +96,24 @@ final class LiqBottomNavBar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             height: hairlineThickness,
             width: double.infinity,
-            child: ColoredBox(color: hairlineColor),
+            child: ColoredBox(color: palette.hairline),
           ),
           SizedBox(
             height: contentHeight,
             child: Row(
               children: <Widget>[
                 for (var i = 0; i < items.length; i++)
-                  Expanded(child: _buildTab(context, i, disabled: disabled)),
+                  Expanded(
+                    child: _buildTab(
+                      context,
+                      i,
+                      disabled: disabled,
+                      palette: palette,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -118,10 +127,15 @@ final class LiqBottomNavBar extends StatelessWidget {
     return bar;
   }
 
-  Widget _buildTab(BuildContext context, int index, {required bool disabled}) {
+  Widget _buildTab(
+    BuildContext context,
+    int index, {
+    required bool disabled,
+    required _BottomNavPalette palette,
+  }) {
     final item = items[index];
     final isActive = index == currentIndex;
-    final color = isActive ? activeColor : inactiveColor;
+    final color = isActive ? palette.active : palette.inactive;
 
     return Semantics(
       button: true,
@@ -173,4 +187,33 @@ final class LiqBottomNavBar extends StatelessWidget {
         ),
       );
   }
+}
+
+final class _BottomNavPalette {
+  const _BottomNavPalette({
+    required this.active,
+    required this.inactive,
+    required this.hairline,
+  });
+
+  factory _BottomNavPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _BottomNavPalette(
+        active: LiqBottomNavBar.activeColor,
+        inactive: LiqBottomNavBar.inactiveColor,
+        hairline: LiqBottomNavBar.hairlineColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _BottomNavPalette(
+      active: context.liqPrimaryColor,
+      inactive: secondary,
+      hairline: secondary.withValues(alpha: 0.18),
+    );
+  }
+
+  final Color active;
+  final Color inactive;
+  final Color hairline;
 }

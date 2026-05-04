@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 multi-line text input.
 ///
@@ -225,11 +226,9 @@ class _LiqTextareaState extends State<LiqTextarea> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TextareaPalette.resolve(context);
     final hasFocus = _focusNode.hasFocus;
-    final borderColor =
-        hasFocus
-            ? LiqTextarea.activeBorderColor
-            : LiqTextarea.inactiveBorderColor;
+    final borderColor = hasFocus ? palette.activeBorder : palette.border;
     final borderWidth =
         hasFocus
             ? LiqTextarea.activeBorderWidth
@@ -251,7 +250,7 @@ class _LiqTextareaState extends State<LiqTextarea> {
               child: Text(
                 widget.placeholder!,
                 style: LiqTextarea.textStyle.copyWith(
-                  color: LiqTextarea.placeholderColor,
+                  color: palette.placeholder,
                 ),
                 maxLines: widget.maxLines,
                 textDirection: TextDirection.ltr,
@@ -262,10 +261,10 @@ class _LiqTextareaState extends State<LiqTextarea> {
           controller: _controller,
           focusNode: _focusNode,
           autofocus: widget.autofocus,
-          style: LiqTextarea.textStyle,
-          cursorColor: LiqTextarea.cursorColor,
-          backgroundCursorColor: LiqTextarea.placeholderColor,
-          selectionColor: LiqTextarea.selectionColor,
+          style: LiqTextarea.textStyle.copyWith(color: palette.text),
+          cursorColor: palette.activeBorder,
+          backgroundCursorColor: palette.placeholder,
+          selectionColor: palette.activeBorder.withValues(alpha: 0.25),
           minLines: widget.minLines,
           maxLines: widget.maxLines,
           inputFormatters: inputFormatters,
@@ -286,10 +285,7 @@ class _LiqTextareaState extends State<LiqTextarea> {
           child: Text(
             '$length / ${widget.maxLength}',
             style: LiqTextarea.counterTextStyle.copyWith(
-              color:
-                  overLimit
-                      ? LiqTextarea.counterOverColor
-                      : LiqTextarea.counterColor,
+              color: overLimit ? LiqTextarea.counterOverColor : palette.counter,
             ),
             textDirection: TextDirection.ltr,
           ),
@@ -299,14 +295,14 @@ class _LiqTextareaState extends State<LiqTextarea> {
 
     final field = Container(
       decoration: BoxDecoration(
-        color: LiqTextarea.backgroundColor,
+        color: palette.background,
         borderRadius: BorderRadius.circular(LiqTextarea.fieldRadius),
         border: Border.all(color: borderColor, width: borderWidth),
       ),
       padding: LiqTextarea.contentPadding,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _focusNode.requestFocus,
+      child: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown: (_) => _focusNode.requestFocus(),
         child: editor,
       ),
     );
@@ -322,4 +318,46 @@ class _LiqTextareaState extends State<LiqTextarea> {
       ),
     );
   }
+}
+
+final class _TextareaPalette {
+  const _TextareaPalette({
+    required this.background,
+    required this.text,
+    required this.placeholder,
+    required this.border,
+    required this.activeBorder,
+    required this.counter,
+  });
+
+  factory _TextareaPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _TextareaPalette(
+        background: LiqTextarea.backgroundColor,
+        text: LiqTextarea.textColor,
+        placeholder: LiqTextarea.placeholderColor,
+        border: LiqTextarea.inactiveBorderColor,
+        activeBorder: LiqTextarea.activeBorderColor,
+        counter: LiqTextarea.counterColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+
+    return _TextareaPalette(
+      background: context.liqSurfaceColor,
+      text: context.liqLabelColor,
+      placeholder: secondary.withValues(alpha: 0.48),
+      border: secondary.withValues(alpha: 0.24),
+      activeBorder: context.liqPrimaryColor,
+      counter: secondary,
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color placeholder;
+  final Color border;
+  final Color activeBorder;
+  final Color counter;
 }

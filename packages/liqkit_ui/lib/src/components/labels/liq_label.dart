@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 form-field caption.
 ///
 /// A small, semibold, slightly tinted line of text rendered above an
@@ -42,6 +44,9 @@ final class LiqLabel extends StatelessWidget with Diagnosticable {
   /// Color of the required asterisk.
   static const Color requiredColor = Color(0xFFFF3B30);
 
+  /// Color of the required asterisk in dark theme.
+  static const Color darkRequiredColor = Color(0xFFFF453A);
+
   /// Style of the muted " (optional)" suffix.
   static const TextStyle optionalSuffixStyle = TextStyle(
     fontFamily: 'SF Pro Text',
@@ -59,18 +64,29 @@ final class LiqLabel extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final labelColor = context.liqLabelColor;
+    final secondaryColor =
+        context.liqHasTheme
+            ? context.liqSecondaryLabelColor
+            : optionalSuffixStyle.color;
+    final isDark = context.liqIsDark;
     return Text.rich(
       TextSpan(
-        style: defaultTextStyle,
+        style: defaultTextStyle.copyWith(color: labelColor),
         children: <InlineSpan>[
           TextSpan(text: text),
           if (required)
-            const TextSpan(
+            TextSpan(
               text: requiredSuffix,
-              style: TextStyle(color: requiredColor),
+              style: TextStyle(
+                color: isDark ? darkRequiredColor : requiredColor,
+              ),
             ),
           if (optional)
-            const TextSpan(text: optionalSuffix, style: optionalSuffixStyle),
+            TextSpan(
+              text: optionalSuffix,
+              style: optionalSuffixStyle.copyWith(color: secondaryColor),
+            ),
         ],
       ),
       textDirection: TextDirection.ltr,
@@ -163,6 +179,12 @@ final class LiqFormField extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final helperColor =
+        context.liqHasTheme
+            ? context.liqSecondaryLabelColor
+            : helperTextStyle.color;
+    final errorColor =
+        context.liqIsDark ? LiqLabel.darkRequiredColor : errorTextStyle.color;
     final hasTrailing = errorText != null || helperText != null;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -176,13 +198,13 @@ final class LiqFormField extends StatelessWidget with Diagnosticable {
           if (errorText != null)
             Text(
               errorText!,
-              style: errorTextStyle,
+              style: errorTextStyle.copyWith(color: errorColor),
               textDirection: TextDirection.ltr,
             )
           else
             Text(
               helperText!,
-              style: helperTextStyle,
+              style: helperTextStyle.copyWith(color: helperColor),
               textDirection: TextDirection.ltr,
             ),
         ],

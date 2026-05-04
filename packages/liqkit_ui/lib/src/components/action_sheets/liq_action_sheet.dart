@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/alerts/liq_alert.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 action sheet — bottom-anchored stack of full-width actions.
 ///
@@ -35,8 +37,11 @@ final class LiqActionSheet extends StatelessWidget {
   final LiqAlertAction? cancelAction;
 
   static const Color _surfaceFill = Color(0x99F5F5F5);
+  static const Color _surfaceFillDark = Color(0xCC1C1C1E);
   static const Color _innerScrim = Color(0x14000000);
+  static const Color _innerScrimDark = Color(0x24FFFFFF);
   static const Color _cancelBg = Color(0xCCFFFFFF);
+  static const Color _cancelBgDark = Color(0xE62C2C2E);
   static const Color _cancelFg = Color(0xFF0088FF);
   static const double _surfaceWidth = 300;
   static const double _surfaceRadius = 34;
@@ -44,6 +49,9 @@ final class LiqActionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(actions.isNotEmpty, 'LiqActionSheet requires at least one action.');
+    final isDark = context.liqIsDark;
+    final titleColor =
+        isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -55,8 +63,16 @@ final class LiqActionSheet extends StatelessWidget {
             ),
             child: Stack(
               children: <Widget>[
-                const Positioned.fill(child: ColoredBox(color: _innerScrim)),
-                const Positioned.fill(child: ColoredBox(color: _surfaceFill)),
+                Positioned.fill(
+                  child: ColoredBox(
+                    color: isDark ? _innerScrimDark : _innerScrim,
+                  ),
+                ),
+                Positioned.fill(
+                  child: ColoredBox(
+                    color: isDark ? _surfaceFillDark : _surfaceFill,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(14),
                   child: Column(
@@ -72,9 +88,9 @@ final class LiqActionSheet extends StatelessWidget {
                                 Text(
                                   title!,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontFamily: 'SF Pro Text',
-                                    fontFamilyFallback: <String>[
+                                    fontFamilyFallback: const <String>[
                                       'SF Pro',
                                       'sans-serif',
                                     ],
@@ -82,7 +98,7 @@ final class LiqActionSheet extends StatelessWidget {
                                     height: 22 / 17,
                                     letterSpacing: -0.43,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF000000),
+                                    color: titleColor,
                                   ),
                                   textDirection: TextDirection.ltr,
                                 ),
@@ -92,9 +108,9 @@ final class LiqActionSheet extends StatelessWidget {
                                 Text(
                                   description!,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontFamily: 'SF Pro Text',
-                                    fontFamilyFallback: <String>[
+                                    fontFamilyFallback: const <String>[
                                       'SF Pro',
                                       'sans-serif',
                                     ],
@@ -102,7 +118,7 @@ final class LiqActionSheet extends StatelessWidget {
                                     height: 22 / 17,
                                     letterSpacing: -0.43,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xFF000000),
+                                    color: titleColor,
                                   ),
                                   textDirection: TextDirection.ltr,
                                 ),
@@ -134,7 +150,7 @@ final class LiqActionSheet extends StatelessWidget {
                 Radius.circular(_surfaceRadius),
               ),
               child: ColoredBox(
-                color: _cancelBg,
+                color: isDark ? _cancelBgDark : _cancelBg,
                 child: Padding(
                   padding: const EdgeInsets.all(14),
                   child: _ActionButton(
@@ -180,49 +196,59 @@ class _ActionButton extends StatelessWidget {
   final Color? fgOverride;
 
   static const Color _bg = Color(0x29787880);
+  static const Color _bgDark = Color(0x33767680);
   static const Color _filledBg = Color(0xFF0088FF);
   static const Color _filledFg = Color(0xFFFFFFFF);
   static const Color _destructiveFg = Color(0xFFFF383C);
   static const Color _regularFg = Color(0xFF000000);
+  static const Color _regularFgDark = Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
     final isFilled = action.style == LiqAlertActionStyle.filled;
     final isDestructive = action.style == LiqAlertActionStyle.destructive;
     final disabled = action.onPressed == null;
+    final isDark = context.liqIsDark;
     final fg =
         fgOverride ??
-        (isFilled ? _filledFg : (isDestructive ? _destructiveFg : _regularFg));
-    final bg = isFilled ? _filledBg : _bg;
+        (isFilled
+            ? _filledFg
+            : (isDestructive
+                ? _destructiveFg
+                : (isDark ? _regularFgDark : _regularFg)));
+    final bg = isFilled ? _filledBg : (isDark ? _bgDark : _bg);
     return Semantics(
       button: true,
       enabled: !disabled,
       label: action.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: action.onPressed,
-        child: Opacity(
-          opacity: disabled ? 0.5 : 1,
-          child: Container(
-            height: 48,
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: const BorderRadius.all(Radius.circular(100)),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              action.label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                fontFamily: 'SF Pro Text',
-                fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                fontSize: 17,
-                height: 22 / 17,
-                letterSpacing: -0.43,
-                fontWeight: boldOverride ? FontWeight.w600 : FontWeight.w500,
-                color: fg,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: action.onPressed,
+          child: Opacity(
+            opacity: disabled ? 0.5 : 1,
+            child: Container(
+              height: 48,
+              decoration: BoxDecoration(
+                color: bg,
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                action.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textDirection: TextDirection.ltr,
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+                  fontSize: 17,
+                  height: 22 / 17,
+                  letterSpacing: -0.43,
+                  fontWeight: boldOverride ? FontWeight.w600 : FontWeight.w500,
+                  color: fg,
+                ),
               ),
             ),
           ),

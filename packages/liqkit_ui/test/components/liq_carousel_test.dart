@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -54,6 +55,30 @@ void main() {
 
       expect(controller.page!.round(), greaterThan(0));
       expect(find.text('Slide 2'), findsOneWidget);
+    });
+
+    testWidgets('admits mouse and trackpad drag on web and desktop', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          Center(
+            child: SizedBox(width: 360, child: LiqCarousel(items: _slides())),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final config = tester.widget<ScrollConfiguration>(
+        find.ancestor(
+          of: find.byType(PageView),
+          matching: find.byType(ScrollConfiguration),
+        ),
+      );
+
+      expect(config.behavior.dragDevices, contains(PointerDeviceKind.mouse));
+      expect(config.behavior.dragDevices, contains(PointerDeviceKind.trackpad));
+      expect(config.behavior.dragDevices, contains(PointerDeviceKind.touch));
     });
 
     testWidgets('showIndicator: false hides the LiqPageControl', (

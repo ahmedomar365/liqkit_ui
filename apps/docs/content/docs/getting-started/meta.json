@@ -4,7 +4,6 @@
   "pages": [
     "overview",
     "installation",
-    "theming",
-    "migrating-from-liqkit"
+    "theming"
   ]
 }

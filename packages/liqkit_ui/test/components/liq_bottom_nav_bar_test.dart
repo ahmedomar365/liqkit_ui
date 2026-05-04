@@ -17,6 +17,9 @@ Widget _wrap(Widget child) => Directionality(
   ),
 );
 
+Widget _wrapDark(Widget child) =>
+    LiqTheme(data: LiqThemeData.dark, child: _wrap(child));
+
 void main() {
   group('LiqBottomNavBar', () {
     testWidgets('renders every item label', (tester) async {
@@ -74,6 +77,35 @@ void main() {
 
       final inactiveLabel = tester.widget<Text>(find.text('Home'));
       expect(inactiveLabel.style?.color, LiqBottomNavBar.inactiveColor);
+    });
+
+    testWidgets('dark theme uses iOS 26 dark active and secondary tints', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapDark(
+          LiqBottomNavBar(
+            items: _fourItems,
+            currentIndex: 2,
+            onChanged: (_) {},
+          ),
+        ),
+      );
+
+      const darkActive = Color(0xFF0091FF);
+      const darkInactive = Color(0xB2EBEBF5);
+
+      final activeIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
+      expect(activeIcon.color, darkActive);
+
+      final activeLabel = tester.widget<Text>(find.text('Inbox'));
+      expect(activeLabel.style?.color, darkActive);
+
+      final inactiveIcon = tester.widget<Icon>(find.byIcon(Icons.home_filled));
+      expect(inactiveIcon.color, darkInactive);
+
+      final inactiveLabel = tester.widget<Text>(find.text('Home'));
+      expect(inactiveLabel.style?.color, darkInactive);
     });
 
     testWidgets('tapping a tab fires onChanged with that index', (

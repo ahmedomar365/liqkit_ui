@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Behavior of [LiqAccordion] when expanding multiple items.
 enum LiqAccordionType {
@@ -59,14 +60,14 @@ final class LiqAccordion extends StatefulWidget {
 
   static const double _radius = 16;
   static const Color _divider = Color(0x29000000);
+  static const Color _dividerDark = Color(0x29FFFFFF);
   static const double _dividerThickness = 0.33;
   static const double _dividerInset = 16;
   static const double _headerMinHeight = 56;
   static const double _headerHPad = 16;
   static const double _bodyPad = 16;
-  static const Color _titleColor = Color(0xFF000000);
-  static const Color _subtitleColor = Color(0xFF8E8E93);
   static const Color _chevronColor = Color(0xFF8E8E93);
+  static const Color _chevronColorDark = Color(0xB2EBEBF5);
   static const double _chevronSize = 13;
   static const Duration _rotateDuration = LiqMotion.fast;
   static const Duration _expandDuration = LiqMotion.normal;
@@ -104,16 +105,21 @@ class _LiqAccordionState extends State<LiqAccordion> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = context.liqBrightness;
+    final dividerColor =
+        brightness == Brightness.dark
+            ? LiqAccordion._dividerDark
+            : LiqAccordion._divider;
     final children = <Widget>[];
     for (var i = 0; i < widget.items.length; i++) {
       if (i > 0) {
         children.add(
-          const Padding(
-            padding: EdgeInsets.only(left: LiqAccordion._dividerInset),
+          Padding(
+            padding: const EdgeInsets.only(left: LiqAccordion._dividerInset),
             child: SizedBox(
               height: LiqAccordion._dividerThickness,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: LiqAccordion._divider),
+                decoration: BoxDecoration(color: dividerColor),
               ),
             ),
           ),
@@ -122,7 +128,10 @@ class _LiqAccordionState extends State<LiqAccordion> {
       children.add(_buildItem(i, widget.items[i]));
     }
     return LiqGlassSurface(
-      tint: LiqGlassTint.opaque,
+      tint:
+          brightness == Brightness.dark
+              ? LiqGlassTint.dark
+              : LiqGlassTint.opaque,
       elevation: LiqGlassElevation.flat,
       borderRadius: const BorderRadius.all(
         Radius.circular(LiqAccordion._radius),
@@ -137,6 +146,13 @@ class _LiqAccordionState extends State<LiqAccordion> {
 
   Widget _buildItem(int index, LiqAccordionItem item) {
     final expanded = _expanded.contains(index);
+    final brightness = context.liqBrightness;
+    final titleColor = context.liqLabelColor;
+    final subtitleColor = context.liqSecondaryLabelColor;
+    final chevronColor =
+        brightness == Brightness.dark
+            ? LiqAccordion._chevronColorDark
+            : LiqAccordion._chevronColor;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -162,18 +178,15 @@ class _LiqAccordionState extends State<LiqAccordion> {
                       children: <Widget>[
                         Text(
                           item.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: LiqAccordion._titleColor,
-                          ),
+                          style: TextStyle(fontSize: 16, color: titleColor),
                         ),
                         if (item.subtitle != null) ...<Widget>[
                           const SizedBox(height: 2),
                           Text(
                             item.subtitle!,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 13,
-                              color: LiqAccordion._subtitleColor,
+                              color: subtitleColor,
                             ),
                           ),
                         ],
@@ -185,10 +198,12 @@ class _LiqAccordionState extends State<LiqAccordion> {
                     duration: LiqAccordion._rotateDuration,
                     curve: LiqAccordion._curve,
                     turns: expanded ? 0.25 : 0,
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: LiqAccordion._chevronSize,
                       height: LiqAccordion._chevronSize,
-                      child: CustomPaint(painter: _ChevronPainter()),
+                      child: CustomPaint(
+                        painter: _ChevronPainter(color: chevronColor),
+                      ),
                     ),
                   ),
                 ],
@@ -206,7 +221,10 @@ class _LiqAccordionState extends State<LiqAccordion> {
                     padding: const EdgeInsets.all(LiqAccordion._bodyPad),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: item.child,
+                      child: DefaultTextStyle.merge(
+                        style: TextStyle(color: titleColor),
+                        child: item.child,
+                      ),
                     ),
                   )
                   : const SizedBox(width: double.infinity),
@@ -225,13 +243,15 @@ class _LiqAccordionState extends State<LiqAccordion> {
 }
 
 class _ChevronPainter extends CustomPainter {
-  const _ChevronPainter();
+  const _ChevronPainter({required this.color});
+
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint =
         Paint()
-          ..color = LiqAccordion._chevronColor
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.6
           ..strokeCap = StrokeCap.round
@@ -248,5 +268,7 @@ class _ChevronPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _ChevronPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _ChevronPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }

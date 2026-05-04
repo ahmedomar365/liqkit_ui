@@ -1,25 +1,23 @@
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget skeletonRectBuilder(BuildContext context) {
-  return const Align(
-    heightFactor: 1,
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
-      // {@highlight}
-      child: SizedBox(
-        width: 320,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            LiqSkeleton(width: 280, height: 24),
-            SizedBox(height: 12),
-            LiqSkeleton(width: 220, height: 24),
-          ],
+  return const SnippetFrame(
+    // {@highlight}
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        LiqSkeleton(width: double.infinity, height: 24),
+        SizedBox(height: 12),
+        FractionallySizedBox(
+          widthFactor: 0.78,
+          alignment: Alignment.centerLeft,
+          child: LiqSkeleton(width: double.infinity, height: 24),
         ),
-      ),
-      // {@endhighlight}
+      ],
     ),
+    // {@endhighlight}
   );
 }

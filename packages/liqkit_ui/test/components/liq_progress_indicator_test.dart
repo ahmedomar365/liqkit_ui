@@ -3,6 +3,33 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 void main() {
+  Widget wrap(Widget child, {LiqThemeData data = LiqThemeData.light}) {
+    return LiqTheme(
+      data: data,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(child: SizedBox(width: 200, child: child)),
+      ),
+    );
+  }
+
+  Color progressDecorationColorAt(WidgetTester tester, int index) {
+    final container = tester.widget<Container>(
+      find
+          .descendant(
+            of: find.byType(LiqProgressBar),
+            matching: find.byWidgetPredicate((widget) {
+              if (widget is! Container) return false;
+              final decoration = widget.decoration;
+              return decoration is BoxDecoration && decoration.color != null;
+            }),
+          )
+          .at(index),
+    );
+    final decoration = container.decoration! as BoxDecoration;
+    return decoration.color!;
+  }
+
   group('LiqProgressBar', () {
     testWidgets('canonical 4pt height', (tester) async {
       await tester.pumpWidget(
@@ -32,6 +59,20 @@ void main() {
         ),
       );
       expect(tester.getSemantics(find.byType(LiqProgressBar)).value, '42%');
+    });
+
+    testWidgets('dark theme resolves track and fill dynamically', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(const LiqProgressBar(value: 0.42), data: LiqThemeData.dark),
+      );
+
+      expect(
+        progressDecorationColorAt(tester, 0),
+        const Color(0xB2EBEBF5).withValues(alpha: 0.24),
+      );
+      expect(progressDecorationColorAt(tester, 1), const Color(0xFF0091FF));
     });
   });
 

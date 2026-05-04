@@ -12,6 +12,10 @@ Widget _wrap(Widget child) {
   );
 }
 
+Widget _wrapDark(Widget child) {
+  return LiqTheme(data: LiqThemeData.dark, child: _wrap(child));
+}
+
 const Key _firstKey = Key('first');
 const Key _secondKey = Key('second');
 
@@ -187,6 +191,57 @@ void main() {
         tester.getSize(find.byKey(_firstKey)).height,
         greaterThan(initialHeight),
       );
+    });
+
+    testWidgets('divider and grip resolve dark theme colors', (tester) async {
+      await tester.pumpWidget(
+        _wrapDark(SizedBox(width: 400, height: 200, child: _resizable())),
+      );
+
+      final divider = tester.widget<AnimatedContainer>(
+        find.descendant(
+          of: find.byKey(LiqResizable.dividerKey),
+          matching: find.byType(AnimatedContainer),
+        ),
+      );
+      final dividerDecoration = divider.decoration! as BoxDecoration;
+      expect(dividerDecoration.color, LiqResizable.darkDividerColorIdle);
+
+      final grip = tester
+          .widgetList<DecoratedBox>(
+            find.descendant(
+              of: find.byKey(LiqResizable.dividerKey),
+              matching: find.byType(DecoratedBox),
+            ),
+          )
+          .firstWhere((box) {
+            final decoration = box.decoration;
+            return decoration is BoxDecoration &&
+                decoration.color == LiqResizable.darkGripColor;
+          });
+      final decoration = grip.decoration as BoxDecoration;
+      expect(decoration.color, LiqResizable.darkGripColor);
+    });
+
+    testWidgets('active divider resolves dark accent color', (tester) async {
+      await tester.pumpWidget(
+        _wrapDark(SizedBox(width: 400, height: 200, child: _resizable())),
+      );
+
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byKey(LiqResizable.dividerKey)),
+      );
+      await tester.pump();
+
+      final divider = tester.widget<AnimatedContainer>(
+        find.descendant(
+          of: find.byKey(LiqResizable.dividerKey),
+          matching: find.byType(AnimatedContainer),
+        ),
+      );
+      final dividerDecoration = divider.decoration! as BoxDecoration;
+      expect(dividerDecoration.color, LiqResizable.darkDividerColorActive);
+      await gesture.up();
     });
 
     test('AssertionError when initialRatio is 0 or 1', () {

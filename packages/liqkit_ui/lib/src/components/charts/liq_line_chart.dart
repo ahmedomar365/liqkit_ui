@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 minimal sparkline / line chart.
 ///
 /// Renders [values] across the full width of the surrounding box,
@@ -67,20 +69,38 @@ final class LiqLineChart extends StatelessWidget {
   /// Inner-ring colour on each dot (white).
   static const Color dotInnerRingColor = Color(0xFFFFFFFF);
 
+  /// Inner-ring colour on each dot in dark theme.
+  static const Color darkDotInnerRingColor = Color(0xFF000000);
+
   /// Area-fill top opacity (line → bottom gradient start).
   static const double areaFillTopOpacity = 0.2;
 
   /// Catmull-Rom tension for the smooth interpolation (0..1).
   static const double smoothTension = 0.5;
 
+  /// Resolves the effective line color for the current theme.
+  @visibleForTesting
+  static Color effectiveColorFor(BuildContext context, Color color) {
+    return color == lineColor ? context.liqPrimaryColor : color;
+  }
+
+  /// Resolves the effective dot ring color for the current theme.
+  @visibleForTesting
+  static Color dotInnerRingColorFor(BuildContext context) {
+    return context.liqIsDark ? darkDotInnerRingColor : dotInnerRingColor;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final effectiveColor = effectiveColorFor(context, color);
+    final dotInnerRingColor = dotInnerRingColorFor(context);
     return ConstrainedBox(
       constraints: const BoxConstraints.expand(),
       child: CustomPaint(
         painter: _LineChartPainter(
           values: values,
-          color: color,
+          color: effectiveColor,
+          dotInnerRingColor: dotInnerRingColor,
           strokeWidth: strokeWidth,
           showDots: showDots,
           fillArea: fillArea,
@@ -109,6 +129,7 @@ class _LineChartPainter extends CustomPainter {
   _LineChartPainter({
     required this.values,
     required this.color,
+    required this.dotInnerRingColor,
     required this.strokeWidth,
     required this.showDots,
     required this.fillArea,
@@ -119,6 +140,7 @@ class _LineChartPainter extends CustomPainter {
 
   final List<double> values;
   final Color color;
+  final Color dotInnerRingColor;
   final double strokeWidth;
   final bool showDots;
   final bool fillArea;
@@ -193,7 +215,7 @@ class _LineChartPainter extends CustomPainter {
           Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = LiqLineChart.dotInnerRingWidth
-            ..color = LiqLineChart.dotInnerRingColor;
+            ..color = dotInnerRingColor;
       for (final p in points) {
         canvas
           ..drawCircle(p, LiqLineChart.dotRadius, dotFill)
@@ -252,6 +274,7 @@ class _LineChartPainter extends CustomPainter {
   bool shouldRepaint(_LineChartPainter old) {
     return !listEquals(old.values, values) ||
         old.color != color ||
+        old.dotInnerRingColor != dotInnerRingColor ||
         old.strokeWidth != strokeWidth ||
         old.showDots != showDots ||
         old.fillArea != fillArea ||

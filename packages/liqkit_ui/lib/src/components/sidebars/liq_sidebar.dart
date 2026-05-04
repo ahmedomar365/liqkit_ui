@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 sidebar surface — translucent rounded panel, padded.
 ///
 /// Sourced from `native/components/sidebars.css` (`.ios26-sidebar-panel`):
@@ -18,21 +21,26 @@ final class LiqSidebar extends StatelessWidget {
   final double width;
 
   static const Color _bg = Color(0xB3FAFAFA);
+  static const Color _bgDark = Color(0xCC1C1C1E);
   static const Color _rim = Color(0x80FFFFFF);
+  static const Color _rimDark = Color(0x33FFFFFF);
   static const Color _shadow = Color(0x2E000000);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     return SizedBox(
       width: width,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(34)),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: _bg,
-            borderRadius: BorderRadius.all(Radius.circular(34)),
-            border: Border.fromBorderSide(BorderSide(color: _rim)),
-            boxShadow: <BoxShadow>[
+          decoration: BoxDecoration(
+            color: isDark ? _bgDark : _bg,
+            borderRadius: const BorderRadius.all(Radius.circular(34)),
+            border: Border.fromBorderSide(
+              BorderSide(color: isDark ? _rimDark : _rim),
+            ),
+            boxShadow: const <BoxShadow>[
               BoxShadow(color: _shadow, offset: Offset(0, 16), blurRadius: 48),
             ],
           ),
@@ -67,16 +75,20 @@ final class LiqSidebarSearch extends StatelessWidget {
   final String placeholder;
 
   static const Color _bg = Color(0x29787880);
+  static const Color _bgDark = Color(0x33767680);
   static const Color _fg = Color(0xFF727272);
+  static const Color _fgDark = Color(0x99EBEBF5);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
+    final fg = isDark ? _fgDark : _fg;
     return SizedBox(
       height: 44,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: _bg,
-          borderRadius: BorderRadius.all(Radius.circular(100)),
+        decoration: BoxDecoration(
+          color: isDark ? _bgDark : _bg,
+          borderRadius: const BorderRadius.all(Radius.circular(100)),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11),
@@ -85,7 +97,7 @@ final class LiqSidebarSearch extends StatelessWidget {
               SizedBox(
                 width: 18,
                 height: 18,
-                child: CustomPaint(painter: _SearchGlyphPainter()),
+                child: CustomPaint(painter: _SearchGlyphPainter(color: fg)),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -99,8 +111,7 @@ final class LiqSidebarSearch extends StatelessWidget {
                     height: 22 / 17,
                     letterSpacing: -0.08,
                     fontWeight: FontWeight.w400,
-                    color: _fg,
-                  ),
+                  ).copyWith(color: fg),
                 ),
               ),
             ],
@@ -112,11 +123,15 @@ final class LiqSidebarSearch extends StatelessWidget {
 }
 
 class _SearchGlyphPainter extends CustomPainter {
+  const _SearchGlyphPainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint =
         Paint()
-          ..color = const Color(0xFF727272)
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeCap = StrokeCap.round
           ..strokeWidth = 1.6;
@@ -133,7 +148,9 @@ class _SearchGlyphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _SearchGlyphPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }
 
 /// Single row inside a [LiqSidebar].
@@ -168,71 +185,81 @@ final class LiqSidebarRow extends StatelessWidget {
   final VoidCallback? onPressed;
 
   static const Color _selectedBg = Color(0xFFEDEDED);
+  static const Color _selectedBgDark = Color(0x24FFFFFF);
   static const Color _titleColor = Color(0xFF000000);
+  static const Color _titleColorDark = Color(0xFFFFFFFF);
   static const Color _detailColor = Color(0xFF727272);
+  static const Color _detailColorDark = Color(0x99EBEBF5);
   static const Color _iconColor = Color(0xFF1A1A1A);
+  static const Color _iconColorDark = Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
+    final titleColor = isDark ? _titleColorDark : _titleColor;
+    final detailColor = isDark ? _detailColorDark : _detailColor;
     return Semantics(
       button: onPressed != null,
       label: title,
       selected: selected,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 44),
-          padding: EdgeInsets.fromLTRB(nested ? 30 : 10, 0, 8, 0),
-          decoration: BoxDecoration(
-            color: selected ? _selectedBg : null,
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-          ),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: 34,
-                child: SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: IconTheme(
-                    data: const IconThemeData(color: _iconColor),
-                    child: icon ?? const SizedBox.shrink(),
+      child: LiqPointerCursor(
+        enabled: onPressed != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: Container(
+            constraints: const BoxConstraints(minHeight: 44),
+            padding: EdgeInsets.fromLTRB(nested ? 30 : 10, 0, 8, 0),
+            decoration: BoxDecoration(
+              color: selected ? (isDark ? _selectedBgDark : _selectedBg) : null,
+              borderRadius: const BorderRadius.all(Radius.circular(100)),
+            ),
+            child: Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 34,
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: IconTheme(
+                      data: IconThemeData(
+                        color: isDark ? _iconColorDark : _iconColor,
+                      ),
+                      child: icon ?? const SizedBox.shrink(),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 4),
-              Expanded(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textDirection: TextDirection.ltr,
-                  style: const TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-                    fontSize: 17,
-                    height: 22 / 17,
-                    letterSpacing: -0.43,
-                    fontWeight: FontWeight.w400,
-                    color: _titleColor,
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textDirection: TextDirection.ltr,
+                    style: const TextStyle(
+                      fontFamily: 'SF Pro Text',
+                      fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+                      fontSize: 17,
+                      height: 22 / 17,
+                      letterSpacing: -0.43,
+                      fontWeight: FontWeight.w400,
+                    ).copyWith(color: titleColor),
                   ),
                 ),
-              ),
-              if (detail != null)
-                Text(
-                  detail!,
-                  textDirection: TextDirection.ltr,
-                  style: const TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontSize: 17,
-                    height: 22 / 17,
-                    letterSpacing: -0.43,
-                    fontWeight: FontWeight.w400,
-                    color: _detailColor,
+                if (detail != null)
+                  Text(
+                    detail!,
+                    textDirection: TextDirection.ltr,
+                    style: const TextStyle(
+                      fontFamily: 'SF Pro Text',
+                      fontSize: 17,
+                      height: 22 / 17,
+                      letterSpacing: -0.43,
+                      fontWeight: FontWeight.w400,
+                    ).copyWith(color: detailColor),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -262,9 +289,11 @@ final class LiqSidebarSectionHeader extends StatelessWidget {
   final String? detail;
 
   static const Color _fg = Color(0x993C3C43);
+  static const Color _fgDark = Color(0x99EBEBF5);
 
   @override
   Widget build(BuildContext context) {
+    final fg = context.liqIsDark ? _fgDark : _fg;
     return Padding(
       padding: const EdgeInsets.only(top: 6),
       child: Container(
@@ -282,8 +311,7 @@ final class LiqSidebarSectionHeader extends StatelessWidget {
                   height: 22 / 17,
                   letterSpacing: -0.43,
                   fontWeight: FontWeight.w400,
-                  color: _fg,
-                ),
+                ).copyWith(color: fg),
               ),
             ),
             if (detail != null)
@@ -296,8 +324,7 @@ final class LiqSidebarSectionHeader extends StatelessWidget {
                   height: 22 / 17,
                   letterSpacing: -0.43,
                   fontWeight: FontWeight.w400,
-                  color: _fg,
-                ),
+                ).copyWith(color: fg),
               ),
           ],
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Brightness mode shared across system primitives.
 enum LiqSystemBrightness {
   /// Light variant.
@@ -99,13 +101,14 @@ enum LiqSystemActionPillStyle {
 }
 
 /// 42pt rounded gradient pill — used inside Home-Screen Quick Actions
-/// rows (HSQA) for action labels.
+/// rows (HSQA) for action labels. The visible pill remains 42pt tall
+/// while the tap target expands to 44pt.
 final class LiqSystemActionPill extends StatelessWidget {
   /// Creates an action pill.
   const LiqSystemActionPill({
     required this.label,
     this.style = LiqSystemActionPillStyle.regular,
-    this.brightness = LiqSystemBrightness.light,
+    this.brightness,
     this.onPressed,
     super.key,
   });
@@ -116,8 +119,8 @@ final class LiqSystemActionPill extends StatelessWidget {
   /// Regular or destructive variant.
   final LiqSystemActionPillStyle style;
 
-  /// Light or dark variant.
-  final LiqSystemBrightness brightness;
+  /// Light or dark variant. Defaults to the nearest liq theme brightness.
+  final LiqSystemBrightness? brightness;
 
   /// Optional tap handler.
   final VoidCallback? onPressed;
@@ -128,10 +131,18 @@ final class LiqSystemActionPill extends StatelessWidget {
   static const Color _darkLabel = Color(0xFFF1F3F7);
   static const Color _lightDestructive = Color(0xFFFF3B30);
   static const Color _darkDestructive = Color(0xFFFF5F57);
+  static const double _visibleHeight = 42;
+  static const double _tapTargetHeight = 44;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == LiqSystemBrightness.dark;
+    final resolvedBrightness =
+        brightness ??
+        switch (context.liqBrightness) {
+          Brightness.dark => LiqSystemBrightness.dark,
+          Brightness.light => LiqSystemBrightness.light,
+        };
+    final isDark = resolvedBrightness == LiqSystemBrightness.dark;
     final isDestructive = style == LiqSystemActionPillStyle.destructive;
     final color =
         isDestructive
@@ -153,22 +164,27 @@ final class LiqSystemActionPill extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onPressed,
-      child: Container(
-        height: 42,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(color: borderColor),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontFamily: 'SF Pro Text',
-            fontSize: 14,
-            height: 20 / 14,
-            fontWeight: FontWeight.w500,
+      child: SizedBox(
+        height: _tapTargetHeight,
+        child: Center(
+          child: Container(
+            height: _visibleHeight,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: gradient,
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: borderColor),
+            ),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: color,
+                fontFamily: 'SF Pro Text',
+                fontSize: 14,
+                height: 20 / 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ),
       ),
@@ -181,12 +197,13 @@ final class LiqSystemActionPill extends StatelessWidget {
     properties
       ..add(StringProperty('label', label))
       ..add(EnumProperty<LiqSystemActionPillStyle>('style', style))
-      ..add(EnumProperty<LiqSystemBrightness>('brightness', brightness));
+      ..add(EnumProperty<LiqSystemBrightness?>('brightness', brightness));
   }
 }
 
 /// 38×38 round toggle dot — used as a single-cell radio inside HSQA
-/// rows. Selected state fills with system blue + 2pt halo.
+/// rows. Selected state fills with system blue + 2pt halo. The visual
+/// dot is centered in a 44×44 tap target.
 final class LiqSystemToggleDot extends StatelessWidget {
   /// Creates a toggle dot.
   const LiqSystemToggleDot({this.selected = false, this.onPressed, super.key});
@@ -201,23 +218,33 @@ final class LiqSystemToggleDot extends StatelessWidget {
   static const Color _border = Color(0x1F000000);
   static const Color _selected = Color(0xFF0A84FF);
   static const Color _halo = Color(0x3D0A84FF);
+  static const double _visibleSize = 38;
+  static const double _tapTargetSize = 44;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onPressed,
-      child: Container(
-        width: 38,
-        height: 38,
-        decoration: BoxDecoration(
-          color: selected ? _selected : _bg,
-          shape: BoxShape.circle,
-          border: Border.all(color: _border),
-          boxShadow:
-              selected
-                  ? const <BoxShadow>[BoxShadow(color: _halo, spreadRadius: 2)]
-                  : null,
+      child: SizedBox(
+        width: _tapTargetSize,
+        height: _tapTargetSize,
+        child: Center(
+          child: Container(
+            width: _visibleSize,
+            height: _visibleSize,
+            decoration: BoxDecoration(
+              color: selected ? _selected : _bg,
+              shape: BoxShape.circle,
+              border: Border.all(color: _border),
+              boxShadow:
+                  selected
+                      ? const <BoxShadow>[
+                        BoxShadow(color: _halo, spreadRadius: 2),
+                      ]
+                      : null,
+            ),
+          ),
         ),
       ),
     );

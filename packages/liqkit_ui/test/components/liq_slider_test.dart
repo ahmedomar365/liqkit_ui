@@ -54,5 +54,38 @@ void main() {
       await tester.pumpAndSettle();
       // No callback => no state to assert. Just confirm no exception.
     });
+
+    testWidgets('pressing the slider animates the knob scale', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: SizedBox(
+                width: 240,
+                child: LiqSlider(value: 0.4, onChanged: (_) {}),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.widget<AnimatedScale>(find.byType(AnimatedScale)).scale, 1);
+
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byType(LiqSlider)),
+      );
+      await gesture.moveBy(const Offset(8, 0));
+      await tester.pump();
+      expect(
+        tester.widget<AnimatedScale>(find.byType(AnimatedScale)).scale,
+        1.08,
+      );
+
+      await gesture.up();
+      await tester.pump();
+      expect(tester.widget<AnimatedScale>(find.byType(AnimatedScale)).scale, 1);
+    });
   });
 }

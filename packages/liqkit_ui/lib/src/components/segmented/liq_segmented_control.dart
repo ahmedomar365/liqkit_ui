@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 segmented control.
 ///
 /// Sourced from `native/components/segmented-controls.css`:
@@ -34,45 +38,86 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
   static const Color _trackBg = Color(0x1F767680);
   static const Color _selectedBg = Color(0xFFFFFFFF);
   static const Color _label = Color(0xFF000000);
+  static const Color _darkTrackBg = Color(0x3D767680);
+  static const Color _darkSelectedBg = Color(0xFF636366);
+  static const Color _darkInactiveLabel = Color(0xB2EBEBF5);
+  static const Color _darkSelectedLabel = Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
+    final palette = _SegmentedPalette.resolve(context);
     final disabled = onChanged == null;
+    final selectedIndex = segments.indexWhere(
+      (segment) => segment.value == value,
+    );
     return Semantics(
       label: 'segmented control',
       child: Opacity(
         opacity: disabled ? 0.5 : 1,
-        child: Container(
-          height: _height,
-          padding: const EdgeInsets.all(_padding),
-          decoration: const BoxDecoration(
-            color: _trackBg,
-            borderRadius: BorderRadius.all(Radius.circular(100)),
-          ),
-          child: Row(
-            children: <Widget>[
-              for (var i = 0; i < segments.length; i++) ...<Widget>[
-                if (i > 0) const SizedBox(width: _gap),
-                Expanded(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap:
-                        disabled
-                            ? null
-                            : () {
-                              if (segments[i].value != value) {
-                                onChanged!(segments[i].value);
-                              }
-                            },
-                    child: _Segment(
-                      label: segments[i].label,
-                      selected: segments[i].value == value,
-                    ),
-                  ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final width =
+                constraints.hasBoundedWidth ? constraints.maxWidth : 320.0;
+            final count = segments.length;
+            final usableWidth =
+                width - 2 * _padding - (count - 1).clamp(0, count) * _gap;
+            final segmentWidth =
+                count == 0
+                    ? 0.0
+                    : usableWidth.clamp(0.0, double.infinity) / count;
+            final hasSelection = selectedIndex >= 0 && count > 0;
+
+            return _SegmentedGestureSurface<T>(
+              disabled: disabled,
+              width: width,
+              segments: segments,
+              value: value,
+              onChanged: onChanged,
+              child: Container(
+                height: _height,
+                padding: const EdgeInsets.all(_padding),
+                decoration: BoxDecoration(
+                  color: palette.track,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
                 ),
-              ],
-            ],
-          ),
+                child: Stack(
+                  children: <Widget>[
+                    if (hasSelection)
+                      AnimatedPositioned(
+                        duration: LiqMotion.normal,
+                        curve: LiqMotion.snappy,
+                        left: selectedIndex * (segmentWidth + _gap),
+                        top: 0,
+                        width: segmentWidth,
+                        height: _segmentHeight,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: palette.selected,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    Row(
+                      children: <Widget>[
+                        for (var i = 0; i < segments.length; i++) ...<Widget>[
+                          if (i > 0) const SizedBox(width: _gap),
+                          Expanded(
+                            child: _Segment(
+                              label: segments[i].label,
+                              selected: segments[i].value == value,
+                              palette: palette,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -95,19 +140,110 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
   }
 }
 
+class _SegmentedGestureSurface<T> extends StatefulWidget {
+  const _SegmentedGestureSurface({
+    required this.disabled,
+    required this.width,
+    required this.segments,
+    required this.value,
+    required this.onChanged,
+    required this.child,
+  });
+
+  final bool disabled;
+  final double width;
+  final List<({T value, String label})> segments;
+  final T value;
+  final ValueChanged<T>? onChanged;
+  final Widget child;
+
+  @override
+  State<_SegmentedGestureSurface<T>> createState() =>
+      _SegmentedGestureSurfaceState<T>();
+}
+
+class _SegmentedGestureSurfaceState<T>
+    extends State<_SegmentedGestureSurface<T>> {
+  bool _tracking = false;
+
+  void _selectFromOffset(Offset localPosition) {
+    if (widget.disabled || widget.segments.isEmpty) return;
+    final count = widget.segments.length;
+    final contentX = (localPosition.dx - LiqSegmentedControl._padding).clamp(
+      0.0,
+      (widget.width - 2 * LiqSegmentedControl._padding).clamp(
+        0.0,
+        double.infinity,
+      ),
+    );
+    final usableWidth =
+        widget.width -
+        2 * LiqSegmentedControl._padding -
+        (count - 1).clamp(0, count) * LiqSegmentedControl._gap;
+    final segmentWidth =
+        count == 0 ? 0.0 : usableWidth.clamp(0.0, double.infinity) / count;
+    if (segmentWidth <= 0) return;
+
+    final index = (contentX / (segmentWidth + LiqSegmentedControl._gap))
+        .floor()
+        .clamp(0, count - 1);
+    final next = widget.segments[index].value;
+    if (next != widget.value) {
+      widget.onChanged!(next);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LiqPointerCursor(
+      enabled: !widget.disabled,
+      child: Listener(
+        behavior: HitTestBehavior.opaque,
+        onPointerDown:
+            widget.disabled
+                ? null
+                : (event) {
+                  _tracking = true;
+                  _selectFromOffset(event.localPosition);
+                },
+        onPointerMove:
+            widget.disabled
+                ? null
+                : (event) {
+                  if (_tracking) _selectFromOffset(event.localPosition);
+                },
+        onPointerUp:
+            widget.disabled
+                ? null
+                : (_) {
+                  _tracking = false;
+                },
+        onPointerCancel:
+            widget.disabled
+                ? null
+                : (_) {
+                  _tracking = false;
+                },
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class _Segment extends StatelessWidget {
-  const _Segment({required this.label, required this.selected});
+  const _Segment({
+    required this.label,
+    required this.selected,
+    required this.palette,
+  });
   final String label;
   final bool selected;
+  final _SegmentedPalette palette;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: LiqSegmentedControl._segmentHeight,
-      decoration: BoxDecoration(
-        color: selected ? LiqSegmentedControl._selectedBg : null,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       child: Text(
@@ -121,10 +257,42 @@ class _Segment extends StatelessWidget {
           height: 18 / 13.333,
           letterSpacing: -0.08,
           fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-          color: LiqSegmentedControl._label,
+          color: selected ? palette.selectedLabel : palette.inactiveLabel,
         ),
         textDirection: TextDirection.ltr,
       ),
     );
   }
+}
+
+final class _SegmentedPalette {
+  const _SegmentedPalette({
+    required this.track,
+    required this.selected,
+    required this.selectedLabel,
+    required this.inactiveLabel,
+  });
+
+  factory _SegmentedPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _SegmentedPalette(
+        track: LiqSegmentedControl._trackBg,
+        selected: LiqSegmentedControl._selectedBg,
+        selectedLabel: LiqSegmentedControl._label,
+        inactiveLabel: LiqSegmentedControl._label,
+      );
+    }
+
+    return const _SegmentedPalette(
+      track: LiqSegmentedControl._darkTrackBg,
+      selected: LiqSegmentedControl._darkSelectedBg,
+      selectedLabel: LiqSegmentedControl._darkSelectedLabel,
+      inactiveLabel: LiqSegmentedControl._darkInactiveLabel,
+    );
+  }
+
+  final Color track;
+  final Color selected;
+  final Color selectedLabel;
+  final Color inactiveLabel;
 }

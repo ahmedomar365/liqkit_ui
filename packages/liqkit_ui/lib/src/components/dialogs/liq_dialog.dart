@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// A button shown in the action row of a [LiqDialog].
 ///
@@ -128,6 +130,7 @@ final class LiqDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _DialogPalette.resolve(context);
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth),
       child: LiqGlassSurface(
@@ -142,7 +145,7 @@ final class LiqDialog extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: _titleStyle,
+                  style: _titleStyle.copyWith(color: palette.title),
                   textDirection: TextDirection.ltr,
                 ),
                 if (message != null) ...<Widget>[
@@ -150,15 +153,15 @@ final class LiqDialog extends StatelessWidget {
                   Text(
                     message!,
                     textAlign: TextAlign.center,
-                    style: _messageStyle,
+                    style: _messageStyle.copyWith(color: palette.message),
                     textDirection: TextDirection.ltr,
                   ),
                 ],
               ],
             ),
             if (actions.isNotEmpty) ...<Widget>[
-              const _LiqDialogSeparator(horizontal: true),
-              _LiqDialogActions(actions: actions),
+              _LiqDialogSeparator(horizontal: true, palette: palette),
+              _LiqDialogActions(actions: actions, palette: palette),
             ],
           ],
         ),
@@ -177,24 +180,26 @@ final class LiqDialog extends StatelessWidget {
 }
 
 class _LiqDialogSeparator extends StatelessWidget {
-  const _LiqDialogSeparator({required this.horizontal});
+  const _LiqDialogSeparator({required this.horizontal, required this.palette});
 
   final bool horizontal;
+  final _DialogPalette palette;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: horizontal ? double.infinity : LiqDialog.separatorWidth,
       height: horizontal ? LiqDialog.separatorWidth : double.infinity,
-      child: const ColoredBox(color: LiqDialog.separatorColor),
+      child: ColoredBox(color: palette.separator),
     );
   }
 }
 
 class _LiqDialogActions extends StatelessWidget {
-  const _LiqDialogActions({required this.actions});
+  const _LiqDialogActions({required this.actions, required this.palette});
 
   final List<LiqDialogAction> actions;
+  final _DialogPalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +208,13 @@ class _LiqDialogActions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           for (var i = 0; i < actions.length; i++) ...<Widget>[
-            if (i > 0) const _LiqDialogSeparator(horizontal: false),
-            Expanded(child: _LiqDialogActionButton(action: actions[i])),
+            if (i > 0) _LiqDialogSeparator(horizontal: false, palette: palette),
+            Expanded(
+              child: _LiqDialogActionButton(
+                action: actions[i],
+                palette: palette,
+              ),
+            ),
           ],
         ],
       ),
@@ -213,43 +223,46 @@ class _LiqDialogActions extends StatelessWidget {
 }
 
 class _LiqDialogActionButton extends StatelessWidget {
-  const _LiqDialogActionButton({required this.action});
+  const _LiqDialogActionButton({required this.action, required this.palette});
 
   final LiqDialogAction action;
+  final _DialogPalette palette;
 
   @override
   Widget build(BuildContext context) {
     final fg =
         action.destructive
             ? LiqDialog.destructiveActionColor
-            : LiqDialog.actionTintColor;
+            : palette.actionTint;
     final weight = action.isDefault ? FontWeight.w600 : FontWeight.w400;
     return Semantics(
       button: true,
       enabled: true,
       label: action.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: action.onPressed,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minHeight: LiqDialog.actionMinHeight,
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                action.label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
-                textDirection: TextDirection.ltr,
-                style: TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                  fontSize: 17,
-                  fontWeight: weight,
-                  color: fg,
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: action.onPressed,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minHeight: LiqDialog.actionMinHeight,
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  action.label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.ltr,
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+                    fontSize: 17,
+                    fontWeight: weight,
+                    color: fg,
+                  ),
                 ),
               ),
             ),
@@ -258,6 +271,39 @@ class _LiqDialogActionButton extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _DialogPalette {
+  const _DialogPalette({
+    required this.title,
+    required this.message,
+    required this.separator,
+    required this.actionTint,
+  });
+
+  factory _DialogPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _DialogPalette(
+        title: LiqDialog.titleColor,
+        message: LiqDialog.messageColor,
+        separator: LiqDialog.separatorColor,
+        actionTint: LiqDialog.actionTintColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _DialogPalette(
+      title: context.liqLabelColor,
+      message: secondary,
+      separator: secondary.withValues(alpha: 0.18),
+      actionTint: context.liqPrimaryColor,
+    );
+  }
+
+  final Color title;
+  final Color message;
+  final Color separator;
+  final Color actionTint;
 }
 
 /// Imperative helper for showing a [LiqDialog] over the nearest

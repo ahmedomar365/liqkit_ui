@@ -213,6 +213,14 @@
       ]
     },
     {
+      "component": "motion",
+      "displayName": "Motion",
+      "group": "foundation",
+      "variants": [
+        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/motion/default.dart" }
+      ]
+    },
+    {
       "component": "toggle",
       "displayName": "Toggles",
       "group": "inputs",

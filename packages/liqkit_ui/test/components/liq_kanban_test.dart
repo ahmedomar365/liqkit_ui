@@ -131,6 +131,37 @@ void main() {
       expect(events.first[2], 'done');
     });
 
+    testWidgets('overlay host reflects updated columns after parent rebuild', (
+      tester,
+    ) async {
+      var columns = const <LiqKanbanColumn>[
+        LiqKanbanColumn(id: 'todo', title: 'TO DO', cardIds: <String>['a']),
+        LiqKanbanColumn(id: 'done', title: 'DONE', cardIds: <String>[]),
+      ];
+
+      Widget board() => wrap(
+        LiqKanban(
+          columns: columns,
+          cards: threeCards(),
+          onMove: (_, __, ___, ____) {},
+        ),
+      );
+
+      await tester.pumpWidget(board());
+      await tester.pumpAndSettle();
+      final before = tester.getCenter(find.text('Card A')).dx;
+
+      columns = const <LiqKanbanColumn>[
+        LiqKanbanColumn(id: 'todo', title: 'TO DO', cardIds: <String>[]),
+        LiqKanbanColumn(id: 'done', title: 'DONE', cardIds: <String>['a']),
+      ];
+      await tester.pumpWidget(board());
+      await tester.pumpAndSettle();
+      final after = tester.getCenter(find.text('Card A')).dx;
+
+      expect(after, greaterThan(before + 100));
+    });
+
     testWidgets('drag within same column fires onMove with same column ids', (
       tester,
     ) async {
@@ -191,6 +222,59 @@ void main() {
 
       expect(tester.takeException(), isNull);
       expect(calls, 0);
+    });
+
+    testWidgets('uses dark theme colors for columns and cards', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: wrap(
+            LiqKanban(
+              columns: const <LiqKanbanColumn>[
+                LiqKanbanColumn(
+                  id: 'todo',
+                  title: 'TO DO',
+                  cardIds: <String>['a'],
+                ),
+              ],
+              cards: threeCards(),
+              onMove: (_, __, ___, ____) {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final cardDefault = tester.widget<DefaultTextStyle>(
+        find
+            .ancestor(
+              of: find.text('Card A'),
+              matching: find.byType(DefaultTextStyle),
+            )
+            .first,
+      );
+      expect(cardDefault.style.color, const Color(0xFFFFFFFF));
+
+      final decorations =
+          tester
+              .widgetList<Container>(
+                find.descendant(
+                  of: find.byType(LiqKanban),
+                  matching: find.byWidgetPredicate(
+                    (widget) =>
+                        widget is Container &&
+                        widget.decoration is BoxDecoration,
+                  ),
+                ),
+              )
+              .map((container) => container.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        decorations.any(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
     });
   });
 }

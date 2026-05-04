@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 popup button — large inline label with a trailing chevron tip.
 ///
 /// Sourced from `native/components/popup-buttons.css`:
@@ -18,49 +21,66 @@ final class LiqPopupButton extends StatelessWidget {
 
   static const Color _enabled = Color(0xFF0088FF);
   static const Color _disabled = Color(0x4D3C3C43);
+  static const Color _disabledDark = Color(0x52EBEBF5);
+  static const double _visualHeight = 38;
+  static const double _tapTargetHeight = 44;
 
   @override
   Widget build(BuildContext context) {
     final disabled = onPressed == null;
-    final color = disabled ? _disabled : _enabled;
+    final color =
+        disabled ? (context.liqIsDark ? _disabledDark : _disabled) : _enabled;
     return Semantics(
       button: true,
       enabled: !disabled,
       label: label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: SizedBox(
-          height: 38,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                label,
-                textDirection: TextDirection.ltr,
-                style: TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                  fontSize: 32,
-                  height: 38 / 32,
-                  letterSpacing: -0.43,
-                  fontWeight: FontWeight.w400,
-                  color: color,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: SizedBox(
+            height: _tapTargetHeight,
+            child: Center(
+              child: SizedBox(
+                height: _visualHeight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      label,
+                      textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        fontFamily: 'SF Pro Text',
+                        fontFamilyFallback: const <String>[
+                          'SF Pro',
+                          'sans-serif',
+                        ],
+                        fontSize: 32,
+                        height: _visualHeight / 32,
+                        letterSpacing: -0.43,
+                        fontWeight: FontWeight.w400,
+                        color: color,
+                      ),
+                    ),
+                    const SizedBox(width: 3),
+                    SizedBox(
+                      width: 18,
+                      height: _visualHeight,
+                      child: Center(
+                        child: SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CustomPaint(
+                            painter: _ChevronDownPainter(color),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 3),
-              SizedBox(
-                width: 18,
-                height: 38,
-                child: Center(
-                  child: SizedBox(
-                    width: 14,
-                    height: 14,
-                    child: CustomPaint(painter: _ChevronDownPainter(color)),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

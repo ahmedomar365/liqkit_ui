@@ -8,6 +8,11 @@ Widget _wrap(Widget child) => Directionality(
   child: Center(child: child),
 );
 
+Widget _wrapAtWidth(double width, Widget child) => Directionality(
+  textDirection: TextDirection.ltr,
+  child: Center(child: SizedBox(width: width, child: child)),
+);
+
 void main() {
   group('LiqPagination.visiblePages', () {
     final cases = <({int currentPage, int totalPages, List<dynamic> expected})>[
@@ -98,6 +103,48 @@ void main() {
       await tester.tap(find.text('4'));
       await tester.pumpAndSettle();
       expect(received, 4);
+    });
+
+    testWidgets('page and chevron buttons keep 44pt tap targets', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapAtWidth(
+          400,
+          LiqPagination(currentPage: 3, totalPages: 5, onPageChanged: (_) {}),
+        ),
+      );
+
+      final page = find.ancestor(
+        of: find.text('3'),
+        matching: find.byType(GestureDetector),
+      );
+      final previous = find.ancestor(
+        of: find.byIcon(Icons.chevron_left),
+        matching: find.byType(GestureDetector),
+      );
+      final next = find.ancestor(
+        of: find.byIcon(Icons.chevron_right),
+        matching: find.byType(GestureDetector),
+      );
+
+      expect(tester.getSize(page.first), const Size(44, 44));
+      expect(tester.getSize(previous.first), const Size(44, 44));
+      expect(tester.getSize(next.first), const Size(44, 44));
+    });
+
+    testWidgets('expanded mode auto-compacts when width is constrained', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapAtWidth(
+          320,
+          LiqPagination(currentPage: 6, totalPages: 12, onPageChanged: (_) {}),
+        ),
+      );
+
+      expect(find.text('6 / 12'), findsOneWidget);
+      expect(find.text('…'), findsNothing);
     });
 
     testWidgets('tap on prev when currentPage=2 fires onPageChanged(1)', (

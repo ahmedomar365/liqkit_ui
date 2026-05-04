@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { LiqPreview } from '../liq-preview';
 
@@ -19,7 +19,7 @@ describe('LiqPreview', () => {
     expect(iframe.tagName).toBe('IFRAME');
     expect(iframe).toHaveAttribute(
       'src',
-      'https://snippets.example.com/?theme=light#/button/regular',
+      'https://snippets.example.com/?theme=light&v=1#/button/regular',
     );
   });
 
@@ -34,13 +34,15 @@ describe('LiqPreview', () => {
     const iframe = screen.getByTitle(
       'liqkit_ui — button/regular',
     ) as HTMLIFrameElement;
-    expect(iframe.height).toBe('200');
-    window.dispatchEvent(
-      new MessageEvent('message', {
-        data: { type: 'liq.height', px: 360 },
-        origin: 'https://snippets.example.com',
-      }),
-    );
+    expect(iframe.height).toBe('120');
+    act(() => {
+      window.dispatchEvent(
+        new MessageEvent('message', {
+          data: { type: 'liq.height', px: 360 },
+          origin: 'https://snippets.example.com',
+        }),
+      );
+    });
     expect(iframe.height).toBe('360');
   });
 
@@ -61,6 +63,6 @@ describe('LiqPreview', () => {
         origin: 'https://attacker.example',
       }),
     );
-    expect(iframe.height).toBe('200');
+    expect(iframe.height).toBe('120');
   });
 });

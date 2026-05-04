@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 single-region collapsible.
 ///
@@ -51,6 +52,9 @@ final class LiqCollapsible extends StatefulWidget {
   /// Trailing-chevron color (SF iOS tertiary label).
   static const Color chevronColor = Color(0xFF8E8E93);
 
+  /// Trailing-chevron color in dark theme.
+  static const Color darkChevronColor = Color(0xB2EBEBF5);
+
   /// Trailing-chevron square size in logical px.
   static const double chevronSize = 13;
 
@@ -92,6 +96,11 @@ class _LiqCollapsibleState extends State<LiqCollapsible> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = context.liqBrightness;
+    final chevronColor =
+        brightness == Brightness.dark
+            ? LiqCollapsible.darkChevronColor
+            : LiqCollapsible.chevronColor;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -112,10 +121,10 @@ class _LiqCollapsibleState extends State<LiqCollapsible> {
                   duration: LiqCollapsible.rotateDuration,
                   curve: LiqCollapsible.curve,
                   turns: _expanded ? 0.25 : 0,
-                  child: const Icon(
+                  child: Icon(
                     Icons.chevron_right,
                     size: LiqCollapsible.chevronSize,
-                    color: LiqCollapsible.chevronColor,
+                    color: chevronColor,
                   ),
                 ),
               ],

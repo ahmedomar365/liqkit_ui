@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
@@ -114,6 +114,55 @@ void main() {
 
       final counter = tester.widget<Text>(find.text('5 / 5'));
       expect(counter.style?.color, LiqTextarea.counterOverColor);
+    });
+
+    testWidgets('uses dark theme colors for surface and text', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(const LiqTextarea(value: 'hello')),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.style.color, const Color(0xFFFFFFFF));
+
+      final fieldContainer = tester.widget<Container>(
+        find
+            .descendant(
+              of: find.byType(LiqTextarea),
+              matching: find.byWidgetPredicate(
+                (widget) =>
+                    widget is Container && widget.decoration is BoxDecoration,
+              ),
+            )
+            .first,
+      );
+      final fieldDecoration = fieldContainer.decoration! as BoxDecoration;
+      expect(fieldDecoration.color, const Color(0xFF000000));
+    });
+
+    testWidgets('selection gestures belong to EditableText', (tester) async {
+      await tester.pumpWidget(_wrap(const LiqTextarea(value: 'hello world')));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is GestureDetector && widget.onTap != null,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byType(Listener),
+        ),
+        findsOneWidget,
+      );
     });
 
     test('throws AssertionError when minLines < 1', () {

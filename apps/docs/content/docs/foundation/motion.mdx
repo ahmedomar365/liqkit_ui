@@ -3,12 +3,21 @@ title: Motion
 description: iOS-26 spring curves and standard durations for component animations.
 ---
 
+import motionDefaultSnippet from '@/snippets/motion/default.json';
+
 `LiqMotion` is the foundation namespace every component pulls its
 animation curves and durations from. Centralising motion lets us
-swap implementations in one place — today the curves map to
-existing Flutter easings, but the public API is shaped to accept
-true `SpringSimulation` springs in a follow-up release without any
-caller changes.
+keep transitions consistent across surfaces, controls, and transient
+feedback.
+
+## Preview
+
+The lanes below show the default motion presets side by side: standard
+surface motion, snappy feedback, and smoother longer movement.
+
+<LiqPreview component="motion" variant="default" />
+
+<CodeSnippet snippet={motionDefaultSnippet} />
 
 ## Curves
 

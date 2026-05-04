@@ -10,7 +10,7 @@ Two widgets cover the iOS 26 progress indicator patterns:
 
 - **`LiqProgressBar`** — a 4pt tall determinate horizontal track filled with
   an accent-blue fill. Pass `value` in `[0, 1]` to set the fill amount.
-- **`LiqSpinner`** — an indeterminate 30pt rotating ring (900ms linear loop).
+- **`LiqSpinner`** — an indeterminate 30pt radial activity indicator (900ms loop).
   Use `size: LiqSpinnerSize.small` for the 22pt compact variant.
 
 ## Linear
@@ -25,7 +25,7 @@ A horizontal bar that communicates determinate progress. Set `value` between
 ## Spinner
 
 An indeterminate spinner for operations with unknown duration. Animates
-continuously as a 270-degree arc rotating over a faint background arc.
+continuously as a 12-tick radial activity indicator with rotating emphasis.
 
 <LiqPreview component="progress" variant="spinner" />
 

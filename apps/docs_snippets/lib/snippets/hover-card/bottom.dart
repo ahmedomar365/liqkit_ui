@@ -1,20 +1,7 @@
 // ignore_for_file: file_names // hyphenated name required by snippet manifest convention
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
-
-const TextStyle _nameStyle = TextStyle(
-  fontFamily: 'SF Pro Text',
-  fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-  fontSize: 17,
-  fontWeight: FontWeight.w600,
-);
-
-const TextStyle _bioStyle = TextStyle(
-  fontFamily: 'SF Pro Text',
-  fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-  fontSize: 13,
-  color: Color(0xFF8E8E93),
-);
 
 const TextStyle _linkStyle = TextStyle(
   fontFamily: 'SF Pro Text',
@@ -22,13 +9,6 @@ const TextStyle _linkStyle = TextStyle(
   color: Color(0xFF007AFF),
   fontSize: 15,
   decoration: TextDecoration.underline,
-);
-
-const TextStyle _hintStyle = TextStyle(
-  fontFamily: 'SF Pro Text',
-  fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-  color: Color(0xFF8E8E93),
-  fontSize: 13,
 );
 
 const Widget _previewContent = SizedBox(
@@ -42,14 +22,13 @@ const Widget _previewContent = SizedBox(
         children: <Widget>[
           LiqAvatar(initials: 'JD'),
           SizedBox(width: 12),
-          Text('Jane Doe', textDirection: TextDirection.ltr, style: _nameStyle),
+          SnippetLabel('Jane Doe', fontSize: 17, fontWeight: FontWeight.w600),
         ],
       ),
       SizedBox(height: 8),
-      Text(
+      SnippetLabel(
         'Senior engineer at liqkit. Lives in San Francisco.',
-        textDirection: TextDirection.ltr,
-        style: _bioStyle,
+        fontSize: 13,
       ),
     ],
   ),
@@ -57,10 +36,9 @@ const Widget _previewContent = SizedBox(
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget hoverCardBottomBuilder(BuildContext context) {
-  return const Align(
-    heightFactor: 1,
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+  return const SnippetFrame(
+    height: 260,
+    child: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -76,10 +54,9 @@ Widget hoverCardBottomBuilder(BuildContext context) {
           ),
           // {@endhighlight}
           SizedBox(height: 12),
-          Text(
+          SnippetLabel(
             'Hover the link with a mouse to reveal the card.',
-            textDirection: TextDirection.ltr,
-            style: _hintStyle,
+            fontSize: 13,
           ),
         ],
       ),

@@ -3,6 +3,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 material thickness presets.
 ///
 /// Each style controls the overlay alpha + core alpha + blur radius.
@@ -47,7 +49,7 @@ final class LiqMaterialChip extends StatelessWidget {
   /// Creates a material chip.
   const LiqMaterialChip({
     this.style = LiqMaterialStyle.regular,
-    this.brightness = LiqMaterialBrightness.light,
+    this.brightness,
     this.size = const Size(100, 100),
     this.borderRadius = const BorderRadius.all(Radius.circular(24)),
     this.increasedContrast = false,
@@ -57,8 +59,8 @@ final class LiqMaterialChip extends StatelessWidget {
   /// The material thickness preset.
   final LiqMaterialStyle style;
 
-  /// Light or dark variant.
-  final LiqMaterialBrightness brightness;
+  /// Light or dark variant. Defaults to the nearest liq theme brightness.
+  final LiqMaterialBrightness? brightness;
 
   /// Outer dimensions.
   final Size size;
@@ -91,7 +93,13 @@ final class LiqMaterialChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == LiqMaterialBrightness.dark;
+    final resolvedBrightness =
+        brightness ??
+        switch (context.liqBrightness) {
+          Brightness.dark => LiqMaterialBrightness.dark,
+          Brightness.light => LiqMaterialBrightness.light,
+        };
+    final isDark = resolvedBrightness == LiqMaterialBrightness.dark;
     final v = _styleValues;
     final overlayBase =
         isDark

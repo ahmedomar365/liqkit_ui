@@ -29,6 +29,13 @@ void main() {
     expect(taps, 1);
   });
 
+  testWidgets('LiqPopupButton keeps a 44pt tap target', (tester) async {
+    await tester.pumpWidget(
+      _wrap(LiqPopupButton(label: 'Sort', onPressed: () {})),
+    );
+    expect(tester.getSize(find.byType(LiqPopupButton)).height, 44);
+  });
+
   testWidgets('LiqPopupButton disables when onPressed is null', (tester) async {
     await tester.pumpWidget(_wrap(const LiqPopupButton(label: 'X')));
     expect(find.text('X'), findsOneWidget);

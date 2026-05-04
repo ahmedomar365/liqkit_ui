@@ -256,6 +256,45 @@ void main() {
       expect(find.text('New project'), findsOneWidget);
       expect(find.text('Cut'), findsOneWidget);
     });
+
+    testWidgets('uses dark theme colors for rows, icons, and shortcuts', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            Center(
+              child: SizedBox(
+                width: 560,
+                height: 360,
+                child: LiqCommandPalette(commands: _flatCommands(() {})),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final label = tester.widget<Text>(find.text('New project'));
+      expect(label.style?.color, const Color(0xFFFFFFFF));
+
+      final searchIcon = tester.widget<Icon>(find.byIcon(Icons.search));
+      expect(searchIcon.color, const Color(0xB2EBEBF5));
+
+      final activeRow = tester.widget<Container>(
+        find
+            .ancestor(
+              of: find.text('New project'),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      expect(activeRow.color, const Color(0xB2EBEBF5).withValues(alpha: 0.14));
+
+      final shortcutText = tester.widget<Text>(find.text('⌘N'));
+      expect(shortcutText.style?.color, const Color(0xB2EBEBF5));
+    });
   });
 
   group('LiqCommandPalette.show', () {

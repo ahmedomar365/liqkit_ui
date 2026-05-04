@@ -7,6 +7,14 @@ Widget _wrap(Widget child) => Directionality(
   child: Center(child: child),
 );
 
+Widget _wrapDark(Widget child) => LiqTheme(
+  data: LiqThemeData.dark,
+  child: Directionality(
+    textDirection: TextDirection.ltr,
+    child: Center(child: child),
+  ),
+);
+
 void main() {
   group('LiqLabel', () {
     testWidgets('renders the supplied text', (tester) async {
@@ -66,6 +74,25 @@ void main() {
         throwsAssertionError,
       );
     });
+
+    testWidgets('dark theme resolves label and suffix colors', (tester) async {
+      await tester.pumpWidget(
+        _wrapDark(const LiqLabel(text: 'Phone', optional: true)),
+      );
+
+      final text = tester.widget<Text>(find.textContaining('Phone (optional)'));
+      final span = text.textSpan! as TextSpan;
+      expect(span.style?.color, const Color(0xFFFFFFFF));
+
+      TextSpan? optional;
+      span.visitChildren((InlineSpan s) {
+        if (s is TextSpan && s.text == LiqLabel.optionalSuffix) {
+          optional = s;
+        }
+        return true;
+      });
+      expect(optional!.style?.color, const Color(0xB2EBEBF5));
+    });
   });
 
   group('LiqFormField', () {
@@ -115,6 +142,24 @@ void main() {
 
       final errorText = tester.widget<Text>(find.text('Invalid email.'));
       expect(errorText.style?.color, LiqFormField.errorTextStyle.color);
+    });
+
+    testWidgets('dark theme resolves helper and error colors', (tester) async {
+      await tester.pumpWidget(
+        _wrapDark(
+          const SizedBox(
+            width: 320,
+            child: LiqFormField(
+              label: 'Email',
+              helperText: 'Help',
+              child: SizedBox(height: 44),
+            ),
+          ),
+        ),
+      );
+
+      final helper = tester.widget<Text>(find.text('Help'));
+      expect(helper.style?.color, const Color(0xB2EBEBF5));
     });
   });
 }

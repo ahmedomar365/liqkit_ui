@@ -21,4 +21,27 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  testWidgets('badge status snippet paints visible badges', (tester) async {
+    await tester.pumpWidget(
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: MediaQuery(
+          data: const MediaQueryData(size: Size(480, 240)),
+          child: LiqTheme(
+            data: LiqThemeData.light,
+            child: Builder(builder: snippetRoutes['/badge/status']!),
+          ),
+        ),
+      ),
+    );
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('New'), findsOneWidget);
+    expect(find.text('Online'), findsOneWidget);
+    expect(find.text('Beta'), findsOneWidget);
+    expect(find.text('Failed'), findsOneWidget);
+    expect(find.text('Draft'), findsOneWidget);
+    expect(tester.getSize(find.byType(LiqBadge).first).width, greaterThan(0));
+  });
 }

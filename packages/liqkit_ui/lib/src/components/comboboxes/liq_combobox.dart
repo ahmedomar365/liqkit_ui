@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One option in a [LiqCombobox].
 ///
@@ -49,6 +51,7 @@ final class LiqCombobox<T> extends StatefulWidget {
     this.placeholder,
     this.filter,
     this.maxOptionsVisible = 6,
+    this.onOpenChanged,
     super.key,
   }) : assert(maxOptionsVisible > 0, 'maxOptionsVisible must be positive');
 
@@ -82,6 +85,9 @@ final class LiqCombobox<T> extends StatefulWidget {
 
   /// Max rows to show in the dropdown panel before scrolling.
   final int maxOptionsVisible;
+
+  /// Called when the dropdown opens or closes.
+  final ValueChanged<bool>? onOpenChanged;
 
   /// Field height.
   static const double fieldHeight = 44;
@@ -165,7 +171,13 @@ final class LiqCombobox<T> extends StatefulWidget {
         ),
       )
       ..add(StringProperty('placeholder', placeholder, defaultValue: null))
-      ..add(IntProperty('maxOptionsVisible', maxOptionsVisible));
+      ..add(IntProperty('maxOptionsVisible', maxOptionsVisible))
+      ..add(
+        ObjectFlagProperty<ValueChanged<bool>?>.has(
+          'onOpenChanged',
+          onOpenChanged,
+        ),
+      );
   }
 }
 
@@ -191,6 +203,8 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
       _focusNode.canRequestFocus = widget.onChanged != null;
       if (widget.onChanged == null && _focusNode.hasFocus) {
         _focusNode.unfocus();
+      } else if (widget.onChanged == null) {
+        _hideDropdown();
       }
     }
     if (widget.value != oldWidget.value) {
@@ -223,11 +237,23 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
     return null;
   }
 
+  void _showDropdown() {
+    if (_portalController.isShowing) return;
+    _portalController.show();
+    widget.onOpenChanged?.call(true);
+  }
+
+  void _hideDropdown() {
+    if (!_portalController.isShowing) return;
+    _portalController.hide();
+    widget.onOpenChanged?.call(false);
+  }
+
   void _handleFocusChange() {
     if (_focusNode.hasFocus) {
-      if (!_portalController.isShowing) _portalController.show();
+      _showDropdown();
     } else {
-      if (_portalController.isShowing) _portalController.hide();
+      _hideDropdown();
     }
     setState(() {});
   }
@@ -237,7 +263,7 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
     if (!_focusNode.hasFocus) {
       _focusNode.requestFocus();
     } else if (!_portalController.isShowing) {
-      _portalController.show();
+      _showDropdown();
       setState(() {});
     }
   }
@@ -274,12 +300,10 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ComboboxPalette.resolve(context);
     final disabled = widget.onChanged == null;
     final hasFocus = _focusNode.hasFocus;
-    final borderColor =
-        hasFocus
-            ? LiqCombobox.activeBorderColor
-            : LiqCombobox.inactiveBorderColor;
+    final borderColor = hasFocus ? palette.activeBorder : palette.border;
     final borderWidth =
         hasFocus
             ? LiqCombobox.activeBorderWidth
@@ -295,13 +319,13 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
         child: OverlayPortal(
           controller: _portalController,
           overlayChildBuilder: _buildDropdown,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: disabled ? null : _openIfPossible,
+          child: Listener(
+            behavior: HitTestBehavior.translucent,
+            onPointerDown: disabled ? null : (_) => _openIfPossible(),
             child: Container(
               height: LiqCombobox.fieldHeight,
               decoration: BoxDecoration(
-                color: LiqCombobox.backgroundColor,
+                color: palette.background,
                 borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
                 border: Border.all(color: borderColor, width: borderWidth),
               ),
@@ -322,7 +346,7 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                             return Text(
                               widget.placeholder!,
                               style: LiqCombobox.textStyle.copyWith(
-                                color: LiqCombobox.placeholderColor,
+                                color: palette.placeholder,
                               ),
                               maxLines: 1,
                               textDirection: TextDirection.ltr,
@@ -333,15 +357,18 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                           controller: _controller,
                           focusNode: _focusNode,
                           readOnly: disabled,
-                          style: LiqCombobox.textStyle,
-                          cursorColor: LiqCombobox.activeBorderColor,
-                          backgroundCursorColor: LiqCombobox.placeholderColor,
-                          selectionColor: LiqCombobox.activeBorderColor
-                              .withValues(alpha: 0.25),
+                          style: LiqCombobox.textStyle.copyWith(
+                            color: palette.text,
+                          ),
+                          cursorColor: palette.activeBorder,
+                          backgroundCursorColor: palette.placeholder,
+                          selectionColor: palette.activeBorder.withValues(
+                            alpha: 0.25,
+                          ),
                           onChanged: (_) {
                             if (_suppressEmit) return;
                             if (!_portalController.isShowing) {
-                              _portalController.show();
+                              _showDropdown();
                             }
                             setState(() {});
                           },
@@ -361,7 +388,7 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                           ? Icons.keyboard_arrow_up
                           : Icons.keyboard_arrow_down,
                       size: 18,
-                      color: LiqCombobox.chevronColor,
+                      color: palette.secondary,
                       textDirection: TextDirection.ltr,
                     ),
                   ),
@@ -428,14 +455,15 @@ class _DropdownPanel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ComboboxPalette.resolve(context);
     return SizedBox(
       width: width,
       height: height,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: LiqCombobox.backgroundColor,
+          color: palette.background,
           borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
-          border: Border.all(color: LiqCombobox.inactiveBorderColor),
+          border: Border.all(color: palette.border),
           boxShadow: const <BoxShadow>[LiqCombobox.panelShadow],
         ),
         child: ClipRRect(
@@ -481,37 +509,40 @@ class _OptionRowState<T> extends State<_OptionRow<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTapDown: (_) => setState(() => _pressed = true),
-      onTapCancel: () => setState(() => _pressed = false),
-      onTapUp: (_) => setState(() => _pressed = false),
-      onTap: widget.onTap,
-      child: Container(
-        height: LiqCombobox.rowHeight,
-        padding: const EdgeInsets.symmetric(
-          horizontal: LiqCombobox.horizontalPadding,
-        ),
-        color: _pressed ? LiqCombobox.pressedRowColor : null,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                widget.option.label,
-                style: LiqCombobox.textStyle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textDirection: TextDirection.ltr,
+    final palette = _ComboboxPalette.resolve(context);
+    return LiqPointerCursor(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTapDown: (_) => setState(() => _pressed = true),
+        onTapCancel: () => setState(() => _pressed = false),
+        onTapUp: (_) => setState(() => _pressed = false),
+        onTap: widget.onTap,
+        child: Container(
+          height: LiqCombobox.rowHeight,
+          padding: const EdgeInsets.symmetric(
+            horizontal: LiqCombobox.horizontalPadding,
+          ),
+          color: _pressed ? palette.pressedRow : null,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  widget.option.label,
+                  style: LiqCombobox.textStyle.copyWith(color: palette.text),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.ltr,
+                ),
               ),
-            ),
-            if (widget.selected)
-              const Icon(
-                Icons.check,
-                size: 18,
-                color: LiqCombobox.activeBorderColor,
-                textDirection: TextDirection.ltr,
-              ),
-          ],
+              if (widget.selected)
+                Icon(
+                  Icons.check,
+                  size: 18,
+                  color: palette.activeBorder,
+                  textDirection: TextDirection.ltr,
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -523,24 +554,70 @@ class _EmptyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ComboboxPalette.resolve(context);
     return Container(
       height: LiqCombobox.rowHeight,
       alignment: AlignmentDirectional.centerStart,
       padding: const EdgeInsets.symmetric(
         horizontal: LiqCombobox.horizontalPadding,
       ),
-      child: const Text(
+      child: Text(
         'No matches',
         style: TextStyle(
           fontFamily: 'SF Pro Text',
-          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+          fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
           fontSize: 17,
           fontWeight: FontWeight.w400,
-          color: LiqCombobox.chevronColor,
+          color: palette.secondary,
         ),
         maxLines: 1,
         textDirection: TextDirection.ltr,
       ),
     );
   }
+}
+
+final class _ComboboxPalette {
+  const _ComboboxPalette({
+    required this.background,
+    required this.text,
+    required this.placeholder,
+    required this.secondary,
+    required this.border,
+    required this.activeBorder,
+    required this.pressedRow,
+  });
+
+  factory _ComboboxPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _ComboboxPalette(
+        background: LiqCombobox.backgroundColor,
+        text: LiqCombobox.textColor,
+        placeholder: LiqCombobox.placeholderColor,
+        secondary: LiqCombobox.chevronColor,
+        border: LiqCombobox.inactiveBorderColor,
+        activeBorder: LiqCombobox.activeBorderColor,
+        pressedRow: LiqCombobox.pressedRowColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _ComboboxPalette(
+      background: context.liqSurfaceColor,
+      text: context.liqLabelColor,
+      placeholder: secondary.withValues(alpha: 0.48),
+      secondary: secondary,
+      border: secondary.withValues(alpha: 0.24),
+      activeBorder: context.liqPrimaryColor,
+      pressedRow: secondary.withValues(alpha: 0.14),
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color placeholder;
+  final Color secondary;
+  final Color border;
+  final Color activeBorder;
+  final Color pressedRow;
 }

@@ -60,8 +60,8 @@ client then routes locally based on the hash.
 
 Local dev:
 
-1. `cd apps/docs_snippets && flutter build web --no-web-resources-cdn --pwa-strategy=none --no-tree-shake-icons --base-href=/`
-2. `cd apps/docs_snippets/build/web && python3 -m http.server 4174 &`
+1. `cd apps/docs_snippets && flutter build web --wasm --release --no-web-resources-cdn --pwa-strategy=none --base-href=/`
+2. `PORT=4174 node tooling/serve_flutter_web_with_headers.mjs apps/docs_snippets/build/web`
    (or `flutter run -d web-server --web-port=4174` for hot reload)
 3. `cd apps/docs && NEXT_PUBLIC_SNIPPETS_URL=http://localhost:4174 npx pnpm@10 dev`
 4. Visit <http://localhost:3000/docs/inputs/buttons>.

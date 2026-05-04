@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 one-time-passcode (OTP) entry field.
 ///
@@ -250,11 +251,9 @@ class _OtpBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _OtpPalette.resolve(context);
     final hasDigit = digit.isNotEmpty;
-    final borderColor =
-        isActive
-            ? LiqOtpInput.activeBorderColor
-            : LiqOtpInput.inactiveBorderColor;
+    final borderColor = isActive ? palette.activeBorder : palette.border;
     final borderWidth =
         isActive
             ? LiqOtpInput.activeBorderWidth
@@ -268,7 +267,7 @@ class _OtpBox extends StatelessWidget {
         child = Text(
           digit,
           textDirection: TextDirection.ltr,
-          style: LiqOtpInput.textStyle,
+          style: LiqOtpInput.textStyle.copyWith(color: palette.text),
         );
       }
     }
@@ -278,7 +277,7 @@ class _OtpBox extends StatelessWidget {
       height: LiqOtpInput.boxHeight,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: LiqOtpInput.backgroundColor,
+        color: palette.background,
         borderRadius: BorderRadius.circular(LiqOtpInput.boxRadius),
         border: Border.all(color: borderColor, width: borderWidth),
       ),
@@ -294,13 +293,44 @@ class _ObscureDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _OtpPalette.resolve(context);
     return Container(
       width: LiqOtpInput.obscureDotSize,
       height: LiqOtpInput.obscureDotSize,
-      decoration: const BoxDecoration(
-        color: LiqOtpInput.textColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: palette.text, shape: BoxShape.circle),
     );
   }
+}
+
+final class _OtpPalette {
+  const _OtpPalette({
+    required this.background,
+    required this.text,
+    required this.border,
+    required this.activeBorder,
+  });
+
+  factory _OtpPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _OtpPalette(
+        background: LiqOtpInput.backgroundColor,
+        text: LiqOtpInput.textColor,
+        border: LiqOtpInput.inactiveBorderColor,
+        activeBorder: LiqOtpInput.activeBorderColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _OtpPalette(
+      background: context.liqSurfaceColor,
+      text: context.liqLabelColor,
+      border: secondary.withValues(alpha: 0.24),
+      activeBorder: context.liqPrimaryColor,
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color border;
+  final Color activeBorder;
 }

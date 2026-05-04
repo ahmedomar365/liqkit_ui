@@ -7,7 +7,7 @@ Widget _wrap(Widget child) {
     textDirection: TextDirection.ltr,
     child: MediaQuery(
       data: const MediaQueryData(),
-      child: SizedBox(width: 400, child: child),
+      child: SizedBox(width: 400, child: Center(child: child)),
     ),
   );
 }
@@ -23,8 +23,24 @@ void main() {
     expect(find.text('Mute'), findsOneWidget);
   });
 
+  testWidgets('LiqSystemActionPill keeps a 44pt tap target', (tester) async {
+    await tester.pumpWidget(
+      _wrap(LiqSystemActionPill(label: 'Mute', onPressed: () {})),
+    );
+
+    expect(tester.getSize(find.byType(LiqSystemActionPill)).height, 44);
+  });
+
   testWidgets('LiqSystemToggleDot renders selected variant', (tester) async {
     await tester.pumpWidget(_wrap(const LiqSystemToggleDot(selected: true)));
     expect(find.byType(LiqSystemToggleDot), findsOneWidget);
+  });
+
+  testWidgets('LiqSystemToggleDot keeps a 44pt tap target', (tester) async {
+    await tester.pumpWidget(
+      _wrap(LiqSystemToggleDot(selected: true, onPressed: () {})),
+    );
+
+    expect(tester.getSize(find.byType(LiqSystemToggleDot)), const Size(44, 44));
   });
 }

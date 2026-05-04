@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
@@ -164,5 +164,62 @@ void main() {
       expect(received, isNotNull);
       expect(received!.minute, 1);
     });
+
+    testWidgets('parent echo does not jump controllers during selection', (
+      tester,
+    ) async {
+      var value = DateTime(2026, 4, 29, 9);
+      await tester.pumpWidget(
+        _wrap(
+          StatefulBuilder(
+            builder:
+                (context, setState) => LiqTimePicker(
+                  value: value,
+                  onChanged: (t) => setState(() => value = t),
+                ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final wheels =
+          tester
+              .widgetList<ListWheelScrollView>(find.byType(ListWheelScrollView))
+              .toList();
+      final minuteController =
+          wheels[1].controller! as FixedExtentScrollController;
+
+      _jumpToItem(minuteController, 2);
+      await tester.pump();
+
+      expect(value.minute, 2);
+      expect(minuteController.selectedItem, 2);
+    });
+
+    testWidgets('uses dark theme color for wheel text', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqTimePicker(
+              value: DateTime(2026, 4, 29, 14, 30),
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final visibleText =
+          tester
+              .widgetList<Text>(find.byType(Text))
+              .where((text) => text.data == '30')
+              .first;
+      expect(visibleText.style?.color, const Color(0xFFFFFFFF));
+    });
   });
+}
+
+void _jumpToItem(FixedExtentScrollController controller, int item) {
+  controller.jumpToItem(item);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Horizontal alignment for a [LiqDataColumn].
 enum LiqColumnAlignment {
@@ -235,6 +236,7 @@ final class LiqDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _DataTablePalette.resolve(context);
     assert(() {
       for (var i = 0; i < rows.length; i++) {
         if (rows[i].cells.length != columns.length) {
@@ -249,9 +251,9 @@ final class LiqDataTable extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: bodyBackground,
+        color: palette.bodyBackground,
         borderRadius: const BorderRadius.all(Radius.circular(radius)),
-        border: Border.all(color: borderColor, width: borderThickness),
+        border: Border.all(color: palette.border, width: borderThickness),
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(radius)),
@@ -259,14 +261,14 @@ final class LiqDataTable extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _buildHeader(),
+            _buildHeader(palette),
             for (var i = 0; i < rows.length; i++) ...<Widget>[
               if (i > 0)
-                const SizedBox(
+                SizedBox(
                   height: rowDividerThickness,
-                  child: ColoredBox(color: rowDividerColor),
+                  child: ColoredBox(color: palette.divider),
                 ),
-              _buildBodyRow(rows[i]),
+              _buildBodyRow(rows[i], palette),
             ],
           ],
         ),
@@ -274,13 +276,13 @@ final class LiqDataTable extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(_DataTablePalette palette) {
     return Container(
-      decoration: const BoxDecoration(
-        color: headerBackground,
+      decoration: BoxDecoration(
+        color: palette.headerBackground,
         border: Border(
           bottom: BorderSide(
-            color: rowDividerColor,
+            color: palette.divider,
             width: rowDividerThickness,
           ),
         ),
@@ -302,6 +304,7 @@ final class LiqDataTable extends StatelessWidget {
                     _effectiveAlignment(columns[i]),
                   ),
                   isSorted: sortColumnIndex == i,
+                  palette: palette,
                   sortDirection:
                       sortColumnIndex == i
                           ? sortDirection
@@ -325,7 +328,7 @@ final class LiqDataTable extends StatelessWidget {
     );
   }
 
-  Widget _buildBodyRow(LiqDataRow row) {
+  Widget _buildBodyRow(LiqDataRow row, _DataTablePalette palette) {
     final children = <Widget>[
       for (var i = 0; i < columns.length; i++)
         Expanded(
@@ -337,6 +340,7 @@ final class LiqDataTable extends StatelessWidget {
             ),
             textAlign: _alignmentToTextAlign(_effectiveAlignment(columns[i])),
             useTabularFigures: columns[i].numeric,
+            palette: palette,
             child: row.cells[i],
           ),
         ),
@@ -400,6 +404,7 @@ class _HeaderCell extends StatelessWidget {
     required this.widgetAlignment,
     required this.textAlign,
     required this.isSorted,
+    required this.palette,
     required this.sortDirection,
     required this.onTap,
   });
@@ -409,6 +414,7 @@ class _HeaderCell extends StatelessWidget {
   final Alignment widgetAlignment;
   final TextAlign textAlign;
   final bool isSorted;
+  final _DataTablePalette palette;
   final LiqSortDirection sortDirection;
   final VoidCallback? onTap;
 
@@ -416,7 +422,7 @@ class _HeaderCell extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = Text(
       column.label,
-      style: LiqDataTable.headerTextStyle,
+      style: LiqDataTable.headerTextStyle.copyWith(color: palette.headerText),
       textAlign: textAlign,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -452,6 +458,7 @@ class _HeaderCell extends StatelessWidget {
   Widget _withChevron(Widget label) {
     final chevron = _SortChevron(
       direction: isSorted ? sortDirection : LiqSortDirection.none,
+      palette: palette,
     );
     final children =
         effectiveAlignment == LiqColumnAlignment.right
@@ -482,9 +489,10 @@ class _HeaderCell extends StatelessWidget {
 }
 
 class _SortChevron extends StatelessWidget {
-  const _SortChevron({required this.direction});
+  const _SortChevron({required this.direction, required this.palette});
 
   final LiqSortDirection direction;
+  final _DataTablePalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -501,7 +509,9 @@ class _SortChevron extends StatelessWidget {
         height: 1,
         fontWeight: FontWeight.w600,
         color:
-            inactive ? const Color(0x808E8E93) : LiqDataTable.headerTextColor,
+            inactive
+                ? palette.headerText.withValues(alpha: 0.56)
+                : palette.headerText,
       ),
       textDirection: TextDirection.ltr,
     );
@@ -515,6 +525,7 @@ class _BodyCell extends StatelessWidget {
     required this.widgetAlignment,
     required this.textAlign,
     required this.useTabularFigures,
+    required this.palette,
   });
 
   final LiqDataColumn column;
@@ -522,6 +533,7 @@ class _BodyCell extends StatelessWidget {
   final Alignment widgetAlignment;
   final TextAlign textAlign;
   final bool useTabularFigures;
+  final _DataTablePalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -529,8 +541,9 @@ class _BodyCell extends StatelessWidget {
         useTabularFigures
             ? LiqDataTable.bodyTextStyle.copyWith(
               fontFeatures: const <FontFeature>[FontFeature.tabularFigures()],
+              color: palette.bodyText,
             )
-            : LiqDataTable.bodyTextStyle;
+            : LiqDataTable.bodyTextStyle.copyWith(color: palette.bodyText);
     return Align(
       alignment: widgetAlignment,
       child: DefaultTextStyle.merge(
@@ -542,4 +555,45 @@ class _BodyCell extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _DataTablePalette {
+  const _DataTablePalette({
+    required this.bodyBackground,
+    required this.headerBackground,
+    required this.border,
+    required this.divider,
+    required this.headerText,
+    required this.bodyText,
+  });
+
+  factory _DataTablePalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _DataTablePalette(
+        bodyBackground: LiqDataTable.bodyBackground,
+        headerBackground: LiqDataTable.headerBackground,
+        border: LiqDataTable.borderColor,
+        divider: LiqDataTable.rowDividerColor,
+        headerText: LiqDataTable.headerTextColor,
+        bodyText: LiqDataTable.bodyTextColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _DataTablePalette(
+      bodyBackground: context.liqSurfaceColor,
+      headerBackground: secondary.withValues(alpha: 0.10),
+      border: secondary.withValues(alpha: 0.16),
+      divider: secondary.withValues(alpha: 0.18),
+      headerText: secondary,
+      bodyText: context.liqLabelColor,
+    );
+  }
+
+  final Color bodyBackground;
+  final Color headerBackground;
+  final Color border;
+  final Color divider;
+  final Color headerText;
+  final Color bodyText;
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Visual variant of [LiqTabs].
 enum LiqTabsVariant {
@@ -95,31 +97,32 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TabsPalette.resolve(context);
     final disabled = onChanged == null;
     return Opacity(
       opacity: disabled ? 0.4 : 1,
       child: switch (variant) {
-        LiqTabsVariant.underline => _buildUnderline(),
-        LiqTabsVariant.pill => _buildPill(),
+        LiqTabsVariant.underline => _buildUnderline(palette),
+        LiqTabsVariant.pill => _buildPill(palette),
       },
     );
   }
 
-  Widget _buildUnderline() {
+  Widget _buildUnderline(_TabsPalette palette) {
     final count = items.length;
     return SizedBox(
       height: headerHeight,
       child: Stack(
         children: <Widget>[
           // Hairline divider full-width at the bottom.
-          const Positioned(
+          Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             child: SizedBox(
               height: 0.33,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: hairlineColor),
+                decoration: BoxDecoration(color: palette.hairline),
               ),
             ),
           ),
@@ -132,8 +135,8 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
                     item: items[i],
                     selected: i == selectedIndex,
                     enabled: !(onChanged == null),
-                    activeColor: activeColor,
-                    inactiveColor: inactiveColor,
+                    activeColor: palette.active,
+                    inactiveColor: palette.inactive,
                     onTap: onChanged == null ? null : () => onChanged!(i),
                     selectedIndex: selectedIndex,
                     indexInGroup: i,
@@ -153,10 +156,10 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
                 curve: animationCurve,
                 child: FractionallySizedBox(
                   widthFactor: 1 / count,
-                  child: const SizedBox(
+                  child: SizedBox(
                     height: 2,
                     child: DecoratedBox(
-                      decoration: BoxDecoration(color: activeColor),
+                      decoration: BoxDecoration(color: palette.active),
                     ),
                   ),
                 ),
@@ -167,14 +170,14 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
     );
   }
 
-  Widget _buildPill() {
+  Widget _buildPill(_TabsPalette palette) {
     final count = items.length;
     return SizedBox(
       height: headerHeight,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: pillTrackColor,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+        decoration: BoxDecoration(
+          color: palette.pillTrack,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(4),
@@ -190,7 +193,7 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
                     child: FractionallySizedBox(
                       widthFactor: 1 / count,
                       heightFactor: 1,
-                      child: const _PillHighlight(),
+                      child: _PillHighlight(color: palette.pillHighlight),
                     ),
                   ),
                 ),
@@ -203,8 +206,8 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
                         item: items[i],
                         selected: i == selectedIndex,
                         enabled: !(onChanged == null),
-                        activeColor: pillActiveLabelColor,
-                        inactiveColor: inactiveColor,
+                        activeColor: palette.pillActiveLabel,
+                        inactiveColor: palette.inactive,
                         onTap: onChanged == null ? null : () => onChanged!(i),
                         selectedIndex: selectedIndex,
                         indexInGroup: i,
@@ -236,15 +239,17 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
 }
 
 class _PillHighlight extends StatelessWidget {
-  const _PillHighlight();
+  const _PillHighlight({required this.color});
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return const DecoratedBox(
+    return DecoratedBox(
       decoration: BoxDecoration(
-        color: LiqTabs.pillHighlightColor,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        boxShadow: <BoxShadow>[
+        color: color,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Color(0x1A000000),
             blurRadius: 8,
@@ -254,6 +259,47 @@ class _PillHighlight extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _TabsPalette {
+  const _TabsPalette({
+    required this.active,
+    required this.inactive,
+    required this.hairline,
+    required this.pillTrack,
+    required this.pillHighlight,
+    required this.pillActiveLabel,
+  });
+
+  factory _TabsPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _TabsPalette(
+        active: LiqTabs.activeColor,
+        inactive: LiqTabs.inactiveColor,
+        hairline: LiqTabs.hairlineColor,
+        pillTrack: LiqTabs.pillTrackColor,
+        pillHighlight: LiqTabs.pillHighlightColor,
+        pillActiveLabel: LiqTabs.pillActiveLabelColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _TabsPalette(
+      active: context.liqPrimaryColor,
+      inactive: secondary,
+      hairline: secondary.withValues(alpha: 0.18),
+      pillTrack: secondary.withValues(alpha: 0.16),
+      pillHighlight: const Color(0xFF1C1C1E),
+      pillActiveLabel: context.liqLabelColor,
+    );
+  }
+
+  final Color active;
+  final Color inactive;
+  final Color hairline;
+  final Color pillTrack;
+  final Color pillHighlight;
+  final Color pillActiveLabel;
 }
 
 class _TabCell extends StatelessWidget {
@@ -318,14 +364,17 @@ class _TabCell extends StatelessWidget {
       button: true,
       inMutuallyExclusiveGroup: true,
       label: item.label ?? 'tab',
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: children,
+      child: LiqPointerCursor(
+        enabled: enabled && onTap != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ),
           ),
         ),
       ),

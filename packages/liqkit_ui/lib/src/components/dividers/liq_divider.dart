@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Orientation for [LiqDivider].
 enum LiqDividerOrientation {
   /// Horizontal hairline. Width fills its parent.
@@ -43,25 +45,35 @@ final class LiqDivider extends StatelessWidget {
   /// Default hairline color: 16% black on white.
   static const Color defaultColor = Color(0x29000000);
 
+  /// Default hairline color in dark theme.
+  static const Color darkDefaultColor = Color(0x29FFFFFF);
+
   /// iOS 26 hairline thickness in logical pixels.
   static const double thickness = 0.33;
 
   @override
   Widget build(BuildContext context) {
+    final effectiveColor = _effectiveColor(context, color);
     switch (orientation) {
       case LiqDividerOrientation.horizontal:
         return Container(
           height: thickness,
           margin: EdgeInsets.only(left: indent, right: endIndent),
-          color: color,
+          color: effectiveColor,
         );
       case LiqDividerOrientation.vertical:
         return Container(
           width: thickness,
           margin: EdgeInsets.only(top: indent, bottom: endIndent),
-          color: color,
+          color: effectiveColor,
         );
     }
+  }
+
+  static Color _effectiveColor(BuildContext context, Color color) {
+    if (color != defaultColor) return color;
+    final brightness = context.liqBrightness;
+    return brightness == Brightness.dark ? darkDefaultColor : defaultColor;
   }
 
   @override
@@ -112,14 +124,18 @@ final class LiqLabeledDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final effectiveColor = LiqDivider._effectiveColor(context, color);
+    final effectiveStyle =
+        textStyle ??
+        defaultLabelStyle.copyWith(color: context.liqSecondaryLabelColor);
     return Row(
       children: [
-        Expanded(child: LiqDivider(color: color)),
+        Expanded(child: LiqDivider(color: effectiveColor)),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: gap),
-          child: Text(label, style: textStyle ?? defaultLabelStyle),
+          child: Text(label, style: effectiveStyle),
         ),
-        Expanded(child: LiqDivider(color: color)),
+        Expanded(child: LiqDivider(color: effectiveColor)),
       ],
     );
   }

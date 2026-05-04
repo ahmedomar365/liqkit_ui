@@ -3,11 +3,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) {
-  return MediaQuery(
-    data: const MediaQueryData(size: Size(800, 600)),
-    child: Directionality(
-      textDirection: TextDirection.ltr,
-      child: Center(child: child),
+  return LiqTheme(
+    data: LiqThemeData.light,
+    child: MediaQuery(
+      data: const MediaQueryData(size: Size(800, 600)),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(child: child),
+      ),
+    ),
+  );
+}
+
+Widget _wrapDark(Widget child) {
+  return LiqTheme(
+    data: LiqThemeData.dark,
+    child: MediaQuery(
+      data: const MediaQueryData(size: Size(800, 600)),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(child: child),
+      ),
     ),
   );
 }
@@ -125,6 +141,21 @@ void main() {
       );
 
       expect(find.byType(RawScrollbar), findsOneWidget);
+    });
+
+    testWidgets('dark theme resolves scrollbar thumb color', (tester) async {
+      await tester.pumpWidget(
+        _wrapDark(
+          const SizedBox(
+            width: 200,
+            height: 200,
+            child: LiqScrollArea(child: SizedBox(width: 100, height: 1000)),
+          ),
+        ),
+      );
+
+      final scrollbar = tester.widget<RawScrollbar>(find.byType(RawScrollbar));
+      expect(scrollbar.thumbColor, LiqScrollArea.darkThumbColor);
     });
   });
 }

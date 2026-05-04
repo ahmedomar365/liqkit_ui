@@ -8,6 +8,14 @@ void main() {
     child: Center(child: SizedBox(width: 320, height: 160, child: child)),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(child: SizedBox(width: 320, height: 160, child: child)),
+    ),
+  );
+
   group('LiqBarChart', () {
     testWidgets('renders with one bar without throwing', (tester) async {
       await tester.pumpWidget(
@@ -125,9 +133,7 @@ void main() {
     testWidgets('rebuilds when bars change without throwing', (tester) async {
       await tester.pumpWidget(
         wrap(
-          LiqBarChart(
-            bars: const <LiqBar>[LiqBar(value: 1), LiqBar(value: 2)],
-          ),
+          LiqBarChart(bars: const <LiqBar>[LiqBar(value: 1), LiqBar(value: 2)]),
         ),
       );
       await tester.pumpWidget(
@@ -161,6 +167,40 @@ void main() {
       );
       expect(find.byType(LiqBarChart), findsOneWidget);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('dark theme resolves default fill and labels dynamically', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrapDark(
+          LiqBarChart(
+            bars: const <LiqBar>[
+              LiqBar(value: 12, label: 'Mon'),
+              LiqBar(value: 18, label: 'Tue'),
+            ],
+          ),
+        ),
+      );
+
+      final label = tester.widget<Text>(find.text('Mon'));
+      expect(label.style?.color, const Color(0xB2EBEBF5));
+
+      late Color effectiveColor;
+      await tester.pumpWidget(
+        wrapDark(
+          Builder(
+            builder: (context) {
+              effectiveColor = LiqBarChart.effectiveColorFor(
+                context,
+                LiqBarChart.barColor,
+              );
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      );
+      expect(effectiveColor, const Color(0xFF0091FF));
     });
   });
 }

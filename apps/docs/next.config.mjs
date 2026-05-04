@@ -17,6 +17,28 @@ if (!SNIPPETS_URL || !/^https?:\/\//.test(SNIPPETS_URL)) {
 const config = {
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'mdx'],
+  allowedDevOrigins: ['127.0.0.1'],
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'credentialless',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'cross-origin-isolated=(self)',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withMDX(config);

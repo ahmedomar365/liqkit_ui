@@ -94,5 +94,27 @@ void main() {
       expect(size.width, LiqCheckbox.boxSize);
       expect(size.height, LiqCheckbox.boxSize);
     });
+
+    testWidgets('uses dark theme colors for unchecked box', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqCheckbox(
+                value: LiqCheckboxState.unchecked,
+                onChanged: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final box = tester.widget<AnimatedContainer>(visibleBox());
+      final decoration = box.decoration! as BoxDecoration;
+      expect(decoration.color, const Color(0xFF000000));
+    });
   });
 }

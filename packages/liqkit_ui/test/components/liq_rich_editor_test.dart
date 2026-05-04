@@ -50,6 +50,40 @@ void main() {
       expect(controller.value.text, 'hello');
     });
 
+    testWidgets(
+      'editable area leaves text selection gestures to EditableText',
+      (tester) async {
+        final controller = LiqRichEditorController(
+          value: const LiqRichValue(text: 'hello world'),
+        );
+        addTearDown(controller.dispose);
+
+        await tester.pumpWidget(
+          wrap(
+            SizedBox(width: 400, child: LiqRichEditor(controller: controller)),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(
+          find.ancestor(
+            of: find.byType(EditableText),
+            matching: find.byWidgetPredicate((widget) => widget is Listener),
+          ),
+          findsWidgets,
+        );
+        expect(
+          find.ancestor(
+            of: find.byType(EditableText),
+            matching: find.byWidgetPredicate(
+              (widget) => widget is GestureDetector && widget.onTap != null,
+            ),
+          ),
+          findsNothing,
+        );
+      },
+    );
+
     testWidgets('renders the bold toolbar button', (tester) async {
       final controller = LiqRichEditorController();
       addTearDown(controller.dispose);
@@ -63,6 +97,29 @@ void main() {
       expect(find.byIcon(Icons.format_bold), findsOneWidget);
       expect(find.byIcon(Icons.format_italic), findsOneWidget);
       expect(find.byIcon(Icons.format_underlined), findsOneWidget);
+    });
+
+    testWidgets('toolbar buttons keep 44pt tap targets', (tester) async {
+      final controller = LiqRichEditorController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(width: 400, child: LiqRichEditor(controller: controller)),
+        ),
+      );
+
+      for (final icon in <IconData>[
+        Icons.format_bold,
+        Icons.format_italic,
+        Icons.format_underlined,
+      ]) {
+        final button = find.ancestor(
+          of: find.byIcon(icon),
+          matching: find.byType(GestureDetector),
+        );
+        expect(tester.getSize(button.first), const Size(44, 44));
+      }
     });
 
     testWidgets('a bold range over [0,4) renders FontWeight.w700 on the first '

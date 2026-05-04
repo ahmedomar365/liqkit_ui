@@ -71,6 +71,24 @@ void main() {
       expect(fired, 1);
     });
 
+    testWidgets('interactive chip keeps a 44pt-tall tap target', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_wrap(LiqChip(label: 'tap', onPressed: () {})));
+
+      expect(tester.getSize(find.byType(LiqChip)).height, 44);
+
+      final visual = tester.getSize(
+        find
+            .descendant(
+              of: find.byType(LiqChip),
+              matching: find.byType(AnimatedContainer),
+            )
+            .first,
+      );
+      expect(visual.height, LiqChip.minHeight);
+    });
+
     testWidgets(
       'when both onPressed and onDeleted are null, the chip is non-tappable',
       (tester) async {
@@ -123,6 +141,17 @@ void main() {
         expect(pressed, 0);
       },
     );
+
+    testWidgets('delete affordance keeps a 44pt tap target', (tester) async {
+      await tester.pumpWidget(_wrap(LiqChip(label: 'tag', onDeleted: () {})));
+
+      final deleteTarget = find.ancestor(
+        of: find.byIcon(Icons.close),
+        matching: find.byType(GestureDetector),
+      );
+
+      expect(tester.getSize(deleteTarget.first), const Size(44, 44));
+    });
   });
 
   group('LiqChipGroup', () {

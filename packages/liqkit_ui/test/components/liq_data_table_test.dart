@@ -199,6 +199,45 @@ void main() {
       );
     });
 
+    testWidgets('uses dark theme colors for table text and surface', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(data: LiqThemeData.dark, child: _wrap(_table())),
+      );
+      await tester.pumpAndSettle();
+
+      final jane = tester.widget<Text>(find.text('Jane'));
+      expect(jane.style?.color, isNull);
+
+      final bodyDefault = tester.widget<DefaultTextStyle>(
+        find
+            .ancestor(
+              of: find.text('Jane'),
+              matching: find.byType(DefaultTextStyle),
+            )
+            .first,
+      );
+      expect(bodyDefault.style.color, const Color(0xFFFFFFFF));
+
+      final tableDecorations =
+          tester
+              .widgetList<DecoratedBox>(
+                find.descendant(
+                  of: find.byType(LiqDataTable),
+                  matching: find.byType(DecoratedBox),
+                ),
+              )
+              .map((box) => box.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        tableDecorations.any(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
+    });
+
     testWidgets('asserts when row.cells.length != columns.length', (
       tester,
     ) async {

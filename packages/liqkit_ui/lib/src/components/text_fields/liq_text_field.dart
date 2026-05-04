@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Surface variant for [LiqTextField].
 enum LiqTextFieldVariant {
   /// Plain row on a transparent surface (no background).
@@ -26,7 +28,7 @@ final class LiqTextField extends StatefulWidget {
     required this.controller,
     this.placeholder,
     this.variant = LiqTextFieldVariant.filled,
-    this.brightness = Brightness.light,
+    this.brightness,
     this.enabled = true,
     this.obscureText = false,
     this.onChanged,
@@ -43,8 +45,8 @@ final class LiqTextField extends StatefulWidget {
   /// Surface variant.
   final LiqTextFieldVariant variant;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   /// When false the field rejects focus / typing.
   final bool enabled;
@@ -103,7 +105,8 @@ class _LiqTextFieldState extends State<LiqTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = widget.brightness == Brightness.dark;
+    final isDark =
+        (widget.brightness ?? context.liqBrightness) == Brightness.dark;
     final filled = widget.variant == LiqTextFieldVariant.filled;
     final bg =
         !filled
@@ -137,9 +140,10 @@ class _LiqTextFieldState extends State<LiqTextField> {
           color: bg,
           border: filled ? Border(bottom: BorderSide(color: separator)) : null,
         ),
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: widget.enabled ? _focusNode.requestFocus : null,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerDown:
+              widget.enabled ? (_) => _focusNode.requestFocus() : null,
           child: Stack(
             alignment: AlignmentDirectional.centerStart,
             children: <Widget>[

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart' show TextInputAction, TextInputType;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Inline character format applied to a span of text inside
 /// [LiqRichEditor].
 ///
@@ -297,6 +299,9 @@ final class LiqRichEditor extends StatefulWidget {
   /// Toolbar button square size.
   static const double buttonSize = 32;
 
+  /// Minimum toolbar button tap target.
+  static const double buttonTapTargetSize = 44;
+
   /// Toolbar button corner radius.
   static const double buttonRadius = 8;
 
@@ -517,28 +522,32 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final palette =
+        context.liqIsDark
+            ? const _RichEditorPalette.dark()
+            : const _RichEditorPalette.light();
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: LiqRichEditor.surfaceBackground,
+        color: palette.surfaceBackground,
         borderRadius: const BorderRadius.all(
           Radius.circular(LiqRichEditor.surfaceRadius),
         ),
-        border: Border.all(color: LiqRichEditor.surfaceBorder),
+        border: Border.all(color: palette.surfaceBorder),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[_buildToolbar(), _buildEditableArea()],
+        children: <Widget>[_buildToolbar(palette), _buildEditableArea(palette)],
       ),
     );
   }
 
-  Widget _buildToolbar() {
+  Widget _buildToolbar(_RichEditorPalette palette) {
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: LiqRichEditor.toolbarDivider,
+            color: palette.toolbarDivider,
             width: LiqRichEditor.toolbarDividerThickness,
           ),
         ),
@@ -556,6 +565,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
                 semanticLabel: 'Bold',
                 icon: Icons.format_bold,
                 isActive: _isFormatActive(LiqRichFormat.bold),
+                palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.bold),
               ),
               const SizedBox(width: LiqRichEditor.buttonGap),
@@ -563,6 +573,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
                 semanticLabel: 'Italic',
                 icon: Icons.format_italic,
                 isActive: _isFormatActive(LiqRichFormat.italic),
+                palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.italic),
               ),
               const SizedBox(width: LiqRichEditor.buttonGap),
@@ -570,6 +581,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
                 semanticLabel: 'Underline',
                 icon: Icons.format_underlined,
                 isActive: _isFormatActive(LiqRichFormat.underline),
+                palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.underline),
               ),
             ],
@@ -579,27 +591,34 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
     );
   }
 
-  Widget _buildEditableArea() {
+  Widget _buildEditableArea(_RichEditorPalette palette) {
     final showPlaceholder = _editingController.text.isEmpty;
+    final baseStyle = LiqRichEditor.baseTextStyle.copyWith(color: palette.text);
     return Padding(
       padding: const EdgeInsets.all(LiqRichEditor.editorPadding),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _focusNode.requestFocus,
+      child: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown: (_) {
+          if (!_focusNode.hasFocus) {
+            _focusNode.requestFocus();
+          }
+        },
         child: Stack(
           children: <Widget>[
             if (showPlaceholder)
               Text(
                 widget.placeholder,
-                style: LiqRichEditor.placeholderTextStyle,
+                style: LiqRichEditor.placeholderTextStyle.copyWith(
+                  color: palette.placeholder,
+                ),
                 textDirection: TextDirection.ltr,
               ),
             EditableText(
               controller: _editingController,
               focusNode: _focusNode,
-              style: LiqRichEditor.baseTextStyle,
+              style: baseStyle,
               cursorColor: LiqRichEditor.cursorColor,
-              backgroundCursorColor: LiqRichEditor.placeholderColor,
+              backgroundCursorColor: palette.placeholder,
               selectionColor: LiqRichEditor.selectionColor,
               minLines: widget.minLines,
               maxLines: widget.maxLines,
@@ -620,6 +639,44 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
       ..add(IntProperty('rangesCount', widget.controller.value.ranges.length))
       ..add(StringProperty('placeholder', widget.placeholder));
   }
+}
+
+final class _RichEditorPalette {
+  const _RichEditorPalette({
+    required this.surfaceBorder,
+    required this.surfaceBackground,
+    required this.toolbarDivider,
+    required this.buttonActiveBackground,
+    required this.buttonIcon,
+    required this.text,
+    required this.placeholder,
+  });
+
+  const _RichEditorPalette.light()
+    : surfaceBorder = LiqRichEditor.surfaceBorder,
+      surfaceBackground = LiqRichEditor.surfaceBackground,
+      toolbarDivider = LiqRichEditor.toolbarDivider,
+      buttonActiveBackground = LiqRichEditor.buttonActiveBackground,
+      buttonIcon = LiqRichEditor.buttonIconColor,
+      text = LiqRichEditor.textColor,
+      placeholder = LiqRichEditor.placeholderColor;
+
+  const _RichEditorPalette.dark()
+    : surfaceBorder = const Color(0x29FFFFFF),
+      surfaceBackground = const Color(0x1FFFFFFF),
+      toolbarDivider = const Color(0x24FFFFFF),
+      buttonActiveBackground = const Color(0x29FFFFFF),
+      buttonIcon = const Color(0xFFF5F5F7),
+      text = const Color(0xFFF5F5F7),
+      placeholder = const Color(0xFF8E8E93);
+
+  final Color surfaceBorder;
+  final Color surfaceBackground;
+  final Color toolbarDivider;
+  final Color buttonActiveBackground;
+  final Color buttonIcon;
+  final Color text;
+  final Color placeholder;
 }
 
 class _RichTextEditingController extends TextEditingController {
@@ -699,12 +756,14 @@ class _ToolbarButton extends StatelessWidget {
     required this.semanticLabel,
     required this.icon,
     required this.isActive,
+    required this.palette,
     required this.onPressed,
   });
 
   final String semanticLabel;
   final IconData icon;
   final bool isActive;
+  final _RichEditorPalette palette;
   final VoidCallback onPressed;
 
   @override
@@ -716,23 +775,29 @@ class _ToolbarButton extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onPressed,
-        child: Container(
-          width: LiqRichEditor.buttonSize,
-          height: LiqRichEditor.buttonSize,
-          decoration: BoxDecoration(
-            color:
-                isActive
-                    ? LiqRichEditor.buttonActiveBackground
-                    : const Color(0x00000000),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(LiqRichEditor.buttonRadius),
+        child: SizedBox(
+          width: LiqRichEditor.buttonTapTargetSize,
+          height: LiqRichEditor.buttonTapTargetSize,
+          child: Center(
+            child: Container(
+              width: LiqRichEditor.buttonSize,
+              height: LiqRichEditor.buttonSize,
+              decoration: BoxDecoration(
+                color:
+                    isActive
+                        ? palette.buttonActiveBackground
+                        : const Color(0x00000000),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(LiqRichEditor.buttonRadius),
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Icon(
+                icon,
+                size: LiqRichEditor.buttonIconSize,
+                color: palette.buttonIcon,
+              ),
             ),
-          ),
-          alignment: Alignment.center,
-          child: Icon(
-            icon,
-            size: LiqRichEditor.buttonIconSize,
-            color: LiqRichEditor.buttonIconColor,
           ),
         ),
       ),

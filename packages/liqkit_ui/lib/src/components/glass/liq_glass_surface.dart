@@ -3,6 +3,8 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Tint preset for [LiqGlassSurface].
 enum LiqGlassTint {
   /// iOS 26 chrome / popover glass — light translucent.
@@ -123,37 +125,6 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     blurRadius: 40,
   );
 
-  Color get _baseFill {
-    switch (tint) {
-      case LiqGlassTint.light:
-        return lightTintBase;
-      case LiqGlassTint.dark:
-        return darkTintBase;
-      case LiqGlassTint.opaque:
-        return opaqueTintBase;
-    }
-  }
-
-  Color get _rimColor {
-    switch (tint) {
-      case LiqGlassTint.light:
-      case LiqGlassTint.opaque:
-        return lightRimColor;
-      case LiqGlassTint.dark:
-        return darkRimColor;
-    }
-  }
-
-  Color get _highlightStart {
-    switch (tint) {
-      case LiqGlassTint.light:
-      case LiqGlassTint.opaque:
-        return lightHighlightStart;
-      case LiqGlassTint.dark:
-        return darkHighlightStart;
-    }
-  }
-
   List<BoxShadow> get _shadows {
     switch (elevation) {
       case LiqGlassElevation.flat:
@@ -165,11 +136,46 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     }
   }
 
+  Color _baseFillFor(LiqGlassTint effectiveTint) {
+    switch (effectiveTint) {
+      case LiqGlassTint.light:
+        return lightTintBase;
+      case LiqGlassTint.dark:
+        return darkTintBase;
+      case LiqGlassTint.opaque:
+        return opaqueTintBase;
+    }
+  }
+
+  Color _rimColorFor(LiqGlassTint effectiveTint) {
+    switch (effectiveTint) {
+      case LiqGlassTint.light:
+      case LiqGlassTint.opaque:
+        return lightRimColor;
+      case LiqGlassTint.dark:
+        return darkRimColor;
+    }
+  }
+
+  Color _highlightStartFor(LiqGlassTint effectiveTint) {
+    switch (effectiveTint) {
+      case LiqGlassTint.light:
+      case LiqGlassTint.opaque:
+        return lightHighlightStart;
+      case LiqGlassTint.dark:
+        return darkHighlightStart;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final effectiveTint =
+        tint == LiqGlassTint.light && context.liqIsDark
+            ? LiqGlassTint.dark
+            : tint;
     final layers = <Widget>[];
 
-    if (tint != LiqGlassTint.opaque) {
+    if (effectiveTint != LiqGlassTint.opaque) {
       layers.add(
         Positioned.fill(
           child: BackdropFilter(
@@ -181,7 +187,9 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     }
 
     layers
-      ..add(Positioned.fill(child: ColoredBox(color: _baseFill)))
+      ..add(
+        Positioned.fill(child: ColoredBox(color: _baseFillFor(effectiveTint))),
+      )
       ..add(
         Positioned.fill(
           child: IgnorePointer(
@@ -190,7 +198,10 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[_highlightStart, highlightEnd],
+                  colors: <Color>[
+                    _highlightStartFor(effectiveTint),
+                    highlightEnd,
+                  ],
                   stops: const <double>[0, 0.4],
                 ),
               ),
@@ -204,7 +215,10 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: borderRadius,
-                border: Border.all(width: 0.5, color: _rimColor),
+                border: Border.all(
+                  width: 0.5,
+                  color: _rimColorFor(effectiveTint),
+                ),
               ),
             ),
           ),

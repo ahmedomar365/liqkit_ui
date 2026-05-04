@@ -1,11 +1,15 @@
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget notificationRemindersBuilder(BuildContext context) {
   // {@highlight}
-  return const Align(
-    heightFactor: 1,
+  return const SnippetFrame(
+    maxWidth: 420,
+    height: 190,
+    surface: SnippetFrameSurface.liquidDark,
+    surfacePadding: EdgeInsets.all(20),
     child: LiqNotification(
       title: 'Reminders',
       body: 'Team standup starts in 5 minutes.',

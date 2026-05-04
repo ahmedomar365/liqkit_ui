@@ -11,6 +11,28 @@ void main() {
     ),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(child: child),
+    ),
+  );
+
+  List<Color> skeletonGradientColors(WidgetTester tester) {
+    final container = tester.widget<Container>(
+      find.byWidgetPredicate((widget) {
+        if (widget is! Container) return false;
+        final decoration = widget.decoration;
+        return decoration is BoxDecoration &&
+            decoration.gradient is LinearGradient;
+      }).first,
+    );
+    final decoration = container.decoration! as BoxDecoration;
+    final gradient = decoration.gradient! as LinearGradient;
+    return gradient.colors;
+  }
+
   group('LiqSkeleton', () {
     testWidgets('rect skeleton sizes exactly to width and height', (
       tester,
@@ -64,6 +86,18 @@ void main() {
 
       expect(find.byType(LiqSkeleton), findsOneWidget);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('uses graphite shimmer colors in dark theme', (tester) async {
+      await tester.pumpWidget(
+        wrapDark(const LiqSkeleton(width: 100, height: 20)),
+      );
+
+      expect(skeletonGradientColors(tester), const <Color>[
+        LiqSkeleton.darkBaseColor,
+        LiqSkeleton.darkHighlightColor,
+        LiqSkeleton.darkBaseColor,
+      ]);
     });
   });
 

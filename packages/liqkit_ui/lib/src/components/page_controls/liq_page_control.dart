@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Surface brightness for [LiqPageControl].
 enum LiqPageControlBrightness {
   /// Light surface — black dots.
@@ -25,7 +27,7 @@ final class LiqPageControl extends StatelessWidget {
   const LiqPageControl({
     required this.count,
     required this.activeIndex,
-    this.brightness = LiqPageControlBrightness.light,
+    this.brightness,
     this.maxVisible = 7,
     super.key,
   }) : assert(count >= 0, 'count must be non-negative'),
@@ -37,8 +39,8 @@ final class LiqPageControl extends StatelessWidget {
   /// Active page index (0..count-1).
   final int activeIndex;
 
-  /// Surface brightness.
-  final LiqPageControlBrightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final LiqPageControlBrightness? brightness;
 
   /// Maximum number of dots rendered before peripheral fading kicks in.
   final int maxVisible;
@@ -58,7 +60,13 @@ final class LiqPageControl extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final isDark = brightness == LiqPageControlBrightness.dark;
+    final resolvedBrightness =
+        brightness ??
+        switch (context.liqBrightness) {
+          Brightness.dark => LiqPageControlBrightness.dark,
+          Brightness.light => LiqPageControlBrightness.light,
+        };
+    final isDark = resolvedBrightness == LiqPageControlBrightness.dark;
     final dotColor = isDark ? _darkDot : _lightDot;
     final activeColor = isDark ? _darkActive : _lightActive;
 
@@ -123,7 +131,7 @@ final class LiqPageControl extends StatelessWidget {
     properties
       ..add(IntProperty('count', count))
       ..add(IntProperty('activeIndex', activeIndex))
-      ..add(EnumProperty<LiqPageControlBrightness>('brightness', brightness))
+      ..add(EnumProperty<LiqPageControlBrightness?>('brightness', brightness))
       ..add(IntProperty('maxVisible', maxVisible));
   }
 }

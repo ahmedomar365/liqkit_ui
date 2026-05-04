@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// One crumb in a [LiqBreadcrumb] trail.
 ///
 /// The last crumb in a trail is typically the current page and has
@@ -45,10 +47,7 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
   /// Creates a breadcrumb trail.
   const LiqBreadcrumb({
     required this.items,
-    this.separator = const Text(
-      '/',
-      style: TextStyle(color: Color(0xFFC7C7CC), fontSize: 14),
-    ),
+    this.separator = _defaultSeparator,
     this.spacing = 8,
     super.key,
   });
@@ -65,11 +64,26 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
   /// Active link color (iOS 26 system blue).
   static const Color activeColor = Color(0xFF007AFF);
 
+  /// Active link color in dark theme.
+  static const Color darkActiveColor = Color(0xFF0091FF);
+
   /// Inactive (current page) text color.
   static const Color inactiveColor = Color(0xFF1C1C1E);
 
+  /// Inactive (current page) text color in dark theme.
+  static const Color darkInactiveColor = Color(0xFFFFFFFF);
+
+  /// Default separator color.
+  static const Color separatorColor = Color(0xFFC7C7CC);
+
+  /// Default separator color in dark theme.
+  static const Color darkSeparatorColor = Color(0x66EBEBF5);
+
   /// Default font size for crumbs and the default separator.
   static const double fontSize = 14;
+
+  /// Minimum tap target height for tappable crumbs.
+  static const double tapTargetHeight = 44;
 
   /// Style applied to tappable crumbs.
   static const TextStyle activeTextStyle = TextStyle(
@@ -91,13 +105,31 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = context.liqBrightness;
+    final isDark = brightness == Brightness.dark;
+    final activeStyle = activeTextStyle.copyWith(
+      color: isDark ? darkActiveColor : activeColor,
+    );
+    final inactiveStyle = inactiveTextStyle.copyWith(
+      color: isDark ? darkInactiveColor : inactiveColor,
+    );
+    final effectiveSeparator =
+        identical(separator, _defaultSeparator)
+            ? Text(
+              '/',
+              style: TextStyle(
+                color: isDark ? darkSeparatorColor : separatorColor,
+                fontSize: fontSize,
+              ),
+            )
+            : separator;
     final children = <Widget>[];
     final lastIndex = items.length - 1;
     for (var i = 0; i < items.length; i++) {
       final item = items[i];
       final isLast = i == lastIndex;
       final tappable = !isLast && item.onPressed != null;
-      final style = isLast ? inactiveTextStyle : activeTextStyle;
+      final style = isLast ? inactiveStyle : activeStyle;
       final text = Text(
         item.label,
         style: style,
@@ -108,7 +140,10 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: item.onPressed,
-            child: text,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: tapTargetHeight),
+              child: Center(widthFactor: 1, heightFactor: 1, child: text),
+            ),
           ),
         );
       } else {
@@ -117,7 +152,7 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
       if (!isLast) {
         children
           ..add(SizedBox(width: spacing))
-          ..add(separator)
+          ..add(effectiveSeparator)
           ..add(SizedBox(width: spacing));
       }
     }
@@ -148,3 +183,8 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
       );
   }
 }
+
+const Widget _defaultSeparator = Text(
+  '/',
+  style: TextStyle(color: LiqBreadcrumb.separatorColor, fontSize: 14),
+);

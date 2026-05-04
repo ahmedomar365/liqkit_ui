@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 inline date picker — month grid with selectable days.
 ///
 /// Sourced from `native/components/pickers.css` (`.ios26-picker-inline`):
@@ -49,13 +51,18 @@ final class LiqDatePicker extends StatelessWidget {
   final VoidCallback? onNext;
 
   static const Color _bg = Color(0xFFFFFFFF);
+  static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _rim = Color(0x140F141C);
+  static const Color _rimDark = Color(0x29FFFFFF);
   static const Color _shadow = Color(0x1F131925);
   static const Color _title = Color(0xFF000000);
+  static const Color _titleDark = Color(0xFFFFFFFF);
   static const Color _accent = Color(0xFF0088FF);
   static const Color _accentTint = Color(0x2E0088FF);
   static const Color _weekdayColor = Color(0x4D3C3C43);
+  static const Color _weekdayColorDark = Color(0x99EBEBF5);
   static const Color _nullColor = Color(0x4D3C3C43);
+  static const Color _nullColorDark = Color(0x52EBEBF5);
 
   static const List<String> _weekdayLabels = <String>[
     'SUN',
@@ -120,17 +127,18 @@ final class LiqDatePicker extends StatelessWidget {
     while (cells.length % 7 != 0) {
       cells.add(null);
     }
+    final palette = _DatePickerPalette.resolve(context);
 
     return SizedBox(
       width: 370,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(13)),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: _bg,
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            border: Border.fromBorderSide(BorderSide(color: _rim)),
-            boxShadow: <BoxShadow>[
+          decoration: BoxDecoration(
+            color: palette.background,
+            borderRadius: const BorderRadius.all(Radius.circular(13)),
+            border: Border.fromBorderSide(BorderSide(color: palette.rim)),
+            boxShadow: const <BoxShadow>[
               BoxShadow(color: _shadow, offset: Offset(0, 10), blurRadius: 40),
             ],
           ),
@@ -139,10 +147,10 @@ final class LiqDatePicker extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _buildHeader(),
-                _buildWeekdays(),
+                _buildHeader(palette),
+                _buildWeekdays(palette),
                 const SizedBox(height: 10),
-                _buildGrid(cells),
+                _buildGrid(cells, palette),
               ],
             ),
           ),
@@ -151,9 +159,9 @@ final class LiqDatePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(_DatePickerPalette palette) {
     return SizedBox(
-      height: 40,
+      height: 44,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
@@ -169,8 +177,7 @@ final class LiqDatePicker extends StatelessWidget {
                   height: 22 / 17,
                   letterSpacing: -0.43,
                   fontWeight: FontWeight.w600,
-                  color: _title,
-                ),
+                ).copyWith(color: palette.title),
               ),
             ),
             _Arrow(direction: _ArrowDir.left, onPressed: onPrev),
@@ -182,7 +189,7 @@ final class LiqDatePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildWeekdays() {
+  Widget _buildWeekdays(_DatePickerPalette palette) {
     return SizedBox(
       height: 20,
       child: Padding(
@@ -202,8 +209,7 @@ final class LiqDatePicker extends StatelessWidget {
                     fontSize: 13,
                     height: 18 / 13,
                     fontWeight: FontWeight.w600,
-                    color: _weekdayColor,
-                  ),
+                  ).copyWith(color: palette.weekday),
                 ),
               ),
           ],
@@ -212,13 +218,13 @@ final class LiqDatePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildGrid(List<int?> cells) {
+  Widget _buildGrid(List<int?> cells, _DatePickerPalette palette) {
     final rows = <Widget>[];
     for (var r = 0; r < cells.length / 7; r++) {
       final row = <Widget>[];
       for (var c = 0; c < 7; c++) {
         final day = cells[r * 7 + c];
-        row.add(_buildDayCell(day));
+        row.add(_buildDayCell(day, palette));
       }
       rows.add(
         Padding(
@@ -236,7 +242,7 @@ final class LiqDatePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildDayCell(int? day) {
+  Widget _buildDayCell(int? day, _DatePickerPalette palette) {
     if (day == null) {
       return const SizedBox(width: 44, height: 44);
     }
@@ -261,7 +267,7 @@ final class LiqDatePicker extends StatelessWidget {
       textColor = _accent;
     } else {
       decoration = null;
-      textColor = _title;
+      textColor = palette.title;
     }
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -279,7 +285,7 @@ final class LiqDatePicker extends StatelessWidget {
             fontSize: 20,
             height: 25 / 20,
             letterSpacing: -0.45,
-            color: day < 1 ? _nullColor : textColor,
+            color: day < 1 ? palette.nullColor : textColor,
           ),
         ),
       ),
@@ -297,6 +303,41 @@ final class LiqDatePicker extends StatelessWidget {
   }
 }
 
+final class _DatePickerPalette {
+  const _DatePickerPalette({
+    required this.background,
+    required this.rim,
+    required this.title,
+    required this.weekday,
+    required this.nullColor,
+  });
+
+  factory _DatePickerPalette.resolve(BuildContext context) {
+    if (context.liqIsDark) {
+      return const _DatePickerPalette(
+        background: LiqDatePicker._bgDark,
+        rim: LiqDatePicker._rimDark,
+        title: LiqDatePicker._titleDark,
+        weekday: LiqDatePicker._weekdayColorDark,
+        nullColor: LiqDatePicker._nullColorDark,
+      );
+    }
+    return const _DatePickerPalette(
+      background: LiqDatePicker._bg,
+      rim: LiqDatePicker._rim,
+      title: LiqDatePicker._title,
+      weekday: LiqDatePicker._weekdayColor,
+      nullColor: LiqDatePicker._nullColor,
+    );
+  }
+
+  final Color background;
+  final Color rim;
+  final Color title;
+  final Color weekday;
+  final Color nullColor;
+}
+
 enum _ArrowDir { left, right }
 
 class _Arrow extends StatelessWidget {
@@ -304,14 +345,16 @@ class _Arrow extends StatelessWidget {
   final _ArrowDir direction;
   final VoidCallback? onPressed;
 
+  static const double _tapTargetSize = 44;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onPressed,
       child: SizedBox(
-        width: 20,
-        height: 24,
+        width: _tapTargetSize,
+        height: _tapTargetSize,
         child: Center(
           child: SizedBox(
             width: 16,

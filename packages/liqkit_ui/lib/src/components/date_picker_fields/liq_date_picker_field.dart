@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/calendars/liq_calendar.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 date-picker field — a 44pt-tall pill trigger that, when tapped,
 /// opens a `LiqCalendar` in a popover beneath the field.
@@ -224,18 +225,13 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _DatePickerFieldPalette.resolve(context);
     final disabled = widget.onChanged == null;
     final value = widget.value;
     final showsPlaceholder = value == null;
     final labelText = showsPlaceholder ? widget.placeholder : _label(value);
-    final labelColor =
-        showsPlaceholder
-            ? LiqDatePickerField.placeholderColor
-            : LiqDatePickerField.textColor;
-    final borderColor =
-        _open
-            ? LiqDatePickerField.activeBorderColor
-            : LiqDatePickerField.inactiveBorderColor;
+    final labelColor = showsPlaceholder ? palette.placeholder : palette.text;
+    final borderColor = _open ? palette.activeBorder : palette.inactiveBorder;
     final borderWidth =
         _open
             ? LiqDatePickerField.activeBorderWidth
@@ -257,7 +253,7 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
             child: Container(
               height: LiqDatePickerField.fieldHeight,
               decoration: BoxDecoration(
-                color: LiqDatePickerField.backgroundColor,
+                color: palette.background,
                 borderRadius: BorderRadius.circular(
                   LiqDatePickerField.fieldRadius,
                 ),
@@ -286,10 +282,10 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
                       turns: _open ? 0.5 : 0,
                       duration: LiqDatePickerField.animationDuration,
                       curve: LiqMotion.standard,
-                      child: const Icon(
+                      child: Icon(
                         Icons.keyboard_arrow_down,
                         size: 18,
-                        color: LiqDatePickerField.chevronColor,
+                        color: palette.chevron,
                         textDirection: TextDirection.ltr,
                       ),
                     ),
@@ -419,13 +415,14 @@ class _DatePickerPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _DatePickerFieldPalette.resolve(context);
     return SizedBox(
       width: width > 0 ? width : null,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: LiqDatePickerField.backgroundColor,
+          color: palette.background,
           borderRadius: BorderRadius.circular(LiqDatePickerField.panelRadius),
-          border: Border.all(color: LiqDatePickerField.panelBorderColor),
+          border: Border.all(color: palette.panelBorder),
           boxShadow: const <BoxShadow>[LiqDatePickerField.panelShadow],
         ),
         child: Padding(
@@ -440,4 +437,52 @@ class _DatePickerPanel extends StatelessWidget {
       ),
     );
   }
+}
+
+class _DatePickerFieldPalette {
+  const _DatePickerFieldPalette({
+    required this.background,
+    required this.text,
+    required this.placeholder,
+    required this.chevron,
+    required this.inactiveBorder,
+    required this.activeBorder,
+    required this.panelBorder,
+  });
+
+  factory _DatePickerFieldPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _DatePickerFieldPalette(
+        background: LiqDatePickerField.backgroundColor,
+        text: LiqDatePickerField.textColor,
+        placeholder: LiqDatePickerField.placeholderColor,
+        chevron: LiqDatePickerField.chevronColor,
+        inactiveBorder: LiqDatePickerField.inactiveBorderColor,
+        activeBorder: LiqDatePickerField.activeBorderColor,
+        panelBorder: LiqDatePickerField.panelBorderColor,
+      );
+    }
+
+    final label = context.liqLabelColor;
+    final secondary = context.liqSecondaryLabelColor;
+    final surface = context.liqSurfaceColor;
+    final accent = context.liqPrimaryColor;
+    return _DatePickerFieldPalette(
+      background: surface,
+      text: label,
+      placeholder: secondary.withValues(alpha: 0.48),
+      chevron: secondary,
+      inactiveBorder: secondary.withValues(alpha: 0.24),
+      activeBorder: accent,
+      panelBorder: secondary.withValues(alpha: 0.24),
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color placeholder;
+  final Color chevron;
+  final Color inactiveBorder;
+  final Color activeBorder;
+  final Color panelBorder;
 }

@@ -42,9 +42,30 @@ void main() {
           ),
         ),
       );
-      final size = tester.getSize(find.byType(LiqToggle));
+      final track =
+          find
+              .descendant(
+                of: find.byType(LiqToggle),
+                matching: find.byType(AnimatedContainer),
+              )
+              .first;
+      final size = tester.getSize(track);
       expect(size.width, LiqToggle.trackWidth);
       expect(size.height, LiqToggle.trackHeight);
+    });
+
+    testWidgets('keeps a 44pt-tall tap target', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(child: LiqToggle(value: true, onChanged: (_) {})),
+          ),
+        ),
+      );
+
+      expect(tester.getSize(find.byType(LiqToggle)), const Size(64, 44));
     });
 
     testWidgets('disabled when onChanged is null', (tester) async {

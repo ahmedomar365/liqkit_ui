@@ -34,4 +34,23 @@ void main() {
     await tester.tap(find.text('15'));
     expect(tapped, 15);
   });
+
+  testWidgets('LiqDatePicker arrows keep 44pt tap targets', (tester) async {
+    await tester.pumpWidget(_wrap(const LiqDatePicker(year: 2026, month: 4)));
+
+    final arrows = find.byWidgetPredicate(
+      (widget) =>
+          widget is CustomPaint &&
+          widget.painter.runtimeType.toString() == '_ArrowPainter',
+    );
+
+    expect(arrows, findsNWidgets(2));
+    for (final element in arrows.evaluate()) {
+      final gesture = find.ancestor(
+        of: find.byElementPredicate((candidate) => candidate == element),
+        matching: find.byType(GestureDetector),
+      );
+      expect(tester.getSize(gesture.first), const Size(44, 44));
+    }
+  });
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
@@ -60,6 +60,26 @@ void main() {
       final decoration = pmContainer.decoration! as BoxDecoration;
       expect(decoration.boxShadow, isNotNull);
       expect(decoration.boxShadow!.isNotEmpty, isTrue);
+    });
+
+    testWidgets('AM/PM cells fill the bordered field interior', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqTimeField(
+            value: const LiqTime(hour: 14, minute: 32),
+            onChanged: (_) {},
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      for (final label in <String>['AM', 'PM']) {
+        final cell = find.ancestor(
+          of: find.text(label),
+          matching: find.byType(GestureDetector),
+        );
+        expect(tester.getSize(cell.first).height, 42);
+      }
     });
 
     testWidgets('typing 1432 auto-inserts colon and fires onChanged in 24h', (
@@ -133,6 +153,76 @@ void main() {
 
       expect(fired, greaterThanOrEqualTo(1));
       expect(received, isNull);
+    });
+
+    testWidgets('uses dark theme colors for field text and surface', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqTimeField(
+              value: const LiqTime(hour: 14, minute: 32),
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.style.color, const Color(0xFFFFFFFF));
+
+      final decorations =
+          tester
+              .widgetList<Container>(
+                find.descendant(
+                  of: find.byType(LiqTimeField),
+                  matching: find.byWidgetPredicate(
+                    (widget) =>
+                        widget is Container &&
+                        widget.decoration is BoxDecoration,
+                  ),
+                ),
+              )
+              .map((container) => container.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        decorations.any(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
+    });
+
+    testWidgets('selection gestures belong to EditableText', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqTimeField(
+            value: const LiqTime(hour: 14, minute: 32),
+            onChanged: (_) {},
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is GestureDetector && widget.onTap != null,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byType(Listener),
+        ),
+        findsOneWidget,
+      );
     });
 
     test('throws AssertionError when hour out of range', () {

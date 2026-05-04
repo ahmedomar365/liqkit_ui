@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// A single card on a [LiqKanban] board.
 ///
@@ -212,9 +213,10 @@ final class LiqKanban extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _KanbanPalette.resolve(context);
     final children = <Widget>[];
     for (var i = 0; i < columns.length; i++) {
-      children.add(_buildColumn(columns[i]));
+      children.add(_buildColumn(columns[i], palette));
       if (i != columns.length - 1) {
         children.add(SizedBox(width: columnSpacing));
       }
@@ -228,14 +230,12 @@ final class LiqKanban extends StatelessWidget {
       ),
     );
     // Draggable requires an Overlay ancestor to host the drag feedback.
-    // Provide one internally so consumers can drop LiqKanban into any
-    // widget tree without needing Navigator/MaterialApp/CupertinoApp.
-    return Overlay(
-      initialEntries: <OverlayEntry>[OverlayEntry(builder: (_) => body)],
-    );
+    // Keep the entry stable, but rebuild its child when the stateless
+    // board receives new columns after a drop.
+    return _KanbanOverlayHost(child: body);
   }
 
-  Widget _buildColumn(LiqKanbanColumn column) {
+  Widget _buildColumn(LiqKanbanColumn column, _KanbanPalette palette) {
     final resolved = <LiqKanbanCard>[];
     for (final id in column.cardIds) {
       final card = cards[id];
@@ -245,7 +245,10 @@ final class LiqKanban extends StatelessWidget {
     final children = <Widget>[
       Padding(
         padding: const EdgeInsets.only(bottom: titleBottomGap),
-        child: Text(column.title.toUpperCase(), style: titleStyle),
+        child: Text(
+          column.title.toUpperCase(),
+          style: titleStyle.copyWith(color: palette.title),
+        ),
       ),
     ];
     for (var i = 0; i < resolved.length; i++) {
@@ -255,6 +258,7 @@ final class LiqKanban extends StatelessWidget {
           card: resolved[i],
           index: i,
           cardSpacing: cardSpacing,
+          palette: palette,
           onMove: onMove,
         ),
       );
@@ -269,21 +273,44 @@ final class LiqKanban extends StatelessWidget {
       ),
     );
 
-    return SizedBox(
-      width: columnWidth,
-      child: Container(
-        padding: columnPadding,
-        decoration: BoxDecoration(
-          color: columnBackground,
-          borderRadius: BorderRadius.circular(columnRadius),
-          border: Border.all(color: columnBorder),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: children,
-        ),
-      ),
+    return DragTarget<_LiqKanbanDragData>(
+      onWillAcceptWithDetails:
+          (details) => details.data.fromColumnId != column.id,
+      onAcceptWithDetails: (details) {
+        onMove(
+          details.data.cardId,
+          details.data.fromColumnId,
+          column.id,
+          resolved.length,
+        );
+      },
+      builder: (context, candidate, rejected) {
+        final dropping = candidate.isNotEmpty;
+        return SizedBox(
+          width: columnWidth,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 140),
+            curve: Curves.easeOutCubic,
+            padding: columnPadding,
+            decoration: BoxDecoration(
+              color:
+                  dropping
+                      ? palette.columnHoverBackground
+                      : palette.columnBackground,
+              borderRadius: BorderRadius.circular(columnRadius),
+              border: Border.all(
+                color:
+                    dropping ? LiqKanban.dropHintColor : palette.columnBorder,
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: children,
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -301,6 +328,40 @@ final class LiqKanban extends StatelessWidget {
   }
 }
 
+class _KanbanOverlayHost extends StatefulWidget {
+  const _KanbanOverlayHost({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_KanbanOverlayHost> createState() => _KanbanOverlayHostState();
+}
+
+class _KanbanOverlayHostState extends State<_KanbanOverlayHost> {
+  late final OverlayEntry _entry = OverlayEntry(builder: (_) => widget.child);
+
+  @override
+  void didUpdateWidget(covariant _KanbanOverlayHost oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.child != widget.child) {
+      _entry.markNeedsBuild();
+    }
+  }
+
+  @override
+  void dispose() {
+    _entry
+      ..remove()
+      ..dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Overlay(initialEntries: <OverlayEntry>[_entry]);
+  }
+}
+
 /// One card row inside a column. Combines the drag source (the card
 /// itself) with a drop target sized over the card's leading edge so a
 /// drop snaps cards to slot `index` (i.e. above this card).
@@ -310,6 +371,7 @@ class _KanbanCardSlot extends StatelessWidget {
     required this.card,
     required this.index,
     required this.cardSpacing,
+    required this.palette,
     required this.onMove,
   });
 
@@ -317,6 +379,7 @@ class _KanbanCardSlot extends StatelessWidget {
   final LiqKanbanCard card;
   final int index;
   final double cardSpacing;
+  final _KanbanPalette palette;
   final void Function(
     String cardId,
     String fromColumnId,
@@ -350,7 +413,12 @@ class _KanbanCardSlot extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: _DropHintLine(),
                 ),
-              _KanbanCardDraggable(column: column, card: card, onMove: onMove),
+              _KanbanCardDraggable(
+                column: column,
+                card: card,
+                palette: palette,
+                onMove: onMove,
+              ),
             ],
           ),
         );
@@ -366,11 +434,13 @@ class _KanbanCardDraggable extends StatelessWidget {
   const _KanbanCardDraggable({
     required this.column,
     required this.card,
+    required this.palette,
     required this.onMove,
   });
 
   final LiqKanbanColumn column;
   final LiqKanbanCard card;
+  final _KanbanPalette palette;
   final void Function(
     String cardId,
     String fromColumnId,
@@ -381,10 +451,10 @@ class _KanbanCardDraggable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resting = _KanbanCardSurface(child: card.child);
+    final resting = _KanbanCardSurface(palette: palette, child: card.child);
     return Draggable<_LiqKanbanDragData>(
       data: _LiqKanbanDragData(cardId: card.id, fromColumnId: column.id),
-      feedback: _KanbanCardFeedback(child: card.child),
+      feedback: _KanbanCardFeedback(palette: palette, child: card.child),
       childWhenDragging: Opacity(
         opacity: LiqKanban.dragSourceOpacity,
         child: resting,
@@ -479,22 +549,23 @@ class _DashedLinePainter extends CustomPainter {
 
 /// Resting / source card surface (white, hairline border, soft shadow).
 class _KanbanCardSurface extends StatelessWidget {
-  const _KanbanCardSurface({required this.child});
+  const _KanbanCardSurface({required this.child, required this.palette});
 
   final Widget child;
+  final _KanbanPalette palette;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: LiqKanban.cardBackground,
+        color: palette.cardBackground,
         borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
-        border: Border.all(color: LiqKanban.cardBorder, width: 0.5),
+        border: Border.all(color: palette.cardBorder, width: 0.5),
         boxShadow: const <BoxShadow>[LiqKanban.cardShadow],
       ),
       padding: LiqKanban.cardPadding,
       child: DefaultTextStyle.merge(
-        style: const TextStyle(fontSize: 13, color: Color(0xFF1C1C1E)),
+        style: TextStyle(fontSize: 13, color: palette.cardText),
         child: child,
       ),
     );
@@ -503,9 +574,10 @@ class _KanbanCardSurface extends StatelessWidget {
 
 /// Drag feedback — a slightly rotated, more-elevated copy of the card.
 class _KanbanCardFeedback extends StatelessWidget {
-  const _KanbanCardFeedback({required this.child});
+  const _KanbanCardFeedback({required this.child, required this.palette});
 
   final Widget child;
+  final _KanbanPalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -518,14 +590,14 @@ class _KanbanCardFeedback extends StatelessWidget {
           angle: LiqKanban.feedbackRotation,
           child: Container(
             decoration: BoxDecoration(
-              color: LiqKanban.cardBackground,
+              color: palette.cardBackground,
               borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
-              border: Border.all(color: LiqKanban.cardBorder, width: 0.5),
+              border: Border.all(color: palette.cardBorder, width: 0.5),
               boxShadow: const <BoxShadow>[LiqKanban.dragShadow],
             ),
             padding: LiqKanban.cardPadding,
             child: DefaultTextStyle.merge(
-              style: const TextStyle(fontSize: 13, color: Color(0xFF1C1C1E)),
+              style: TextStyle(fontSize: 13, color: palette.cardText),
               child: child,
             ),
           ),
@@ -533,4 +605,49 @@ class _KanbanCardFeedback extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _KanbanPalette {
+  const _KanbanPalette({
+    required this.columnBackground,
+    required this.columnHoverBackground,
+    required this.columnBorder,
+    required this.title,
+    required this.cardBackground,
+    required this.cardBorder,
+    required this.cardText,
+  });
+
+  factory _KanbanPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _KanbanPalette(
+        columnBackground: LiqKanban.columnBackground,
+        columnHoverBackground: Color(0xFFEAF4FF),
+        columnBorder: LiqKanban.columnBorder,
+        title: LiqKanban.titleColor,
+        cardBackground: LiqKanban.cardBackground,
+        cardBorder: LiqKanban.cardBorder,
+        cardText: Color(0xFF1C1C1E),
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _KanbanPalette(
+      columnBackground: secondary.withValues(alpha: 0.10),
+      columnHoverBackground: const Color(0xFF007AFF).withValues(alpha: 0.18),
+      columnBorder: secondary.withValues(alpha: 0.16),
+      title: secondary,
+      cardBackground: context.liqSurfaceColor,
+      cardBorder: secondary.withValues(alpha: 0.18),
+      cardText: context.liqLabelColor,
+    );
+  }
+
+  final Color columnBackground;
+  final Color columnHoverBackground;
+  final Color columnBorder;
+  final Color title;
+  final Color cardBackground;
+  final Color cardBorder;
+  final Color cardText;
 }

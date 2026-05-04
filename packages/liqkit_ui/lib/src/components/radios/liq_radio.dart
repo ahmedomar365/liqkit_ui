@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 single-select radio circle.
 ///
@@ -60,6 +62,7 @@ final class LiqRadio<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _RadioPalette.resolve(context);
     final disabled = onChanged == null;
     final selected = _selected;
 
@@ -67,10 +70,10 @@ final class LiqRadio<T> extends StatelessWidget {
       width: ringSize,
       height: ringSize,
       decoration: BoxDecoration(
-        color: ringBackground,
+        color: palette.background,
         shape: BoxShape.circle,
         border: Border.all(
-          color: selected ? selectedColor : unselectedBorder,
+          color: selected ? palette.selected : palette.border,
           width: borderWidth,
         ),
       ),
@@ -86,8 +89,8 @@ final class LiqRadio<T> extends StatelessWidget {
             child: Container(
               width: dotSize,
               height: dotSize,
-              decoration: const BoxDecoration(
-                color: selectedColor,
+              decoration: BoxDecoration(
+                color: palette.selected,
                 shape: BoxShape.circle,
               ),
             ),
@@ -101,14 +104,17 @@ final class LiqRadio<T> extends StatelessWidget {
       selected: selected,
       enabled: !disabled,
       label: 'radio',
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: disabled ? null : () => onChanged!(value),
-        child: SizedBox(
-          width: hitSize,
-          height: hitSize,
-          child: Center(
-            child: Opacity(opacity: disabled ? 0.4 : 1, child: ring),
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: disabled ? null : () => onChanged!(value),
+          child: SizedBox(
+            width: hitSize,
+            height: hitSize,
+            child: Center(
+              child: Opacity(opacity: disabled ? 0.4 : 1, child: ring),
+            ),
           ),
         ),
       ),
@@ -167,6 +173,7 @@ final class LiqRadioGroup<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _RadioPalette.resolve(context);
     final disabled = onChanged == null;
     final children = <Widget>[];
     for (var i = 0; i < options.length; i++) {
@@ -175,19 +182,27 @@ final class LiqRadioGroup<T> extends StatelessWidget {
       }
       final option = options[i];
       children.add(
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: disabled ? null : () => onChanged!(option.value),
-          child: Row(
-            children: [
-              LiqRadio<T>(
-                value: option.value,
-                groupValue: value,
-                onChanged: disabled ? null : onChanged,
-              ),
-              const Padding(padding: EdgeInsets.only(left: 12)),
-              Expanded(child: Text(option.label)),
-            ],
+        LiqPointerCursor(
+          enabled: !disabled,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: disabled ? null : () => onChanged!(option.value),
+            child: Row(
+              children: [
+                LiqRadio<T>(
+                  value: option.value,
+                  groupValue: value,
+                  onChanged: disabled ? null : onChanged,
+                ),
+                const Padding(padding: EdgeInsets.only(left: 12)),
+                Expanded(
+                  child: Text(
+                    option.label,
+                    style: TextStyle(color: palette.label),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -215,4 +230,36 @@ final class LiqRadioGroup<T> extends StatelessWidget {
         ),
       );
   }
+}
+
+final class _RadioPalette {
+  const _RadioPalette({
+    required this.selected,
+    required this.background,
+    required this.border,
+    required this.label,
+  });
+
+  factory _RadioPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _RadioPalette(
+        selected: LiqRadio.selectedColor,
+        background: LiqRadio.ringBackground,
+        border: LiqRadio.unselectedBorder,
+        label: Color(0xFF1C1C1E),
+      );
+    }
+
+    return _RadioPalette(
+      selected: context.liqPrimaryColor,
+      background: context.liqSurfaceColor,
+      border: context.liqSecondaryLabelColor.withValues(alpha: 0.36),
+      label: context.liqLabelColor,
+    );
+  }
+
+  final Color selected;
+  final Color background;
+  final Color border;
+  final Color label;
 }

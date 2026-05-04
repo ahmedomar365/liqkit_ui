@@ -1,12 +1,10 @@
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget toggleDisabledBuilder(BuildContext context) {
   // {@highlight}
-  return const Align(
-    heightFactor: 1,
-    child: LiqToggle(value: true, onChanged: null),
-  );
+  return const SnippetFrame(child: LiqToggle(value: true, onChanged: null));
   // {@endhighlight}
 }

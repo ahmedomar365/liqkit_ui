@@ -17,7 +17,7 @@ The calendar in its default state. Tap a day to select it; the
 focused month follows the selection. The month/year title sits to the
 left, with chevrons on the right to step forward and back.
 
-<LiqPreview component="calendar" variant="default" />
+<LiqPreview component="calendar" variant="default" initialHeight={380} />
 
 <CodeSnippet snippet={calendarDefaultSnippet} />
 
@@ -28,6 +28,6 @@ Days outside the bounds render in a dim gray and are non-tappable;
 chevrons still work so the grid can scroll past the bounds for
 context.
 
-<LiqPreview component="calendar" variant="with-bounds" />
+<LiqPreview component="calendar" variant="with-bounds" initialHeight={380} />
 
 <CodeSnippet snippet={calendarWithBoundsSnippet} />

@@ -62,5 +62,25 @@ void main() {
         );
       }
     });
+
+    testWidgets('liquid style samples backdrop content', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqButton(
+                label: 'Glass',
+                style: LiqButtonStyle.liquid,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(BackdropFilter), findsOneWidget);
+    });
   });
 }

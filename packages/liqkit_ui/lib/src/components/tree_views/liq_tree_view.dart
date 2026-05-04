@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One node in a [LiqTreeView].
 ///
@@ -271,6 +272,7 @@ class _TreeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _TreeViewPalette.resolve(context);
     final left = indent * depth + LiqTreeView.rowBaseLeftPadding;
     final children = <Widget>[
       if (isFolder)
@@ -278,21 +280,17 @@ class _TreeRow extends StatelessWidget {
           duration: LiqTreeView.rotateDuration,
           curve: LiqTreeView.curve,
           turns: isExpanded ? 0.25 : 0,
-          child: const Icon(
+          child: Icon(
             Icons.chevron_right,
             size: LiqTreeView.chevronSize,
-            color: LiqTreeView.glyphColor,
+            color: palette.glyph,
           ),
         )
       else
         const SizedBox(width: LiqTreeView.chevronSize),
       const SizedBox(width: LiqTreeView.chevronGap),
       if (node.icon != null) ...<Widget>[
-        Icon(
-          node.icon,
-          size: LiqTreeView.iconSize,
-          color: LiqTreeView.glyphColor,
-        ),
+        Icon(node.icon, size: LiqTreeView.iconSize, color: palette.glyph),
         const SizedBox(width: LiqTreeView.iconLabelGap),
       ],
       Expanded(
@@ -303,8 +301,10 @@ class _TreeRow extends StatelessWidget {
           textDirection: TextDirection.ltr,
           style:
               isSelected
-                  ? LiqTreeView.selectedLabelStyle
-                  : LiqTreeView.labelStyle,
+                  ? LiqTreeView.selectedLabelStyle.copyWith(
+                    color: palette.label,
+                  )
+                  : LiqTreeView.labelStyle.copyWith(color: palette.label),
         ),
       ),
     ];
@@ -326,10 +326,39 @@ class _TreeRow extends StatelessWidget {
             LiqTreeView.rowRightPadding,
             LiqTreeView.rowVerticalPadding,
           ),
-          color: isSelected ? LiqTreeView.selectedBackground : null,
+          color: isSelected ? palette.selectedBackground : null,
           child: Row(children: children),
         ),
       ),
     );
   }
+}
+
+final class _TreeViewPalette {
+  const _TreeViewPalette({
+    required this.selectedBackground,
+    required this.label,
+    required this.glyph,
+  });
+
+  factory _TreeViewPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _TreeViewPalette(
+        selectedBackground: LiqTreeView.selectedBackground,
+        label: LiqTreeView.labelColor,
+        glyph: LiqTreeView.glyphColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _TreeViewPalette(
+      selectedBackground: secondary.withValues(alpha: 0.14),
+      label: context.liqLabelColor,
+      glyph: secondary,
+    );
+  }
+
+  final Color selectedBackground;
+  final Color label;
+  final Color glyph;
 }

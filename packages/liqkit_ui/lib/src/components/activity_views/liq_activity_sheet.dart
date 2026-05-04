@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 share/activity sheet container.
 ///
 /// Sourced from `native/components/activity-views.css` (`.ios26-activity-sheet`):
@@ -26,21 +29,26 @@ final class LiqActivitySheet extends StatelessWidget {
   final double width;
 
   static const Color _bg = Color(0xE0F7F7F7);
+  static const Color _bgDark = Color(0xE61C1C1E);
   static const Color _rim = Color(0x9EFFFFFF);
+  static const Color _rimDark = Color(0x33FFFFFF);
   static const Color _shadow = Color(0x2E000000);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     return SizedBox(
       width: width,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(34)),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: _bg,
-            borderRadius: BorderRadius.all(Radius.circular(34)),
-            border: Border.fromBorderSide(BorderSide(color: _rim)),
-            boxShadow: <BoxShadow>[
+          decoration: BoxDecoration(
+            color: isDark ? _bgDark : _bg,
+            borderRadius: const BorderRadius.all(Radius.circular(34)),
+            border: Border.fromBorderSide(
+              BorderSide(color: isDark ? _rimDark : _rim),
+            ),
+            boxShadow: const <BoxShadow>[
               BoxShadow(color: _shadow, offset: Offset(0, 14), blurRadius: 40),
             ],
           ),
@@ -92,12 +100,22 @@ final class LiqActivityHeader extends StatelessWidget {
   final VoidCallback? onClose;
 
   static const Color _titleColor = Color(0xFF1A1A1A);
+  static const Color _titleColorDark = Color(0xFFFFFFFF);
   static const Color _subtitleColor = Color(0xFF727272);
+  static const Color _subtitleColorDark = Color(0x99EBEBF5);
   static const Color _closeBg = Color(0x29787880);
+  static const Color _closeBgDark = Color(0x33767680);
   static const Color _closeFg = Color(0xFF1A1A1A);
+  static const Color _closeFgDark = Color(0xFFFFFFFF);
+  static const double _closeTapTargetSize = 44;
+  static const double _closeCircleSize = 36;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
+    final titleColor = isDark ? _titleColorDark : _titleColor;
+    final subtitleColor = isDark ? _subtitleColorDark : _subtitleColor;
+    final closeFg = isDark ? _closeFgDark : _closeFg;
     return Row(
       children: <Widget>[
         SizedBox(width: 64, height: 64, child: thumb ?? const _DefaultThumb()),
@@ -119,8 +137,7 @@ final class LiqActivityHeader extends StatelessWidget {
                   height: 20 / 15,
                   letterSpacing: -0.23,
                   fontWeight: FontWeight.w500,
-                  color: _titleColor,
-                ),
+                ).copyWith(color: titleColor),
               ),
               if (subtitle != null)
                 Padding(
@@ -136,8 +153,7 @@ final class LiqActivityHeader extends StatelessWidget {
                       height: 18 / 13,
                       letterSpacing: -0.08,
                       fontWeight: FontWeight.w400,
-                      color: _subtitleColor,
-                    ),
+                    ).copyWith(color: subtitleColor),
                   ),
                 ),
             ],
@@ -148,21 +164,31 @@ final class LiqActivityHeader extends StatelessWidget {
           Semantics(
             button: true,
             label: 'Close',
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: onClose,
-              child: Container(
-                width: 36,
-                height: 36,
-                decoration: const BoxDecoration(
-                  color: _closeBg,
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CustomPaint(painter: _CloseGlyphPainter(_closeFg)),
+            child: LiqPointerCursor(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onClose,
+                child: SizedBox(
+                  width: _closeTapTargetSize,
+                  height: _closeTapTargetSize,
+                  child: Center(
+                    child: Container(
+                      width: _closeCircleSize,
+                      height: _closeCircleSize,
+                      decoration: BoxDecoration(
+                        color: isDark ? _closeBgDark : _closeBg,
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CustomPaint(
+                          painter: _CloseGlyphPainter(closeFg),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

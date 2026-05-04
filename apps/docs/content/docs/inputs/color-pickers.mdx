@@ -7,13 +7,13 @@ import colorPickerLargeSnippet from '@/snippets/color-picker/large.json';
 import colorPickerSmallSnippet from '@/snippets/color-picker/small.json';
 import colorPickerGridSnippet from '@/snippets/color-picker/grid.json';
 
-liqkit_ui ships two colour-picker widgets. `LiqColorPickerButton` is a
-circular button with a conic-gradient hue ring and an inset swatch.
-`LiqColorGrid` is a scrollable grid of solid colour swatches.
+liqkit_ui ships a composed `LiqColorPicker` with an iOS-style popover
+palette, plus the lower-level `LiqColorPickerButton` and `LiqColorGrid`
+building blocks for custom colour tools.
 
 ## Large
 
-The 36pt button — the default size for prominent colour controls.
+The 36pt picker — tap the hue ring to open the palette popover.
 
 <LiqPreview component="color-picker" variant="large" />
 
@@ -21,7 +21,7 @@ The 36pt button — the default size for prominent colour controls.
 
 ## Small
 
-The 28pt button — suited for compact contexts such as toolbars.
+The 28pt picker — suited for compact contexts such as toolbars.
 
 <LiqPreview component="color-picker" variant="small" />
 
@@ -29,7 +29,7 @@ The 28pt button — suited for compact contexts such as toolbars.
 
 ## Grid
 
-A 12-column swatch grid with a selection ring on the active colour.
+A 12-column swatch grid with a live selection ring on the active colour.
 
 <LiqPreview component="color-picker" variant="grid" />
 

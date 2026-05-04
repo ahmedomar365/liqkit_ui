@@ -69,5 +69,41 @@ void main() {
       );
       expect(tester.getSize(find.byType(LiqTextField)).height, 52);
     });
+
+    testWidgets('selection gestures belong to EditableText', (tester) async {
+      final controller = TextEditingController(text: 'hello world');
+      addTearDown(controller.dispose);
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: SizedBox(
+                width: 240,
+                child: LiqTextField(controller: controller),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is GestureDetector && widget.onTap != null,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byType(Listener),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

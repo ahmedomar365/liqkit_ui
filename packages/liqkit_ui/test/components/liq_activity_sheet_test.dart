@@ -37,4 +37,25 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Close'));
     expect(taps, 1);
   });
+
+  testWidgets('LiqActivityHeader close keeps a 44pt tap target', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        LiqActivitySheet(header: LiqActivityHeader(title: 'X', onClose: () {})),
+      ),
+    );
+
+    expect(tester.getSize(find.bySemanticsLabel('Close')), const Size(44, 44));
+
+    final closeCircle = tester.widget<Container>(
+      find.descendant(
+        of: find.bySemanticsLabel('Close'),
+        matching: find.byType(Container),
+      ),
+    );
+    expect(closeCircle.constraints?.maxWidth, 36);
+    expect(closeCircle.constraints?.maxHeight, 36);
+  });
 }

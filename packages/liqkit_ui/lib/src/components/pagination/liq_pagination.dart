@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 page-number selector for paged content (a table of results,
 /// a photo album, etc.).
 ///
@@ -44,8 +47,11 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
   /// When `true`: only show `[prev] {currentPage} / {totalPages} [next]`.
   final bool compact;
 
-  /// Side length of every interactive square in the control.
+  /// Side length of each visible square in the control.
   static const double buttonSize = 32;
+
+  /// Minimum tap target for interactive pagination buttons.
+  static const double buttonTapTargetSize = 44;
 
   /// Squircle corner radius for [buttonSize] buttons.
   static const double buttonRadius = 8;
@@ -163,6 +169,36 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final palette =
+        context.liqIsDark
+            ? const _PaginationPalette.dark()
+            : const _PaginationPalette.light();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final useCompact =
+            compact ||
+            (!compact &&
+                constraints.hasBoundedWidth &&
+                _expandedWidth() > constraints.maxWidth);
+        final row = _buildRow(useCompact: useCompact, palette: palette);
+
+        if (onPageChanged == null) {
+          return Opacity(opacity: 0.4, child: row);
+        }
+        return row;
+      },
+    );
+  }
+
+  double _expandedWidth() {
+    final itemCount = visiblePages(currentPage, totalPages).length + 2;
+    return itemCount * buttonTapTargetSize + (itemCount - 1) * spacing;
+  }
+
+  Widget _buildRow({
+    required bool useCompact,
+    required _PaginationPalette palette,
+  }) {
     final enabled = onPageChanged != null;
     final children = <Widget>[];
 
@@ -173,17 +209,18 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
         enabled: enabled,
         atBoundary: currentPage <= 1,
         semanticLabel: 'Previous page',
+        palette: palette,
         onTap: prevEnabled ? () => onPageChanged!(currentPage - 1) : null,
       ),
     );
 
-    if (compact) {
+    if (useCompact) {
       children
         ..add(const SizedBox(width: spacing))
         ..add(
           Text(
             '$currentPage / $totalPages',
-            style: compactTextStyle,
+            style: compactTextStyle.copyWith(color: palette.inactiveText),
             textDirection: TextDirection.ltr,
           ),
         )
@@ -199,11 +236,12 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
               page: entry,
               isActive: isActive,
               enabled: enabled,
+              palette: palette,
               onTap: enabled ? () => onPageChanged!(entry) : null,
             ),
           );
         } else {
-          children.add(const _Ellipsis());
+          children.add(_Ellipsis(palette: palette));
         }
       }
       children.add(const SizedBox(width: spacing));
@@ -216,15 +254,12 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
         enabled: enabled,
         atBoundary: currentPage >= totalPages,
         semanticLabel: 'Next page',
+        palette: palette,
         onTap: nextEnabled ? () => onPageChanged!(currentPage + 1) : null,
       ),
     );
 
     final row = Row(mainAxisSize: MainAxisSize.min, children: children);
-
-    if (!enabled) {
-      return Opacity(opacity: 0.4, child: row);
-    }
     return row;
   }
 
@@ -253,17 +288,53 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
   }
 }
 
+final class _PaginationPalette {
+  const _PaginationPalette({
+    required this.border,
+    required this.buttonBackground,
+    required this.inactiveText,
+    required this.ellipsis,
+    required this.chevron,
+    required this.chevronDisabled,
+  });
+
+  const _PaginationPalette.light()
+    : border = LiqPagination.borderColor,
+      buttonBackground = LiqPagination.buttonBackground,
+      inactiveText = LiqPagination.inactiveTextColor,
+      ellipsis = LiqPagination.ellipsisColor,
+      chevron = LiqPagination.chevronColor,
+      chevronDisabled = LiqPagination.chevronDisabledColor;
+
+  const _PaginationPalette.dark()
+    : border = const Color(0x29FFFFFF),
+      buttonBackground = const Color(0x1FFFFFFF),
+      inactiveText = const Color(0xFFF5F5F7),
+      ellipsis = const Color(0xFF98989D),
+      chevron = const Color(0xFFF5F5F7),
+      chevronDisabled = const Color(0xFF636366);
+
+  final Color border;
+  final Color buttonBackground;
+  final Color inactiveText;
+  final Color ellipsis;
+  final Color chevron;
+  final Color chevronDisabled;
+}
+
 class _PageNumberButton extends StatelessWidget {
   const _PageNumberButton({
     required this.page,
     required this.isActive,
     required this.enabled,
+    required this.palette,
     required this.onTap,
   });
 
   final int page;
   final bool isActive;
   final bool enabled;
+  final _PaginationPalette palette;
   final VoidCallback? onTap;
 
   @override
@@ -276,16 +347,18 @@ class _PageNumberButton extends StatelessWidget {
         color:
             isActive
                 ? LiqPagination.activeBackground
-                : LiqPagination.buttonBackground,
+                : palette.buttonBackground,
         borderRadius: BorderRadius.circular(LiqPagination.buttonRadius),
-        border: isActive ? null : Border.all(color: LiqPagination.borderColor),
+        border: isActive ? null : Border.all(color: palette.border),
       ),
       child: Text(
         '$page',
         style:
             isActive
                 ? LiqPagination.activeTextStyle
-                : LiqPagination.inactiveTextStyle,
+                : LiqPagination.inactiveTextStyle.copyWith(
+                  color: palette.inactiveText,
+                ),
         textDirection: TextDirection.ltr,
       ),
     );
@@ -295,10 +368,17 @@ class _PageNumberButton extends StatelessWidget {
       enabled: enabled,
       selected: isActive,
       label: 'Page $page',
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: box,
+      child: LiqPointerCursor(
+        enabled: enabled && onTap != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: SizedBox(
+            width: LiqPagination.buttonTapTargetSize,
+            height: LiqPagination.buttonTapTargetSize,
+            child: Center(child: box),
+          ),
+        ),
       ),
     );
   }
@@ -310,6 +390,7 @@ class _ChevronButton extends StatelessWidget {
     required this.enabled,
     required this.atBoundary,
     required this.semanticLabel,
+    required this.palette,
     required this.onTap,
   });
 
@@ -317,23 +398,21 @@ class _ChevronButton extends StatelessWidget {
   final bool enabled;
   final bool atBoundary;
   final String semanticLabel;
+  final _PaginationPalette palette;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        atBoundary
-            ? LiqPagination.chevronDisabledColor
-            : LiqPagination.chevronColor;
+    final color = atBoundary ? palette.chevronDisabled : palette.chevron;
 
     final box = Container(
       width: LiqPagination.buttonSize,
       height: LiqPagination.buttonSize,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: LiqPagination.buttonBackground,
+        color: palette.buttonBackground,
         borderRadius: BorderRadius.circular(LiqPagination.buttonRadius),
-        border: Border.all(color: LiqPagination.borderColor),
+        border: Border.all(color: palette.border),
       ),
       child: Icon(icon, size: 18, color: color),
     );
@@ -342,27 +421,38 @@ class _ChevronButton extends StatelessWidget {
       button: true,
       enabled: enabled && !atBoundary,
       label: semanticLabel,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: box,
+      child: LiqPointerCursor(
+        enabled: enabled && !atBoundary && onTap != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: SizedBox(
+            width: LiqPagination.buttonTapTargetSize,
+            height: LiqPagination.buttonTapTargetSize,
+            child: Center(child: box),
+          ),
+        ),
       ),
     );
   }
 }
 
 class _Ellipsis extends StatelessWidget {
-  const _Ellipsis();
+  const _Ellipsis({required this.palette});
+
+  final _PaginationPalette palette;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: LiqPagination.buttonSize,
-      height: LiqPagination.buttonSize,
+    return SizedBox(
+      width: LiqPagination.buttonTapTargetSize,
+      height: LiqPagination.buttonTapTargetSize,
       child: Center(
         child: Text(
           '…',
-          style: LiqPagination.ellipsisTextStyle,
+          style: LiqPagination.ellipsisTextStyle.copyWith(
+            color: palette.ellipsis,
+          ),
           textDirection: TextDirection.ltr,
         ),
       ),

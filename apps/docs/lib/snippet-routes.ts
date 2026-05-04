@@ -109,6 +109,7 @@ export const SNIPPET_ROUTES = {
   'materials/light': { component: 'materials', variant: 'light', displayName: "Light", path: '/materials/light' },
   'menu/default': { component: 'menu', variant: 'default', displayName: "Default", path: '/menu/default' },
   'menu/with-section': { component: 'menu', variant: 'with-section', displayName: "With Section", path: '/menu/with-section' },
+  'motion/default': { component: 'motion', variant: 'default', displayName: "Default", path: '/motion/default' },
   'notification/mail': { component: 'notification', variant: 'mail', displayName: "Mail", path: '/notification/mail' },
   'notification/reminders': { component: 'notification', variant: 'reminders', displayName: "Reminders", path: '/notification/reminders' },
   'number-field/default': { component: 'number-field', variant: 'default', displayName: "Default", path: '/number-field/default' },

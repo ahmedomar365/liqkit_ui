@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Semantic typography role from iOS 26 Human Interface Guidelines.
 ///
@@ -219,16 +220,21 @@ _baseFor(LiqTypeRole role) {
   }
 }
 
-Color _toneColor(LiqTextTone tone) {
+Color _toneColor(LiqTextTone tone, Brightness brightness) {
+  final isDark = brightness == Brightness.dark;
   switch (tone) {
     case LiqTextTone.primary:
-      return const Color(0xFF000000);
+      return isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
     case LiqTextTone.secondary:
-      return const Color(0xFF3C3C43);
+      return isDark ? const Color(0x99EBEBF5) : const Color(0xFF3C3C43);
     case LiqTextTone.tertiary:
-      return const Color(0xFF3C3C43).withValues(alpha: 0.62);
+      return isDark
+          ? const Color(0x99EBEBF5).withValues(alpha: 0.62)
+          : const Color(0xFF3C3C43).withValues(alpha: 0.62);
     case LiqTextTone.quaternary:
-      return const Color(0xFF3C3C43).withValues(alpha: 0.38);
+      return isDark
+          ? const Color(0x99EBEBF5).withValues(alpha: 0.38)
+          : const Color(0xFF3C3C43).withValues(alpha: 0.38);
   }
 }
 
@@ -238,6 +244,7 @@ TextStyle liqResolveTextStyle({
   required LiqTypeRole role,
   LiqDynamicTypeScale scale = LiqDynamicTypeScale.large,
   LiqTextTone tone = LiqTextTone.primary,
+  Brightness brightness = Brightness.light,
 }) {
   final base = _baseFor(role);
   final m = liqDynamicTypeMultiplier(scale);
@@ -248,7 +255,7 @@ TextStyle liqResolveTextStyle({
     height: (base.line * m) / (base.size * m),
     letterSpacing: base.track * m,
     fontWeight: base.weight,
-    color: _toneColor(tone),
+    color: _toneColor(tone, brightness),
   );
 }
 
@@ -293,16 +300,27 @@ final class LiqTypeColumn extends StatelessWidget {
   final String sampleText;
 
   static const Color _headerColor = Color(0xFF66666C);
+  static const Color _headerColorDark = Color(0x99EBEBF5);
   static const Color _hairline = Color(0xFFECECF1);
+  static const Color _hairlineDark = Color(0x29FFFFFF);
   static const Color _border = Color(0xFFE5E5EA);
+  static const Color _borderDark = Color(0x29FFFFFF);
+  static const Color _background = Color(0xFFFFFFFF);
+  static const Color _backgroundDark = Color(0xFF1C1C1E);
 
   @override
   Widget build(BuildContext context) {
+    final brightness = context.liqBrightness;
+    final isDark = brightness == Brightness.dark;
+    final background = isDark ? _backgroundDark : _background;
+    final border = isDark ? _borderDark : _border;
+    final hairline = isDark ? _hairlineDark : _hairline;
+    final headerColor = isDark ? _headerColorDark : _headerColor;
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.all(Radius.circular(14)),
-        border: Border.fromBorderSide(BorderSide(color: _border)),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+        border: Border.fromBorderSide(BorderSide(color: border)),
       ),
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -312,15 +330,15 @@ final class LiqTypeColumn extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: DecoratedBox(
-              decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(color: _hairline)),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: hairline)),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text(
                   header,
-                  style: const TextStyle(
-                    color: _headerColor,
+                  style: TextStyle(
+                    color: headerColor,
                     fontFamily: 'SF Pro Text',
                     fontSize: 12,
                     height: 16 / 12,
@@ -341,6 +359,7 @@ final class LiqTypeColumn extends StatelessWidget {
                   role: role,
                   scale: scale,
                   tone: tone,
+                  brightness: brightness,
                 ),
               ),
             ),

@@ -99,6 +99,40 @@ void main() {
       final textWidget = tester.widget<Text>(find.text('Delete'));
       expect(textWidget.style?.color, LiqDialog.destructiveActionColor);
     });
+
+    testWidgets('uses dark theme colors for title message and action', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            Center(
+              child: LiqDialog(
+                title: 'Dark dialog',
+                message: 'Secondary copy',
+                actions: <LiqDialogAction>[
+                  LiqDialogAction(label: 'OK', onPressed: () {}),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester.widget<Text>(find.text('Dark dialog')).style?.color,
+        const Color(0xFFFFFFFF),
+      );
+      expect(
+        tester.widget<Text>(find.text('Secondary copy')).style?.color,
+        const Color(0xB2EBEBF5),
+      );
+      expect(
+        tester.widget<Text>(find.text('OK')).style?.color,
+        const Color(0xFF0091FF),
+      );
+    });
   });
 
   group('LiqDialogOverlay.show', () {

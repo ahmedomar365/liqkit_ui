@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Visual variant for [LiqBadge].
 ///
 /// Each variant maps to a fixed iOS 26 system color for the pill background
@@ -87,6 +89,18 @@ final class LiqBadge extends StatelessWidget {
   /// iOS system red background for [LiqBadgeVariant.destructive].
   static const Color destructiveBackground = Color(0xFFFF3B30);
 
+  /// Dark iOS system grey background for [LiqBadgeVariant.neutral].
+  static const Color darkNeutralBackground = Color(0xFF3A3A3C);
+
+  /// Dark iOS system green background for [LiqBadgeVariant.success].
+  static const Color darkSuccessBackground = Color(0xFF30D158);
+
+  /// Dark iOS system orange background for [LiqBadgeVariant.warning].
+  static const Color darkWarningBackground = Color(0xFFFF9F0A);
+
+  /// Dark iOS system red background for [LiqBadgeVariant.destructive].
+  static const Color darkDestructiveBackground = Color(0xFFFF453A);
+
   /// Foreground color used by [LiqBadgeVariant.neutral].
   static const Color neutralForeground = Color(0xFF1C1C1E);
 
@@ -127,19 +141,21 @@ final class LiqBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = backgroundFor(variant);
+    final palette = _BadgePalette.resolve(context, variant);
 
     if (dot) {
       return SizedBox(
         width: dotSize,
         height: dotSize,
         child: DecoratedBox(
-          decoration: BoxDecoration(color: background, shape: BoxShape.circle),
+          decoration: BoxDecoration(
+            color: palette.background,
+            shape: BoxShape.circle,
+          ),
         ),
       );
     }
 
-    final foreground = foregroundFor(variant);
     final text = count != null ? formatCount(count!) : label!;
     final isSingleDigitCount = count != null && text.length == 1;
     final horizontal =
@@ -151,7 +167,7 @@ final class LiqBadge extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: pillMinHeight),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: background,
+          color: palette.background,
           borderRadius: BorderRadius.circular(pillMinHeight / 2),
         ),
         child: Padding(
@@ -169,7 +185,7 @@ final class LiqBadge extends StatelessWidget {
                 ],
                 fontSize: fontSize,
                 fontWeight: FontWeight.w600,
-                color: foreground,
+                color: palette.foreground,
                 height: 1,
               ),
               maxLines: 1,
@@ -190,4 +206,31 @@ final class LiqBadge extends StatelessWidget {
       ..add(IntProperty('count', count, defaultValue: null))
       ..add(StringProperty('label', label, defaultValue: null));
   }
+}
+
+final class _BadgePalette {
+  const _BadgePalette({required this.background, required this.foreground});
+
+  factory _BadgePalette.resolve(BuildContext context, LiqBadgeVariant variant) {
+    if (!context.liqIsDark) {
+      return _BadgePalette(
+        background: LiqBadge.backgroundFor(variant),
+        foreground: LiqBadge.foregroundFor(variant),
+      );
+    }
+
+    return _BadgePalette(
+      background: switch (variant) {
+        LiqBadgeVariant.neutral => LiqBadge.darkNeutralBackground,
+        LiqBadgeVariant.primary => context.liqPrimaryColor,
+        LiqBadgeVariant.success => LiqBadge.darkSuccessBackground,
+        LiqBadgeVariant.warning => LiqBadge.darkWarningBackground,
+        LiqBadgeVariant.destructive => LiqBadge.darkDestructiveBackground,
+      },
+      foreground: LiqBadge.contrastForeground,
+    );
+  }
+
+  final Color background;
+  final Color foreground;
 }

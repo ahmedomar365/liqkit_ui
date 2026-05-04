@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 themed-scrollbar scroll container.
 ///
@@ -43,8 +44,14 @@ final class LiqScrollArea extends StatefulWidget {
   /// Idle thumb color — 40% black hairline.
   static const Color thumbColor = Color(0x66000000);
 
+  /// Idle thumb color in dark theme.
+  static const Color darkThumbColor = Color(0x66FFFFFF);
+
   /// Hover/drag thumb color — 80% black.
   static const Color thumbHoverColor = Color(0xCC000000);
+
+  /// Hover/drag thumb color in dark theme.
+  static const Color darkThumbHoverColor = Color(0xCCFFFFFF);
 
   /// Thumb thickness in logical pixels.
   static const double thumbThickness = 4;
@@ -96,10 +103,15 @@ class _LiqScrollAreaState extends State<LiqScrollArea> {
   @override
   Widget build(BuildContext context) {
     final controller = _effectiveController;
+    final brightness = context.liqBrightness;
+    final thumbColor =
+        brightness == Brightness.dark
+            ? LiqScrollArea.darkThumbColor
+            : LiqScrollArea.thumbColor;
 
     return RawScrollbar(
       controller: controller,
-      thumbColor: LiqScrollArea.thumbColor,
+      thumbColor: thumbColor,
       thickness: LiqScrollArea.thumbThickness,
       minThumbLength: LiqScrollArea.thumbMinLength,
       radius: LiqScrollArea.thumbRadius,

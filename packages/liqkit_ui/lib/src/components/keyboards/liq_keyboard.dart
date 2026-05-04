@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Default QWERTY rows for [LiqKeyboard.keyRows].
 const List<List<String>> liqKeyboardQwertyRows = <List<String>>[
   <String>['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
@@ -41,39 +43,51 @@ final class LiqKeyboard extends StatelessWidget {
   final double minHeight;
 
   static const Color _bg = Color(0xFFF3F4F7);
+  static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _hairline = Color(0x1A161B26);
+  static const Color _hairlineDark = Color(0x29FFFFFF);
   static const Color _shadow = Color(0x290F141E);
   static const Color _suggestionDivider = Color(0x14000000);
+  static const Color _suggestionDividerDark = Color(0x29FFFFFF);
   static const Color _suggestionText = Color(0xFF1A1A1A);
+  static const Color _suggestionTextDark = Color(0xFFFFFFFF);
   static const Color _keyText = Color(0xFF000000);
+  static const Color _keyTextDark = Color(0xFFFFFFFF);
+  static const Color _keyBg = Color(0xFFFFFFFF);
+  static const Color _keyBgDark = Color(0xFF2C2C2E);
   static const Color _keyBorder = Color(0x1F000000);
+  static const Color _keyBorderDark = Color(0x24FFFFFF);
   static const Color _keyShadow = Color(0x1F000000);
   static const Color _toolbarBg = Color(0xD9F4F6FA);
+  static const Color _toolbarBgDark = Color(0xD92C2C2E);
   static const Color _toolbarBorder = Color(0x14000000);
+  static const Color _toolbarBorderDark = Color(0x24FFFFFF);
   static const Color _glyph = Color(0xA1222B59);
+  static const Color _glyphDark = Color(0x99EBEBF5);
 
   @override
   Widget build(BuildContext context) {
+    final palette = _KeyboardPalette.resolve(context);
     return Container(
       width: width,
       constraints: BoxConstraints(minHeight: minHeight),
       padding: const EdgeInsets.fromLTRB(14, 22, 14, 16),
-      decoration: const BoxDecoration(
-        color: _bg,
-        borderRadius: BorderRadius.all(Radius.circular(44)),
-        boxShadow: <BoxShadow>[
+      decoration: BoxDecoration(
+        color: palette.background,
+        borderRadius: const BorderRadius.all(Radius.circular(44)),
+        boxShadow: const <BoxShadow>[
           BoxShadow(color: _shadow, offset: Offset(0, 12), blurRadius: 36),
         ],
-        border: Border.fromBorderSide(BorderSide(color: _hairline)),
+        border: Border.fromBorderSide(BorderSide(color: palette.hairline)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          _Suggestions(suggestions: suggestions),
+          _Suggestions(suggestions: suggestions, palette: palette),
           const SizedBox(height: 14),
-          Expanded(child: _Keys(rows: keyRows)),
+          Expanded(child: _Keys(rows: keyRows, palette: palette)),
           const SizedBox(height: 14),
-          const _Toolbar(),
+          _Toolbar(palette: palette),
         ],
       ),
     );
@@ -89,10 +103,66 @@ final class LiqKeyboard extends StatelessWidget {
   }
 }
 
+final class _KeyboardPalette {
+  const _KeyboardPalette({
+    required this.background,
+    required this.hairline,
+    required this.suggestionDivider,
+    required this.suggestionText,
+    required this.keyBackground,
+    required this.keyText,
+    required this.keyBorder,
+    required this.toolbarBackground,
+    required this.toolbarBorder,
+    required this.glyph,
+  });
+
+  factory _KeyboardPalette.resolve(BuildContext context) {
+    if (context.liqIsDark) {
+      return const _KeyboardPalette(
+        background: LiqKeyboard._bgDark,
+        hairline: LiqKeyboard._hairlineDark,
+        suggestionDivider: LiqKeyboard._suggestionDividerDark,
+        suggestionText: LiqKeyboard._suggestionTextDark,
+        keyBackground: LiqKeyboard._keyBgDark,
+        keyText: LiqKeyboard._keyTextDark,
+        keyBorder: LiqKeyboard._keyBorderDark,
+        toolbarBackground: LiqKeyboard._toolbarBgDark,
+        toolbarBorder: LiqKeyboard._toolbarBorderDark,
+        glyph: LiqKeyboard._glyphDark,
+      );
+    }
+    return const _KeyboardPalette(
+      background: LiqKeyboard._bg,
+      hairline: LiqKeyboard._hairline,
+      suggestionDivider: LiqKeyboard._suggestionDivider,
+      suggestionText: LiqKeyboard._suggestionText,
+      keyBackground: LiqKeyboard._keyBg,
+      keyText: LiqKeyboard._keyText,
+      keyBorder: LiqKeyboard._keyBorder,
+      toolbarBackground: LiqKeyboard._toolbarBg,
+      toolbarBorder: LiqKeyboard._toolbarBorder,
+      glyph: LiqKeyboard._glyph,
+    );
+  }
+
+  final Color background;
+  final Color hairline;
+  final Color suggestionDivider;
+  final Color suggestionText;
+  final Color keyBackground;
+  final Color keyText;
+  final Color keyBorder;
+  final Color toolbarBackground;
+  final Color toolbarBorder;
+  final Color glyph;
+}
+
 class _Suggestions extends StatelessWidget {
-  const _Suggestions({required this.suggestions});
+  const _Suggestions({required this.suggestions, required this.palette});
 
   final List<String> suggestions;
+  final _KeyboardPalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +181,8 @@ class _Suggestions extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               softWrap: false,
-              style: const TextStyle(
-                color: LiqKeyboard._suggestionText,
+              style: TextStyle(
+                color: palette.suggestionText,
                 fontSize: 17,
                 height: 22 / 17,
                 letterSpacing: -0.43,
@@ -126,10 +196,8 @@ class _Suggestions extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(minHeight: 27),
       padding: const EdgeInsets.only(bottom: 8),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: LiqKeyboard._suggestionDivider),
-        ),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: palette.suggestionDivider)),
       ),
       child: Row(children: cells),
     );
@@ -137,9 +205,10 @@ class _Suggestions extends StatelessWidget {
 }
 
 class _Keys extends StatelessWidget {
-  const _Keys({required this.rows});
+  const _Keys({required this.rows, required this.palette});
 
   final List<List<String>> rows;
+  final _KeyboardPalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +220,7 @@ class _Keys extends StatelessWidget {
         alignment: WrapAlignment.center,
         children: <Widget>[
           for (final row in rows)
-            for (final label in row) _KeyPill(label: label),
+            for (final label in row) _KeyPill(label: label, palette: palette),
         ],
       ),
     );
@@ -159,22 +228,21 @@ class _Keys extends StatelessWidget {
 }
 
 class _KeyPill extends StatelessWidget {
-  const _KeyPill({required this.label});
+  const _KeyPill({required this.label, required this.palette});
 
   final String label;
+  final _KeyboardPalette palette;
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: 30, minHeight: 40),
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          border: Border.fromBorderSide(
-            BorderSide(color: LiqKeyboard._keyBorder),
-          ),
-          boxShadow: <BoxShadow>[
+        decoration: BoxDecoration(
+          color: palette.keyBackground,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          border: Border.fromBorderSide(BorderSide(color: palette.keyBorder)),
+          boxShadow: const <BoxShadow>[
             BoxShadow(color: LiqKeyboard._keyShadow, offset: Offset(0, 1)),
           ],
         ),
@@ -185,8 +253,8 @@ class _KeyPill extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 9),
             child: Text(
               label,
-              style: const TextStyle(
-                color: LiqKeyboard._keyText,
+              style: TextStyle(
+                color: palette.keyText,
                 fontSize: 17,
                 height: 22 / 17,
                 fontWeight: FontWeight.w500,
@@ -200,50 +268,53 @@ class _KeyPill extends StatelessWidget {
 }
 
 class _Toolbar extends StatelessWidget {
-  const _Toolbar();
+  const _Toolbar({required this.palette});
+
+  final _KeyboardPalette palette;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(minHeight: 44),
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: const BoxDecoration(
-        color: LiqKeyboard._toolbarBg,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        border: Border.fromBorderSide(
-          BorderSide(color: LiqKeyboard._toolbarBorder),
-        ),
+      decoration: BoxDecoration(
+        color: palette.toolbarBackground,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: Border.fromBorderSide(BorderSide(color: palette.toolbarBorder)),
       ),
-      child: const Row(
+      child: Row(
         children: <Widget>[
           SizedBox(
             width: 40,
             height: 24,
             child: CustomPaint(
-              painter: _EmojiGlyphPainter(),
-              size: Size(24, 24),
+              painter: _EmojiGlyphPainter(palette.glyph),
+              size: const Size(24, 24),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: SizedBox(
               height: 32,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: palette.keyBackground,
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
                   border: Border.fromBorderSide(
-                    BorderSide(color: LiqKeyboard._keyBorder),
+                    BorderSide(color: palette.keyBorder),
                   ),
                 ),
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           SizedBox(
             width: 40,
             height: 24,
-            child: CustomPaint(painter: _MicGlyphPainter(), size: Size(24, 24)),
+            child: CustomPaint(
+              painter: _MicGlyphPainter(palette.glyph),
+              size: const Size(24, 24),
+            ),
           ),
         ],
       ),
@@ -252,7 +323,9 @@ class _Toolbar extends StatelessWidget {
 }
 
 class _EmojiGlyphPainter extends CustomPainter {
-  const _EmojiGlyphPainter();
+  const _EmojiGlyphPainter(this.color);
+
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -263,10 +336,10 @@ class _EmojiGlyphPainter extends CustomPainter {
     final r = s / 2 - 1;
     final stroke =
         Paint()
-          ..color = LiqKeyboard._glyph
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.4;
-    final fill = Paint()..color = LiqKeyboard._glyph;
+    final fill = Paint()..color = color;
     final eyeDy = c.dy - s * 0.12;
     canvas
       ..drawCircle(c, r, stroke)
@@ -285,11 +358,15 @@ class _EmojiGlyphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_EmojiGlyphPainter oldDelegate) => false;
+  bool shouldRepaint(_EmojiGlyphPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }
 
 class _MicGlyphPainter extends CustomPainter {
-  const _MicGlyphPainter();
+  const _MicGlyphPainter(this.color);
+
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -297,11 +374,11 @@ class _MicGlyphPainter extends CustomPainter {
     final cy = size.height / 2;
     final stroke =
         Paint()
-          ..color = LiqKeyboard._glyph
+          ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.6
           ..strokeCap = StrokeCap.round;
-    final fill = Paint()..color = LiqKeyboard._glyph;
+    final fill = Paint()..color = color;
     final capsule = RRect.fromRectAndRadius(
       Rect.fromCenter(center: Offset(cx, cy - 3), width: 8, height: 13),
       const Radius.circular(4),
@@ -319,5 +396,7 @@ class _MicGlyphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_MicGlyphPainter oldDelegate) => false;
+  bool shouldRepaint(_MicGlyphPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }

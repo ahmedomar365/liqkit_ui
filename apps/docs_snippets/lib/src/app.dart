@@ -17,6 +17,7 @@ class SnippetsApp extends StatelessWidget {
     return WidgetsApp(
       title: 'liqkit_ui — snippet',
       color: const Color(0xFF000000),
+      initialRoute: _initialRoute(),
       pageRouteBuilder:
           <T>(settings, builder) => PageRouteBuilder<T>(
             settings: settings,
@@ -31,10 +32,27 @@ class SnippetsApp extends StatelessWidget {
         );
       },
       builder:
-          (context, child) =>
-              LiqTheme(data: data, child: child ?? const SizedBox.shrink()),
+          (context, child) => LiqTheme(
+            data: data,
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: ColoredBox(
+                    color: data.surfaceColor.resolve(data.brightness),
+                  ),
+                ),
+                child ?? const SizedBox.shrink(),
+              ],
+            ),
+          ),
     );
   }
+}
+
+String _initialRoute() {
+  final fragment = Uri.base.fragment;
+  if (fragment.isEmpty) return '/';
+  return fragment.startsWith('/') ? fragment : '/$fragment';
 }
 
 Widget _fallback(BuildContext context) => const ColoredBox(

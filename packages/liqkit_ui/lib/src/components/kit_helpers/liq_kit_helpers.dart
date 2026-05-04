@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Page header for a kit demo: bold 56pt title + 28pt description.
 ///
 /// Sourced from `native/components/kit-helpers.css`:
@@ -20,10 +22,9 @@ final class LiqKitHelpersHeader extends StatelessWidget {
   /// Description rendered at SF Pro Text 400 28/34.
   final String description;
 
-  static const Color _ink = Color(0xFF000000);
-
   @override
   Widget build(BuildContext context) {
+    final ink = context.liqLabelColor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -31,10 +32,10 @@ final class LiqKitHelpersHeader extends StatelessWidget {
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: _ink,
+          style: TextStyle(
+            color: ink,
             fontFamily: 'SF Pro Display',
-            fontFamilyFallback: <String>['SF Pro Text', '-apple-system'],
+            fontFamilyFallback: const <String>['SF Pro Text', '-apple-system'],
             fontSize: 56,
             height: 60 / 56,
             letterSpacing: -0.28,
@@ -44,8 +45,8 @@ final class LiqKitHelpersHeader extends StatelessWidget {
         const SizedBox(height: 32),
         Text(
           description,
-          style: const TextStyle(
-            color: _ink,
+          style: TextStyle(
+            color: ink,
             fontFamily: 'SF Pro Text',
             fontSize: 28,
             height: 34 / 28,

@@ -64,5 +64,28 @@ void main() {
       await tester.tap(find.byType(LiqTopBarSymbolButton));
       expect(taps, 1);
     });
+
+    testWidgets('accent button keeps a 44pt tap target', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqTopBarAccentButton(glyph: '+', onPressed: () {}),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSize(find.byType(LiqTopBarAccentButton)),
+        const Size(44, 44),
+      );
+
+      final pill = tester.widget<Container>(find.byType(Container));
+      expect(pill.constraints?.maxWidth, 36);
+      expect(pill.constraints?.maxHeight, 36);
+    });
   });
 }

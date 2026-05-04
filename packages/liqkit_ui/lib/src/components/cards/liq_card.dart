@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 Liquid Glass content surface for grouping arbitrary children.
 ///
@@ -61,6 +62,9 @@ final class LiqCard extends StatelessWidget {
   /// Header / footer divider color.
   static const Color dividerColor = Color(0x29000000);
 
+  /// Header / footer divider color in dark theme.
+  static const Color darkDividerColor = Color(0x29FFFFFF);
+
   /// Soft drop shadow color.
   static const Color shadowColor = Color(0x12000000);
 
@@ -78,23 +82,30 @@ final class LiqCard extends StatelessWidget {
     if (header != null) {
       columnChildren
         ..add(Padding(padding: slotPadding, child: header))
-        ..add(_divider());
+        ..add(_divider(context));
     }
     columnChildren.add(Padding(padding: padding, child: child));
     if (footer != null) {
       columnChildren
-        ..add(_divider())
+        ..add(_divider(context))
         ..add(Padding(padding: slotPadding, child: footer));
     }
 
+    final brightness = context.liqBrightness;
     final Widget surface = LiqGlassSurface(
-      tint: LiqGlassTint.opaque,
+      tint:
+          brightness == Brightness.dark
+              ? LiqGlassTint.dark
+              : LiqGlassTint.opaque,
       elevation: LiqGlassElevation.flat,
       borderRadius: BorderRadius.circular(cornerRadius),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: columnChildren,
+      child: DefaultTextStyle.merge(
+        style: TextStyle(color: context.liqLabelColor),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: columnChildren,
+        ),
       ),
     );
 
@@ -105,8 +116,12 @@ final class LiqCard extends StatelessWidget {
     return _PressableSurface(onTap: onTap!, child: surface);
   }
 
-  static Widget _divider() {
-    return Container(height: dividerThickness, color: dividerColor);
+  static Widget _divider(BuildContext context) {
+    final brightness = context.liqBrightness;
+    return Container(
+      height: dividerThickness,
+      color: brightness == Brightness.dark ? darkDividerColor : dividerColor,
+    );
   }
 
   @override

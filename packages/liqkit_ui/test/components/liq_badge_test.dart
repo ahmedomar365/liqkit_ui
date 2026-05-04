@@ -8,6 +8,11 @@ void main() {
     child: Directionality(textDirection: TextDirection.ltr, child: child),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(textDirection: TextDirection.ltr, child: child),
+  );
+
   Color backgroundOf(WidgetTester tester) {
     final box = tester.widget<DecoratedBox>(
       find
@@ -94,6 +99,45 @@ void main() {
         await measure(LiqBadgeVariant.destructive),
         equals(LiqBadge.destructiveBackground),
       );
+    });
+
+    testWidgets('dark theme resolves dynamic iOS badge colors', (tester) async {
+      Future<Color> measure(LiqBadgeVariant variant) async {
+        await tester.pumpWidget(
+          wrapDark(LiqBadge(label: 'X', variant: variant)),
+        );
+        return backgroundOf(tester);
+      }
+
+      expect(
+        await measure(LiqBadgeVariant.neutral),
+        equals(LiqBadge.darkNeutralBackground),
+      );
+      expect(
+        await measure(LiqBadgeVariant.primary),
+        equals(const Color(0xFF0091FF)),
+      );
+      expect(
+        await measure(LiqBadgeVariant.success),
+        equals(LiqBadge.darkSuccessBackground),
+      );
+      expect(
+        await measure(LiqBadgeVariant.warning),
+        equals(LiqBadge.darkWarningBackground),
+      );
+      expect(
+        await measure(LiqBadgeVariant.destructive),
+        equals(LiqBadge.darkDestructiveBackground),
+      );
+    });
+
+    testWidgets('dark neutral badge keeps white foreground text', (
+      tester,
+    ) async {
+      await tester.pumpWidget(wrapDark(const LiqBadge(label: 'New')));
+
+      final label = tester.widget<Text>(find.text('New'));
+      expect(label.style?.color, LiqBadge.contrastForeground);
     });
 
     test('label/count/dot all-null throws AssertionError', () {

@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 horizontal slider.
 ///
 /// All visual values from liqkit's `native/components/sliders.css`:
@@ -18,7 +22,7 @@ final class LiqSlider extends StatefulWidget {
     required this.onChanged,
     this.min = 0,
     this.max = 1,
-    this.brightness = Brightness.light,
+    this.brightness,
     super.key,
   });
 
@@ -34,8 +38,8 @@ final class LiqSlider extends StatefulWidget {
   /// Maximum value of the range.
   final double max;
 
-  /// Surface brightness — selects the matching track + knob colors.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   static const double _trackHeight = 6;
   static const double _knobWidth = 38;
@@ -53,6 +57,8 @@ final class LiqSlider extends StatefulWidget {
 }
 
 class _LiqSliderState extends State<LiqSlider> {
+  bool _pressed = false;
+
   double _normalize(double v) {
     final span = widget.max - widget.min;
     if (span <= 0) return 0;
@@ -69,11 +75,17 @@ class _LiqSliderState extends State<LiqSlider> {
     widget.onChanged!(_denormalize(t));
   }
 
+  void _setPressed(bool value) {
+    if (_pressed == value) return;
+    setState(() => _pressed = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final disabled = widget.onChanged == null;
     final t = _normalize(widget.value);
-    final isDark = widget.brightness == Brightness.dark;
+    final isDark =
+        (widget.brightness ?? context.liqBrightness) == Brightness.dark;
     return Semantics(
       slider: true,
       enabled: !disabled,
@@ -82,100 +94,130 @@ class _LiqSliderState extends State<LiqSlider> {
         builder: (context, constraints) {
           final width =
               constraints.hasBoundedWidth ? constraints.maxWidth : 240.0;
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTapDown:
-                disabled
-                    ? null
-                    : (details) => _emitFromX(details.localPosition.dx, width),
-            onHorizontalDragUpdate:
-                disabled
-                    ? null
-                    : (details) => _emitFromX(details.localPosition.dx, width),
-            child: Opacity(
-              opacity: disabled ? 0.5 : 1,
-              child: SizedBox(
-                width: width,
-                height: LiqSlider._rowHeight,
-                child: Stack(
-                  children: <Widget>[
-                    // Track background.
-                    Positioned(
-                      left: LiqSlider._hInset,
-                      right: LiqSlider._hInset,
-                      top: (LiqSlider._rowHeight - LiqSlider._trackHeight) / 2,
-                      child: Container(
-                        height: LiqSlider._trackHeight,
-                        decoration: BoxDecoration(
-                          color:
-                              isDark
-                                  ? LiqSlider._trackDark
-                                  : LiqSlider._trackLight,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(3),
+          return LiqPointerCursor(
+            enabled: !disabled,
+            child: Listener(
+              onPointerDown: disabled ? null : (_) => _setPressed(true),
+              onPointerUp: disabled ? null : (_) => _setPressed(false),
+              onPointerCancel: disabled ? null : (_) => _setPressed(false),
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTapDown:
+                    disabled
+                        ? null
+                        : (details) =>
+                            _emitFromX(details.localPosition.dx, width),
+                onHorizontalDragUpdate:
+                    disabled
+                        ? null
+                        : (details) =>
+                            _emitFromX(details.localPosition.dx, width),
+                onHorizontalDragEnd:
+                    disabled ? null : (_) => _setPressed(false),
+                onHorizontalDragCancel:
+                    disabled ? null : () => _setPressed(false),
+                child: Opacity(
+                  opacity: disabled ? 0.5 : 1,
+                  child: SizedBox(
+                    width: width,
+                    height: LiqSlider._rowHeight,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: <Widget>[
+                        // Track background.
+                        Positioned(
+                          left: LiqSlider._hInset,
+                          right: LiqSlider._hInset,
+                          top:
+                              (LiqSlider._rowHeight - LiqSlider._trackHeight) /
+                              2,
+                          child: Container(
+                            height: LiqSlider._trackHeight,
+                            decoration: BoxDecoration(
+                              color:
+                                  isDark
+                                      ? LiqSlider._trackDark
+                                      : LiqSlider._trackLight,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(3),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    // Filled portion left of the knob.
-                    Positioned(
-                      left: LiqSlider._hInset,
-                      right:
-                          LiqSlider._hInset +
-                          (1 - t) * (width - 2 * LiqSlider._hInset),
-                      top: (LiqSlider._rowHeight - LiqSlider._trackHeight) / 2,
-                      child: Container(
-                        height: LiqSlider._trackHeight,
-                        decoration: const BoxDecoration(
-                          color: LiqSlider._fill,
-                          borderRadius: BorderRadius.all(Radius.circular(3)),
-                        ),
-                      ),
-                    ),
-                    // Knob — centered on the value's pixel position.
-                    Positioned(
-                      left:
-                          LiqSlider._hInset +
-                          t * (width - 2 * LiqSlider._hInset) -
-                          LiqSlider._knobWidth / 2,
-                      top: (LiqSlider._rowHeight - LiqSlider._knobHeight) / 2,
-                      child: Container(
-                        width: LiqSlider._knobWidth,
-                        height: LiqSlider._knobHeight,
-                        decoration: BoxDecoration(
-                          color:
-                              isDark
-                                  ? LiqSlider._knobDark
-                                  : LiqSlider._knobLight,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
+                        // Filled portion left of the knob.
+                        Positioned(
+                          left: LiqSlider._hInset,
+                          right:
+                              LiqSlider._hInset +
+                              (1 - t) * (width - 2 * LiqSlider._hInset),
+                          top:
+                              (LiqSlider._rowHeight - LiqSlider._trackHeight) /
+                              2,
+                          child: Container(
+                            height: LiqSlider._trackHeight,
+                            decoration: const BoxDecoration(
+                              color: LiqSlider._fill,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(3),
+                              ),
+                            ),
                           ),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Color.fromRGBO(
-                                0,
-                                0,
-                                0,
-                                isDark ? 0.20 : 0.12,
-                              ),
-                              offset: const Offset(0, 0.5),
-                              blurRadius: 4,
-                            ),
-                            BoxShadow(
-                              color: Color.fromRGBO(
-                                0,
-                                0,
-                                0,
-                                isDark ? 0.26 : 0.12,
-                              ),
-                              offset: const Offset(0, 6),
-                              blurRadius: 13,
-                            ),
-                          ],
                         ),
-                      ),
+                        // Knob — centered on the value's pixel position.
+                        Positioned(
+                          left:
+                              LiqSlider._hInset +
+                              t * (width - 2 * LiqSlider._hInset) -
+                              LiqSlider._knobWidth / 2,
+                          top:
+                              (LiqSlider._rowHeight - LiqSlider._knobHeight) /
+                              2,
+                          child: AnimatedScale(
+                            scale: _pressed ? 1.08 : 1,
+                            duration: LiqMotion.fast,
+                            curve: LiqMotion.snappy,
+                            child: AnimatedContainer(
+                              duration: LiqMotion.fast,
+                              curve: LiqMotion.snappy,
+                              width: LiqSlider._knobWidth,
+                              height: LiqSlider._knobHeight,
+                              decoration: BoxDecoration(
+                                color:
+                                    isDark
+                                        ? LiqSlider._knobDark
+                                        : LiqSlider._knobLight,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(100),
+                                ),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Color.fromRGBO(
+                                      0,
+                                      0,
+                                      0,
+                                      isDark ? 0.20 : 0.12,
+                                    ),
+                                    offset: Offset(0, _pressed ? 1 : 0.5),
+                                    blurRadius: _pressed ? 6 : 4,
+                                  ),
+                                  BoxShadow(
+                                    color: Color.fromRGBO(
+                                      0,
+                                      0,
+                                      0,
+                                      isDark ? 0.30 : 0.16,
+                                    ),
+                                    offset: Offset(0, _pressed ? 8 : 6),
+                                    blurRadius: _pressed ? 18 : 13,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

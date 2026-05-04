@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) {
   return MediaQuery(
@@ -42,6 +42,32 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.text('Apr 30, 2026'), findsOneWidget);
+    });
+
+    testWidgets('resolves trigger colors from dark LiqTheme', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqDatePickerField(value: DateTime(2026, 4, 30), onChanged: (_) {}),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final label = tester.widget<Text>(find.text('Apr 30, 2026'));
+      final container = tester.widget<Container>(
+        find
+            .descendant(
+              of: find.byType(LiqDatePickerField),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      final decoration = container.decoration! as BoxDecoration;
+
+      expect(label.style?.color, const Color(0xFFFFFFFF));
+      expect(decoration.color, const Color(0xFF000000));
     });
 
     testWidgets('custom format callback overrides the default', (tester) async {

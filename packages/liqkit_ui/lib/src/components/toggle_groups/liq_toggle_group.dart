@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One option in a [LiqToggleGroup].
 ///
@@ -124,13 +125,14 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ToggleGroupPalette.resolve(context);
     final disabled = onChanged == null;
 
     Widget control = Container(
       padding: const EdgeInsets.all(trackPadding),
-      decoration: const BoxDecoration(
-        color: trackColor,
-        borderRadius: BorderRadius.all(Radius.circular(trackRadius)),
+      decoration: BoxDecoration(
+        color: palette.track,
+        borderRadius: const BorderRadius.all(Radius.circular(trackRadius)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -140,6 +142,7 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
               item: item,
               active: selected.contains(item.value),
               enabled: !disabled,
+              palette: palette,
               onTap:
                   disabled
                       ? null
@@ -186,20 +189,20 @@ class _Segment<T> extends StatelessWidget {
     required this.item,
     required this.active,
     required this.enabled,
+    required this.palette,
     required this.onTap,
   });
 
   final LiqToggleGroupItem<T> item;
   final bool active;
   final bool enabled;
+  final _ToggleGroupPalette palette;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final foreground =
-        active
-            ? LiqToggleGroup.activeForegroundColor
-            : LiqToggleGroup.inactiveForegroundColor;
+        active ? palette.activeForeground : palette.inactiveForeground;
 
     final children = <Widget>[
       if (item.icon != null)
@@ -232,10 +235,7 @@ class _Segment<T> extends StatelessWidget {
         horizontal: LiqToggleGroup.segmentHorizontalPadding,
       ),
       decoration: BoxDecoration(
-        color:
-            active
-                ? LiqToggleGroup.activeBackgroundColor
-                : const Color(0x00000000),
+        color: active ? palette.activeBackground : const Color(0x00000000),
         borderRadius: const BorderRadius.all(
           Radius.circular(LiqToggleGroup.segmentRadius),
         ),
@@ -261,4 +261,37 @@ class _Segment<T> extends StatelessWidget {
       child: segment,
     );
   }
+}
+
+final class _ToggleGroupPalette {
+  const _ToggleGroupPalette({
+    required this.track,
+    required this.activeBackground,
+    required this.activeForeground,
+    required this.inactiveForeground,
+  });
+
+  factory _ToggleGroupPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _ToggleGroupPalette(
+        track: LiqToggleGroup.trackColor,
+        activeBackground: LiqToggleGroup.activeBackgroundColor,
+        activeForeground: LiqToggleGroup.activeForegroundColor,
+        inactiveForeground: LiqToggleGroup.inactiveForegroundColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _ToggleGroupPalette(
+      track: secondary.withValues(alpha: 0.16),
+      activeBackground: const Color(0xFF1C1C1E),
+      activeForeground: context.liqLabelColor,
+      inactiveForeground: secondary,
+    );
+  }
+
+  final Color track;
+  final Color activeBackground;
+  final Color activeForeground;
+  final Color inactiveForeground;
 }

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/page_controls/liq_page_control.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// iOS 26 horizontal carousel.
@@ -181,19 +183,30 @@ class _LiqCarouselState extends State<LiqCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final pageView = PageView.builder(
-      controller: _controller,
-      itemCount: widget.items.length,
-      onPageChanged: _handlePageChanged,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: widget.itemSpacing / 2),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(LiqCarousel.itemBorderRadius),
-            child: SizedBox(height: widget.height, child: widget.items[index]),
-          ),
-        );
-      },
+    final pageView = ScrollConfiguration(
+      behavior: const _CarouselScrollBehavior(),
+      child: LiqPointerCursor(
+        cursor: SystemMouseCursors.grab,
+        child: PageView.builder(
+          controller: _controller,
+          itemCount: widget.items.length,
+          onPageChanged: _handlePageChanged,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: widget.itemSpacing / 2),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  LiqCarousel.itemBorderRadius,
+                ),
+                child: SizedBox(
+                  height: widget.height,
+                  child: widget.items[index],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
 
     return Column(
@@ -218,4 +231,17 @@ class _LiqCarouselState extends State<LiqCarousel> {
       ],
     );
   }
+}
+
+class _CarouselScrollBehavior extends ScrollBehavior {
+  const _CarouselScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.invertedStylus,
+  };
 }

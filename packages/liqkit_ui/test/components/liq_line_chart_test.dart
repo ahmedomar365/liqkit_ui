@@ -8,6 +8,14 @@ void main() {
     child: Center(child: SizedBox(width: 320, height: 120, child: child)),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(child: SizedBox(width: 320, height: 120, child: child)),
+    ),
+  );
+
   group('LiqLineChart', () {
     testWidgets('renders with two values without throwing', (tester) async {
       await tester.pumpWidget(wrap(LiqLineChart(values: const <double>[0, 1])));
@@ -116,6 +124,34 @@ void main() {
         ),
       );
       expect(find.byType(LiqLineChart), findsOneWidget);
+    });
+
+    testWidgets('dark theme resolves default line and dot ring colors', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrapDark(LiqLineChart(values: const <double>[1, 4, 2], showDots: true)),
+      );
+
+      late Color effectiveColor;
+      late Color dotRingColor;
+      await tester.pumpWidget(
+        wrapDark(
+          Builder(
+            builder: (context) {
+              effectiveColor = LiqLineChart.effectiveColorFor(
+                context,
+                LiqLineChart.lineColor,
+              );
+              dotRingColor = LiqLineChart.dotInnerRingColorFor(context);
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      );
+
+      expect(effectiveColor, const Color(0xFF0091FF));
+      expect(dotRingColor, LiqLineChart.darkDotInnerRingColor);
     });
   });
 }

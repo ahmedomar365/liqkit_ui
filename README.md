@@ -71,10 +71,11 @@ showcase, and snippets app all live in a single workspace.
 ```bash
 # 1. Build the snippets Flutter Web app (iframed by docs)
 cd apps/docs_snippets
-flutter build web --no-web-resources-cdn --pwa-strategy=none --no-tree-shake-icons --base-href=/
+flutter build web --wasm --release --no-web-resources-cdn --pwa-strategy=none --base-href=/
 
-# 2. Serve it on :4174
-cd build/web && python3 -m http.server 4174 &
+# 2. Serve it on :4174 with COOP/COEP headers for threaded skwasm
+cd ../..
+PORT=4174 node tooling/serve_flutter_web_with_headers.mjs apps/docs_snippets/build/web
 
 # 3. Run the Fumadocs docs app on :3000
 cd apps/docs

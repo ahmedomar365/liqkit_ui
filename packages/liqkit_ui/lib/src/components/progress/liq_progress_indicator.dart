@@ -1,7 +1,7 @@
-import 'dart:math' as math;
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Linear iOS 26 progress bar (4pt track, accent fill).
 ///
@@ -24,6 +24,7 @@ final class LiqProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ProgressPalette.resolve(context);
     final v = (value ?? 0).clamp(0.0, 1.0);
     return Semantics(
       label: 'progress',
@@ -38,17 +39,19 @@ final class LiqProgressBar extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  decoration: const BoxDecoration(
-                    color: _trackColor,
-                    borderRadius: BorderRadius.all(Radius.circular(999)),
+                  decoration: BoxDecoration(
+                    color: palette.track,
+                    borderRadius: const BorderRadius.all(Radius.circular(999)),
                   ),
                 ),
                 FractionallySizedBox(
                   widthFactor: v,
                   child: Container(
-                    decoration: const BoxDecoration(
-                      color: _fillColor,
-                      borderRadius: BorderRadius.all(Radius.circular(999)),
+                    decoration: BoxDecoration(
+                      color: palette.fill,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(999),
+                      ),
                     ),
                   ),
                 ),
@@ -76,13 +79,10 @@ enum LiqSpinnerSize {
   regular,
 }
 
-/// iOS 26 indeterminate spinner.
+/// iOS 26 indeterminate activity indicator.
 ///
-/// Sourced from `native/components/progress-indicators.css`:
-///   - regular 30x30 with 2.5pt border (right side at 20% opacity)
-///   - small   22x22 with 2pt border
-///   - color rgba(60,60,67,0.6); right edge rgba(60,60,67,0.2)
-///   - 0.9s linear infinite rotation
+/// Renders as a fixed-diameter 12-tick radial spinner so parent preview
+/// constraints cannot stretch it into an oval.
 final class LiqSpinner extends StatefulWidget {
   /// Creates a spinner.
   const LiqSpinner({this.size = LiqSpinnerSize.regular, super.key});
@@ -119,75 +119,50 @@ class _LiqSpinnerState extends State<LiqSpinner>
 
   @override
   Widget build(BuildContext context) {
+    final palette = _ProgressPalette.resolve(context);
     return Semantics(
       label: 'loading',
-      child: SizedBox(
-        width: widget.diameter,
-        height: widget.diameter,
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, _) {
-            return Transform.rotate(
-              angle: _controller.value * 2 * math.pi,
-              child: CustomPaint(
-                painter: _SpinnerPainter(
-                  color: LiqSpinner._strokeColor,
-                  faint: LiqSpinner._strokeFaint,
-                  borderWidth: widget.borderWidth,
-                ),
-              ),
-            );
-          },
+      child: SizedBox.square(
+        dimension: widget.diameter,
+        child: CupertinoActivityIndicator(
+          animating: _controller.isAnimating,
+          radius: widget.diameter / 2,
+          color: palette.spinnerStroke,
         ),
       ),
     );
   }
 }
 
-class _SpinnerPainter extends CustomPainter {
-  _SpinnerPainter({
-    required this.color,
-    required this.faint,
-    required this.borderWidth,
+final class _ProgressPalette {
+  const _ProgressPalette({
+    required this.track,
+    required this.fill,
+    required this.spinnerStroke,
+    required this.spinnerFaint,
   });
 
-  final Color color;
-  final Color faint;
-  final double borderWidth;
+  factory _ProgressPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _ProgressPalette(
+        track: LiqProgressBar._trackColor,
+        fill: LiqProgressBar._fillColor,
+        spinnerStroke: LiqSpinner._strokeColor,
+        spinnerFaint: LiqSpinner._strokeFaint,
+      );
+    }
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    final inset = borderWidth / 2;
-    final ringRect = Rect.fromLTWH(
-      rect.left + inset,
-      rect.top + inset,
-      rect.width - borderWidth,
-      rect.height - borderWidth,
+    final secondary = context.liqSecondaryLabelColor;
+    return _ProgressPalette(
+      track: secondary.withValues(alpha: 0.24),
+      fill: context.liqPrimaryColor,
+      spinnerStroke: secondary.withValues(alpha: 0.75),
+      spinnerFaint: secondary.withValues(alpha: 0.25),
     );
-    final mainPaint =
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = borderWidth
-          ..strokeCap = StrokeCap.butt
-          ..color = color;
-    final faintPaint =
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = borderWidth
-          ..strokeCap = StrokeCap.butt
-          ..color = faint;
-
-    canvas
-      // Main: ~270deg sweep starting from -135deg.
-      ..drawArc(ringRect, -math.pi * 0.75, math.pi * 1.5, false, mainPaint)
-      // Faint: the remaining arc (right side).
-      ..drawArc(ringRect, math.pi * 0.75, math.pi * 0.5, false, faintPaint);
   }
 
-  @override
-  bool shouldRepaint(_SpinnerPainter oldDelegate) =>
-      oldDelegate.color != color ||
-      oldDelegate.faint != faint ||
-      oldDelegate.borderWidth != borderWidth;
+  final Color track;
+  final Color fill;
+  final Color spinnerStroke;
+  final Color spinnerFaint;
 }

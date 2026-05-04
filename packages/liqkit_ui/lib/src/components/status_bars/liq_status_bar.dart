@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 phone status bar — clock + signal/wifi/battery glyphs.
 ///
 /// Sourced from `native/components/status-bars.css` (`.ios26-statusbars-phone`):
@@ -10,7 +12,7 @@ final class LiqStatusBar extends StatelessWidget {
   /// Creates a status bar.
   const LiqStatusBar({
     this.time = '9:41',
-    this.brightness = Brightness.light,
+    this.brightness,
     this.batteryLevel = 0.78,
     this.cellularBars = 4,
     super.key,
@@ -19,8 +21,8 @@ final class LiqStatusBar extends StatelessWidget {
   /// Clock label.
   final String time;
 
-  /// Surface brightness — controls glyph + label color.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   /// Battery level in [0..1].
   final double batteryLevel;
@@ -33,7 +35,7 @@ final class LiqStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final fg = isDark ? _fgDark : _fgLight;
     return SizedBox(
       height: 62,
@@ -72,7 +74,7 @@ final class LiqStatusBar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('time', time))
-      ..add(EnumProperty<Brightness>('brightness', brightness))
+      ..add(EnumProperty<Brightness?>('brightness', brightness))
       ..add(DoubleProperty('batteryLevel', batteryLevel))
       ..add(IntProperty('cellularBars', cellularBars));
   }

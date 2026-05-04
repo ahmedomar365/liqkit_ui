@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Visual style for a [LiqAlertAction].
 ///
 /// Sourced from `native/shared-surfaces.css` (`.ios26-dialog-action`).
@@ -67,10 +70,13 @@ final class LiqAlert extends StatelessWidget {
   final LiqAlertActionLayout layout;
 
   static const Color _surfaceFill = Color(0x99F5F5F5);
+  static const Color _surfaceFillDark = Color(0xCC1C1C1E);
   static const Color _innerScrim = Color(0x14000000);
+  static const Color _innerScrimDark = Color(0x24FFFFFF);
   static const double _surfaceWidth = 300;
   static const double _surfaceRadius = 34;
   static const Color _titleColor = Color(0xFF000000);
+  static const Color _titleColorDark = Color(0xFFFFFFFF);
   static const TextStyle _titleStyle = TextStyle(
     fontFamily: 'SF Pro Text',
     fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
@@ -78,7 +84,6 @@ final class LiqAlert extends StatelessWidget {
     height: 22 / 17,
     letterSpacing: -0.43,
     fontWeight: FontWeight.w600,
-    color: _titleColor,
   );
   static const TextStyle _descriptionStyle = TextStyle(
     fontFamily: 'SF Pro Text',
@@ -87,7 +92,6 @@ final class LiqAlert extends StatelessWidget {
     height: 22 / 17,
     letterSpacing: -0.43,
     fontWeight: FontWeight.w400,
-    color: _titleColor,
   );
 
   @override
@@ -97,14 +101,22 @@ final class LiqAlert extends StatelessWidget {
       layout != LiqAlertActionLayout.sideBySide || actions.length == 2,
       'sideBySide layout requires exactly two actions.',
     );
+    final isDark = context.liqIsDark;
+    final titleColor = isDark ? _titleColorDark : _titleColor;
     return SizedBox(
       width: _surfaceWidth,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(_surfaceRadius)),
         child: Stack(
           children: <Widget>[
-            const Positioned.fill(child: ColoredBox(color: _innerScrim)),
-            const Positioned.fill(child: ColoredBox(color: _surfaceFill)),
+            Positioned.fill(
+              child: ColoredBox(color: isDark ? _innerScrimDark : _innerScrim),
+            ),
+            Positioned.fill(
+              child: ColoredBox(
+                color: isDark ? _surfaceFillDark : _surfaceFill,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(14),
               child: Column(
@@ -118,7 +130,7 @@ final class LiqAlert extends StatelessWidget {
                         Text(
                           title,
                           textAlign: TextAlign.center,
-                          style: _titleStyle,
+                          style: _titleStyle.copyWith(color: titleColor),
                           textDirection: TextDirection.ltr,
                         ),
                         if (description != null) ...<Widget>[
@@ -126,7 +138,9 @@ final class LiqAlert extends StatelessWidget {
                           Text(
                             description!,
                             textAlign: TextAlign.center,
-                            style: _descriptionStyle,
+                            style: _descriptionStyle.copyWith(
+                              color: titleColor,
+                            ),
                             textDirection: TextDirection.ltr,
                           ),
                         ],
@@ -182,10 +196,12 @@ class _LiqAlertActionButton extends StatelessWidget {
   final LiqAlertAction action;
 
   static const Color _bg = Color(0x29787880);
+  static const Color _bgDark = Color(0x33767680);
   static const Color _filledBg = Color(0xFF0088FF);
   static const Color _filledFg = Color(0xFFFFFFFF);
   static const Color _destructiveFg = Color(0xFFFF383C);
   static const Color _regularFg = Color(0xFF000000);
+  static const Color _regularFgDark = Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
@@ -193,37 +209,44 @@ class _LiqAlertActionButton extends StatelessWidget {
     final isDestructive = action.style == LiqAlertActionStyle.destructive;
     final disabled = action.onPressed == null;
     final fg =
-        isFilled ? _filledFg : (isDestructive ? _destructiveFg : _regularFg);
-    final bg = isFilled ? _filledBg : _bg;
+        isFilled
+            ? _filledFg
+            : (isDestructive
+                ? _destructiveFg
+                : (context.liqIsDark ? _regularFgDark : _regularFg));
+    final bg = isFilled ? _filledBg : (context.liqIsDark ? _bgDark : _bg);
     return Semantics(
       button: true,
       enabled: !disabled,
       label: action.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: action.onPressed,
-        child: Opacity(
-          opacity: disabled ? 0.5 : 1,
-          child: Container(
-            height: 48,
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: const BorderRadius.all(Radius.circular(100)),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              action.label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                fontFamily: 'SF Pro Text',
-                fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                fontSize: 17,
-                height: 22 / 17,
-                letterSpacing: -0.43,
-                fontWeight: FontWeight.w500,
-                color: fg,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: action.onPressed,
+          child: Opacity(
+            opacity: disabled ? 0.5 : 1,
+            child: Container(
+              height: 48,
+              decoration: BoxDecoration(
+                color: bg,
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                action.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textDirection: TextDirection.ltr,
+                style: TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+                  fontSize: 17,
+                  height: 22 / 17,
+                  letterSpacing: -0.43,
+                  fontWeight: FontWeight.w500,
+                  color: fg,
+                ),
               ),
             ),
           ),

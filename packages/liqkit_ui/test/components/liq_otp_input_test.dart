@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
@@ -21,6 +21,13 @@ bool _isObscureDot(Widget w) {
   final dec = w.decoration;
   if (dec is! BoxDecoration) return false;
   return dec.shape == BoxShape.circle && dec.color == LiqOtpInput.textColor;
+}
+
+bool _isDarkObscureDot(Widget w) {
+  if (w is! Container) return false;
+  final dec = w.decoration;
+  if (dec is! BoxDecoration) return false;
+  return dec.shape == BoxShape.circle && dec.color == const Color(0xFFFFFFFF);
 }
 
 Finder _otpBoxesIn(Type root) => find.descendant(
@@ -126,6 +133,58 @@ void main() {
         find.descendant(
           of: find.byType(LiqOtpInput),
           matching: find.byWidgetPredicate(_isObscureDot),
+        ),
+        findsNWidgets(4),
+      );
+    });
+
+    testWidgets('uses dark theme colors for boxes and digits', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqOtpInput(value: '1234', length: 4, onChanged: (_) {}),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final boxDecorations =
+          tester
+              .widgetList<Container>(_otpBoxesIn(LiqOtpInput))
+              .map((container) => container.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        boxDecorations.every(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
+
+      final digit = tester.widget<Text>(_digitText('1'));
+      expect(digit.style?.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('uses dark theme color for obscure dots', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqOtpInput(
+              value: '1234',
+              length: 4,
+              obscure: true,
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byType(LiqOtpInput),
+          matching: find.byWidgetPredicate(_isDarkObscureDot),
         ),
         findsNWidgets(4),
       );

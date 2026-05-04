@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 navigation top bar.
 ///
@@ -16,7 +18,7 @@ final class LiqTopBar extends StatelessWidget {
     this.leading,
     this.trailing,
     this.largeTitle,
-    this.brightness = Brightness.light,
+    this.brightness,
     super.key,
   });
 
@@ -32,8 +34,8 @@ final class LiqTopBar extends StatelessWidget {
   /// When non-null, renders the large-title row beneath the nav row.
   final String? largeTitle;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   static const double _rowHeight = 44;
   static const double _hPad = 16;
@@ -42,7 +44,7 @@ final class LiqTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final titleColor = isDark ? _titleDark : _titleLight;
     final titleStyle = TextStyle(
       fontFamily: 'SF Pro Text',
@@ -114,7 +116,7 @@ final class LiqTopBar extends StatelessWidget {
     properties
       ..add(StringProperty('title', title))
       ..add(StringProperty('largeTitle', largeTitle, defaultValue: null))
-      ..add(EnumProperty<Brightness>('brightness', brightness));
+      ..add(EnumProperty<Brightness?>('brightness', brightness));
   }
 }
 
@@ -124,7 +126,7 @@ final class LiqTopBarSymbolButton extends StatelessWidget {
   const LiqTopBarSymbolButton({
     required this.glyph,
     required this.onPressed,
-    this.brightness = Brightness.light,
+    this.brightness,
     super.key,
   });
 
@@ -134,8 +136,8 @@ final class LiqTopBarSymbolButton extends StatelessWidget {
   /// Tap callback. When null the button is rendered disabled.
   final VoidCallback? onPressed;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   static const Color _accentLight = Color(0xFF0088FF);
   static const Color _accentDark = Color(0xFF0091FF);
@@ -143,29 +145,32 @@ final class LiqTopBarSymbolButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final color =
         onPressed == null ? _disabled : (isDark ? _accentDark : _accentLight);
     return Semantics(
       button: true,
       enabled: onPressed != null,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: SizedBox(
-          width: 44,
-          height: 44,
-          child: Center(
-            child: Text(
-              glyph,
-              style: TextStyle(
-                fontFamily: LiqFontFamily.display,
-                fontSize: 22,
-                height: 1,
-                color: color,
-                fontWeight: FontWeight.w500,
+      child: LiqPointerCursor(
+        enabled: onPressed != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: SizedBox(
+            width: 44,
+            height: 44,
+            child: Center(
+              child: Text(
+                glyph,
+                style: TextStyle(
+                  fontFamily: LiqFontFamily.display,
+                  fontSize: 22,
+                  height: 1,
+                  color: color,
+                  fontWeight: FontWeight.w500,
+                ),
+                textDirection: TextDirection.ltr,
               ),
-              textDirection: TextDirection.ltr,
             ),
           ),
         ),
@@ -190,40 +195,51 @@ final class LiqTopBarAccentButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   static const Color _accent = Color(0xFF0088FF);
+  static const double _tapTargetSize = 44;
+  static const double _pillSize = 36;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
       enabled: onPressed != null,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: Container(
-          width: 36,
-          height: 36,
-          decoration: const BoxDecoration(
-            color: _accent,
-            borderRadius: BorderRadius.all(Radius.circular(100)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Color(0x1F000000),
-                offset: Offset(0, 1),
-                blurRadius: 8,
+      child: LiqPointerCursor(
+        enabled: onPressed != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: SizedBox(
+            width: _tapTargetSize,
+            height: _tapTargetSize,
+            child: Center(
+              child: Container(
+                width: _pillSize,
+                height: _pillSize,
+                decoration: const BoxDecoration(
+                  color: _accent,
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Color(0x1F000000),
+                      offset: Offset(0, 1),
+                      blurRadius: 8,
+                    ),
+                  ],
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  glyph,
+                  style: const TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 18,
+                    height: 1,
+                    color: Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
               ),
-            ],
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            glyph,
-            style: const TextStyle(
-              fontFamily: 'SF Pro Text',
-              fontSize: 18,
-              height: 1,
-              color: Color(0xFFFFFFFF),
-              fontWeight: FontWeight.w600,
             ),
-            textDirection: TextDirection.ltr,
           ),
         ),
       ),

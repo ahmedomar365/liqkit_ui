@@ -1,23 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// A grouped iOS 26 list — rounded card on a card surface.
 ///
 /// Sourced from `native/components/lists.css`. Children are
 /// [LiqListRow]s; the group inserts hairline separators between them.
 final class LiqListGroup extends StatelessWidget {
   /// Creates a list group.
-  const LiqListGroup({
-    required this.rows,
-    this.brightness = Brightness.light,
-    super.key,
-  });
+  const LiqListGroup({required this.rows, this.brightness, super.key});
 
   /// Rows to render inside the group.
   final List<LiqListRow> rows;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   static const double _radius = 26;
   static const Color _bgLight = Color(0xFFFFFFFF);
@@ -27,7 +25,7 @@ final class LiqListGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final bg = isDark ? _bgDark : _bgLight;
     final border = isDark ? _borderDark : _borderLight;
 
@@ -56,7 +54,7 @@ final class LiqListGroup extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('rowCount', rows.length))
-      ..add(EnumProperty<Brightness>('brightness', brightness));
+      ..add(EnumProperty<Brightness?>('brightness', brightness));
   }
 }
 
@@ -71,7 +69,7 @@ final class LiqListRow extends StatelessWidget {
     this.detail,
     this.showChevron = false,
     this.onTap,
-    this.brightness = Brightness.light,
+    this.brightness,
     super.key,
   });
 
@@ -97,8 +95,8 @@ final class LiqListRow extends StatelessWidget {
   /// Tap callback. When null, the row is non-interactive.
   final VoidCallback? onTap;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   static const Color _titleLight = Color(0xFF000000);
   static const Color _titleDark = Color(0xFFFFFFFF);
@@ -108,7 +106,7 @@ final class LiqListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final tall = subtitle != null;
     final titleColor = isDark ? _titleDark : _titleLight;
     final subtitleColor = isDark ? _subtitleDark : _subtitleLight;

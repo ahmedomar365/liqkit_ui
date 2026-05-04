@@ -12,6 +12,16 @@ Widget _wrap(Widget child) {
   );
 }
 
+Widget _wrapDark(Widget child) {
+  return LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(child: SizedBox(width: 360, child: child)),
+    ),
+  );
+}
+
 const _items = <LiqTabItem>[
   LiqTabItem(label: 'Overview'),
   LiqTabItem(label: 'Comments'),
@@ -112,6 +122,41 @@ void main() {
         return false;
       });
       expect(hasPill, findsWidgets);
+    });
+
+    testWidgets('underline variant resolves dark theme tab colors', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapDark(LiqTabs(items: _items, selectedIndex: 0, onChanged: (_) {})),
+      );
+
+      final active = tester.widget<Text>(find.text('Overview'));
+      expect(active.style?.color, const Color(0xFF0091FF));
+
+      final inactive = tester.widget<Text>(find.text('Comments'));
+      expect(inactive.style?.color, const Color(0xB2EBEBF5));
+    });
+
+    testWidgets('pill variant keeps selected label readable in dark theme', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapDark(
+          LiqTabs(
+            variant: LiqTabsVariant.pill,
+            items: _items,
+            selectedIndex: 1,
+            onChanged: (_) {},
+          ),
+        ),
+      );
+
+      final selected = tester.widget<Text>(find.text('Comments'));
+      expect(selected.style?.color, const Color(0xFFFFFFFF));
+
+      final inactive = tester.widget<Text>(find.text('Overview'));
+      expect(inactive.style?.color, const Color(0xB2EBEBF5));
     });
 
     testWidgets('renders 3 LiqTabItem labels', (tester) async {

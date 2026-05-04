@@ -1,11 +1,11 @@
 import 'package:docs_snippets/src/demo.dart';
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget popupButtonRegularBuilder(BuildContext context) {
-  return Align(
-    heightFactor: 1,
+  return SnippetFrame(
     child: LiqDemo<int>(
       initial: 0,
       builder: (v, set) {
@@ -17,12 +17,9 @@ Widget popupButtonRegularBuilder(BuildContext context) {
             if (v > 0)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(
+                child: SnippetLabel(
                   'Tapped $v time${v == 1 ? '' : 's'}',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Color(0xFF8E8E93),
-                  ),
+                  fontSize: 13,
                 ),
               ),
           ],

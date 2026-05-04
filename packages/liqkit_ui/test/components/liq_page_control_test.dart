@@ -49,5 +49,79 @@ void main() {
       );
       expect(tester.getSize(find.byType(LiqPageControl)), Size.zero);
     });
+
+    testWidgets('default brightness follows dark LiqTheme', (tester) async {
+      await tester.pumpWidget(
+        const LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(child: LiqPageControl(count: 5, activeIndex: 2)),
+          ),
+        ),
+      );
+
+      final activeDot = tester
+          .widgetList<Container>(
+            find.descendant(
+              of: find.byType(LiqPageControl),
+              matching: find.byType(Container),
+            ),
+          )
+          .firstWhere((container) {
+            final decoration = container.decoration;
+            return decoration is BoxDecoration &&
+                decoration.color == const Color(0xFFFFFFFF);
+          });
+      expect(
+        activeDot.decoration,
+        isA<BoxDecoration>().having(
+          (decoration) => decoration.color,
+          'color',
+          const Color(0xFFFFFFFF),
+        ),
+      );
+    });
+
+    testWidgets('explicit light brightness stays black in dark LiqTheme', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqPageControl(
+                count: 5,
+                activeIndex: 2,
+                brightness: LiqPageControlBrightness.light,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final activeDot = tester
+          .widgetList<Container>(
+            find.descendant(
+              of: find.byType(LiqPageControl),
+              matching: find.byType(Container),
+            ),
+          )
+          .firstWhere((container) {
+            final decoration = container.decoration;
+            return decoration is BoxDecoration &&
+                decoration.color == const Color(0xFF000000);
+          });
+      expect(
+        activeDot.decoration,
+        isA<BoxDecoration>().having(
+          (decoration) => decoration.color,
+          'color',
+          const Color(0xFF000000),
+        ),
+      );
+    });
   });
 }

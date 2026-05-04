@@ -1,23 +1,41 @@
 import 'package:docs_snippets/src/demo.dart';
+import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget comboboxPreselectedBuilder(BuildContext context) {
-  return Align(
-    heightFactor: 1,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: LiqDemo<String?>(
-        initial: 'jp',
-        builder:
-            (v, set) => SizedBox(
-              width: 320,
+  return const _ComboboxPreselectedDemo();
+}
+
+class _ComboboxPreselectedDemo extends StatefulWidget {
+  const _ComboboxPreselectedDemo();
+
+  @override
+  State<_ComboboxPreselectedDemo> createState() =>
+      _ComboboxPreselectedDemoState();
+}
+
+class _ComboboxPreselectedDemoState extends State<_ComboboxPreselectedDemo> {
+  bool _open = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return SnippetFrame(
+      maxWidth: 420,
+      height: _open ? 314 : null,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: LiqDemo<String?>(
+          initial: 'jp',
+          builder:
+              (v, set) =>
               // {@highlight}
-              child: LiqCombobox<String>(
+              LiqCombobox<String>(
                 placeholder: 'Choose a country',
                 value: v,
                 onChanged: set,
+                onOpenChanged: (open) => setState(() => _open = open),
                 options: const <LiqComboboxOption<String>>[
                   LiqComboboxOption<String>(
                     value: 'us',
@@ -35,9 +53,9 @@ Widget comboboxPreselectedBuilder(BuildContext context) {
                   LiqComboboxOption<String>(value: 'br', label: 'Brazil'),
                 ],
               ),
-              // {@endhighlight}
-            ),
+          // {@endhighlight}
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

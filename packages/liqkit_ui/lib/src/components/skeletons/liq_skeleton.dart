@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Shape of a [LiqSkeleton] placeholder.
 enum LiqSkeletonShape {
   /// Rounded rectangle. Defaults to a 6pt corner radius.
@@ -59,6 +61,12 @@ final class LiqSkeleton extends StatefulWidget {
   /// Highlight color: iOS 26 brighter shimmer band.
   static const Color highlightColor = Color(0xFFF5F5F7);
 
+  /// Dark-mode base color for shimmer placeholders.
+  static const Color darkBaseColor = Color(0xFF2C2C2E);
+
+  /// Dark-mode highlight color for the moving shimmer band.
+  static const Color darkHighlightColor = Color(0xFF3A3A3C);
+
   /// Duration of one full shimmer sweep.
   static const Duration period = Duration(milliseconds: 1400);
 
@@ -94,6 +102,7 @@ class _LiqSkeletonState extends State<LiqSkeleton>
 
   @override
   Widget build(BuildContext context) {
+    final palette = _SkeletonPalette.resolve(context);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
@@ -101,11 +110,7 @@ class _LiqSkeletonState extends State<LiqSkeleton>
         final gradient = LinearGradient(
           begin: Alignment(-1 + 2 * t, 0),
           end: Alignment(1 + 2 * t, 0),
-          colors: const [
-            LiqSkeleton.baseColor,
-            LiqSkeleton.highlightColor,
-            LiqSkeleton.baseColor,
-          ],
+          colors: [palette.base, palette.highlight, palette.base],
           stops: const [0, 0.5, 1],
         );
 
@@ -141,6 +146,27 @@ class _LiqSkeletonState extends State<LiqSkeleton>
       },
     );
   }
+}
+
+final class _SkeletonPalette {
+  const _SkeletonPalette({required this.base, required this.highlight});
+
+  factory _SkeletonPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _SkeletonPalette(
+        base: LiqSkeleton.baseColor,
+        highlight: LiqSkeleton.highlightColor,
+      );
+    }
+
+    return const _SkeletonPalette(
+      base: LiqSkeleton.darkBaseColor,
+      highlight: LiqSkeleton.darkHighlightColor,
+    );
+  }
+
+  final Color base;
+  final Color highlight;
 }
 
 /// Helper for skeletoning multi-line text.

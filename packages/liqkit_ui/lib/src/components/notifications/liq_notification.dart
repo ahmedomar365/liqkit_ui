@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Color pair for a [LiqNotification] icon surface.
 ///
 /// The gradient runs from [top] to [bottom] (180°), with a soft white
@@ -97,6 +100,7 @@ final class LiqNotification extends StatelessWidget {
     required this.icon,
     this.time,
     this.width = 386,
+    this.brightness,
     super.key,
   });
 
@@ -115,37 +119,39 @@ final class LiqNotification extends StatelessWidget {
   /// Total card width. Defaults to 386pt.
   final double width;
 
-  static const Color _cardOver = Color(0x47FFFFFF);
-  static const Color _cardUnder = Color(0x14FFFFFF);
-  static const Color _cardBase = Color(0x1AFFFFFF);
-  static const Color _rim = Color(0x47FFFFFF);
-  static const Color _shadow = Color(0x1F000000);
-  static const Color _titleColor = Color(0xD1FFFFFF);
-  static const Color _bodyColor = Color(0xB8FFFFFF);
-  static const Color _timeColor = Color(0xB8F8F8F8);
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  ///
+  /// Light notifications use dark text on a light glass tint. Dark
+  /// notifications use white text on a dark glass tint.
+  final Brightness? brightness;
+
+  static const Color _titleLight = Color(0xE6000000);
+  static const Color _bodyLight = Color(0xB3000000);
+  static const Color _timeLight = Color(0x8F000000);
+  static const Color _titleDark = Color(0xF2FFFFFF);
+  static const Color _bodyDark = Color(0xD9FFFFFF);
+  static const Color _timeDark = Color(0xB8FFFFFF);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: _cardBase,
-            borderRadius: BorderRadius.all(Radius.circular(24)),
-            border: Border.fromBorderSide(BorderSide(color: _rim)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(color: _shadow, offset: Offset(0, 24), blurRadius: 50),
-            ],
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[_cardOver, _cardUnder],
-            ),
-          ),
-          child: Padding(
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
+    final titleColor = isDark ? _titleDark : _titleLight;
+    final bodyColor = isDark ? _bodyDark : _bodyLight;
+    final timeColor = isDark ? _timeDark : _timeLight;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableWidth = constraints.maxWidth;
+        final cardWidth =
+            availableWidth.isFinite && availableWidth < width
+                ? availableWidth
+                : width;
+        return SizedBox(
+          width: cardWidth,
+          child: LiqGlassSurface(
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             padding: const EdgeInsets.fromLTRB(14, 13, 17, 13),
+            tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
             child: Row(
               children: <Widget>[
                 icon,
@@ -173,8 +179,7 @@ final class LiqNotification extends StatelessWidget {
                                 height: 17 / 15,
                                 letterSpacing: -0.23,
                                 fontWeight: FontWeight.w600,
-                                color: _titleColor,
-                              ),
+                              ).copyWith(color: titleColor),
                             ),
                           ),
                           if (time != null)
@@ -190,8 +195,7 @@ final class LiqNotification extends StatelessWidget {
                                   fontSize: 13,
                                   height: 20 / 13,
                                   fontWeight: FontWeight.w400,
-                                  color: _timeColor,
-                                ),
+                                ).copyWith(color: timeColor),
                               ),
                             ),
                         ],
@@ -209,8 +213,7 @@ final class LiqNotification extends StatelessWidget {
                           height: 18 / 15,
                           letterSpacing: -0.23,
                           fontWeight: FontWeight.w400,
-                          color: _bodyColor,
-                        ),
+                        ).copyWith(color: bodyColor),
                       ),
                     ],
                   ),
@@ -218,8 +221,8 @@ final class LiqNotification extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -230,6 +233,7 @@ final class LiqNotification extends StatelessWidget {
       ..add(StringProperty('title', title))
       ..add(StringProperty('body', body))
       ..add(StringProperty('time', time))
-      ..add(DoubleProperty('width', width));
+      ..add(DoubleProperty('width', width))
+      ..add(EnumProperty<Brightness?>('brightness', brightness));
   }
 }

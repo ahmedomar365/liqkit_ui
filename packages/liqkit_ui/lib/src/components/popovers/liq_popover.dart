@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Side of the popover bubble that the tip points from.
 enum LiqPopoverSide {
   /// Tip on the top edge, pointing up.
@@ -39,7 +41,7 @@ final class LiqPopover extends StatelessWidget {
     required this.child,
     this.side = LiqPopoverSide.top,
     this.alignment = LiqPopoverAlignment.center,
-    this.brightness = Brightness.light,
+    this.brightness,
     this.width = 220,
     this.padding = const EdgeInsets.all(14),
     super.key,
@@ -54,8 +56,8 @@ final class LiqPopover extends StatelessWidget {
   /// Position of the tip along the edge.
   final LiqPopoverAlignment alignment;
 
-  /// Surface brightness.
-  final Brightness brightness;
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
 
   /// Bubble width. Defaults to 220pt.
   final double width;
@@ -72,7 +74,7 @@ final class LiqPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = brightness == Brightness.dark;
+    final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
     final fill = isDark ? _bubbleDark : _bubbleLight;
     final rim = isDark ? _rimDark : _rimLight;
     final shadow = isDark ? _shadowDark : _shadowLight;
@@ -118,7 +120,7 @@ final class LiqPopover extends StatelessWidget {
     properties
       ..add(EnumProperty<LiqPopoverSide>('side', side))
       ..add(EnumProperty<LiqPopoverAlignment>('alignment', alignment))
-      ..add(EnumProperty<Brightness>('brightness', brightness))
+      ..add(EnumProperty<Brightness?>('brightness', brightness))
       ..add(DoubleProperty('width', width));
   }
 }

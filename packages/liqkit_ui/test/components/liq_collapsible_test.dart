@@ -8,6 +8,11 @@ void main() {
     child: Directionality(textDirection: TextDirection.ltr, child: child),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(textDirection: TextDirection.ltr, child: child),
+  );
+
   group('LiqCollapsible', () {
     testWidgets('body is not visible by default', (tester) async {
       await tester.pumpWidget(
@@ -99,6 +104,17 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(rotation().turns, 0.25);
+    });
+
+    testWidgets('chevron resolves dark theme color', (tester) async {
+      await tester.pumpWidget(
+        wrapDark(
+          const LiqCollapsible(header: Text('header'), child: Text('body')),
+        ),
+      );
+
+      final icon = tester.widget<Icon>(find.byType(Icon));
+      expect(icon.color, LiqCollapsible.darkChevronColor);
     });
   });
 }

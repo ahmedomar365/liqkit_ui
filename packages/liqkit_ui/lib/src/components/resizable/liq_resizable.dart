@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Axis along which a [LiqResizable] arranges its two panes.
 enum LiqResizableDirection {
@@ -76,11 +77,20 @@ final class LiqResizable extends StatefulWidget {
   /// Idle divider band fill — iOS 26 hairline-ish 8% black.
   static const Color dividerColorIdle = Color(0x14000000);
 
+  /// Idle divider band fill in dark theme.
+  static const Color darkDividerColorIdle = Color(0x1FFFFFFF);
+
   /// Active/hover divider band fill — iOS 26 system blue.
   static const Color dividerColorActive = Color(0xFF007AFF);
 
+  /// Active/hover divider band fill in dark theme.
+  static const Color darkDividerColorActive = Color(0xFF0091FF);
+
   /// Grip rectangle fill — iOS 26 system gray 4.
   static const Color gripColor = Color(0xFFC7C7CC);
+
+  /// Grip rectangle fill in dark theme.
+  static const Color darkGripColor = Color(0xFF636366);
 
   /// Grip rectangle long edge length.
   static const double gripLong = 24;
@@ -178,10 +188,17 @@ class _LiqResizableState extends State<LiqResizable> {
         horizontal
             ? SystemMouseCursors.resizeColumn
             : SystemMouseCursors.resizeRow;
+    final isDark = context.liqIsDark;
     final activeColor =
         (_hovered || _pressing)
-            ? LiqResizable.dividerColorActive
+            ? isDark
+                ? LiqResizable.darkDividerColorActive
+                : LiqResizable.dividerColorActive
+            : isDark
+            ? LiqResizable.darkDividerColorIdle
             : LiqResizable.dividerColorIdle;
+    final gripColor =
+        isDark ? LiqResizable.darkGripColor : LiqResizable.gripColor;
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -228,10 +245,12 @@ class _LiqResizableState extends State<LiqResizable> {
                       horizontal
                           ? LiqResizable.gripLong
                           : LiqResizable.gripShort,
-                  child: const DecoratedBox(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color: LiqResizable.gripColor,
-                      borderRadius: BorderRadius.all(Radius.circular(1.5)),
+                      color: gripColor,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(1.5),
+                      ),
                     ),
                   ),
                 ),

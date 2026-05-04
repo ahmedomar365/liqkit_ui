@@ -8,6 +8,19 @@ void main() {
     child: Directionality(textDirection: TextDirection.ltr, child: child),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(textDirection: TextDirection.ltr, child: child),
+  );
+
+  Color decoratedColorAt(WidgetTester tester, int index) {
+    final box = tester.widget<DecoratedBox>(
+      find.byType(DecoratedBox).at(index),
+    );
+    final decoration = box.decoration as BoxDecoration;
+    return decoration.color!;
+  }
+
   group('LiqAvatar', () {
     testWidgets('renders initials when image is null', (tester) async {
       await tester.pumpWidget(wrap(const LiqAvatar(initials: 'JD')));
@@ -58,6 +71,14 @@ void main() {
         const Size(LiqAvatar.diameterLarge, LiqAvatar.diameterLarge),
       );
     });
+
+    testWidgets('generic fallback uses dark neutral fill in dark theme', (
+      tester,
+    ) async {
+      await tester.pumpWidget(wrapDark(const LiqAvatar()));
+
+      expect(decoratedColorAt(tester, 0), LiqAvatar.darkNeutralBackground);
+    });
   });
 
   group('LiqAvatarGroup', () {
@@ -88,6 +109,30 @@ void main() {
       expect(find.text('DD'), findsNothing);
       expect(find.text('EE'), findsNothing);
       expect(find.text('+2'), findsOneWidget);
+    });
+
+    testWidgets('overflow pill resolves dark neutral colors', (tester) async {
+      await tester.pumpWidget(
+        wrapDark(
+          const Align(
+            alignment: Alignment.topLeft,
+            child: LiqAvatarGroup(
+              avatars: <LiqAvatar>[
+                LiqAvatar(initials: 'AA'),
+                LiqAvatar(initials: 'BB'),
+                LiqAvatar(initials: 'CC'),
+                LiqAvatar(initials: 'DD'),
+                LiqAvatar(initials: 'EE'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(decoratedColorAt(tester, 3), LiqAvatar.darkNeutralBackground);
+
+      final overflow = tester.widget<Text>(find.text('+2'));
+      expect(overflow.style?.color, LiqAvatar.darkNeutralForeground);
     });
   });
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
@@ -139,6 +139,69 @@ void main() {
 
       expect(find.byIcon(Icons.add), findsNothing);
       expect(find.byIcon(Icons.remove), findsNothing);
+    });
+
+    testWidgets('uses dark theme colors for field and steppers', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(LiqNumberField(value: 42, onChanged: (_) {})),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.style.color, const Color(0xFFFFFFFF));
+
+      final decorations =
+          tester
+              .widgetList<Container>(
+                find.descendant(
+                  of: find.byType(LiqNumberField),
+                  matching: find.byWidgetPredicate(
+                    (widget) =>
+                        widget is Container &&
+                        widget.decoration is BoxDecoration,
+                  ),
+                ),
+              )
+              .map((container) => container.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        decorations.any(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
+
+      final addIcon = tester.widget<Icon>(find.byIcon(Icons.add));
+      expect(addIcon.color, const Color(0xFFFFFFFF));
+    });
+
+    testWidgets('selection gestures belong to EditableText', (tester) async {
+      await tester.pumpWidget(
+        _wrap(LiqNumberField(value: 42, onChanged: (_) {})),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is GestureDetector && widget.onTap != null,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byType(Listener),
+        ),
+        findsOneWidget,
+      );
     });
 
     test('throws AssertionError when min > max', () {

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// macOS-style window card — 34pt rounded white surface with a soft
 /// drop-shadow, an optional toolbar, and content rendered below.
 ///
@@ -25,16 +27,19 @@ final class LiqWindow extends StatelessWidget {
   final Widget? child;
 
   static const Color _shadow = Color(0x33000000);
+  static const Color _surface = Color(0xFFFFFFFF);
+  static const Color _surfaceDark = Color(0xFF1C1C1E);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     return SizedBox.fromSize(
       size: size,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.all(Radius.circular(34)),
-          boxShadow: <BoxShadow>[
+        decoration: BoxDecoration(
+          color: isDark ? _surfaceDark : _surface,
+          borderRadius: const BorderRadius.all(Radius.circular(34)),
+          boxShadow: const <BoxShadow>[
             BoxShadow(color: _shadow, offset: Offset(0, 20), blurRadius: 76),
           ],
         ),
@@ -82,10 +87,15 @@ final class LiqWindowToolbar extends StatelessWidget {
   final List<Widget> trailing;
 
   static const Color _titleColor = Color(0xFF1A1A1A);
+  static const Color _titleColorDark = Color(0xFFFFFFFF);
   static const Color _subtitleColor = Color(0xFF727272);
+  static const Color _subtitleColorDark = Color(0x99EBEBF5);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
+    final titleColor = isDark ? _titleColorDark : _titleColor;
+    final subtitleColor = isDark ? _subtitleColorDark : _subtitleColor;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Row(
@@ -101,8 +111,8 @@ final class LiqWindowToolbar extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             title!,
-                            style: const TextStyle(
-                              color: _titleColor,
+                            style: TextStyle(
+                              color: titleColor,
                               fontFamily: 'SF Pro Text',
                               fontSize: 15,
                               height: 18 / 15,
@@ -112,8 +122,8 @@ final class LiqWindowToolbar extends StatelessWidget {
                           if (subtitle != null)
                             Text(
                               subtitle!,
-                              style: const TextStyle(
-                                color: _subtitleColor,
+                              style: TextStyle(
+                                color: subtitleColor,
                                 fontFamily: 'SF Pro Text',
                                 fontSize: 12,
                                 height: 14 / 12,
@@ -182,27 +192,33 @@ final class LiqWindowGlassButton extends StatelessWidget {
   final double minWidth;
 
   static const Color _bg = Color(0xFFF7F7F7);
+  static const Color _bgDark = Color(0xFF2C2C2E);
   static const Color _innerHighlight = Color(0xD9FFFFFF);
+  static const Color _innerHighlightDark = Color(0x24FFFFFF);
   static const Color _label = Color(0xFF1A1A1A);
+  static const Color _labelDark = Color(0xFFFFFFFF);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onPressed,
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: minWidth, minHeight: 44),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: _bg,
-            borderRadius: BorderRadius.all(Radius.circular(296)),
-            border: Border.fromBorderSide(BorderSide(color: _innerHighlight)),
+          decoration: BoxDecoration(
+            color: isDark ? _bgDark : _bg,
+            borderRadius: const BorderRadius.all(Radius.circular(296)),
+            border: Border.fromBorderSide(
+              BorderSide(color: isDark ? _innerHighlightDark : _innerHighlight),
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: DefaultTextStyle(
-              style: const TextStyle(
-                color: _label,
+              style: TextStyle(
+                color: isDark ? _labelDark : _label,
                 fontFamily: 'SF Pro Text',
                 fontSize: 17,
                 height: 22 / 17,

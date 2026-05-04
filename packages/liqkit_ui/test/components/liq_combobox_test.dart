@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 const List<LiqComboboxOption<String>> _fruits = <LiqComboboxOption<String>>[
   LiqComboboxOption<String>(value: 'apple', label: 'Apple'),
@@ -127,6 +127,28 @@ void main() {
       expect(received, 'cherry');
     });
 
+    testWidgets('reports dropdown open and close state', (tester) async {
+      final states = <bool>[];
+      await tester.pumpWidget(
+        _wrap(
+          LiqCombobox<String>(
+            options: _fruits,
+            value: null,
+            onChanged: (_) {},
+            onOpenChanged: states.add,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LiqCombobox<String>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cherry'));
+      await tester.pumpAndSettle();
+
+      expect(states, <bool>[true, false]);
+    });
+
     testWidgets('"No matches" row appears when filter returns empty', (
       tester,
     ) async {
@@ -191,5 +213,76 @@ void main() {
         expect(find.text('Banana'), findsNothing);
       },
     );
+
+    testWidgets('uses dark theme colors for field text and surface', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            LiqCombobox<String>(
+              options: _fruits,
+              value: 'apple',
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.style.color, const Color(0xFFFFFFFF));
+      final decorations =
+          tester
+              .widgetList<Container>(
+                find.descendant(
+                  of: find.byType(LiqCombobox<String>),
+                  matching: find.byWidgetPredicate(
+                    (widget) =>
+                        widget is Container &&
+                        widget.decoration is BoxDecoration,
+                  ),
+                ),
+              )
+              .map((container) => container.decoration)
+              .whereType<BoxDecoration>();
+      expect(
+        decorations.any(
+          (decoration) => decoration.color == const Color(0xFF000000),
+        ),
+        isTrue,
+      );
+    });
+
+    testWidgets('selection gestures belong to EditableText', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqCombobox<String>(
+            options: _fruits,
+            value: 'apple',
+            onChanged: (_) {},
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byWidgetPredicate(
+            (widget) => widget is GestureDetector && widget.onTap != null,
+          ),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.ancestor(
+          of: find.byType(EditableText),
+          matching: find.byType(Listener),
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

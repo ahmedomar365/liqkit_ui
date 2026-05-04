@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Diameter preset for [LiqAvatar].
 enum LiqAvatarSize {
   /// 24pt diameter, 12pt initials.
@@ -70,8 +72,20 @@ final class LiqAvatar extends StatelessWidget {
   /// Neutral grey used for the generic glyph fallback and `+N` pill.
   static const Color neutralBackground = Color(0xFFE5E5EA);
 
+  /// Dark neutral used for the generic glyph fallback and `+N` pill.
+  static const Color darkNeutralBackground = Color(0xFF3A3A3C);
+
   /// Foreground color for the `+N` pill in [LiqAvatarGroup].
   static const Color neutralForeground = Color(0xFF1C1C1E);
+
+  /// Dark foreground color for the `+N` pill in [LiqAvatarGroup].
+  static const Color darkNeutralForeground = Color(0xFFFFFFFF);
+
+  /// Generic glyph color for the neutral avatar fallback.
+  static const Color glyphColor = Color(0xFF8E8E93);
+
+  /// Dark generic glyph color for the neutral avatar fallback.
+  static const Color darkGlyphColor = Color(0xB2EBEBF5);
 
   /// Six iOS pastel colors used for the deterministic background hash.
   static const List<Color> palette = <Color>[
@@ -138,11 +152,11 @@ final class LiqAvatar extends StatelessWidget {
     return SizedBox(
       width: diameter,
       height: diameter,
-      child: _buildContents(diameter),
+      child: _buildContents(context, diameter),
     );
   }
 
-  Widget _buildContents(double diameter) {
+  Widget _buildContents(BuildContext context, double diameter) {
     final image = this.image;
     if (image != null) {
       return ClipOval(
@@ -151,14 +165,15 @@ final class LiqAvatar extends StatelessWidget {
           width: diameter,
           height: diameter,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stack) => _buildInitialsOrGlyph(),
+          errorBuilder:
+              (context, error, stack) => _buildInitialsOrGlyph(context),
         ),
       );
     }
-    return _buildInitialsOrGlyph();
+    return _buildInitialsOrGlyph(context);
   }
 
-  Widget _buildInitialsOrGlyph() {
+  Widget _buildInitialsOrGlyph(BuildContext context) {
     final initials = this.initials;
     if (initials != null && initials.trim().isNotEmpty) {
       final formatted = formatInitials(initials);
@@ -186,9 +201,10 @@ final class LiqAvatar extends StatelessWidget {
         ),
       );
     }
+    final palette = _AvatarNeutralPalette.resolve(context);
     return _CircleFill(
-      color: backgroundColor ?? neutralBackground,
-      child: CustomPaint(painter: _PersonGlyphPainter()),
+      color: backgroundColor ?? palette.background,
+      child: CustomPaint(painter: _PersonGlyphPainter(color: palette.glyph)),
     );
   }
 
@@ -218,13 +234,13 @@ class _CircleFill extends StatelessWidget {
 }
 
 class _PersonGlyphPainter extends CustomPainter {
-  _PersonGlyphPainter();
+  _PersonGlyphPainter({required this.color});
 
-  static const Color _glyphColor = Color(0xFF8E8E93);
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = _glyphColor;
+    final paint = Paint()..color = color;
     final w = size.width;
     final h = size.height;
 
@@ -247,7 +263,9 @@ class _PersonGlyphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _PersonGlyphPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _PersonGlyphPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }
 
 /// Horizontal stack of overlapping [LiqAvatar]s, with a `+N` overflow pill.
@@ -319,12 +337,13 @@ class _OverflowPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final diameter = LiqAvatar.diameterFor(size);
+    final palette = _AvatarNeutralPalette.resolve(context);
     return SizedBox(
       width: diameter,
       height: diameter,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: LiqAvatar.neutralBackground,
+        decoration: BoxDecoration(
+          color: palette.background,
           shape: BoxShape.circle,
         ),
         child: Center(
@@ -339,7 +358,7 @@ class _OverflowPill extends StatelessWidget {
               ],
               fontSize: LiqAvatar.initialsFontFor(size),
               fontWeight: FontWeight.w600,
-              color: LiqAvatar.neutralForeground,
+              color: palette.foreground,
               height: 1,
             ),
             maxLines: 1,
@@ -349,4 +368,32 @@ class _OverflowPill extends StatelessWidget {
       ),
     );
   }
+}
+
+final class _AvatarNeutralPalette {
+  const _AvatarNeutralPalette({
+    required this.background,
+    required this.foreground,
+    required this.glyph,
+  });
+
+  factory _AvatarNeutralPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _AvatarNeutralPalette(
+        background: LiqAvatar.neutralBackground,
+        foreground: LiqAvatar.neutralForeground,
+        glyph: LiqAvatar.glyphColor,
+      );
+    }
+
+    return const _AvatarNeutralPalette(
+      background: LiqAvatar.darkNeutralBackground,
+      foreground: LiqAvatar.darkNeutralForeground,
+      glyph: LiqAvatar.darkGlyphColor,
+    );
+  }
+
+  final Color background;
+  final Color foreground;
+  final Color glyph;
 }

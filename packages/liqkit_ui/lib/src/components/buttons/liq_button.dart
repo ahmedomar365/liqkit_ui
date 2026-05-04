@@ -1,5 +1,10 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Visual style of a [LiqButton], ported from liqkit's iOS 26 button
 /// catalog (`figma_artifacts/buttons/`).
@@ -73,7 +78,9 @@ final class LiqButton extends StatelessWidget {
   static const Color _accentBlue = Color(0xFF0088FF);
   static const Color _accentRed = Color(0xFFFF383C);
   static const Color _labelPrimary = Color(0xFF000000);
+  static const Color _labelPrimaryDark = Color(0xFFFFFFFF);
   static const Color _labelTertiary = Color(0x4D3C3C43);
+  static const Color _labelTertiaryDark = Color(0x52EBEBF5);
   static const Color _fillSecondary = Color(0x2978788A);
   static const Color _fillTertiary = Color(0x1F767680);
   static const Color _destructiveBg = Color(0x24FF383C);
@@ -117,8 +124,12 @@ final class LiqButton extends StatelessWidget {
   };
 
   /// Resolved fill and label color for this style/state combo.
-  ({Color fill, Color label, BoxDecoration? decoration}) _resolve() {
+  ({Color fill, Color label, BoxDecoration? decoration}) _resolve({
+    required bool isDark,
+  }) {
     final disabled = onPressed == null;
+    final labelPrimary = isDark ? _labelPrimaryDark : _labelPrimary;
+    final labelTertiary = isDark ? _labelTertiaryDark : _labelTertiary;
     switch (style) {
       case LiqButtonStyle.borderedProminent:
         if (disabled) {
@@ -137,7 +148,7 @@ final class LiqButton extends StatelessWidget {
         if (disabled) {
           return (
             fill: destructive ? _destructiveBg : _fillSecondary,
-            label: destructive ? _destructiveDisabled : _labelTertiary,
+            label: destructive ? _destructiveDisabled : labelTertiary,
             decoration: null,
           );
         }
@@ -150,13 +161,13 @@ final class LiqButton extends StatelessWidget {
         if (disabled) {
           return (
             fill: destructive ? _destructiveBg : _fillTertiary,
-            label: destructive ? _destructiveDisabled : _labelTertiary,
+            label: destructive ? _destructiveDisabled : labelTertiary,
             decoration: null,
           );
         }
         return (
           fill: destructive ? _destructiveBg : _fillTertiary,
-          label: destructive ? _accentRed : _labelPrimary,
+          label: destructive ? _accentRed : labelPrimary,
           decoration: null,
         );
       case LiqButtonStyle.borderless:
@@ -164,7 +175,7 @@ final class LiqButton extends StatelessWidget {
           fill: const Color(0x00000000),
           label:
               disabled
-                  ? _labelTertiary
+                  ? labelTertiary
                   : (destructive ? _accentRed : _accentBlue),
           decoration: null,
         );
@@ -173,8 +184,8 @@ final class LiqButton extends StatelessWidget {
           fill: const Color(0x00000000),
           label:
               disabled
-                  ? _labelTertiary
-                  : (destructive ? _accentRed : _labelPrimary),
+                  ? labelTertiary
+                  : (destructive ? _accentRed : labelPrimary),
           // The "liquid" variant layers a vertical white gradient over a
           // translucent gray fill plus an inner-highlight 1px border —
           // matches `linear-gradient(180deg, rgba(255,255,255,0.58),
@@ -196,7 +207,7 @@ final class LiqButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resolved = _resolve();
+    final resolved = _resolve(isDark: context.liqIsDark);
     final textStyle = _textStyle(size).copyWith(color: resolved.label);
     final decoration =
         resolved.decoration ??
@@ -205,6 +216,41 @@ final class LiqButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(999)),
         );
     final disabled = onPressed == null;
+    const radius = BorderRadius.all(Radius.circular(999));
+
+    final buttonBody = Container(
+      height: _height(size),
+      padding: _padding(size),
+      decoration: decoration,
+      child: Center(
+        widthFactor: 1,
+        child: Text(
+          label,
+          style: textStyle,
+          maxLines: 1,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
+    final visual =
+        style == LiqButtonStyle.liquid
+            ? ClipRRect(
+              borderRadius: radius,
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: <Widget>[
+                  Positioned.fill(
+                    child: BackdropFilter(
+                      filter: ui.ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+                      child: const SizedBox.shrink(),
+                    ),
+                  ),
+                  buttonBody,
+                ],
+              ),
+            )
+            : buttonBody;
 
     // Use IntrinsicWidth so the pill sizes to the label (plus padding)
     // instead of stretching to whatever bounded width its parent gives.
@@ -214,23 +260,11 @@ final class LiqButton extends StatelessWidget {
       button: true,
       enabled: !disabled,
       label: label,
-      child: GestureDetector(
-        onTap: onPressed,
-        child: IntrinsicWidth(
-          child: Container(
-            height: _height(size),
-            padding: _padding(size),
-            decoration: decoration,
-            child: Center(
-              widthFactor: 1,
-              child: Text(
-                label,
-                style: textStyle,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          onTap: onPressed,
+          child: IntrinsicWidth(child: visual),
         ),
       ),
     );

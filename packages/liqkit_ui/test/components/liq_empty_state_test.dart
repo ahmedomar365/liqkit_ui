@@ -1,13 +1,29 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 Widget _wrap(Widget child) {
-  return Directionality(
-    textDirection: TextDirection.ltr,
-    child: MediaQuery(
-      data: const MediaQueryData(),
-      child: SizedBox(width: 360, child: Center(child: child)),
+  return LiqTheme(
+    data: LiqThemeData.light,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: SizedBox(width: 360, child: Center(child: child)),
+      ),
+    ),
+  );
+}
+
+Widget _wrapDark(Widget child) {
+  return LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: SizedBox(width: 360, child: Center(child: child)),
+      ),
     ),
   );
 }
@@ -38,5 +54,33 @@ void main() {
     );
     await tester.tap(find.text('Compose'));
     expect(taps, 1);
+  });
+
+  testWidgets('LiqEmptyState resolves text and CTA colors from dark theme', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrapDark(
+        LiqEmptyState(
+          title: 'No Messages',
+          description: 'Your inbox is empty.',
+          cta: LiqEmptyStateCta(label: 'Compose', onPressed: () {}),
+        ),
+      ),
+    );
+
+    final title = tester.widget<Text>(find.text('No Messages'));
+    expect(title.style?.color, const Color(0xFFFFFFFF));
+
+    final description = tester.widget<Text>(find.text('Your inbox is empty.'));
+    expect(description.style?.color, const Color(0xB2EBEBF5));
+
+    final ctaContainer = tester.widget<Container>(
+      find
+          .ancestor(of: find.text('Compose'), matching: find.byType(Container))
+          .first,
+    );
+    final decoration = ctaContainer.decoration! as BoxDecoration;
+    expect(decoration.color, const Color(0xFF0091FF));
   });
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// Arrangement for [LiqContextMenu]: which side the menu sits on relative
 /// to the preview tile.
 enum LiqContextMenuArrangement {
@@ -39,24 +41,30 @@ final class LiqContextMenuPreview extends StatelessWidget {
   static const Color _border = Color(0xFFE8EBEF);
   static const Color _shadow = Color(0x14000000);
   static const Color _placeholder = Color(0x99000000);
+  static const Color _bgDark = Color(0xFF1C1C1E);
+  static const Color _borderDark = Color(0x3DEBEBF5);
+  static const Color _placeholderDark = Color(0xB2EBEBF5);
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     return Container(
       width: size.width,
       height: size.height,
-      decoration: const BoxDecoration(
-        color: _bg,
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-        border: Border.fromBorderSide(BorderSide(color: _border)),
-        boxShadow: <BoxShadow>[
+      decoration: BoxDecoration(
+        color: isDark ? _bgDark : _bg,
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        border: Border.fromBorderSide(
+          BorderSide(color: isDark ? _borderDark : _border),
+        ),
+        boxShadow: const <BoxShadow>[
           BoxShadow(color: _shadow, offset: Offset(0, 16), blurRadius: 28),
         ],
       ),
       alignment: Alignment.center,
       child:
           child ??
-          const Text(
+          Text(
             'Content area',
             textDirection: TextDirection.ltr,
             style: TextStyle(
@@ -64,7 +72,7 @@ final class LiqContextMenuPreview extends StatelessWidget {
               fontSize: 17,
               height: 22 / 17,
               letterSpacing: -0.43,
-              color: _placeholder,
+              color: isDark ? _placeholderDark : _placeholder,
             ),
           ),
     );

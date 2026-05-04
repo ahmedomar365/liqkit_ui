@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 empty-state placeholder — centered icon + title + description.
 ///
@@ -34,12 +35,12 @@ final class LiqEmptyState extends StatelessWidget {
   /// Optional CTA widget rendered at the bottom (e.g. [LiqEmptyStateCta]).
   final Widget? cta;
 
-  static const Color _titleColor = Color(0xFF000000);
-  static const Color _descColor = Color(0x993C3C43);
-  static const Color _iconCircleBg = Color(0x260A84FF);
-
   @override
   Widget build(BuildContext context) {
+    final titleColor = context.liqLabelColor;
+    final descriptionColor = context.liqSecondaryLabelColor;
+    final iconCircleColor = context.liqPrimaryColor.withValues(alpha: 0.15);
+
     final children = <Widget>[
       if (icon != null) ...<Widget>[
         SizedBox(
@@ -48,8 +49,8 @@ final class LiqEmptyState extends StatelessWidget {
           child:
               iconBackground
                   ? DecoratedBox(
-                    decoration: const BoxDecoration(
-                      color: _iconCircleBg,
+                    decoration: BoxDecoration(
+                      color: iconCircleColor,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -64,13 +65,13 @@ final class LiqEmptyState extends StatelessWidget {
         title,
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: LiqFontFamily.display,
-          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+          fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
           fontSize: 22,
           height: 28 / 22,
           fontWeight: FontWeight.w600,
-          color: _titleColor,
+          color: titleColor,
         ),
       ),
       if (description != null) ...<Widget>[
@@ -79,13 +80,13 @@ final class LiqEmptyState extends StatelessWidget {
           description!,
           textAlign: TextAlign.center,
           textDirection: TextDirection.ltr,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: LiqFontFamily.display,
-            fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+            fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
             fontSize: 22,
             height: 28 / 22,
             fontWeight: FontWeight.w500,
-            color: _descColor,
+            color: descriptionColor,
           ),
         ),
       ],
@@ -130,12 +131,12 @@ final class LiqEmptyStateCta extends StatelessWidget {
   /// Tap callback. When null the button is rendered disabled.
   final VoidCallback? onPressed;
 
-  static const Color _bg = Color(0xFF0091FF);
   static const Color _fg = Color(0xFFFFFFFF);
   static const Color _shadow = Color(0x1F000000);
 
   @override
   Widget build(BuildContext context) {
+    final background = context.liqPrimaryColor;
     final disabled = onPressed == null;
     return Semantics(
       button: true,
@@ -149,10 +150,10 @@ final class LiqEmptyStateCta extends StatelessWidget {
           child: Container(
             height: 48,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              color: _bg,
-              borderRadius: BorderRadius.all(Radius.circular(1000)),
-              boxShadow: <BoxShadow>[
+            decoration: BoxDecoration(
+              color: background,
+              borderRadius: const BorderRadius.all(Radius.circular(1000)),
+              boxShadow: const <BoxShadow>[
                 BoxShadow(color: _shadow, offset: Offset(0, 1), blurRadius: 8),
               ],
             ),

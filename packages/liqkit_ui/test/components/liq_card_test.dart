@@ -8,7 +8,15 @@ void main() {
     child: Directionality(textDirection: TextDirection.ltr, child: child),
   );
 
-  Iterable<Container> dividers(WidgetTester tester) {
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(textDirection: TextDirection.ltr, child: child),
+  );
+
+  Iterable<Container> dividers(
+    WidgetTester tester, {
+    Color color = LiqCard.dividerColor,
+  }) {
     return tester
         .widgetList<Container>(
           find.descendant(
@@ -16,7 +24,7 @@ void main() {
             matching: find.byType(Container),
           ),
         )
-        .where((Container c) => c.color == LiqCard.dividerColor);
+        .where((Container c) => c.color == color);
   }
 
   group('LiqCard', () {
@@ -95,6 +103,22 @@ void main() {
             .first,
       );
       expect(bodyPadding.padding, custom);
+    });
+
+    testWidgets('header/footer dividers resolve dark theme color', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrapDark(
+          const LiqCard(
+            header: Text('Title'),
+            footer: Text('Footer'),
+            child: Text('Body'),
+          ),
+        ),
+      );
+
+      expect(dividers(tester, color: LiqCard.darkDividerColor).length, 2);
     });
   });
 }

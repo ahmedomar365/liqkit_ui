@@ -34,6 +34,7 @@ final class LiqSheet extends StatelessWidget {
     this.leading,
     this.trailing,
     this.child,
+    this.width = 402,
     this.height = 360,
     super.key,
   });
@@ -52,6 +53,11 @@ final class LiqSheet extends StatelessWidget {
 
   /// Optional sheet body (rendered below the controls row).
   final Widget? child;
+
+  /// Preferred sheet width. Defaults to the iOS modal width used by the
+  /// design reference and shrinks when the parent provides narrower
+  /// constraints.
+  final double width;
 
   /// Total sheet height. Defaults to 360pt.
   final double height;
@@ -80,42 +86,51 @@ final class LiqSheet extends StatelessWidget {
               topRight: Radius.circular(_sheetTopRadius),
             );
 
-    return SizedBox(
-      width: 402,
-      height: height,
-      child:
-          variant == LiqSheetVariant.stacked
-              ? Stack(
-                children: <Widget>[
-                  const Positioned(
-                    left: 16,
-                    right: 16,
-                    top: 0,
-                    bottom: 0,
-                    child: _BackgroundPage(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final resolvedWidth =
+            constraints.maxWidth.isFinite && constraints.maxWidth < width
+                ? constraints.maxWidth
+                : width;
+
+        return SizedBox(
+          width: resolvedWidth,
+          height: height,
+          child:
+              variant == LiqSheetVariant.stacked
+                  ? Stack(
+                    children: <Widget>[
+                      const Positioned(
+                        left: 16,
+                        right: 16,
+                        top: 0,
+                        bottom: 0,
+                        child: _BackgroundPage(),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        top: 10,
+                        bottom: 0,
+                        child: _SheetSurface(
+                          radius: radius,
+                          background: _white,
+                          rim: null,
+                          body: child,
+                          child: controls,
+                        ),
+                      ),
+                    ],
+                  )
+                  : _SheetSurface(
+                    radius: radius,
+                    background: isInspector ? _glass60 : _white,
+                    rim: isInspector ? _rim35 : null,
+                    body: child,
+                    child: controls,
                   ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 10,
-                    bottom: 0,
-                    child: _SheetSurface(
-                      radius: radius,
-                      background: _white,
-                      rim: null,
-                      body: child,
-                      child: controls,
-                    ),
-                  ),
-                ],
-              )
-              : _SheetSurface(
-                radius: radius,
-                background: isInspector ? _glass60 : _white,
-                rim: isInspector ? _rim35 : null,
-                body: child,
-                child: controls,
-              ),
+        );
+      },
     );
   }
 
@@ -125,6 +140,7 @@ final class LiqSheet extends StatelessWidget {
     properties
       ..add(StringProperty('title', title))
       ..add(EnumProperty<LiqSheetVariant>('variant', variant))
+      ..add(DoubleProperty('width', width))
       ..add(DoubleProperty('height', height));
   }
 }

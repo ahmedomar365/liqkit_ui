@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One row inside a [LiqCommandPalette].
 ///
@@ -350,6 +351,7 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _CommandPalettePalette.resolve(context);
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: LiqCommandPalette.maxWidth,
@@ -367,10 +369,11 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
                 controller: _controller,
                 focusNode: _searchFocusNode,
                 placeholder: widget.placeholder,
+                palette: palette,
                 showClear: _query.isNotEmpty,
                 onClear: _clearQuery,
               ),
-              const _Hairline(),
+              _Hairline(palette: palette),
               Flexible(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
@@ -381,6 +384,7 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
                   child: _Results(
                     filtered: _filtered,
                     activeIndex: _activeIndex,
+                    palette: palette,
                     onTap: (LiqCommand cmd, int index) {
                       setState(() => _activeIndex = index);
                       cmd.onSelected();
@@ -397,14 +401,16 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
 }
 
 class _Hairline extends StatelessWidget {
-  const _Hairline();
+  const _Hairline({required this.palette});
+
+  final _CommandPalettePalette palette;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: double.infinity,
       height: LiqCommandPalette.hairlineWidth,
-      child: ColoredBox(color: LiqCommandPalette.hairlineColor),
+      child: ColoredBox(color: palette.hairline),
     );
   }
 }
@@ -414,6 +420,7 @@ class _SearchField extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.placeholder,
+    required this.palette,
     required this.showClear,
     required this.onClear,
   });
@@ -421,6 +428,7 @@ class _SearchField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final String placeholder;
+  final _CommandPalettePalette palette;
   final bool showClear;
   final VoidCallback onClear;
 
@@ -431,10 +439,10 @@ class _SearchField extends StatelessWidget {
       child: Row(
         children: <Widget>[
           const SizedBox(width: LiqCommandPalette.searchFieldHorizontalPadding),
-          const Icon(
+          Icon(
             Icons.search,
             size: LiqCommandPalette.searchIconSize,
-            color: LiqCommandPalette.tertiaryColor,
+            color: palette.tertiary,
             textDirection: TextDirection.ltr,
           ),
           const SizedBox(width: 8),
@@ -449,7 +457,7 @@ class _SearchField extends StatelessWidget {
                     return Text(
                       placeholder,
                       style: LiqCommandPalette.searchTextStyle.copyWith(
-                        color: LiqCommandPalette.tertiaryColor,
+                        color: palette.tertiary,
                       ),
                       maxLines: 1,
                       textDirection: TextDirection.ltr,
@@ -459,9 +467,11 @@ class _SearchField extends StatelessWidget {
                 EditableText(
                   controller: controller,
                   focusNode: focusNode,
-                  style: LiqCommandPalette.searchTextStyle,
-                  cursorColor: LiqCommandPalette.labelColor,
-                  backgroundCursorColor: LiqCommandPalette.tertiaryColor,
+                  style: LiqCommandPalette.searchTextStyle.copyWith(
+                    color: palette.label,
+                  ),
+                  cursorColor: palette.label,
+                  backgroundCursorColor: palette.tertiary,
                   selectionColor: const Color(0x3D007AFF),
                   enableSuggestions: false,
                   autocorrect: false,
@@ -474,12 +484,12 @@ class _SearchField extends StatelessWidget {
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: onClear,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Icon(
                   Icons.close,
                   size: LiqCommandPalette.clearIconSize,
-                  color: LiqCommandPalette.tertiaryColor,
+                  color: palette.tertiary,
                   textDirection: TextDirection.ltr,
                 ),
               ),
@@ -496,24 +506,28 @@ class _Results extends StatelessWidget {
   const _Results({
     required this.filtered,
     required this.activeIndex,
+    required this.palette,
     required this.onTap,
   });
 
   final List<LiqCommand> filtered;
   final int activeIndex;
+  final _CommandPalettePalette palette;
   final void Function(LiqCommand command, int index) onTap;
 
   @override
   Widget build(BuildContext context) {
     if (filtered.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(
+      return Padding(
+        padding: const EdgeInsets.symmetric(
           vertical: LiqCommandPalette.emptyStateVerticalPadding,
         ),
         child: Center(
           child: Text(
             'No commands found',
-            style: LiqCommandPalette.emptyStateStyle,
+            style: LiqCommandPalette.emptyStateStyle.copyWith(
+              color: palette.tertiary,
+            ),
             maxLines: 1,
             textDirection: TextDirection.ltr,
           ),
@@ -542,16 +556,17 @@ class _Results extends StatelessWidget {
       itemBuilder: (BuildContext context, int i) {
         final entry = entries[i];
         if (entry.isSection) {
-          return _SectionHeader(label: entry.sectionLabel!);
+          return _SectionHeader(label: entry.sectionLabel!, palette: palette);
         }
         final showDivider = i > 0 && !entries[i - 1].isSection;
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (showDivider) const _Hairline(),
+            if (showDivider) _Hairline(palette: palette),
             _CommandRow(
               command: entry.command!,
               active: entry.commandIndex == activeIndex,
+              palette: palette,
               onTap: () => onTap(entry.command!, entry.commandIndex!),
             ),
           ],
@@ -584,9 +599,10 @@ class _RenderEntry {
 }
 
 class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.label});
+  const _SectionHeader({required this.label, required this.palette});
 
   final String label;
+  final _CommandPalettePalette palette;
 
   @override
   Widget build(BuildContext context) {
@@ -600,7 +616,9 @@ class _SectionHeader extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       child: Text(
         label.toUpperCase(),
-        style: LiqCommandPalette.sectionHeaderStyle,
+        style: LiqCommandPalette.sectionHeaderStyle.copyWith(
+          color: palette.tertiary,
+        ),
         maxLines: 1,
         textDirection: TextDirection.ltr,
       ),
@@ -612,11 +630,13 @@ class _CommandRow extends StatelessWidget {
   const _CommandRow({
     required this.command,
     required this.active,
+    required this.palette,
     required this.onTap,
   });
 
   final LiqCommand command;
   final bool active;
+  final _CommandPalettePalette palette;
   final VoidCallback onTap;
 
   @override
@@ -630,7 +650,7 @@ class _CommandRow extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: LiqCommandPalette.rowHeight,
-          color: active ? LiqCommandPalette.activeRowBackgroundColor : null,
+          color: active ? palette.activeRowBackground : null,
           padding: const EdgeInsets.symmetric(
             horizontal: LiqCommandPalette.rowHorizontalPadding,
           ),
@@ -640,7 +660,7 @@ class _CommandRow extends StatelessWidget {
                 Icon(
                   command.icon,
                   size: LiqCommandPalette.rowIconSize,
-                  color: LiqCommandPalette.labelColor,
+                  color: palette.label,
                   textDirection: TextDirection.ltr,
                 ),
                 const SizedBox(width: LiqCommandPalette.iconLabelGap),
@@ -648,7 +668,9 @@ class _CommandRow extends StatelessWidget {
               Expanded(
                 child: Text(
                   command.label,
-                  style: LiqCommandPalette.labelStyle,
+                  style: LiqCommandPalette.labelStyle.copyWith(
+                    color: palette.label,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textDirection: TextDirection.ltr,
@@ -656,7 +678,7 @@ class _CommandRow extends StatelessWidget {
               ),
               if (command.shortcut != null) ...<Widget>[
                 const SizedBox(width: 8),
-                _ShortcutPill(text: command.shortcut!),
+                _ShortcutPill(text: command.shortcut!, palette: palette),
               ],
             ],
           ),
@@ -667,28 +689,68 @@ class _CommandRow extends StatelessWidget {
 }
 
 class _ShortcutPill extends StatelessWidget {
-  const _ShortcutPill({required this.text});
+  const _ShortcutPill({required this.text, required this.palette});
 
   final String text;
+  final _CommandPalettePalette palette;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: LiqCommandPalette.shortcutBackgroundColor,
+        color: palette.shortcutBackground,
         borderRadius: BorderRadius.circular(LiqCommandPalette.shortcutRadius),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         child: Text(
           text,
-          style: LiqCommandPalette.shortcutStyle,
+          style: LiqCommandPalette.shortcutStyle.copyWith(
+            color: palette.tertiary,
+          ),
           maxLines: 1,
           textDirection: TextDirection.ltr,
         ),
       ),
     );
   }
+}
+
+final class _CommandPalettePalette {
+  const _CommandPalettePalette({
+    required this.label,
+    required this.tertiary,
+    required this.hairline,
+    required this.activeRowBackground,
+    required this.shortcutBackground,
+  });
+
+  factory _CommandPalettePalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _CommandPalettePalette(
+        label: LiqCommandPalette.labelColor,
+        tertiary: LiqCommandPalette.tertiaryColor,
+        hairline: LiqCommandPalette.hairlineColor,
+        activeRowBackground: LiqCommandPalette.activeRowBackgroundColor,
+        shortcutBackground: LiqCommandPalette.shortcutBackgroundColor,
+      );
+    }
+
+    final secondary = context.liqSecondaryLabelColor;
+    return _CommandPalettePalette(
+      label: context.liqLabelColor,
+      tertiary: secondary,
+      hairline: secondary.withValues(alpha: 0.18),
+      activeRowBackground: secondary.withValues(alpha: 0.14),
+      shortcutBackground: secondary.withValues(alpha: 0.16),
+    );
+  }
+
+  final Color label;
+  final Color tertiary;
+  final Color hairline;
+  final Color activeRowBackground;
+  final Color shortcutBackground;
 }
 
 class _LiqCommandPaletteEntry {

@@ -26,6 +26,22 @@ void main() {
     expect(find.byType(LiqSheetTopButton), findsNWidgets(2));
   });
 
+  testWidgets('LiqSheet shrinks to fit narrow constraints', (tester) async {
+    await tester.pumpWidget(
+      _wrap(
+        const SizedBox(width: 320, child: LiqSheet(title: 'Responsive Sheet')),
+      ),
+    );
+
+    expect(tester.getSize(find.byType(LiqSheet)), const Size(320, 360));
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is SizedBox && (widget.width ?? 0) > 320,
+      ),
+      findsNothing,
+    );
+  });
+
   testWidgets('LiqSheetTopButton invokes onPressed', (tester) async {
     var taps = 0;
     await tester.pumpWidget(

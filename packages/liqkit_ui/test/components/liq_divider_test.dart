@@ -11,6 +11,14 @@ void main() {
     ),
   );
 
+  Widget wrapDark(Widget child) => LiqTheme(
+    data: LiqThemeData.dark,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(child: child),
+    ),
+  );
+
   // The visible hairline is rendered by a single [Container] descendant
   // of the [LiqDivider]; reading its margin and computed size lets us
   // assert thickness and indent behavior.
@@ -91,6 +99,17 @@ void main() {
       expect(margin.left, 0);
       expect(margin.right, 0);
     });
+
+    testWidgets('default divider color resolves dark theme hairline', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrapDark(const SizedBox(width: 200, child: LiqDivider())),
+      );
+
+      final container = innerContainer(tester, find.byType(LiqDivider));
+      expect(container.color, LiqDivider.darkDefaultColor);
+    });
   });
 
   group('LiqLabeledDivider', () {
@@ -103,6 +122,26 @@ void main() {
 
       expect(find.text('OR'), findsOneWidget);
       expect(find.byType(LiqDivider), findsNWidgets(2));
+    });
+
+    testWidgets('label and lines resolve dark theme colors', (tester) async {
+      await tester.pumpWidget(
+        wrapDark(
+          const SizedBox(width: 320, child: LiqLabeledDivider(label: 'OR')),
+        ),
+      );
+
+      for (final divider in tester.widgetList<Container>(
+        find.descendant(
+          of: find.byType(LiqDivider),
+          matching: find.byType(Container),
+        ),
+      )) {
+        expect(divider.color, LiqDivider.darkDefaultColor);
+      }
+
+      final label = tester.widget<Text>(find.text('OR'));
+      expect(label.style?.color, const Color(0xB2EBEBF5));
     });
   });
 }

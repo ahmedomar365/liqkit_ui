@@ -7,6 +7,14 @@ Widget _wrap(Widget child) => Directionality(
   child: Center(child: child),
 );
 
+Widget _wrapDark(Widget child) => LiqTheme(
+  data: LiqThemeData.dark,
+  child: Directionality(
+    textDirection: TextDirection.ltr,
+    child: Center(child: child),
+  ),
+);
+
 void main() {
   group('LiqBreadcrumb', () {
     testWidgets('renders every item label as Text', (tester) async {
@@ -49,6 +57,47 @@ void main() {
       expect(libraryTapped, 1);
     });
 
+    testWidgets('tappable crumbs keep a 44pt tap target', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqBreadcrumb(
+            items: <LiqBreadcrumbItem>[
+              LiqBreadcrumbItem(label: 'Home', onPressed: () {}),
+              const LiqBreadcrumbItem(label: 'Current'),
+            ],
+          ),
+        ),
+      );
+
+      final target = find.ancestor(
+        of: find.text('Home'),
+        matching: find.byType(GestureDetector),
+      );
+      expect(tester.getSize(target.first).height, 44);
+    });
+
+    testWidgets('crumbs stay on one line when width is available', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqBreadcrumb(
+            items: <LiqBreadcrumbItem>[
+              LiqBreadcrumbItem(label: 'Home', onPressed: () {}),
+              LiqBreadcrumbItem(label: 'Library', onPressed: () {}),
+              LiqBreadcrumbItem(label: 'Components', onPressed: () {}),
+              const LiqBreadcrumbItem(label: 'Breadcrumb'),
+            ],
+          ),
+        ),
+      );
+
+      final y = tester.getTopLeft(find.text('Home')).dy;
+      expect(tester.getTopLeft(find.text('Library')).dy, y);
+      expect(tester.getTopLeft(find.text('Components')).dy, y);
+      expect(tester.getTopLeft(find.text('Breadcrumb')).dy, y);
+    });
+
     testWidgets("last crumb's text is rendered in semibold (w600)", (
       tester,
     ) async {
@@ -65,6 +114,34 @@ void main() {
 
       final lastText = tester.widget<Text>(find.text('Current'));
       expect(lastText.style?.fontWeight, FontWeight.w600);
+    });
+
+    testWidgets('dark theme resolves active, inactive, and separator colors', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapDark(
+          LiqBreadcrumb(
+            items: <LiqBreadcrumbItem>[
+              LiqBreadcrumbItem(label: 'Home', onPressed: () {}),
+              const LiqBreadcrumbItem(label: 'Current'),
+            ],
+          ),
+        ),
+      );
+
+      expect(
+        tester.widget<Text>(find.text('Home')).style?.color,
+        LiqBreadcrumb.darkActiveColor,
+      );
+      expect(
+        tester.widget<Text>(find.text('Current')).style?.color,
+        LiqBreadcrumb.darkInactiveColor,
+      );
+      expect(
+        tester.widget<Text>(find.text('/')).style?.color,
+        LiqBreadcrumb.darkSeparatorColor,
+      );
     });
 
     testWidgets('items with onPressed: null are non-tappable', (tester) async {

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// iOS 26 home-screen app icon — squircle tile with optional badge.
 ///
 /// Sourced from `native/components/app-icons.css` (`.ios26-app-icons-image`):
@@ -47,6 +49,8 @@ final class LiqAppIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final radius = size * (14 / 66);
+    final labelColor =
+        context.liqIsDark ? const Color(0xFFFFFFFF) : const Color(0xFF12161F);
     final tile = Container(
       width: size,
       height: size,
@@ -108,8 +112,7 @@ final class LiqAppIcon extends StatelessWidget {
                 fontSize: 11,
                 height: 14 / 11,
                 fontWeight: FontWeight.w400,
-                color: Color(0xFF12161F),
-              ),
+              ).copyWith(color: labelColor),
             ),
           ),
         ],

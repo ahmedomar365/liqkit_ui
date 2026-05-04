@@ -18,3 +18,30 @@
 .dark {
   --color-fd-muted-foreground: oklch(0.74 0 0);
 }
+
+/* Keep generated MDX content inside the mobile docs viewport. Fumadocs code
+ * blocks default to `w-max`, and markdown tables can grow beyond their
+ * scroll container when cells contain API constants.
+ */
+#nd-page .prose figure pre {
+  min-width: 0 !important;
+  width: 100% !important;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#nd-page .prose figure code,
+#nd-page .prose table :where(th, td) {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  #nd-page .prose table {
+    display: block;
+    max-width: 100%;
+  }
+
+  #nd-page .prose table :where(th, td) {
+    white-space: normal;
+  }
+}

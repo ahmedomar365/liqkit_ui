@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 numeric input — text field with optional ± stepper buttons.
 ///
@@ -214,11 +215,9 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = _NumberFieldPalette.resolve(context);
     final hasFocus = _focusNode.hasFocus;
-    final borderColor =
-        hasFocus
-            ? LiqNumberField.activeBorderColor
-            : LiqNumberField.inactiveBorderColor;
+    final borderColor = hasFocus ? palette.activeBorder : palette.border;
     final borderWidth =
         hasFocus
             ? LiqNumberField.activeBorderWidth
@@ -232,13 +231,14 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
       height: LiqNumberField.fieldHeight,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: LiqNumberField.backgroundColor,
+        color: palette.background,
         borderRadius: BorderRadius.circular(LiqNumberField.fieldRadius),
         border: Border.all(color: borderColor, width: borderWidth),
       ),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _focusNode.requestFocus,
+      child: Listener(
+        behavior: HitTestBehavior.translucent,
+        onPointerDown:
+            widget.onChanged == null ? null : (_) => _focusNode.requestFocus(),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -254,7 +254,7 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
                       return Text(
                         widget.placeholder!,
                         style: LiqNumberField.textStyle.copyWith(
-                          color: LiqNumberField.placeholderColor,
+                          color: palette.placeholder,
                         ),
                         maxLines: 1,
                         textAlign: TextAlign.end,
@@ -265,10 +265,12 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
                   EditableText(
                     controller: _controller,
                     focusNode: _focusNode,
-                    style: LiqNumberField.textStyle,
-                    cursorColor: LiqNumberField.activeBorderColor,
-                    backgroundCursorColor: LiqNumberField.placeholderColor,
-                    selectionColor: LiqNumberField.activeBorderColor.withValues(
+                    style: LiqNumberField.textStyle.copyWith(
+                      color: palette.text,
+                    ),
+                    cursorColor: palette.activeBorder,
+                    backgroundCursorColor: palette.placeholder,
+                    selectionColor: palette.activeBorder.withValues(
                       alpha: 0.25,
                     ),
                     keyboardType: TextInputType.numberWithOptions(
@@ -290,7 +292,9 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
                 ),
                 child: Text(
                   widget.suffix!,
-                  style: LiqNumberField.suffixTextStyle,
+                  style: LiqNumberField.suffixTextStyle.copyWith(
+                    color: palette.suffix,
+                  ),
                   maxLines: 1,
                   textDirection: TextDirection.ltr,
                 ),
@@ -314,6 +318,8 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
             icon: Icons.remove,
             enabled: _canDecrement,
             onTap: _canDecrement ? _decrement : null,
+            backgroundColor: palette.buttonBackground,
+            glyphColor: palette.buttonGlyph,
           ),
           const SizedBox(width: LiqNumberField.buttonSpacing),
           Expanded(child: field),
@@ -322,6 +328,8 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
             icon: Icons.add,
             enabled: _canIncrement,
             onTap: _canIncrement ? _increment : null,
+            backgroundColor: palette.buttonBackground,
+            glyphColor: palette.buttonGlyph,
           ),
         ],
       ),
@@ -361,11 +369,15 @@ class _StepperButton extends StatelessWidget {
     required this.icon,
     required this.enabled,
     required this.onTap,
+    required this.backgroundColor,
+    required this.glyphColor,
   });
 
   final IconData icon;
   final bool enabled;
   final VoidCallback? onTap;
+  final Color backgroundColor;
+  final Color glyphColor;
 
   @override
   Widget build(BuildContext context) {
@@ -373,14 +385,11 @@ class _StepperButton extends StatelessWidget {
       width: LiqNumberField.buttonSize,
       height: LiqNumberField.buttonSize,
       alignment: Alignment.center,
-      decoration: const BoxDecoration(
-        color: LiqNumberField.buttonBackgroundColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
       child: Icon(
         icon,
         size: 20,
-        color: LiqNumberField.buttonGlyphColor,
+        color: glyphColor,
         textDirection: TextDirection.ltr,
       ),
     );
@@ -390,4 +399,56 @@ class _StepperButton extends StatelessWidget {
       child: Opacity(opacity: enabled ? 1.0 : 0.4, child: button),
     );
   }
+}
+
+final class _NumberFieldPalette {
+  const _NumberFieldPalette({
+    required this.background,
+    required this.text,
+    required this.placeholder,
+    required this.suffix,
+    required this.border,
+    required this.activeBorder,
+    required this.buttonBackground,
+    required this.buttonGlyph,
+  });
+
+  factory _NumberFieldPalette.resolve(BuildContext context) {
+    if (!context.liqIsDark) {
+      return const _NumberFieldPalette(
+        background: LiqNumberField.backgroundColor,
+        text: LiqNumberField.textColor,
+        placeholder: LiqNumberField.placeholderColor,
+        suffix: LiqNumberField.suffixColor,
+        border: LiqNumberField.inactiveBorderColor,
+        activeBorder: LiqNumberField.activeBorderColor,
+        buttonBackground: LiqNumberField.buttonBackgroundColor,
+        buttonGlyph: LiqNumberField.buttonGlyphColor,
+      );
+    }
+
+    final label = context.liqLabelColor;
+    final secondary = context.liqSecondaryLabelColor;
+    final accent = context.liqPrimaryColor;
+
+    return _NumberFieldPalette(
+      background: context.liqSurfaceColor,
+      text: label,
+      placeholder: secondary.withValues(alpha: 0.48),
+      suffix: secondary,
+      border: secondary.withValues(alpha: 0.24),
+      activeBorder: accent,
+      buttonBackground: secondary.withValues(alpha: 0.18),
+      buttonGlyph: label,
+    );
+  }
+
+  final Color background;
+  final Color text;
+  final Color placeholder;
+  final Color suffix;
+  final Color border;
+  final Color activeBorder;
+  final Color buttonBackground;
+  final Color buttonGlyph;
 }

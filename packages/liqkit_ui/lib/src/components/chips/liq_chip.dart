@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 selectable / dismissible tag pill.
 ///
@@ -22,6 +24,8 @@ import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 ///   - delete affordance: 14×14 round button with `Icons.close` 10pt,
 ///     6pt left padding from label, taps fire `onDeleted` (NOT
 ///     `onPressed`)
+/// The visible pill remains compact; interactive chips expand their
+/// overall hit target to 44pt tall.
 final class LiqChip extends StatelessWidget {
   /// Creates a chip.
   const LiqChip({
@@ -56,6 +60,9 @@ final class LiqChip extends StatelessWidget {
   /// Minimum chip height in logical pixels.
   static const double minHeight = 28;
 
+  /// Minimum tap target height for interactive chips.
+  static const double hitHeight = 44;
+
   /// Vertical padding inside the pill.
   static const double verticalPadding = 6;
 
@@ -68,8 +75,14 @@ final class LiqChip extends StatelessWidget {
   /// Default (unselected) background color.
   static const Color backgroundColor = Color(0xFFE5E5EA);
 
+  /// Dark-mode unselected background color.
+  static const Color backgroundColorDark = Color(0xFF3A3A3C);
+
   /// Default (unselected) label color.
   static const Color labelColor = Color(0xFF1C1C1E);
+
+  /// Dark-mode unselected label color.
+  static const Color labelColorDark = Color(0xFFFFFFFF);
 
   /// Selected background color (iOS system blue).
   static const Color selectedBackgroundColor = Color(0xFF007AFF);
@@ -109,11 +122,16 @@ final class LiqChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     final isInteractive = onPressed != null || onDeleted != null;
-    final background = selected ? selectedBackgroundColor : backgroundColor;
-    final foreground = selected ? selectedLabelColor : labelColor;
+    final background =
+        selected
+            ? selectedBackgroundColor
+            : (isDark ? backgroundColorDark : backgroundColor);
+    final foreground =
+        selected ? selectedLabelColor : (isDark ? labelColorDark : labelColor);
 
-    Widget chip = AnimatedContainer(
+    final visualChip = AnimatedContainer(
       duration: animationDuration,
       constraints: const BoxConstraints(minHeight: minHeight),
       decoration: BoxDecoration(
@@ -147,34 +165,67 @@ final class LiqChip extends StatelessWidget {
           ),
           if (onDeleted != null) ...<Widget>[
             const SizedBox(width: deleteLabelGap),
-            // Inner GestureDetector consumes the tap so it never
-            // bubbles to the outer onPressed handler.
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: onDeleted,
-              child: SizedBox(
-                width: deleteSize,
-                height: deleteSize,
-                child: Center(
-                  child: Icon(
-                    Icons.close,
-                    size: deleteIconSize,
-                    color: foreground,
-                    textDirection: TextDirection.ltr,
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(width: deleteSize, height: deleteSize),
           ],
         ],
       ),
     );
 
+    var chip =
+        isInteractive
+            ? Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: (hitHeight - minHeight) / 2,
+              ),
+              child: visualChip,
+            )
+            : visualChip;
+
+    if (onDeleted != null) {
+      chip = Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: <Widget>[
+          chip,
+          Positioned(
+            top: 0,
+            right: 0,
+            child: LiqPointerCursor(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onDeleted,
+                child: SizedBox(
+                  width: hitHeight,
+                  height: hitHeight,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: SizedBox(
+                      width: horizontalPadding + deleteSize,
+                      child: Center(
+                        child: Icon(
+                          Icons.close,
+                          size: deleteIconSize,
+                          color: foreground,
+                          textDirection: TextDirection.ltr,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     if (onPressed != null) {
-      chip = GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: chip,
+      chip = LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: chip,
+        ),
       );
     }
 

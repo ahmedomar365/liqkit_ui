@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+
 /// A single bar in a [LiqBarChart].
 @immutable
 final class LiqBar with Diagnosticable {
@@ -104,13 +106,20 @@ final class LiqBarChart extends StatelessWidget {
     height: 1.2,
   );
 
+  /// Resolves the effective chart color for the current theme.
+  @visibleForTesting
+  static Color effectiveColorFor(BuildContext context, Color color) {
+    return color == barColor ? context.liqPrimaryColor : color;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final effectiveColor = effectiveColorFor(context, color);
     return LayoutBuilder(
       builder: (context, constraints) {
         return _BarChartLayout(
           bars: bars,
-          color: color,
+          color: effectiveColor,
           barRadius: barRadius,
           barSpacing: barSpacing,
           min: min,
@@ -195,6 +204,10 @@ class _BarLabelsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labelColor =
+        context.liqHasTheme
+            ? context.liqSecondaryLabelColor
+            : LiqBarChart.labelColor;
     final cells = <Widget>[];
     for (var i = 0; i < bars.length; i++) {
       final label = bars[i].label;
@@ -209,7 +222,9 @@ class _BarLabelsRow extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: LiqBarChart.labelTextStyle,
+                      style: LiqBarChart.labelTextStyle.copyWith(
+                        color: labelColor,
+                      ),
                     ),
           ),
         ),
