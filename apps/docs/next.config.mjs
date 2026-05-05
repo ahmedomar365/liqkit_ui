@@ -16,6 +16,7 @@ if (!SNIPPETS_URL || !/^https?:\/\//.test(SNIPPETS_URL)) {
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  output: 'standalone',
   pageExtensions: ['ts', 'tsx', 'mdx'],
   allowedDevOrigins: ['127.0.0.1'],
   async headers() {

@@ -8,6 +8,22 @@ Dart-only; Node/pnpm only show up under `apps/docs/` for the Fumadocs
 documentation site. The component library, design tokens, asset bundle,
 showcase, and snippets app all live in a single workspace.
 
+## Links
+
+- **Website:** <https://liqkit.com>
+- **GitHub:** <https://github.com/ahmedomar365/liqkit_ui>
+- **Package:** `liqkit_ui` on pub.dev once the first release is published.
+
+## Preview
+
+| Bottom nav | Tabs |
+| --- | --- |
+| ![Bottom navigation component](apps/docs/public/showcase/bottom-nav-four-tabs.png) | ![Tabs component](apps/docs/public/showcase/tabs-pill.png) |
+
+| Command palette | Calendar |
+| --- | --- |
+| ![Command palette component](apps/docs/public/showcase/command-palette.png) | ![Calendar component](apps/docs/public/showcase/calendar.png) |
+
 ## Highlights
 
 - **76 components** across 7 categories — buttons, toggles, toggle
@@ -145,4 +161,10 @@ it's generator output.
 
 ## License
 
-MIT — see `LICENSE`.
+This project is licensed under the [MIT License](LICENSE).
+
+## Support
+
+If you find this project useful, consider buying me a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/ahmedomarar365)

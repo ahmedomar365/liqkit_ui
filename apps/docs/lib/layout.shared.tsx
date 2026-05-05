@@ -19,7 +19,7 @@ export const baseOptions: BaseLayoutProps = {
     { text: 'Docs', url: '/docs' },
     {
       text: 'GitHub',
-      url: 'https://github.com/forus-labs/liqkit_ui',
+      url: 'https://github.com/ahmedomar365/liqkit_ui',
       external: true,
     },
   ],

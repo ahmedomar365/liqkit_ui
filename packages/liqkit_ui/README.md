@@ -1,13 +1,39 @@
 # liqkit_ui
 
-iOS 26 Liquid Glass design system for Flutter. Hand-ported from the
-Figma-extracted [`liqkit`](https://github.com/ahmedomar/liqkit) design
-system. Companion packages: `liqkit_ui_tokens`, `liqkit_ui_assets`.
+iOS 26 Liquid Glass design system for Flutter — 76 components, every
+one with goldens, snippets, and live docs.
 
-## Status
+Hand-ported from the Figma-extracted `liqkit` design system and shaped
+around a single reusable Liquid Glass primitive, centralized motion
+tokens, SF Pro typography helpers, and pure-Dart steady-state
+dependencies.
 
-Pre-1.0 - bootstrap. v1.0 ships when all 37 categories are ported.
+## Links
+
+- Website: <https://liqkit.com>
+- GitHub: <https://github.com/ahmedomar365/liqkit_ui>
+
+## Highlights
+
+- 76 components across inputs, containers, navigation, status,
+  foundation, and decoration categories.
+- Shared `LiqGlassSurface` for glass-bearing components.
+- Centralized `LiqMotion` curves and durations.
+- Generated iOS 26 design tokens from frozen Figma artifacts.
+- Widget tests, goldens, docs snippets, and live Flutter Web previews.
+
+## Usage
+
+```dart
+import 'package:liqkit_ui/liqkit_ui.dart';
+```
 
 ## License
 
-MIT.
+This project is licensed under the [MIT License](LICENSE).
+
+## Support
+
+If you find this project useful, consider buying me a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/ahmedomarar365)
