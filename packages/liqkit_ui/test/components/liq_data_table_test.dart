@@ -85,6 +85,20 @@ void main() {
       expect(receivedDir, LiqSortDirection.ascending);
     });
 
+    testWidgets('sortable headers expose click cursors', (tester) async {
+      await tester.pumpWidget(_wrap(_table(onSortChanged: (_, __) {})));
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(1),
+      );
+    });
+
     testWidgets('tap cycles ascending → descending', (tester) async {
       int? receivedIndex;
       LiqSortDirection? receivedDir;
@@ -167,6 +181,35 @@ void main() {
       await tester.tap(find.text('Jane'));
       await tester.pump();
       expect(taps, 1);
+    });
+
+    testWidgets('tappable body rows expose click cursors', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          _table(
+            rows: <LiqDataRow>[
+              LiqDataRow(
+                cells: const <Widget>[
+                  Text('Jane'),
+                  Text('Engineer'),
+                  Text('2024'),
+                ],
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(2),
+      );
     });
 
     testWidgets('body row with onTap=null is non-tappable', (tester) async {

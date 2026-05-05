@@ -123,5 +123,46 @@ void main() {
         ),
       );
     });
+
+    testWidgets('dot transitions animate and honor reduced motion', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(child: LiqPageControl(count: 5, activeIndex: 1)),
+          ),
+        ),
+      );
+
+      expect(
+        tester
+            .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+            .map((container) => container.duration),
+        everyElement(LiqMotion.fast),
+      );
+
+      await tester.pumpWidget(
+        const LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: MediaQuery(
+              data: MediaQueryData(disableAnimations: true),
+              child: Center(child: LiqPageControl(count: 5, activeIndex: 2)),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester
+            .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+            .map((container) => container.duration),
+        everyElement(Duration.zero),
+      );
+    });
   });
 }

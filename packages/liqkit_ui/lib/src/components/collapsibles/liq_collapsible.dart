@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -105,29 +106,31 @@ class _LiqCollapsibleState extends State<LiqCollapsible> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: _toggle,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LiqCollapsible.headerHPad,
-              vertical: LiqCollapsible.headerVPad,
-            ),
-            child: Row(
-              children: <Widget>[
-                Expanded(child: widget.header),
-                const SizedBox(width: 12),
-                AnimatedRotation(
-                  duration: LiqCollapsible.rotateDuration,
-                  curve: LiqCollapsible.curve,
-                  turns: _expanded ? 0.25 : 0,
-                  child: Icon(
-                    Icons.chevron_right,
-                    size: LiqCollapsible.chevronSize,
-                    color: chevronColor,
+        LiqPointerCursor(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _toggle,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: LiqCollapsible.headerHPad,
+                vertical: LiqCollapsible.headerVPad,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(child: widget.header),
+                  const SizedBox(width: 12),
+                  AnimatedRotation(
+                    duration: LiqCollapsible.rotateDuration,
+                    curve: LiqCollapsible.curve,
+                    turns: _expanded ? 0.25 : 0,
+                    child: Icon(
+                      Icons.chevron_right,
+                      size: LiqCollapsible.chevronSize,
+                      color: chevronColor,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

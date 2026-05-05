@@ -205,49 +205,70 @@ class _LiqColorPickerState extends State<LiqColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        LiqColorPickerButton(
-          color: widget.color,
-          size: widget.buttonSize,
-          onPressed: () => _setOpen(!_open),
-        ),
-        AnimatedSize(
-          duration: LiqMotion.normal,
-          curve: LiqMotion.snappy,
-          alignment: Alignment.topCenter,
-          child: AnimatedSwitcher(
-            duration: LiqMotion.fast,
-            switchInCurve: LiqMotion.snappy,
-            switchOutCurve: LiqMotion.standard,
-            transitionBuilder:
-                (child, animation) => FadeTransition(
-                  opacity: animation,
-                  child: ScaleTransition(
-                    scale: Tween<double>(
-                      begin: 0.96,
-                      end: 1,
-                    ).animate(animation),
-                    child: child,
-                  ),
+    final disableAnimations = context.liqDisableAnimations;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final hasBoundedHeight = constraints.hasBoundedHeight;
+        final maxPanelHeight =
+            hasBoundedHeight
+                ? math.max<double>(
+                  0,
+                  constraints.maxHeight -
+                      LiqColorPickerButton.tapTargetSize -
+                      10,
+                )
+                : double.infinity;
+        final panel = AnimatedSwitcher(
+          duration: context.liqMotionDuration(LiqMotion.fast),
+          switchInCurve: LiqMotion.snappy,
+          switchOutCurve: LiqMotion.standard,
+          transitionBuilder:
+              (child, animation) => FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: Tween<double>(begin: 0.96, end: 1).animate(animation),
+                  child: child,
                 ),
-            child:
-                _open
-                    ? Padding(
-                      key: const ValueKey<String>('native-panel'),
-                      padding: const EdgeInsets.only(top: 10),
-                      child: LiqColorPickerPanel(
-                        color: widget.color,
-                        savedColors: widget.colors,
-                        onChanged: widget.onChanged,
-                        onClose: () => _setOpen(false),
+              ),
+          child:
+              _open
+                  ? Padding(
+                    key: const ValueKey<String>('native-panel'),
+                    padding: const EdgeInsets.only(top: 10),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: maxPanelHeight),
+                      child: SingleChildScrollView(
+                        child: LiqColorPickerPanel(
+                          color: widget.color,
+                          savedColors: widget.colors,
+                          onChanged: widget.onChanged,
+                          onClose: () => _setOpen(false),
+                        ),
                       ),
-                    )
-                    : const SizedBox.shrink(key: ValueKey<String>('empty')),
-          ),
-        ),
-      ],
+                    ),
+                  )
+                  : const SizedBox.shrink(key: ValueKey<String>('empty')),
+        );
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            LiqColorPickerButton(
+              color: widget.color,
+              size: widget.buttonSize,
+              onPressed: () => _setOpen(!_open),
+            ),
+            if (disableAnimations)
+              panel
+            else
+              AnimatedSize(
+                duration: LiqMotion.normal,
+                curve: LiqMotion.snappy,
+                alignment: Alignment.topCenter,
+                child: panel,
+              ),
+          ],
+        );
+      },
     );
   }
 }
@@ -359,7 +380,7 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
                     ),
                     const SizedBox(height: 14),
                     AnimatedSwitcher(
-                      duration: LiqMotion.fast,
+                      duration: context.liqMotionDuration(LiqMotion.fast),
                       switchInCurve: LiqMotion.snappy,
                       switchOutCurve: LiqMotion.standard,
                       child: switch (_mode) {
@@ -523,6 +544,13 @@ class _PickerSegments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
+    final selectedBackground =
+        isDark ? const Color(0xFF636366) : const Color(0xFFFFFFFF);
+    final selectedLabel =
+        isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+    final inactiveLabel =
+        isDark ? const Color(0xB2EBEBF5) : const Color(0xFF000000);
     const labels = <_ColorPickerMode, String>{
       _ColorPickerMode.grid: 'Grid',
       _ColorPickerMode.spectrum: 'Spectrum',
@@ -545,7 +573,7 @@ class _PickerSegments extends StatelessWidget {
                     behavior: HitTestBehavior.opaque,
                     onTap: () => onChanged(entry.key),
                     child: AnimatedContainer(
-                      duration: LiqMotion.fast,
+                      duration: context.liqMotionDuration(LiqMotion.fast),
                       curve: LiqMotion.snappy,
                       height: double.infinity,
                       alignment: Alignment.center,
@@ -553,7 +581,7 @@ class _PickerSegments extends StatelessWidget {
                       decoration: BoxDecoration(
                         color:
                             selected
-                                ? const Color(0xFFFFFFFF)
+                                ? selectedBackground
                                 : const Color(0x00FFFFFF),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(20),
@@ -573,7 +601,7 @@ class _PickerSegments extends StatelessWidget {
                           letterSpacing: -0.08,
                           fontWeight:
                               selected ? FontWeight.w600 : FontWeight.w500,
-                          color: const Color(0xFF000000),
+                          color: selected ? selectedLabel : inactiveLabel,
                         ),
                       ),
                     ),
@@ -721,7 +749,7 @@ class _SavedSwatches extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AnimatedContainer(
-                duration: LiqMotion.fast,
+                duration: context.liqMotionDuration(LiqMotion.fast),
                 curve: LiqMotion.snappy,
                 width: well,
                 height: well,
@@ -784,15 +812,14 @@ class _SavedSwatchRow extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final fitsNativeSpacing = constraints.maxWidth >= colors.length * 44;
-        final dots =
-            <Widget>[
-              for (var i = 0; i < colors.length; i++)
-                LiqColorDot(
-                  color: colors[i],
-                  selected: selectedIndex == i + startIndex,
-                  onPressed: () => onChanged(colors[i]),
-                ),
-            ];
+        final dots = <Widget>[
+          for (var i = 0; i < colors.length; i++)
+            LiqColorDot(
+              color: colors[i],
+              selected: selectedIndex == i + startIndex,
+              onPressed: () => onChanged(colors[i]),
+            ),
+        ];
         if (fitsNativeSpacing) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1277,7 +1304,7 @@ class _LiqColorPickerButtonState extends State<LiqColorPickerButton> {
               child: Center(
                 child: AnimatedScale(
                   scale: _pressed ? 0.9 : 1,
-                  duration: LiqMotion.fast,
+                  duration: context.liqMotionDuration(LiqMotion.fast),
                   curve: LiqMotion.snappy,
                   child: SizedBox(
                     width: dim,
@@ -1291,7 +1318,7 @@ class _LiqColorPickerButtonState extends State<LiqColorPickerButton> {
                           child: CustomPaint(painter: _ColorWheelPainter()),
                         ),
                         AnimatedContainer(
-                          duration: LiqMotion.fast,
+                          duration: context.liqMotionDuration(LiqMotion.fast),
                           curve: LiqMotion.snappy,
                           width: inner,
                           height: inner,
@@ -1421,10 +1448,10 @@ class _LiqColorDotState extends State<LiqColorDot> {
               child: Center(
                 child: AnimatedScale(
                   scale: _pressed ? 0.9 : 1,
-                  duration: LiqMotion.fast,
+                  duration: context.liqMotionDuration(LiqMotion.fast),
                   curve: LiqMotion.snappy,
                   child: AnimatedContainer(
-                    duration: LiqMotion.fast,
+                    duration: context.liqMotionDuration(LiqMotion.fast),
                     curve: LiqMotion.snappy,
                     width: 30,
                     height: 30,
@@ -1443,7 +1470,9 @@ class _LiqColorDotState extends State<LiqColorDot> {
                     child:
                         widget.selected
                             ? AnimatedContainer(
-                              duration: LiqMotion.fast,
+                              duration: context.liqMotionDuration(
+                                LiqMotion.fast,
+                              ),
                               curve: LiqMotion.snappy,
                               width: 22,
                               height: 22,
@@ -1572,14 +1601,14 @@ class _ColorGridSwatchState extends State<_ColorGridSwatch> {
           onTap: widget.onPressed,
           child: AnimatedScale(
             scale: _pressed ? 0.94 : 1,
-            duration: LiqMotion.fast,
+            duration: context.liqMotionDuration(LiqMotion.fast),
             curve: LiqMotion.snappy,
             child: Stack(
               children: <Widget>[
                 Positioned.fill(child: ColoredBox(color: widget.color)),
                 Positioned.fill(
                   child: AnimatedContainer(
-                    duration: LiqMotion.fast,
+                    duration: context.liqMotionDuration(LiqMotion.fast),
                     curve: LiqMotion.snappy,
                     margin: EdgeInsets.all(widget.selected ? 3 : 0),
                     decoration: BoxDecoration(

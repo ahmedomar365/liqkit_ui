@@ -66,10 +66,16 @@ final class LiqDialog extends StatelessWidget {
   final double maxWidth;
 
   /// Background fill color (light glass, ~95% opaque).
-  static const Color backgroundColor = Color(0xF2FAFAFA);
+  static const Color backgroundColor = Color(0xD6F5F5F5);
+
+  /// Background fill color for dark glass.
+  static const Color darkBackgroundColor = Color(0xDC18181A);
 
   /// Hairline border color.
-  static const Color borderColor = Color(0x14000000);
+  static const Color borderColor = Color(0x1A000000);
+
+  /// Hairline border color for dark glass.
+  static const Color darkBorderColor = Color(0x70E4E9EF);
 
   /// Hairline border width.
   static const double borderWidth = 0.5;
@@ -77,11 +83,24 @@ final class LiqDialog extends StatelessWidget {
   /// Outer corner radius.
   static const double radius = 14;
 
+  /// Light-mode top glass highlight.
+  static const Color highlightColor = Color(0x24FFFFFF);
+
+  /// Dark-mode top glass highlight.
+  static const Color darkHighlightColor = Color(0x06FFFFFF);
+
   /// Soft drop shadow.
   static const BoxShadow shadow = BoxShadow(
     color: Color(0x33000000),
     offset: Offset(0, 12),
     blurRadius: 32,
+  );
+
+  /// Soft drop shadow for dark glass.
+  static const BoxShadow darkShadow = BoxShadow(
+    color: Color(0x6B000000),
+    offset: Offset(0, 18),
+    blurRadius: 34,
   );
 
   /// Padding inside the dialog around the title + message.
@@ -134,8 +153,17 @@ final class LiqDialog extends StatelessWidget {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth),
       child: LiqGlassSurface(
+        tint: context.liqIsDark ? LiqGlassTint.dark : LiqGlassTint.light,
         elevation: LiqGlassElevation.modal,
         padding: contentPadding,
+        baseFill: context.liqIsDark ? darkBackgroundColor : backgroundColor,
+        rimColor: context.liqIsDark ? darkBorderColor : borderColor,
+        highlightStart: context.liqIsDark ? darkHighlightColor : highlightColor,
+        blurSigma: 20,
+        shadows:
+            context.liqIsDark
+                ? const <BoxShadow>[darkShadow]
+                : const <BoxShadow>[shadow],
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

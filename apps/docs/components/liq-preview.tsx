@@ -11,9 +11,9 @@ const PREVIEW_INITIAL_HEIGHTS: Partial<Record<SnippetRouteKey, number>> = {
   'date-picker-field/default': 430,
   'date-picker-field/preselected': 430,
   'picker/inline-calendar': 380,
-  'time-picker/12-hour': 260,
-  'time-picker/24-hour': 260,
-  'time-picker/intervals': 260,
+  'time-picker/12-hour': 300,
+  'time-picker/24-hour': 300,
+  'time-picker/intervals': 300,
   'tree-view/files': 360,
   'tree-view/outline': 420,
   'badge/counter': 88,
@@ -26,8 +26,8 @@ const PREVIEW_INITIAL_HEIGHTS: Partial<Record<SnippetRouteKey, number>> = {
   'glass-surface/floating': 240,
   'glass-surface/flat': 240,
   'glass-surface/dark': 240,
-  'hover-card/default': 320,
-  'hover-card/bottom': 320,
+  'hover-card/default': 440,
+  'hover-card/bottom': 440,
   'kit-helpers/header': 220,
   'kit-helpers/mode-pill': 96,
   'kit-helpers/mode-labels': 150,
@@ -98,6 +98,7 @@ export function LiqPreview({
   const resolvedInitialHeight = PREVIEW_INITIAL_HEIGHTS[key] ?? initialHeight;
   const baseUrl =
     snippetsBaseUrl ?? process.env.NEXT_PUBLIC_SNIPPETS_URL ?? '';
+  const normalizedBaseUrl = baseUrl.replace(/\/$/, '');
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [htmlIsDark, setHtmlIsDark] = useState(false);
@@ -109,7 +110,7 @@ export function LiqPreview({
   // Python http.server) without depending on SPA-fallback rewrites.
   // The `?theme=` query is placed BEFORE the `#` so it's available
   // via window.location.search, not buried inside the fragment.
-  const src = `${baseUrl}/?theme=${theme}&v=${encodeURIComponent(cacheKey)}#${route.path}`;
+  const src = `${normalizedBaseUrl}/index.html?theme=${theme}&v=${encodeURIComponent(cacheKey)}#${route.path}`;
   const [height, setHeight] = useState(resolvedInitialHeight);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -135,9 +136,9 @@ export function LiqPreview({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      const expectedOrigin =
-        baseUrl.length > 0
-          ? new URL(baseUrl, window.location.href).origin
+        const expectedOrigin =
+        normalizedBaseUrl.length > 0
+          ? new URL(normalizedBaseUrl, window.location.href).origin
           : window.location.origin;
       if (e.origin !== expectedOrigin) return;
       const data = e.data as { type?: string; px?: number };
@@ -154,7 +155,7 @@ export function LiqPreview({
     }
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, [baseUrl, resolvedInitialHeight]);
+  }, [normalizedBaseUrl, resolvedInitialHeight]);
 
   return (
     <iframe

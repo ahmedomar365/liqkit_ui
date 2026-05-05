@@ -6,7 +6,9 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget popoverTrailingBuilder(BuildContext context) {
   // {@highlight}
   return const SnippetFrame(
-    maxWidth: 260,
+    maxWidth: 300,
+    height: 150,
+    surface: SnippetFrameSurface.liquidLight,
     child: LiqPopover(
       side: LiqPopoverSide.trailing,
       child: SnippetLabel('Tip on trailing'),

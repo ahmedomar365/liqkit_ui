@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 popup button — large inline label with a trailing chevron tip.
@@ -9,7 +10,7 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 /// Sourced from `native/components/popup-buttons.css`:
 /// SF Pro Text 32/38 -0.43, enabled = #0088FF (system blue),
 /// disabled = rgba(60,60,67,0.3). 14×14 chevron-down icon, 3pt gap.
-final class LiqPopupButton extends StatelessWidget {
+final class LiqPopupButton extends StatefulWidget {
   /// Creates a popup button.
   const LiqPopupButton({required this.label, this.onPressed, super.key});
 
@@ -26,66 +27,7 @@ final class LiqPopupButton extends StatelessWidget {
   static const double _tapTargetHeight = 44;
 
   @override
-  Widget build(BuildContext context) {
-    final disabled = onPressed == null;
-    final color =
-        disabled ? (context.liqIsDark ? _disabledDark : _disabled) : _enabled;
-    return Semantics(
-      button: true,
-      enabled: !disabled,
-      label: label,
-      child: LiqPointerCursor(
-        enabled: !disabled,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: onPressed,
-          child: SizedBox(
-            height: _tapTargetHeight,
-            child: Center(
-              child: SizedBox(
-                height: _visualHeight,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      label,
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        fontFamily: 'SF Pro Text',
-                        fontFamilyFallback: const <String>[
-                          'SF Pro',
-                          'sans-serif',
-                        ],
-                        fontSize: 32,
-                        height: _visualHeight / 32,
-                        letterSpacing: -0.43,
-                        fontWeight: FontWeight.w400,
-                        color: color,
-                      ),
-                    ),
-                    const SizedBox(width: 3),
-                    SizedBox(
-                      width: 18,
-                      height: _visualHeight,
-                      child: Center(
-                        child: SizedBox(
-                          width: 14,
-                          height: 14,
-                          child: CustomPaint(
-                            painter: _ChevronDownPainter(color),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<LiqPopupButton> createState() => _LiqPopupButtonState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -100,6 +42,96 @@ final class LiqPopupButton extends StatelessWidget {
           ifFalse: 'disabled',
         ),
       );
+  }
+}
+
+class _LiqPopupButtonState extends State<LiqPopupButton> {
+  bool _pressed = false;
+
+  void _setPressed(bool pressed) {
+    if (_pressed == pressed) return;
+    setState(() => _pressed = pressed);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final disabled = widget.onPressed == null;
+    final color =
+        disabled
+            ? (context.liqIsDark
+                ? LiqPopupButton._disabledDark
+                : LiqPopupButton._disabled)
+            : LiqPopupButton._enabled;
+    return Semantics(
+      button: true,
+      enabled: !disabled,
+      label: widget.label,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: Listener(
+          onPointerDown: disabled ? null : (_) => _setPressed(true),
+          onPointerUp: disabled ? null : (_) => _setPressed(false),
+          onPointerCancel: disabled ? null : (_) => _setPressed(false),
+          child: SizedBox(
+            height: LiqPopupButton._tapTargetHeight,
+            child: Center(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: widget.onPressed,
+                child: AnimatedScale(
+                  scale: _pressed ? 0.96 : 1,
+                  duration: context.liqMotionDuration(LiqMotion.fast),
+                  curve: LiqMotion.snappy,
+                  child: AnimatedOpacity(
+                    opacity: _pressed ? 0.72 : 1,
+                    duration: context.liqMotionDuration(LiqMotion.fast),
+                    curve: LiqMotion.snappy,
+                    child: SizedBox(
+                      height: LiqPopupButton._visualHeight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text(
+                            widget.label,
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                              fontFamily: 'SF Pro Text',
+                              fontFamilyFallback: const <String>[
+                                'SF Pro',
+                                'sans-serif',
+                              ],
+                              fontSize: 32,
+                              height: LiqPopupButton._visualHeight / 32,
+                              letterSpacing: -0.43,
+                              fontWeight: FontWeight.w400,
+                              color: color,
+                            ),
+                          ),
+                          const SizedBox(width: 3),
+                          SizedBox(
+                            width: 18,
+                            height: LiqPopupButton._visualHeight,
+                            child: Center(
+                              child: SizedBox(
+                                width: 14,
+                                height: 14,
+                                child: CustomPaint(
+                                  painter: _ChevronDownPainter(color),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

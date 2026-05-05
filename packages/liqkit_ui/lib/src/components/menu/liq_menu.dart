@@ -1,8 +1,7 @@
-import 'dart:ui' show ImageFilter;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -10,7 +9,7 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 /// iOS 26 menu surface — translucent rounded panel of quick actions and rows.
 ///
 /// Sourced from the local iOS 26 Figma/native artifacts:
-/// 238pt wide, 34pt corner radius, 10pt vertical padding, optional
+/// 286pt wide, 34pt corner radius, 10pt vertical padding, optional
 /// three-column quick action strip, 16pt row-group padding, 52pt rows,
 /// 21pt separators, and adaptive light/dark Liquid Glass tinting.
 final class LiqMenu extends StatelessWidget {
@@ -18,7 +17,7 @@ final class LiqMenu extends StatelessWidget {
   const LiqMenu({
     required this.children,
     this.quickActions = const <LiqMenuQuickAction>[],
-    this.width = 238,
+    this.width = 286,
     this.brightness,
     super.key,
   });
@@ -30,17 +29,27 @@ final class LiqMenu extends StatelessWidget {
   /// [LiqMenuSectionTitle].
   final List<Widget> children;
 
-  /// Panel width. Defaults to 238pt.
+  /// Panel width. Defaults to 286pt.
   final double width;
 
   /// Surface brightness. Defaults to the nearest liqkit theme brightness.
   final Brightness? brightness;
 
-  static const Color _bgLight = Color(0xD6F5F5F5);
-  static const Color _borderLight = Color(0xFFD8DCE3);
-  static const Color _shadowLight = Color(0x33000000);
-  static const Color _shadowDark = Color(0x6B000000);
-  static const Color _rimDark = Color(0x70E4E9EF);
+  static const BorderRadius _radius = BorderRadius.all(Radius.circular(34));
+  static const Color _lightSurfaceBase = Color(0xD6F5F5F5);
+  static const Color _darkSurfaceBase = Color(0xDC18181A);
+  static const Color _lightSurfaceRim = Color(0x1A000000);
+  static const Color _darkSurfaceRim = Color(0x70E4E9EF);
+  static const Color _lightSurfaceHighlight = Color(0x24FFFFFF);
+  static const Color _darkSurfaceHighlight = Color(0x06FFFFFF);
+  static const List<BoxShadow> _lightSurfaceShadows = <BoxShadow>[
+    BoxShadow(color: Color(0x33000000), offset: Offset(0, 16), blurRadius: 40),
+    BoxShadow(color: Color(0x24FFFFFF), offset: Offset(0, 1)),
+  ];
+  static const List<BoxShadow> _darkSurfaceShadows = <BoxShadow>[
+    BoxShadow(color: Color(0x6B000000), offset: Offset(0, 18), blurRadius: 34),
+    BoxShadow(color: Color(0x14000000), offset: Offset(0, 4), blurRadius: 18),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -73,67 +82,17 @@ final class LiqMenu extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(34)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: isDark ? _shadowDark : _shadowLight,
-              offset: const Offset(0, 16),
-              blurRadius: 40,
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(34)),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xD91A1A1A) : _bgLight,
-                borderRadius: const BorderRadius.all(Radius.circular(34)),
-                border: Border.fromBorderSide(
-                  BorderSide(color: isDark ? _rimDark : _borderLight),
-                ),
-                gradient:
-                    isDark
-                        ? const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color(0x8FA5A5A5),
-                            Color(0xC7898989),
-                          ],
-                        )
-                        : null,
-              ),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(34)),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: <Color>[
-                      if (isDark)
-                        const Color(0x52FFFFFF)
-                      else
-                        const Color(0x99FFFFFF),
-                      const Color(0x00FFFFFF),
-                    ],
-                    stops: const <double>[0, 0.28],
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: content,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+      child: LiqGlassSurface(
+        tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
+        elevation: LiqGlassElevation.modal,
+        borderRadius: _radius,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        baseFill: isDark ? _darkSurfaceBase : _lightSurfaceBase,
+        rimColor: isDark ? _darkSurfaceRim : _lightSurfaceRim,
+        highlightStart: isDark ? _darkSurfaceHighlight : _lightSurfaceHighlight,
+        blurSigma: 20,
+        shadows: isDark ? _darkSurfaceShadows : _lightSurfaceShadows,
+        child: Column(mainAxisSize: MainAxisSize.min, children: content),
       ),
     );
   }
@@ -199,10 +158,10 @@ class _LiqMenuQuickActionState extends State<LiqMenuQuickAction> {
 
   static const Color _labelLight = Color(0xFF1A1A1A);
   static const Color _labelDark = Color(0xFFF5F5F5);
-  static const Color _quickLight = Color(0xFFEDEDED);
-  static const Color _quickLightActive = Color(0xFFDBDBDB);
-  static const Color _quickDark = Color(0x1FFFFFFF);
-  static const Color _quickDarkActive = Color(0x33FFFFFF);
+  static const Color _quickLight = Color(0x52FFFFFF);
+  static const Color _quickLightActive = Color(0x7AFFFFFF);
+  static const Color _quickDark = Color(0x00FFFFFF);
+  static const Color _quickDarkActive = Color(0x18FFFFFF);
   static const Color _destructiveLight = Color(0xFFFF383C);
   static const Color _destructiveDark = Color(0xFFFF4245);
 
@@ -220,6 +179,7 @@ class _LiqMenuQuickActionState extends State<LiqMenuQuickAction> {
         active
             ? (isDark ? _quickDarkActive : _quickLightActive)
             : (isDark ? _quickDark : _quickLight);
+    final duration = context.liqMotionDuration(LiqMotion.fast);
 
     return Semantics(
       button: true,
@@ -233,42 +193,60 @@ class _LiqMenuQuickActionState extends State<LiqMenuQuickAction> {
           onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
           onTapUp: enabled ? (_) => setState(() => _pressed = false) : null,
           onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
-          child: AnimatedContainer(
-            duration: LiqMotion.fast,
+          child: AnimatedScale(
+            scale: _pressed ? 0.96 : 1,
+            duration: duration,
             curve: LiqMotion.snappy,
-            constraints: const BoxConstraints(minHeight: 57),
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            decoration: BoxDecoration(
-              color: enabled ? background : const Color(0x00FFFFFF),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                DefaultTextStyle.merge(
-                  style: TextStyle(color: color),
-                  child: SizedBox(
-                    width: 18,
-                    height: 22,
-                    child: Center(child: widget.icon),
-                  ),
+            child: AnimatedContainer(
+              duration: duration,
+              curve: LiqMotion.snappy,
+              constraints: const BoxConstraints(minHeight: 57),
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+              decoration: BoxDecoration(
+                color: enabled ? background : const Color(0x00FFFFFF),
+                border: Border.all(
+                  width: 0.5,
+                  color:
+                      isDark
+                          ? const Color(0x0FFFFFFF)
+                          : const Color(0x10000000),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  widget.label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                    fontSize: 12,
-                    height: 18 / 12,
-                    fontWeight: FontWeight.w500,
-                    color: color.withValues(alpha: enabled ? 1 : 0),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  IconTheme.merge(
+                    data: IconThemeData(color: color, size: 18),
+                    child: DefaultTextStyle.merge(
+                      style: TextStyle(color: color),
+                      child: SizedBox(
+                        width: 18,
+                        height: 22,
+                        child: Center(child: widget.icon),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 4),
+                  Text(
+                    widget.label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      fontFamily: 'SF Pro Text',
+                      fontFamilyFallback: const <String>[
+                        'SF Pro',
+                        'sans-serif',
+                      ],
+                      fontSize: 12,
+                      height: 18 / 12,
+                      fontWeight: FontWeight.w500,
+                      color: color.withValues(alpha: enabled ? 1 : 0),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -349,11 +327,11 @@ class _LiqMenuItemState extends State<LiqMenuItem> {
   static const Color _labelLight = Color(0xFF1A1A1A);
   static const Color _labelDark = Color(0xFFF5F5F5);
   static const Color _disabledLight = Color(0xFFBFBFBF);
-  static const Color _disabledDark = Color(0xFF404040);
+  static const Color _disabledDark = Color(0x66EBEBF5);
   static const Color _destructiveLight = Color(0xFFFF383C);
   static const Color _destructiveDark = Color(0xFFFF4245);
   static const Color _pressLight = Color(0x12000000);
-  static const Color _pressDark = Color(0x24FFFFFF);
+  static const Color _pressDark = Color(0x1FFFFFFF);
 
   @override
   Widget build(BuildContext context) {
@@ -361,6 +339,7 @@ class _LiqMenuItemState extends State<LiqMenuItem> {
     final isDark = resolvedBrightness == Brightness.dark;
     final disabled = widget.onPressed == null;
     final labelColor = _resolveLabelColor(isDark, disabled);
+    final duration = context.liqMotionDuration(LiqMotion.fast);
 
     return Semantics(
       button: true,
@@ -375,97 +354,105 @@ class _LiqMenuItemState extends State<LiqMenuItem> {
           onTapUp: !disabled ? (_) => setState(() => _pressed = false) : null,
           onTapCancel:
               !disabled ? () => setState(() => _pressed = false) : null,
-          child: AnimatedContainer(
-            duration: LiqMotion.fast,
+          child: AnimatedScale(
+            scale: _pressed ? 0.985 : 1,
+            duration: duration,
             curve: LiqMotion.snappy,
-            constraints: const BoxConstraints(minHeight: 52),
-            padding: const EdgeInsets.fromLTRB(6, 0, 8, 0),
-            decoration: BoxDecoration(
-              color:
-                  _pressed
-                      ? (isDark ? _pressDark : _pressLight)
-                      : const Color(0x00FFFFFF),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            child: Row(
-              children: <Widget>[
-                if (widget.icon != null) ...<Widget>[
-                  SizedBox(
-                    width: 28,
-                    height: 22,
-                    child: Center(child: widget.icon),
-                  ),
-                  const SizedBox(width: 8),
-                ],
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        widget.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textDirection: TextDirection.ltr,
-                        style: TextStyle(
-                          fontFamily: 'SF Pro Text',
-                          fontFamilyFallback: const <String>[
-                            'SF Pro',
-                            'sans-serif',
-                          ],
-                          fontSize: 17,
-                          height: 20 / 17,
-                          letterSpacing: -0.43,
-                          fontWeight: FontWeight.w400,
-                          color: labelColor,
-                        ),
+            child: AnimatedContainer(
+              duration: duration,
+              curve: LiqMotion.snappy,
+              constraints: const BoxConstraints(minHeight: 52),
+              padding: const EdgeInsets.fromLTRB(6, 0, 8, 0),
+              decoration: BoxDecoration(
+                color:
+                    _pressed
+                        ? (isDark ? _pressDark : _pressLight)
+                        : const Color(0x00FFFFFF),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Row(
+                children: <Widget>[
+                  if (widget.icon != null) ...<Widget>[
+                    IconTheme.merge(
+                      data: IconThemeData(color: labelColor, size: 21),
+                      child: SizedBox(
+                        width: 28,
+                        height: 22,
+                        child: Center(child: widget.icon),
                       ),
-                      if (widget.subtitle != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2),
-                          child: Text(
-                            widget.subtitle!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Text',
-                              fontSize: 11,
-                              height: 13 / 11,
-                              letterSpacing: -0.08,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  isDark
-                                      ? const Color(0xFF8A8A8A)
-                                      : const Color(0xFF727272),
-                            ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          widget.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textDirection: TextDirection.ltr,
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Text',
+                            fontFamilyFallback: const <String>[
+                              'SF Pro',
+                              'sans-serif',
+                            ],
+                            fontSize: 17,
+                            height: 20 / 17,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w400,
+                            color: labelColor,
                           ),
                         ),
-                    ],
-                  ),
-                ),
-                if (widget.trailing != null) ...<Widget>[
-                  const SizedBox(width: 8),
-                  DefaultTextStyle.merge(
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Text',
-                      fontSize: 15,
-                      height: 20 / 15,
-                      fontWeight: FontWeight.w500,
-                      color:
-                          disabled
-                              ? (isDark
-                                  ? const Color(0xFF909090)
-                                  : const Color(0xFFD9D9D9))
-                              : (isDark
-                                  ? const Color(0xFF8A8A8A)
-                                  : const Color(0xFF727272)),
+                        if (widget.subtitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2),
+                            child: Text(
+                              widget.subtitle!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textDirection: TextDirection.ltr,
+                              style: TextStyle(
+                                fontFamily: 'SF Pro Text',
+                                fontSize: 11,
+                                height: 13 / 11,
+                                letterSpacing: -0.08,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    isDark
+                                        ? const Color(0xB2EBEBF5)
+                                        : const Color(0xFF727272),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                    child: widget.trailing!,
                   ),
+                  if (widget.trailing != null) ...<Widget>[
+                    const SizedBox(width: 8),
+                    DefaultTextStyle.merge(
+                      style: TextStyle(
+                        fontFamily: 'SF Pro Text',
+                        fontSize: 15,
+                        height: 20 / 15,
+                        fontWeight: FontWeight.w500,
+                        color:
+                            disabled
+                                ? (isDark
+                                    ? const Color(0x66EBEBF5)
+                                    : const Color(0xFFD9D9D9))
+                                : (isDark
+                                    ? const Color(0xB2EBEBF5)
+                                    : const Color(0xFF727272)),
+                      ),
+                      child: widget.trailing!,
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),
@@ -491,7 +478,7 @@ final class LiqMenuSeparator extends StatelessWidget {
   final Brightness? brightness;
 
   static const Color _light = Color(0xFFE6E6E6);
-  static const Color _dark = Color(0xD1F5F5F5);
+  static const Color _dark = Color(0x29EBEBF5);
 
   @override
   Widget build(BuildContext context) {
@@ -524,7 +511,7 @@ final class LiqMenuSectionTitle extends StatelessWidget {
   final Brightness? brightness;
 
   static const Color _fgLight = Color(0xFFBFBFBF);
-  static const Color _fgDark = Color(0xDBF5F5F5);
+  static const Color _fgDark = Color(0x66EBEBF5);
 
   @override
   Widget build(BuildContext context) {

@@ -87,5 +87,38 @@ void main() {
       await tester.pump();
       expect(tester.widget<AnimatedScale>(find.byType(AnimatedScale)).scale, 1);
     });
+
+    testWidgets('reduced motion disables knob transition durations', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: LiqTheme(
+            data: LiqThemeData.light,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Center(
+                child: SizedBox(
+                  width: 240,
+                  child: LiqSlider(value: 0.4, onChanged: (_) {}),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester.widget<AnimatedScale>(find.byType(AnimatedScale)).duration,
+        Duration.zero,
+      );
+      expect(
+        tester
+            .widget<AnimatedContainer>(find.byType(AnimatedContainer))
+            .duration,
+        Duration.zero,
+      );
+    });
   });
 }

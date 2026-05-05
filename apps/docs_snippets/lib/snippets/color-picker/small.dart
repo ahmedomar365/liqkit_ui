@@ -22,21 +22,25 @@ class _ColorPickerSmallDemoState extends State<_ColorPickerSmallDemo> {
   Widget build(BuildContext context) {
     return SnippetFrame(
       maxWidth: 430,
-      height: _open ? 690 : 64,
+      height: _open ? 820 : 64,
       child: Align(
         alignment: Alignment.topCenter,
-        child: LiqDemo<Color>(
-          initial: const Color(0xFF34C759),
-          builder:
-              (color, set) =>
-              // {@highlight}
-              LiqColorPicker(
-                color: color,
-                buttonSize: LiqColorPickerButtonSize.small,
-                onChanged: set,
-                onOpenChanged: (open) => setState(() => _open = open),
-              ),
-          // {@endhighlight}
+        child: Transform.scale(
+          scale: _open ? 0.82 : 1,
+          alignment: Alignment.topCenter,
+          child: LiqDemo<Color>(
+            initial: const Color(0xFF34C759),
+            builder:
+                (color, set) =>
+                // {@highlight}
+                LiqColorPicker(
+                  color: color,
+                  buttonSize: LiqColorPickerButtonSize.small,
+                  onChanged: set,
+                  onOpenChanged: (open) => setState(() => _open = open),
+                ),
+            // {@endhighlight}
+          ),
         ),
       ),
     );

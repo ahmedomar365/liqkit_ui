@@ -37,24 +37,24 @@ class _SheetStackedDemoState extends State<_SheetStackedDemo> {
               opacity: _presented ? 1 : 0,
               duration: LiqMotion.fast,
               child:
-                  // {@highlight}
-                  LiqSheet(
-                    title: 'Payment',
-                    variant: LiqSheetVariant.stacked,
-                    height: 430,
-                    leading: LiqSheetTopButton(
-                      semanticsLabel: 'Close',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('x'),
-                    ),
-                    trailing: LiqSheetTopButton(
-                      style: LiqSheetTopButtonStyle.primary,
-                      semanticsLabel: 'Confirm',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('OK'),
-                    ),
-                    child: const _PaymentSheetBody(),
-                  ),
+              // {@highlight}
+              LiqSheet(
+                title: 'Payment',
+                variant: LiqSheetVariant.stacked,
+                height: 430,
+                leading: LiqSheetTopButton(
+                  semanticsLabel: 'Close',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('x'),
+                ),
+                trailing: LiqSheetTopButton(
+                  style: LiqSheetTopButtonStyle.primary,
+                  semanticsLabel: 'Confirm',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('OK'),
+                ),
+                child: const _PaymentSheetBody(),
+              ),
               // {@endhighlight}
             ),
           ),

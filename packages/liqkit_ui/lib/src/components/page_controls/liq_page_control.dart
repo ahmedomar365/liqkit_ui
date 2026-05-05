@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Surface brightness for [LiqPageControl].
@@ -138,6 +139,7 @@ final class LiqPageControl extends StatelessWidget {
 
 class _Dot extends StatelessWidget {
   const _Dot({required this.size, required this.color});
+
   final double size;
   final Color color;
 
@@ -147,7 +149,9 @@ class _Dot extends StatelessWidget {
       width: LiqPageControl._dotLarge,
       height: LiqPageControl._dotLarge,
       child: Center(
-        child: Container(
+        child: AnimatedContainer(
+          duration: context.liqMotionDuration(LiqMotion.fast),
+          curve: LiqMotion.snappy,
           width: size,
           height: size,
           decoration: BoxDecoration(

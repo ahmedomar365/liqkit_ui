@@ -42,4 +42,15 @@ void main() {
     await tester.tap(find.byType(LiqAppIcon));
     expect(taps, 1);
   });
+
+  testWidgets('LiqAppIcon exposes a click cursor when tappable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(LiqAppIcon(color: const Color(0xFFFF3B30), onPressed: () {})),
+    );
+
+    final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+    expect(mouseRegion.cursor, SystemMouseCursors.click);
+  });
 }

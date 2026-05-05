@@ -38,23 +38,23 @@ class _SheetFullScreenDemoState extends State<_SheetFullScreenDemo> {
               opacity: _presented ? 1 : 0,
               duration: LiqMotion.fast,
               child:
-                  // {@highlight}
-                  LiqSheet(
-                    title: 'Edit Profile',
-                    height: 430,
-                    leading: LiqSheetTopButton(
-                      semanticsLabel: 'Close',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('x'),
-                    ),
-                    trailing: LiqSheetTopButton(
-                      style: LiqSheetTopButtonStyle.primary,
-                      semanticsLabel: 'Done',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('OK'),
-                    ),
-                    child: const _ProfileSheetBody(),
-                  ),
+              // {@highlight}
+              LiqSheet(
+                title: 'Edit Profile',
+                height: 430,
+                leading: LiqSheetTopButton(
+                  semanticsLabel: 'Close',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('x'),
+                ),
+                trailing: LiqSheetTopButton(
+                  style: LiqSheetTopButtonStyle.primary,
+                  semanticsLabel: 'Done',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('OK'),
+                ),
+                child: const _ProfileSheetBody(),
+              ),
               // {@endhighlight}
             ),
           ),

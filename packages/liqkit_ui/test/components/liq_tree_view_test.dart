@@ -106,6 +106,20 @@ void main() {
       expect(lastValue, 'foo-value');
     });
 
+    testWidgets('rows expose click cursors', (tester) async {
+      await tester.pumpWidget(wrap(const LiqTreeView<String>(nodes: sample)));
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        isNotEmpty,
+      );
+    });
+
     testWidgets('tap on a folder row does not fire onSelected', (tester) async {
       var calls = 0;
       await tester.pumpWidget(

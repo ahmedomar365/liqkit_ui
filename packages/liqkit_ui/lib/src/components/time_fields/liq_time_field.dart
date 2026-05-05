@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Immutable hour/minute pair consumed by [LiqTimeField].
@@ -358,42 +359,22 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  ValueListenableBuilder<TextEditingValue>(
-                    valueListenable: _controller,
-                    builder: (context, value, _) {
-                      if (value.text.isNotEmpty) {
-                        return const SizedBox.shrink();
-                      }
-                      return Text(
-                        _placeholder,
-                        style: LiqTimeField.textStyle.copyWith(
-                          color: palette.placeholder,
-                        ),
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.ltr,
-                      );
-                    },
-                  ),
-                  EditableText(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    style: LiqTimeField.textStyle.copyWith(color: palette.text),
-                    cursorColor: palette.activeBorder,
-                    backgroundCursorColor: palette.placeholder,
-                    selectionColor: palette.activeBorder.withValues(
-                      alpha: 0.25,
-                    ),
-                    keyboardType: TextInputType.datetime,
-                    inputFormatters: inputFormatters,
-                    textAlign: TextAlign.center,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                  ),
-                ],
+              child: CupertinoTextField.borderless(
+                controller: _controller,
+                focusNode: _focusNode,
+                padding: EdgeInsets.zero,
+                placeholder: _placeholder,
+                placeholderStyle: LiqTimeField.textStyle.copyWith(
+                  color: palette.placeholder,
+                ),
+                style: LiqTimeField.textStyle.copyWith(color: palette.text),
+                cursorColor: palette.activeBorder,
+                cursorRadius: const Radius.circular(1),
+                keyboardType: TextInputType.datetime,
+                inputFormatters: inputFormatters,
+                textAlign: TextAlign.center,
+                enableSuggestions: false,
+                autocorrect: false,
               ),
             ),
             if (!widget.use24HourFormat) ...<Widget>[
@@ -491,35 +472,39 @@ class _PeriodCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: SizedBox(
-        height: LiqTimeField.fieldHeight,
-        width:
-            (LiqTimeField.segmentHorizontalPadding * 2) + _periodCellLabelWidth,
-        child: Center(
-          child: Container(
-            height: LiqTimeField.segmentHeight,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color:
-                  isActive
-                      ? palette.segmentActiveBackground
-                      : const Color(0x00000000),
-              borderRadius: BorderRadius.circular(LiqTimeField.segmentRadius),
-              boxShadow:
-                  isActive
-                      ? const <BoxShadow>[LiqTimeField.activeSegmentShadow]
-                      : null,
-            ),
-            child: Text(
-              label,
-              style: LiqTimeField.segmentTextStyle.copyWith(
-                color: isActive ? palette.text : palette.segmentInactive,
+    return LiqPointerCursor(
+      enabled: onTap != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: SizedBox(
+          height: LiqTimeField.fieldHeight,
+          width:
+              (LiqTimeField.segmentHorizontalPadding * 2) +
+              _periodCellLabelWidth,
+          child: Center(
+            child: Container(
+              height: LiqTimeField.segmentHeight,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color:
+                    isActive
+                        ? palette.segmentActiveBackground
+                        : const Color(0x00000000),
+                borderRadius: BorderRadius.circular(LiqTimeField.segmentRadius),
+                boxShadow:
+                    isActive
+                        ? const <BoxShadow>[LiqTimeField.activeSegmentShadow]
+                        : null,
               ),
-              maxLines: 1,
-              textDirection: TextDirection.ltr,
+              child: Text(
+                label,
+                style: LiqTimeField.segmentTextStyle.copyWith(
+                  color: isActive ? palette.text : palette.segmentInactive,
+                ),
+                maxLines: 1,
+                textDirection: TextDirection.ltr,
+              ),
             ),
           ),
         ),

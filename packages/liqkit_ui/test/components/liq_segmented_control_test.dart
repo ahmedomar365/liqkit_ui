@@ -4,11 +4,14 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 
 void main() {
   Widget wrap(Widget child, {LiqThemeData data = LiqThemeData.light}) {
-    return LiqTheme(
-      data: data,
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Center(child: SizedBox(width: 300, child: child)),
+    return MediaQuery(
+      data: const MediaQueryData(),
+      child: LiqTheme(
+        data: data,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Center(child: SizedBox(width: 300, child: child)),
+        ),
       ),
     );
   }
@@ -170,6 +173,40 @@ void main() {
       );
       expect(target.duration, LiqMotion.normal);
       expect(target.left, greaterThan(initial.left!));
+    });
+
+    testWidgets('selection capsule honors reduced motion settings', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: LiqTheme(
+            data: LiqThemeData.light,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Center(
+                child: SizedBox(
+                  width: 300,
+                  child: LiqSegmentedControl<int>(
+                    segments: const <({int value, String label})>[
+                      (value: 0, label: 'Day'),
+                      (value: 1, label: 'Week'),
+                    ],
+                    value: 0,
+                    onChanged: (int _) {},
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final capsule = tester.widget<AnimatedPositioned>(
+        find.byType(AnimatedPositioned),
+      );
+      expect(capsule.duration, Duration.zero);
     });
 
     testWidgets('dark theme uses dark selected and inactive label colors', (

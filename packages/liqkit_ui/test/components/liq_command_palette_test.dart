@@ -9,7 +9,12 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget _wrap(Widget child) {
   return MediaQuery(
     data: const MediaQueryData(size: Size(800, 600)),
-    child: Directionality(textDirection: TextDirection.ltr, child: child),
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Overlay(
+        initialEntries: <OverlayEntry>[OverlayEntry(builder: (_) => child)],
+      ),
+    ),
   );
 }
 
@@ -141,6 +146,59 @@ void main() {
 
       await tester.tap(find.text('New project'));
       expect(newProjectFired, 1);
+    });
+
+    testWidgets('rows expose click cursors', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          Center(
+            child: SizedBox(
+              width: 560,
+              height: 360,
+              child: LiqCommandPalette(commands: _flatCommands(() {})),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(3),
+      );
+    });
+
+    testWidgets('clear button exposes a click cursor', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          Center(
+            child: SizedBox(
+              width: 560,
+              height: 360,
+              child: LiqCommandPalette(commands: _flatCommands(() {})),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      await tester.enterText(find.byType(EditableText).first, 'sett');
+      await tester.pump();
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(2),
+      );
     });
 
     testWidgets('Up/Down arrow keys move the active highlight', (tester) async {
@@ -294,6 +352,32 @@ void main() {
 
       final shortcutText = tester.widget<Text>(find.text('⌘N'));
       expect(shortcutText.style?.color, const Color(0xB2EBEBF5));
+    });
+
+    testWidgets('uses an explicit Liquid Glass surface recipe', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            Center(
+              child: SizedBox(
+                width: 560,
+                height: 360,
+                child: LiqCommandPalette(commands: _flatCommands(() {})),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final glass = tester.widget<LiqGlassSurface>(
+        find.byType(LiqGlassSurface),
+      );
+      expect(glass.borderRadius, const BorderRadius.all(Radius.circular(34)));
+      expect(glass.blurSigma, 20);
+      expect(glass.baseFill, const Color(0xDC18181A));
+      expect(glass.highlightStart, const Color(0x06FFFFFF));
     });
   });
 

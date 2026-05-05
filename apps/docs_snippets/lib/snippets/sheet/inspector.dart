@@ -21,7 +21,7 @@ class _SheetInspectorDemoState extends State<_SheetInspectorDemo> {
   Widget build(BuildContext context) {
     return SnippetFrame(
       maxWidth: 430,
-      height: 470,
+      height: 540,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       surface: SnippetFrameSurface.liquidLight,
       surfacePadding: EdgeInsets.zero,
@@ -37,24 +37,23 @@ class _SheetInspectorDemoState extends State<_SheetInspectorDemo> {
               opacity: _presented ? 1 : 0,
               duration: LiqMotion.fast,
               child:
-                  // {@highlight}
-                  LiqSheet(
-                    title: 'Inspector',
-                    variant: LiqSheetVariant.inspector,
-                    height: 320,
-                    leading: LiqSheetTopButton(
-                      semanticsLabel: 'Close',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('x'),
-                    ),
-                    trailing: LiqSheetTopButton(
-                      style: LiqSheetTopButtonStyle.primary,
-                      semanticsLabel: 'Apply',
-                      onPressed: () => setState(() => _presented = false),
-                      child: const Text('OK'),
-                    ),
-                    child: const _InspectorSheetBody(),
-                  ),
+              // {@highlight}
+              LiqSheet(
+                title: 'Inspector',
+                variant: LiqSheetVariant.inspector,
+                leading: LiqSheetTopButton(
+                  semanticsLabel: 'Close',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('x'),
+                ),
+                trailing: LiqSheetTopButton(
+                  style: LiqSheetTopButtonStyle.primary,
+                  semanticsLabel: 'Apply',
+                  onPressed: () => setState(() => _presented = false),
+                  child: const Text('OK'),
+                ),
+                child: const _InspectorSheetBody(),
+              ),
               // {@endhighlight}
             ),
           ),

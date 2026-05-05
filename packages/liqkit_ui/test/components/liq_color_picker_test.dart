@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
-Widget _wrap(Widget child) {
+Widget _wrap(Widget child, {MediaQueryData media = const MediaQueryData()}) {
   return Directionality(
     textDirection: TextDirection.ltr,
     child: MediaQuery(
-      data: const MediaQueryData(),
+      data: media,
       child: SizedBox(width: 360, child: Center(child: child)),
     ),
   );
@@ -151,4 +151,78 @@ void main() {
       isTrue,
     );
   });
+
+  testWidgets('color picker animations honor reduced motion', (tester) async {
+    await tester.pumpWidget(
+      _wrap(
+        LiqColorPicker(color: const Color(0xFFAF52DE), onChanged: (_) {}),
+        media: const MediaQueryData(disableAnimations: true),
+      ),
+    );
+
+    expect(find.byType(AnimatedSize), findsNothing);
+    expect(
+      tester
+          .widget<AnimatedSwitcher>(find.byType(AnimatedSwitcher).first)
+          .duration,
+      Duration.zero,
+    );
+
+    await tester.tap(find.byType(LiqColorPickerButton));
+    await tester.pump();
+
+    expect(
+      tester
+          .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+          .map((container) => container.duration),
+      everyElement(Duration.zero),
+    );
+  });
+
+  testWidgets('open color picker scrolls instead of overflowing when bounded', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(420, 420);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      _wrap(
+        const SizedBox(
+          height: 360,
+          child: LiqColorPicker(color: Color(0xFFAF52DE), onChanged: _noop),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byType(LiqColorPickerButton));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(LiqColorPickerPanel), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('color picker mode segments remain legible in dark theme', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      LiqTheme(
+        data: LiqThemeData.dark,
+        child: _wrap(
+          LiqColorPicker(color: const Color(0xFFAF52DE), onChanged: (_) {}),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byType(LiqColorPickerButton));
+    await tester.pumpAndSettle();
+
+    final selected = tester.widget<Text>(find.text('Grid'));
+    expect(selected.style?.color, const Color(0xFFFFFFFF));
+    final inactive = tester.widget<Text>(find.text('Spectrum'));
+    expect(inactive.style?.color, const Color(0xB2EBEBF5));
+  });
 }
+
+void _noop(Color color) {}

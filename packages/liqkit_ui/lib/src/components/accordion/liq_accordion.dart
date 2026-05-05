@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -157,56 +158,58 @@ class _LiqAccordionState extends State<LiqAccordion> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _onHeaderTap(index),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              minHeight: LiqAccordion._headerMinHeight,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: LiqAccordion._headerHPad,
-                vertical: 8,
+        LiqPointerCursor(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => _onHeaderTap(index),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                minHeight: LiqAccordion._headerMinHeight,
               ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          item.title,
-                          style: TextStyle(fontSize: 16, color: titleColor),
-                        ),
-                        if (item.subtitle != null) ...<Widget>[
-                          const SizedBox(height: 2),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LiqAccordion._headerHPad,
+                  vertical: 8,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
                           Text(
-                            item.subtitle!,
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: subtitleColor,
-                            ),
+                            item.title,
+                            style: TextStyle(fontSize: 16, color: titleColor),
                           ),
+                          if (item.subtitle != null) ...<Widget>[
+                            const SizedBox(height: 2),
+                            Text(
+                              item.subtitle!,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: subtitleColor,
+                              ),
+                            ),
+                          ],
                         ],
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  AnimatedRotation(
-                    duration: LiqAccordion._rotateDuration,
-                    curve: LiqAccordion._curve,
-                    turns: expanded ? 0.25 : 0,
-                    child: SizedBox(
-                      width: LiqAccordion._chevronSize,
-                      height: LiqAccordion._chevronSize,
-                      child: CustomPaint(
-                        painter: _ChevronPainter(color: chevronColor),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 12),
+                    AnimatedRotation(
+                      duration: LiqAccordion._rotateDuration,
+                      curve: LiqAccordion._curve,
+                      turns: expanded ? 0.25 : 0,
+                      child: SizedBox(
+                        width: LiqAccordion._chevronSize,
+                        height: LiqAccordion._chevronSize,
+                        child: CustomPaint(
+                          painter: _ChevronPainter(color: chevronColor),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -9,7 +10,11 @@ void main() {
       textDirection: TextDirection.ltr,
       child: MediaQuery(
         data: const MediaQueryData(),
-        child: Center(child: child),
+        child: Overlay(
+          initialEntries: <OverlayEntry>[
+            OverlayEntry(builder: (_) => Center(child: child)),
+          ],
+        ),
       ),
     ),
   );
@@ -50,39 +55,50 @@ void main() {
       expect(controller.value.text, 'hello');
     });
 
-    testWidgets(
-      'editable area leaves text selection gestures to EditableText',
-      (tester) async {
-        final controller = LiqRichEditorController(
-          value: const LiqRichValue(text: 'hello world'),
-        );
-        addTearDown(controller.dispose);
+    testWidgets('editable area uses Cupertino text selection gestures', (
+      tester,
+    ) async {
+      final controller = LiqRichEditorController(
+        value: const LiqRichValue(text: 'hello world'),
+      );
+      addTearDown(controller.dispose);
 
-        await tester.pumpWidget(
-          wrap(
-            SizedBox(width: 400, child: LiqRichEditor(controller: controller)),
-          ),
-        );
-        await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(width: 400, child: LiqRichEditor(controller: controller)),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        expect(
-          find.ancestor(
-            of: find.byType(EditableText),
-            matching: find.byWidgetPredicate((widget) => widget is Listener),
-          ),
-          findsWidgets,
-        );
-        expect(
-          find.ancestor(
-            of: find.byType(EditableText),
-            matching: find.byWidgetPredicate(
-              (widget) => widget is GestureDetector && widget.onTap != null,
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.rendererIgnoresPointer, isTrue);
+      expect(editable.enableInteractiveSelection, isTrue);
+      expect(editable.selectionControls, isNotNull);
+    });
+
+    testWidgets('placeholder is rendered by the platform text field', (
+      tester,
+    ) async {
+      final controller = LiqRichEditorController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(
+            width: 400,
+            child: LiqRichEditor(
+              controller: controller,
+              placeholder: 'Compose',
             ),
           ),
-          findsNothing,
-        );
-      },
-    );
+        ),
+      );
+
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.text('Compose'), findsOneWidget);
+    });
 
     testWidgets('renders the bold toolbar button', (tester) async {
       final controller = LiqRichEditorController();
@@ -120,6 +136,30 @@ void main() {
         );
         expect(tester.getSize(button.first), const Size(44, 44));
       }
+    });
+
+    testWidgets('toolbar buttons expose click cursors', (tester) async {
+      final controller = LiqRichEditorController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(width: 400, child: LiqRichEditor(controller: controller)),
+        ),
+      );
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.descendant(
+          of: find.byType(LiqRichEditor),
+          matching: find.byType(MouseRegion),
+        ),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(3),
+      );
     });
 
     testWidgets('a bold range over [0,4) renders FontWeight.w700 on the first '

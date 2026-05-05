@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart' show cupertinoTextSelectionControls;
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -81,6 +83,10 @@ final class LiqTextField extends StatefulWidget {
 class _LiqTextFieldState extends State<LiqTextField> {
   late final FocusNode _focusNode = FocusNode(canRequestFocus: widget.enabled)
     ..addListener(_handleFocus);
+  int? _dragSelectionBase;
+  Offset? _pointerDownPosition;
+  DateTime? _lastPointerDownAt;
+  Offset? _lastPointerDownPosition;
 
   void _handleFocus() => setState(() {});
 
@@ -133,51 +139,176 @@ class _LiqTextFieldState extends State<LiqTextField> {
     return Semantics(
       textField: true,
       enabled: widget.enabled,
-      child: Container(
-        height: LiqTextField._height,
-        padding: const EdgeInsets.symmetric(horizontal: LiqTextField._padding),
-        decoration: BoxDecoration(
-          color: bg,
-          border: filled ? Border(bottom: BorderSide(color: separator)) : null,
-        ),
-        child: Listener(
-          behavior: HitTestBehavior.translucent,
-          onPointerDown:
-              widget.enabled ? (_) => _focusNode.requestFocus() : null,
-          child: Stack(
-            alignment: AlignmentDirectional.centerStart,
-            children: <Widget>[
-              ValueListenableBuilder<TextEditingValue>(
-                valueListenable: widget.controller,
-                builder: (context, value, _) {
-                  if (value.text.isNotEmpty || widget.placeholder == null) {
-                    return const SizedBox.shrink();
-                  }
-                  return Text(
-                    widget.placeholder!,
-                    style: placeholderStyle,
-                    maxLines: 1,
-                    textDirection: TextDirection.ltr,
-                  );
-                },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final textWidth = constraints.maxWidth - (LiqTextField._padding * 2);
+          return Container(
+            height: LiqTextField._height,
+            padding: const EdgeInsets.symmetric(
+              horizontal: LiqTextField._padding,
+            ),
+            decoration: BoxDecoration(
+              color: bg,
+              border:
+                  filled ? Border(bottom: BorderSide(color: separator)) : null,
+            ),
+            child: Listener(
+              behavior: HitTestBehavior.translucent,
+              onPointerDown:
+                  widget.enabled && !widget.obscureText
+                      ? (event) => _handlePointerDown(
+                        event.localPosition,
+                        textStyle,
+                        textWidth,
+                      )
+                      : widget.enabled
+                      ? (_) => _focusNode.requestFocus()
+                      : null,
+              onPointerMove:
+                  widget.enabled && !widget.obscureText
+                      ? (event) => _handlePointerMove(
+                        event.localPosition,
+                        event.buttons,
+                        textStyle,
+                        textWidth,
+                      )
+                      : null,
+              onPointerUp: (_) => _endMouseSelection(),
+              onPointerCancel: (_) => _endMouseSelection(),
+              child: Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: <Widget>[
+                  ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: widget.controller,
+                    builder: (context, value, _) {
+                      if (value.text.isNotEmpty || widget.placeholder == null) {
+                        return const SizedBox.shrink();
+                      }
+                      return Text(
+                        widget.placeholder!,
+                        style: placeholderStyle,
+                        maxLines: 1,
+                        textDirection: TextDirection.ltr,
+                      );
+                    },
+                  ),
+                  EditableText(
+                    controller: widget.controller,
+                    focusNode: _focusNode,
+                    readOnly: !widget.enabled,
+                    obscureText: widget.obscureText,
+                    style: textStyle,
+                    cursorColor: accent,
+                    backgroundCursorColor: placeholder,
+                    selectionColor: accent.withValues(alpha: 0.25),
+                    selectionControls: cupertinoTextSelectionControls,
+                    rendererIgnoresPointer: true,
+                    inputFormatters: const <TextInputFormatter>[],
+                    onChanged: widget.onChanged,
+                    onSubmitted: widget.onSubmitted,
+                  ),
+                ],
               ),
-              EditableText(
-                controller: widget.controller,
-                focusNode: _focusNode,
-                readOnly: !widget.enabled,
-                obscureText: widget.obscureText,
-                style: textStyle,
-                cursorColor: accent,
-                backgroundCursorColor: placeholder,
-                selectionColor: accent.withValues(alpha: 0.25),
-                onChanged: widget.onChanged,
-                onSubmitted: widget.onSubmitted,
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
+  }
+
+  void _handlePointerDown(
+    Offset localPosition,
+    TextStyle style,
+    double maxWidth,
+  ) {
+    final now = DateTime.now();
+    final lastAt = _lastPointerDownAt;
+    final lastPosition = _lastPointerDownPosition;
+    final isDoubleClick =
+        lastAt != null &&
+        lastPosition != null &&
+        now.difference(lastAt) < const Duration(milliseconds: 450) &&
+        (localPosition - lastPosition).distance < 16;
+
+    _focusNode.requestFocus();
+    _pointerDownPosition = localPosition;
+    _dragSelectionBase = null;
+    _lastPointerDownAt = now;
+    _lastPointerDownPosition = localPosition;
+
+    if (isDoubleClick) {
+      _selectWordAt(localPosition, style, maxWidth);
+    } else {
+      widget.controller.selection = TextSelection.collapsed(
+        offset: _textOffsetAt(localPosition, style, maxWidth),
+      );
+    }
+  }
+
+  void _handlePointerMove(
+    Offset localPosition,
+    int buttons,
+    TextStyle style,
+    double maxWidth,
+  ) {
+    if (buttons & kPrimaryMouseButton == 0) return;
+    final downPosition = _pointerDownPosition;
+    if (downPosition == null) return;
+    if (_dragSelectionBase == null) {
+      if ((localPosition - downPosition).distance < 2) return;
+      _dragSelectionBase = _textOffsetAt(downPosition, style, maxWidth);
+    }
+    widget.controller.selection = TextSelection(
+      baseOffset: _dragSelectionBase!,
+      extentOffset: _textOffsetAt(localPosition, style, maxWidth),
+    );
+  }
+
+  void _endMouseSelection() {
+    _dragSelectionBase = null;
+    _pointerDownPosition = null;
+  }
+
+  void _selectWordAt(Offset localPosition, TextStyle style, double maxWidth) {
+    final text = widget.controller.text;
+    if (text.isEmpty) return;
+    final offset = _textOffsetAt(localPosition, style, maxWidth);
+    var start = offset;
+    var end = offset;
+    if (start == text.length && start > 0) {
+      start--;
+      end = text.length;
+    }
+    while (start > 0 && _isWordCodeUnit(text.codeUnitAt(start - 1))) {
+      start--;
+    }
+    while (end < text.length && _isWordCodeUnit(text.codeUnitAt(end))) {
+      end++;
+    }
+    if (start == end) return;
+    widget.controller.selection = TextSelection(
+      baseOffset: start,
+      extentOffset: end,
+    );
+  }
+
+  int _textOffsetAt(Offset localPosition, TextStyle style, double maxWidth) {
+    final painter = TextPainter(
+      text: TextSpan(text: widget.controller.text, style: style),
+      textDirection: Directionality.of(context),
+      maxLines: 1,
+    )..layout(maxWidth: maxWidth < 0 ? 0 : maxWidth);
+    return painter
+        .getPositionForOffset(Offset(localPosition.dx, painter.height / 2))
+        .offset
+        .clamp(0, widget.controller.text.length);
+  }
+
+  bool _isWordCodeUnit(int codeUnit) {
+    return (codeUnit >= 48 && codeUnit <= 57) ||
+        (codeUnit >= 65 && codeUnit <= 90) ||
+        (codeUnit >= 97 && codeUnit <= 122) ||
+        codeUnit == 95;
   }
 
   @override

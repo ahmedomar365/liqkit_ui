@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -6,7 +6,13 @@ Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
   child: MediaQuery(
     data: const MediaQueryData(),
-    child: Center(child: SizedBox(width: 320, child: child)),
+    child: Overlay(
+      initialEntries: <OverlayEntry>[
+        OverlayEntry(
+          builder: (_) => Center(child: SizedBox(width: 320, child: child)),
+        ),
+      ],
+    ),
   ),
 );
 
@@ -80,6 +86,30 @@ void main() {
         );
         expect(tester.getSize(cell.first).height, 42);
       }
+    });
+
+    testWidgets('inactive AM/PM segment exposes a click cursor', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqTimeField(
+            value: const LiqTime(hour: 14, minute: 32),
+            onChanged: (_) {},
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(1),
+      );
     });
 
     testWidgets('typing 1432 auto-inserts colon and fires onChanged in 24h', (
@@ -196,7 +226,7 @@ void main() {
       );
     });
 
-    testWidgets('selection gestures belong to EditableText', (tester) async {
+    testWidgets('uses Cupertino text selection gestures', (tester) async {
       await tester.pumpWidget(
         _wrap(
           LiqTimeField(
@@ -207,22 +237,12 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byWidgetPredicate(
-            (widget) => widget is GestureDetector && widget.onTap != null,
-          ),
-        ),
-        findsNothing,
-      );
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byType(Listener),
-        ),
-        findsOneWidget,
-      );
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.rendererIgnoresPointer, isTrue);
+      expect(editable.enableInteractiveSelection, isTrue);
+      expect(editable.selectionControls, isNotNull);
     });
 
     test('throws AssertionError when hour out of range', () {

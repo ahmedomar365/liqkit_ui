@@ -7,6 +7,10 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget kitHelpersModePillBuilder(BuildContext context) {
   // {@highlight}
   return const SnippetFrame(
+    maxWidth: 220,
+    height: 72,
+    surface: SnippetFrameSurface.themed,
+    surfacePadding: EdgeInsets.symmetric(horizontal: 18),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

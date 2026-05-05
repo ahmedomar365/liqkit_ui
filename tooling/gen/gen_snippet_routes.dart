@@ -32,6 +32,16 @@ String _identifier(String component, String variant) {
   return '${_camel(component)}${v[0].toUpperCase()}${v.substring(1)}Builder';
 }
 
+String _dartImport(String component, String variant, String identifier) {
+  final uri = 'package:docs_snippets/snippets/$component/$variant.dart';
+  final inline = "import '$uri' show $identifier;";
+  if (inline.length <= 80) {
+    return inline;
+  }
+
+  return "import '$uri'\n    show $identifier;";
+}
+
 /// Render the Dart `routes.g.dart` content for [apps/docs_snippets/].
 String renderDartRoutes(String manifestJson) {
   final m = jsonDecode(manifestJson) as Map<String, dynamic>;
@@ -46,9 +56,7 @@ String renderDartRoutes(String manifestJson) {
       final variant = v['variant'] as String;
       _checkIdent('variant', variant, component: component);
       final ident = _identifier(component, variant);
-      imports.add(
-        "import 'package:docs_snippets/snippets/$component/$variant.dart' show $ident;",
-      );
+      imports.add(_dartImport(component, variant, ident));
       entries.add("  '/$component/$variant': $ident,");
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One crumb in a [LiqBreadcrumb] trail.
@@ -41,8 +42,8 @@ final class LiqBreadcrumbItem with Diagnosticable {
 /// Each crumb in [items] renders as a tappable link in iOS system blue
 /// when its [LiqBreadcrumbItem.onPressed] is non-null. The final crumb
 /// is rendered in semibold iOS primary-label color and is never a link
-/// regardless of its callback. Trails wrap onto multiple lines on
-/// narrow screens.
+/// regardless of its callback. Trails stay on one horizontal line and
+/// scroll when space is tight so the hierarchy remains visually intact.
 final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
   /// Creates a breadcrumb trail.
   const LiqBreadcrumb({
@@ -137,12 +138,14 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
       );
       if (tappable) {
         children.add(
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: item.onPressed,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: tapTargetHeight),
-              child: Center(widthFactor: 1, heightFactor: 1, child: text),
+          LiqPointerCursor(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: item.onPressed,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: tapTargetHeight),
+                child: Center(widthFactor: 1, heightFactor: 1, child: text),
+              ),
             ),
           ),
         );
@@ -157,16 +160,9 @@ final class LiqBreadcrumb extends StatelessWidget with Diagnosticable {
       }
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Flexible(
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: children,
-          ),
-        ),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(mainAxisSize: MainAxisSize.min, children: children),
     );
   }
 

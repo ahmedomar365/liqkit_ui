@@ -49,6 +49,37 @@ void main() {
       expect(index, 1);
     });
 
+    testWidgets('press-drag previews and commits released tab', (tester) async {
+      var index = 0;
+      await tester.pumpWidget(
+        StatefulBuilder(
+          builder:
+              (context, setState) => _wrap(
+                LiqTabs(
+                  items: _items,
+                  selectedIndex: index,
+                  onChanged: (i) => setState(() => index = i),
+                ),
+              ),
+        ),
+      );
+
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.text('Overview')),
+      );
+      await tester.pump();
+      await gesture.moveTo(tester.getCenter(find.text('History')));
+      await tester.pump();
+
+      expect(index, 0);
+      final preview = tester.widget<Text>(find.text('History'));
+      expect(preview.style?.color, LiqTabs.activeColor);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(index, 2);
+    });
+
     testWidgets('selectedIndex=2 then tap on tab 0 fires onChanged(0)', (
       tester,
     ) async {

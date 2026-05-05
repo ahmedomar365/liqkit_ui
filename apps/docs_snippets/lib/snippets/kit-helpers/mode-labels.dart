@@ -7,6 +7,10 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget kitHelpersModeLabelsBuilder(BuildContext context) {
   // {@highlight}
   return const SnippetFrame(
+    maxWidth: 160,
+    height: 150,
+    surface: SnippetFrameSurface.themed,
+    surfacePadding: EdgeInsets.all(18),
     child: LiqKitHelpersModeLabels(
       children: <Widget>[
         LiqKitHelpersModePill(label: 'Light'),

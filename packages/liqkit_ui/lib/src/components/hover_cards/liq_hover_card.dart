@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Preferred edge of [LiqHoverCard] relative to its child.
 enum LiqHoverCardPlacement {
@@ -133,6 +135,14 @@ class _LiqHoverCardState extends State<LiqHoverCard>
     _animation = AnimationController(
       vsync: this,
       duration: LiqHoverCard.animationDuration,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _animation.duration = context.liqMotionDuration(
+      LiqHoverCard.animationDuration,
     );
   }
 
@@ -310,6 +320,7 @@ class _LiqHoverCardOverlay extends StatelessWidget {
               onExit: onPopoverExit,
               child: _LiqHoverCardSurface(
                 maxWidth: maxWidth,
+                maxHeight: math.max<double>(0, mediaSize.height - 16),
                 padding: padding,
                 child: content,
               ),
@@ -413,24 +424,26 @@ class _LiqHoverCardOverlay extends StatelessWidget {
 class _LiqHoverCardSurface extends StatelessWidget {
   const _LiqHoverCardSurface({
     required this.maxWidth,
+    required this.maxHeight,
     required this.padding,
     required this.child,
   });
 
   final double maxWidth;
+  final double maxHeight;
   final EdgeInsets padding;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth),
+      constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
       child: LiqGlassSurface(
         borderRadius: const BorderRadius.all(
           Radius.circular(LiqHoverCard.radius),
         ),
         padding: padding,
-        child: child,
+        child: SingleChildScrollView(child: child),
       ),
     );
   }

@@ -6,7 +6,9 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget popoverLeadingBuilder(BuildContext context) {
   // {@highlight}
   return const SnippetFrame(
-    maxWidth: 260,
+    maxWidth: 300,
+    height: 150,
+    surface: SnippetFrameSurface.liquidLight,
     child: LiqPopover(
       side: LiqPopoverSide.leading,
       child: SnippetLabel('Tip on leading'),

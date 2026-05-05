@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Brightness mode shared across system primitives.
@@ -161,28 +162,31 @@ final class LiqSystemActionPill extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: <Color>[Color(0xB8FFFFFF), Color(0xE6E6E9EE)],
             );
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onPressed,
-      child: SizedBox(
-        height: _tapTargetHeight,
-        child: Center(
-          child: Container(
-            height: _visibleHeight,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: gradient,
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: borderColor),
-            ),
-            child: Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontFamily: 'SF Pro Text',
-                fontSize: 14,
-                height: 20 / 14,
-                fontWeight: FontWeight.w500,
+    return LiqPointerCursor(
+      enabled: onPressed != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: SizedBox(
+          height: _tapTargetHeight,
+          child: Center(
+            child: Container(
+              height: _visibleHeight,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: gradient,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: Border.all(color: borderColor),
+              ),
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: color,
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 14,
+                  height: 20 / 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
@@ -223,26 +227,29 @@ final class LiqSystemToggleDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onPressed,
-      child: SizedBox(
-        width: _tapTargetSize,
-        height: _tapTargetSize,
-        child: Center(
-          child: Container(
-            width: _visibleSize,
-            height: _visibleSize,
-            decoration: BoxDecoration(
-              color: selected ? _selected : _bg,
-              shape: BoxShape.circle,
-              border: Border.all(color: _border),
-              boxShadow:
-                  selected
-                      ? const <BoxShadow>[
-                        BoxShadow(color: _halo, spreadRadius: 2),
-                      ]
-                      : null,
+    return LiqPointerCursor(
+      enabled: onPressed != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: SizedBox(
+          width: _tapTargetSize,
+          height: _tapTargetSize,
+          child: Center(
+            child: Container(
+              width: _visibleSize,
+              height: _visibleSize,
+              decoration: BoxDecoration(
+                color: selected ? _selected : _bg,
+                shape: BoxShape.circle,
+                border: Border.all(color: _border),
+                boxShadow:
+                    selected
+                        ? const <BoxShadow>[
+                          BoxShadow(color: _halo, spreadRadius: 2),
+                        ]
+                        : null,
+              ),
             ),
           ),
         ),

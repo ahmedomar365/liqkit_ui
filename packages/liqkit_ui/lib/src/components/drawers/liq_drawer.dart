@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// The screen edge a [LiqDrawer] is anchored to.
 enum LiqDrawerSide {
@@ -76,6 +78,7 @@ final class LiqDrawer extends StatelessWidget {
         width.isFinite && screenWidth.isFinite
             ? (width > screenWidth ? screenWidth : width)
             : width;
+    final labelColor = context.liqLabelColor;
 
     return SizedBox(
       width: clampedWidth,
@@ -83,7 +86,19 @@ final class LiqDrawer extends StatelessWidget {
         elevation: LiqGlassElevation.modal,
         borderRadius: BorderRadius.zero,
         padding: padding,
-        child: child,
+        child: IconTheme.merge(
+          data: IconThemeData(color: labelColor),
+          child: DefaultTextStyle.merge(
+            style: TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+              fontSize: 15,
+              height: 20 / 15,
+              color: labelColor,
+            ),
+            child: child,
+          ),
+        ),
       ),
     );
   }
@@ -295,13 +310,16 @@ class _LiqDrawerBodyState extends State<_LiqDrawerBody>
           return Stack(
             children: <Widget>[
               Positioned.fill(
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: widget.onScrimTap,
-                  child: ColoredBox(
-                    color: widget.scrimColor.withValues(
-                      alpha:
-                          (widget.scrimColor.a) * curved.value.clamp(0.0, 1.0),
+                child: LiqPointerCursor(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: widget.onScrimTap,
+                    child: ColoredBox(
+                      color: widget.scrimColor.withValues(
+                        alpha:
+                            (widget.scrimColor.a) *
+                            curved.value.clamp(0.0, 1.0),
+                      ),
                     ),
                   ),
                 ),

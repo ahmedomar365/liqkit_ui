@@ -8,9 +8,9 @@ Widget contextMenuBelowLeadingBuilder(BuildContext context) {
   // {@highlight}
   return SnippetFrame(
     maxWidth: 360,
-    height: 320,
+    height: 340,
     child: LiqContextMenu(
-      preview: const LiqContextMenuPreview(),
+      preview: const LiqContextMenuPreview(size: Size(168, 132)),
       menu: LiqMenu(
         children: <Widget>[
           LiqMenuItem(label: 'Share', onPressed: () {}),

@@ -1,9 +1,10 @@
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 numeric input — text field with optional ± stepper buttons.
@@ -242,47 +243,25 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Stack(
-                alignment: AlignmentDirectional.centerEnd,
-                children: <Widget>[
-                  ValueListenableBuilder<TextEditingValue>(
-                    valueListenable: _controller,
-                    builder: (context, value, _) {
-                      if (value.text.isNotEmpty || widget.placeholder == null) {
-                        return const SizedBox.shrink();
-                      }
-                      return Text(
-                        widget.placeholder!,
-                        style: LiqNumberField.textStyle.copyWith(
-                          color: palette.placeholder,
-                        ),
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        textDirection: TextDirection.ltr,
-                      );
-                    },
-                  ),
-                  EditableText(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    style: LiqNumberField.textStyle.copyWith(
-                      color: palette.text,
-                    ),
-                    cursorColor: palette.activeBorder,
-                    backgroundCursorColor: palette.placeholder,
-                    selectionColor: palette.activeBorder.withValues(
-                      alpha: 0.25,
-                    ),
-                    keyboardType: TextInputType.numberWithOptions(
-                      decimal: true,
-                      signed: widget.min < 0,
-                    ),
-                    inputFormatters: inputFormatters,
-                    textAlign: TextAlign.end,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                  ),
-                ],
+              child: CupertinoTextField.borderless(
+                controller: _controller,
+                focusNode: _focusNode,
+                padding: EdgeInsets.zero,
+                placeholder: widget.placeholder,
+                placeholderStyle: LiqNumberField.textStyle.copyWith(
+                  color: palette.placeholder,
+                ),
+                style: LiqNumberField.textStyle.copyWith(color: palette.text),
+                cursorColor: palette.activeBorder,
+                cursorRadius: const Radius.circular(1),
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: true,
+                  signed: widget.min < 0,
+                ),
+                inputFormatters: inputFormatters,
+                textAlign: TextAlign.end,
+                enableSuggestions: false,
+                autocorrect: false,
               ),
             ),
             if (widget.suffix != null)
@@ -393,10 +372,13 @@ class _StepperButton extends StatelessWidget {
         textDirection: TextDirection.ltr,
       ),
     );
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: Opacity(opacity: enabled ? 1.0 : 0.4, child: button),
+    return LiqPointerCursor(
+      enabled: enabled,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Opacity(opacity: enabled ? 1.0 : 0.4, child: button),
+      ),
     );
   }
 }

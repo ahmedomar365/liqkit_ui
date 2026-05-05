@@ -37,8 +37,9 @@ const Widget _previewContent = SizedBox(
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget hoverCardDefaultBuilder(BuildContext context) {
   return const SnippetFrame(
-    height: 260,
-    child: Center(
+    height: 420,
+    child: Align(
+      alignment: Alignment.bottomCenter,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -52,7 +53,7 @@ Widget hoverCardDefaultBuilder(BuildContext context) {
             ),
           ),
           // {@endhighlight}
-          SizedBox(height: 12),
+          SizedBox(height: 28),
           SnippetLabel(
             'Hover the link with a mouse to reveal the card.',
             fontSize: 13,

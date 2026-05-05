@@ -8,33 +8,24 @@ Widget dialogWithActionsBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 360,
     height: 220,
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: ColoredBox(
-        color: const Color(0xFFEFEFF4),
-        child: Stack(
-          children: <Widget>[
-            const Positioned.fill(child: ColoredBox(color: Color(0x66000000))),
-            Center(
-              // {@highlight}
-              child: LiqDialog(
-                title: 'Discard changes?',
-                message: 'Your edits will be lost. This cannot be undone.',
-                actions: <LiqDialogAction>[
-                  LiqDialogAction(label: 'Cancel', onPressed: () {}),
-                  LiqDialogAction(
-                    label: 'Discard',
-                    onPressed: () {},
-                    destructive: true,
-                    isDefault: true,
-                  ),
-                ],
-              ),
-              // {@endhighlight}
-            ),
-          ],
-        ),
+    surface: SnippetFrameSurface.liquidThemed,
+    surfaceScrimOpacity: 0.4,
+    child: Center(
+      // {@highlight}
+      child: LiqDialog(
+        title: 'Discard changes?',
+        message: 'Your edits will be lost. This cannot be undone.',
+        actions: <LiqDialogAction>[
+          LiqDialogAction(label: 'Cancel', onPressed: () {}),
+          LiqDialogAction(
+            label: 'Discard',
+            onPressed: () {},
+            destructive: true,
+            isDefault: true,
+          ),
+        ],
       ),
+      // {@endhighlight}
     ),
   );
 }

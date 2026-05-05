@@ -21,6 +21,9 @@ enum SnippetFrameSurface {
 
   /// Colorful content backdrop for dark Liquid Glass demos.
   liquidDark,
+
+  /// Colorful content backdrop that follows the active theme brightness.
+  liquidThemed,
 }
 
 /// Centers snippet content while allowing it to shrink on narrow docs
@@ -34,6 +37,7 @@ class SnippetFrame extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.surface = SnippetFrameSurface.none,
     this.surfacePadding = const EdgeInsets.all(16),
+    this.surfaceScrimOpacity = 0,
     super.key,
   });
 
@@ -51,6 +55,12 @@ class SnippetFrame extends StatelessWidget {
 
   /// Padding inside [surface] when it is not [SnippetFrameSurface.none].
   final EdgeInsetsGeometry surfacePadding;
+
+  /// Optional dimming layer above the demo backdrop and below [child].
+  ///
+  /// Use for modal examples such as dialogs and drawers so all overlay
+  /// previews share the same scene construction.
+  final double surfaceScrimOpacity;
 
   /// Demo content.
   final Widget child;
@@ -71,10 +81,16 @@ class SnippetFrame extends StatelessWidget {
         SnippetFrameSurface.dark => const Color(0xFF1C1C1E),
         SnippetFrameSurface.liquidLight => const Color(0xFFEFEFF4),
         SnippetFrameSurface.liquidDark => const Color(0xFF111114),
+        SnippetFrameSurface.liquidThemed =>
+          brightness == Brightness.dark
+              ? const Color(0xFF111114)
+              : const Color(0xFFEFEFF4),
       };
       final isLightSurface =
           surface == SnippetFrameSurface.light ||
           surface == SnippetFrameSurface.liquidLight ||
+          (surface == SnippetFrameSurface.liquidThemed &&
+              brightness == Brightness.light) ||
           (surface == SnippetFrameSurface.themed &&
               brightness == Brightness.light);
       final themedChild = switch (surface) {
@@ -84,11 +100,42 @@ class SnippetFrame extends StatelessWidget {
           data: LiqThemeData.dark,
           child: child,
         ),
+        SnippetFrameSurface.liquidThemed =>
+          brightness == Brightness.dark
+              ? LiqTheme(data: LiqThemeData.dark, child: child)
+              : LiqTheme(data: LiqThemeData.light, child: child),
         _ => child,
       };
       final content = Padding(
         padding: surfacePadding,
         child: Center(child: themedChild),
+      );
+      final scene = Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          switch (surface) {
+            SnippetFrameSurface.liquidLight => const _LiquidBackdrop(
+              brightness: Brightness.light,
+              child: SizedBox.expand(),
+            ),
+            SnippetFrameSurface.liquidDark => const _LiquidBackdrop(
+              brightness: Brightness.dark,
+              child: SizedBox.expand(),
+            ),
+            SnippetFrameSurface.liquidThemed => _LiquidBackdrop(
+              brightness: brightness,
+              child: const SizedBox.expand(),
+            ),
+            _ => const SizedBox.expand(),
+          },
+          if (surfaceScrimOpacity > 0)
+            ColoredBox(
+              color: const Color(
+                0xFF000000,
+              ).withValues(alpha: surfaceScrimOpacity.clamp(0, 1)),
+            ),
+          content,
+        ],
       );
       framedChild = DecoratedBox(
         decoration: BoxDecoration(
@@ -103,17 +150,13 @@ class SnippetFrame extends StatelessWidget {
             ),
           ),
         ),
-        child: switch (surface) {
-          SnippetFrameSurface.liquidLight => _LiquidBackdrop(
-            brightness: Brightness.light,
-            child: content,
-          ),
-          SnippetFrameSurface.liquidDark => _LiquidBackdrop(
-            brightness: Brightness.dark,
-            child: content,
-          ),
-          _ => content,
-        },
+        child:
+            surfaceScrimOpacity > 0 ||
+                    surface == SnippetFrameSurface.liquidLight ||
+                    surface == SnippetFrameSurface.liquidDark ||
+                    surface == SnippetFrameSurface.liquidThemed
+                ? scene
+                : content,
       );
     }
 
@@ -179,64 +222,75 @@ class _LiquidBackdrop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = brightness == Brightness.dark;
+    final topBand = isDark ? const Color(0xFF2F5F9E) : const Color(0xFFB9D9FF);
+    final topBandEnd =
+        isDark ? const Color(0xFF17345C) : const Color(0xFFDCEBFF);
+    final lowerBase =
+        isDark ? const Color(0xFF020203) : const Color(0xFFF7F8FC);
+    final lowerLift =
+        isDark ? const Color(0xFF111114) : const Color(0xFFFFFFFF);
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(18)),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF111114) : const Color(0xFFEFEFF4),
+          DecoratedBox(decoration: BoxDecoration(color: lowerBase)),
+          Positioned(
+            left: 0,
+            top: 0,
+            right: 0,
+            height: 132,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[topBand, topBandEnd],
+                ),
+              ),
             ),
           ),
           Positioned(
-            left: -28,
-            top: -22,
-            child: _BackdropPatch(
-              color: isDark ? const Color(0xFF1A84FF) : const Color(0xFF2F8DFF),
-              size: 150,
+            left: 0,
+            right: 0,
+            top: 132,
+            bottom: 0,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[lowerBase, lowerLift],
+                  stops: const <double>[0, 1],
+                ),
+              ),
             ),
           ),
           Positioned(
-            right: -16,
-            bottom: -24,
-            child: _BackdropPatch(
-              color: isDark ? const Color(0xFFFF4F79) : const Color(0xFFFF6B8A),
-              size: 160,
-            ),
-          ),
-          Positioned(
-            left: 150,
-            bottom: 18,
-            child: _BackdropPatch(
-              color: isDark ? const Color(0xFF32D74B) : const Color(0xFF58D68D),
-              size: 112,
+            left: 0,
+            right: 0,
+            top: 126,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color:
+                        isDark
+                            ? const Color(0x99000000)
+                            : const Color(0x26000000),
+                    blurRadius: 28,
+                  ),
+                ],
+              ),
+              child: const SizedBox(height: 1),
             ),
           ),
           ColoredBox(
-            color: isDark ? const Color(0x33000000) : const Color(0x24FFFFFF),
+            color: isDark ? const Color(0x14000000) : const Color(0x20FFFFFF),
           ),
           child,
         ],
       ),
-    );
-  }
-}
-
-class _BackdropPatch extends StatelessWidget {
-  const _BackdropPatch({required this.color, required this.size});
-
-  final Color color;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.72),
-        borderRadius: BorderRadius.all(Radius.circular(size / 2)),
-      ),
-      child: SizedBox.square(dimension: size),
     );
   }
 }

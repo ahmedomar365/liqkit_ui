@@ -50,4 +50,47 @@ void main() {
     await tester.tap(find.byType(LiqSheetTopButton));
     expect(taps, 1);
   });
+
+  testWidgets('LiqSheetTopButton exposes click cursor when enabled', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(LiqSheetTopButton(onPressed: () {}, child: const Text('×'))),
+    );
+
+    final mouseRegion = tester.widget<MouseRegion>(
+      find.descendant(
+        of: find.byType(LiqSheetTopButton),
+        matching: find.byType(MouseRegion),
+      ),
+    );
+    expect(mouseRegion.cursor, SystemMouseCursors.click);
+  });
+
+  testWidgets('LiqSheetTopButton scales while pressed', (tester) async {
+    await tester.pumpWidget(
+      _wrap(LiqSheetTopButton(onPressed: () {}, child: const Text('×'))),
+    );
+
+    AnimatedScale scale() => tester.widget<AnimatedScale>(
+      find.descendant(
+        of: find.byType(LiqSheetTopButton),
+        matching: find.byType(AnimatedScale),
+      ),
+    );
+
+    expect(scale().scale, 1);
+
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.byType(LiqSheetTopButton)),
+    );
+    await tester.pump();
+
+    expect(scale().scale, 0.92);
+
+    await gesture.up();
+    await tester.pump();
+
+    expect(scale().scale, 1);
+  });
 }

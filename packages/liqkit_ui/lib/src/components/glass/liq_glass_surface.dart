@@ -57,6 +57,11 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     this.padding = EdgeInsets.zero,
     this.tint = LiqGlassTint.light,
     this.elevation = LiqGlassElevation.floating,
+    this.baseFill,
+    this.rimColor,
+    this.highlightStart,
+    this.blurSigma = defaultBlurSigma,
+    this.shadows,
     this.clipBehavior = Clip.antiAlias,
     super.key,
   });
@@ -78,6 +83,24 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Elevation preset. Drives the outer drop shadow.
   final LiqGlassElevation elevation;
 
+  /// Optional base fill override for components with an artifact-specific
+  /// material recipe.
+  final Color? baseFill;
+
+  /// Optional hairline rim override.
+  final Color? rimColor;
+
+  /// Optional top highlight override. Use a transparent color for components
+  /// where a generic glass sheen would overpower the sampled backdrop.
+  final Color? highlightStart;
+
+  /// Backdrop blur sigma.
+  final double blurSigma;
+
+  /// Optional shadow override for components with an artifact-specific
+  /// elevation recipe.
+  final List<BoxShadow>? shadows;
+
   /// Clip behavior for the inner [ClipRRect]. Defaults to
   /// [Clip.antiAlias] for crisp rounded corners.
   final Clip clipBehavior;
@@ -90,8 +113,11 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Dark tint base fill: 80% opaque dark gray.
   static const Color darkTintBase = Color(0xCC1C1C1E);
 
-  /// Opaque tint base fill: no transparency, no blur.
-  static const Color opaqueTintBase = Color(0xFFFAFAFA);
+  /// Opaque light fallback: no transparency, no blur.
+  static const Color opaqueLightTintBase = Color(0xFFFAFAFA);
+
+  /// Opaque dark fallback: no transparency, no blur.
+  static const Color opaqueDarkTintBase = Color(0xFF1C1C1E);
 
   /// Light-tint inner border (rim) hairline color: 8% black.
   static const Color lightRimColor = Color(0x14000000);
@@ -109,7 +135,7 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   static const Color highlightEnd = Color(0x00FFFFFF);
 
   /// Backdrop blur sigma. Matches `UIBlurEffect.systemMaterial`.
-  static const double blurSigma = 30;
+  static const double defaultBlurSigma = 30;
 
   /// Floating drop shadow.
   static const BoxShadow floatingShadow = BoxShadow(
@@ -126,6 +152,9 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   );
 
   List<BoxShadow> get _shadows {
+    final customShadows = shadows;
+    if (customShadows != null) return customShadows;
+
     switch (elevation) {
       case LiqGlassElevation.flat:
         return const <BoxShadow>[];
@@ -136,18 +165,24 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     }
   }
 
-  Color _baseFillFor(LiqGlassTint effectiveTint) {
+  Color _baseFillFor(LiqGlassTint effectiveTint, {required bool isDark}) {
+    final customBaseFill = baseFill;
+    if (customBaseFill != null) return customBaseFill;
+
     switch (effectiveTint) {
       case LiqGlassTint.light:
         return lightTintBase;
       case LiqGlassTint.dark:
         return darkTintBase;
       case LiqGlassTint.opaque:
-        return opaqueTintBase;
+        return isDark ? opaqueDarkTintBase : opaqueLightTintBase;
     }
   }
 
   Color _rimColorFor(LiqGlassTint effectiveTint) {
+    final customRimColor = rimColor;
+    if (customRimColor != null) return customRimColor;
+
     switch (effectiveTint) {
       case LiqGlassTint.light:
       case LiqGlassTint.opaque:
@@ -158,6 +193,9 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   }
 
   Color _highlightStartFor(LiqGlassTint effectiveTint) {
+    final customHighlightStart = highlightStart;
+    if (customHighlightStart != null) return customHighlightStart;
+
     switch (effectiveTint) {
       case LiqGlassTint.light:
       case LiqGlassTint.opaque:
@@ -169,8 +207,11 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.liqIsDark;
     final effectiveTint =
-        tint == LiqGlassTint.light && context.liqIsDark
+        context.liqUseOpaqueMaterials
+            ? LiqGlassTint.opaque
+            : tint == LiqGlassTint.light && isDark
             ? LiqGlassTint.dark
             : tint;
     final layers = <Widget>[];
@@ -188,7 +229,9 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
 
     layers
       ..add(
-        Positioned.fill(child: ColoredBox(color: _baseFillFor(effectiveTint))),
+        Positioned.fill(
+          child: ColoredBox(color: _baseFillFor(effectiveTint, isDark: isDark)),
+        ),
       )
       ..add(
         Positioned.fill(
@@ -248,6 +291,11 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty<LiqGlassTint>('tint', tint))
-      ..add(EnumProperty<LiqGlassElevation>('elevation', elevation));
+      ..add(EnumProperty<LiqGlassElevation>('elevation', elevation))
+      ..add(ColorProperty('baseFill', baseFill, defaultValue: null))
+      ..add(ColorProperty('rimColor', rimColor, defaultValue: null))
+      ..add(ColorProperty('highlightStart', highlightStart, defaultValue: null))
+      ..add(DoubleProperty('blurSigma', blurSigma))
+      ..add(IterableProperty<BoxShadow>('shadows', shadows));
   }
 }

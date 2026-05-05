@@ -8,10 +8,10 @@ Widget contextMenuBelowTrailingBuilder(BuildContext context) {
   // {@highlight}
   return SnippetFrame(
     maxWidth: 360,
-    height: 320,
+    height: 340,
     child: LiqContextMenu(
       arrangement: LiqContextMenuArrangement.belowTrailing,
-      preview: const LiqContextMenuPreview(),
+      preview: const LiqContextMenuPreview(size: Size(168, 132)),
       menu: LiqMenu(
         children: <Widget>[
           LiqMenuItem(label: 'Share', onPressed: () {}),

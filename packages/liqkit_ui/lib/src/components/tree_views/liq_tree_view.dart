@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -313,21 +314,23 @@ class _TreeRow extends StatelessWidget {
       button: true,
       label: node.label,
       selected: isSelected,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          constraints: const BoxConstraints(
-            minHeight: LiqTreeView.rowMinHeight,
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: Container(
+            constraints: const BoxConstraints(
+              minHeight: LiqTreeView.rowMinHeight,
+            ),
+            padding: EdgeInsets.fromLTRB(
+              left,
+              LiqTreeView.rowVerticalPadding,
+              LiqTreeView.rowRightPadding,
+              LiqTreeView.rowVerticalPadding,
+            ),
+            color: isSelected ? palette.selectedBackground : null,
+            child: Row(children: children),
           ),
-          padding: EdgeInsets.fromLTRB(
-            left,
-            LiqTreeView.rowVerticalPadding,
-            LiqTreeView.rowRightPadding,
-            LiqTreeView.rowVerticalPadding,
-          ),
-          color: isSelected ? palette.selectedBackground : null,
-          child: Row(children: children),
         ),
       ),
     );

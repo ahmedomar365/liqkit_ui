@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// One option in a [LiqCombobox].
@@ -333,49 +335,30 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                 children: <Widget>[
                   const SizedBox(width: LiqCombobox.horizontalPadding),
                   Expanded(
-                    child: Stack(
-                      alignment: AlignmentDirectional.centerStart,
-                      children: <Widget>[
-                        ValueListenableBuilder<TextEditingValue>(
-                          valueListenable: _controller,
-                          builder: (context, value, _) {
-                            if (value.text.isNotEmpty ||
-                                widget.placeholder == null) {
-                              return const SizedBox.shrink();
-                            }
-                            return Text(
-                              widget.placeholder!,
-                              style: LiqCombobox.textStyle.copyWith(
-                                color: palette.placeholder,
-                              ),
-                              maxLines: 1,
-                              textDirection: TextDirection.ltr,
-                            );
-                          },
-                        ),
-                        EditableText(
-                          controller: _controller,
-                          focusNode: _focusNode,
-                          readOnly: disabled,
-                          style: LiqCombobox.textStyle.copyWith(
-                            color: palette.text,
-                          ),
-                          cursorColor: palette.activeBorder,
-                          backgroundCursorColor: palette.placeholder,
-                          selectionColor: palette.activeBorder.withValues(
-                            alpha: 0.25,
-                          ),
-                          onChanged: (_) {
-                            if (_suppressEmit) return;
-                            if (!_portalController.isShowing) {
-                              _showDropdown();
-                            }
-                            setState(() {});
-                          },
-                          enableSuggestions: false,
-                          autocorrect: false,
-                        ),
-                      ],
+                    child: CupertinoTextField.borderless(
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      readOnly: disabled,
+                      enabled: !disabled,
+                      padding: EdgeInsets.zero,
+                      placeholder: widget.placeholder,
+                      placeholderStyle: LiqCombobox.textStyle.copyWith(
+                        color: palette.placeholder,
+                      ),
+                      style: LiqCombobox.textStyle.copyWith(
+                        color: palette.text,
+                      ),
+                      cursorColor: palette.activeBorder,
+                      cursorRadius: const Radius.circular(1),
+                      onChanged: (_) {
+                        if (_suppressEmit) return;
+                        if (!_portalController.isShowing) {
+                          _showDropdown();
+                        }
+                        setState(() {});
+                      },
+                      enableSuggestions: false,
+                      autocorrect: false,
                     ),
                   ),
                   Padding(
@@ -418,12 +401,27 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
         showWhenUnlinked: false,
         targetAnchor: Alignment.bottomLeft,
         offset: const Offset(0, LiqCombobox.panelOffset),
-        child: _DropdownPanel<T>(
-          width: _fieldWidth(),
-          height: panelHeight,
-          options: filtered,
-          selectedValue: widget.value,
-          onSelect: _selectOption,
+        child: TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: 0, end: 1),
+          duration: context.liqMotionDuration(LiqMotion.fast),
+          curve: LiqMotion.standard,
+          builder: (context, value, child) {
+            return Opacity(
+              opacity: value,
+              child: Transform.scale(
+                scale: 0.98 + (value * 0.02),
+                alignment: Alignment.topCenter,
+                child: child,
+              ),
+            );
+          },
+          child: _DropdownPanel<T>(
+            width: _fieldWidth(),
+            height: panelHeight,
+            options: filtered,
+            selectedValue: widget.value,
+            onSelect: _selectOption,
+          ),
         ),
       ),
     );
@@ -455,17 +453,12 @@ class _DropdownPanel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = _ComboboxPalette.resolve(context);
     return SizedBox(
       width: width,
       height: height,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: palette.background,
-          borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
-          border: Border.all(color: palette.border),
-          boxShadow: const <BoxShadow>[LiqCombobox.panelShadow],
-        ),
+      child: LiqGlassSurface(
+        borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
+        tint: context.liqIsDark ? LiqGlassTint.dark : LiqGlassTint.light,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
           child:

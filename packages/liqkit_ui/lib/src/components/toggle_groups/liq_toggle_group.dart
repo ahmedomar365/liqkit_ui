@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -246,11 +247,15 @@ class _Segment<T> extends StatelessWidget {
     );
 
     if (onTap != null) {
-      segment = GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: segment,
+      segment = LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: segment,
+        ),
       );
+    } else {
+      segment = LiqPointerCursor(enabled: false, child: segment);
     }
 
     return Semantics(

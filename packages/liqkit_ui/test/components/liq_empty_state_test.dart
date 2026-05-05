@@ -56,6 +56,22 @@ void main() {
     expect(taps, 1);
   });
 
+  testWidgets('LiqEmptyStateCta exposes a click cursor when tappable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        LiqEmptyState(
+          title: 'X',
+          cta: LiqEmptyStateCta(label: 'Compose', onPressed: () {}),
+        ),
+      ),
+    );
+
+    final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+    expect(mouseRegion.cursor, SystemMouseCursors.click);
+  });
+
   testWidgets('LiqEmptyState resolves text and CTA colors from dark theme', (
     tester,
   ) async {

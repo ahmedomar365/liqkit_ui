@@ -175,5 +175,35 @@ void main() {
       final plus = tester.widget<Text>(find.text('+'));
       expect(plus.style?.color, const Color(0x99EBEBF5));
     });
+
+    testWidgets('reduced motion disables press transition durations', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: LiqTheme(
+            data: LiqThemeData.light,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Center(child: LiqStepper(value: 5, onChanged: (int _) {})),
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester
+            .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+            .map((container) => container.duration),
+        everyElement(Duration.zero),
+      );
+      expect(
+        tester
+            .widgetList<AnimatedScale>(find.byType(AnimatedScale))
+            .map((scale) => scale.duration),
+        everyElement(Duration.zero),
+      );
+    });
   });
 }

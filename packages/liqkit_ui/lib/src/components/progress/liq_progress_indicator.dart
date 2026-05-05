@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -93,6 +95,7 @@ final class LiqSpinner extends StatefulWidget {
   static const Color _strokeColor = Color(0x993C3C43);
   static const Color _strokeFaint = Color(0x333C3C43);
   static const Duration _period = Duration(milliseconds: 900);
+  static const int _tickCount = 12;
 
   /// Diameter in logical px.
   double get diameter => size == LiqSpinnerSize.regular ? 30.0 : 22.0;
@@ -109,7 +112,19 @@ class _LiqSpinnerState extends State<LiqSpinner>
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: LiqSpinner._period,
-  )..repeat();
+  );
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (context.liqDisableAnimations) {
+      _controller
+        ..stop()
+        ..value = 0;
+    } else if (!_controller.isAnimating) {
+      _controller.repeat();
+    }
+  }
 
   @override
   void dispose() {
@@ -120,17 +135,82 @@ class _LiqSpinnerState extends State<LiqSpinner>
   @override
   Widget build(BuildContext context) {
     final palette = _ProgressPalette.resolve(context);
-    return Semantics(
-      label: 'loading',
+    final diameter = widget.diameter;
+    final spinner = RepaintBoundary(
       child: SizedBox.square(
-        dimension: widget.diameter,
-        child: CupertinoActivityIndicator(
-          animating: _controller.isAnimating,
-          radius: widget.diameter / 2,
-          color: palette.spinnerStroke,
+        dimension: diameter,
+        child: CustomPaint(
+          painter: _LiqSpinnerPainter(
+            color: palette.spinnerStroke,
+            tickCount: LiqSpinner._tickCount,
+            strokeWidth: widget.borderWidth,
+          ),
         ),
       ),
     );
+
+    return UnconstrainedBox(
+      child: SizedBox.square(
+        dimension: diameter,
+        child: Semantics(
+          label: 'loading',
+          child:
+              context.liqDisableAnimations
+                  ? spinner
+                  : RotationTransition(turns: _controller, child: spinner),
+        ),
+      ),
+    );
+  }
+}
+
+final class _LiqSpinnerPainter extends CustomPainter {
+  const _LiqSpinnerPainter({
+    required this.color,
+    required this.tickCount,
+    required this.strokeWidth,
+  });
+
+  final Color color;
+  final int tickCount;
+  final double strokeWidth;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final shortestSide = size.shortestSide;
+    if (shortestSide <= 0 || tickCount <= 0) return;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final outerRadius = (shortestSide / 2) - (strokeWidth / 2);
+    final innerRadius = outerRadius * 0.58;
+    final angleStep = (math.pi * 2) / tickCount;
+
+    canvas
+      ..save()
+      ..translate(center.dx, center.dy);
+
+    for (var index = 0; index < tickCount; index += 1) {
+      final opacity = 0.18 + (index / (tickCount - 1)) * 0.72;
+      final paint =
+          Paint()
+            ..color = color.withValues(alpha: opacity.clamp(0.0, 1.0))
+            ..strokeWidth = strokeWidth
+            ..strokeCap = StrokeCap.round
+            ..style = PaintingStyle.stroke;
+
+      canvas
+        ..drawLine(Offset(0, -innerRadius), Offset(0, -outerRadius), paint)
+        ..rotate(angleStep);
+    }
+
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant _LiqSpinnerPainter oldDelegate) {
+    return color != oldDelegate.color ||
+        tickCount != oldDelegate.tickCount ||
+        strokeWidth != oldDelegate.strokeWidth;
   }
 }
 

@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -87,16 +88,38 @@ final class LiqCommandPalette extends StatefulWidget {
   static const double maxWidth = 560;
 
   /// Outer panel corner radius.
-  static const double radius = 14;
+  static const double radius = 34;
 
   /// Outer panel background fill (~95% opaque white glass).
-  static const Color backgroundColor = Color(0xF2FAFAFA);
+  static const Color backgroundColor = Color(0xD6F5F5F5);
+
+  /// Dark-mode panel background fill.
+  static const Color darkBackgroundColor = Color(0xDC18181A);
+
+  /// Light-mode glass rim.
+  static const Color rimColor = Color(0x1A000000);
+
+  /// Dark-mode glass rim.
+  static const Color darkRimColor = Color(0x70E4E9EF);
+
+  /// Light-mode top glass highlight.
+  static const Color highlightColor = Color(0x24FFFFFF);
+
+  /// Dark-mode top glass highlight.
+  static const Color darkHighlightColor = Color(0x06FFFFFF);
 
   /// Outer panel drop shadow.
   static const BoxShadow shadow = BoxShadow(
     color: Color(0x33000000),
     offset: Offset(0, 12),
     blurRadius: 32,
+  );
+
+  /// Dark-mode panel drop shadow.
+  static const BoxShadow darkShadow = BoxShadow(
+    color: Color(0x6B000000),
+    offset: Offset(0, 18),
+    blurRadius: 34,
   );
 
   /// Search field height.
@@ -358,7 +381,28 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
         maxHeight: widget.maxHeight,
       ),
       child: LiqGlassSurface(
+        tint: context.liqIsDark ? LiqGlassTint.dark : LiqGlassTint.light,
         elevation: LiqGlassElevation.modal,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(LiqCommandPalette.radius),
+        ),
+        baseFill:
+            context.liqIsDark
+                ? LiqCommandPalette.darkBackgroundColor
+                : LiqCommandPalette.backgroundColor,
+        rimColor:
+            context.liqIsDark
+                ? LiqCommandPalette.darkRimColor
+                : LiqCommandPalette.rimColor,
+        highlightStart:
+            context.liqIsDark
+                ? LiqCommandPalette.darkHighlightColor
+                : LiqCommandPalette.highlightColor,
+        blurSigma: 20,
+        shadows:
+            context.liqIsDark
+                ? const <BoxShadow>[LiqCommandPalette.darkShadow]
+                : const <BoxShadow>[LiqCommandPalette.shadow],
         child: Focus(
           focusNode: _keyFocusNode,
           onKeyEvent: _onKey,
@@ -447,50 +491,37 @@ class _SearchField extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Stack(
-              alignment: AlignmentDirectional.centerStart,
-              children: <Widget>[
-                ValueListenableBuilder<TextEditingValue>(
-                  valueListenable: controller,
-                  builder: (context, value, _) {
-                    if (value.text.isNotEmpty) return const SizedBox.shrink();
-                    return Text(
-                      placeholder,
-                      style: LiqCommandPalette.searchTextStyle.copyWith(
-                        color: palette.tertiary,
-                      ),
-                      maxLines: 1,
-                      textDirection: TextDirection.ltr,
-                    );
-                  },
-                ),
-                EditableText(
-                  controller: controller,
-                  focusNode: focusNode,
-                  style: LiqCommandPalette.searchTextStyle.copyWith(
-                    color: palette.label,
-                  ),
-                  cursorColor: palette.label,
-                  backgroundCursorColor: palette.tertiary,
-                  selectionColor: const Color(0x3D007AFF),
-                  enableSuggestions: false,
-                  autocorrect: false,
-                ),
-              ],
+            child: CupertinoTextField.borderless(
+              controller: controller,
+              focusNode: focusNode,
+              padding: EdgeInsets.zero,
+              placeholder: placeholder,
+              placeholderStyle: LiqCommandPalette.searchTextStyle.copyWith(
+                color: palette.tertiary,
+              ),
+              style: LiqCommandPalette.searchTextStyle.copyWith(
+                color: palette.label,
+              ),
+              cursorColor: palette.label,
+              cursorRadius: const Radius.circular(1),
+              enableSuggestions: false,
+              autocorrect: false,
             ),
           ),
           if (showClear) ...<Widget>[
             const SizedBox(width: 8),
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: onClear,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Icon(
-                  Icons.close,
-                  size: LiqCommandPalette.clearIconSize,
-                  color: palette.tertiary,
-                  textDirection: TextDirection.ltr,
+            LiqPointerCursor(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onClear,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Icon(
+                    Icons.close,
+                    size: LiqCommandPalette.clearIconSize,
+                    color: palette.tertiary,
+                    textDirection: TextDirection.ltr,
+                  ),
                 ),
               ),
             ),
@@ -645,42 +676,44 @@ class _CommandRow extends StatelessWidget {
       button: true,
       enabled: true,
       label: command.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          height: LiqCommandPalette.rowHeight,
-          color: active ? palette.activeRowBackground : null,
-          padding: const EdgeInsets.symmetric(
-            horizontal: LiqCommandPalette.rowHorizontalPadding,
-          ),
-          child: Row(
-            children: <Widget>[
-              if (command.icon != null) ...<Widget>[
-                Icon(
-                  command.icon,
-                  size: LiqCommandPalette.rowIconSize,
-                  color: palette.label,
-                  textDirection: TextDirection.ltr,
-                ),
-                const SizedBox(width: LiqCommandPalette.iconLabelGap),
-              ],
-              Expanded(
-                child: Text(
-                  command.label,
-                  style: LiqCommandPalette.labelStyle.copyWith(
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: Container(
+            height: LiqCommandPalette.rowHeight,
+            color: active ? palette.activeRowBackground : null,
+            padding: const EdgeInsets.symmetric(
+              horizontal: LiqCommandPalette.rowHorizontalPadding,
+            ),
+            child: Row(
+              children: <Widget>[
+                if (command.icon != null) ...<Widget>[
+                  Icon(
+                    command.icon,
+                    size: LiqCommandPalette.rowIconSize,
                     color: palette.label,
+                    textDirection: TextDirection.ltr,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textDirection: TextDirection.ltr,
+                  const SizedBox(width: LiqCommandPalette.iconLabelGap),
+                ],
+                Expanded(
+                  child: Text(
+                    command.label,
+                    style: LiqCommandPalette.labelStyle.copyWith(
+                      color: palette.label,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textDirection: TextDirection.ltr,
+                  ),
                 ),
-              ),
-              if (command.shortcut != null) ...<Widget>[
-                const SizedBox(width: 8),
-                _ShortcutPill(text: command.shortcut!, palette: palette),
+                if (command.shortcut != null) ...<Widget>[
+                  const SizedBox(width: 8),
+                  _ShortcutPill(text: command.shortcut!, palette: palette),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

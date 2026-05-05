@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/components/shared/liq_scrubbable_index_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -46,7 +47,7 @@ final class LiqTabItem with Diagnosticable {
 /// `LiqSegmentedControl`, which selects among values inside a setting.
 /// The [variant] picks between an underline indicator and a sliding
 /// glass pill.
-final class LiqTabs extends StatelessWidget with Diagnosticable {
+final class LiqTabs extends StatefulWidget with Diagnosticable {
   /// Creates a tab strip.
   const LiqTabs({
     required this.items,
@@ -96,12 +97,55 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
   static const Curve animationCurve = LiqMotion.standard;
 
   @override
+  State<LiqTabs> createState() => _LiqTabsState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty<LiqTabsVariant>('variant', variant))
+      ..add(IntProperty('selectedIndex', selectedIndex))
+      ..add(IntProperty('count', items.length));
+  }
+}
+
+final class _LiqTabsState extends State<LiqTabs> {
+  int? _previewIndex;
+
+  @override
+  void didUpdateWidget(covariant LiqTabs oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onChanged == null ||
+        widget.items.length != oldWidget.items.length ||
+        (_previewIndex != null && _previewIndex! >= widget.items.length)) {
+      _previewIndex = null;
+    }
+  }
+
+  int get _activeIndex {
+    final count = widget.items.length;
+    if (count == 0) return 0;
+    final selected = _previewIndex ?? widget.selectedIndex;
+    return selected.clamp(0, count - 1);
+  }
+
+  void _preview(int index) {
+    if (_previewIndex == index) return;
+    setState(() => _previewIndex = index);
+  }
+
+  void _commit(int index) {
+    setState(() => _previewIndex = null);
+    widget.onChanged?.call(index);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final palette = _TabsPalette.resolve(context);
-    final disabled = onChanged == null;
+    final disabled = widget.onChanged == null;
     return Opacity(
       opacity: disabled ? 0.4 : 1,
-      child: switch (variant) {
+      child: switch (widget.variant) {
         LiqTabsVariant.underline => _buildUnderline(palette),
         LiqTabsVariant.pill => _buildPill(palette),
       },
@@ -109,71 +153,78 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
   }
 
   Widget _buildUnderline(_TabsPalette palette) {
-    final count = items.length;
+    final count = widget.items.length;
+    final activeIndex = _activeIndex;
     return SizedBox(
-      height: headerHeight,
-      child: Stack(
-        children: <Widget>[
-          // Hairline divider full-width at the bottom.
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: SizedBox(
-              height: 0.33,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: palette.hairline),
-              ),
-            ),
-          ),
-          // Tab cells.
-          Row(
-            children: <Widget>[
-              for (var i = 0; i < count; i++)
-                Expanded(
-                  child: _TabCell(
-                    item: items[i],
-                    selected: i == selectedIndex,
-                    enabled: !(onChanged == null),
-                    activeColor: palette.active,
-                    inactiveColor: palette.inactive,
-                    onTap: onChanged == null ? null : () => onChanged!(i),
-                    selectedIndex: selectedIndex,
-                    indexInGroup: i,
-                  ),
-                ),
-            ],
-          ),
-          // Animated underline.
-          if (count > 0)
+      height: LiqTabs.headerHeight,
+      child: LiqScrubbableIndexSurface(
+        count: count,
+        enabled: widget.onChanged != null,
+        onPreview: _preview,
+        onCommit: _commit,
+        child: Stack(
+          children: <Widget>[
+            // Hairline divider full-width at the bottom.
             Positioned(
               left: 0,
               right: 0,
               bottom: 0,
-              child: AnimatedAlign(
-                alignment: Alignment(_alignmentX(selectedIndex, count), 0),
-                duration: animationDuration,
-                curve: animationCurve,
-                child: FractionallySizedBox(
-                  widthFactor: 1 / count,
-                  child: SizedBox(
-                    height: 2,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(color: palette.active),
+              child: SizedBox(
+                height: 0.33,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: palette.hairline),
+                ),
+              ),
+            ),
+            // Tab cells.
+            Row(
+              children: <Widget>[
+                for (var i = 0; i < count; i++)
+                  Expanded(
+                    child: _TabCell(
+                      item: widget.items[i],
+                      selected: i == activeIndex,
+                      enabled: widget.onChanged != null,
+                      activeColor: palette.active,
+                      inactiveColor: palette.inactive,
+                      selectedIndex: activeIndex,
+                      indexInGroup: i,
+                    ),
+                  ),
+              ],
+            ),
+            // Animated underline.
+            if (count > 0)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AnimatedAlign(
+                  alignment: Alignment(_alignmentX(activeIndex, count), 0),
+                  duration: LiqTabs.animationDuration,
+                  curve: LiqTabs.animationCurve,
+                  child: FractionallySizedBox(
+                    widthFactor: 1 / count,
+                    child: SizedBox(
+                      height: 2,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(color: palette.active),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildPill(_TabsPalette palette) {
-    final count = items.length;
+    final count = widget.items.length;
+    final activeIndex = _activeIndex;
     return SizedBox(
-      height: headerHeight,
+      height: LiqTabs.headerHeight,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: palette.pillTrack,
@@ -181,41 +232,46 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
         ),
         child: Padding(
           padding: const EdgeInsets.all(4),
-          child: Stack(
-            children: <Widget>[
-              // Animated active pill background.
-              if (count > 0)
-                Positioned.fill(
-                  child: AnimatedAlign(
-                    alignment: Alignment(_alignmentX(selectedIndex, count), 0),
-                    duration: animationDuration,
-                    curve: animationCurve,
-                    child: FractionallySizedBox(
-                      widthFactor: 1 / count,
-                      heightFactor: 1,
-                      child: _PillHighlight(color: palette.pillHighlight),
-                    ),
-                  ),
-                ),
-              // Tab cells.
-              Row(
-                children: <Widget>[
-                  for (var i = 0; i < count; i++)
-                    Expanded(
-                      child: _TabCell(
-                        item: items[i],
-                        selected: i == selectedIndex,
-                        enabled: !(onChanged == null),
-                        activeColor: palette.pillActiveLabel,
-                        inactiveColor: palette.inactive,
-                        onTap: onChanged == null ? null : () => onChanged!(i),
-                        selectedIndex: selectedIndex,
-                        indexInGroup: i,
+          child: LiqScrubbableIndexSurface(
+            count: count,
+            enabled: widget.onChanged != null,
+            onPreview: _preview,
+            onCommit: _commit,
+            child: Stack(
+              children: <Widget>[
+                // Animated active pill background.
+                if (count > 0)
+                  Positioned.fill(
+                    child: AnimatedAlign(
+                      alignment: Alignment(_alignmentX(activeIndex, count), 0),
+                      duration: LiqTabs.animationDuration,
+                      curve: LiqTabs.animationCurve,
+                      child: FractionallySizedBox(
+                        widthFactor: 1 / count,
+                        heightFactor: 1,
+                        child: _PillHighlight(color: palette.pillHighlight),
                       ),
                     ),
-                ],
-              ),
-            ],
+                  ),
+                // Tab cells.
+                Row(
+                  children: <Widget>[
+                    for (var i = 0; i < count; i++)
+                      Expanded(
+                        child: _TabCell(
+                          item: widget.items[i],
+                          selected: i == activeIndex,
+                          enabled: widget.onChanged != null,
+                          activeColor: palette.pillActiveLabel,
+                          inactiveColor: palette.inactive,
+                          selectedIndex: activeIndex,
+                          indexInGroup: i,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -226,15 +282,6 @@ final class LiqTabs extends StatelessWidget with Diagnosticable {
     if (count <= 1) return 0;
     // Map index ∈ [0, count-1] → alignment ∈ [-1, 1].
     return (index / (count - 1)) * 2 - 1;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(EnumProperty<LiqTabsVariant>('variant', variant))
-      ..add(IntProperty('selectedIndex', selectedIndex))
-      ..add(IntProperty('count', items.length));
   }
 }
 
@@ -309,7 +356,6 @@ class _TabCell extends StatelessWidget {
     required this.enabled,
     required this.activeColor,
     required this.inactiveColor,
-    required this.onTap,
     required this.selectedIndex,
     required this.indexInGroup,
   });
@@ -319,7 +365,6 @@ class _TabCell extends StatelessWidget {
   final bool enabled;
   final Color activeColor;
   final Color inactiveColor;
-  final VoidCallback? onTap;
   final int selectedIndex;
   final int indexInGroup;
 
@@ -365,16 +410,12 @@ class _TabCell extends StatelessWidget {
       inMutuallyExclusiveGroup: true,
       label: item.label ?? 'tab',
       child: LiqPointerCursor(
-        enabled: enabled && onTap != null,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: onTap,
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
+        enabled: enabled,
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
           ),
         ),
       ),

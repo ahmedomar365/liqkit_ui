@@ -75,9 +75,22 @@ class _KanbanDemoState extends State<_KanbanDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 320,
-      child: LiqKanban(columns: _columns, cards: _cards, onMove: _onMove),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width =
+            constraints.maxWidth.isFinite ? constraints.maxWidth : 700;
+        final columnWidth = ((width - LiqKanban.defaultColumnSpacing * 2) / 3)
+            .clamp(150.0, LiqKanban.defaultColumnWidth);
+        return SizedBox(
+          height: 320,
+          child: LiqKanban(
+            columns: _columns,
+            cards: _cards,
+            columnWidth: columnWidth,
+            onMove: _onMove,
+          ),
+        );
+      },
     );
   }
 }

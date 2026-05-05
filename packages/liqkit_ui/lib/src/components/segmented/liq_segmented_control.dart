@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/components/shared/liq_scrubbable_index_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -84,7 +85,7 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
                   children: <Widget>[
                     if (hasSelection)
                       AnimatedPositioned(
-                        duration: LiqMotion.normal,
+                        duration: context.liqMotionDuration(LiqMotion.normal),
                         curve: LiqMotion.snappy,
                         left: selectedIndex * (segmentWidth + _gap),
                         top: 0,
@@ -164,29 +165,7 @@ class _SegmentedGestureSurface<T> extends StatefulWidget {
 
 class _SegmentedGestureSurfaceState<T>
     extends State<_SegmentedGestureSurface<T>> {
-  bool _tracking = false;
-
-  void _selectFromOffset(Offset localPosition) {
-    if (widget.disabled || widget.segments.isEmpty) return;
-    final count = widget.segments.length;
-    final contentX = (localPosition.dx - LiqSegmentedControl._padding).clamp(
-      0.0,
-      (widget.width - 2 * LiqSegmentedControl._padding).clamp(
-        0.0,
-        double.infinity,
-      ),
-    );
-    final usableWidth =
-        widget.width -
-        2 * LiqSegmentedControl._padding -
-        (count - 1).clamp(0, count) * LiqSegmentedControl._gap;
-    final segmentWidth =
-        count == 0 ? 0.0 : usableWidth.clamp(0.0, double.infinity) / count;
-    if (segmentWidth <= 0) return;
-
-    final index = (contentX / (segmentWidth + LiqSegmentedControl._gap))
-        .floor()
-        .clamp(0, count - 1);
+  void _selectIndex(int index) {
     final next = widget.segments[index].value;
     if (next != widget.value) {
       widget.onChanged!(next);
@@ -197,33 +176,13 @@ class _SegmentedGestureSurfaceState<T>
   Widget build(BuildContext context) {
     return LiqPointerCursor(
       enabled: !widget.disabled,
-      child: Listener(
-        behavior: HitTestBehavior.opaque,
-        onPointerDown:
-            widget.disabled
-                ? null
-                : (event) {
-                  _tracking = true;
-                  _selectFromOffset(event.localPosition);
-                },
-        onPointerMove:
-            widget.disabled
-                ? null
-                : (event) {
-                  if (_tracking) _selectFromOffset(event.localPosition);
-                },
-        onPointerUp:
-            widget.disabled
-                ? null
-                : (_) {
-                  _tracking = false;
-                },
-        onPointerCancel:
-            widget.disabled
-                ? null
-                : (_) {
-                  _tracking = false;
-                },
+      child: LiqScrubbableIndexSurface(
+        count: widget.segments.length,
+        enabled: !widget.disabled,
+        padding: const EdgeInsets.all(LiqSegmentedControl._padding),
+        spacing: LiqSegmentedControl._gap,
+        onPreview: _selectIndex,
+        onCommit: _selectIndex,
         child: widget.child,
       ),
     );

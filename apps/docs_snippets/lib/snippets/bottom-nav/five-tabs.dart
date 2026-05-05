@@ -7,7 +7,10 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget bottomNavFiveTabsBuilder(BuildContext context) {
   return SnippetFrame(
-    maxWidth: 360,
+    maxWidth: 420,
+    height: 190,
+    surface: SnippetFrameSurface.liquidThemed,
+    surfacePadding: EdgeInsets.zero,
     child: LiqDemo<int>(
       initial: 0,
       builder:

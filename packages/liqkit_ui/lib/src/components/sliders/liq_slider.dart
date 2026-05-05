@@ -174,10 +174,12 @@ class _LiqSliderState extends State<LiqSlider> {
                               2,
                           child: AnimatedScale(
                             scale: _pressed ? 1.08 : 1,
-                            duration: LiqMotion.fast,
+                            duration: context.liqMotionDuration(LiqMotion.fast),
                             curve: LiqMotion.snappy,
                             child: AnimatedContainer(
-                              duration: LiqMotion.fast,
+                              duration: context.liqMotionDuration(
+                                LiqMotion.fast,
+                              ),
                               curve: LiqMotion.snappy,
                               width: LiqSlider._knobWidth,
                               height: LiqSlider._knobHeight,

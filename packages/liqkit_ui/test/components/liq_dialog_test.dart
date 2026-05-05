@@ -133,6 +133,25 @@ void main() {
         const Color(0xFF0091FF),
       );
     });
+
+    testWidgets('uses an explicit Liquid Glass alert surface recipe', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(const Center(child: LiqDialog(title: 'Dark dialog'))),
+        ),
+      );
+
+      final glass = tester.widget<LiqGlassSurface>(
+        find.byType(LiqGlassSurface),
+      );
+      expect(glass.borderRadius, const BorderRadius.all(Radius.circular(14)));
+      expect(glass.blurSigma, 20);
+      expect(glass.baseFill, const Color(0xDC18181A));
+      expect(glass.highlightStart, const Color(0x06FFFFFF));
+    });
   });
 
   group('LiqDialogOverlay.show', () {

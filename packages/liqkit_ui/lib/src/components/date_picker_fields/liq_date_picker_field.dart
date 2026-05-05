@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/calendars/liq_calendar.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -88,9 +90,6 @@ final class LiqDatePickerField extends StatefulWidget {
   /// Trailing chevron color.
   static const Color chevronColor = Color(0xFF8E8E93);
 
-  /// Popover panel border color.
-  static const Color panelBorderColor = Color(0xFFE5E5EA);
-
   /// Popover panel corner radius.
   static const double panelRadius = 14;
 
@@ -111,13 +110,6 @@ final class LiqDatePickerField extends StatefulWidget {
 
   /// Popover open/close animation duration.
   static const Duration animationDuration = LiqMotion.fast;
-
-  /// Popover panel shadow.
-  static const BoxShadow panelShadow = BoxShadow(
-    color: Color(0x1A000000),
-    blurRadius: 16,
-    offset: Offset(0, 8),
-  );
 
   /// Default text style for the trigger label.
   static const TextStyle textStyle = TextStyle(
@@ -247,50 +239,53 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
           enabled: !disabled,
           value: showsPlaceholder ? null : labelText,
           label: showsPlaceholder ? widget.placeholder : null,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: disabled ? null : _toggleOpen,
-            child: Container(
-              height: LiqDatePickerField.fieldHeight,
-              decoration: BoxDecoration(
-                color: palette.background,
-                borderRadius: BorderRadius.circular(
-                  LiqDatePickerField.fieldRadius,
-                ),
-                border: Border.all(color: borderColor, width: borderWidth),
-              ),
-              child: Row(
-                children: <Widget>[
-                  const SizedBox(width: LiqDatePickerField.horizontalPadding),
-                  Expanded(
-                    child: Text(
-                      labelText,
-                      style: LiqDatePickerField.textStyle.copyWith(
-                        color: labelColor,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textDirection: TextDirection.ltr,
-                    ),
+          child: LiqPointerCursor(
+            enabled: !disabled,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: disabled ? null : _toggleOpen,
+              child: Container(
+                height: LiqDatePickerField.fieldHeight,
+                decoration: BoxDecoration(
+                  color: palette.background,
+                  borderRadius: BorderRadius.circular(
+                    LiqDatePickerField.fieldRadius,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: LiqDatePickerField.chevronRightPadding,
-                      left: 4,
-                    ),
-                    child: AnimatedRotation(
-                      turns: _open ? 0.5 : 0,
-                      duration: LiqDatePickerField.animationDuration,
-                      curve: LiqMotion.standard,
-                      child: Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 18,
-                        color: palette.chevron,
+                  border: Border.all(color: borderColor, width: borderWidth),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    const SizedBox(width: LiqDatePickerField.horizontalPadding),
+                    Expanded(
+                      child: Text(
+                        labelText,
+                        style: LiqDatePickerField.textStyle.copyWith(
+                          color: labelColor,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         textDirection: TextDirection.ltr,
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: LiqDatePickerField.chevronRightPadding,
+                        left: 4,
+                      ),
+                      child: AnimatedRotation(
+                        turns: _open ? 0.5 : 0,
+                        duration: context.liqMotionDuration(LiqMotion.fast),
+                        curve: LiqMotion.standard,
+                        child: Icon(
+                          Icons.keyboard_arrow_down,
+                          size: 18,
+                          color: palette.chevron,
+                          textDirection: TextDirection.ltr,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -374,6 +369,12 @@ class _AnimatedPanelState extends State<_AnimatedPanel>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller.duration = context.liqMotionDuration(LiqMotion.fast);
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -415,24 +416,16 @@ class _DatePickerPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = _DatePickerFieldPalette.resolve(context);
     return SizedBox(
       width: width > 0 ? width : null,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: palette.background,
-          borderRadius: BorderRadius.circular(LiqDatePickerField.panelRadius),
-          border: Border.all(color: palette.panelBorder),
-          boxShadow: const <BoxShadow>[LiqDatePickerField.panelShadow],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(LiqDatePickerField.panelPadding),
-          child: LiqCalendar(
-            selectedDate: selectedDate,
-            firstDate: firstDate,
-            lastDate: lastDate,
-            onDateChanged: onDateChanged,
-          ),
+      child: LiqGlassSurface(
+        borderRadius: BorderRadius.circular(LiqDatePickerField.panelRadius),
+        padding: const EdgeInsets.all(LiqDatePickerField.panelPadding),
+        child: LiqCalendar(
+          selectedDate: selectedDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          onDateChanged: onDateChanged,
         ),
       ),
     );
@@ -447,7 +440,6 @@ class _DatePickerFieldPalette {
     required this.chevron,
     required this.inactiveBorder,
     required this.activeBorder,
-    required this.panelBorder,
   });
 
   factory _DatePickerFieldPalette.resolve(BuildContext context) {
@@ -459,7 +451,6 @@ class _DatePickerFieldPalette {
         chevron: LiqDatePickerField.chevronColor,
         inactiveBorder: LiqDatePickerField.inactiveBorderColor,
         activeBorder: LiqDatePickerField.activeBorderColor,
-        panelBorder: LiqDatePickerField.panelBorderColor,
       );
     }
 
@@ -474,7 +465,6 @@ class _DatePickerFieldPalette {
       chevron: secondary,
       inactiveBorder: secondary.withValues(alpha: 0.24),
       activeBorder: accent,
-      panelBorder: secondary.withValues(alpha: 0.24),
     );
   }
 
@@ -484,5 +474,4 @@ class _DatePickerFieldPalette {
   final Color chevron;
   final Color inactiveBorder;
   final Color activeBorder;
-  final Color panelBorder;
 }

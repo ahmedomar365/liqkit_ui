@@ -9,57 +9,48 @@ Widget commandPaletteSectionsBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 560,
     height: 420,
-    child: Stack(
-      children: <Widget>[
-        const Positioned.fill(child: ColoredBox(color: Color(0xFFEFEFF4))),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 24),
-            // {@highlight}
-            child: LiqCommandPalette(
-              commands: <LiqCommand>[
-                LiqCommand(
-                  label: 'New project',
-                  section: 'File',
-                  icon: Icons.add,
-                  shortcut: '⌘N',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Open recent',
-                  section: 'File',
-                  icon: Icons.folder_open,
-                  shortcut: '⌘O',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Cut',
-                  section: 'Edit',
-                  icon: Icons.content_cut,
-                  shortcut: '⌘X',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Copy',
-                  section: 'Edit',
-                  icon: Icons.content_copy,
-                  shortcut: '⌘C',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Toggle sidebar',
-                  section: 'View',
-                  icon: Icons.view_sidebar,
-                  shortcut: '⌘B',
-                  onSelected: () {},
-                ),
-              ],
-            ),
-            // {@endhighlight}
-          ),
+    surface: SnippetFrameSurface.liquidThemed,
+    surfacePadding: const EdgeInsets.fromLTRB(16, 56, 16, 16),
+    // {@highlight}
+    child: LiqCommandPalette(
+      commands: <LiqCommand>[
+        LiqCommand(
+          label: 'New project',
+          section: 'File',
+          icon: Icons.add,
+          shortcut: '⌘N',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Open recent',
+          section: 'File',
+          icon: Icons.folder_open,
+          shortcut: '⌘O',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Cut',
+          section: 'Edit',
+          icon: Icons.content_cut,
+          shortcut: '⌘X',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Copy',
+          section: 'Edit',
+          icon: Icons.content_copy,
+          shortcut: '⌘C',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Toggle sidebar',
+          section: 'View',
+          icon: Icons.view_sidebar,
+          shortcut: '⌘B',
+          onSelected: () {},
         ),
       ],
     ),
+    // {@endhighlight}
   );
 }

@@ -3,9 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
-Widget _wrap(Widget child) {
+Widget _wrap(
+  Widget child, {
+  MediaQueryData media = const MediaQueryData(size: Size(800, 600)),
+}) {
   return MediaQuery(
-    data: const MediaQueryData(size: Size(800, 600)),
+    data: media,
     child: Directionality(
       textDirection: TextDirection.ltr,
       child: Overlay(
@@ -198,6 +201,63 @@ void main() {
       // text layout box is constrained by the surface's maxWidth so its
       // own width must be <= maxWidth - padding.
       expect(popoverBox.size.width, lessThanOrEqualTo(160));
+
+      await gesture.removePointer();
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('reduced motion disables show/hide animation duration', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          _hoverCard(child: const SizedBox(width: 120, height: 40)),
+          media: const MediaQueryData(
+            size: Size(800, 600),
+            disableAnimations: true,
+          ),
+        ),
+      );
+
+      final gesture = await _hoverInto(
+        tester,
+        tester.getCenter(find.byType(LiqHoverCard)),
+      );
+      await tester.pump(_openDelay);
+
+      expect(find.text('Profile preview'), findsOneWidget);
+
+      await gesture.removePointer();
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('tall popover content is constrained and scrollable', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          const LiqHoverCard(
+            openDelay: _openDelay,
+            closeDelay: _closeDelay,
+            content: SizedBox(
+              height: 1000,
+              child: Text('tall content', textDirection: TextDirection.ltr),
+            ),
+            child: SizedBox(width: 120, height: 40),
+          ),
+          media: const MediaQueryData(size: Size(320, 240)),
+        ),
+      );
+
+      final gesture = await _hoverInto(
+        tester,
+        tester.getCenter(find.byType(LiqHoverCard)),
+      );
+      await tester.pump(_openDelay);
+      await tester.pump(_animation);
+
+      expect(find.byType(SingleChildScrollView), findsOneWidget);
+      expect(tester.takeException(), isNull);
 
       await gesture.removePointer();
       await tester.pumpAndSettle();

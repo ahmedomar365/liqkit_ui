@@ -7,6 +7,10 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget timePicker12HourBuilder(BuildContext context) {
   return SnippetFrame(
+    maxWidth: 420,
+    height: 276,
+    surface: SnippetFrameSurface.themed,
+    surfacePadding: const EdgeInsets.all(20),
     child: LiqDemo<DateTime>(
       initial: DateTime(2026, 4, 29, 14, 30),
       builder:

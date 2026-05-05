@@ -28,4 +28,15 @@ void main() {
     await tester.tap(find.byType(LiqWidgetCard));
     expect(taps, 1);
   });
+
+  testWidgets('LiqWidgetCard exposes a click cursor when tappable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(LiqWidgetCard(size: LiqWidgetSize.small, onPressed: () {})),
+    );
+
+    final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+    expect(mouseRegion.cursor, SystemMouseCursors.click);
+  });
 }

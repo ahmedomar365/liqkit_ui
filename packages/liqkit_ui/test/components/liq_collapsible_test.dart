@@ -55,6 +55,15 @@ void main() {
       expect(find.text('body'), findsNothing);
     });
 
+    testWidgets('header exposes a click cursor', (tester) async {
+      await tester.pumpWidget(
+        wrap(const LiqCollapsible(header: Text('header'), child: Text('body'))),
+      );
+
+      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+      expect(mouseRegion.cursor, SystemMouseCursors.click);
+    });
+
     testWidgets('onChanged fires with the new expanded value', (tester) async {
       final events = <bool>[];
       await tester.pumpWidget(

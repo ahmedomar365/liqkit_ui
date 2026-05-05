@@ -194,6 +194,71 @@ void main() {
       expect(events.first[2], 'todo');
     });
 
+    testWidgets('the whole column body accepts a drop at the end', (
+      tester,
+    ) async {
+      final events = <List<Object>>[];
+      await tester.pumpWidget(
+        wrap(
+          LiqKanban(
+            columns: const <LiqKanbanColumn>[
+              LiqKanbanColumn(
+                id: 'todo',
+                title: 'TO DO',
+                cardIds: <String>['a'],
+              ),
+              LiqKanbanColumn(
+                id: 'done',
+                title: 'DONE',
+                cardIds: <String>['c'],
+              ),
+            ],
+            cards: threeCards(),
+            onMove: (cardId, fromId, toId, idx) {
+              events.add(<Object>[cardId, fromId, toId, idx]);
+            },
+          ),
+        ),
+      );
+
+      final dragStart = tester.getCenter(find.text('Card A'));
+      final columnTarget =
+          tester.getCenter(find.text('DONE')) + const Offset(0, 140);
+      await tester.dragFrom(dragStart, columnTarget - dragStart);
+      await tester.pumpAndSettle();
+
+      expect(events, isNotEmpty);
+      expect(events.last, <Object>['a', 'todo', 'done', 1]);
+    });
+
+    testWidgets('card drag surfaces use a grab cursor', (tester) async {
+      await tester.pumpWidget(
+        wrap(
+          LiqKanban(
+            columns: const <LiqKanbanColumn>[
+              LiqKanbanColumn(
+                id: 'todo',
+                title: 'TO DO',
+                cardIds: <String>['a'],
+              ),
+            ],
+            cards: threeCards(),
+            onMove: (_, __, ___, ____) {},
+          ),
+        ),
+      );
+
+      final mouseRegion = tester.widget<MouseRegion>(
+        find
+            .ancestor(
+              of: find.text('Card A'),
+              matching: find.byType(MouseRegion),
+            )
+            .first,
+      );
+      expect(mouseRegion.cursor, SystemMouseCursors.grab);
+    });
+
     testWidgets('drop outside any DragTarget does not call onMove', (
       tester,
     ) async {

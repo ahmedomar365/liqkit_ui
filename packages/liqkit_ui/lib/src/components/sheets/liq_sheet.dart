@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Visual variant of a [LiqSheet].
 ///
@@ -310,7 +313,7 @@ enum LiqSheetTopButtonStyle {
 }
 
 /// 44×44pt circular top-bar button used inside a [LiqSheet] controls row.
-final class LiqSheetTopButton extends StatelessWidget {
+final class LiqSheetTopButton extends StatefulWidget {
   /// Creates a top button.
   const LiqSheetTopButton({
     required this.child,
@@ -342,67 +345,7 @@ final class LiqSheetTopButton extends StatelessWidget {
   static const Color _primaryShadow = Color(0x610079FF);
 
   @override
-  Widget build(BuildContext context) {
-    final isPrimary = style == LiqSheetTopButtonStyle.primary;
-    final disabled = onPressed == null;
-
-    final glyph = DefaultTextStyle.merge(
-      style: TextStyle(
-        color: isPrimary ? _primaryFg : _standardFg,
-        fontFamily: 'SF Pro Text',
-        fontSize: 17,
-        fontWeight: FontWeight.w600,
-      ),
-      textAlign: TextAlign.center,
-      child: child,
-    );
-
-    return Semantics(
-      button: true,
-      enabled: !disabled,
-      label: semanticsLabel,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: Opacity(
-          opacity: disabled ? 0.5 : 1,
-          child: Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(296)),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors:
-                    isPrimary
-                        ? const <Color>[_primaryTop, _primaryBottom]
-                        : const <Color>[_standardTop, _standardBottom],
-              ),
-              border:
-                  isPrimary
-                      ? null
-                      : const Border.fromBorderSide(
-                        BorderSide(color: _standardRim),
-                      ),
-              boxShadow:
-                  isPrimary
-                      ? const <BoxShadow>[
-                        BoxShadow(
-                          color: _primaryShadow,
-                          offset: Offset(0, 1),
-                          blurRadius: 8,
-                        ),
-                      ]
-                      : null,
-            ),
-            alignment: Alignment.center,
-            child: SizedBox(width: 18, height: 18, child: Center(child: glyph)),
-          ),
-        ),
-      ),
-    );
-  }
+  State<LiqSheetTopButton> createState() => _LiqSheetTopButtonState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -418,6 +361,105 @@ final class LiqSheetTopButton extends StatelessWidget {
           ifFalse: 'disabled',
         ),
       );
+  }
+}
+
+class _LiqSheetTopButtonState extends State<LiqSheetTopButton> {
+  bool _pressed = false;
+
+  void _setPressed(bool value) {
+    if (_pressed == value) return;
+    setState(() => _pressed = value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isPrimary = widget.style == LiqSheetTopButtonStyle.primary;
+    final disabled = widget.onPressed == null;
+    final motionDuration = context.liqMotionDuration(LiqMotion.fast);
+
+    final glyph = DefaultTextStyle.merge(
+      style: TextStyle(
+        color:
+            isPrimary
+                ? LiqSheetTopButton._primaryFg
+                : LiqSheetTopButton._standardFg,
+        fontFamily: 'SF Pro Text',
+        fontSize: 17,
+        fontWeight: FontWeight.w600,
+      ),
+      textAlign: TextAlign.center,
+      child: widget.child,
+    );
+
+    return Semantics(
+      button: true,
+      enabled: !disabled,
+      label: widget.semanticsLabel,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTapDown: disabled ? null : (_) => _setPressed(true),
+          onTapCancel: disabled ? null : () => _setPressed(false),
+          onTapUp: disabled ? null : (_) => _setPressed(false),
+          onTap: widget.onPressed,
+          child: AnimatedScale(
+            scale: _pressed ? 0.92 : 1,
+            duration: motionDuration,
+            curve: LiqMotion.snappy,
+            child: AnimatedOpacity(
+              opacity: disabled ? 0.5 : (_pressed ? 0.78 : 1),
+              duration: motionDuration,
+              curve: LiqMotion.standard,
+              child: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(296)),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors:
+                        isPrimary
+                            ? const <Color>[
+                              LiqSheetTopButton._primaryTop,
+                              LiqSheetTopButton._primaryBottom,
+                            ]
+                            : const <Color>[
+                              LiqSheetTopButton._standardTop,
+                              LiqSheetTopButton._standardBottom,
+                            ],
+                  ),
+                  border:
+                      isPrimary
+                          ? null
+                          : const Border.fromBorderSide(
+                            BorderSide(color: LiqSheetTopButton._standardRim),
+                          ),
+                  boxShadow:
+                      isPrimary
+                          ? const <BoxShadow>[
+                            BoxShadow(
+                              color: LiqSheetTopButton._primaryShadow,
+                              offset: Offset(0, 1),
+                              blurRadius: 8,
+                            ),
+                          ]
+                          : null,
+                ),
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: Center(child: glyph),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

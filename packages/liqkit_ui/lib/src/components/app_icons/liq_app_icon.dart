@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 home-screen app icon — squircle tile with optional badge.
@@ -85,10 +86,13 @@ final class LiqAppIcon extends StatelessWidget {
     Widget content = Semantics(
       button: onPressed != null,
       label: label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: stack,
+      child: LiqPointerCursor(
+        enabled: onPressed != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: stack,
+        ),
       ),
     );
 

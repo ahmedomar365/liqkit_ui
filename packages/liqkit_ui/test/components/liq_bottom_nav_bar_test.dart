@@ -73,10 +73,10 @@ void main() {
       expect(activeLabel.style?.color, LiqBottomNavBar.activeColor);
 
       final inactiveIcon = tester.widget<Icon>(find.byIcon(Icons.home_filled));
-      expect(inactiveIcon.color, LiqBottomNavBar.inactiveColor);
+      expect(inactiveIcon.color, const Color(0xFF1A1A1A));
 
       final inactiveLabel = tester.widget<Text>(find.text('Home'));
-      expect(inactiveLabel.style?.color, LiqBottomNavBar.inactiveColor);
+      expect(inactiveLabel.style?.color, const Color(0xFF1A1A1A));
     });
 
     testWidgets('dark theme uses iOS 26 dark active and secondary tints', (
@@ -93,7 +93,7 @@ void main() {
       );
 
       const darkActive = Color(0xFF0091FF);
-      const darkInactive = Color(0xB2EBEBF5);
+      const darkInactive = Color(0xE6F5F5F5);
 
       final activeIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
       expect(activeIcon.color, darkActive);
@@ -106,6 +106,25 @@ void main() {
 
       final inactiveLabel = tester.widget<Text>(find.text('Home'));
       expect(inactiveLabel.style?.color, darkInactive);
+    });
+
+    testWidgets('uses an inset rounded Liquid Glass capsule', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqBottomNavBar(
+            items: _fourItems,
+            currentIndex: 0,
+            onChanged: (_) {},
+          ),
+        ),
+      );
+
+      final glass = tester.widget<LiqGlassSurface>(
+        find.byType(LiqGlassSurface),
+      );
+      expect(glass.borderRadius, const BorderRadius.all(Radius.circular(999)));
+      expect(glass.blurSigma, 20);
+      expect(glass.baseFill, const Color(0xDFF7F7F7));
     });
 
     testWidgets('tapping a tab fires onChanged with that index', (
@@ -125,6 +144,36 @@ void main() {
       await tester.tap(find.text('Search'));
       await tester.pumpAndSettle();
       expect(lastIndex, 1);
+    });
+
+    testWidgets('dragging across tabs previews and commits the released tab', (
+      tester,
+    ) async {
+      var lastIndex = -1;
+      await tester.pumpWidget(
+        _wrap(
+          LiqBottomNavBar(
+            items: _fourItems,
+            currentIndex: 0,
+            onChanged: (i) => lastIndex = i,
+          ),
+        ),
+      );
+
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.text('Home')),
+      );
+      await tester.pump();
+      await gesture.moveTo(tester.getCenter(find.text('Inbox')));
+      await tester.pump();
+
+      expect(lastIndex, -1);
+      final previewIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
+      expect(previewIcon.color, LiqBottomNavBar.activeColor);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(lastIndex, 2);
     });
 
     testWidgets('onChanged: null disables taps', (tester) async {

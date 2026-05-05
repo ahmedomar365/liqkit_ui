@@ -68,6 +68,26 @@ void main() {
       await tester.tap(find.byType(LiqListRow));
       expect(taps, 1);
     });
+
+    testWidgets('tappable row exposes a click cursor', (tester) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: SizedBox(
+                width: 320,
+                child: LiqListRow(title: 'Tap', onTap: () {}),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+      expect(mouseRegion.cursor, SystemMouseCursors.click);
+    });
   });
 
   group('LiqListGroup', () {

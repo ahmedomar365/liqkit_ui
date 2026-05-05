@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Horizontal alignment for a [LiqDataColumn].
@@ -359,10 +361,12 @@ final class LiqDataTable extends StatelessWidget {
     }
     return Semantics(
       button: true,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: row.onTap,
-        child: body,
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: row.onTap,
+          child: body,
+        ),
       ),
     );
   }
@@ -447,10 +451,12 @@ class _HeaderCell extends StatelessWidget {
     return Semantics(
       button: true,
       label: column.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: padded,
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: padded,
+        ),
       ),
     );
   }

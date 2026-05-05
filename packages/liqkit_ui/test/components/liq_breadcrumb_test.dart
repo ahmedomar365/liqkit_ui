@@ -214,5 +214,47 @@ void main() {
       // 4 items → 3 separators between them.
       expect(find.byIcon(separatorIcon), findsNWidgets(3));
     });
+
+    testWidgets('narrow trails scroll horizontally instead of wrapping', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          SizedBox(
+            width: 160,
+            child: LiqBreadcrumb(
+              items: <LiqBreadcrumbItem>[
+                LiqBreadcrumbItem(label: 'Home', onPressed: () {}),
+                LiqBreadcrumbItem(label: 'Library', onPressed: () {}),
+                LiqBreadcrumbItem(label: 'Components', onPressed: () {}),
+                const LiqBreadcrumbItem(label: 'Breadcrumb'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      final y = tester.getTopLeft(find.text('Home')).dy;
+      expect(tester.getTopLeft(find.text('Library')).dy, y);
+      expect(tester.getTopLeft(find.text('Components')).dy, y);
+      expect(tester.getTopLeft(find.text('Breadcrumb')).dy, y);
+      expect(find.byType(SingleChildScrollView), findsOneWidget);
+    });
+
+    testWidgets('tappable crumbs expose a click cursor', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqBreadcrumb(
+            items: <LiqBreadcrumbItem>[
+              LiqBreadcrumbItem(label: 'Home', onPressed: () {}),
+              const LiqBreadcrumbItem(label: 'Current'),
+            ],
+          ),
+        ),
+      );
+
+      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+      expect(mouseRegion.cursor, SystemMouseCursors.click);
+    });
   });
 }

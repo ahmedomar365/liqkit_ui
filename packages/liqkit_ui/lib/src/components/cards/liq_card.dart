@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -154,17 +155,19 @@ class _PressableSurfaceState extends State<_PressableSurface> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTapDown: (TapDownDetails _) => _setPressed(true),
-      onTapUp: (TapUpDetails _) => _setPressed(false),
-      onTapCancel: () => _setPressed(false),
-      onTap: widget.onTap,
-      child: AnimatedOpacity(
-        opacity: _pressed ? 0.85 : 1,
-        duration: LiqMotion.fast,
-        curve: LiqMotion.snappy,
-        child: widget.child,
+    return LiqPointerCursor(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTapDown: (TapDownDetails _) => _setPressed(true),
+        onTapUp: (TapUpDetails _) => _setPressed(false),
+        onTapCancel: () => _setPressed(false),
+        onTap: widget.onTap,
+        child: AnimatedOpacity(
+          opacity: _pressed ? 0.85 : 1,
+          duration: LiqMotion.fast,
+          curve: LiqMotion.snappy,
+          child: widget.child,
+        ),
       ),
     );
   }

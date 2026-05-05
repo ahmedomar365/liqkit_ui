@@ -33,6 +33,32 @@ void main() {
     expect(find.text('Light'), findsOneWidget);
   });
 
+  testWidgets('LiqKitHelpersModePill keeps compact minimum size', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_wrap(const LiqKitHelpersModePill(label: 'Light')));
+
+    expect(
+      tester.getSize(find.byType(LiqKitHelpersModePill)).width,
+      greaterThanOrEqualTo(54),
+    );
+    expect(tester.getSize(find.byType(LiqKitHelpersModePill)).height, 19);
+  });
+
+  testWidgets('LiqKitHelpersModePill expands for longer labels', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(const LiqKitHelpersModePill(label: 'High Contrast')),
+    );
+
+    expect(
+      tester.getSize(find.byType(LiqKitHelpersModePill)).width,
+      greaterThan(54),
+    );
+    expect(find.text('High Contrast'), findsOneWidget);
+  });
+
   testWidgets('LiqKitHelpersModeLabels stacks pills', (tester) async {
     await tester.pumpWidget(
       _wrap(

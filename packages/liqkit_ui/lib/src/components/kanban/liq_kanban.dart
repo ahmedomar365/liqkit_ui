@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// A single card on a [LiqKanban] board.
@@ -274,9 +275,12 @@ final class LiqKanban extends StatelessWidget {
     );
 
     return DragTarget<_LiqKanbanDragData>(
-      onWillAcceptWithDetails:
-          (details) => details.data.fromColumnId != column.id,
+      onWillAcceptWithDetails: (_) => true,
       onAcceptWithDetails: (details) {
+        if (details.data.fromColumnId == column.id &&
+            details.data.cardId == resolved.lastOrNull?.id) {
+          return;
+        }
         onMove(
           details.data.cardId,
           details.data.fromColumnId,
@@ -303,10 +307,13 @@ final class LiqKanban extends StatelessWidget {
                     dropping ? LiqKanban.dropHintColor : palette.columnBorder,
               ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: children,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 220),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: children,
+              ),
             ),
           ),
         );
@@ -452,14 +459,17 @@ class _KanbanCardDraggable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resting = _KanbanCardSurface(palette: palette, child: card.child);
-    return Draggable<_LiqKanbanDragData>(
-      data: _LiqKanbanDragData(cardId: card.id, fromColumnId: column.id),
-      feedback: _KanbanCardFeedback(palette: palette, child: card.child),
-      childWhenDragging: Opacity(
-        opacity: LiqKanban.dragSourceOpacity,
+    return LiqPointerCursor(
+      cursor: SystemMouseCursors.grab,
+      child: Draggable<_LiqKanbanDragData>(
+        data: _LiqKanbanDragData(cardId: card.id, fromColumnId: column.id),
+        feedback: _KanbanCardFeedback(palette: palette, child: card.child),
+        childWhenDragging: Opacity(
+          opacity: LiqKanban.dragSourceOpacity,
+          child: resting,
+        ),
         child: resting,
       ),
-      child: resting,
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget pickerInlineCalendarBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 420,
-    height: 340,
+    height: 360,
     child: LiqDemo<int?>(
       initial: 15,
       builder: (v, set) {

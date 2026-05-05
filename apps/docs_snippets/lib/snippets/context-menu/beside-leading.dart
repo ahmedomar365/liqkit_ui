@@ -7,11 +7,11 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget contextMenuBesideLeadingBuilder(BuildContext context) {
   // {@highlight}
   return SnippetFrame(
-    maxWidth: 420,
+    maxWidth: 440,
     height: 260,
     child: LiqContextMenu(
       arrangement: LiqContextMenuArrangement.besideLeading,
-      preview: const LiqContextMenuPreview(),
+      preview: const LiqContextMenuPreview(size: Size(132, 168)),
       menu: LiqMenu(
         children: <Widget>[
           LiqMenuItem(label: 'Share', onPressed: () {}),

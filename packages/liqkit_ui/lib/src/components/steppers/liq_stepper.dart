@@ -227,7 +227,7 @@ class _StepperButtonState extends State<_StepperButton> {
           behavior: HitTestBehavior.opaque,
           onTap: widget.onTap,
           child: AnimatedContainer(
-            duration: LiqMotion.fast,
+            duration: context.liqMotionDuration(LiqMotion.fast),
             curve: LiqMotion.snappy,
             height: 32,
             decoration: BoxDecoration(
@@ -240,7 +240,7 @@ class _StepperButtonState extends State<_StepperButton> {
             child: Center(
               child: AnimatedScale(
                 scale: _pressed ? 0.92 : 1,
-                duration: LiqMotion.fast,
+                duration: context.liqMotionDuration(LiqMotion.fast),
                 curve: LiqMotion.snappy,
                 child: Text(
                   widget.label,

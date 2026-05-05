@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 inline date picker — month grid with selectable days.
@@ -269,23 +270,26 @@ final class LiqDatePicker extends StatelessWidget {
       decoration = null;
       textColor = palette.title;
     }
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onDayTap == null ? null : () => onDayTap!(day),
-      child: Container(
-        width: 44,
-        height: 44,
-        decoration: decoration,
-        alignment: Alignment.center,
-        child: Text(
-          '$day',
-          textDirection: TextDirection.ltr,
-          style: TextStyle(
-            fontFamily: 'SF Pro Text',
-            fontSize: 20,
-            height: 25 / 20,
-            letterSpacing: -0.45,
-            color: day < 1 ? palette.nullColor : textColor,
+    return LiqPointerCursor(
+      enabled: onDayTap != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onDayTap == null ? null : () => onDayTap!(day),
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: decoration,
+          alignment: Alignment.center,
+          child: Text(
+            '$day',
+            textDirection: TextDirection.ltr,
+            style: TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontSize: 20,
+              height: 25 / 20,
+              letterSpacing: -0.45,
+              color: day < 1 ? palette.nullColor : textColor,
+            ),
           ),
         ),
       ),
@@ -349,17 +353,20 @@ class _Arrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onPressed,
-      child: SizedBox(
-        width: _tapTargetSize,
-        height: _tapTargetSize,
-        child: Center(
-          child: SizedBox(
-            width: 16,
-            height: 16,
-            child: CustomPaint(painter: _ArrowPainter(direction)),
+    return LiqPointerCursor(
+      enabled: onPressed != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: SizedBox(
+          width: _tapTargetSize,
+          height: _tapTargetSize,
+          child: Center(
+            child: SizedBox(
+              width: 16,
+              height: 16,
+              child: CustomPaint(painter: _ArrowPainter(direction)),
+            ),
           ),
         ),
       ),

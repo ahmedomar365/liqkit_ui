@@ -81,6 +81,45 @@ void main() {
       expect(config.behavior.dragDevices, contains(PointerDeviceKind.touch));
     });
 
+    testWidgets('uses grabbing cursor while the pointer is held', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          Center(
+            child: SizedBox(width: 360, child: LiqCarousel(items: _slides())),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      MouseRegion carouselMouseRegion() => tester.widget<MouseRegion>(
+        find
+            .ancestor(
+              of: find.byType(PageView),
+              matching: find.byType(MouseRegion),
+            )
+            .first,
+      );
+
+      expect(carouselMouseRegion().cursor, SystemMouseCursors.grab);
+
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(
+        location: tester.getCenter(find.byType(PageView)),
+      );
+      await tester.pump();
+      await gesture.down(tester.getCenter(find.byType(PageView)));
+      await tester.pump();
+
+      expect(carouselMouseRegion().cursor, SystemMouseCursors.grabbing);
+
+      await gesture.up();
+      await tester.pump();
+
+      expect(carouselMouseRegion().cursor, SystemMouseCursors.grab);
+    });
+
     testWidgets('showIndicator: false hides the LiqPageControl', (
       tester,
     ) async {

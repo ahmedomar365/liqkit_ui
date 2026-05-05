@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -142,32 +144,39 @@ final class LiqEmptyStateCta extends StatelessWidget {
       button: true,
       enabled: !disabled,
       label: label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: Opacity(
-          opacity: disabled ? 0.5 : 1,
-          child: Container(
-            height: 48,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: background,
-              borderRadius: const BorderRadius.all(Radius.circular(1000)),
-              boxShadow: const <BoxShadow>[
-                BoxShadow(color: _shadow, offset: Offset(0, 1), blurRadius: 8),
-              ],
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              label,
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(
-                fontFamily: 'SF Pro Text',
-                fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-                fontSize: 17,
-                height: 22 / 17,
-                fontWeight: FontWeight.w500,
-                color: _fg,
+      child: LiqPointerCursor(
+        enabled: !disabled,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: Opacity(
+            opacity: disabled ? 0.5 : 1,
+            child: Container(
+              height: 48,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: background,
+                borderRadius: const BorderRadius.all(Radius.circular(1000)),
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: _shadow,
+                    offset: Offset(0, 1),
+                    blurRadius: 8,
+                  ),
+                ],
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                label,
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  fontFamily: 'SF Pro Text',
+                  fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+                  fontSize: 17,
+                  height: 22 / 17,
+                  fontWeight: FontWeight.w500,
+                  color: _fg,
+                ),
               ),
             ),
           ),

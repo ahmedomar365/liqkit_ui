@@ -107,6 +107,82 @@ void main() {
       expect(find.text('April 2026'), findsOneWidget);
     });
 
+    testWidgets('calendar popover uses shared Liquid Glass material', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqDatePickerField(value: DateTime(2026, 4, 15), onChanged: (_) {}),
+        ),
+      );
+
+      await tester.tap(find.byType(LiqDatePickerField));
+      await tester.pumpAndSettle();
+
+      final surface = tester.widget<LiqGlassSurface>(
+        find.ancestor(
+          of: find.byType(LiqCalendar),
+          matching: find.byType(LiqGlassSurface),
+        ),
+      );
+      expect(surface.tint, LiqGlassTint.light);
+      expect(surface.elevation, LiqGlassElevation.floating);
+    });
+
+    testWidgets('trigger exposes a click cursor for pointer input', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqDatePickerField(value: DateTime(2026, 4, 15), onChanged: (_) {}),
+        ),
+      );
+
+      final cursors = tester
+          .widgetList<MouseRegion>(find.byType(MouseRegion))
+          .map((region) => region.cursor);
+      expect(cursors, contains(SystemMouseCursors.click));
+    });
+
+    testWidgets('open animations honor reduced motion', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(800, 600),
+            disableAnimations: true,
+          ),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Overlay(
+              initialEntries: <OverlayEntry>[
+                OverlayEntry(
+                  builder:
+                      (_) => Center(
+                        child: SizedBox(
+                          width: 320,
+                          child: LiqDatePickerField(
+                            value: DateTime(2026, 4, 15),
+                            onChanged: (_) {},
+                          ),
+                        ),
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        tester.widget<AnimatedRotation>(find.byType(AnimatedRotation)).duration,
+        Duration.zero,
+      );
+
+      await tester.tap(find.byType(LiqDatePickerField));
+      await tester.pump();
+      expect(find.byType(LiqCalendar), findsOneWidget);
+    });
+
     testWidgets('tapping a day fires onChanged and closes the popover', (
       tester,
     ) async {

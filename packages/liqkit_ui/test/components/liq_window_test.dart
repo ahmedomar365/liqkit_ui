@@ -37,4 +37,15 @@ void main() {
     await tester.pumpWidget(_wrap(const LiqWindowControls()));
     expect(find.byType(LiqWindowControls), findsOneWidget);
   });
+
+  testWidgets('LiqWindowGlassButton exposes a click cursor when tappable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(LiqWindowGlassButton(onPressed: () {}, child: const Text('OK'))),
+    );
+
+    final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+    expect(mouseRegion.cursor, SystemMouseCursors.click);
+  });
 }

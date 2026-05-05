@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -163,6 +164,45 @@ void main() {
 
       expect(received, isNotNull);
       expect(received!.minute, 1);
+    });
+
+    testWidgets('wheels use immediate drag tracking and iOS bounce physics', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqTimePicker(value: DateTime(2026, 4, 29, 9), onChanged: (_) {}),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final wheel = tester.widget<ListWheelScrollView>(
+        find.byType(ListWheelScrollView).first,
+      );
+      expect(wheel.dragStartBehavior, DragStartBehavior.down);
+      expect(wheel.physics, isA<FixedExtentScrollPhysics>());
+      expect(wheel.physics?.parent, isA<BouncingScrollPhysics>());
+    });
+
+    testWidgets('wheels expose resize-up-down cursor for pointer input', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqTimePicker(value: DateTime(2026, 4, 29, 9), onChanged: (_) {}),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final mouseRegion = tester.widget<MouseRegion>(
+        find
+            .ancestor(
+              of: find.byType(ListWheelScrollView).first,
+              matching: find.byType(MouseRegion),
+            )
+            .first,
+      );
+      expect(mouseRegion.cursor, SystemMouseCursors.resizeUpDown);
     });
 
     testWidgets('parent echo does not jump controllers during selection', (

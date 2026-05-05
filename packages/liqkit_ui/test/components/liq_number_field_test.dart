@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -7,7 +7,13 @@ Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
   child: MediaQuery(
     data: const MediaQueryData(),
-    child: Center(child: SizedBox(width: 320, child: child)),
+    child: Overlay(
+      initialEntries: <OverlayEntry>[
+        OverlayEntry(
+          builder: (_) => Center(child: SizedBox(width: 320, child: child)),
+        ),
+      ],
+    ),
   ),
 );
 
@@ -34,6 +40,23 @@ void main() {
       await tester.tap(find.byIcon(Icons.add));
       await tester.pumpAndSettle();
       expect(received, 7);
+    });
+
+    testWidgets('enabled stepper buttons expose click cursors', (tester) async {
+      await tester.pumpWidget(
+        _wrap(LiqNumberField(value: 5, onChanged: (_) {})),
+      );
+      await tester.pumpAndSettle();
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(2),
+      );
     });
 
     testWidgets('tapping - button fires onChanged(value - step)', (
@@ -180,28 +203,18 @@ void main() {
       expect(addIcon.color, const Color(0xFFFFFFFF));
     });
 
-    testWidgets('selection gestures belong to EditableText', (tester) async {
+    testWidgets('uses Cupertino text selection gestures', (tester) async {
       await tester.pumpWidget(
         _wrap(LiqNumberField(value: 42, onChanged: (_) {})),
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byWidgetPredicate(
-            (widget) => widget is GestureDetector && widget.onTap != null,
-          ),
-        ),
-        findsNothing,
-      );
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byType(Listener),
-        ),
-        findsOneWidget,
-      );
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.rendererIgnoresPointer, isTrue);
+      expect(editable.enableInteractiveSelection, isTrue);
+      expect(editable.selectionControls, isNotNull);
     });
 
     test('throws AssertionError when min > max', () {

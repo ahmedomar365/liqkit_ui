@@ -94,6 +94,19 @@ void main() {
       expect(_digitText('7'), findsOneWidget);
     });
 
+    testWidgets('tap region exposes a click cursor', (tester) async {
+      await tester.pumpWidget(_wrap(LiqOtpInput(value: '', onChanged: (_) {})));
+      await tester.pumpAndSettle();
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.any((region) => region.cursor == SystemMouseCursors.click),
+        isTrue,
+      );
+    });
+
     testWidgets('deleting the last digit fires onChanged with shorter value', (
       tester,
     ) async {

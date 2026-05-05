@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// macOS-style window card — 34pt rounded white surface with a soft
@@ -201,30 +202,35 @@ final class LiqWindowGlassButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.liqIsDark;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onPressed,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minWidth: minWidth, minHeight: 44),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: isDark ? _bgDark : _bg,
-            borderRadius: const BorderRadius.all(Radius.circular(296)),
-            border: Border.fromBorderSide(
-              BorderSide(color: isDark ? _innerHighlightDark : _innerHighlight),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                color: isDark ? _labelDark : _label,
-                fontFamily: 'SF Pro Text',
-                fontSize: 17,
-                height: 22 / 17,
-                fontWeight: FontWeight.w500,
+    return LiqPointerCursor(
+      enabled: onPressed != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minWidth: minWidth, minHeight: 44),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: isDark ? _bgDark : _bg,
+              borderRadius: const BorderRadius.all(Radius.circular(296)),
+              border: Border.fromBorderSide(
+                BorderSide(
+                  color: isDark ? _innerHighlightDark : _innerHighlight,
+                ),
               ),
-              child: Center(widthFactor: 1, heightFactor: 1, child: child),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: isDark ? _labelDark : _label,
+                  fontFamily: 'SF Pro Text',
+                  fontSize: 17,
+                  height: 22 / 17,
+                  fontWeight: FontWeight.w500,
+                ),
+                child: Center(widthFactor: 1, heightFactor: 1, child: child),
+              ),
             ),
           ),
         ),

@@ -53,4 +53,20 @@ void main() {
       expect(tester.getSize(gesture.first), const Size(44, 44));
     }
   });
+
+  testWidgets('LiqDatePicker interactive cells expose click cursors', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(LiqDatePicker(year: 2026, month: 4, onDayTap: (_) {})),
+    );
+
+    final mouseRegions = tester.widgetList<MouseRegion>(
+      find.byType(MouseRegion),
+    );
+    expect(
+      mouseRegions.any((region) => region.cursor == SystemMouseCursors.click),
+      isTrue,
+    );
+  });
 }

@@ -32,6 +32,29 @@ void main() {
       expect(find.text('body-a'), findsOneWidget);
     });
 
+    testWidgets('headers expose click cursors', (tester) async {
+      await tester.pumpWidget(
+        wrap(
+          const LiqAccordion(
+            items: <LiqAccordionItem>[
+              LiqAccordionItem(title: 'A', child: Text('body-a')),
+              LiqAccordionItem(title: 'B', child: Text('body-b')),
+            ],
+          ),
+        ),
+      );
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(2),
+      );
+    });
+
     testWidgets('single mode collapses the previously open item', (
       tester,
     ) async {

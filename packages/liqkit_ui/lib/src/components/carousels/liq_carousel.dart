@@ -90,6 +90,7 @@ class _LiqCarouselState extends State<LiqCarousel> {
   Timer? _autoplayTimer;
   Timer? _resumeTimer;
   int _currentIndex = 0;
+  bool _dragging = false;
 
   PageController get _controller =>
       widget.controller ?? (_internalController ??= _makeController());
@@ -181,12 +182,25 @@ class _LiqCarouselState extends State<LiqCarousel> {
     setState(() => _currentIndex = index);
   }
 
+  void _handlePointerDown(PointerDownEvent event) {
+    _pauseAutoplay();
+    if (_dragging) return;
+    setState(() => _dragging = true);
+  }
+
+  void _handlePointerEnd(PointerEvent event) {
+    _scheduleResumeAutoplay();
+    if (!_dragging) return;
+    setState(() => _dragging = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final pageView = ScrollConfiguration(
       behavior: const _CarouselScrollBehavior(),
       child: LiqPointerCursor(
-        cursor: SystemMouseCursors.grab,
+        cursor:
+            _dragging ? SystemMouseCursors.grabbing : SystemMouseCursors.grab,
         child: PageView.builder(
           controller: _controller,
           itemCount: widget.items.length,
@@ -215,9 +229,9 @@ class _LiqCarouselState extends State<LiqCarousel> {
         SizedBox(
           height: widget.height,
           child: Listener(
-            onPointerDown: (_) => _pauseAutoplay(),
-            onPointerUp: (_) => _scheduleResumeAutoplay(),
-            onPointerCancel: (_) => _scheduleResumeAutoplay(),
+            onPointerDown: _handlePointerDown,
+            onPointerUp: _handlePointerEnd,
+            onPointerCancel: _handlePointerEnd,
             child: pageView,
           ),
         ),

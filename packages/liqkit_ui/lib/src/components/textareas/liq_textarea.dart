@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 multi-line text input.
@@ -240,38 +240,24 @@ class _LiqTextareaState extends State<LiqTextarea> {
     ];
 
     final text = _controller.text;
-    final showPlaceholder = text.isEmpty && widget.placeholder != null;
 
-    final editor = Stack(
-      children: <Widget>[
-        if (showPlaceholder)
-          Positioned.fill(
-            child: IgnorePointer(
-              child: Text(
-                widget.placeholder!,
-                style: LiqTextarea.textStyle.copyWith(
-                  color: palette.placeholder,
-                ),
-                maxLines: widget.maxLines,
-                textDirection: TextDirection.ltr,
-              ),
-            ),
-          ),
-        EditableText(
-          controller: _controller,
-          focusNode: _focusNode,
-          autofocus: widget.autofocus,
-          style: LiqTextarea.textStyle.copyWith(color: palette.text),
-          cursorColor: palette.activeBorder,
-          backgroundCursorColor: palette.placeholder,
-          selectionColor: palette.activeBorder.withValues(alpha: 0.25),
-          minLines: widget.minLines,
-          maxLines: widget.maxLines,
-          inputFormatters: inputFormatters,
-          keyboardType: TextInputType.multiline,
-          textInputAction: TextInputAction.newline,
-        ),
-      ],
+    final editor = CupertinoTextField.borderless(
+      controller: _controller,
+      focusNode: _focusNode,
+      autofocus: widget.autofocus,
+      padding: EdgeInsets.zero,
+      placeholder: widget.placeholder,
+      placeholderStyle: LiqTextarea.textStyle.copyWith(
+        color: palette.placeholder,
+      ),
+      style: LiqTextarea.textStyle.copyWith(color: palette.text),
+      cursorColor: palette.activeBorder,
+      cursorRadius: const Radius.circular(1),
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
+      inputFormatters: inputFormatters,
+      keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.newline,
     );
 
     Widget counter = const SizedBox.shrink();
@@ -300,11 +286,7 @@ class _LiqTextareaState extends State<LiqTextarea> {
         border: Border.all(color: borderColor, width: borderWidth),
       ),
       padding: LiqTextarea.contentPadding,
-      child: Listener(
-        behavior: HitTestBehavior.translucent,
-        onPointerDown: (_) => _focusNode.requestFocus(),
-        child: editor,
-      ),
+      child: editor,
     );
 
     return Semantics(

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/liqkit_ui.dart';
 
 void main() {
   group('LiqGlassSurface', () {
@@ -8,6 +8,21 @@ void main() {
       textDirection: TextDirection.ltr,
       child: Center(child: child),
     );
+
+    Widget themedHost(
+      Widget child, {
+      LiqThemeData? theme,
+      MediaQueryData? media,
+    }) {
+      final body = LiqTheme(
+        data: theme ?? LiqThemeData.light,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Center(child: child),
+        ),
+      );
+      return MediaQuery(data: media ?? const MediaQueryData(), child: body);
+    }
 
     testWidgets('renders its child', (tester) async {
       await tester.pumpWidget(
@@ -52,6 +67,26 @@ void main() {
             tint: LiqGlassTint.opaque,
             child: SizedBox(width: 80, height: 80),
           ),
+        ),
+      );
+      expect(find.byType(BackdropFilter), findsNothing);
+    });
+
+    testWidgets('minimal quality disables backdrop blur', (tester) async {
+      await tester.pumpWidget(
+        themedHost(
+          const LiqGlassSurface(child: SizedBox(width: 80, height: 80)),
+          theme: LiqThemeData.light.copyWith(quality: LiqQuality.minimal),
+        ),
+      );
+      expect(find.byType(BackdropFilter), findsNothing);
+    });
+
+    testWidgets('high contrast disables backdrop blur', (tester) async {
+      await tester.pumpWidget(
+        themedHost(
+          const LiqGlassSurface(child: SizedBox(width: 80, height: 80)),
+          media: const MediaQueryData(highContrast: true),
         ),
       );
       expect(find.byType(BackdropFilter), findsNothing);
@@ -150,6 +185,38 @@ void main() {
       );
       final clipRRect = tester.widget<ClipRRect>(find.byType(ClipRRect));
       expect(clipRRect.borderRadius, customRadius);
+    });
+
+    testWidgets('component-specific glass recipe is preserved', (tester) async {
+      const shadows = <BoxShadow>[
+        BoxShadow(
+          color: Color(0x33000000),
+          offset: Offset(0, 12),
+          blurRadius: 28,
+        ),
+      ];
+
+      await tester.pumpWidget(
+        host(
+          const LiqGlassSurface(
+            baseFill: Color(0xDC18181A),
+            rimColor: Color(0x70E4E9EF),
+            highlightStart: Color(0x06FFFFFF),
+            blurSigma: 20,
+            shadows: shadows,
+            child: SizedBox(width: 80, height: 80),
+          ),
+        ),
+      );
+
+      final surface = tester.widget<LiqGlassSurface>(
+        find.byType(LiqGlassSurface),
+      );
+      expect(surface.baseFill, const Color(0xDC18181A));
+      expect(surface.rimColor, const Color(0x70E4E9EF));
+      expect(surface.highlightStart, const Color(0x06FFFFFF));
+      expect(surface.blurSigma, 20);
+      expect(surface.shadows, shadows);
     });
   });
 }

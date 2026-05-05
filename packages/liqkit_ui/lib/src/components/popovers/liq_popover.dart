@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Side of the popover bubble that the tip points from.
@@ -65,37 +66,32 @@ final class LiqPopover extends StatelessWidget {
   /// Padding around [child].
   final EdgeInsets padding;
 
-  static const Color _bubbleLight = Color(0xD6FFFFFF);
-  static const Color _bubbleDark = Color(0xF0272B36);
-  static const Color _rimLight = Color(0xB3FFFFFF);
-  static const Color _rimDark = Color(0x17FFFFFF);
-  static const Color _shadowLight = Color(0x2E000000);
-  static const Color _shadowDark = Color(0x57000000);
+  static const Color _tipLight = LiqGlassSurface.lightTintBase;
+  static const Color _tipDark = LiqGlassSurface.darkTintBase;
+  static const Color _tipOpaqueLight = LiqGlassSurface.opaqueLightTintBase;
+  static const Color _tipOpaqueDark = LiqGlassSurface.opaqueDarkTintBase;
 
   @override
   Widget build(BuildContext context) {
     final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
-    final fill = isDark ? _bubbleDark : _bubbleLight;
-    final rim = isDark ? _rimDark : _rimLight;
-    final shadow = isDark ? _shadowDark : _shadowLight;
+    final useOpaque = context.liqUseOpaqueMaterials;
+    final fill =
+        useOpaque
+            ? (isDark ? _tipOpaqueDark : _tipOpaqueLight)
+            : (isDark ? _tipDark : _tipLight);
     final tipPainter = _PopoverTipPainter(color: fill, side: side);
 
-    final bubble = Container(
+    final bubble = SizedBox(
       width: width,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: fill,
+      child: LiqGlassSurface(
         borderRadius: const BorderRadius.all(Radius.circular(13)),
-        border: Border.fromBorderSide(BorderSide(color: rim)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: shadow,
-            offset: const Offset(0, 10),
-            blurRadius: isDark ? 30 : 28,
-          ),
-        ],
+        padding: padding,
+        tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
+        child: DefaultTextStyle.merge(
+          style: TextStyle(color: isDark ? const Color(0xFFFFFFFF) : null),
+          child: child,
+        ),
       ),
-      child: child,
     );
 
     final tip = SizedBox(

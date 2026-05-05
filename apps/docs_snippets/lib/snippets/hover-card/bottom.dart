@@ -37,11 +37,13 @@ const Widget _previewContent = SizedBox(
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget hoverCardBottomBuilder(BuildContext context) {
   return const SnippetFrame(
-    height: 260,
-    child: Center(
+    height: 420,
+    child: Align(
+      alignment: Alignment.topCenter,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          SizedBox(height: 72),
           // {@highlight}
           LiqHoverCard(
             placement: LiqHoverCardPlacement.bottom,

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/alerts/liq_alert.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 action sheet — bottom-anchored stack of full-width actions.
@@ -184,7 +185,7 @@ final class LiqActionSheet extends StatelessWidget {
   }
 }
 
-class _ActionButton extends StatelessWidget {
+class _ActionButton extends StatefulWidget {
   const _ActionButton({
     required this.action,
     this.boldOverride = false,
@@ -195,9 +196,24 @@ class _ActionButton extends StatelessWidget {
   final bool boldOverride;
   final Color? fgOverride;
 
+  @override
+  State<_ActionButton> createState() => _ActionButtonState();
+}
+
+class _ActionButtonState extends State<_ActionButton> {
+  bool _pressed = false;
+
+  void _setPressed(bool value) {
+    if (_pressed == value) return;
+    setState(() => _pressed = value);
+  }
+
   static const Color _bg = Color(0x29787880);
   static const Color _bgDark = Color(0x33767680);
+  static const Color _pressedBg = Color(0x33787880);
+  static const Color _pressedBgDark = Color(0x47FFFFFF);
   static const Color _filledBg = Color(0xFF0088FF);
+  static const Color _filledPressedBg = Color(0xFF0074D9);
   static const Color _filledFg = Color(0xFFFFFFFF);
   static const Color _destructiveFg = Color(0xFFFF383C);
   static const Color _regularFg = Color(0xFF000000);
@@ -205,49 +221,69 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isFilled = action.style == LiqAlertActionStyle.filled;
-    final isDestructive = action.style == LiqAlertActionStyle.destructive;
-    final disabled = action.onPressed == null;
+    final isFilled = widget.action.style == LiqAlertActionStyle.filled;
+    final isDestructive =
+        widget.action.style == LiqAlertActionStyle.destructive;
+    final disabled = widget.action.onPressed == null;
     final isDark = context.liqIsDark;
     final fg =
-        fgOverride ??
+        widget.fgOverride ??
         (isFilled
             ? _filledFg
             : (isDestructive
                 ? _destructiveFg
                 : (isDark ? _regularFgDark : _regularFg)));
-    final bg = isFilled ? _filledBg : (isDark ? _bgDark : _bg);
+    final bg =
+        isFilled
+            ? (_pressed ? _filledPressedBg : _filledBg)
+            : (isDark
+                ? (_pressed ? _pressedBgDark : _bgDark)
+                : (_pressed ? _pressedBg : _bg));
+    final motionDuration = context.liqMotionDuration(LiqMotion.fast);
     return Semantics(
       button: true,
       enabled: !disabled,
-      label: action.label,
+      label: widget.action.label,
       child: LiqPointerCursor(
         enabled: !disabled,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: action.onPressed,
-          child: Opacity(
-            opacity: disabled ? 0.5 : 1,
-            child: Container(
-              height: 48,
-              decoration: BoxDecoration(
-                color: bg,
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                action.label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textDirection: TextDirection.ltr,
-                style: TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                  fontSize: 17,
-                  height: 22 / 17,
-                  letterSpacing: -0.43,
-                  fontWeight: boldOverride ? FontWeight.w600 : FontWeight.w500,
-                  color: fg,
+          onTapDown: disabled ? null : (_) => _setPressed(true),
+          onTapCancel: disabled ? null : () => _setPressed(false),
+          onTapUp: disabled ? null : (_) => _setPressed(false),
+          onTap: widget.action.onPressed,
+          child: AnimatedScale(
+            scale: _pressed ? 0.985 : 1,
+            duration: motionDuration,
+            curve: LiqMotion.snappy,
+            child: AnimatedOpacity(
+              opacity: disabled ? 0.5 : 1,
+              duration: motionDuration,
+              curve: LiqMotion.standard,
+              child: AnimatedContainer(
+                duration: motionDuration,
+                curve: LiqMotion.snappy,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: bg,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  widget.action.label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.ltr,
+                  style: TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+                    fontSize: 17,
+                    height: 22 / 17,
+                    letterSpacing: -0.43,
+                    fontWeight:
+                        widget.boldOverride ? FontWeight.w600 : FontWeight.w500,
+                    color: fg,
+                  ),
                 ),
               ),
             ),

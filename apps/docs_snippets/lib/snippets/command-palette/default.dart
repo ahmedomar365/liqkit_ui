@@ -9,46 +9,37 @@ Widget commandPaletteDefaultBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 560,
     height: 360,
-    child: Stack(
-      children: <Widget>[
-        const Positioned.fill(child: ColoredBox(color: Color(0xFFEFEFF4))),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 24),
-            // {@highlight}
-            child: LiqCommandPalette(
-              commands: <LiqCommand>[
-                LiqCommand(
-                  label: 'New project',
-                  icon: Icons.add,
-                  shortcut: '⌘N',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Open recent',
-                  icon: Icons.folder_open,
-                  shortcut: '⌘O',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Settings',
-                  icon: Icons.settings,
-                  shortcut: '⌘,',
-                  onSelected: () {},
-                ),
-                LiqCommand(
-                  label: 'Quit',
-                  icon: Icons.power_settings_new,
-                  shortcut: '⌘Q',
-                  onSelected: () {},
-                ),
-              ],
-            ),
-            // {@endhighlight}
-          ),
+    surface: SnippetFrameSurface.liquidThemed,
+    surfacePadding: const EdgeInsets.fromLTRB(16, 56, 16, 16),
+    // {@highlight}
+    child: LiqCommandPalette(
+      commands: <LiqCommand>[
+        LiqCommand(
+          label: 'New project',
+          icon: Icons.add,
+          shortcut: '⌘N',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Open recent',
+          icon: Icons.folder_open,
+          shortcut: '⌘O',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Settings',
+          icon: Icons.settings,
+          shortcut: '⌘,',
+          onSelected: () {},
+        ),
+        LiqCommand(
+          label: 'Quit',
+          icon: Icons.power_settings_new,
+          shortcut: '⌘Q',
+          onSelected: () {},
         ),
       ],
     ),
+    // {@endhighlight}
   );
 }

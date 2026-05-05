@@ -56,6 +56,31 @@ void main() {
       expect(captured, equals(<String>{'a', 'b'}));
     });
 
+    testWidgets('enabled segments expose click cursors', (tester) async {
+      await tester.pumpWidget(
+        wrap(
+          LiqToggleGroup<String>(
+            selected: const <String>{'a'},
+            onChanged: (_) {},
+            items: const <LiqToggleGroupItem<String>>[
+              LiqToggleGroupItem(value: 'a', label: 'Alpha'),
+              LiqToggleGroupItem(value: 'b', label: 'Beta'),
+            ],
+          ),
+        ),
+      );
+
+      final mouseRegions = tester.widgetList<MouseRegion>(
+        find.byType(MouseRegion),
+      );
+      expect(
+        mouseRegions.where(
+          (region) => region.cursor == SystemMouseCursors.click,
+        ),
+        hasLength(2),
+      );
+    });
+
     testWidgets('tap on a selected item removes it from the new set', (
       tester,
     ) async {

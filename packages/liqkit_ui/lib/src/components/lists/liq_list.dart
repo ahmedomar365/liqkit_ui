@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// A grouped iOS 26 list — rounded card on a card surface.
@@ -132,62 +133,65 @@ final class LiqListRow extends StatelessWidget {
     return Semantics(
       button: onTap != null,
       label: title,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          constraints: BoxConstraints(minHeight: tall ? 68 : 52),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            children: <Widget>[
-              if (leading != null) ...<Widget>[
-                leading!,
-                const SizedBox(width: 12),
-              ],
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: titleStyle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textDirection: TextDirection.ltr,
-                    ),
-                    if (subtitle != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: Text(
-                          subtitle!,
-                          style: subtitleStyle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textDirection: TextDirection.ltr,
-                        ),
+      child: LiqPointerCursor(
+        enabled: onTap != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: Container(
+            constraints: BoxConstraints(minHeight: tall ? 68 : 52),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: <Widget>[
+                if (leading != null) ...<Widget>[
+                  leading!,
+                  const SizedBox(width: 12),
+                ],
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: titleStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: TextDirection.ltr,
                       ),
-                  ],
+                      if (subtitle != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Text(
+                            subtitle!,
+                            style: subtitleStyle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              if (detail != null) ...<Widget>[
-                const SizedBox(width: 8),
-                Text(
-                  detail!,
-                  style: detailStyle,
-                  maxLines: 1,
-                  textDirection: TextDirection.ltr,
-                ),
+                if (detail != null) ...<Widget>[
+                  const SizedBox(width: 8),
+                  Text(
+                    detail!,
+                    style: detailStyle,
+                    maxLines: 1,
+                    textDirection: TextDirection.ltr,
+                  ),
+                ],
+                if (trailing != null) ...<Widget>[
+                  const SizedBox(width: 8),
+                  trailing!,
+                ],
+                if (showChevron) ...<Widget>[
+                  const SizedBox(width: 8),
+                  const _Chevron(),
+                ],
               ],
-              if (trailing != null) ...<Widget>[
-                const SizedBox(width: 8),
-                trailing!,
-              ],
-              if (showChevron) ...<Widget>[
-                const SizedBox(width: 8),
-                const _Chevron(),
-              ],
-            ],
+            ),
           ),
         ),
       ),

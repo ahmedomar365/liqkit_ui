@@ -28,22 +28,6 @@ Widget _wrapDark(Widget child) {
   );
 }
 
-Color menuPanelColor(WidgetTester tester) {
-  final boxes = tester.widgetList<DecoratedBox>(
-    find.descendant(
-      of: find.byType(LiqMenu),
-      matching: find.byType(DecoratedBox),
-    ),
-  );
-  for (final box in boxes) {
-    final decoration = box.decoration;
-    if (decoration is BoxDecoration && decoration.color != null) {
-      return decoration.color!;
-    }
-  }
-  throw StateError('No menu panel fill found.');
-}
-
 void main() {
   testWidgets('LiqMenu renders all child rows', (tester) async {
     await tester.pumpWidget(
@@ -80,6 +64,76 @@ void main() {
     expect(taps, 1);
   });
 
+  testWidgets('LiqMenuItem scales while pressed', (tester) async {
+    await tester.pumpWidget(
+      _wrap(
+        LiqMenu(
+          children: <Widget>[LiqMenuItem(label: 'Tap me', onPressed: () {})],
+        ),
+      ),
+    );
+
+    AnimatedScale scale() => tester.widget<AnimatedScale>(
+      find
+          .ancestor(
+            of: find.text('Tap me'),
+            matching: find.byType(AnimatedScale),
+          )
+          .first,
+    );
+
+    expect(scale().scale, 1);
+
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.text('Tap me')),
+    );
+    await tester.pump();
+
+    expect(scale().scale, 0.985);
+
+    await gesture.up();
+    await tester.pump();
+
+    expect(scale().scale, 1);
+  });
+
+  testWidgets('LiqMenuQuickAction scales while pressed', (tester) async {
+    await tester.pumpWidget(
+      _wrap(
+        LiqMenu(
+          quickActions: <LiqMenuQuickAction>[
+            LiqMenuQuickAction(
+              label: 'Copy',
+              icon: const Text('C'),
+              onPressed: () {},
+            ),
+          ],
+          children: const <Widget>[LiqMenuItem(label: 'Row')],
+        ),
+      ),
+    );
+
+    AnimatedScale scale() => tester.widget<AnimatedScale>(
+      find
+          .ancestor(of: find.text('Copy'), matching: find.byType(AnimatedScale))
+          .first,
+    );
+
+    expect(scale().scale, 1);
+
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.text('Copy')),
+    );
+    await tester.pump();
+
+    expect(scale().scale, 0.96);
+
+    await gesture.up();
+    await tester.pump();
+
+    expect(scale().scale, 1);
+  });
+
   testWidgets('LiqMenu resolves dark surface and row color from theme', (
     tester,
   ) async {
@@ -95,7 +149,13 @@ void main() {
       ),
     );
 
-    expect(menuPanelColor(tester), const Color(0xD91A1A1A));
+    final glass = tester.widget<LiqGlassSurface>(find.byType(LiqGlassSurface));
+    expect(glass.tint, LiqGlassTint.dark);
+    expect(glass.borderRadius, const BorderRadius.all(Radius.circular(34)));
+    expect(glass.baseFill, const Color(0xDC18181A));
+    expect(glass.rimColor, const Color(0x70E4E9EF));
+    expect(glass.highlightStart, const Color(0x06FFFFFF));
+    expect(glass.blurSigma, 20);
 
     final label = tester.widget<Text>(find.text('Copy'));
     expect(label.style?.color, const Color(0xFFF5F5F5));

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -145,20 +146,21 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
     _hourIndex = desired.hour;
     _minuteIndex = desired.minute;
     _amPmIndex = desired.amPm;
+    final duration = context.liqMotionDuration(LiqMotion.normal);
     _hourController.animateToItem(
       _hourIndex,
-      duration: const Duration(milliseconds: 260),
-      curve: Curves.easeOutCubic,
+      duration: duration,
+      curve: LiqMotion.standard,
     );
     _minuteController.animateToItem(
       _minuteIndex,
-      duration: const Duration(milliseconds: 260),
-      curve: Curves.easeOutCubic,
+      duration: duration,
+      curve: LiqMotion.standard,
     );
     _amPmController.animateToItem(
       _amPmIndex,
-      duration: const Duration(milliseconds: 260),
-      curve: Curves.easeOutCubic,
+      duration: duration,
+      curve: LiqMotion.standard,
     );
   }
 
@@ -434,7 +436,8 @@ class _Wheel extends StatelessWidget {
       useMagnifier: true,
       magnification: LiqTimePicker.magnification,
       overAndUnderCenterOpacity: 0.36,
-      physics: const FixedExtentScrollPhysics(),
+      physics: const _PickerWheelPhysics(),
+      dragStartBehavior: DragStartBehavior.down,
       onSelectedItemChanged: onSelectedItemChanged,
       childDelegate: childDelegate,
     );
@@ -461,6 +464,15 @@ class _Wheel extends StatelessWidget {
         child: wheel,
       ),
     );
+  }
+}
+
+class _PickerWheelPhysics extends FixedExtentScrollPhysics {
+  const _PickerWheelPhysics() : super(parent: const BouncingScrollPhysics());
+
+  @override
+  _PickerWheelPhysics applyTo(ScrollPhysics? ancestor) {
+    return const _PickerWheelPhysics();
   }
 }
 

@@ -65,6 +65,27 @@ void main() {
       // Outer constraint width is 800 from the MediaQuery wrapper.
       expect(topRight.dx, 800);
     });
+
+    testWidgets('dark theme gives drawer content readable defaults', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: _wrap(
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: LiqDrawer(width: 240, child: Text('Readable')),
+            ),
+          ),
+        ),
+      );
+
+      final defaultTextStyle = DefaultTextStyle.of(
+        tester.element(find.text('Readable')),
+      );
+      expect(defaultTextStyle.style.color, const Color(0xFFFFFFFF));
+    });
   });
 
   group('LiqDrawerOverlay.show', () {
@@ -113,6 +134,28 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       await tester.pumpAndSettle();
       expect(find.text('Dismiss me'), findsNothing);
+    });
+
+    testWidgets('scrim exposes a click cursor', (tester) async {
+      final ctxKey = GlobalKey();
+      await tester.pumpWidget(_withOverlay(ctxKey));
+      await tester.pump();
+
+      unawaited(
+        LiqDrawerOverlay.show(
+          context: ctxKey.currentContext!,
+          child: const Text('Dismiss me'),
+          width: 200,
+        ),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+      expect(mouseRegion.cursor, SystemMouseCursors.click);
+
+      await tester.tapAt(const Offset(700, 300));
+      await tester.pumpAndSettle();
     });
 
     testWidgets('returned future resolves when fully dismissed', (

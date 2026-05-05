@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:flutter/services.dart' show TextInputAction, TextInputType;
-import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Inline character format applied to a span of text inside
@@ -592,41 +592,24 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
   }
 
   Widget _buildEditableArea(_RichEditorPalette palette) {
-    final showPlaceholder = _editingController.text.isEmpty;
     final baseStyle = LiqRichEditor.baseTextStyle.copyWith(color: palette.text);
     return Padding(
       padding: const EdgeInsets.all(LiqRichEditor.editorPadding),
-      child: Listener(
-        behavior: HitTestBehavior.translucent,
-        onPointerDown: (_) {
-          if (!_focusNode.hasFocus) {
-            _focusNode.requestFocus();
-          }
-        },
-        child: Stack(
-          children: <Widget>[
-            if (showPlaceholder)
-              Text(
-                widget.placeholder,
-                style: LiqRichEditor.placeholderTextStyle.copyWith(
-                  color: palette.placeholder,
-                ),
-                textDirection: TextDirection.ltr,
-              ),
-            EditableText(
-              controller: _editingController,
-              focusNode: _focusNode,
-              style: baseStyle,
-              cursorColor: LiqRichEditor.cursorColor,
-              backgroundCursorColor: palette.placeholder,
-              selectionColor: LiqRichEditor.selectionColor,
-              minLines: widget.minLines,
-              maxLines: widget.maxLines,
-              keyboardType: TextInputType.multiline,
-              textInputAction: TextInputAction.newline,
-            ),
-          ],
+      child: CupertinoTextField.borderless(
+        controller: _editingController,
+        focusNode: _focusNode,
+        padding: EdgeInsets.zero,
+        placeholder: widget.placeholder,
+        placeholderStyle: LiqRichEditor.placeholderTextStyle.copyWith(
+          color: palette.placeholder,
         ),
+        style: baseStyle,
+        cursorColor: LiqRichEditor.cursorColor,
+        cursorRadius: const Radius.circular(1),
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        keyboardType: TextInputType.multiline,
+        textInputAction: TextInputAction.newline,
       ),
     );
   }
@@ -772,30 +755,32 @@ class _ToolbarButton extends StatelessWidget {
       button: true,
       label: semanticLabel,
       selected: isActive,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: SizedBox(
-          width: LiqRichEditor.buttonTapTargetSize,
-          height: LiqRichEditor.buttonTapTargetSize,
-          child: Center(
-            child: Container(
-              width: LiqRichEditor.buttonSize,
-              height: LiqRichEditor.buttonSize,
-              decoration: BoxDecoration(
-                color:
-                    isActive
-                        ? palette.buttonActiveBackground
-                        : const Color(0x00000000),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(LiqRichEditor.buttonRadius),
+      child: LiqPointerCursor(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: SizedBox(
+            width: LiqRichEditor.buttonTapTargetSize,
+            height: LiqRichEditor.buttonTapTargetSize,
+            child: Center(
+              child: Container(
+                width: LiqRichEditor.buttonSize,
+                height: LiqRichEditor.buttonSize,
+                decoration: BoxDecoration(
+                  color:
+                      isActive
+                          ? palette.buttonActiveBackground
+                          : const Color(0x00000000),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(LiqRichEditor.buttonRadius),
+                  ),
                 ),
-              ),
-              alignment: Alignment.center,
-              child: Icon(
-                icon,
-                size: LiqRichEditor.buttonIconSize,
-                color: palette.buttonIcon,
+                alignment: Alignment.center,
+                child: Icon(
+                  icon,
+                  size: LiqRichEditor.buttonIconSize,
+                  color: palette.buttonIcon,
+                ),
               ),
             ),
           ),

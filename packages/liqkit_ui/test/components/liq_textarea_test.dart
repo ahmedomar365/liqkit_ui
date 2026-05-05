@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -6,7 +6,13 @@ Widget _wrap(Widget child) => Directionality(
   textDirection: TextDirection.ltr,
   child: MediaQuery(
     data: const MediaQueryData(),
-    child: Center(child: SizedBox(width: 480, child: child)),
+    child: Overlay(
+      initialEntries: <OverlayEntry>[
+        OverlayEntry(
+          builder: (_) => Center(child: SizedBox(width: 480, child: child)),
+        ),
+      ],
+    ),
   ),
 );
 
@@ -143,26 +149,28 @@ void main() {
       expect(fieldDecoration.color, const Color(0xFF000000));
     });
 
-    testWidgets('selection gestures belong to EditableText', (tester) async {
+    testWidgets('uses Cupertino text selection gestures', (tester) async {
       await tester.pumpWidget(_wrap(const LiqTextarea(value: 'hello world')));
       await tester.pumpAndSettle();
 
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byWidgetPredicate(
-            (widget) => widget is GestureDetector && widget.onTap != null,
-          ),
-        ),
-        findsNothing,
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.rendererIgnoresPointer, isTrue);
+      expect(editable.enableInteractiveSelection, isTrue);
+      expect(editable.selectionControls, isNotNull);
+    });
+
+    testWidgets('placeholder is rendered by the platform text field', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(const LiqTextarea(placeholder: 'Tell us what you think')),
       );
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byType(Listener),
-        ),
-        findsOneWidget,
-      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.text('Tell us what you think'), findsOneWidget);
     });
 
     test('throws AssertionError when minLines < 1', () {

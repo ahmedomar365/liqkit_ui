@@ -6,6 +6,9 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget breadcrumbDefaultBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 520,
+    height: 88,
+    surface: SnippetFrameSurface.themed,
+    surfacePadding: const EdgeInsets.symmetric(horizontal: 18),
     // {@highlight}
     child: LiqBreadcrumb(
       items: <LiqBreadcrumbItem>[

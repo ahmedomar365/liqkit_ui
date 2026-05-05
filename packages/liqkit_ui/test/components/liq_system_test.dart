@@ -43,4 +43,27 @@ void main() {
 
     expect(tester.getSize(find.byType(LiqSystemToggleDot)), const Size(44, 44));
   });
+
+  testWidgets('system controls expose click cursors when tappable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        Column(
+          children: <Widget>[
+            LiqSystemActionPill(label: 'Mute', onPressed: () {}),
+            LiqSystemToggleDot(onPressed: () {}),
+          ],
+        ),
+      ),
+    );
+
+    final mouseRegions = tester.widgetList<MouseRegion>(
+      find.byType(MouseRegion),
+    );
+    expect(
+      mouseRegions.where((region) => region.cursor == SystemMouseCursors.click),
+      hasLength(2),
+    );
+  });
 }

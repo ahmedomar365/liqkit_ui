@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+
 /// iOS 26 home-screen widget size — sets the aspect ratio of a card.
 ///
 /// Sourced from `native/components/widgets.css` (`.ios26-widgets-size-card`).
@@ -77,56 +79,62 @@ final class LiqWidgetCard extends StatelessWidget {
     return Semantics(
       button: onPressed != null,
       label: caption,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onPressed,
-        child: AspectRatio(
-          aspectRatio: _aspect(),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: gradient ?? _defaultGradient,
-                borderRadius: const BorderRadius.all(Radius.circular(14)),
-                boxShadow: const <BoxShadow>[
-                  BoxShadow(
-                    color: _shadow,
-                    offset: Offset(0, 8),
-                    blurRadius: 18,
-                  ),
-                ],
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: CustomPaint(painter: _HighlightPainter()),
-                  ),
-                  if (child != null) Positioned.fill(child: child!),
-                  if (caption != null)
-                    Positioned(
-                      left: 8,
-                      bottom: 6,
-                      child: Text(
-                        caption!,
-                        textDirection: TextDirection.ltr,
-                        style: const TextStyle(
-                          fontFamily: 'SF Pro Text',
-                          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-                          fontSize: 11,
-                          height: 14 / 11,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFFFFFFF),
-                          shadows: <Shadow>[
-                            Shadow(
-                              color: Color(0x73000000),
-                              offset: Offset(0, 2),
-                              blurRadius: 6,
-                            ),
-                          ],
+      child: LiqPointerCursor(
+        enabled: onPressed != null,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onPressed,
+          child: AspectRatio(
+            aspectRatio: _aspect(),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: gradient ?? _defaultGradient,
+                  borderRadius: const BorderRadius.all(Radius.circular(14)),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                      color: _shadow,
+                      offset: Offset(0, 8),
+                      blurRadius: 18,
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: CustomPaint(painter: _HighlightPainter()),
+                    ),
+                    if (child != null) Positioned.fill(child: child!),
+                    if (caption != null)
+                      Positioned(
+                        left: 8,
+                        bottom: 6,
+                        child: Text(
+                          caption!,
+                          textDirection: TextDirection.ltr,
+                          style: const TextStyle(
+                            fontFamily: 'SF Pro Text',
+                            fontFamilyFallback: <String>[
+                              'SF Pro',
+                              'sans-serif',
+                            ],
+                            fontSize: 11,
+                            height: 14 / 11,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFFFFFFF),
+                            shadows: <Shadow>[
+                              Shadow(
+                                color: Color(0x73000000),
+                                offset: Offset(0, 2),
+                                blurRadius: 6,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

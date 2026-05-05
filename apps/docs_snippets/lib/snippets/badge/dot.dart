@@ -5,6 +5,10 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget badgeDotBuilder(BuildContext context) {
   return const SnippetFrame(
+    maxWidth: 220,
+    height: 72,
+    surface: SnippetFrameSurface.themed,
+    surfacePadding: EdgeInsets.symmetric(horizontal: 18),
     // {@highlight}
     child: Wrap(
       spacing: 12,

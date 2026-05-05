@@ -75,10 +75,11 @@ enum LiqKitHelpersBrightness {
   dark,
 }
 
-/// 54×19 rounded pill labelling a mode preview.
+/// Compact rounded pill labelling a mode preview.
 ///
-/// Renders a small ring-with-dot glyph and a 590-weight 11/13 label.
-/// Light/dark variants per the brightness flag.
+/// Renders a small ring-with-dot glyph and a 600-weight 11/13 label.
+/// The pill keeps the original 54×19 minimum footprint but grows
+/// horizontally for longer labels so docs examples never collapse.
 final class LiqKitHelpersModePill extends StatelessWidget {
   /// Creates a mode pill.
   const LiqKitHelpersModePill({
@@ -101,6 +102,8 @@ final class LiqKitHelpersModePill extends StatelessWidget {
   static const Color _darkText = Color(0xFFFFFFFF);
   static const Color _lightDot = Color(0xFF3C3C43);
   static const Color _darkDot = Color(0xFFFFFFFF);
+  static const double _minWidth = 54;
+  static const double _height = 19;
 
   @override
   Widget build(BuildContext context) {
@@ -109,38 +112,41 @@ final class LiqKitHelpersModePill extends StatelessWidget {
     final bg = isDark ? _darkBg : _lightBg;
     final textColor = isDark ? _darkText : _lightText;
     final dotColor = isDark ? _darkDot : _lightDot;
-    return Container(
-      width: 54,
-      height: 19,
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: const BorderRadius.all(Radius.circular(14)),
-        border: Border.all(color: borderColor),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _ModeDot(color: dotColor),
-          const SizedBox(width: 4),
-          Flexible(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                label,
-                maxLines: 1,
-                style: TextStyle(
-                  color: textColor,
-                  fontFamily: 'SF Pro Text',
-                  fontSize: 11,
-                  height: 13 / 11,
-                  letterSpacing: -0.4,
-                  fontWeight: FontWeight.w600,
+    return Semantics(
+      label: label,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: _minWidth),
+        child: Container(
+          height: _height,
+          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+          decoration: BoxDecoration(
+            color: bg,
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
+            border: Border.all(color: borderColor),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _ModeDot(color: dotColor),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: textColor,
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 11,
+                    height: 13 / 11,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

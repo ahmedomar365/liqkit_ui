@@ -70,6 +70,15 @@ void main() {
       expect(taps, 1);
     });
 
+    testWidgets('onTap exposes a click cursor', (tester) async {
+      await tester.pumpWidget(
+        wrap(LiqCard(onTap: () {}, child: const Text('Tap me'))),
+      );
+
+      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
+      expect(mouseRegion.cursor, SystemMouseCursors.click);
+    });
+
     testWidgets('onTap=null: tap does not throw or change state', (
       tester,
     ) async {

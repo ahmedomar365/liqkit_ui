@@ -3,12 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
 void main() {
-  Widget wrap(Widget child, {LiqThemeData data = LiqThemeData.light}) {
+  Widget wrap(
+    Widget child, {
+    LiqThemeData data = LiqThemeData.light,
+    MediaQueryData media = const MediaQueryData(),
+    double? width = 200,
+  }) {
     return LiqTheme(
       data: data,
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Center(child: SizedBox(width: 200, child: child)),
+      child: MediaQuery(
+        data: media,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Center(
+            child: width == null ? child : SizedBox(width: width, child: child),
+          ),
+        ),
       ),
     );
   }
@@ -78,16 +88,9 @@ void main() {
 
   group('LiqSpinner', () {
     testWidgets('regular size is 30x30', (tester) async {
-      await tester.pumpWidget(
-        const LiqTheme(
-          data: LiqThemeData.light,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: Center(child: LiqSpinner()),
-          ),
-        ),
-      );
+      await tester.pumpWidget(wrap(const LiqSpinner(), width: null));
       expect(tester.getSize(find.byType(LiqSpinner)), const Size(30, 30));
+      expect(tester.getSize(find.byType(CustomPaint)), const Size(30, 30));
       // Pump a frame so the animation controller doesn't keep the test
       // ticker alive.
       await tester.pump(const Duration(milliseconds: 100));
@@ -95,16 +98,36 @@ void main() {
 
     testWidgets('small size is 22x22', (tester) async {
       await tester.pumpWidget(
-        const LiqTheme(
-          data: LiqThemeData.light,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: Center(child: LiqSpinner(size: LiqSpinnerSize.small)),
-          ),
-        ),
+        wrap(const LiqSpinner(size: LiqSpinnerSize.small), width: null),
       );
       expect(tester.getSize(find.byType(LiqSpinner)), const Size(22, 22));
+      expect(tester.getSize(find.byType(CustomPaint)), const Size(22, 22));
       await tester.pump(const Duration(milliseconds: 100));
+    });
+
+    testWidgets(
+      'uses a deterministic custom painter instead of platform paint',
+      (tester) async {
+        await tester.pumpWidget(wrap(const LiqSpinner()));
+
+        expect(find.byType(CustomPaint), findsOneWidget);
+        expect(tester.getSize(find.byType(CustomPaint)), const Size(30, 30));
+        expect(find.byType(RotationTransition), findsOneWidget);
+      },
+    );
+
+    testWidgets('reduced motion renders a static spinner frame', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          const LiqSpinner(),
+          media: const MediaQueryData(disableAnimations: true),
+        ),
+      );
+
+      expect(find.byType(CustomPaint), findsOneWidget);
+      expect(find.byType(RotationTransition), findsNothing);
     });
   });
 }

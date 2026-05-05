@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 one-time-passcode (OTP) entry field.
@@ -160,54 +161,56 @@ class _LiqOtpInputState extends State<LiqOtpInput> {
     final activeIndex = text.length.clamp(0, widget.length - 1);
     final hasFocus = _focusNode.hasFocus;
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: _requestFocus,
-      child: Stack(
-        children: <Widget>[
-          // Visible row of boxes — pointer events fall through to the
-          // GestureDetector.
-          IgnorePointer(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                for (var i = 0; i < widget.length; i++) ...<Widget>[
-                  if (i > 0) const SizedBox(width: LiqOtpInput.boxSpacing),
-                  _OtpBox(
-                    digit: i < text.length ? text[i] : '',
-                    obscure: widget.obscure,
-                    isActive: hasFocus && i == activeIndex,
-                  ),
+    return LiqPointerCursor(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _requestFocus,
+        child: Stack(
+          children: <Widget>[
+            // Visible row of boxes — pointer events fall through to the
+            // GestureDetector.
+            IgnorePointer(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  for (var i = 0; i < widget.length; i++) ...<Widget>[
+                    if (i > 0) const SizedBox(width: LiqOtpInput.boxSpacing),
+                    _OtpBox(
+                      digit: i < text.length ? text[i] : '',
+                      obscure: widget.obscure,
+                      isActive: hasFocus && i == activeIndex,
+                    ),
+                  ],
                 ],
-              ],
-            ),
-          ),
-          // Hidden EditableText that owns the actual input state.
-          // Sized to match the visible row so taps on any box (which
-          // were already routed via the parent GestureDetector) work,
-          // but rendered with zero opacity and no cursor color so it
-          // doesn't paint anything visible.
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0,
-              child: EditableText(
-                controller: _controller,
-                focusNode: _focusNode,
-                autofocus: widget.autofocus,
-                style: LiqOtpInput.textStyle,
-                cursorColor: const Color(0x00000000),
-                backgroundCursorColor: const Color(0x00000000),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(widget.length),
-                ],
-                enableSuggestions: false,
-                autocorrect: false,
               ),
             ),
-          ),
-        ],
+            // Hidden EditableText that owns the actual input state.
+            // Sized to match the visible row so taps on any box (which
+            // were already routed via the parent GestureDetector) work,
+            // but rendered with zero opacity and no cursor color so it
+            // doesn't paint anything visible.
+            Positioned.fill(
+              child: Opacity(
+                opacity: 0,
+                child: EditableText(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  autofocus: widget.autofocus,
+                  style: LiqOtpInput.textStyle,
+                  cursorColor: const Color(0x00000000),
+                  backgroundCursorColor: const Color(0x00000000),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(widget.length),
+                  ],
+                  enableSuggestions: false,
+                  autocorrect: false,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

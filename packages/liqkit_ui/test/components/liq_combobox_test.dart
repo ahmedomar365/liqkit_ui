@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -13,6 +13,22 @@ const List<LiqComboboxOption<String>> _fruits = <LiqComboboxOption<String>>[
 Widget _wrap(Widget child) {
   return MediaQuery(
     data: const MediaQueryData(size: Size(800, 600)),
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: Overlay(
+        initialEntries: <OverlayEntry>[
+          OverlayEntry(
+            builder: (_) => Center(child: SizedBox(width: 320, child: child)),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _wrapWithMedia(Widget child, MediaQueryData media) {
+  return MediaQuery(
+    data: media,
     child: Directionality(
       textDirection: TextDirection.ltr,
       child: Overlay(
@@ -58,7 +74,8 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.text('Banana'), findsOneWidget);
-      expect(find.text('Pick a fruit'), findsNothing);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.controller.text, 'Banana');
     });
 
     testWidgets('tapping the field opens the dropdown', (tester) async {
@@ -189,6 +206,39 @@ void main() {
       expect(find.byIcon(Icons.check), findsOneWidget);
     });
 
+    testWidgets('opening dropdown uses a glass popover surface', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqCombobox<String>(options: _fruits, value: null, onChanged: (_) {}),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LiqCombobox<String>));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(LiqGlassSurface), findsOneWidget);
+    });
+
+    testWidgets('reduced motion shows dropdown without waiting for animation', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrapWithMedia(
+          LiqCombobox<String>(options: _fruits, value: null, onChanged: (_) {}),
+          const MediaQueryData(size: Size(800, 600), disableAnimations: true),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LiqCombobox<String>));
+      await tester.pump();
+
+      expect(find.text('Apple'), findsOneWidget);
+    });
+
     testWidgets(
       'when onChanged is null, tapping the field does NOT open the dropdown',
       (tester) async {
@@ -207,10 +257,20 @@ void main() {
         await tester.tap(find.byType(LiqCombobox<String>));
         await tester.pumpAndSettle();
 
-        // The dropdown should not appear — none of the option labels
-        // should be in the widget tree.
-        expect(find.text('Apple'), findsNothing);
-        expect(find.text('Banana'), findsNothing);
+        expect(
+          find.descendant(
+            of: find.byType(LiqGlassSurface),
+            matching: find.text('Apple'),
+          ),
+          findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: find.byType(LiqGlassSurface),
+            matching: find.text('Banana'),
+          ),
+          findsNothing,
+        );
       },
     );
 
@@ -255,7 +315,7 @@ void main() {
       );
     });
 
-    testWidgets('selection gestures belong to EditableText', (tester) async {
+    testWidgets('uses Cupertino text selection gestures', (tester) async {
       await tester.pumpWidget(
         _wrap(
           LiqCombobox<String>(
@@ -267,22 +327,12 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byWidgetPredicate(
-            (widget) => widget is GestureDetector && widget.onTap != null,
-          ),
-        ),
-        findsNothing,
-      );
-      expect(
-        find.ancestor(
-          of: find.byType(EditableText),
-          matching: find.byType(Listener),
-        ),
-        findsOneWidget,
-      );
+      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.rendererIgnoresPointer, isTrue);
+      expect(editable.enableInteractiveSelection, isTrue);
+      expect(editable.selectionControls, isNotNull);
     });
   });
 }

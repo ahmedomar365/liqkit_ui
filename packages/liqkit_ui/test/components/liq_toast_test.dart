@@ -19,8 +19,7 @@ Widget _withOverlay(GlobalKey contextKey) {
     Overlay(
       initialEntries: <OverlayEntry>[
         OverlayEntry(
-          builder: (BuildContext context) =>
-              SizedBox.expand(key: contextKey),
+          builder: (BuildContext context) => SizedBox.expand(key: contextKey),
         ),
       ],
     ),
