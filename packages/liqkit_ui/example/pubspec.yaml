@@ -12,11 +12,3 @@ dependencies:
     sdk: flutter
   liqkit_ui:
     path: ..
-
-# Until the companion packages are published to pub.dev (Phase I),
-# point at the workspace siblings so this example can resolve.
-dependency_overrides:
-  liqkit_ui_assets:
-    path: ../../liqkit_ui_assets
-  liqkit_ui_tokens:
-    path: ../../liqkit_ui_tokens

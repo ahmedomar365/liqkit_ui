@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/theme/liq_theme.dart';
-import 'package:liqkit_ui_tokens/liqkit_ui_tokens.dart';
+import 'package:liqkit_ui/src/tokens/_generated/canonical.dart';
 
 /// A single iOS 26 color swatch card.
 class LiqColorSwatch extends StatelessWidget {

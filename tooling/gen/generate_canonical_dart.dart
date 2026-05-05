@@ -1,7 +1,7 @@
 // Pure-Dart canonical token Dart generator.
 //
 // Reads packages/liqkit_ui_design_data/manifests/canonical_tokens.json
-// and writes packages/liqkit_ui_tokens/lib/src/{foundation,semantic,component,canonical}.dart.
+// and writes packages/liqkit_ui/lib/src/tokens/_generated/canonical.dart.
 //
 // Output:
 //   - LiqColorMode (enum: default_, increasedContrast)
@@ -21,7 +21,7 @@ import 'package:crypto/crypto.dart';
 
 const String _jsonRel =
     'packages/liqkit_ui_design_data/manifests/canonical_tokens.json';
-const String _outDirRel = 'packages/liqkit_ui_tokens/lib/src';
+const String _outDirRel = 'packages/liqkit_ui/lib/src/tokens/_generated';
 const String _hashFileRel = 'tooling/gen/.canonical_tokens.json.sha256';
 
 Future<void> main(List<String> args) async {
@@ -52,18 +52,8 @@ Future<void> main(List<String> args) async {
       const <String, dynamic>{};
 
   final canonicalDart = _emitCanonical(modes, colors, typography, hash);
-  // Keep the schemaVersion-shaped placeholder files so the existing
-  // tokens_smoke_test.dart and downstream imports still resolve.
-  final foundationDart = _emitFoundationStub(hash);
-  final semanticDart = _emitSemanticStub(hash);
-  final componentDart = _emitComponentStub(hash);
 
-  final outputs = <String, String>{
-    'canonical.dart': canonicalDart,
-    'foundation.dart': foundationDart,
-    'semantic.dart': semanticDart,
-    'component.dart': componentDart,
-  };
+  final outputs = <String, String>{'canonical.dart': canonicalDart};
 
   if (check) {
     var drift = false;
@@ -89,6 +79,7 @@ Future<void> main(List<String> args) async {
     return;
   }
 
+  Directory('${repoRoot.path}/$_outDirRel').createSync(recursive: true);
   outputs.forEach((name, body) {
     File('${repoRoot.path}/$_outDirRel/$name').writeAsStringSync(body);
   });
@@ -364,35 +355,6 @@ String _emitCanonical(
 
   return buf.toString();
 }
-
-String _emitFoundationStub(String hash) => '''
-${_header('foundation', hash)}/// Foundation tokens placeholder.
-///
-/// Real iOS 26 token data lives in [LiqCanonicalColors] and
-/// [LiqCanonicalTypography] under `package:liqkit_ui_tokens/liqkit_ui_tokens.dart`.
-/// This class is preserved for backwards compatibility with the original
-/// scaffold; new code should reference the canonical accessors directly.
-class LiqFoundationTokens {
-  /// Schema version of the foundation token set.
-  static const int schemaVersion = 2;
-}
-''';
-
-String _emitSemanticStub(String hash) => '''
-${_header('semantic', hash)}/// Semantic tokens placeholder. See `LiqCanonicalColors` for real data.
-class LiqSemanticTokens {
-  /// Schema version of the semantic token set.
-  static const int schemaVersion = 2;
-}
-''';
-
-String _emitComponentStub(String hash) => '''
-${_header('component', hash)}/// Component tokens placeholder. See `LiqCanonicalColors` for real data.
-class LiqComponentTokens {
-  /// Schema version of the component token set.
-  static const int schemaVersion = 2;
-}
-''';
 
 class _ColorEntry {
   _ColorEntry({

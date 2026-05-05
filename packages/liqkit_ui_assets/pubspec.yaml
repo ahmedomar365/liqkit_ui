@@ -1,8 +1,7 @@
 name: liqkit_ui_assets
-description: Bundled fonts and image assets for liqkit_ui (the iOS 26 Liquid Glass design system for Flutter).
-version: 0.0.1
-homepage: https://github.com/ahmedomar/liqkit_ui
-repository: https://github.com/ahmedomar/liqkit_ui
+description: Internal scaffold for the future bundled-fonts package. Currently empty; not published. The font surface will move to `package:liqkit_ui` directly when fonts are added.
+version: 0.0.0
+publish_to: none
 
 resolution: workspace
 

@@ -1,12 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
-import 'package:liqkit_ui_assets/liqkit_ui_assets.dart';
 import 'package:showcase/src/ready.dart';
 import 'package:showcase/src/routes.g.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LiqFontLoader.loadAll();
   runApp(const ShowcaseApp());
 }
 

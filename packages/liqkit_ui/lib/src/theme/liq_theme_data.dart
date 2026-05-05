@@ -7,7 +7,7 @@ import 'package:liqkit_ui/src/theme/liq_material.dart';
 import 'package:liqkit_ui/src/theme/liq_quality.dart';
 import 'package:liqkit_ui/src/theme/liq_semantics.dart';
 import 'package:liqkit_ui/src/theme/liq_text_style.dart';
-import 'package:liqkit_ui_tokens/liqkit_ui_tokens.dart';
+import 'package:liqkit_ui/src/tokens/_generated/canonical.dart';
 
 /// The single immutable theme data carried via `LiqTheme`.
 ///
