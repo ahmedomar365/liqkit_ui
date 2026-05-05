@@ -222,71 +222,86 @@ class _LiquidBackdrop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = brightness == Brightness.dark;
-    final topBand = isDark ? const Color(0xFF2F5F9E) : const Color(0xFFB9D9FF);
-    final topBandEnd =
-        isDark ? const Color(0xFF17345C) : const Color(0xFFDCEBFF);
-    final lowerBase =
-        isDark ? const Color(0xFF020203) : const Color(0xFFF7F8FC);
-    final lowerLift =
-        isDark ? const Color(0xFF111114) : const Color(0xFFFFFFFF);
+    final base = isDark ? const Color(0xFF050506) : const Color(0xFFEFF7FF);
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(18)),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          DecoratedBox(decoration: BoxDecoration(color: lowerBase)),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: base,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors:
+                    isDark
+                        ? const <Color>[
+                          Color(0xFF10213D),
+                          Color(0xFF061120),
+                          Color(0xFF050506),
+                          Color(0xFF052726),
+                        ]
+                        : const <Color>[
+                          Color(0xFFBFD8FF),
+                          Color(0xFFE6F4FF),
+                          Color(0xFFDDFCF3),
+                          Color(0xFFFFFFFF),
+                        ],
+                stops: const <double>[0, 0.33, 0.68, 1],
+              ),
+            ),
+          ),
           Positioned(
-            left: 0,
-            top: 0,
-            right: 0,
-            height: 132,
+            left: -120,
+            top: -120,
+            width: 360,
+            height: 360,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[topBand, topBandEnd],
+                gradient: RadialGradient(
+                  colors:
+                      isDark
+                          ? const <Color>[Color(0xAA2F67B1), Color(0x003060A8)]
+                          : const <Color>[Color(0xB978A7FF), Color(0x0078A7FF)],
                 ),
               ),
             ),
           ),
           Positioned(
-            left: 0,
-            right: 0,
-            top: 132,
-            bottom: 0,
+            right: -120,
+            top: -80,
+            width: 380,
+            height: 380,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[lowerBase, lowerLift],
-                  stops: const <double>[0, 1],
+                gradient: RadialGradient(
+                  colors:
+                      isDark
+                          ? const <Color>[Color(0x883BC7B4), Color(0x003BC7B4)]
+                          : const <Color>[Color(0xAA7CFFF1), Color(0x007CFFF1)],
                 ),
               ),
             ),
           ),
           Positioned(
-            left: 0,
-            right: 0,
-            top: 126,
+            left: -80,
+            right: -80,
+            bottom: -150,
+            height: 280,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color:
-                        isDark
-                            ? const Color(0x99000000)
-                            : const Color(0x26000000),
-                    blurRadius: 28,
-                  ),
-                ],
+                gradient: RadialGradient(
+                  colors:
+                      isDark
+                          ? const <Color>[Color(0xCC000000), Color(0x00000000)]
+                          : const <Color>[Color(0x88FFFFFF), Color(0x00FFFFFF)],
+                ),
               ),
-              child: const SizedBox(height: 1),
             ),
           ),
           ColoredBox(
-            color: isDark ? const Color(0x14000000) : const Color(0x20FFFFFF),
+            color: isDark ? const Color(0x30000000) : const Color(0x18FFFFFF),
           ),
           child,
         ],

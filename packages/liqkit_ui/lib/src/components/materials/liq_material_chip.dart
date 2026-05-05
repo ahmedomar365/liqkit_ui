@@ -7,7 +7,7 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 material thickness presets.
 ///
-/// Each style controls the overlay alpha + core alpha + blur radius.
+/// Each style controls the translucent material opacity and blur radius.
 enum LiqMaterialStyle {
   /// Sheerest material — minimal overlay + small blur.
   ultraThin,
@@ -34,17 +34,14 @@ enum LiqMaterialBrightness {
   dark,
 }
 
-/// A 100×100 material swatch chip — used to preview iOS 26 material
+/// A 100x100 material swatch chip — used to preview iOS 26 material
 /// thickness presets on top of arbitrary content.
 ///
-/// Sourced from `native/components/materials.css`. The CSS uses
-/// `backdrop-filter: blur(...)` to sample whatever sits behind the chip,
-/// then overlays a light or dark tint to taste. In Flutter, we wrap the
-/// chip in a [BackdropFilter] (clipped to the rounded shape) so the
-/// blur applies to whatever paints behind it, then layer the tint and
-/// the highlight on top. When [LiqMaterialChip] paints over an opaque
-/// solid colour, the blur is a no-op and only the tint is visible — the
-/// same as the CSS spec.
+/// The Figma material node is a uniform translucent layer with backdrop blur,
+/// not a directional gloss painted over the top. In Flutter, this samples the
+/// live pixels behind the chip through [BackdropFilter], then applies a single
+/// brightness-appropriate tint, rim, and shadow. There is no screenshot or
+/// staged fake reflection baked into the component.
 final class LiqMaterialChip extends StatelessWidget {
   /// Creates a material chip.
   const LiqMaterialChip({
@@ -53,6 +50,8 @@ final class LiqMaterialChip extends StatelessWidget {
     this.size = const Size(100, 100),
     this.borderRadius = const BorderRadius.all(Radius.circular(24)),
     this.increasedContrast = false,
+    this.padding = EdgeInsets.zero,
+    this.child,
     super.key,
   });
 
@@ -71,23 +70,29 @@ final class LiqMaterialChip extends StatelessWidget {
   /// When true, draws the border at 1.5pt instead of 1pt.
   final bool increasedContrast;
 
-  static const Color _innerHighlightLight = Color(0xCCFFFFFF);
-  static const Color _innerHighlightDark = Color(0x1FFFFFFF);
-  static const Color _shadowLight = Color(0x1F131822);
-  static const Color _shadowDark = Color(0x57000000);
+  /// Insets applied around [child].
+  final EdgeInsetsGeometry padding;
+
+  /// Optional foreground content rendered inside the material.
+  final Widget? child;
+
+  static const Color _innerHighlightLight = Color(0xB8FFFFFF);
+  static const Color _innerHighlightDark = Color(0x21FFFFFF);
+  static const Color _shadowLight = Color(0x24131822);
+  static const Color _shadowDark = Color(0x64000000);
 
   ({double overlay, double core, double blur}) get _styleValues {
     switch (style) {
       case LiqMaterialStyle.ultraThin:
-        return (overlay: 0.28, core: 0.50, blur: 16);
+        return (overlay: 0.18, core: 0.46, blur: 24);
       case LiqMaterialStyle.thin:
-        return (overlay: 0.34, core: 0.58, blur: 28);
+        return (overlay: 0.23, core: 0.54, blur: 34);
       case LiqMaterialStyle.regular:
-        return (overlay: 0.42, core: 0.64, blur: 44);
+        return (overlay: 0.28, core: 0.60, blur: 50);
       case LiqMaterialStyle.thick:
-        return (overlay: 0.54, core: 0.74, blur: 60);
+        return (overlay: 0.34, core: 0.68, blur: 66);
       case LiqMaterialStyle.chrome:
-        return (overlay: 0.68, core: 0.82, blur: 76);
+        return (overlay: 0.40, core: 0.76, blur: 82);
     }
   }
 
@@ -102,49 +107,46 @@ final class LiqMaterialChip extends StatelessWidget {
     final isDark = resolvedBrightness == LiqMaterialBrightness.dark;
     final v = _styleValues;
     final overlayBase =
-        isDark
-            ? const Color.fromARGB(255, 16, 17, 21)
-            : const Color.fromARGB(255, 255, 255, 255);
-    final coreBase =
-        isDark
-            ? const Color.fromARGB(255, 35, 37, 44)
-            : const Color.fromARGB(255, 255, 255, 255);
+        isDark ? const Color(0xFF050507) : const Color(0xFFFFFFFF);
+    final coreBase = isDark ? const Color(0xFF1E2025) : const Color(0xFFFFFFFF);
     final overlayColor = overlayBase.withValues(
-      alpha: isDark ? 0.58 : v.overlay,
+      alpha: isDark ? v.overlay : 0.25,
     );
-    final coreColor = coreBase.withValues(alpha: isDark ? 0.74 : v.core);
+    final coreColor = coreBase.withValues(alpha: isDark ? v.core : v.core);
     final borderColor =
-        isDark ? const Color(0x33FFFFFF) : const Color(0xC2FFFFFF);
+        isDark ? const Color(0x30FFFFFF) : const Color(0xD6FFFFFF);
     final innerHighlight = isDark ? _innerHighlightDark : _innerHighlightLight;
     final shadow = isDark ? _shadowDark : _shadowLight;
+    final fillColor = Color.alphaBlend(overlayColor, coreColor);
 
     final chip = SizedBox.fromSize(
       size: size,
       child: ClipRRect(
         borderRadius: borderRadius,
         child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: v.blur / 2, sigmaY: v.blur / 2),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: borderRadius,
-              gradient: const LinearGradient(
-                begin: Alignment(0.55, -1),
-                end: Alignment(-0.55, 1),
-                colors: <Color>[Color(0x4DFFFFFF), Color(0x00FFFFFF)],
-                stops: <double>[0, 0.68],
+          filter: ui.ImageFilter.blur(sigmaX: v.blur, sigmaY: v.blur),
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  color: fillColor,
+                  border: Border.all(
+                    color: borderColor,
+                    width: increasedContrast ? 1.5 : 1,
+                  ),
+                ),
               ),
-              color: Color.alphaBlend(overlayColor, coreColor),
-              border: Border.all(
-                color: borderColor,
-                width: increasedContrast ? 1.5 : 1,
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  border: Border.all(color: innerHighlight),
+                ),
               ),
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius,
-                border: Border.all(color: innerHighlight),
-              ),
-            ),
+              if (child case final foreground?)
+                Padding(padding: padding, child: foreground),
+            ],
           ),
         ),
       ),
@@ -168,6 +170,7 @@ final class LiqMaterialChip extends StatelessWidget {
       ..add(EnumProperty<LiqMaterialStyle>('style', style))
       ..add(EnumProperty<LiqMaterialBrightness>('brightness', brightness))
       ..add(DiagnosticsProperty<Size>('size', size))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding))
       ..add(
         FlagProperty(
           'increasedContrast',

@@ -10,7 +10,7 @@ interface DocsToolbarProps {
 
 export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
   const search = useSearchContext();
-  const { resolvedTheme, setTheme, theme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
         <ThemeButton
           mounted={mounted}
           resolvedTheme={resolvedTheme}
-          theme={theme}
           setTheme={setTheme}
         />
       </div>
@@ -54,7 +53,6 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
       <ThemeButton
         mounted={mounted}
         resolvedTheme={resolvedTheme}
-        theme={theme}
         setTheme={setTheme}
       />
     </div>
@@ -64,15 +62,13 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
 function ThemeButton({
   mounted,
   resolvedTheme,
-  theme,
   setTheme,
 }: {
   mounted: boolean;
   resolvedTheme?: string;
-  theme?: string;
   setTheme: (theme: string) => void;
 }) {
-  const effectiveTheme = mounted ? resolvedTheme : 'light';
+  const effectiveTheme = mounted && resolvedTheme === 'dark' ? 'dark' : 'light';
   const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark';
   const label = effectiveTheme === 'dark' ? 'Switch to light' : 'Switch to dark';
 
@@ -84,9 +80,7 @@ function ThemeButton({
       className="inline-flex size-10 shrink-0 items-center justify-center rounded-md border bg-fd-background text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
       onClick={() => setTheme(nextTheme)}
     >
-      {theme === 'system' && mounted ? (
-        <SystemIcon className="size-4" />
-      ) : effectiveTheme === 'dark' ? (
+      {effectiveTheme === 'dark' ? (
         <MoonIcon className="size-4" />
       ) : (
         <SunIcon className="size-4" />
@@ -151,25 +145,6 @@ function MoonIcon({ className }: { className?: string }) {
       strokeLinejoin="round"
     >
       <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 7 7 0 1 0 20 14.5Z" />
-    </svg>
-  );
-}
-
-function SystemIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="4" y="5" width="16" height="11" rx="2" />
-      <path d="M8 21h8" />
-      <path d="M12 16v5" />
     </svg>
   );
 }

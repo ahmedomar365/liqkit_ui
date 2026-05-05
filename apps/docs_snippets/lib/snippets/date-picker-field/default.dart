@@ -7,15 +7,22 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget datePickerFieldDefaultBuilder(BuildContext context) {
   return SnippetFrame(
-    child: LiqDemo<DateTime?>(
-      initial: null,
-      builder:
-          (v, set) => SizedBox(
-            width: double.infinity,
-            // {@highlight}
-            child: LiqDatePickerField(value: v, onChanged: set),
-            // {@endhighlight}
-          ),
+    maxWidth: 560,
+    height: 520,
+    surface: SnippetFrameSurface.liquidThemed,
+    surfacePadding: const EdgeInsets.symmetric(horizontal: 34, vertical: 40),
+    child: Align(
+      alignment: Alignment.topCenter,
+      child: LiqDemo<DateTime?>(
+        initial: null,
+        builder:
+            (v, set) => SizedBox(
+              width: 360,
+              // {@highlight}
+              child: LiqDatePickerField(value: v, onChanged: set),
+              // {@endhighlight}
+            ),
+      ),
     ),
   );
 }

@@ -1,3 +1,4 @@
+import 'package:docs_snippets/src/materials_specimen.dart';
 import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -6,9 +7,11 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget materialsLightBuilder(BuildContext context) {
   // {@highlight}
   return const SnippetFrame(
-    maxWidth: 180,
-    surface: SnippetFrameSurface.light,
-    child: LiqMaterialChip(),
+    maxWidth: 780,
+    height: 500,
+    surface: SnippetFrameSurface.liquidLight,
+    surfacePadding: EdgeInsets.all(40),
+    child: MaterialsSpecimen(brightness: LiqMaterialBrightness.light),
   );
   // {@endhighlight}
 }
