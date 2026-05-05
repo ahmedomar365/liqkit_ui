@@ -10,12 +10,19 @@ interface DocsToolbarProps {
 
 export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
   const search = useSearchContext();
-  const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (theme !== 'light' && theme !== 'dark') {
+      setTheme(resolvedTheme === 'dark' ? 'dark' : 'light');
+    }
+  }, [mounted, resolvedTheme, setTheme, theme]);
 
   if (variant === 'sm') {
     return (
@@ -31,6 +38,7 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
         <ThemeButton
           mounted={mounted}
           resolvedTheme={resolvedTheme}
+          theme={theme}
           setTheme={setTheme}
         />
       </div>
@@ -53,6 +61,7 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
       <ThemeButton
         mounted={mounted}
         resolvedTheme={resolvedTheme}
+        theme={theme}
         setTheme={setTheme}
       />
     </div>
@@ -62,13 +71,20 @@ export function DocsToolbar({ variant = 'lg' }: DocsToolbarProps) {
 function ThemeButton({
   mounted,
   resolvedTheme,
+  theme,
   setTheme,
 }: {
   mounted: boolean;
   resolvedTheme?: string;
+  theme?: string;
   setTheme: (theme: string) => void;
 }) {
-  const effectiveTheme = mounted && resolvedTheme === 'dark' ? 'dark' : 'light';
+  const explicitTheme =
+    theme === 'dark' || theme === 'light' ? theme : undefined;
+  const resolvedTwoState = resolvedTheme === 'dark' ? 'dark' : 'light';
+  const effectiveTheme = mounted
+    ? (explicitTheme ?? resolvedTwoState)
+    : 'dark';
   const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark';
   const label = effectiveTheme === 'dark' ? 'Switch to light' : 'Switch to dark';
 

@@ -52,16 +52,9 @@ const PHASE_4_PAGES: PageSpec[] = [
   { slug: 'inputs/textarea', title: 'Textarea', iframes: 2 },
 ];
 
-// Force dark mode by clicking Fumadocs's "Toggle Theme" button on
-// every page. We start with colorScheme='light' (the page renders in
-// light) and then advance the toggle once — that promotes the docs
-// site through next-themes' rotation into dark and triggers
-// LiqPreview to re-render with theme=dark in its iframe URL.
-//
-// Setting colorScheme='dark' and seeding localStorage alone is NOT
-// sufficient: LiqPreview's useTheme returns resolvedTheme=undefined
-// until the user explicitly picks a value, so without a click the
-// iframe stays at theme=light even when `<html class="dark">` flips.
+// The docs theme control is intentionally two-state: light and dark.
+// Force dark by clicking our custom toolbar button only when a page
+// starts in light; the Fumadocs three-state system toggle is disabled.
 test.use({ colorScheme: 'light' });
 
 for (const p of PHASE_4_PAGES) {
@@ -75,14 +68,12 @@ for (const p of PHASE_4_PAGES) {
     await page.goto(`/docs/${p.slug}`);
     await expect(page.locator('h1', { hasText: p.title })).toBeVisible();
 
-    // Click Fumadocs's "Toggle Theme" button to force dark. The page
-    // starts in light because next-themes' resolvedTheme is undefined
-    // on first render; clicking the button writes localStorage.theme
-    // and triggers LiqPreview to re-render with the new theme.
-    const toggle = page
-      .locator('button[aria-label="Toggle Theme"]')
+    const switchToDark = page
+      .locator('button[aria-label="Switch to dark"]')
       .first();
-    await toggle.click();
+    if (await switchToDark.isVisible().catch(() => false)) {
+      await switchToDark.click();
+    }
     // Confirm next-themes flipped <html> to the dark class.
     await expect
       .poll(async () => page.locator('html').getAttribute('class'), {
