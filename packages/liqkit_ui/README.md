@@ -37,3 +37,7 @@ This project is licensed under the [MIT License](LICENSE).
 If you find this project useful, consider buying me a coffee:
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/ahmedomarar365)
+
+## Acknowledgements
+
+Built with love by Codex (majority) and Claude Code.
