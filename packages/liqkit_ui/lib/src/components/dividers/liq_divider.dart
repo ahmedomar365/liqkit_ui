@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Orientation for [LiqDivider].
@@ -42,11 +43,11 @@ final class LiqDivider extends StatelessWidget {
   /// Hairline color. Defaults to [defaultColor].
   final Color color;
 
-  /// Default hairline color: 16% black on white.
-  static const Color defaultColor = Color(0x29000000);
+  /// Default hairline color on light surfaces.
+  static const Color defaultColor = LiqSeparator.light;
 
   /// Default hairline color in dark theme.
-  static const Color darkDefaultColor = Color(0x29FFFFFF);
+  static const Color darkDefaultColor = LiqSeparator.dark;
 
   /// iOS 26 hairline thickness in logical pixels.
   static const double thickness = 0.33;

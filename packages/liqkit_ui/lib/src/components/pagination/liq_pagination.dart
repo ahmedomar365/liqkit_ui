@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 page-number selector for paged content (a table of results,
@@ -307,7 +308,7 @@ final class _PaginationPalette {
       chevronDisabled = LiqPagination.chevronDisabledColor;
 
   const _PaginationPalette.dark()
-    : border = const Color(0x29FFFFFF),
+    : border = LiqSeparator.dark,
       buttonBackground = const Color(0x1FFFFFFF),
       inactiveText = const Color(0xFFF5F5F7),
       ellipsis = const Color(0xFF98989D),

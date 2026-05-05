@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Axis along which a [LiqResizable] arranges its two panes.
@@ -78,7 +79,7 @@ final class LiqResizable extends StatefulWidget {
   static const Color dividerColorIdle = Color(0x14000000);
 
   /// Idle divider band fill in dark theme.
-  static const Color darkDividerColorIdle = Color(0x1FFFFFFF);
+  static const Color darkDividerColorIdle = LiqSeparator.dark;
 
   /// Active/hover divider band fill — iOS 26 system blue.
   static const Color dividerColorActive = Color(0xFF007AFF);

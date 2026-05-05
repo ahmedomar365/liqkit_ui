@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 inline date picker — month grid with selectable days.
@@ -54,7 +55,7 @@ final class LiqDatePicker extends StatelessWidget {
   static const Color _bg = Color(0xFFFFFFFF);
   static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _rim = Color(0x140F141C);
-  static const Color _rimDark = Color(0x29FFFFFF);
+  static const Color _rimDark = LiqSeparator.dark;
   static const Color _shadow = Color(0x1F131925);
   static const Color _title = Color(0xFF000000);
   static const Color _titleDark = Color(0xFFFFFFFF);

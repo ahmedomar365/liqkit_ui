@@ -3,4 +3,5 @@ library;
 
 export 'src/foundation/liq_material_surface.dart';
 export 'src/foundation/liq_motion.dart';
+export 'src/foundation/liq_separator.dart';
 export 'src/foundation/liq_typography.dart';

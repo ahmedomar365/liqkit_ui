@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Brightness mode shared across system primitives.
@@ -127,7 +128,7 @@ final class LiqSystemActionPill extends StatelessWidget {
   final VoidCallback? onPressed;
 
   static const Color _lightBorder = Color(0x14000000);
-  static const Color _darkBorder = Color(0x29FFFFFF);
+  static const Color _darkBorder = LiqSeparator.dark;
   static const Color _lightLabel = Color(0xFF181A1F);
   static const Color _darkLabel = Color(0xFFF1F3F7);
   static const Color _lightDestructive = Color(0xFFFF3B30);

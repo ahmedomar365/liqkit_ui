@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Icons;
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Inline character format applied to a span of text inside
@@ -645,9 +646,9 @@ final class _RichEditorPalette {
       placeholder = LiqRichEditor.placeholderColor;
 
   const _RichEditorPalette.dark()
-    : surfaceBorder = const Color(0x29FFFFFF),
+    : surfaceBorder = LiqSeparator.dark,
       surfaceBackground = const Color(0x1FFFFFFF),
-      toolbarDivider = const Color(0x24FFFFFF),
+      toolbarDivider = LiqSeparator.dark,
       buttonActiveBackground = const Color(0x29FFFFFF),
       buttonIcon = const Color(0xFFF5F5F7),
       text = const Color(0xFFF5F5F7),

@@ -152,13 +152,10 @@ void main() {
           if (widget is! DecoratedBox) return false;
           final decoration = widget.decoration;
           return decoration is BoxDecoration &&
-              decoration.color == const Color(0x29FFFFFF);
+              decoration.color == LiqSeparator.dark;
         }),
       );
-      expect(
-        (divider.decoration as BoxDecoration).color,
-        const Color(0x29FFFFFF),
-      );
+      expect((divider.decoration as BoxDecoration).color, LiqSeparator.dark);
     });
   });
 }

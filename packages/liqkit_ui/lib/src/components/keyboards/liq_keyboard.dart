@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Default QWERTY rows for [LiqKeyboard.keyRows].
@@ -45,10 +46,10 @@ final class LiqKeyboard extends StatelessWidget {
   static const Color _bg = Color(0xFFF3F4F7);
   static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _hairline = Color(0x1A161B26);
-  static const Color _hairlineDark = Color(0x29FFFFFF);
+  static const Color _hairlineDark = LiqSeparator.dark;
   static const Color _shadow = Color(0x290F141E);
   static const Color _suggestionDivider = Color(0x14000000);
-  static const Color _suggestionDividerDark = Color(0x29FFFFFF);
+  static const Color _suggestionDividerDark = LiqSeparator.dark;
   static const Color _suggestionText = Color(0xFF1A1A1A);
   static const Color _suggestionTextDark = Color(0xFFFFFFFF);
   static const Color _keyText = Color(0xFF000000);

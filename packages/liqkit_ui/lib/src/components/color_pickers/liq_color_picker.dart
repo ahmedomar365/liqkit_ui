@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Default iOS saved swatches used by [LiqColorPickerPanel].
@@ -352,9 +353,7 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
                   border: Border.fromBorderSide(
                     BorderSide(
                       color:
-                          isDark
-                              ? const Color(0x29FFFFFF)
-                              : const Color(0xD1D6D9DE),
+                          isDark ? LiqSeparator.dark : const Color(0xD1D6D9DE),
                     ),
                   ),
                   boxShadow: const <BoxShadow>[
@@ -1528,7 +1527,7 @@ final class LiqColorPalette extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(18)),
         border: Border.fromBorderSide(
           BorderSide(
-            color: isDark ? const Color(0x29FFFFFF) : const Color(0x1F000000),
+            color: isDark ? LiqSeparator.dark : const Color(0x1F000000),
           ),
         ),
         boxShadow: <BoxShadow>[

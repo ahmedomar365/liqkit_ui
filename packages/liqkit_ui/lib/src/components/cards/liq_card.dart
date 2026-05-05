@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 Liquid Glass content surface for grouping arbitrary children.
@@ -61,10 +62,10 @@ final class LiqCard extends StatelessWidget {
   static const Color borderColor = Color(0x14000000);
 
   /// Header / footer divider color.
-  static const Color dividerColor = Color(0x29000000);
+  static const Color dividerColor = LiqSeparator.light;
 
   /// Header / footer divider color in dark theme.
-  static const Color darkDividerColor = Color(0x29FFFFFF);
+  static const Color darkDividerColor = LiqSeparator.dark;
 
   /// Soft drop shadow color.
   static const Color shadowColor = Color(0x12000000);

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Behavior of [LiqAccordion] when expanding multiple items.
@@ -60,8 +61,8 @@ final class LiqAccordion extends StatefulWidget {
   final Set<int> initialExpanded;
 
   static const double _radius = 16;
-  static const Color _divider = Color(0x29000000);
-  static const Color _dividerDark = Color(0x29FFFFFF);
+  static const Color _divider = LiqSeparator.light;
+  static const Color _dividerDark = LiqSeparator.dark;
   static const double _dividerThickness = 0.33;
   static const double _dividerInset = 16;
   static const double _headerMinHeight = 56;

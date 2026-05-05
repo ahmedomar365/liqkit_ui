@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -302,9 +303,9 @@ final class LiqTypeColumn extends StatelessWidget {
   static const Color _headerColor = Color(0xFF66666C);
   static const Color _headerColorDark = Color(0x99EBEBF5);
   static const Color _hairline = Color(0xFFECECF1);
-  static const Color _hairlineDark = Color(0x29FFFFFF);
+  static const Color _hairlineDark = LiqSeparator.dark;
   static const Color _border = Color(0xFFE5E5EA);
-  static const Color _borderDark = Color(0x29FFFFFF);
+  static const Color _borderDark = LiqSeparator.dark;
   static const Color _background = Color(0xFFFFFFFF);
   static const Color _backgroundDark = Color(0xFF1C1C1E);
 
