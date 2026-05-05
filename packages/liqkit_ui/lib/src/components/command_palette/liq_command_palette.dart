@@ -90,23 +90,23 @@ final class LiqCommandPalette extends StatefulWidget {
   /// Outer panel corner radius.
   static const double radius = 34;
 
-  /// Outer panel background fill (~95% opaque white glass).
-  static const Color backgroundColor = Color(0xD6F5F5F5);
+  /// Outer panel background fill.
+  static const Color backgroundColor = LiqGlassSurface.lightTintBase;
 
   /// Dark-mode panel background fill.
-  static const Color darkBackgroundColor = Color(0xDC18181A);
+  static const Color darkBackgroundColor = LiqGlassSurface.darkTintBase;
 
   /// Light-mode glass rim.
-  static const Color rimColor = Color(0x1A000000);
+  static const Color rimColor = LiqGlassSurface.lightRimColor;
 
   /// Dark-mode glass rim.
-  static const Color darkRimColor = Color(0x70E4E9EF);
+  static const Color darkRimColor = LiqGlassSurface.darkRimColor;
 
   /// Light-mode top glass highlight.
-  static const Color highlightColor = Color(0x24FFFFFF);
+  static const Color highlightColor = LiqGlassSurface.lightHighlightStart;
 
   /// Dark-mode top glass highlight.
-  static const Color darkHighlightColor = Color(0x06FFFFFF);
+  static const Color darkHighlightColor = LiqGlassSurface.darkHighlightStart;
 
   /// Outer panel drop shadow.
   static const BoxShadow shadow = BoxShadow(
@@ -386,18 +386,6 @@ class _LiqCommandPaletteState extends State<LiqCommandPalette> {
         borderRadius: const BorderRadius.all(
           Radius.circular(LiqCommandPalette.radius),
         ),
-        baseFill:
-            context.liqIsDark
-                ? LiqCommandPalette.darkBackgroundColor
-                : LiqCommandPalette.backgroundColor,
-        rimColor:
-            context.liqIsDark
-                ? LiqCommandPalette.darkRimColor
-                : LiqCommandPalette.rimColor,
-        highlightStart:
-            context.liqIsDark
-                ? LiqCommandPalette.darkHighlightColor
-                : LiqCommandPalette.highlightColor,
         blurSigma: 20,
         shadows:
             context.liqIsDark

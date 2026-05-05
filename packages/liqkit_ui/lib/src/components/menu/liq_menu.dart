@@ -36,15 +36,8 @@ final class LiqMenu extends StatelessWidget {
   final Brightness? brightness;
 
   static const BorderRadius _radius = BorderRadius.all(Radius.circular(34));
-  static const Color _lightSurfaceBase = Color(0xD6F5F5F5);
-  static const Color _darkSurfaceBase = Color(0xDC18181A);
-  static const Color _lightSurfaceRim = Color(0x1A000000);
-  static const Color _darkSurfaceRim = Color(0x70E4E9EF);
-  static const Color _lightSurfaceHighlight = Color(0x24FFFFFF);
-  static const Color _darkSurfaceHighlight = Color(0x06FFFFFF);
   static const List<BoxShadow> _lightSurfaceShadows = <BoxShadow>[
     BoxShadow(color: Color(0x33000000), offset: Offset(0, 16), blurRadius: 40),
-    BoxShadow(color: Color(0x24FFFFFF), offset: Offset(0, 1)),
   ];
   static const List<BoxShadow> _darkSurfaceShadows = <BoxShadow>[
     BoxShadow(color: Color(0x6B000000), offset: Offset(0, 18), blurRadius: 34),
@@ -87,9 +80,6 @@ final class LiqMenu extends StatelessWidget {
         elevation: LiqGlassElevation.modal,
         borderRadius: _radius,
         padding: const EdgeInsets.symmetric(vertical: 10),
-        baseFill: isDark ? _darkSurfaceBase : _lightSurfaceBase,
-        rimColor: isDark ? _darkSurfaceRim : _lightSurfaceRim,
-        highlightStart: isDark ? _darkSurfaceHighlight : _lightSurfaceHighlight,
         blurSigma: 20,
         shadows: isDark ? _darkSurfaceShadows : _lightSurfaceShadows,
         child: Column(mainAxisSize: MainAxisSize.min, children: content),

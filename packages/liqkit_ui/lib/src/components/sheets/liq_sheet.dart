@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -69,8 +70,6 @@ final class LiqSheet extends StatelessWidget {
   static const double _inspectorRadius = 34;
   static const Color _white = Color(0xFFFFFFFF);
   static const Color _shadow18 = Color(0x2E000000);
-  static const Color _glass60 = Color(0x99F5F5F5);
-  static const Color _rim35 = Color(0x59FFFFFF);
   static const Color _scrim10 = Color(0x1A000000);
 
   @override
@@ -118,7 +117,6 @@ final class LiqSheet extends StatelessWidget {
                         child: _SheetSurface(
                           radius: radius,
                           background: _white,
-                          rim: null,
                           body: child,
                           child: controls,
                         ),
@@ -127,8 +125,8 @@ final class LiqSheet extends StatelessWidget {
                   )
                   : _SheetSurface(
                     radius: radius,
-                    background: isInspector ? _glass60 : _white,
-                    rim: isInspector ? _rim35 : null,
+                    background: _white,
+                    tint: isInspector ? LiqGlassTint.light : null,
                     body: child,
                     child: controls,
                   ),
@@ -152,25 +150,49 @@ class _SheetSurface extends StatelessWidget {
   const _SheetSurface({
     required this.radius,
     required this.background,
-    required this.rim,
     required this.child,
     required this.body,
+    this.tint,
   });
 
   final BorderRadius radius;
   final Color background;
-  final Color? rim;
   final Widget child;
   final Widget? body;
+  final LiqGlassTint? tint;
 
   @override
   Widget build(BuildContext context) {
+    final content = ClipRRect(
+      borderRadius: radius,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[child, if (body != null) Expanded(child: body!)],
+      ),
+    );
+
+    final glassTint = tint;
+    if (glassTint != null) {
+      return LiqGlassSurface(
+        tint: glassTint,
+        elevation: LiqGlassElevation.modal,
+        borderRadius: radius,
+        blurSigma: 20,
+        shadows: const <BoxShadow>[
+          BoxShadow(
+            color: LiqSheet._shadow18,
+            offset: Offset(0, 15),
+            blurRadius: 75,
+          ),
+        ],
+        child: content,
+      );
+    }
+
     return DecoratedBox(
       decoration: BoxDecoration(
         color: background,
         borderRadius: radius,
-        border:
-            rim == null ? null : Border.fromBorderSide(BorderSide(color: rim!)),
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: LiqSheet._shadow18,
@@ -179,13 +201,7 @@ class _SheetSurface extends StatelessWidget {
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: radius,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[child, if (body != null) Expanded(child: body!)],
-        ),
-      ),
+      child: content,
     );
   }
 }

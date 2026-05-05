@@ -153,9 +153,6 @@ final class _LiqBottomNavBarState extends State<LiqBottomNavBar> {
         borderRadius: LiqBottomNavBar._radius,
         padding: LiqBottomNavBar._surfacePadding,
         tint: palette.tint,
-        baseFill: palette.surface,
-        rimColor: palette.rim,
-        highlightStart: palette.highlight,
         blurSigma: 20,
         shadows: palette.shadows,
         child: SizedBox(
@@ -276,9 +273,6 @@ final class _BottomNavPalette {
     required this.active,
     required this.inactive,
     required this.selection,
-    required this.surface,
-    required this.rim,
-    required this.highlight,
     required this.tint,
     required this.shadows,
   });
@@ -289,9 +283,6 @@ final class _BottomNavPalette {
         active: LiqBottomNavBar.activeColor,
         inactive: Color(0xFF1A1A1A),
         selection: Color(0xFFEDEDED),
-        surface: Color(0xDFF7F7F7),
-        rim: Color(0x20FFFFFF),
-        highlight: Color(0x22FFFFFF),
         tint: LiqGlassTint.light,
         shadows: <BoxShadow>[
           BoxShadow(
@@ -307,9 +298,6 @@ final class _BottomNavPalette {
       active: context.liqPrimaryColor,
       inactive: const Color(0xE6F5F5F5),
       selection: const Color(0x1AFFFFFF),
-      surface: const Color(0xD9141416),
-      rim: const Color(0x24FFFFFF),
-      highlight: const Color(0x05FFFFFF),
       tint: LiqGlassTint.dark,
       shadows: <BoxShadow>[
         const BoxShadow(
@@ -324,9 +312,6 @@ final class _BottomNavPalette {
   final Color active;
   final Color inactive;
   final Color selection;
-  final Color surface;
-  final Color rim;
-  final Color highlight;
   final LiqGlassTint tint;
   final List<BoxShadow> shadows;
 }

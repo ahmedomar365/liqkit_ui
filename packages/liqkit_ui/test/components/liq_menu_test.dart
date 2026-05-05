@@ -152,9 +152,9 @@ void main() {
     final glass = tester.widget<LiqGlassSurface>(find.byType(LiqGlassSurface));
     expect(glass.tint, LiqGlassTint.dark);
     expect(glass.borderRadius, const BorderRadius.all(Radius.circular(34)));
-    expect(glass.baseFill, const Color(0xDC18181A));
-    expect(glass.rimColor, const Color(0x70E4E9EF));
-    expect(glass.highlightStart, const Color(0x06FFFFFF));
+    expect(glass.baseFill, isNull);
+    expect(glass.rimColor, isNull);
+    expect(glass.highlightStart, isNull);
     expect(glass.blurSigma, 20);
 
     final label = tester.widget<Text>(find.text('Copy'));

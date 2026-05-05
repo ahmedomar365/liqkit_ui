@@ -376,8 +376,8 @@ void main() {
       );
       expect(glass.borderRadius, const BorderRadius.all(Radius.circular(34)));
       expect(glass.blurSigma, 20);
-      expect(glass.baseFill, const Color(0xDC18181A));
-      expect(glass.highlightStart, const Color(0x06FFFFFF));
+      expect(glass.baseFill, isNull);
+      expect(glass.highlightStart, isNull);
     });
   });
 

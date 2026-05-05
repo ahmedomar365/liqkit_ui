@@ -124,7 +124,8 @@ void main() {
       );
       expect(glass.borderRadius, const BorderRadius.all(Radius.circular(999)));
       expect(glass.blurSigma, 20);
-      expect(glass.baseFill, const Color(0xDFF7F7F7));
+      expect(glass.baseFill, isNull);
+      expect(glass.highlightStart, isNull);
     });
 
     testWidgets('tapping a tab fires onChanged with that index', (

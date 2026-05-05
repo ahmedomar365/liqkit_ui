@@ -34,8 +34,8 @@ enum LiqGlassElevation {
 
 /// iOS 26 Liquid Glass material primitive.
 ///
-/// Renders a translucent surface with proper backdrop blur, a hairline
-/// rim, and a vibrancy highlight gradient at the top edge. Use this
+/// Renders a translucent surface with proper backdrop blur, a uniform
+/// material tint, and a hairline rim. Use this
 /// everywhere a component needs an iOS-26 glass panel — instead of
 /// hand-rolling the colors and shadows.
 ///
@@ -43,7 +43,7 @@ enum LiqGlassElevation {
 /// 1. A [BackdropFilter] that samples whatever sits behind the surface
 ///    (skipped for [LiqGlassTint.opaque]).
 /// 2. A tint-specific base fill.
-/// 3. A subtle vibrancy highlight gradient at the top edge.
+/// 3. An optional, very subtle optical highlight.
 /// 4. A 0.5pt hairline rim.
 /// 5. The [child] wrapped in [padding].
 ///
@@ -90,8 +90,8 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Optional hairline rim override.
   final Color? rimColor;
 
-  /// Optional top highlight override. Use a transparent color for components
-  /// where a generic glass sheen would overpower the sampled backdrop.
+  /// Optional optical highlight override. Keep this subtle; large painted
+  /// gradients make the material read as fake instead of sampled glass.
   final Color? highlightStart;
 
   /// Backdrop blur sigma.
@@ -107,11 +107,13 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
 
   // -- iOS 26 spec values ----------------------------------------------------
 
-  /// Light tint base fill: 80% opaque off-white.
-  static const Color lightTintBase = Color(0xCCFAFAFA);
+  /// Light tint base fill. Mostly uniform so content beneath reads through
+  /// the blur without creating a fake painted band.
+  static const Color lightTintBase = Color(0xE6F5F5F7);
 
-  /// Dark tint base fill: 80% opaque dark gray.
-  static const Color darkTintBase = Color(0xCC1C1C1E);
+  /// Dark tint base fill. Opaque enough to keep dark chrome visually
+  /// continuous over mixed imagery while still sampling the backdrop.
+  static const Color darkTintBase = Color(0xE61C1C1E);
 
   /// Opaque light fallback: no transparency, no blur.
   static const Color opaqueLightTintBase = Color(0xFFFAFAFA);
@@ -125,11 +127,11 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Dark-tint inner border (rim) hairline color: 8% white.
   static const Color darkRimColor = Color(0x14FFFFFF);
 
-  /// Top vibrancy highlight start color (light tint): 16% white.
-  static const Color lightHighlightStart = Color(0x28FFFFFF);
+  /// Optional optical highlight start color for light tint.
+  static const Color lightHighlightStart = Color(0x06FFFFFF);
 
-  /// Top vibrancy highlight start color (dark tint): 16% white.
-  static const Color darkHighlightStart = Color(0x28FFFFFF);
+  /// Optional optical highlight start color for dark tint.
+  static const Color darkHighlightStart = Color(0x04FFFFFF);
 
   /// Vibrancy highlight end color (transparent white).
   static const Color highlightEnd = Color(0x00FFFFFF);
@@ -227,13 +229,15 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
       );
     }
 
-    layers
-      ..add(
-        Positioned.fill(
-          child: ColoredBox(color: _baseFillFor(effectiveTint, isDark: isDark)),
-        ),
-      )
-      ..add(
+    layers.add(
+      Positioned.fill(
+        child: ColoredBox(color: _baseFillFor(effectiveTint, isDark: isDark)),
+      ),
+    );
+
+    final highlightStart = _highlightStartFor(effectiveTint);
+    if (highlightStart.a > 0) {
+      layers.add(
         Positioned.fill(
           child: IgnorePointer(
             child: DecoratedBox(
@@ -241,17 +245,17 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    _highlightStartFor(effectiveTint),
-                    highlightEnd,
-                  ],
-                  stops: const <double>[0, 0.4],
+                  colors: <Color>[highlightStart, highlightEnd],
+                  stops: const <double>[0, 0.16],
                 ),
               ),
             ),
           ),
         ),
-      )
+      );
+    }
+
+    layers
       ..add(
         Positioned.fill(
           child: IgnorePointer(

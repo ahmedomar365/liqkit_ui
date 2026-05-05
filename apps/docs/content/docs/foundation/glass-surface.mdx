@@ -10,8 +10,7 @@ import glassSurfaceDarkSnippet from '@/snippets/glass-surface/dark.json';
 `LiqGlassSurface` is the canonical iOS 26 Liquid Glass material — the
 single primitive every glass-bearing component in liqkit_ui consumes
 to draw a translucent panel. It paints, in order, a backdrop blur, a
-tint-specific base fill, a subtle vibrancy highlight gradient at the
-top edge, and a 0.5pt hairline rim. Sheets, popovers, dialogs,
+tint-specific uniform material fill, and a 0.5pt hairline rim. Sheets, popovers, dialogs,
 toolbars, action sheets, drawers, and hover cards all reduce to a
 single call to this widget — instead of hand-rolling colors and
 shadows.
@@ -44,7 +43,7 @@ as part of their parent rather than floating above it.
 ## Dark
 
 `LiqGlassTint.dark` switches to the iOS 26 dark glass palette: an
-80% dark-gray base fill with a 8% white inner rim. Use this for
+opaque-enough dark material fill with an 8% white inner rim. Use this for
 dark-mode action sheets, the dark status bar, and any glass surface
 overlaid on dark content.
 

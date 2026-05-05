@@ -17,7 +17,7 @@ Widget glassSurfaceFloatingBuilder(BuildContext context) {
         width: 240,
         child: SnippetLabel(
           'Liquid Glass — translucent surface with backdrop blur, '
-          'hairline rim, and a subtle vibrancy highlight at the top.',
+          'a uniform material tint, and a hairline rim.',
           fontSize: 14,
         ),
       ),
