@@ -22,31 +22,54 @@ const _ignoredSuffixes = <String>[
 
 final _blockedPatterns = <_BlockedPattern>[
   _BlockedPattern(
-    RegExp('\\b${'fa'}${'ke'}\\b', caseSensitive: false),
+    _word('fa', 'ke'),
     'Do not describe or implement staged preview/glass behavior.',
   ),
   _BlockedPattern(
-    RegExp('\\b${'ba'}${'ked'}\\b', caseSensitive: false),
-    'Do not bake visual effects into previews or components.',
+    _word('ba', 'ked'),
+    'Do not flatten visual effects into previews or components.',
   ),
   _BlockedPattern(
-    RegExp('\\b${'screen'}${'shot'}\\b', caseSensitive: false),
+    _word('screen', 'shot'),
     'Live docs/snippets must render widgets, not captured images.',
   ),
   _BlockedPattern(
-    RegExp('\\b${'static'} ${'preview'}\\b', caseSensitive: false),
+    RegExp('\\b${'sta'}${'tic'} ${'pre'}${'view'}\\b', caseSensitive: false),
     'Live previews must not depend on captured preview images.',
   ),
   _BlockedPattern(
-    RegExp('\\b${'pre'}${'tend'}\\b', caseSensitive: false),
+    _word('pre', 'tend'),
     'Do not ship staged component behavior.',
   ),
   _BlockedPattern(
     RegExp(
-      '\\b(?:${'top'}${'Band'}|${'lower'}${'Base'}|${'white'} ${'band'})\\b',
+      '\\b(?:${'top'}${'Band'}|${'lower'}${'Base'}|${'wh'}${'ite'} ${'ba'}${'nd'})\\b',
       caseSensitive: false,
     ),
     'Do not reintroduce staged banded backdrops.',
+  ),
+];
+
+final _blockedDocsPreviewPatterns = <_BlockedPattern>[
+  _BlockedPattern(
+    RegExp(r'!\['),
+    'Docs pages must use LiqPreview for component previews, '
+    'not Markdown image embeds.',
+  ),
+  _BlockedPattern(
+    RegExp(r'<img\b', caseSensitive: false),
+    'Docs pages must use LiqPreview for component previews, not image tags.',
+  ),
+  _BlockedPattern(
+    RegExp(
+      r'from\s+["'
+      "'"
+      ']next/image["'
+      "'"
+      ']',
+    ),
+    'Docs pages must use LiqPreview for component previews, '
+    'not Next image embeds.',
   ),
 ];
 
@@ -99,7 +122,25 @@ void _scanFile(File file, String rel, List<_Finding> findings) {
         );
       }
     }
+    if (rel.startsWith('apps/docs/content/')) {
+      for (final blocked in _blockedDocsPreviewPatterns) {
+        if (blocked.regex.hasMatch(line)) {
+          findings.add(
+            _Finding(
+              path: rel,
+              line: i + 1,
+              text: line,
+              reason: blocked.reason,
+            ),
+          );
+        }
+      }
+    }
   }
+}
+
+RegExp _word(String first, String second) {
+  return RegExp('\\b$first$second\\b', caseSensitive: false);
 }
 
 Directory _findRepoRoot() {
