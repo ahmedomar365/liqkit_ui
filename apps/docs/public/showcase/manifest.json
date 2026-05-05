@@ -1,0 +1,26 @@
+[
+  {
+    "path": "apps/docs/public/showcase/bottom-nav-four-tabs.png",
+    "component": "bottom-nav",
+    "variant": "four-tabs",
+    "route": "/bottom-nav/four-tabs"
+  },
+  {
+    "path": "apps/docs/public/showcase/tabs-pill.png",
+    "component": "tabs",
+    "variant": "pill",
+    "route": "/tabs/pill"
+  },
+  {
+    "path": "apps/docs/public/showcase/command-palette.png",
+    "component": "command-palette",
+    "variant": "default",
+    "route": "/command-palette/default"
+  },
+  {
+    "path": "apps/docs/public/showcase/calendar.png",
+    "component": "calendar",
+    "variant": "default",
+    "route": "/calendar/default"
+  }
+]
