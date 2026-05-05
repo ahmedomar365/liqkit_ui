@@ -20,3 +20,6 @@ jobs:
 
       - name: Verify live widget previews
         run: dart run tooling/scripts/check_real_previews.dart
+
+      - name: Verify audit catches non-live previews
+        run: dart run tooling/scripts/check_real_previews_self_test.dart

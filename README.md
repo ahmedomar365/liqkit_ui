@@ -117,6 +117,7 @@ melos run analyze
 melos run analyze:flutter
 melos run test
 melos run audit:real_previews
+melos run audit:real_previews:self_test
 ```
 
 Plus, for docs-affecting changes:

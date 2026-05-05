@@ -100,6 +100,10 @@ melos:
       run: dart run tooling/scripts/check_real_previews.dart
       description: Verify live docs, snippets, and library code render real widget previews.
 
+    audit:real_previews:self_test:
+      run: dart run tooling/scripts/check_real_previews_self_test.dart
+      description: Verify the real-preview audit catches non-live docs previews.
+
     verify:provenance:
       run: dart run tooling/scripts/verify_provenance.dart
       description: Re-hash design_data and assert PROVENANCE.md matches.

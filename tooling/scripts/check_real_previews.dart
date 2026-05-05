@@ -73,8 +73,8 @@ final _blockedDocsPreviewPatterns = <_BlockedPattern>[
   ),
 ];
 
-void main() {
-  final repo = _findRepoRoot();
+void main(List<String> args) {
+  final repo = _resolveRepoRoot(args);
   final findings = <_Finding>[];
 
   for (final root in _scannedRoots) {
@@ -143,17 +143,51 @@ RegExp _word(String first, String second) {
   return RegExp('\\b$first$second\\b', caseSensitive: false);
 }
 
+Directory _resolveRepoRoot(List<String> args) {
+  if (args.isNotEmpty) {
+    final root = _parseRootArg(args);
+    if (root == null) {
+      throw ArgumentError(
+        'Usage: dart run tooling/scripts/check_real_previews.dart [--root <path>]',
+      );
+    }
+    return _validatedRepoRoot(Directory(root));
+  }
+  return _findRepoRoot();
+}
+
+String? _parseRootArg(List<String> args) {
+  if (args.length == 1 && args.single.startsWith('--root=')) {
+    return args.single.substring('--root='.length);
+  }
+  if (args.length == 2 && args.first == '--root') {
+    return args.last;
+  }
+  return null;
+}
+
+Directory _validatedRepoRoot(Directory dir) {
+  if (_isRepoRoot(dir)) {
+    return dir;
+  }
+  throw StateError('Could not find liqkit_ui_workspace pubspec.yaml');
+}
+
 Directory _findRepoRoot() {
   var dir = Directory.current;
   while (dir.parent.path != dir.path) {
-    final pubspec = File('${dir.path}/pubspec.yaml');
-    if (pubspec.existsSync() &&
-        pubspec.readAsStringSync().contains('liqkit_ui_workspace')) {
+    if (_isRepoRoot(dir)) {
       return dir;
     }
     dir = dir.parent;
   }
   throw StateError('Could not find liqkit_ui_workspace pubspec.yaml');
+}
+
+bool _isRepoRoot(Directory dir) {
+  final pubspec = File('${dir.path}/pubspec.yaml');
+  return pubspec.existsSync() &&
+      pubspec.readAsStringSync().contains('liqkit_ui_workspace');
 }
 
 final class _BlockedPattern {
