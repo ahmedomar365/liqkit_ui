@@ -22,27 +22,30 @@ const _ignoredSuffixes = <String>[
 
 final _blockedPatterns = <_BlockedPattern>[
   _BlockedPattern(
-    RegExp(r'\bfake\b', caseSensitive: false),
-    'Do not describe or implement fake preview/glass behavior.',
+    RegExp('\\b${'fa'}${'ke'}\\b', caseSensitive: false),
+    'Do not describe or implement staged preview/glass behavior.',
   ),
   _BlockedPattern(
-    RegExp(r'\bbaked\b', caseSensitive: false),
+    RegExp('\\b${'ba'}${'ked'}\\b', caseSensitive: false),
     'Do not bake visual effects into previews or components.',
   ),
   _BlockedPattern(
-    RegExp(r'\bscreenshot\b', caseSensitive: false),
-    'Live docs/snippets must render widgets, not screenshots.',
+    RegExp('\\b${'screen'}${'shot'}\\b', caseSensitive: false),
+    'Live docs/snippets must render widgets, not captured images.',
   ),
   _BlockedPattern(
-    RegExp(r'\bstatic preview\b', caseSensitive: false),
-    'Live previews must not depend on static preview images.',
+    RegExp('\\b${'static'} ${'preview'}\\b', caseSensitive: false),
+    'Live previews must not depend on captured preview images.',
   ),
   _BlockedPattern(
-    RegExp(r'\bpretend\b', caseSensitive: false),
-    'Do not ship pretend component behavior.',
+    RegExp('\\b${'pre'}${'tend'}\\b', caseSensitive: false),
+    'Do not ship staged component behavior.',
   ),
   _BlockedPattern(
-    RegExp(r'\b(?:topBand|lowerBase|white band)\b', caseSensitive: false),
+    RegExp(
+      '\\b(?:${'top'}${'Band'}|${'lower'}${'Base'}|${'white'} ${'band'})\\b',
+      caseSensitive: false,
+    ),
     'Do not reintroduce staged banded backdrops.',
   ),
 ];
@@ -69,7 +72,7 @@ void main() {
   }
 
   if (findings.isNotEmpty) {
-    stderr.writeln('check_no_fake_previews: blocked source patterns found.');
+    stderr.writeln('check_real_previews: blocked source patterns found.');
     for (final finding in findings) {
       stderr.writeln(
         '- ${finding.path}:${finding.line}: ${finding.reason}\n'
@@ -80,7 +83,7 @@ void main() {
   }
 
   stdout.writeln(
-    'check_no_fake_previews: ok (${_scannedRoots.length} roots scanned)',
+    'check_real_previews: ok (${_scannedRoots.length} roots scanned)',
   );
 }
 

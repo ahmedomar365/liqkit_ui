@@ -116,6 +116,7 @@ melos run fmt
 melos run analyze
 melos run analyze:flutter
 melos run test
+melos run audit:real_previews
 ```
 
 Plus, for docs-affecting changes:
