@@ -96,6 +96,10 @@ melos:
       run: dart run tooling/scripts/check_showcase_migration.dart
       description: Verify the App Store showcase consumes liqkit_ui instead of duplicated Liquid* components.
 
+    audit:no_fake_previews:
+      run: dart run tooling/scripts/check_no_fake_previews.dart
+      description: Verify live docs, snippets, and library code do not use staged or baked preview effects.
+
     verify:provenance:
       run: dart run tooling/scripts/verify_provenance.dart
       description: Re-hash design_data and assert PROVENANCE.md matches.
