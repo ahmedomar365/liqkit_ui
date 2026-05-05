@@ -3,11 +3,9 @@ import 'package:flutter/animation.dart';
 /// iOS 26 motion presets — curves and durations used by every
 /// liqkit_ui component for transitions, gestures, and feedback.
 ///
-/// The curves below are first-cut placeholders that map to the closest
-/// existing Flutter curves. They will be upgraded to true critically /
-/// underdamped spring curves (matching iOS `UISpringTimingParameters`)
-/// in a follow-up task — the API is finalized now so call sites can
-/// adopt the namespace without churn.
+/// The curves below are the current Flutter implementation of the motion
+/// model. The namespace keeps component call sites centralized so the exact
+/// spring tuning can be improved in one file as the platform APIs evolve.
 ///
 /// Spring targets for the future upgrade:
 /// * [standard] — `UISpringTimingParameters(stiffness: 180, damping: 22)`

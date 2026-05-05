@@ -90,8 +90,8 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Optional hairline rim override.
   final Color? rimColor;
 
-  /// Optional optical highlight override. Keep this subtle; large painted
-  /// gradients make the material read as fake instead of sampled glass.
+  /// Optional optical highlight override. Keep this subtle; the material
+  /// should read as sampled glass, not as a separate painted overlay.
   final Color? highlightStart;
 
   /// Backdrop blur sigma.
@@ -108,7 +108,7 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   // -- iOS 26 spec values ----------------------------------------------------
 
   /// Light tint base fill. Mostly uniform so content beneath reads through
-  /// the blur without creating a fake painted band.
+  /// the blur without creating a separate painted band.
   static const Color lightTintBase = Color(0xE6F5F5F7);
 
   /// Dark tint base fill. Opaque enough to keep dark chrome visually

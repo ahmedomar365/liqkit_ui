@@ -1,8 +1,7 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -21,7 +20,7 @@ enum LiqButtonStyle {
   /// `borderless` — no fill, accent label.
   borderless,
 
-  /// `liquid` — iOS 26 liquid-glass button with gradient + inner highlight.
+  /// `liquid` — iOS 26 liquid-glass button backed by [LiqGlassSurface].
   liquid,
 }
 
@@ -88,8 +87,6 @@ final class LiqButton extends StatelessWidget {
   static const Color _destructiveDisabled = Color(0x80FF383C);
   static const Color _prominentDisabledBg = Color(0x330088FF);
   static const Color _prominentDisabledFg = Color(0x4DFFFFFF);
-  static const Color _liquidHighlight = Color(0x85FFFFFF);
-  static const Color _liquidGlassFill = Color(0x2E767680);
   static const Color _white = Color(0xFFFFFFFF);
 
   static double _height(LiqButtonSize size) => switch (size) {
@@ -186,21 +183,7 @@ final class LiqButton extends StatelessWidget {
               disabled
                   ? labelTertiary
                   : (destructive ? _accentRed : labelPrimary),
-          // The "liquid" variant layers a vertical white gradient over a
-          // translucent gray fill plus an inner-highlight 1px border —
-          // matches `linear-gradient(180deg, rgba(255,255,255,0.58),
-          // rgba(255,255,255,0.12)), rgba(118,118,128,0.18); inset 0 0
-          // 0 1px rgba(255,255,255,0.52)`.
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(999)),
-            color: _liquidGlassFill,
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Color(0x94FFFFFF), Color(0x1FFFFFFF)],
-            ),
-            border: Border.all(color: _liquidHighlight),
-          ),
+          decoration: null,
         );
     }
   }
@@ -221,7 +204,7 @@ final class LiqButton extends StatelessWidget {
     final buttonBody = Container(
       height: _height(size),
       padding: _padding(size),
-      decoration: decoration,
+      decoration: style == LiqButtonStyle.liquid ? null : decoration,
       child: Center(
         widthFactor: 1,
         child: Text(
@@ -235,20 +218,12 @@ final class LiqButton extends StatelessWidget {
 
     final visual =
         style == LiqButtonStyle.liquid
-            ? ClipRRect(
+            ? LiqGlassSurface(
               borderRadius: radius,
-              child: Stack(
-                fit: StackFit.passthrough,
-                children: <Widget>[
-                  Positioned.fill(
-                    child: BackdropFilter(
-                      filter: ui.ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-                      child: const SizedBox.shrink(),
-                    ),
-                  ),
-                  buttonBody,
-                ],
-              ),
+              blurSigma: 18,
+              elevation: LiqGlassElevation.flat,
+              highlightStart: const Color(0x00FFFFFF),
+              child: buttonBody,
             )
             : buttonBody;
 

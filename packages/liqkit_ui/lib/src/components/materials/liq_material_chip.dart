@@ -40,8 +40,8 @@ enum LiqMaterialBrightness {
 /// The Figma material node is a uniform translucent layer with backdrop blur,
 /// not a directional gloss painted over the top. In Flutter, this samples the
 /// live pixels behind the chip through [BackdropFilter], then applies a single
-/// brightness-appropriate tint, rim, and shadow. There is no screenshot or
-/// staged fake reflection baked into the component.
+/// brightness-appropriate tint, rim, and shadow. The component is rendered from
+/// live Flutter layers, with no static image or staged reflection asset.
 final class LiqMaterialChip extends StatelessWidget {
   /// Creates a material chip.
   const LiqMaterialChip({
