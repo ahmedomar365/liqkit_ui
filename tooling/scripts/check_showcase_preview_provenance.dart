@@ -27,6 +27,17 @@ void main() {
     final image = File('${repo.path}/$path');
     if (!image.existsSync()) {
       problems.add('$path is declared but the file does not exist.');
+    } else {
+      final dimensions = _readPngDimensions(image);
+      if (dimensions == null) {
+        problems.add('$path is not a readable PNG image.');
+      } else if (dimensions.width != entry.width ||
+          dimensions.height != entry.height) {
+        problems.add(
+          '$path is ${dimensions.width}x${dimensions.height}; '
+          'expected ${entry.width}x${entry.height}.',
+        );
+      }
     }
     final route = '${entry.component}/${entry.variant}';
     if (!snippetRoutes.contains(route)) {
@@ -72,6 +83,8 @@ Map<String, _ShowcasePreview> _readShowcaseManifest(File file) {
           component: _requiredString(item, 'component'),
           variant: _requiredString(item, 'variant'),
           route: _requiredString(item, 'route'),
+          width: _requiredInt(item, 'width'),
+          height: _requiredInt(item, 'height'),
         ),
   };
 }
@@ -116,6 +129,35 @@ String _requiredString(Map<String, Object?> item, String key) {
   throw FormatException('Showcase manifest entry is missing "$key".');
 }
 
+int _requiredInt(Map<String, Object?> item, String key) {
+  final value = item[key];
+  if (value is int && value > 0) {
+    return value;
+  }
+  throw FormatException('Showcase manifest entry is missing "$key".');
+}
+
+_PngDimensions? _readPngDimensions(File file) {
+  final bytes = file.readAsBytesSync();
+  if (bytes.length < 24) {
+    return null;
+  }
+  const signature = <int>[137, 80, 78, 71, 13, 10, 26, 10];
+  for (var i = 0; i < signature.length; i++) {
+    if (bytes[i] != signature[i]) {
+      return null;
+    }
+  }
+
+  int uint32(int offset) =>
+      (bytes[offset] << 24) |
+      (bytes[offset + 1] << 16) |
+      (bytes[offset + 2] << 8) |
+      bytes[offset + 3];
+
+  return _PngDimensions(width: uint32(16), height: uint32(20));
+}
+
 Directory _findRepoRoot() {
   var dir = Directory.current;
   while (dir.parent.path != dir.path) {
@@ -135,10 +177,21 @@ final class _ShowcasePreview {
     required this.component,
     required this.variant,
     required this.route,
+    required this.width,
+    required this.height,
   });
 
   final String path;
   final String component;
   final String variant;
   final String route;
+  final int width;
+  final int height;
+}
+
+final class _PngDimensions {
+  const _PngDimensions({required this.width, required this.height});
+
+  final int width;
+  final int height;
 }

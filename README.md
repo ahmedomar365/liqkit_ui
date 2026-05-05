@@ -18,7 +18,7 @@ showcase, and snippets app all live in a single workspace.
 
 | Bottom nav | Tabs |
 | --- | --- |
-| ![Bottom navigation component](apps/docs/public/showcase/bottom-nav-four-tabs.png) | ![Tabs component](apps/docs/public/showcase/tabs-pill.png) |
+| ![Bottom navigation component](apps/docs/public/showcase/bottom-nav-four-tabs-real.png) | ![Tabs component](apps/docs/public/showcase/tabs-pill.png) |
 
 | Command palette | Calendar |
 | --- | --- |

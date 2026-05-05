@@ -1,26 +1,34 @@
 [
   {
-    "path": "apps/docs/public/showcase/bottom-nav-four-tabs.png",
+    "path": "apps/docs/public/showcase/bottom-nav-four-tabs-real.png",
     "component": "bottom-nav",
     "variant": "four-tabs",
-    "route": "/bottom-nav/four-tabs"
+    "route": "/bottom-nav/four-tabs",
+    "width": 900,
+    "height": 360
   },
   {
     "path": "apps/docs/public/showcase/tabs-pill.png",
     "component": "tabs",
     "variant": "pill",
-    "route": "/tabs/pill"
+    "route": "/tabs/pill",
+    "width": 900,
+    "height": 260
   },
   {
     "path": "apps/docs/public/showcase/command-palette.png",
     "component": "command-palette",
     "variant": "default",
-    "route": "/command-palette/default"
+    "route": "/command-palette/default",
+    "width": 900,
+    "height": 520
   },
   {
     "path": "apps/docs/public/showcase/calendar.png",
     "component": "calendar",
     "variant": "default",
-    "route": "/calendar/default"
+    "route": "/calendar/default",
+    "width": 620,
+    "height": 520
   }
 ]
