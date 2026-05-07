@@ -1,3 +1,9 @@
+## 0.3.0
+
+Bumps the `liqkit_ui` peer dep constraint from `^0.2.0` to `^0.3.0` so
+this package keeps resolving against the matching liqkit_ui release.
+No icon-surface changes in this version.
+
 ## 0.2.0
 
 Adds `LiqMaterialIcons` — a 315-icon verbose-name surface mapping
