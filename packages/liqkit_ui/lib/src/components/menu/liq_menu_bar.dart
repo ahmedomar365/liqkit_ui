@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/menu/liq_menu.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -100,31 +101,22 @@ class _LiqMenuBarState extends State<LiqMenuBar> {
     final textStyle = LiqAppleTypography.subheadline(brightness).copyWith(
       color: isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
     );
-    final bg = isDark
-        ? const Color(0xCC1C1C1E)
-        : const Color(0xCCF5F5F7);
-    return Container(
+    return SizedBox(
       height: 32,
-      decoration: BoxDecoration(
-        color: bg,
-        border: Border(
-          bottom: BorderSide(
-            color: isDark
-                ? const Color(0x1AEBEBF5)
-                : const Color(0x1A3C3C43),
-          ),
+      child: LiqGlassSurface(
+        borderRadius: BorderRadius.zero,
+        padding: EdgeInsets.zero,
+        child: Row(
+          children: <Widget>[
+            for (var i = 0; i < widget.items.length; i++)
+              _MenuBarTitle(
+                key: _keys[i],
+                title: widget.items[i].title,
+                style: textStyle,
+                onTap: () => _open(i),
+              ),
+          ],
         ),
-      ),
-      child: Row(
-        children: <Widget>[
-          for (var i = 0; i < widget.items.length; i++)
-            _MenuBarTitle(
-              key: _keys[i],
-              title: widget.items[i].title,
-              style: textStyle,
-              onTap: () => _open(i),
-            ),
-        ],
       ),
     );
   }

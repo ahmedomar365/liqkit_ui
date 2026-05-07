@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -27,31 +28,21 @@ final class LiqWindow extends StatelessWidget {
   /// Optional content rendered below the toolbar.
   final Widget? child;
 
-  static const Color _shadow = Color(0x33000000);
-  static const Color _surface = Color(0xFFFFFFFF);
-  static const Color _surfaceDark = Color(0xFF1C1C1E);
+  // Surface fill / shadow are now handled by LiqGlassSurface.
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
     return SizedBox.fromSize(
       size: size,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isDark ? _surfaceDark : _surface,
-          borderRadius: const BorderRadius.all(Radius.circular(34)),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(color: _shadow, offset: Offset(0, 20), blurRadius: 76),
+      child: LiqGlassSurface(
+        borderRadius: const BorderRadius.all(Radius.circular(34)),
+        elevation: LiqGlassElevation.modal,
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: <Widget>[
+            if (toolbar != null) SizedBox(height: 64, child: toolbar),
+            if (child != null) Expanded(child: child!),
           ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(34)),
-          child: Column(
-            children: <Widget>[
-              if (toolbar != null) SizedBox(height: 64, child: toolbar),
-              if (child != null) Expanded(child: child!),
-            ],
-          ),
         ),
       ),
     );
@@ -192,10 +183,7 @@ final class LiqWindowGlassButton extends StatelessWidget {
   /// value for label buttons (e.g. 78 for a Back button).
   final double minWidth;
 
-  static const Color _bg = Color(0xFFF7F7F7);
-  static const Color _bgDark = Color(0xFF2C2C2E);
-  static const Color _innerHighlight = Color(0xD9FFFFFF);
-  static const Color _innerHighlightDark = Color(0x24FFFFFF);
+  // Surface fill + rim are now handled by LiqGlassSurface.
   static const Color _label = Color(0xFF1A1A1A);
   static const Color _labelDark = Color(0xFFFFFFFF);
 
@@ -209,19 +197,10 @@ final class LiqWindowGlassButton extends StatelessWidget {
         onTap: onPressed,
         child: ConstrainedBox(
           constraints: BoxConstraints(minWidth: minWidth, minHeight: 44),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: isDark ? _bgDark : _bg,
-              borderRadius: const BorderRadius.all(Radius.circular(296)),
-              border: Border.fromBorderSide(
-                BorderSide(
-                  color: isDark ? _innerHighlightDark : _innerHighlight,
-                ),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: DefaultTextStyle(
+          child: LiqGlassSurface(
+            borderRadius: const BorderRadius.all(Radius.circular(296)),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DefaultTextStyle(
                 style: TextStyle(
                   color: isDark ? _labelDark : _label,
                   fontFamily: 'SF Pro Text',
@@ -231,7 +210,6 @@ final class LiqWindowGlassButton extends StatelessWidget {
                 ),
                 child: Center(widthFactor: 1, heightFactor: 1, child: child),
               ),
-            ),
           ),
         ),
       ),

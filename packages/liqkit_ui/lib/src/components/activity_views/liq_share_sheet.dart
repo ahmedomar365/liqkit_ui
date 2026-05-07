@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/activity_views/liq_activity_sheet.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -133,13 +134,9 @@ final class LiqShareSheet extends StatelessWidget with Diagnosticable {
               applicationActivities.isNotEmpty)
             const SizedBox(height: 8),
           if (applicationActivities.isNotEmpty)
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: isDark
-                    ? const Color(0x4D767680)
-                    : const Color(0x33767680),
-                borderRadius: BorderRadius.circular(14),
-              ),
+            LiqGlassSurface(
+              borderRadius: BorderRadius.circular(14),
+              padding: EdgeInsets.zero,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[

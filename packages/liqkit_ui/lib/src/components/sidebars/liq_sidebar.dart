@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -20,38 +21,20 @@ final class LiqSidebar extends StatelessWidget {
   /// Panel width.
   final double width;
 
-  static const Color _bg = Color(0xB3FAFAFA);
-  static const Color _bgDark = Color(0xCC1C1C1E);
-  static const Color _rim = Color(0x80FFFFFF);
-  static const Color _rimDark = Color(0x33FFFFFF);
-  static const Color _shadow = Color(0x2E000000);
+  // Surface fill / rim / shadow are now handled by LiqGlassSurface.
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
     return SizedBox(
       width: width,
-      child: ClipRRect(
+      child: LiqGlassSurface(
         borderRadius: const BorderRadius.all(Radius.circular(34)),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: isDark ? _bgDark : _bg,
-            borderRadius: const BorderRadius.all(Radius.circular(34)),
-            border: Border.fromBorderSide(
-              BorderSide(color: isDark ? _rimDark : _rim),
-            ),
-            boxShadow: const <BoxShadow>[
-              BoxShadow(color: _shadow, offset: Offset(0, 16), blurRadius: 48),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 11, 16, 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: children,
-            ),
-          ),
+        elevation: LiqGlassElevation.modal,
+        padding: const EdgeInsets.fromLTRB(16, 11, 16, 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
         ),
       ),
     );
@@ -74,8 +57,7 @@ final class LiqSidebarSearch extends StatelessWidget {
   /// Placeholder text.
   final String placeholder;
 
-  static const Color _bg = Color(0x29787880);
-  static const Color _bgDark = Color(0x33767680);
+  // Surface fill is handled by LiqGlassSurface.
   static const Color _fg = Color(0xFF727272);
   static const Color _fgDark = Color(0x99EBEBF5);
 
@@ -85,14 +67,10 @@ final class LiqSidebarSearch extends StatelessWidget {
     final fg = isDark ? _fgDark : _fg;
     return SizedBox(
       height: 44,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isDark ? _bgDark : _bg,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 11),
-          child: Row(
+      child: LiqGlassSurface(
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        padding: const EdgeInsets.symmetric(horizontal: 11),
+        child: Row(
             children: <Widget>[
               SizedBox(
                 width: 18,
@@ -117,7 +95,6 @@ final class LiqSidebarSearch extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

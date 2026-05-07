@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -28,42 +29,23 @@ final class LiqActivitySheet extends StatelessWidget {
   /// Sheet width.
   final double width;
 
-  static const Color _bg = Color(0xE0F7F7F7);
-  static const Color _bgDark = Color(0xE61C1C1E);
-  static const Color _rim = Color(0x9EFFFFFF);
-  static const Color _rimDark = Color(0x33FFFFFF);
-  static const Color _shadow = Color(0x2E000000);
-
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
     return SizedBox(
       width: width,
-      child: ClipRRect(
+      child: LiqGlassSurface(
         borderRadius: const BorderRadius.all(Radius.circular(34)),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: isDark ? _bgDark : _bg,
-            borderRadius: const BorderRadius.all(Radius.circular(34)),
-            border: Border.fromBorderSide(
-              BorderSide(color: isDark ? _rimDark : _rim),
-            ),
-            boxShadow: const <BoxShadow>[
-              BoxShadow(color: _shadow, offset: Offset(0, 14), blurRadius: 40),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                if (header != null) header!,
-                if (header != null && child != null) const SizedBox(height: 14),
-                if (child != null) child!,
-              ],
-            ),
-          ),
+        elevation: LiqGlassElevation.modal,
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (header != null) header!,
+            if (header != null && child != null)
+              const SizedBox(height: 14),
+            if (child != null) child!,
+          ],
         ),
       ),
     );
