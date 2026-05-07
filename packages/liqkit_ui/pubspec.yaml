@@ -1,6 +1,6 @@
 name: liqkit_ui
 description: iOS 26 Liquid Glass design system for Flutter - components, theming, and foundation primitives. Hand-ported from the Figma-extracted liqkit design system.
-version: 0.2.0
+version: 0.3.0
 homepage: https://github.com/ahmedomar365/liqkit_ui
 repository: https://github.com/ahmedomar365/liqkit_ui
 issue_tracker: https://github.com/ahmedomar365/liqkit_ui/issues

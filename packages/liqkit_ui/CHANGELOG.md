@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.3.0
+
+Final batch of primitives so consumers can build a full iOS 26 app
+without ever importing `package:flutter/material.dart`.
+
+### New components
+
+- `LiqSliverAppBar` + `LiqFlexibleSpaceBar` — iOS 26 collapsing
+  app-bar pattern (hero image expanded, glass title bar pinned).
+  Drop-in replacement for Material's `SliverAppBar` /
+  `FlexibleSpaceBar` for any `CustomScrollView` flow that wants the
+  hero-collapse UX. Built on `SliverPersistentHeader` (pure
+  `package:flutter/widgets.dart`, no Material dependency).
+- `LiqDatePickerModal.show()` — modal date-picker route.
+  Drop-in replacement for Material's `showDatePicker`. Returns a
+  `Future<DateTime?>` that resolves to the chosen date or null on
+  dismiss. Internally uses `LiqCalendar` inside a `LiqAlert` with
+  Cancel + Done actions.
+- `LiqForm` + `LiqValidatedField<T>` — form-state container with
+  `validate()` / `reset()` / `save()` propagation to all
+  `LiqValidatedField` descendants. Drop-in replacement for
+  Material's `Form` + `TextFormField` for the typical
+  "submit button calls `_formKey.currentState?.validate()`" pattern.
+  No `Form` dependency in consumer code.
+
+The remaining Material symbols an iOS-26 app might still touch
+are limited to `BorderSide` (already exported by
+`package:flutter/painting.dart` → `package:flutter/widgets.dart`,
+so no Material import is actually needed) and
+`GlobalMaterialLocalizations` (only when the app needs Material's
+i18n delegates — replace with `GlobalCupertinoLocalizations` for
+iOS-only apps).
+
 ## 0.2.0
 
 Adds the missing primitives the showcase needed so an iOS 26 app can
