@@ -8,11 +8,8 @@ Widget _wrap(Widget child) => Directionality(
 );
 
 bool _isOtpBox(Widget w) {
-  if (w is! Container) return false;
-  final dec = w.decoration;
-  if (dec is! BoxDecoration) return false;
-  final br = dec.borderRadius;
-  if (br is! BorderRadius) return false;
+  if (w is! LiqGlassSurface) return false;
+  final br = w.borderRadius;
   return br.topLeft.x == LiqOtpInput.boxRadius;
 }
 
@@ -162,15 +159,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final boxDecorations =
-          tester
-              .widgetList<Container>(_otpBoxesIn(LiqOtpInput))
-              .map((container) => container.decoration)
-              .whereType<BoxDecoration>();
+      final fills = tester
+          .widgetList<LiqGlassSurface>(_otpBoxesIn(LiqOtpInput))
+          .map((s) => s.baseFill);
       expect(
-        boxDecorations.every(
-          (decoration) => decoration.color == const Color(0xFF000000),
-        ),
+        fills.every((fill) => fill == const Color(0xFF000000)),
         isTrue,
       );
 

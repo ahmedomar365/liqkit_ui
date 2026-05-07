@@ -134,19 +134,13 @@ void main() {
       final editable = tester.widget<EditableText>(find.byType(EditableText));
       expect(editable.style.color, const Color(0xFFFFFFFF));
 
-      final fieldContainer = tester.widget<Container>(
-        find
-            .descendant(
-              of: find.byType(LiqTextarea),
-              matching: find.byWidgetPredicate(
-                (widget) =>
-                    widget is Container && widget.decoration is BoxDecoration,
-              ),
-            )
-            .first,
+      final glass = tester.widget<LiqGlassSurface>(
+        find.descendant(
+          of: find.byType(LiqTextarea),
+          matching: find.byType(LiqGlassSurface),
+        ),
       );
-      final fieldDecoration = fieldContainer.decoration! as BoxDecoration;
-      expect(fieldDecoration.color, const Color(0xFF000000));
+      expect(glass.baseFill, const Color(0xFF000000));
     });
 
     testWidgets('uses Cupertino text selection gestures', (tester) async {

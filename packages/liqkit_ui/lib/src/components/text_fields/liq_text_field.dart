@@ -3,9 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
-import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Surface variant for [LiqTextField].
@@ -282,25 +282,11 @@ class _LiqTextFieldState extends State<LiqTextField> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final textWidth = constraints.maxWidth - LiqTextField._padding * 2;
-          return AnimatedContainer(
-            duration: context.liqMotionDuration(LiqMotion.fast),
-            curve: LiqMotion.snappy,
+          final inner = SizedBox(
             height: fieldHeight,
-            padding: padding,
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: filled ? LiqTextField._radius : null,
-              border:
-                  filled
-                      ? Border.fromBorderSide(
-                        BorderSide(
-                          color: rim,
-                          width: focused || hasError ? 1.5 : 1,
-                        ),
-                      )
-                      : null,
-            ),
-            child: Row(
+            child: Padding(
+              padding: padding,
+              child: Row(
               crossAxisAlignment:
                   multiline
                       ? CrossAxisAlignment.start
@@ -409,6 +395,15 @@ class _LiqTextFieldState extends State<LiqTextField> {
                 ],
               ],
             ),
+            ),
+          );
+          if (!filled) return inner;
+          return LiqGlassSurface(
+            borderRadius: LiqTextField._radius,
+            padding: EdgeInsets.zero,
+            baseFill: bg,
+            rimColor: rim,
+            child: inner,
           );
         },
       ),

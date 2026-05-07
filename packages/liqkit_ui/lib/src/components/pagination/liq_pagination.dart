@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -340,27 +341,27 @@ class _PageNumberButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final box = Container(
+    final box = SizedBox(
       width: LiqPagination.buttonSize,
       height: LiqPagination.buttonSize,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color:
-            isActive
-                ? LiqPagination.activeBackground
-                : palette.buttonBackground,
+      child: LiqGlassSurface(
+        baseFill: isActive
+            ? LiqPagination.activeBackground
+            : palette.buttonBackground,
+        rimColor: isActive ? const Color(0x00000000) : palette.border,
         borderRadius: BorderRadius.circular(LiqPagination.buttonRadius),
-        border: isActive ? null : Border.all(color: palette.border),
-      ),
-      child: Text(
-        '$page',
-        style:
-            isActive
+        padding: EdgeInsets.zero,
+        child: Center(
+          child: Text(
+            '$page',
+            style: isActive
                 ? LiqPagination.activeTextStyle
                 : LiqPagination.inactiveTextStyle.copyWith(
-                  color: palette.inactiveText,
-                ),
-        textDirection: TextDirection.ltr,
+                    color: palette.inactiveText,
+                  ),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
       ),
     );
 
@@ -406,16 +407,16 @@ class _ChevronButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = atBoundary ? palette.chevronDisabled : palette.chevron;
 
-    final box = Container(
+    final box = SizedBox(
       width: LiqPagination.buttonSize,
       height: LiqPagination.buttonSize,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: palette.buttonBackground,
+      child: LiqGlassSurface(
+        baseFill: palette.buttonBackground,
+        rimColor: palette.border,
         borderRadius: BorderRadius.circular(LiqPagination.buttonRadius),
-        border: Border.all(color: palette.border),
+        padding: EdgeInsets.zero,
+        child: Center(child: Icon(icon, size: 18, color: color)),
       ),
-      child: Icon(icon, size: 18, color: color),
     );
 
     return Semantics(

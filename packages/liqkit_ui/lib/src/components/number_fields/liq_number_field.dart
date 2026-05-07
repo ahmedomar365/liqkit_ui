@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -219,24 +220,19 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
     final palette = _NumberFieldPalette.resolve(context);
     final hasFocus = _focusNode.hasFocus;
     final borderColor = hasFocus ? palette.activeBorder : palette.border;
-    final borderWidth =
-        hasFocus
-            ? LiqNumberField.activeBorderWidth
-            : LiqNumberField.inactiveBorderWidth;
 
     final inputFormatters = <TextInputFormatter>[
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.\-]')),
     ];
 
-    final field = Container(
+    final field = SizedBox(
       height: LiqNumberField.fieldHeight,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: palette.background,
+      child: LiqGlassSurface(
+        baseFill: palette.background,
+        rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqNumberField.fieldRadius),
-        border: Border.all(color: borderColor, width: borderWidth),
-      ),
-      child: Listener(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Listener(
         behavior: HitTestBehavior.translucent,
         onPointerDown:
             widget.onChanged == null ? null : (_) => _focusNode.requestFocus(),
@@ -280,6 +276,7 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
               ),
           ],
         ),
+      ),
       ),
     );
 

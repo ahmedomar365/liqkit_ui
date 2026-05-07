@@ -84,7 +84,7 @@ void main() {
           of: find.text(label),
           matching: find.byType(GestureDetector),
         );
-        expect(tester.getSize(cell.first).height, 42);
+        expect(tester.getSize(cell.first).height, 44);
       }
     });
 
@@ -204,24 +204,16 @@ void main() {
       final editable = tester.widget<EditableText>(find.byType(EditableText));
       expect(editable.style.color, const Color(0xFFFFFFFF));
 
-      final decorations =
-          tester
-              .widgetList<Container>(
-                find.descendant(
-                  of: find.byType(LiqTimeField),
-                  matching: find.byWidgetPredicate(
-                    (widget) =>
-                        widget is Container &&
-                        widget.decoration is BoxDecoration,
-                  ),
-                ),
-              )
-              .map((container) => container.decoration)
-              .whereType<BoxDecoration>();
+      final glassFills = tester
+          .widgetList<LiqGlassSurface>(
+            find.descendant(
+              of: find.byType(LiqTimeField),
+              matching: find.byType(LiqGlassSurface),
+            ),
+          )
+          .map((s) => s.baseFill);
       expect(
-        decorations.any(
-          (decoration) => decoration.color == const Color(0xFF000000),
-        ),
+        glassFills.any((fill) => fill == const Color(0xFF000000)),
         isTrue,
       );
     });

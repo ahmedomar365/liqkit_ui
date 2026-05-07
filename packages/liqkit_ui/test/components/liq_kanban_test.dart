@@ -320,24 +320,16 @@ void main() {
       );
       expect(cardDefault.style.color, const Color(0xFFFFFFFF));
 
-      final decorations =
-          tester
-              .widgetList<Container>(
-                find.descendant(
-                  of: find.byType(LiqKanban),
-                  matching: find.byWidgetPredicate(
-                    (widget) =>
-                        widget is Container &&
-                        widget.decoration is BoxDecoration,
-                  ),
-                ),
-              )
-              .map((container) => container.decoration)
-              .whereType<BoxDecoration>();
+      final fills = tester
+          .widgetList<LiqGlassSurface>(
+            find.descendant(
+              of: find.byType(LiqKanban),
+              matching: find.byType(LiqGlassSurface),
+            ),
+          )
+          .map((s) => s.baseFill);
       expect(
-        decorations.any(
-          (decoration) => decoration.color == const Color(0xFF000000),
-        ),
+        fills.any((fill) => fill == const Color(0xFF000000)),
         isTrue,
       );
     });

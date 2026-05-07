@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 multi-line text input.
@@ -229,10 +230,6 @@ class _LiqTextareaState extends State<LiqTextarea> {
     final palette = _TextareaPalette.resolve(context);
     final hasFocus = _focusNode.hasFocus;
     final borderColor = hasFocus ? palette.activeBorder : palette.border;
-    final borderWidth =
-        hasFocus
-            ? LiqTextarea.activeBorderWidth
-            : LiqTextarea.inactiveBorderWidth;
 
     final inputFormatters = <TextInputFormatter>[
       if (widget.maxLength != null)
@@ -279,12 +276,10 @@ class _LiqTextareaState extends State<LiqTextarea> {
       );
     }
 
-    final field = Container(
-      decoration: BoxDecoration(
-        color: palette.background,
-        borderRadius: BorderRadius.circular(LiqTextarea.fieldRadius),
-        border: Border.all(color: borderColor, width: borderWidth),
-      ),
+    final field = LiqGlassSurface(
+      baseFill: palette.background,
+      rimColor: borderColor,
+      borderRadius: BorderRadius.circular(LiqTextarea.fieldRadius),
       padding: LiqTextarea.contentPadding,
       child: editor,
     );

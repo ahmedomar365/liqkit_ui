@@ -213,12 +213,11 @@ void main() {
       final placeholder = tester.widget<Text>(find.text('Placeholder'));
       expect(placeholder.style?.color, const Color(0x99EBEBF5));
 
-      final container = tester.widget<AnimatedContainer>(
-        find.byType(AnimatedContainer),
+      final glass = tester.widget<LiqGlassSurface>(
+        find.byType(LiqGlassSurface),
       );
-      final decoration = container.decoration! as BoxDecoration;
-      expect(decoration.color, const Color(0x3D767680));
-      expect(decoration.borderRadius, BorderRadius.circular(14));
+      expect(glass.baseFill, const Color(0x3D767680));
+      expect(glass.borderRadius, BorderRadius.circular(14));
     });
   });
 }

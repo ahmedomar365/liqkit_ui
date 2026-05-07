@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -275,16 +276,16 @@ class _OtpBox extends StatelessWidget {
       }
     }
 
-    return Container(
+    return SizedBox(
       width: LiqOtpInput.boxWidth,
       height: LiqOtpInput.boxHeight,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: palette.background,
+      child: LiqGlassSurface(
+        baseFill: palette.background,
+        rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqOtpInput.boxRadius),
-        border: Border.all(color: borderColor, width: borderWidth),
+        padding: EdgeInsets.zero,
+        child: Center(child: child),
       ),
-      child: child,
     );
   }
 }

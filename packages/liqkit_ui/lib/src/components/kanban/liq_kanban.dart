@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -292,21 +293,15 @@ final class LiqKanban extends StatelessWidget {
         final dropping = candidate.isNotEmpty;
         return SizedBox(
           width: columnWidth,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 140),
-            curve: Curves.easeOutCubic,
+          child: LiqGlassSurface(
+            baseFill: dropping
+                ? palette.columnHoverBackground
+                : palette.columnBackground,
+            rimColor: dropping
+                ? LiqKanban.dropHintColor
+                : palette.columnBorder,
+            borderRadius: BorderRadius.circular(columnRadius),
             padding: columnPadding,
-            decoration: BoxDecoration(
-              color:
-                  dropping
-                      ? palette.columnHoverBackground
-                      : palette.columnBackground,
-              borderRadius: BorderRadius.circular(columnRadius),
-              border: Border.all(
-                color:
-                    dropping ? LiqKanban.dropHintColor : palette.columnBorder,
-              ),
-            ),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minHeight: 220),
               child: Column(
@@ -566,13 +561,10 @@ class _KanbanCardSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: palette.cardBackground,
-        borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
-        border: Border.all(color: palette.cardBorder, width: 0.5),
-        boxShadow: const <BoxShadow>[LiqKanban.cardShadow],
-      ),
+    return LiqGlassSurface(
+      baseFill: palette.cardBackground,
+      rimColor: palette.cardBorder,
+      borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
       padding: LiqKanban.cardPadding,
       child: DefaultTextStyle.merge(
         style: TextStyle(fontSize: 13, color: palette.cardText),
@@ -598,13 +590,11 @@ class _KanbanCardFeedback extends StatelessWidget {
         width: LiqKanban.defaultColumnWidth - 24,
         child: Transform.rotate(
           angle: LiqKanban.feedbackRotation,
-          child: Container(
-            decoration: BoxDecoration(
-              color: palette.cardBackground,
-              borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
-              border: Border.all(color: palette.cardBorder, width: 0.5),
-              boxShadow: const <BoxShadow>[LiqKanban.dragShadow],
-            ),
+          child: LiqGlassSurface(
+            baseFill: palette.cardBackground,
+            rimColor: palette.cardBorder,
+            elevation: LiqGlassElevation.modal,
+            borderRadius: BorderRadius.circular(LiqKanban.cardRadius),
             padding: LiqKanban.cardPadding,
             child: DefaultTextStyle.merge(
               style: TextStyle(fontSize: 13, color: palette.cardText),

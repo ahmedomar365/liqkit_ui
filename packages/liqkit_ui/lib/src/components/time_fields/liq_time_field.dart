@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -333,27 +334,22 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
     final disabled = widget.onChanged == null;
     final hasFocus = _focusNode.hasFocus;
     final borderColor = hasFocus ? palette.activeBorder : palette.border;
-    final borderWidth =
-        hasFocus
-            ? LiqTimeField.activeBorderWidth
-            : LiqTimeField.inactiveBorderWidth;
 
     final inputFormatters = <TextInputFormatter>[
       FilteringTextInputFormatter.allow(RegExp('[0-9:]')),
       LengthLimitingTextInputFormatter(5),
     ];
 
-    final field = Container(
+    final field = SizedBox(
       height: LiqTimeField.fieldHeight,
-      padding: const EdgeInsets.symmetric(
-        horizontal: LiqTimeField.horizontalPadding,
-      ),
-      decoration: BoxDecoration(
-        color: palette.background,
+      child: LiqGlassSurface(
+        baseFill: palette.background,
+        rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqTimeField.fieldRadius),
-        border: Border.all(color: borderColor, width: borderWidth),
-      ),
-      child: Listener(
+        padding: const EdgeInsets.symmetric(
+          horizontal: LiqTimeField.horizontalPadding,
+        ),
+        child: Listener(
         behavior: HitTestBehavior.translucent,
         onPointerDown: disabled ? null : (_) => _focusNode.requestFocus(),
         child: Row(
@@ -383,6 +379,7 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
             ],
           ],
         ),
+      ),
       ),
     );
 
@@ -419,17 +416,18 @@ class _PeriodSegment extends StatelessWidget {
         children: <Widget>[
           Positioned.fill(
             child: Center(
-              child: Container(
-                width:
-                    2 *
+              child: SizedBox(
+                width: 2 *
                     ((LiqTimeField.segmentHorizontalPadding * 2) +
                         _periodCellLabelWidth),
                 height: LiqTimeField.segmentHeight,
-                decoration: BoxDecoration(
-                  color: palette.segmentBackground,
+                child: LiqGlassSurface(
+                  baseFill: palette.segmentBackground,
                   borderRadius: BorderRadius.circular(
                     LiqTimeField.segmentRadius,
                   ),
+                  padding: EdgeInsets.zero,
+                  child: const SizedBox.expand(),
                 ),
               ),
             ),
