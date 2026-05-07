@@ -82,6 +82,7 @@ export 'src/components/radios/liq_radio.dart';
 export 'src/components/resizable/liq_resizable.dart';
 export 'src/components/rich_editors/liq_rich_editor.dart';
 export 'src/components/scaffold/liq_app_bar.dart';
+export 'src/components/scaffold/liq_demo_split_layout.dart';
 export 'src/components/scaffold/liq_floating_action_button.dart';
 export 'src/components/scaffold/liq_scaffold.dart';
 export 'src/components/scaffold/liq_sliver_app_bar.dart';
