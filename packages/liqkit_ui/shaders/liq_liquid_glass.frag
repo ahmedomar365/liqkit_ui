@@ -105,10 +105,13 @@ void main() {
   vec3 blurred = sum;
 
   // Mix toward tint color, then a small vibrancy lift on very dark results.
+  // The 0.02 ceiling is intentional — anything higher pushes dark-mode glass
+  // toward a flat-gray look that breaks the "I can see through to the page"
+  // illusion. Apple's vibrancyDark uses only a few %.
   float tintAmt = clamp(uTintRGB.w, 0.0, 1.0);
   vec3 tinted = mix(blurred, uTintRGB.rgb, tintAmt);
   float lum = dot(tinted, vec3(0.299, 0.587, 0.114));
-  float vibrancy = smoothstep(0.30, 0.0, lum) * 0.06;
+  float vibrancy = smoothstep(0.30, 0.0, lum) * 0.02;
   vec3 backdrop = mix(tinted, vec3(1.0), vibrancy);
 
   // Always-visible material cues.
@@ -138,7 +141,7 @@ void main() {
     vec3 chroma3 = vec3(r, blurred.g, b);
     chroma3 = mix(chroma3, uTintRGB.rgb, tintAmt);
     float clum = dot(chroma3, vec3(0.299, 0.587, 0.114));
-    chroma3 = mix(chroma3, vec3(1.0), smoothstep(0.30, 0.0, clum) * 0.06);
+    chroma3 = mix(chroma3, vec3(1.0), smoothstep(0.30, 0.0, clum) * 0.02);
     color = chroma3;
     color += vec3(topLit + perimeter + fresnel * 0.12);
     color *= 1.0 - bottomShadow;

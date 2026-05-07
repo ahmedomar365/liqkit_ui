@@ -48,18 +48,24 @@ final class LiqEmptyState extends StatelessWidget {
         SizedBox(
           width: 50,
           height: 50,
-          child:
-              iconBackground
-                  ? DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: iconCircleColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: SizedBox(width: 22, height: 22, child: icon),
-                    ),
-                  )
-                  : Center(child: icon),
+          child: iconBackground
+              ? DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: iconCircleColor,
+                    shape: BoxShape.circle,
+                  ),
+                  // FittedBox actually scales the icon to fit the disc,
+                  // regardless of any `size:` the caller passed on the
+                  // Icon widget. Without this, callers who pass an
+                  // oversized icon (e.g. size: 48) get an asymmetric
+                  // overflow because RenderIcon anchors top-left, not
+                  // center, and the icon ends up visibly left-shifted.
+                  child: Padding(
+                    padding: const EdgeInsets.all(13),
+                    child: FittedBox(fit: BoxFit.contain, child: icon!),
+                  ),
+                )
+              : Center(child: icon),
         ),
         const SizedBox(height: 16),
       ],

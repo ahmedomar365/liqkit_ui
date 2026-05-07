@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -185,10 +186,8 @@ final class LiqAlert extends StatelessWidget {
   /// Layout for the action row.
   final LiqAlertActionLayout layout;
 
-  static const Color _surfaceFill = Color(0x99F5F5F5);
-  static const Color _surfaceFillDark = Color(0xCC1C1C1E);
-  static const Color _innerScrim = Color(0x14000000);
-  static const Color _innerScrimDark = Color(0x24FFFFFF);
+  // Surface fill is now handled by LiqGlassSurface inside `build` — the
+  // legacy `_surfaceFill` / `_innerScrim` constants are gone.
   static const double _surfaceWidth = 300;
   static const double _surfaceRadius = 34;
   static const Color _titleColor = Color(0xFF000000);
@@ -219,59 +218,57 @@ final class LiqAlert extends StatelessWidget {
     );
     final isDark = context.liqIsDark;
     final titleColor = isDark ? _titleColorDark : _titleColor;
+    // Real liquid-glass surface (delegates to the same shader path as
+    // every other Liq* chrome). Previously this was two stacked
+    // ColoredBox layers, which gave the alert a flat opaque look. The
+    // glass tint here is the same `light` default that auto-flips to
+    // dark in dark mode, so the alert has authentic frosted-glass
+    // refraction over whatever's behind it.
     return SizedBox(
       width: _surfaceWidth,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(_surfaceRadius)),
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: ColoredBox(color: isDark ? _innerScrimDark : _innerScrim),
-            ),
-            Positioned.fill(
-              child: ColoredBox(
-                color: isDark ? _surfaceFillDark : _surfaceFill,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          title,
-                          textAlign: TextAlign.center,
-                          style: _titleStyle.copyWith(color: titleColor),
-                          textDirection: TextDirection.ltr,
-                        ),
-                        if (description != null) ...<Widget>[
-                          const SizedBox(height: 10),
-                          Text(
-                            description!,
-                            textAlign: TextAlign.center,
-                            style: _descriptionStyle.copyWith(
-                              color: titleColor,
-                            ),
-                            textDirection: TextDirection.ltr,
-                          ),
-                        ],
-                        if (content != null) ...<Widget>[
-                          const SizedBox(height: 16),
-                          content!,
-                        ],
-                      ],
+      child: LiqGlassSurface(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(_surfaceRadius),
+        ),
+        elevation: LiqGlassElevation.modal,
+        padding: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: _titleStyle.copyWith(color: titleColor),
+                      textDirection: TextDirection.ltr,
                     ),
-                  ),
-                  _buildActions(),
-                ],
+                    if (description != null) ...<Widget>[
+                      const SizedBox(height: 10),
+                      Text(
+                        description!,
+                        textAlign: TextAlign.center,
+                        style: _descriptionStyle.copyWith(
+                          color: titleColor,
+                        ),
+                        textDirection: TextDirection.ltr,
+                      ),
+                    ],
+                    if (content != null) ...<Widget>[
+                      const SizedBox(height: 16),
+                      content!,
+                    ],
+                  ],
+                ),
               ),
-            ),
-          ],
+              _buildActions(),
+            ],
+          ),
         ),
       ),
     );

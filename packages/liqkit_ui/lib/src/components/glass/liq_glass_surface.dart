@@ -487,7 +487,10 @@ class _ShaderHost extends StatelessWidget {
       ..setFloat(5, 18 * dpr)             // uParams1.w — edgeWidth
       ..setFloat(6, 0.30)                 // uParams2.x — chroma
       ..setFloat(7, blurPx * dpr)         // uParams2.y — blurPx
-      ..setFloat(8, isDark ? 1.4 : 1.0)   // uParams2.z — rimBrightness
+      ..setFloat(8, isDark ? 0.55 : 1.0)  // uParams2.z — rimBrightness
+                                          // (dark mode: subtler rim — Apple's
+                                          // dark glass has lower-amplitude
+                                          // highlights, not higher.)
       ..setFloat(9, 2.0)                  // uParams2.w — mode (full)
       ..setFloat(10, tintRgb.r)           // uTintRGB.x
       ..setFloat(11, tintRgb.g)           // uTintRGB.y
