@@ -46,6 +46,7 @@ class LiqStep {
   final LiqStepState state;
   final bool isActive;
 
+  // ignore: unused_element
   LiqStep _withState(LiqStepState newState, {bool? isActive}) {
     return LiqStep(
       title: title,

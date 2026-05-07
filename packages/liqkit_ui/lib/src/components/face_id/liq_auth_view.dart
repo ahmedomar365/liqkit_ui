@@ -97,6 +97,7 @@ class _LiqFaceIdViewState extends State<LiqFaceIdView> {
     });
   }
 
+  // ignore: unused_element
   void _fail() {
     _timer?.cancel();
     setState(() => _state = LiqAuthState.failed);
