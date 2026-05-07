@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -47,7 +48,7 @@ final class LiqKeyboard extends StatelessWidget {
   static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _hairline = Color(0x1A161B26);
   static const Color _hairlineDark = LiqSeparator.dark;
-  static const Color _shadow = Color(0x290F141E);
+  // Shadow is handled by LiqGlassSurface elevation.
   static const Color _suggestionDivider = Color(0x14000000);
   static const Color _suggestionDividerDark = LiqSeparator.dark;
   static const Color _suggestionText = Color(0xFF1A1A1A);
@@ -69,27 +70,22 @@ final class LiqKeyboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = _KeyboardPalette.resolve(context);
-    return Container(
-      width: width,
-      constraints: BoxConstraints(minHeight: minHeight),
-      padding: const EdgeInsets.fromLTRB(14, 22, 14, 16),
-      decoration: BoxDecoration(
-        color: palette.background,
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: width, minHeight: minHeight),
+      child: LiqGlassSurface(
+        elevation: LiqGlassElevation.modal,
         borderRadius: const BorderRadius.all(Radius.circular(44)),
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: _shadow, offset: Offset(0, 12), blurRadius: 36),
-        ],
-        border: Border.fromBorderSide(BorderSide(color: palette.hairline)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          _Suggestions(suggestions: suggestions, palette: palette),
-          const SizedBox(height: 14),
-          Expanded(child: _Keys(rows: keyRows, palette: palette)),
-          const SizedBox(height: 14),
-          _Toolbar(palette: palette),
-        ],
+        padding: const EdgeInsets.fromLTRB(14, 22, 14, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _Suggestions(suggestions: suggestions, palette: palette),
+            const SizedBox(height: 14),
+            Expanded(child: _Keys(rows: keyRows, palette: palette)),
+            const SizedBox(height: 14),
+            _Toolbar(palette: palette),
+          ],
+        ),
       ),
     );
   }

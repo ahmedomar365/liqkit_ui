@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/components/shared/liq_scrubbable_index_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
@@ -225,14 +226,10 @@ final class _LiqTabsState extends State<LiqTabs> {
     final activeIndex = _activeIndex;
     return SizedBox(
       height: LiqTabs.headerHeight,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: palette.pillTrack,
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(4),
-          child: LiqScrubbableIndexSurface(
+      child: LiqGlassSurface(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        padding: const EdgeInsets.all(4),
+        child: LiqScrubbableIndexSurface(
             count: count,
             enabled: widget.onChanged != null,
             onPreview: _preview,
@@ -274,7 +271,6 @@ final class _LiqTabsState extends State<LiqTabs> {
             ),
           ),
         ),
-      ),
     );
   }
 

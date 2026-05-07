@@ -198,9 +198,8 @@ void main() {
 
       final track = find.byWidgetPredicate(
         (widget) =>
-            widget is Container &&
-            widget.decoration is BoxDecoration &&
-            (widget.decoration! as BoxDecoration).borderRadius ==
+            widget is LiqGlassSurface &&
+            widget.borderRadius ==
                 const BorderRadius.all(
                   Radius.circular(LiqToggleGroup.trackRadius),
                 ),
@@ -235,9 +234,8 @@ void main() {
 
       final track = find.byWidgetPredicate(
         (widget) =>
-            widget is Container &&
-            widget.decoration is BoxDecoration &&
-            (widget.decoration! as BoxDecoration).borderRadius ==
+            widget is LiqGlassSurface &&
+            widget.borderRadius ==
                 const BorderRadius.all(
                   Radius.circular(LiqToggleGroup.trackRadius),
                 ),

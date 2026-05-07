@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/components/shared/liq_scrubbable_index_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
@@ -74,14 +75,12 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
               segments: segments,
               value: value,
               onChanged: onChanged,
-              child: Container(
+              child: SizedBox(
                 height: _height,
-                padding: const EdgeInsets.all(_padding),
-                decoration: BoxDecoration(
-                  color: palette.track,
+                child: LiqGlassSurface(
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
-                ),
-                child: Stack(
+                  padding: const EdgeInsets.all(_padding),
+                  child: Stack(
                   children: <Widget>[
                     if (hasSelection)
                       AnimatedPositioned(
@@ -116,6 +115,7 @@ final class LiqSegmentedControl<T> extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
               ),
             );
           },

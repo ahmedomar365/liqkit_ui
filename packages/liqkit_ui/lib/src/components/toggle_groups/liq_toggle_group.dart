@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -130,12 +131,9 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
     final disabled = onChanged == null;
 
     Widget control = _ToggleGroupTrack(
-      child: Container(
+      child: LiqGlassSurface(
         padding: const EdgeInsets.all(trackPadding),
-        decoration: BoxDecoration(
-          color: palette.track,
-          borderRadius: const BorderRadius.all(Radius.circular(trackRadius)),
-        ),
+        borderRadius: const BorderRadius.all(Radius.circular(trackRadius)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/foundation/liq_typography.dart';
@@ -305,11 +306,9 @@ class _LiqTimePickerState extends State<LiqTimePicker> {
       behavior: const _AnyDeviceScrollBehavior(),
       child: SizedBox(
         height: LiqTimePicker.wheelHeight,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: palette.background,
-            borderRadius: BorderRadius.circular(12),
-          ),
+        child: LiqGlassSurface(
+          borderRadius: BorderRadius.circular(12),
+          padding: EdgeInsets.zero,
           child: Center(
             child: SizedBox(
               width: clusterWidth + 28,
