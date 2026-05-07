@@ -8,6 +8,12 @@ import 'package:liqkit_ui/src/components/lists/liq_list.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
+/// Mode controlling which columns appear in [LiqTimerPicker].
+///
+/// Re-export of `CupertinoTimerPickerMode` so consumers don't need a
+/// `package:flutter/cupertino.dart` import to pass `mode:` values.
+typedef LiqTimerPickerMode = CupertinoTimerPickerMode;
+
 /// One selectable entry in [LiqPickerButton] / [LiqMultiColumnPicker].
 @immutable
 class LiqPickerItem<T> {
