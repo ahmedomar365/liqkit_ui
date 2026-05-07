@@ -96,42 +96,24 @@ final class LiqScaffold extends StatelessWidget {
     final keyboardInset =
         resizeToAvoidBottomInset ? mediaQuery.viewInsets.bottom : 0.0;
 
-    final appBarHeight = appBar?.preferredSize.height ?? 0;
-
-    final bodyContent = Padding(
+    Widget bodySlot = Padding(
       padding: EdgeInsets.only(bottom: keyboardInset),
       child: body,
     );
 
-    return ColoredBox(
-      color: bg,
-      child: SafeArea(
-        top: true,
-        bottom: bottomNavigationBar == null,
-        child: Stack(
-          children: <Widget>[
-            // Body — positioned to leave room for appBar / bottomNavBar
-            // unless extend* flags allow it to bleed under them.
+    // FAB and drawers overlay the body via an inner Stack so they don't
+    // affect the body's vertical sizing.
+    if (floatingActionButton != null ||
+        drawer != null ||
+        endDrawer != null) {
+      bodySlot = Stack(
+        children: <Widget>[
+          Positioned.fill(child: bodySlot),
+          if (floatingActionButton != null)
             Positioned.fill(
-              top: extendBodyBehindAppBar ? 0 : appBarHeight,
-              bottom: extendBody ? 0 : null,
-              child: bodyContent,
-            ),
-            // App bar pinned at the top.
-            if (appBar != null)
-              Positioned(top: 0, left: 0, right: 0, child: appBar!),
-            // Bottom nav pinned at the bottom.
-            if (bottomNavigationBar != null)
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: bottomNavigationBar!,
-              ),
-            // FAB anchored.
-            if (floatingActionButton != null)
-              Positioned.fill(
-                top: appBarHeight,
+              child: SafeArea(
+                top: false,
+                bottom: false,
                 child: Padding(
                   padding: floatingActionButtonPadding,
                   child: Align(
@@ -140,16 +122,63 @@ final class LiqScaffold extends StatelessWidget {
                   ),
                 ),
               ),
-            // Drawer overlays — caller manages open/close.
-            if (drawer != null)
-              Align(alignment: AlignmentDirectional.centerStart, child: drawer),
-            if (endDrawer != null)
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: endDrawer,
-              ),
-          ],
-        ),
+            ),
+          if (drawer != null)
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: drawer,
+            ),
+          if (endDrawer != null)
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: endDrawer,
+            ),
+        ],
+      );
+    }
+
+    // Vertical chrome composition: appBar | body | bottomNav.
+    // Using Column gives the body Expanded → bounded height, which is
+    // what every viewport-based child (SingleChildScrollView, GridView,
+    // PageView) needs in the cross axis. Previously this was a Stack
+    // with `Positioned.fill(bottom: null)` which gave unbounded height
+    // and crashed any consumer that nested a viewport directly.
+    final bool overlayAppBar = extendBodyBehindAppBar && appBar != null;
+    final bool overlayBottomNav =
+        extendBody && bottomNavigationBar != null;
+
+    Widget chrome = Column(
+      children: <Widget>[
+        if (appBar != null && !overlayAppBar) appBar!,
+        Expanded(child: bodySlot),
+        if (bottomNavigationBar != null && !overlayBottomNav)
+          bottomNavigationBar!,
+      ],
+    );
+
+    if (overlayAppBar || overlayBottomNav) {
+      chrome = Stack(
+        children: <Widget>[
+          Positioned.fill(child: chrome),
+          if (overlayAppBar)
+            Positioned(top: 0, left: 0, right: 0, child: appBar!),
+          if (overlayBottomNav)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: bottomNavigationBar!,
+            ),
+        ],
+      );
+    }
+
+    return ColoredBox(
+      color: bg,
+      child: SafeArea(
+        top: !overlayAppBar,
+        bottom: bottomNavigationBar == null && !overlayBottomNav,
+        child: chrome,
       ),
     );
   }

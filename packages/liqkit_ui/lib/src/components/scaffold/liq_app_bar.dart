@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import 'package:liqkit_ui/src/components/buttons/liq_icon_button.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
@@ -17,6 +19,7 @@ final class LiqAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LiqAppBar({
     this.title,
     this.leading,
+    this.automaticallyImplyLeading = true,
     this.actions = const <Widget>[],
     this.centerTitle = true,
     this.toolbarHeight = 44,
@@ -32,7 +35,13 @@ final class LiqAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
 
   /// Optional leading widget — typically a back button or menu trigger.
+  /// When null and [automaticallyImplyLeading] is true, a back-arrow
+  /// is rendered if the enclosing [Navigator] can pop.
   final Widget? leading;
+
+  /// When [leading] is null and the enclosing [Navigator] can pop,
+  /// render a back-arrow leading button. Defaults to true.
+  final bool automaticallyImplyLeading;
 
   /// Trailing action widgets, laid out in a row at the right edge.
   final List<Widget> actions;
@@ -72,13 +81,25 @@ final class LiqAppBar extends StatelessWidget implements PreferredSizeWidget {
       isDark ? Brightness.dark : Brightness.light,
     ).copyWith(color: labelColor);
 
+    Widget? effectiveLeading = leading;
+    if (effectiveLeading == null &&
+        automaticallyImplyLeading &&
+        Navigator.canPop(context)) {
+      effectiveLeading = LiqIconButton(
+        icon: LucideIcons.chevronLeft,
+        iconSize: 28,
+        onPressed: () => Navigator.maybePop(context),
+        semanticLabel: 'Back',
+      );
+    }
+
     final Widget toolbar = SizedBox(
       height: toolbarHeight,
       child: Row(
         children: <Widget>[
-          if (leading != null) ...<Widget>[
+          if (effectiveLeading != null) ...<Widget>[
             SizedBox(width: titleSpacing),
-            leading!,
+            effectiveLeading,
           ],
           if (centerTitle) ...<Widget>[
             Expanded(
