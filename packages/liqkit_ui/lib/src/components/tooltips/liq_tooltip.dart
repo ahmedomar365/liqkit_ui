@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 
 /// Preferred edge of [LiqTooltip] relative to its child.
@@ -332,26 +333,30 @@ class _LiqTooltipBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bubble = Container(
+    // Real liquid-glass bubble — uses dark tint regardless of theme
+    // (tooltips are visually invariant high-contrast attention overlays).
+    final bubble = ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: LiqTooltip.maxWidth),
-      padding: const EdgeInsets.symmetric(
-        horizontal: LiqTooltip.paddingHorizontal,
-        vertical: LiqTooltip.paddingVertical,
-      ),
-      decoration: const BoxDecoration(
-        color: LiqTooltip.backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(LiqTooltip.radius)),
-      ),
-      child: Text(
-        message,
-        textDirection: TextDirection.ltr,
-        style: const TextStyle(
-          fontFamily: 'SF Pro Text',
-          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-          fontSize: LiqTooltip.fontSize,
-          fontWeight: FontWeight.w400,
-          color: LiqTooltip.textColor,
-          height: 1.25,
+      child: LiqGlassSurface(
+        tint: LiqGlassTint.dark,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(LiqTooltip.radius),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: LiqTooltip.paddingHorizontal,
+          vertical: LiqTooltip.paddingVertical,
+        ),
+        child: Text(
+          message,
+          textDirection: TextDirection.ltr,
+          style: const TextStyle(
+            fontFamily: 'SF Pro Text',
+            fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+            fontSize: LiqTooltip.fontSize,
+            fontWeight: FontWeight.w400,
+            color: LiqTooltip.textColor,
+            height: 1.25,
+          ),
         ),
       ),
     );

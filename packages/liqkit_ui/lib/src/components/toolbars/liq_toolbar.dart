@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -28,13 +29,10 @@ final class LiqToolbarGlassButton extends StatelessWidget {
   /// When true, button is exactly 44x44 (no horizontal padding).
   final bool symbolOnly;
 
-  static const Color _bg = Color(0xFFF7F7F7);
-  static const Color _fg = Color(0xFF1A1A1A);
-  static const Color _highlight = Color(0xD9FFFFFF);
-
   @override
   Widget build(BuildContext context) {
     final disabled = onPressed == null;
+    final fg = context.liqLabelColor;
     return Semantics(
       button: true,
       enabled: !disabled,
@@ -46,32 +44,36 @@ final class LiqToolbarGlassButton extends StatelessWidget {
           onTap: onPressed,
           child: Opacity(
             opacity: disabled ? 0.5 : 1,
-            child: Container(
-              height: 44,
+            child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: 44),
-              padding:
-                  symbolOnly
-                      ? null
-                      : const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: _bg,
+              child: LiqGlassSurface(
                 borderRadius: const BorderRadius.all(Radius.circular(296)),
-                border: Border.all(color: _highlight),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
-                  fontSize: 17,
-                  height: 22 / 17,
-                  letterSpacing: -0.43,
-                  fontWeight: FontWeight.w500,
-                  color: _fg,
+                padding: symbolOnly
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 44,
+                  width: symbolOnly ? 44 : null,
+                  child: Center(
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        fontFamily: 'SF Pro Text',
+                        fontFamilyFallback: const <String>[
+                          'SF Pro',
+                          'sans-serif',
+                        ],
+                        fontSize: 17,
+                        height: 22 / 17,
+                        letterSpacing: -0.43,
+                        fontWeight: FontWeight.w500,
+                        color: fg,
+                      ),
+                      maxLines: 1,
+                      textDirection: TextDirection.ltr,
+                    ),
+                  ),
                 ),
-                maxLines: 1,
-                textDirection: TextDirection.ltr,
               ),
             ),
           ),
@@ -164,40 +166,33 @@ final class LiqToolbarChip extends StatelessWidget {
   /// Surface brightness. Defaults to the nearest liq theme brightness.
   final Brightness? brightness;
 
-  static const Color _bgLight = Color(0xFFF8FAFC);
-  static const Color _bgDark = Color(0xFF1F2937);
-  static const Color _borderLight = Color(0xFFDBE1EA);
-  static const Color _borderDark = Color(0xFF334155);
-  static const Color _fgLight = Color(0xFF334155);
-  static const Color _fgDark = Color(0xFFCBD5E1);
-
   @override
   Widget build(BuildContext context) {
     final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
+    final fg = isDark ? const Color(0xFFCBD5E1) : const Color(0xFF334155);
     return LiqPointerCursor(
       enabled: onPressed != null,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onPressed,
-        child: Container(
+        child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 30),
-          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 7),
-          decoration: BoxDecoration(
-            color: isDark ? _bgDark : _bgLight,
+          child: LiqGlassSurface(
+            tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
             borderRadius: const BorderRadius.all(Radius.circular(9)),
-            border: Border.all(color: isDark ? _borderDark : _borderLight),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            label,
-            style: TextStyle(
-              fontFamily: 'SF Pro Text',
-              fontSize: 11,
-              height: 14 / 11,
-              fontWeight: FontWeight.w500,
-              color: isDark ? _fgDark : _fgLight,
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 7),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontFamily: 'SF Pro Text',
+                fontSize: 11,
+                height: 14 / 11,
+                fontWeight: FontWeight.w500,
+                color: fg,
+              ),
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
             ),
-            textDirection: TextDirection.ltr,
           ),
         ),
       ),
