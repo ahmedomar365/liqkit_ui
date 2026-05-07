@@ -48,6 +48,32 @@ final class LiqPopover extends StatelessWidget {
     super.key,
   });
 
+  /// Show this popover as a modal overlay anchored at [anchor]. The
+  /// bubble's tip points toward [anchor], offset by [side]. Returns
+  /// whatever value is popped (or `null` if dismissed).
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required Widget child,
+    required Offset anchor,
+    LiqPopoverSide side = LiqPopoverSide.bottom,
+    LiqPopoverAlignment alignment = LiqPopoverAlignment.center,
+    double width = 220,
+    EdgeInsets padding = const EdgeInsets.all(14),
+    bool barrierDismissible = true,
+  }) {
+    return Navigator.of(context).push<T>(
+      _LiqPopoverRoute<T>(
+        child: child,
+        anchor: anchor,
+        side: side,
+        alignment: alignment,
+        width: width,
+        padding: padding,
+        barrierDismissible: barrierDismissible,
+      ),
+    );
+  }
+
   /// Body content.
   final Widget child;
 
@@ -319,4 +345,109 @@ class _PopoverTipPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _PopoverTipPainter oldDelegate) =>
       oldDelegate.color != color || oldDelegate.side != side;
+}
+
+/// Modal route for [LiqPopover.show]. Positions the bubble around the
+/// [anchor] point with a small offset so the tip touches the anchor.
+class _LiqPopoverRoute<T> extends ModalRoute<T> {
+  _LiqPopoverRoute({
+    required this.child,
+    required this.anchor,
+    required this.side,
+    required this.alignment,
+    required this.width,
+    required this.padding,
+    bool barrierDismissible = true,
+  }) : _barrierDismissible = barrierDismissible;
+
+  final Widget child;
+  final Offset anchor;
+  final LiqPopoverSide side;
+  final LiqPopoverAlignment alignment;
+  final double width;
+  final EdgeInsets padding;
+  final bool _barrierDismissible;
+
+  @override
+  Color? get barrierColor => null;
+  @override
+  bool get barrierDismissible => _barrierDismissible;
+  @override
+  String? get barrierLabel => 'popover';
+  @override
+  bool get opaque => false;
+  @override
+  bool get maintainState => true;
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 180);
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const margin = 16.0;
+        // Bubble approximate size — final layout is done by LiqPopover.
+        const estimatedHeight = 220.0;
+        var left = anchor.dx - width / 2;
+        var top = anchor.dy;
+        switch (side) {
+          case LiqPopoverSide.top:
+            top = anchor.dy - estimatedHeight - 8;
+          case LiqPopoverSide.bottom:
+            top = anchor.dy + 8;
+          case LiqPopoverSide.leading:
+            left = anchor.dx - width - 8;
+            top = anchor.dy - estimatedHeight / 2;
+          case LiqPopoverSide.trailing:
+            left = anchor.dx + 8;
+            top = anchor.dy - estimatedHeight / 2;
+        }
+        if (left + width > constraints.maxWidth - margin) {
+          left = constraints.maxWidth - width - margin;
+        }
+        if (left < margin) left = margin;
+        if (top + estimatedHeight > constraints.maxHeight - margin) {
+          top = constraints.maxHeight - estimatedHeight - margin;
+        }
+        if (top < margin) top = margin;
+
+        return Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _barrierDismissible
+                    ? () => Navigator.of(context).pop()
+                    : null,
+              ),
+            ),
+            Positioned(
+              left: left,
+              top: top,
+              child: FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: Tween<double>(begin: 0.94, end: 1).animate(
+                    CurvedAnimation(parent: animation, curve: Curves.easeOut),
+                  ),
+                  alignment: Alignment.topCenter,
+                  child: LiqPopover(
+                    side: side,
+                    alignment: alignment,
+                    width: width,
+                    padding: padding,
+                    child: child,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

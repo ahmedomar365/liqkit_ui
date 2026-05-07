@@ -54,6 +54,58 @@ void main() {
     }
   });
 
+  testWidgets('LiqDatePicker arrows navigate months without external wiring', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_wrap(const LiqDatePicker(year: 2026, month: 4)));
+
+    final arrows = find.byWidgetPredicate(
+      (widget) =>
+          widget is CustomPaint &&
+          widget.painter.runtimeType.toString() == '_ArrowPainter',
+    );
+
+    expect(find.text('April 2026'), findsOneWidget);
+    await tester.tap(arrows.last);
+    await tester.pumpAndSettle();
+    expect(find.text('May 2026'), findsOneWidget);
+
+    await tester.tap(arrows.first);
+    await tester.pumpAndSettle();
+    expect(find.text('April 2026'), findsOneWidget);
+  });
+
+  testWidgets('LiqDatePicker arrows still invoke external callbacks', (
+    tester,
+  ) async {
+    var previousCount = 0;
+    var nextCount = 0;
+    await tester.pumpWidget(
+      _wrap(
+        LiqDatePicker(
+          year: 2026,
+          month: 4,
+          onPrev: () => previousCount += 1,
+          onNext: () => nextCount += 1,
+        ),
+      ),
+    );
+
+    final arrows = find.byWidgetPredicate(
+      (widget) =>
+          widget is CustomPaint &&
+          widget.painter.runtimeType.toString() == '_ArrowPainter',
+    );
+
+    await tester.tap(arrows.last);
+    await tester.pumpAndSettle();
+    await tester.tap(arrows.first);
+    await tester.pumpAndSettle();
+
+    expect(nextCount, 1);
+    expect(previousCount, 1);
+  });
+
   testWidgets('LiqDatePicker interactive cells expose click cursors', (
     tester,
   ) async {

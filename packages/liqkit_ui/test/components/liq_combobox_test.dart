@@ -42,6 +42,28 @@ Widget _wrapWithMedia(Widget child, MediaQueryData media) {
   );
 }
 
+class _ControlledComboboxDemo extends StatefulWidget {
+  const _ControlledComboboxDemo();
+
+  @override
+  State<_ControlledComboboxDemo> createState() =>
+      _ControlledComboboxDemoState();
+}
+
+class _ControlledComboboxDemoState extends State<_ControlledComboboxDemo> {
+  String? _value;
+
+  @override
+  Widget build(BuildContext context) {
+    return LiqCombobox<String>(
+      options: _fruits,
+      value: _value,
+      onChanged: (value) => setState(() => _value = value),
+      placeholder: 'Pick a fruit',
+    );
+  }
+}
+
 void main() {
   group('LiqCombobox', () {
     testWidgets('renders the placeholder when value is null', (tester) async {
@@ -144,6 +166,23 @@ void main() {
       expect(received, 'cherry');
     });
 
+    testWidgets('tapping a row updates the visible controlled value', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_wrap(const _ControlledComboboxDemo()));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LiqCombobox<String>));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Cherry'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Cherry'), findsOneWidget);
+      final editable = tester.widget<EditableText>(find.byType(EditableText));
+      expect(editable.controller.text, 'Cherry');
+    });
+
     testWidgets('reports dropdown open and close state', (tester) async {
       final states = <bool>[];
       await tester.pumpWidget(
@@ -220,6 +259,28 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(LiqGlassSurface), findsOneWidget);
+    });
+
+    testWidgets('dropdown rows stay inside the text field tap region', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _wrap(
+          LiqCombobox<String>(options: _fruits, value: null, onChanged: (_) {}),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LiqCombobox<String>));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.ancestor(
+          of: find.text('Cherry'),
+          matching: find.byType(TextFieldTapRegion),
+        ),
+        findsWidgets,
+      );
     });
 
     testWidgets('reduced motion shows dropdown without waiting for animation', (

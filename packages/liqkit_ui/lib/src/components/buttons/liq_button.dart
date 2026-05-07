@@ -55,6 +55,11 @@ final class LiqButton extends StatelessWidget {
     this.style = LiqButtonStyle.borderedProminent,
     this.size = LiqButtonSize.medium,
     this.destructive = false,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.isLoading = false,
+    this.onLongPress,
+    this.fullWidth = false,
     super.key,
   });
 
@@ -64,6 +69,10 @@ final class LiqButton extends StatelessWidget {
   /// Tap callback. When `null` the button is rendered disabled.
   final VoidCallback? onPressed;
 
+  /// Optional long-press callback. Disabled when [onPressed] is null
+  /// or [isLoading] is true.
+  final VoidCallback? onLongPress;
+
   /// Visual style.
   final LiqButtonStyle style;
 
@@ -72,6 +81,20 @@ final class LiqButton extends StatelessWidget {
 
   /// When true, applies the iOS 26 destructive coloring.
   final bool destructive;
+
+  /// Optional icon rendered before the label.
+  final IconData? leadingIcon;
+
+  /// Optional icon rendered after the label.
+  final IconData? trailingIcon;
+
+  /// When true, the label is replaced by a centered spinner and tap
+  /// callbacks are suppressed.
+  final bool isLoading;
+
+  /// When true, the button stretches to the available parent width
+  /// instead of sizing to its label intrinsically.
+  final bool fullWidth;
 
   // Canonical color values from liqkit's buttons.css.
   static const Color _accentBlue = Color(0xFF0088FF);
@@ -93,6 +116,24 @@ final class LiqButton extends StatelessWidget {
     LiqButtonSize.small => 28,
     LiqButtonSize.medium => 34,
     LiqButtonSize.large => 50,
+  };
+
+  static double _iconSize(LiqButtonSize size) => switch (size) {
+    LiqButtonSize.small => 14,
+    LiqButtonSize.medium => 16,
+    LiqButtonSize.large => 18,
+  };
+
+  static double _iconGap(LiqButtonSize size) => switch (size) {
+    LiqButtonSize.small => 6,
+    LiqButtonSize.medium => 8,
+    LiqButtonSize.large => 10,
+  };
+
+  static double _spinnerSize(LiqButtonSize size) => switch (size) {
+    LiqButtonSize.small => 14,
+    LiqButtonSize.medium => 16,
+    LiqButtonSize.large => 20,
   };
 
   static EdgeInsets _padding(LiqButtonSize size) => switch (size) {
@@ -198,22 +239,58 @@ final class LiqButton extends StatelessWidget {
           color: resolved.fill,
           borderRadius: const BorderRadius.all(Radius.circular(999)),
         );
-    final disabled = onPressed == null;
+    final disabled = onPressed == null || isLoading;
     const radius = BorderRadius.all(Radius.circular(999));
+    final iconColor = resolved.label;
+    final iconPx = _iconSize(size);
+    final gap = _iconGap(size);
+    final spinnerPx = _spinnerSize(size);
+
+    final Widget content;
+    if (isLoading) {
+      content = SizedBox(
+        width: spinnerPx,
+        height: spinnerPx,
+        child: _LiqButtonSpinner(color: iconColor),
+      );
+    } else if (leadingIcon == null && trailingIcon == null) {
+      content = Text(
+        label,
+        style: textStyle,
+        maxLines: 1,
+        textAlign: TextAlign.center,
+      );
+    } else {
+      content = Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (leadingIcon != null) ...<Widget>[
+            Icon(leadingIcon, size: iconPx, color: iconColor),
+            SizedBox(width: gap),
+          ],
+          Flexible(
+            child: Text(
+              label,
+              style: textStyle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          if (trailingIcon != null) ...<Widget>[
+            SizedBox(width: gap),
+            Icon(trailingIcon, size: iconPx, color: iconColor),
+          ],
+        ],
+      );
+    }
 
     final buttonBody = Container(
       height: _height(size),
       padding: _padding(size),
       decoration: style == LiqButtonStyle.liquid ? null : decoration,
-      child: Center(
-        widthFactor: 1,
-        child: Text(
-          label,
-          style: textStyle,
-          maxLines: 1,
-          textAlign: TextAlign.center,
-        ),
-      ),
+      child: Center(widthFactor: fullWidth ? null : 1, child: content),
     );
 
     final visual =
@@ -227,10 +304,10 @@ final class LiqButton extends StatelessWidget {
             )
             : buttonBody;
 
-    // Use IntrinsicWidth so the pill sizes to the label (plus padding)
-    // instead of stretching to whatever bounded width its parent gives.
-    // Matches iOS 26 spec widths captured from liqkit's Figma metadata
-    // (text-only buttons: 49/57/73 logical px for Small/Medium/Large).
+    final sized = fullWidth
+        ? SizedBox(width: double.infinity, child: visual)
+        : IntrinsicWidth(child: visual);
+
     return Semantics(
       button: true,
       enabled: !disabled,
@@ -238,8 +315,9 @@ final class LiqButton extends StatelessWidget {
       child: LiqPointerCursor(
         enabled: !disabled,
         child: GestureDetector(
-          onTap: onPressed,
-          child: IntrinsicWidth(child: visual),
+          onTap: disabled ? null : onPressed,
+          onLongPress: disabled ? null : onLongPress,
+          child: sized,
         ),
       ),
     );
@@ -256,6 +334,22 @@ final class LiqButton extends StatelessWidget {
         FlagProperty('destructive', value: destructive, ifTrue: 'destructive'),
       )
       ..add(
+        DiagnosticsProperty<IconData?>(
+          'leadingIcon',
+          leadingIcon,
+          defaultValue: null,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<IconData?>(
+          'trailingIcon',
+          trailingIcon,
+          defaultValue: null,
+        ),
+      )
+      ..add(FlagProperty('isLoading', value: isLoading, ifTrue: 'loading'))
+      ..add(FlagProperty('fullWidth', value: fullWidth, ifTrue: 'fullWidth'))
+      ..add(
         FlagProperty(
           'enabled',
           value: onPressed != null,
@@ -264,4 +358,73 @@ final class LiqButton extends StatelessWidget {
         ),
       );
   }
+}
+
+/// Indeterminate spinner used inside [LiqButton] when `isLoading: true`.
+///
+/// Pure-Dart `flutter/widgets.dart` implementation (no Material dep) — a
+/// rotating arc rendered with a [CustomPainter].
+class _LiqButtonSpinner extends StatefulWidget {
+  const _LiqButtonSpinner({required this.color});
+
+  final Color color;
+
+  @override
+  State<_LiqButtonSpinner> createState() => _LiqButtonSpinnerState();
+}
+
+class _LiqButtonSpinnerState extends State<_LiqButtonSpinner>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) => CustomPaint(
+        painter: _ArcSpinnerPainter(
+          progress: _controller.value,
+          color: widget.color,
+        ),
+      ),
+    );
+  }
+}
+
+class _ArcSpinnerPainter extends CustomPainter {
+  _ArcSpinnerPainter({required this.progress, required this.color});
+
+  final double progress;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final rect = Offset.zero & size;
+    final start = progress * 2 * 3.14159265;
+    canvas.drawArc(rect.deflate(1), start, 3.14159265 * 1.4, false, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _ArcSpinnerPainter old) =>
+      old.progress != progress || old.color != color;
 }

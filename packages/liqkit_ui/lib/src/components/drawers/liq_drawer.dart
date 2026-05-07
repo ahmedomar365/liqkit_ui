@@ -30,6 +30,8 @@ final class LiqDrawer extends StatelessWidget {
     required this.child,
     this.side = LiqDrawerSide.left,
     this.width = 320,
+    this.collapsed = false,
+    this.collapsedWidth = 72,
     this.padding = const EdgeInsets.all(16),
     super.key,
   });
@@ -42,6 +44,16 @@ final class LiqDrawer extends StatelessWidget {
 
   /// Drawer width. Clamps to `MediaQuery.size.width` when smaller.
   final double width;
+
+  /// Whether the drawer renders as a compact navigation rail.
+  ///
+  /// Collapsed drawers keep the same Liquid Glass surface treatment but
+  /// resolve their width from [collapsedWidth], which is useful for
+  /// adaptive sidebars that can shrink to icon-only navigation.
+  final bool collapsed;
+
+  /// Width used when [collapsed] is true.
+  final double collapsedWidth;
 
   /// Internal padding around [child].
   final EdgeInsets padding;
@@ -70,14 +82,18 @@ final class LiqDrawer extends StatelessWidget {
   /// Default drawer width.
   static const double defaultWidth = 320;
 
+  /// Default collapsed drawer rail width.
+  static const double defaultCollapsedWidth = 72;
+
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.maybeOf(context);
     final screenWidth = media?.size.width ?? double.infinity;
+    final targetWidth = collapsed ? collapsedWidth : width;
     final clampedWidth =
-        width.isFinite && screenWidth.isFinite
-            ? (width > screenWidth ? screenWidth : width)
-            : width;
+        targetWidth.isFinite && screenWidth.isFinite
+            ? (targetWidth > screenWidth ? screenWidth : targetWidth)
+            : targetWidth;
     final labelColor = context.liqLabelColor;
 
     return SizedBox(
@@ -108,7 +124,9 @@ final class LiqDrawer extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty<LiqDrawerSide>('side', side))
-      ..add(DoubleProperty('width', width));
+      ..add(DoubleProperty('width', width))
+      ..add(FlagProperty('collapsed', value: collapsed, ifTrue: 'collapsed'))
+      ..add(DoubleProperty('collapsedWidth', collapsedWidth));
   }
 }
 

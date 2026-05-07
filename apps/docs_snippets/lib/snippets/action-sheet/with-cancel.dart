@@ -25,7 +25,7 @@ class _ActionSheetWithCancelDemoState
     return SnippetFrame(
       maxWidth: 420,
       height: 410,
-      surface: SnippetFrameSurface.liquidLight,
+      surface: SnippetFrameSurface.liquidThemed,
       surfacePadding: EdgeInsets.zero,
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -73,15 +73,20 @@ class _PhotoSource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Text(
+          Text(
             'Photo',
             textDirection: TextDirection.ltr,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: isDark ? const Color(0xFFF5F5F7) : const Color(0xFF000000),
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 12),
           const Expanded(

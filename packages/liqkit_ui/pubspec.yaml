@@ -26,3 +26,7 @@ dev_dependencies:
     sdk: flutter
   liqkit_ui_design_data:
     path: ../liqkit_ui_design_data
+
+flutter:
+  shaders:
+    - shaders/liq_liquid_glass.frag

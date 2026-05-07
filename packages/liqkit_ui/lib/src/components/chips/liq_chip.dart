@@ -188,27 +188,20 @@ final class LiqChip extends StatelessWidget {
         children: <Widget>[
           chip,
           Positioned(
-            top: 0,
-            right: 0,
-            child: LiqPointerCursor(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: onDeleted,
-                child: SizedBox(
-                  width: hitHeight,
-                  height: hitHeight,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: SizedBox(
-                      width: horizontalPadding + deleteSize,
-                      child: Center(
-                        child: Icon(
-                          Icons.close,
-                          size: deleteIconSize,
-                          color: foreground,
-                          textDirection: TextDirection.ltr,
-                        ),
-                      ),
+            top: (hitHeight - deleteSize) / 2,
+            right: horizontalPadding,
+            child: GestureDetector(
+              behavior: HitTestBehavior.deferToChild,
+              onTap: onDeleted,
+              child: LiqPointerCursor(
+                child: SizedBox.square(
+                  dimension: deleteSize,
+                  child: Center(
+                    child: Icon(
+                      Icons.close,
+                      size: deleteIconSize,
+                      color: foreground,
+                      textDirection: TextDirection.ltr,
                     ),
                   ),
                 ),

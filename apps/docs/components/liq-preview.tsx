@@ -5,6 +5,9 @@ import { useTheme } from 'next-themes';
 import { SNIPPET_ROUTES, type SnippetRouteKey } from '@/lib/snippet-routes';
 
 const PREVIEW_INITIAL_HEIGHTS: Partial<Record<SnippetRouteKey, number>> = {
+  'card/default': 180,
+  'card/with-header': 220,
+  'card/with-footer': 260,
   'colors/swatch-grid': 1180,
   'calendar/default': 380,
   'calendar/with-bounds': 380,
@@ -54,8 +57,9 @@ const PREVIEW_INITIAL_HEIGHTS: Partial<Record<SnippetRouteKey, number>> = {
   'alert/stacked': 300,
   'alert/side-by-side': 300,
   'alert/destructive': 300,
-  'drawer/left': 360,
-  'drawer/right': 360,
+  'drawer/left': 320,
+  'drawer/right': 320,
+  'drawer/collapsed': 320,
   'window/default': 360,
   'window/inactive-controls': 360,
   'widget/large': 360,
@@ -70,6 +74,8 @@ const PREVIEW_INITIAL_HEIGHTS: Partial<Record<SnippetRouteKey, number>> = {
   'carousel/default': 280,
   'carousel/autoplay': 280,
   'carousel/no-indicator': 260,
+  'collapsible/default': 120,
+  'collapsible/expanded': 220,
   'tooltip/top': 320,
   'tooltip/bottom': 320,
   'tooltip/with-arrow': 320,
@@ -103,9 +109,8 @@ export function LiqPreview({
   const normalizedBaseUrl = baseUrl.replace(/\/$/, '');
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [htmlIsDark, setHtmlIsDark] = useState(false);
   const cacheKey = process.env.NEXT_PUBLIC_SNIPPETS_CACHE_KEY ?? '1';
-  const theme = mounted && htmlIsDark ? 'dark' : 'light';
+  const theme = mounted && resolvedTheme === 'light' ? 'light' : 'dark';
   // Hash-based routing: the snippets Flutter app reads
   // `window.location.hash` to pick the route. This keeps it working
   // against ANY static origin (Cloudflare Pages, `serve -s`, plain
@@ -119,15 +124,6 @@ export function LiqPreview({
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const syncTheme = () => setHtmlIsDark(root.classList.contains('dark'));
-    syncTheme();
-    const observer = new MutationObserver(syncTheme);
-    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, [resolvedTheme]);
 
   useEffect(() => {
     setHeight(resolvedInitialHeight);

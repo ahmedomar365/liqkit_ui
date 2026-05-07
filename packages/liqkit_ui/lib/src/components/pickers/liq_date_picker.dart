@@ -13,7 +13,7 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 /// (uppercase, 590 13/18 30%); 7×N grid of 44pt day cells with the
 /// `current` day shown as a blue ring and the `selected` day(s) tinted
 /// light blue (or solid blue when current+selected).
-final class LiqDatePicker extends StatelessWidget {
+final class LiqDatePicker extends StatefulWidget {
   /// Creates an inline date picker for [month]/[year].
   ///
   /// [selectedDay] is highlighted with a tinted background; [currentDay]
@@ -91,8 +91,45 @@ final class LiqDatePicker extends StatelessWidget {
     'December',
   ];
 
+  @override
+  State<LiqDatePicker> createState() => _LiqDatePickerState();
+}
+
+class _LiqDatePickerState extends State<LiqDatePicker> {
+  late int _year;
+  late int _month;
+
+  @override
+  void initState() {
+    super.initState();
+    _year = widget.year;
+    _month = widget.month;
+  }
+
+  @override
+  void didUpdateWidget(covariant LiqDatePicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.year != widget.year || oldWidget.month != widget.month) {
+      _year = widget.year;
+      _month = widget.month;
+    }
+  }
+
+  void _shiftMonth(int delta) {
+    final next = DateTime(_year, _month + delta);
+    setState(() {
+      _year = next.year;
+      _month = next.month;
+    });
+    if (delta < 0) {
+      widget.onPrev?.call();
+    } else {
+      widget.onNext?.call();
+    }
+  }
+
   int _daysInMonth() {
-    switch (month) {
+    switch (_month) {
       case 1:
       case 3:
       case 5:
@@ -107,7 +144,8 @@ final class LiqDatePicker extends StatelessWidget {
       case 11:
         return 30;
       case 2:
-        final isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        final isLeap =
+            (_year % 4 == 0 && _year % 100 != 0) || (_year % 400 == 0);
         return isLeap ? 29 : 28;
     }
     return 30;
@@ -115,7 +153,7 @@ final class LiqDatePicker extends StatelessWidget {
 
   /// Returns 0..6 (Sunday..Saturday) for the first day of [month]/[year].
   int _firstDayOfWeek() {
-    return DateTime(year, month).weekday % 7;
+    return DateTime(_year, _month).weekday % 7;
   }
 
   @override
@@ -141,7 +179,11 @@ final class LiqDatePicker extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(13)),
             border: Border.fromBorderSide(BorderSide(color: palette.rim)),
             boxShadow: const <BoxShadow>[
-              BoxShadow(color: _shadow, offset: Offset(0, 10), blurRadius: 40),
+              BoxShadow(
+                color: LiqDatePicker._shadow,
+                offset: Offset(0, 10),
+                blurRadius: 40,
+              ),
             ],
           ),
           child: Padding(
@@ -170,7 +212,7 @@ final class LiqDatePicker extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Text(
-                '${_monthNames[month - 1]} $year',
+                '${LiqDatePicker._monthNames[_month - 1]} $_year',
                 textDirection: TextDirection.ltr,
                 style: const TextStyle(
                   fontFamily: 'SF Pro Text',
@@ -182,9 +224,9 @@ final class LiqDatePicker extends StatelessWidget {
                 ).copyWith(color: palette.title),
               ),
             ),
-            _Arrow(direction: _ArrowDir.left, onPressed: onPrev),
+            _Arrow(direction: _ArrowDir.left, onPressed: () => _shiftMonth(-1)),
             const SizedBox(width: 20),
-            _Arrow(direction: _ArrowDir.right, onPressed: onNext),
+            _Arrow(direction: _ArrowDir.right, onPressed: () => _shiftMonth(1)),
           ],
         ),
       ),
@@ -199,7 +241,7 @@ final class LiqDatePicker extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            for (final label in _weekdayLabels)
+            for (final label in LiqDatePicker._weekdayLabels)
               SizedBox(
                 width: 32,
                 child: Text(
@@ -248,34 +290,37 @@ final class LiqDatePicker extends StatelessWidget {
     if (day == null) {
       return const SizedBox(width: 44, height: 44);
     }
-    final isSelected = day == selectedDay;
-    final isCurrent = day == currentDay;
+    final isSelected = day == widget.selectedDay;
+    final isCurrent = day == widget.currentDay;
     final BoxDecoration? decoration;
     final Color textColor;
     if (isSelected && isCurrent) {
-      decoration = const BoxDecoration(color: _accent, shape: BoxShape.circle);
+      decoration = const BoxDecoration(
+        color: LiqDatePicker._accent,
+        shape: BoxShape.circle,
+      );
       textColor = const Color(0xFFFFFFFF);
     } else if (isSelected) {
       decoration = const BoxDecoration(
-        color: _accentTint,
+        color: LiqDatePicker._accentTint,
         shape: BoxShape.circle,
       );
-      textColor = _accent;
+      textColor = LiqDatePicker._accent;
     } else if (isCurrent) {
       decoration = BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: _accent),
+        border: Border.all(color: LiqDatePicker._accent),
       );
-      textColor = _accent;
+      textColor = LiqDatePicker._accent;
     } else {
       decoration = null;
       textColor = palette.title;
     }
     return LiqPointerCursor(
-      enabled: onDayTap != null,
+      enabled: widget.onDayTap != null,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: onDayTap == null ? null : () => onDayTap!(day),
+        onTap: widget.onDayTap == null ? null : () => widget.onDayTap!(day),
         child: Container(
           width: 44,
           height: 44,
@@ -301,10 +346,10 @@ final class LiqDatePicker extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IntProperty('year', year))
-      ..add(IntProperty('month', month))
-      ..add(IntProperty('selectedDay', selectedDay))
-      ..add(IntProperty('currentDay', currentDay));
+      ..add(IntProperty('year', _year))
+      ..add(IntProperty('month', _month))
+      ..add(IntProperty('selectedDay', widget.selectedDay))
+      ..add(IntProperty('currentDay', widget.currentDay));
   }
 }
 

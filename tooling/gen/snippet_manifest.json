@@ -454,7 +454,8 @@
       "group": "containers",
       "variants": [
         { "variant": "left",  "displayName": "Left",  "dartFile": "apps/docs_snippets/lib/snippets/drawer/left.dart" },
-        { "variant": "right", "displayName": "Right", "dartFile": "apps/docs_snippets/lib/snippets/drawer/right.dart" }
+        { "variant": "right", "displayName": "Right", "dartFile": "apps/docs_snippets/lib/snippets/drawer/right.dart" },
+        { "variant": "collapsed", "displayName": "Collapsed", "dartFile": "apps/docs_snippets/lib/snippets/drawer/collapsed.dart" }
       ]
     },
     {

@@ -142,7 +142,9 @@ void main() {
       },
     );
 
-    testWidgets('delete affordance keeps a 44pt tap target', (tester) async {
+    testWidgets('delete affordance is scoped to the close glyph', (
+      tester,
+    ) async {
       await tester.pumpWidget(_wrap(LiqChip(label: 'tag', onDeleted: () {})));
 
       final deleteTarget = find.ancestor(
@@ -150,7 +152,10 @@ void main() {
         matching: find.byType(GestureDetector),
       );
 
-      expect(tester.getSize(deleteTarget.first), const Size(44, 44));
+      expect(
+        tester.getSize(deleteTarget.first),
+        const Size.square(LiqChip.deleteSize),
+      );
     });
   });
 

@@ -1,4 +1,5 @@
-import 'dart:ui' show ImageFilter;
+import 'dart:async';
+import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -34,21 +35,23 @@ enum LiqGlassElevation {
 
 /// iOS 26 Liquid Glass material primitive.
 ///
-/// Renders a translucent surface with proper backdrop blur, a uniform
-/// material tint, and a hairline rim. Use this
-/// everywhere a component needs an iOS-26 glass panel — instead of
-/// hand-rolling the colors and shadows.
+/// Renders a translucent surface using the **real liquid-glass shader**
+/// (refraction + frosted blur + adaptive tint + rim/Fresnel/specular
+/// lighting) on Impeller (iOS / Android). On Flutter web (CanvasKit) —
+/// where `ImageFilter.shader` isn't supported — falls back gracefully
+/// to `ImageFilter.blur` + a tint overlay.
 ///
-/// The widget paints, in order:
-/// 1. A [BackdropFilter] that samples whatever sits behind the surface
-///    (skipped for [LiqGlassTint.opaque]).
-/// 2. A tint-specific base fill.
-/// 3. An optional, very subtle optical highlight.
+/// The visible material consists of, in order:
+/// 1. An outer drop shadow driven by [elevation].
+/// 2. A clipped rounded-rect.
+/// 3. The shader-driven glass material (or blur+tint fallback on web).
 /// 4. A 0.5pt hairline rim.
 /// 5. The [child] wrapped in [padding].
 ///
-/// An outer drop shadow is layered behind the clipped surface. The
-/// shadow weight is driven by [elevation].
+/// The constructor API and exported constants are identical to the
+/// previous glassmorphism implementation, so every component built on
+/// `LiqGlassSurface` (LiqCard, LiqAppBar, LiqMenu, LiqSheet…) inherits
+/// the upgrade automatically with zero code changes at the call site.
 final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Creates a Liquid Glass surface.
   const LiqGlassSurface({
@@ -90,11 +93,14 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Optional hairline rim override.
   final Color? rimColor;
 
-  /// Optional optical highlight override. Keep this subtle; the material
-  /// should read as sampled glass, not as a separate painted overlay.
+  /// **Deprecated visual hint** — ignored by the shader path. The shader's
+  /// built-in rim cues replace the old gradient overlay. Kept on the API
+  /// so existing callers compile unchanged.
   final Color? highlightStart;
 
-  /// Backdrop blur sigma.
+  /// Backdrop blur sigma. With the shader path this is the radius of the
+  /// 17-tap rosette blur kernel; with the web fallback it's the
+  /// [ui.ImageFilter.blur] sigma.
   final double blurSigma;
 
   /// Optional shadow override for components with an artifact-specific
@@ -106,31 +112,30 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   final Clip clipBehavior;
 
   // -- iOS 26 spec values ----------------------------------------------------
+  // (Constants kept compatible — other components reference them.)
 
-  /// Light tint base fill. Mostly uniform so content beneath reads through
-  /// the blur without creating a separate painted band.
+  /// Light tint base fill.
   static const Color lightTintBase = Color(0xE6F5F5F7);
 
-  /// Dark tint base fill. Opaque enough to keep dark chrome visually
-  /// continuous over mixed imagery while still sampling the backdrop.
+  /// Dark tint base fill.
   static const Color darkTintBase = Color(0xE61C1C1E);
 
-  /// Opaque light fallback: no transparency, no blur.
+  /// Opaque light fallback.
   static const Color opaqueLightTintBase = Color(0xFFFAFAFA);
 
-  /// Opaque dark fallback: no transparency, no blur.
+  /// Opaque dark fallback.
   static const Color opaqueDarkTintBase = Color(0xFF1C1C1E);
 
-  /// Light-tint inner border (rim) hairline color: 8% black.
+  /// Light-tint hairline rim color: 8% black.
   static const Color lightRimColor = Color(0x14000000);
 
-  /// Dark-tint inner border (rim) hairline color: 8% white.
+  /// Dark-tint hairline rim color: 8% white.
   static const Color darkRimColor = Color(0x14FFFFFF);
 
-  /// Optional optical highlight start color for light tint.
+  /// Optional optical highlight start color for light tint (legacy).
   static const Color lightHighlightStart = Color(0x06FFFFFF);
 
-  /// Optional optical highlight start color for dark tint.
+  /// Optional optical highlight start color for dark tint (legacy).
   static const Color darkHighlightStart = Color(0x04FFFFFF);
 
   /// Vibrancy highlight end color (transparent white).
@@ -156,7 +161,6 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   List<BoxShadow> get _shadows {
     final customShadows = shadows;
     if (customShadows != null) return customShadows;
-
     switch (elevation) {
       case LiqGlassElevation.flat:
         return const <BoxShadow>[];
@@ -170,7 +174,6 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   Color _baseFillFor(LiqGlassTint effectiveTint, {required bool isDark}) {
     final customBaseFill = baseFill;
     if (customBaseFill != null) return customBaseFill;
-
     switch (effectiveTint) {
       case LiqGlassTint.light:
         return lightTintBase;
@@ -184,26 +187,12 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   Color _rimColorFor(LiqGlassTint effectiveTint) {
     final customRimColor = rimColor;
     if (customRimColor != null) return customRimColor;
-
     switch (effectiveTint) {
       case LiqGlassTint.light:
       case LiqGlassTint.opaque:
         return lightRimColor;
       case LiqGlassTint.dark:
         return darkRimColor;
-    }
-  }
-
-  Color _highlightStartFor(LiqGlassTint effectiveTint) {
-    final customHighlightStart = highlightStart;
-    if (customHighlightStart != null) return customHighlightStart;
-
-    switch (effectiveTint) {
-      case LiqGlassTint.light:
-      case LiqGlassTint.opaque:
-        return lightHighlightStart;
-      case LiqGlassTint.dark:
-        return darkHighlightStart;
     }
   }
 
@@ -216,77 +205,39 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
             : tint == LiqGlassTint.light && isDark
             ? LiqGlassTint.dark
             : tint;
-    final layers = <Widget>[];
 
-    if (effectiveTint != LiqGlassTint.opaque) {
-      layers.add(
-        Positioned.fill(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
-            child: const SizedBox.expand(),
-          ),
-        ),
+    // Opaque path — accessibility "reduce transparency" or explicit opaque
+    // request. No shader, no blur, just a solid surface with rim and shadow.
+    if (effectiveTint == LiqGlassTint.opaque) {
+      return _OpaqueSurface(
+        borderRadius: borderRadius,
+        padding: padding,
+        fill: _baseFillFor(effectiveTint, isDark: isDark),
+        rim: _rimColorFor(effectiveTint),
+        shadows: _shadows,
+        clipBehavior: clipBehavior,
+        child: child,
       );
     }
 
-    layers.add(
-      Positioned.fill(
-        child: ColoredBox(color: _baseFillFor(effectiveTint, isDark: isDark)),
-      ),
-    );
-
-    final highlightStart = _highlightStartFor(effectiveTint);
-    if (highlightStart.a > 0) {
-      layers.add(
-        Positioned.fill(
-          child: IgnorePointer(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[highlightStart, highlightEnd],
-                  stops: const <double>[0, 0.16],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    layers
-      ..add(
-        Positioned.fill(
-          child: IgnorePointer(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius,
-                border: Border.all(
-                  width: 0.5,
-                  color: _rimColorFor(effectiveTint),
-                ),
-              ),
-            ),
-          ),
-        ),
-      )
-      ..add(Padding(padding: padding, child: child));
-
-    final clipped = ClipRRect(
+    // Glass path — real shader on Impeller, blur+tint fallback on web.
+    final fill = _baseFillFor(effectiveTint, isDark: isDark);
+    return _LiquidGlassMaterial(
       borderRadius: borderRadius,
+      padding: padding,
+      tintRgb: Color.fromRGBO(
+        (fill.r * 255).round(),
+        (fill.g * 255).round(),
+        (fill.b * 255).round(),
+        1,
+      ),
+      tintAmount: fill.a,
+      isDark: effectiveTint == LiqGlassTint.dark,
+      blurPx: blurSigma,
+      rim: _rimColorFor(effectiveTint),
+      shadows: _shadows,
       clipBehavior: clipBehavior,
-      child: Stack(children: layers),
-    );
-
-    final shadows = _shadows;
-    if (shadows.isEmpty) {
-      return clipped;
-    }
-
-    return DecoratedBox(
-      decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: shadows),
-      child: clipped,
+      child: child,
     );
   }
 
@@ -301,5 +252,250 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
       ..add(ColorProperty('highlightStart', highlightStart, defaultValue: null))
       ..add(DoubleProperty('blurSigma', blurSigma))
       ..add(IterableProperty<BoxShadow>('shadows', shadows));
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Implementation widgets — private to this file. Kept inline so the public
+// API stays one widget + two enums + a handful of constants.
+// ---------------------------------------------------------------------------
+
+/// Opaque (no-glass) variant — no [BackdropFilter], no shader.
+class _OpaqueSurface extends StatelessWidget {
+  const _OpaqueSurface({
+    required this.borderRadius,
+    required this.padding,
+    required this.fill,
+    required this.rim,
+    required this.shadows,
+    required this.clipBehavior,
+    required this.child,
+  });
+
+  final BorderRadius borderRadius;
+  final EdgeInsetsGeometry padding;
+  final Color fill;
+  final Color rim;
+  final List<BoxShadow> shadows;
+  final Clip clipBehavior;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final body = ClipRRect(
+      borderRadius: borderRadius,
+      clipBehavior: clipBehavior,
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(child: ColoredBox(color: fill)),
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  border: Border.all(width: 0.5, color: rim),
+                ),
+              ),
+            ),
+          ),
+          Padding(padding: padding, child: child),
+        ],
+      ),
+    );
+    if (shadows.isEmpty) return body;
+    return DecoratedBox(
+      decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: shadows),
+      child: body,
+    );
+  }
+}
+
+/// Real liquid-glass material — uses the .frag shader on Impeller, falls
+/// back to a `BackdropFilter(blur)` + tint overlay on Flutter web.
+class _LiquidGlassMaterial extends StatefulWidget {
+  const _LiquidGlassMaterial({
+    required this.borderRadius,
+    required this.padding,
+    required this.tintRgb,
+    required this.tintAmount,
+    required this.isDark,
+    required this.blurPx,
+    required this.rim,
+    required this.shadows,
+    required this.clipBehavior,
+    required this.child,
+  });
+
+  final BorderRadius borderRadius;
+  final EdgeInsetsGeometry padding;
+  final Color tintRgb;       // opaque RGB (alpha ignored)
+  final double tintAmount;   // mix amount toward tintRgb, 0..1
+  final bool isDark;
+  final double blurPx;
+  final Color rim;
+  final List<BoxShadow> shadows;
+  final Clip clipBehavior;
+  final Widget child;
+
+  @override
+  State<_LiquidGlassMaterial> createState() => _LiquidGlassMaterialState();
+}
+
+class _LiquidGlassMaterialState extends State<_LiquidGlassMaterial> {
+  static ui.FragmentProgram? _program;
+  static Future<ui.FragmentProgram>? _programLoading;
+  ui.FragmentShader? _shader;
+  bool _shaderUnavailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) {
+      _shaderUnavailable = true;
+    } else {
+      unawaited(_loadShader());
+    }
+  }
+
+  Future<void> _loadShader() async {
+    try {
+      final p = _program ??
+          await (_programLoading ??= ui.FragmentProgram.fromAsset(
+            'packages/liqkit_ui/shaders/liq_liquid_glass.frag',
+          ));
+      _program = p;
+      _programLoading = null;
+      if (!mounted) return;
+      setState(() => _shader = p.fragmentShader());
+    } catch (_) {
+      if (mounted) setState(() => _shaderUnavailable = true);
+    }
+  }
+
+  @override
+  void dispose() {
+    _shader?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final clipped = ClipRRect(
+      borderRadius: widget.borderRadius,
+      clipBehavior: widget.clipBehavior,
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: _shaderUnavailable || _shader == null
+                ? _BlurFallback(
+                    blurPx: widget.blurPx,
+                    tintRgb: widget.tintRgb,
+                    tintAmount: widget.tintAmount,
+                  )
+                : _ShaderHost(
+                    shader: _shader!,
+                    radius: widget.borderRadius.topLeft.x,
+                    blurPx: widget.blurPx * 0.6, // shader's 17-tap is heavier
+                    tintRgb: widget.tintRgb,
+                    tintAmount: widget.tintAmount,
+                    isDark: widget.isDark,
+                  ),
+          ),
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: widget.borderRadius,
+                  border: Border.all(width: 0.5, color: widget.rim),
+                ),
+              ),
+            ),
+          ),
+          Padding(padding: widget.padding, child: widget.child),
+        ],
+      ),
+    );
+    if (widget.shadows.isEmpty) return clipped;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: widget.borderRadius,
+        boxShadow: widget.shadows,
+      ),
+      child: clipped,
+    );
+  }
+}
+
+/// Web (CanvasKit) — `BackdropFilter(blur)` + tint overlay. Visually
+/// continues to look like the prior glassmorphism, no regressions.
+class _BlurFallback extends StatelessWidget {
+  const _BlurFallback({
+    required this.blurPx,
+    required this.tintRgb,
+    required this.tintAmount,
+  });
+
+  final double blurPx;
+  final Color tintRgb;
+  final double tintAmount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: blurPx, sigmaY: blurPx),
+            child: const SizedBox.expand(),
+          ),
+        ),
+        Positioned.fill(
+          child: ColoredBox(color: tintRgb.withValues(alpha: tintAmount)),
+        ),
+      ],
+    );
+  }
+}
+
+/// Impeller — real shader filter.
+class _ShaderHost extends StatelessWidget {
+  const _ShaderHost({
+    required this.shader,
+    required this.radius,
+    required this.blurPx,
+    required this.tintRgb,
+    required this.tintAmount,
+    required this.isDark,
+  });
+
+  final ui.FragmentShader shader;
+  final double radius;
+  final double blurPx;
+  final Color tintRgb;
+  final double tintAmount;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final dpr = MediaQuery.of(context).devicePixelRatio;
+    // Set the non-sampler uniforms. Engine auto-binds uSize (idx 0,1) and
+    // uBackdrop (sampler 0) when used via ImageFilter.shader.
+    shader
+      ..setFloat(2, radius * dpr)        // uParams1.x — radius
+      ..setFloat(3, 1.55)                 // uParams1.y — ior
+      ..setFloat(4, 18 * dpr)             // uParams1.z — thickness
+      ..setFloat(5, 18 * dpr)             // uParams1.w — edgeWidth
+      ..setFloat(6, 0.30)                 // uParams2.x — chroma
+      ..setFloat(7, blurPx * dpr)         // uParams2.y — blurPx
+      ..setFloat(8, isDark ? 1.4 : 1.0)   // uParams2.z — rimBrightness
+      ..setFloat(9, 2.0)                  // uParams2.w — mode (full)
+      ..setFloat(10, tintRgb.r)           // uTintRGB.x
+      ..setFloat(11, tintRgb.g)           // uTintRGB.y
+      ..setFloat(12, tintRgb.b)           // uTintRGB.z
+      ..setFloat(13, tintAmount);         // uTintRGB.w — tint amount
+    return BackdropFilter(
+      filter: ui.ImageFilter.shader(shader),
+      child: const SizedBox.expand(),
+    );
   }
 }

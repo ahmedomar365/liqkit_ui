@@ -8,7 +8,7 @@ Widget popoverTopBuilder(BuildContext context) {
   return const SnippetFrame(
     maxWidth: 260,
     height: 170,
-    surface: SnippetFrameSurface.liquidLight,
+    surface: SnippetFrameSurface.liquidThemed,
     child: LiqPopover(child: SnippetLabel('Tip on top')),
   );
   // {@endhighlight}

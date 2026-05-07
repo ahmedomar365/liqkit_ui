@@ -453,29 +453,31 @@ class _DropdownPanel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: LiqGlassSurface(
-        borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
-        tint: context.liqIsDark ? LiqGlassTint.dark : LiqGlassTint.light,
-        child: ClipRRect(
+    return TextFieldTapRegion(
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: LiqGlassSurface(
           borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
-          child:
-              options.isEmpty
-                  ? const _EmptyRow()
-                  : ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: options.length,
-                    itemBuilder: (context, index) {
-                      final option = options[index];
-                      return _OptionRow<T>(
-                        option: option,
-                        selected: option.value == selectedValue,
-                        onTap: () => onSelect(option),
-                      );
-                    },
-                  ),
+          tint: context.liqIsDark ? LiqGlassTint.dark : LiqGlassTint.light,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
+            child:
+                options.isEmpty
+                    ? const _EmptyRow()
+                    : ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: options.length,
+                      itemBuilder: (context, index) {
+                        final option = options[index];
+                        return _OptionRow<T>(
+                          option: option,
+                          selected: option.value == selectedValue,
+                          onTap: () => onSelect(option),
+                        );
+                      },
+                    ),
+          ),
         ),
       ),
     );

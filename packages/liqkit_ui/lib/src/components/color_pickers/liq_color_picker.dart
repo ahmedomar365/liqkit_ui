@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -316,6 +317,28 @@ const double _nativeColorPickerPanelMinWidth = 320;
 
 class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
   _ColorPickerMode _mode = _ColorPickerMode.grid;
+  late List<Color> _savedColors;
+  int _savedPage = 0;
+
+  static const int _savedPageSize = 9;
+
+  @override
+  void initState() {
+    super.initState();
+    _savedColors = List<Color>.of(widget.savedColors);
+  }
+
+  @override
+  void didUpdateWidget(covariant LiqColorPickerPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!listEquals(oldWidget.savedColors, widget.savedColors)) {
+      _savedColors = List<Color>.of(widget.savedColors);
+      _savedPage = _savedPage.clamp(0, _savedPageCount - 1);
+    }
+  }
+
+  int get _savedPageCount =>
+      math.max(2, (_savedColors.length / _savedPageSize).ceil());
 
   @override
   Widget build(BuildContext context) {
@@ -324,7 +347,7 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
     final secondary =
         isDark ? const Color(0xB3EBEBF5) : const Color(0xFF727272);
     final gridIndex = widget.gridColors.indexOf(widget.color);
-    final savedIndex = widget.savedColors.indexOf(widget.color);
+    final savedIndex = _savedColors.indexOf(widget.color);
     return LayoutBuilder(
       builder: (context, constraints) {
         final availableWidth =
@@ -404,12 +427,24 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
                         ),
                       },
                     ),
-                    _OpacityMeter(color: widget.color, labelColor: label),
+                    _OpacityMeter(
+                      color: widget.color,
+                      labelColor: label,
+                      onChanged: widget.onChanged,
+                    ),
                     _SavedSwatches(
                       color: widget.color,
-                      colors: widget.savedColors,
+                      colors: _savedColors,
+                      page: _savedPage,
+                      pageCount: _savedPageCount,
                       selectedIndex: savedIndex,
                       onChanged: widget.onChanged,
+                      onAdd: _addSavedColor,
+                      onPageChanged:
+                          (page) => setState(
+                            () =>
+                                _savedPage = page.clamp(0, _savedPageCount - 1),
+                          ),
                     ),
                   ],
                 ),
@@ -419,6 +454,17 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
         );
       },
     );
+  }
+
+  void _addSavedColor() {
+    setState(() {
+      if (!_savedColors.contains(widget.color)) {
+        _savedColors = <Color>[..._savedColors, widget.color];
+      }
+      _savedPage = (_savedColors.indexOf(widget.color) / _savedPageSize)
+          .floor()
+          .clamp(0, _savedPageCount - 1);
+    });
   }
 }
 
@@ -614,10 +660,15 @@ class _PickerSegments extends StatelessWidget {
 }
 
 class _OpacityMeter extends StatelessWidget {
-  const _OpacityMeter({required this.color, required this.labelColor});
+  const _OpacityMeter({
+    required this.color,
+    required this.labelColor,
+    required this.onChanged,
+  });
 
   final Color color;
   final Color labelColor;
+  final ValueChanged<Color> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -648,25 +699,83 @@ class _OpacityMeter extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: SizedBox(
+                  child: _OpacitySlider(
+                    color: color,
+                    colorStop: colorStop,
+                    onChanged: onChanged,
+                  ),
+                ),
+                const SizedBox(width: 11),
+                _OpacityValueField(
+                  color: color,
+                  labelColor: labelColor,
+                  onChanged: onChanged,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _OpacitySlider extends StatelessWidget {
+  const _OpacitySlider({
+    required this.color,
+    required this.colorStop,
+    required this.onChanged,
+  });
+
+  static const double _thumbSize = 36;
+
+  final Color color;
+  final Color colorStop;
+  final ValueChanged<Color> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final value = color.a.clamp(0.0, 1.0);
+    return Builder(
+      builder:
+          (gestureContext) => LiqPointerCursor(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapDown:
+                  (details) => _select(gestureContext, details.localPosition),
+              onHorizontalDragStart:
+                  (details) => _select(gestureContext, details.localPosition),
+              onHorizontalDragUpdate:
+                  (details) => _select(gestureContext, details.localPosition),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final width = constraints.maxWidth;
+                  final left = (value * (width - _thumbSize)).clamp(
+                    0.0,
+                    width - _thumbSize,
+                  );
+                  return SizedBox(
                     height: 40,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(100),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.centerRight,
-                        children: <Widget>[
-                          Positioned.fill(
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
                             child: CustomPaint(
                               painter: _OpacitySliderPainter(colorStop),
                             ),
                           ),
-                          Container(
-                            width: 36,
-                            height: 36,
-                            margin: const EdgeInsets.all(2),
+                        ),
+                        Positioned(
+                          left: left,
+                          top: 2,
+                          child: Container(
+                            width: _thumbSize,
+                            height: _thumbSize,
                             decoration: BoxDecoration(
+                              color: color,
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: const Color(0xFFFFFFFF),
@@ -680,44 +789,126 @@ class _OpacityMeter extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 11),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 9,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0x33787878),
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: Text(
-                    '${(color.a * 100).round()}%',
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Text',
-                      fontFamilyFallback: const <String>[
-                        'SF Pro',
-                        'sans-serif',
+                        ),
                       ],
-                      fontSize: 17,
-                      height: 22 / 17,
-                      letterSpacing: -0.43,
-                      fontWeight: FontWeight.w600,
-                      color: labelColor,
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
-        ],
+    );
+  }
+
+  void _select(BuildContext context, Offset position) {
+    final box = context.findRenderObject() as RenderBox?;
+    if (box == null || box.size.width <= 0) return;
+    const thumbRadius = _thumbSize / 2;
+    final trackWidth = math.max(1, box.size.width - _thumbSize);
+    final value = ((position.dx - thumbRadius) / trackWidth).clamp(0.0, 1.0);
+    onChanged(color.withValues(alpha: value));
+  }
+}
+
+class _OpacityValueField extends StatefulWidget {
+  const _OpacityValueField({
+    required this.color,
+    required this.labelColor,
+    required this.onChanged,
+  });
+
+  final Color color;
+  final Color labelColor;
+  final ValueChanged<Color> onChanged;
+
+  @override
+  State<_OpacityValueField> createState() => _OpacityValueFieldState();
+}
+
+class _OpacityValueFieldState extends State<_OpacityValueField> {
+  late final TextEditingController _controller;
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: _percentText);
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(covariant _OpacityValueField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_focusNode.hasFocus && _controller.text != _percentText) {
+      _controller.text = _percentText;
+    }
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String get _percentText => '${(widget.color.a * 100).round()}%';
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 70,
+      decoration: const BoxDecoration(
+        color: Color(0x33787878),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 9),
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            _focusNode.requestFocus();
+            _controller.selection = TextSelection(
+              baseOffset: 0,
+              extentOffset: _controller.text.length,
+            );
+          },
+          child: EditableText(
+            controller: _controller,
+            focusNode: _focusNode,
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            cursorColor: widget.labelColor,
+            backgroundCursorColor: const Color(0xFF8E8E93),
+            onSubmitted: _commit,
+            onEditingComplete: () => _commit(_controller.text),
+            style: TextStyle(
+              fontFamily: 'SF Pro Text',
+              fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+              fontSize: 17,
+              height: 22 / 17,
+              fontWeight: FontWeight.w600,
+              color: widget.labelColor,
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  void _commit(String value) {
+    final number = int.tryParse(value.replaceAll(RegExp('[^0-9]'), ''));
+    if (number == null) {
+      _controller.text = _percentText;
+      return;
+    }
+    final clamped = number.clamp(0, 100);
+    _controller
+      ..text = '$clamped%'
+      ..selection = TextSelection.collapsed(offset: _controller.text.length);
+    widget.onChanged(widget.color.withValues(alpha: clamped / 100));
+    _focusNode.unfocus();
   }
 }
 
@@ -725,19 +916,37 @@ class _SavedSwatches extends StatelessWidget {
   const _SavedSwatches({
     required this.color,
     required this.colors,
+    required this.page,
+    required this.pageCount,
     required this.selectedIndex,
     required this.onChanged,
+    required this.onAdd,
+    required this.onPageChanged,
   });
 
   final Color color;
   final List<Color> colors;
+  final int page;
+  final int pageCount;
   final int selectedIndex;
   final ValueChanged<Color> onChanged;
+  final VoidCallback onAdd;
+  final ValueChanged<int> onPageChanged;
 
   @override
   Widget build(BuildContext context) {
-    final firstRow = colors.take(5).toList();
-    final secondRow = colors.skip(5).take(4).toList();
+    final pageStart = page * _LiqColorPickerPanelState._savedPageSize;
+    final pageColors = colors
+        .skip(pageStart)
+        .take(_LiqColorPickerPanelState._savedPageSize);
+    final firstRow = pageColors.take(5).toList();
+    final secondRow = pageColors.skip(5).take(4).toList();
+    final pageSelectedIndex =
+        selectedIndex >= pageStart &&
+                selectedIndex <
+                    pageStart + _LiqColorPickerPanelState._savedPageSize
+            ? selectedIndex
+            : -1;
     return Padding(
       padding: const EdgeInsets.only(top: 26),
       child: LayoutBuilder(
@@ -763,8 +972,8 @@ class _SavedSwatches extends StatelessWidget {
                   children: <Widget>[
                     _SavedSwatchRow(
                       colors: firstRow,
-                      startIndex: 0,
-                      selectedIndex: selectedIndex,
+                      startIndex: pageStart,
+                      selectedIndex: pageSelectedIndex,
                       onChanged: onChanged,
                     ),
                     const SizedBox(height: 22),
@@ -774,14 +983,18 @@ class _SavedSwatches extends StatelessWidget {
                         for (var i = 0; i < secondRow.length; i++)
                           LiqColorDot(
                             color: secondRow[i],
-                            selected: selectedIndex == i + 5,
+                            selected: pageSelectedIndex == pageStart + i + 5,
                             onPressed: () => onChanged(secondRow[i]),
                           ),
-                        const _AddSwatchButton(),
+                        _AddSwatchButton(onPressed: onAdd),
                       ],
                     ),
                     const SizedBox(height: 14),
-                    const _PageDots(),
+                    _PageDots(
+                      page: page,
+                      pageCount: pageCount,
+                      onChanged: onPageChanged,
+                    ),
                   ],
                 ),
               ),
@@ -837,24 +1050,30 @@ class _SavedSwatchRow extends StatelessWidget {
 }
 
 class _AddSwatchButton extends StatelessWidget {
-  const _AddSwatchButton();
+  const _AddSwatchButton({required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return const LiqPointerCursor(
-      child: SizedBox(
-        width: 44,
-        height: 44,
-        child: Center(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Color(0x33787878),
-              shape: BoxShape.circle,
-            ),
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: CustomPaint(painter: _PlusPainter()),
+    return LiqPointerCursor(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onPressed,
+        child: const SizedBox(
+          width: 44,
+          height: 44,
+          child: Center(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Color(0x33787878),
+                shape: BoxShape.circle,
+              ),
+              child: SizedBox(
+                width: 30,
+                height: 30,
+                child: CustomPaint(painter: _PlusPainter()),
+              ),
             ),
           ),
         ),
@@ -864,30 +1083,50 @@ class _AddSwatchButton extends StatelessWidget {
 }
 
 class _PageDots extends StatelessWidget {
-  const _PageDots();
+  const _PageDots({
+    required this.page,
+    required this.pageCount,
+    required this.onChanged,
+  });
+
+  final int page;
+  final int pageCount;
+  final ValueChanged<int> onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    final isDark = context.liqIsDark;
+    final active = isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+    final inactive = isDark ? const Color(0x59FFFFFF) : const Color(0x4D000000);
+    return SizedBox(
       height: 22,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Color(0xFF000000),
-              shape: BoxShape.circle,
+          for (var i = 0; i < pageCount; i++) ...[
+            LiqPointerCursor(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => onChanged(i),
+                child: SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: Center(
+                    child: AnimatedContainer(
+                      duration: context.liqMotionDuration(LiqMotion.fast),
+                      curve: LiqMotion.snappy,
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: i == page ? active : inactive,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
-            child: SizedBox(width: 8, height: 8),
-          ),
-          SizedBox(width: 8),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Color(0x4D000000),
-              shape: BoxShape.circle,
-            ),
-            child: SizedBox(width: 8, height: 8),
-          ),
+          ],
         ],
       ),
     );
@@ -906,37 +1145,68 @@ class _SpectrumPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LiqPointerCursor(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTapDown: (details) => _select(details.localPosition, context),
-        onHorizontalDragUpdate:
-            (details) => _select(details.localPosition, context),
-        onVerticalDragUpdate:
-            (details) => _select(details.localPosition, context),
-        child: SizedBox(
-          height: 300,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(18)),
-            child: CustomPaint(
-              painter: _SpectrumPainter(),
-              child: Center(
-                child: Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: color,
-                    border: Border.all(
-                      color: const Color(0xFFFFFFFF),
-                      width: 3,
-                    ),
-                  ),
+    final hsl = HSLColor.fromColor(color);
+    return Builder(
+      builder:
+          (gestureContext) => LiqPointerCursor(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapDown:
+                  (details) => _select(details.localPosition, gestureContext),
+              onPanStart:
+                  (details) => _select(details.localPosition, gestureContext),
+              onPanUpdate:
+                  (details) => _select(details.localPosition, gestureContext),
+              child: SizedBox(
+                height: 300,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final width = constraints.maxWidth;
+                    const markerSize = 24.0;
+                    final x =
+                        ((hsl.hue / 360) * width - markerSize / 2)
+                            .clamp(0.0, math.max(0.0, width - markerSize))
+                            .toDouble();
+                    final y = (((1 - hsl.lightness) / 0.9) * 300 -
+                            markerSize / 2)
+                        .clamp(0.0, 300 - markerSize);
+                    return ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(18)),
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            child: CustomPaint(painter: _SpectrumPainter()),
+                          ),
+                          Positioned(
+                            left: x,
+                            top: y,
+                            child: Container(
+                              width: markerSize,
+                              height: markerSize,
+                              decoration: BoxDecoration(
+                                color: color,
+                                border: Border.all(
+                                  color: const Color(0xFFFFFFFF),
+                                  width: 3,
+                                ),
+                                boxShadow: const <BoxShadow>[
+                                  BoxShadow(
+                                    color: Color(0x26000000),
+                                    blurRadius: 5,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 
@@ -945,7 +1215,7 @@ class _SpectrumPanel extends StatelessWidget {
     if (box == null || box.size.isEmpty) return;
     final h = (position.dx / box.size.width).clamp(0.0, 1.0);
     final s = (position.dy / box.size.height).clamp(0.0, 1.0);
-    onChanged(HSLColor.fromAHSL(1, h * 360, 1, 1 - s * 0.9).toColor());
+    onChanged(HSLColor.fromAHSL(color.a, h * 360, 1, 1 - s * 0.9).toColor());
   }
 }
 
@@ -1013,6 +1283,8 @@ class _ColorSliderRow extends StatelessWidget {
   final Color textColor;
   final ValueChanged<double> onChanged;
 
+  static const double _thumbSize = 28;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -1033,37 +1305,76 @@ class _ColorSliderRow extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: LiqPointerCursor(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTapDown: (details) => _select(context, details.localPosition),
-                onHorizontalDragUpdate:
-                    (details) => _select(context, details.localPosition),
-                child: Container(
-                  height: 32,
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    gradient: LinearGradient(colors: gradientColors),
-                  ),
-                  child: FractionallySizedBox(
-                    widthFactor: value.clamp(0.0, 1.0),
-                    child: const Align(
-                      alignment: Alignment.centerRight,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
-                          shape: BoxShape.circle,
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(color: Color(0x22000000), blurRadius: 4),
-                          ],
-                        ),
-                        child: SizedBox(width: 28, height: 28),
+            child: Builder(
+              builder:
+                  (gestureContext) => LiqPointerCursor(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTapDown:
+                          (details) =>
+                              _select(gestureContext, details.localPosition),
+                      onHorizontalDragStart:
+                          (details) =>
+                              _select(gestureContext, details.localPosition),
+                      onHorizontalDragUpdate:
+                          (details) =>
+                              _select(gestureContext, details.localPosition),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final width = constraints.maxWidth;
+                          final t = value.clamp(0.0, 1.0);
+                          final left =
+                              (t * (width - _thumbSize)).clamp(
+                                    0.0,
+                                    math.max(0.0, width - _thumbSize),
+                                  )
+                                  as double;
+                          return SizedBox(
+                            height: 44,
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: <Widget>[
+                                Positioned.fill(
+                                  top: 6,
+                                  bottom: 6,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(100),
+                                      ),
+                                      gradient: LinearGradient(
+                                        colors: gradientColors,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: left,
+                                  top: 8,
+                                  child: const DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFFFFFF),
+                                      shape: BoxShape.circle,
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                          color: Color(0x22000000),
+                                          blurRadius: 4,
+                                        ),
+                                      ],
+                                    ),
+                                    child: SizedBox(
+                                      width: _ColorSliderRow._thumbSize,
+                                      height: _ColorSliderRow._thumbSize,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
-                ),
-              ),
             ),
           ),
         ],
@@ -1074,7 +1385,9 @@ class _ColorSliderRow extends StatelessWidget {
   void _select(BuildContext context, Offset position) {
     final box = context.findRenderObject() as RenderBox?;
     if (box == null || box.size.width == 0) return;
-    onChanged(position.dx / box.size.width);
+    const thumbRadius = _thumbSize / 2;
+    final trackWidth = math.max(1, box.size.width - _thumbSize);
+    onChanged(((position.dx - thumbRadius) / trackWidth).clamp(0.0, 1.0));
   }
 }
 

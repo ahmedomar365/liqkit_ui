@@ -8,7 +8,7 @@ Widget glassSurfaceFloatingBuilder(BuildContext context) {
   return const SnippetFrame(
     maxWidth: 400,
     height: 200,
-    surface: SnippetFrameSurface.liquidLight,
+    surface: SnippetFrameSurface.liquidThemed,
     surfacePadding: EdgeInsets.all(24),
     // {@highlight}
     child: LiqGlassSurface(

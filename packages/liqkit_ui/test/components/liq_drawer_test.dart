@@ -86,6 +86,42 @@ void main() {
       );
       expect(defaultTextStyle.style.color, const Color(0xFFFFFFFF));
     });
+
+    testWidgets('clamps requested width to the available screen width', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(size: Size(180, 400)),
+          child: const Directionality(
+            textDirection: TextDirection.ltr,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: LiqDrawer(width: 320, child: Text('Clamped')),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.getSize(find.byType(LiqDrawer)).width, 180);
+    });
+
+    testWidgets('collapsed mode uses the collapsed rail width', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: LiqDrawer(
+              collapsed: true,
+              collapsedWidth: 64,
+              child: Text('Rail'),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.getSize(find.byType(LiqDrawer)).width, 64);
+    });
   });
 
   group('LiqDrawerOverlay.show', () {

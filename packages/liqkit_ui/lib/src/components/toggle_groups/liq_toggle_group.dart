@@ -129,35 +129,37 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
     final palette = _ToggleGroupPalette.resolve(context);
     final disabled = onChanged == null;
 
-    Widget control = Container(
-      padding: const EdgeInsets.all(trackPadding),
-      decoration: BoxDecoration(
-        color: palette.track,
-        borderRadius: const BorderRadius.all(Radius.circular(trackRadius)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          for (final item in items)
-            _Segment<T>(
-              item: item,
-              active: selected.contains(item.value),
-              enabled: !disabled,
-              palette: palette,
-              onTap:
-                  disabled
-                      ? null
-                      : () {
-                        final next = Set<T>.of(selected);
-                        if (next.contains(item.value)) {
-                          next.remove(item.value);
-                        } else {
-                          next.add(item.value);
-                        }
-                        onChanged!(next);
-                      },
-            ),
-        ],
+    Widget control = _ToggleGroupTrack(
+      child: Container(
+        padding: const EdgeInsets.all(trackPadding),
+        decoration: BoxDecoration(
+          color: palette.track,
+          borderRadius: const BorderRadius.all(Radius.circular(trackRadius)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            for (final item in items)
+              _Segment<T>(
+                item: item,
+                active: selected.contains(item.value),
+                enabled: !disabled,
+                palette: palette,
+                onTap:
+                    disabled
+                        ? null
+                        : () {
+                          final next = Set<T>.of(selected);
+                          if (next.contains(item.value)) {
+                            next.remove(item.value);
+                          } else {
+                            next.add(item.value);
+                          }
+                          onChanged!(next);
+                        },
+              ),
+          ],
+        ),
       ),
     );
 
@@ -182,6 +184,41 @@ final class LiqToggleGroup<T> extends StatelessWidget with Diagnosticable {
           ifFalse: 'disabled',
         ),
       );
+  }
+}
+
+class _ToggleGroupTrack extends StatelessWidget {
+  const _ToggleGroupTrack({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (!constraints.hasBoundedWidth) {
+          return child;
+        }
+
+        return SizedBox(
+          width: constraints.maxWidth,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
+            primary: false,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              child: Center(
+                child: UnconstrainedBox(
+                  constrainedAxis: Axis.vertical,
+                  child: child,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

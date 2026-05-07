@@ -9,6 +9,7 @@ workspace:
   - packages/liqkit_ui_tokens
   - packages/liqkit_ui_assets
   - packages/liqkit_ui
+  - packages/liqkit_ui_icons
   - apps/showcase
   - apps/demo
   - apps/playground

@@ -11,11 +11,11 @@ Widget dividerVerticalBuilder(BuildContext context) {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Left'),
+          SnippetLabel('Left'),
           SizedBox(width: 12),
           LiqDivider(orientation: LiqDividerOrientation.vertical),
           SizedBox(width: 12),
-          Text('Right'),
+          SnippetLabel('Right'),
         ],
       ),
     ),

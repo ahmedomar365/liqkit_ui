@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
+import 'package:liqkit_ui/src/theme/liq_theme.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_data.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Visual variant of a [LiqSheet].
@@ -40,8 +42,39 @@ final class LiqSheet extends StatelessWidget {
     this.child,
     this.width = 402,
     this.height = 360,
+    this.brightness,
     super.key,
   });
+
+  /// Show this sheet as a modal bottom-anchored overlay with a
+  /// translucent scrim. Returns whatever value is popped (typically
+  /// from the trailing confirm button).
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required String title,
+    LiqSheetVariant variant = LiqSheetVariant.fullScreen,
+    Widget? leading,
+    Widget? trailing,
+    Widget? child,
+    double width = 402,
+    double height = 360,
+    Brightness? brightness,
+    bool barrierDismissible = true,
+  }) {
+    return Navigator.of(context).push<T>(
+      _LiqSheetRoute<T>(
+        title: title,
+        variant: variant,
+        leading: leading,
+        trailing: trailing,
+        child: child,
+        width: width,
+        height: height,
+        brightness: brightness,
+        barrierDismissible: barrierDismissible,
+      ),
+    );
+  }
 
   /// Centered title rendered in the controls row.
   final String title;
@@ -66,16 +99,30 @@ final class LiqSheet extends StatelessWidget {
   /// Total sheet height. Defaults to 360pt.
   final double height;
 
+  /// Surface brightness. Defaults to the nearest liq theme brightness.
+  final Brightness? brightness;
+
   static const double _sheetTopRadius = 38;
   static const double _inspectorRadius = 34;
   static const Color _white = Color(0xFFFFFFFF);
+  static const Color _darkSurface = Color(0xFF1C1C1E);
   static const Color _shadow18 = Color(0x2E000000);
   static const Color _scrim10 = Color(0x1A000000);
+  static const Color _darkScrim14 = Color(0x24000000);
 
   @override
   Widget build(BuildContext context) {
+    final resolvedBrightness = brightness ?? context.liqBrightness;
+    final isDark = resolvedBrightness == Brightness.dark;
+    final surfaceTint =
+        isDark
+            ? LiqGlassTint.dark
+            : variant == LiqSheetVariant.inspector
+            ? LiqGlassTint.light
+            : null;
     final controls = _SheetTopBar(
       title: title,
+      brightness: resolvedBrightness,
       leading: leading ?? const _LiqSheetCloseButton(),
       trailing: trailing ?? const _LiqSheetConfirmButton(),
     );
@@ -95,41 +142,47 @@ final class LiqSheet extends StatelessWidget {
                 ? constraints.maxWidth
                 : width;
 
+        final sheet =
+            variant == LiqSheetVariant.stacked
+                ? Stack(
+                  children: <Widget>[
+                    const Positioned(
+                      left: 16,
+                      right: 16,
+                      top: 0,
+                      bottom: 0,
+                      child: _BackgroundPage(),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 10,
+                      bottom: 0,
+                      child: _SheetSurface(
+                        radius: radius,
+                        background: isDark ? _darkSurface : _white,
+                        tint: surfaceTint,
+                        body: child,
+                        child: controls,
+                      ),
+                    ),
+                  ],
+                )
+                : _SheetSurface(
+                  radius: radius,
+                  background: isDark ? _darkSurface : _white,
+                  tint: surfaceTint,
+                  body: child,
+                  child: controls,
+                );
+
         return SizedBox(
           width: resolvedWidth,
           height: height,
-          child:
-              variant == LiqSheetVariant.stacked
-                  ? Stack(
-                    children: <Widget>[
-                      const Positioned(
-                        left: 16,
-                        right: 16,
-                        top: 0,
-                        bottom: 0,
-                        child: _BackgroundPage(),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 10,
-                        bottom: 0,
-                        child: _SheetSurface(
-                          radius: radius,
-                          background: _white,
-                          body: child,
-                          child: controls,
-                        ),
-                      ),
-                    ],
-                  )
-                  : _SheetSurface(
-                    radius: radius,
-                    background: _white,
-                    tint: isInspector ? LiqGlassTint.light : null,
-                    body: child,
-                    child: controls,
-                  ),
+          child: LiqTheme(
+            data: isDark ? LiqThemeData.dark : LiqThemeData.light,
+            child: sheet,
+          ),
         );
       },
     );
@@ -142,7 +195,8 @@ final class LiqSheet extends StatelessWidget {
       ..add(StringProperty('title', title))
       ..add(EnumProperty<LiqSheetVariant>('variant', variant))
       ..add(DoubleProperty('width', width))
-      ..add(DoubleProperty('height', height));
+      ..add(DoubleProperty('height', height))
+      ..add(EnumProperty<Brightness?>('brightness', brightness));
   }
 }
 
@@ -211,20 +265,25 @@ class _BackgroundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
+    final isDark = context.liqBrightness == Brightness.dark;
+    return Stack(
       children: <Widget>[
         Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: LiqSheet._white,
-              borderRadius: BorderRadius.only(
+              color: isDark ? LiqSheet._darkSurface : LiqSheet._white,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(LiqSheet._sheetTopRadius),
                 topRight: Radius.circular(LiqSheet._sheetTopRadius),
               ),
             ),
           ),
         ),
-        Positioned.fill(child: ColoredBox(color: LiqSheet._scrim10)),
+        Positioned.fill(
+          child: ColoredBox(
+            color: isDark ? LiqSheet._darkScrim14 : LiqSheet._scrim10,
+          ),
+        ),
       ],
     );
   }
@@ -233,11 +292,13 @@ class _BackgroundPage extends StatelessWidget {
 class _SheetTopBar extends StatelessWidget {
   const _SheetTopBar({
     required this.title,
+    required this.brightness,
     required this.leading,
     required this.trailing,
   });
 
   final String title;
+  final Brightness brightness;
   final Widget leading;
   final Widget trailing;
 
@@ -270,14 +331,20 @@ class _SheetTopBar extends StatelessWidget {
                     child: Center(
                       child: Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'SF Pro Text',
-                          fontFamilyFallback: <String>['SF Pro', 'sans-serif'],
+                          fontFamilyFallback: const <String>[
+                            'SF Pro',
+                            'sans-serif',
+                          ],
                           fontSize: 17,
                           height: 22 / 17,
                           letterSpacing: -0.43,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF1A1A1A),
+                          color:
+                              brightness == Brightness.dark
+                                  ? const Color(0xFFF5F5F7)
+                                  : const Color(0xFF1A1A1A),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -355,6 +422,10 @@ final class LiqSheetTopButton extends StatefulWidget {
   static const Color _standardBottom = Color(0xD9E6E6E6);
   static const Color _standardFg = Color(0xFF727272);
   static const Color _standardRim = Color(0x73FFFFFF);
+  static const Color _standardDarkTop = Color(0xFF3A3A3C);
+  static const Color _standardDarkBottom = Color(0xFF2C2C2E);
+  static const Color _standardDarkFg = Color(0xFFD1D1D6);
+  static const Color _standardDarkRim = Color(0x24FFFFFF);
   static const Color _primaryTop = Color(0xFF32A2FF);
   static const Color _primaryBottom = Color(0xFF0079FF);
   static const Color _primaryFg = Color(0xFFFFFFFF);
@@ -393,12 +464,15 @@ class _LiqSheetTopButtonState extends State<LiqSheetTopButton> {
     final isPrimary = widget.style == LiqSheetTopButtonStyle.primary;
     final disabled = widget.onPressed == null;
     final motionDuration = context.liqMotionDuration(LiqMotion.fast);
+    final isDark = context.liqBrightness == Brightness.dark;
 
     final glyph = DefaultTextStyle.merge(
       style: TextStyle(
         color:
             isPrimary
                 ? LiqSheetTopButton._primaryFg
+                : isDark
+                ? LiqSheetTopButton._standardDarkFg
                 : LiqSheetTopButton._standardFg,
         fontFamily: 'SF Pro Text',
         fontSize: 17,
@@ -442,6 +516,11 @@ class _LiqSheetTopButtonState extends State<LiqSheetTopButton> {
                               LiqSheetTopButton._primaryTop,
                               LiqSheetTopButton._primaryBottom,
                             ]
+                            : isDark
+                            ? const <Color>[
+                              LiqSheetTopButton._standardDarkTop,
+                              LiqSheetTopButton._standardDarkBottom,
+                            ]
                             : const <Color>[
                               LiqSheetTopButton._standardTop,
                               LiqSheetTopButton._standardBottom,
@@ -450,8 +529,13 @@ class _LiqSheetTopButtonState extends State<LiqSheetTopButton> {
                   border:
                       isPrimary
                           ? null
-                          : const Border.fromBorderSide(
-                            BorderSide(color: LiqSheetTopButton._standardRim),
+                          : Border.fromBorderSide(
+                            BorderSide(
+                              color:
+                                  isDark
+                                      ? LiqSheetTopButton._standardDarkRim
+                                      : LiqSheetTopButton._standardRim,
+                            ),
                           ),
                   boxShadow:
                       isPrimary
@@ -572,4 +656,70 @@ class _GlyphPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _GlyphPainter oldDelegate) =>
       oldDelegate.kind != kind || oldDelegate.color != color;
+}
+
+/// Modal route for [LiqSheet.show].
+class _LiqSheetRoute<T> extends ModalRoute<T> {
+  _LiqSheetRoute({
+    required this.title,
+    required this.variant,
+    required this.width,
+    required this.height,
+    this.brightness,
+    this.leading,
+    this.trailing,
+    Widget? child,
+    bool barrierDismissible = true,
+  }) : _child = child,
+       _barrierDismissible = barrierDismissible;
+
+  final String title;
+  final LiqSheetVariant variant;
+  final Widget? leading;
+  final Widget? trailing;
+  final Widget? _child;
+  final double width;
+  final double height;
+  final Brightness? brightness;
+  final bool _barrierDismissible;
+
+  @override
+  Color? get barrierColor => const Color(0x66000000);
+  @override
+  bool get barrierDismissible => _barrierDismissible;
+  @override
+  String? get barrierLabel => 'sheet';
+  @override
+  bool get opaque => false;
+  @override
+  bool get maintainState => true;
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 240);
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: Offset.zero,
+      ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: LiqSheet(
+          title: title,
+          variant: variant,
+          leading: leading,
+          trailing: trailing,
+          width: width,
+          height: height,
+          brightness: brightness,
+          child: _child,
+        ),
+      ),
+    );
+  }
 }

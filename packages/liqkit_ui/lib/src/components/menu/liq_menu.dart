@@ -22,6 +22,33 @@ final class LiqMenu extends StatelessWidget {
     super.key,
   });
 
+  /// Opens this menu as a popup overlay anchored at [position].
+  ///
+  /// Returns a `Future<T?>` that resolves with whatever value the
+  /// invoker pops the route with (typically via
+  /// `Navigator.of(ctx).pop(value)` from inside an item's `onPressed`).
+  ///
+  /// Smart positioning: if the menu would overflow any screen edge, it
+  /// is repositioned to stay visible (with a 16pt margin).
+  static Future<T?> showPopup<T>({
+    required BuildContext context,
+    required List<Widget> children,
+    required Offset position,
+    List<LiqMenuQuickAction> quickActions = const <LiqMenuQuickAction>[],
+    double width = 286,
+    bool barrierDismissible = true,
+  }) {
+    return Navigator.of(context).push<T>(
+      _LiqMenuPopupRoute<T>(
+        position: position,
+        children: children,
+        quickActions: quickActions,
+        width: width,
+        barrierDismissible: barrierDismissible,
+      ),
+    );
+  }
+
   /// Optional quick actions rendered above row items.
   final List<LiqMenuQuickAction> quickActions;
 
@@ -485,6 +512,104 @@ final class LiqMenuSeparator extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// PopupRoute for [LiqMenu.showPopup]. Implements smart edge-detection
+/// positioning so the menu always stays inside the viewport.
+class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
+  _LiqMenuPopupRoute({
+    required this.position,
+    required this.children,
+    required this.quickActions,
+    required this.width,
+    bool barrierDismissible = true,
+  }) : _barrierDismissible = barrierDismissible;
+
+  final Offset position;
+  final List<Widget> children;
+  final List<LiqMenuQuickAction> quickActions;
+  final double width;
+  final bool _barrierDismissible;
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 180);
+
+  @override
+  bool get barrierDismissible => _barrierDismissible;
+
+  @override
+  Color? get barrierColor => null;
+
+  @override
+  String? get barrierLabel => 'menu';
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const margin = 16.0;
+        // Estimated max menu height — clamped further by the inner
+        // SingleChildScrollView once content lays out.
+        const estimatedMaxHeight = 480.0;
+        var left = position.dx;
+        var top = position.dy;
+        if (left + width > constraints.maxWidth - margin) {
+          left = constraints.maxWidth - width - margin;
+        }
+        if (left < margin) left = margin;
+        if (top + estimatedMaxHeight > constraints.maxHeight - margin) {
+          // Try anchoring above the trigger.
+          final flipped = position.dy - estimatedMaxHeight - 8;
+          top = flipped > margin
+              ? flipped
+              : constraints.maxHeight - estimatedMaxHeight - margin;
+        }
+        if (top < margin) top = margin;
+
+        return Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _barrierDismissible
+                    ? () => Navigator.of(context).pop()
+                    : null,
+              ),
+            ),
+            Positioned(
+              left: left,
+              top: top,
+              child: FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: Tween<double>(begin: 0.96, end: 1).animate(
+                    CurvedAnimation(parent: animation, curve: Curves.easeOut),
+                  ),
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: constraints.maxHeight - top - margin,
+                    ),
+                    child: SingleChildScrollView(
+                      child: LiqMenu(
+                        quickActions: quickActions,
+                        width: width,
+                        children: children,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

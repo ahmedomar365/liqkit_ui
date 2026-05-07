@@ -27,13 +27,14 @@ enum LiqAlertActionLayout {
   sideBySide,
 }
 
-/// Single action in a [LiqAlert] dialog.
+/// Single action in a [LiqAlert] dialog or [LiqActionSheet].
 final class LiqAlertAction {
   /// Creates an action.
   const LiqAlertAction({
     required this.label,
     this.onPressed,
     this.style = LiqAlertActionStyle.regular,
+    this.icon,
   });
 
   /// Action label.
@@ -44,6 +45,9 @@ final class LiqAlertAction {
 
   /// Visual style.
   final LiqAlertActionStyle style;
+
+  /// Optional leading glyph rendered before the label (action sheets).
+  final IconData? icon;
 }
 
 /// iOS 26 alert dialog (300pt translucent surface, title/description, actions).
@@ -53,15 +57,127 @@ final class LiqAlert extends StatelessWidget {
     required this.title,
     required this.actions,
     this.description,
+    this.content,
     this.layout = LiqAlertActionLayout.stacked,
     super.key,
   });
+
+  /// Show this alert as a centered modal dialog with a translucent
+  /// scrim. Returns the value an action's `onPressed` pops with.
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required String title,
+    required List<LiqAlertAction> actions,
+    String? description,
+    Widget? content,
+    LiqAlertActionLayout layout = LiqAlertActionLayout.stacked,
+    bool barrierDismissible = true,
+  }) {
+    return Navigator.of(context).push<T>(
+      _LiqAlertRoute<T>(
+        title: title,
+        description: description,
+        content: content,
+        actions: actions,
+        layout: layout,
+        barrierDismissible: barrierDismissible,
+      ),
+    );
+  }
+
+  /// Convenience: single-button informational alert. Resolves when the
+  /// dialog is dismissed.
+  static Future<void> showMessage({
+    required BuildContext context,
+    required String title,
+    String? description,
+    String buttonText = 'OK',
+    VoidCallback? onPressed,
+  }) {
+    return show<void>(
+      context: context,
+      title: title,
+      description: description,
+      actions: <LiqAlertAction>[
+        LiqAlertAction(
+          label: buttonText,
+          style: LiqAlertActionStyle.filled,
+          onPressed: () {
+            Navigator.of(context).pop();
+            onPressed?.call();
+          },
+        ),
+      ],
+    );
+  }
+
+  /// Convenience: red-styled single-button error alert.
+  static Future<void> showError({
+    required BuildContext context,
+    required String title,
+    String? description,
+    String buttonText = 'OK',
+    VoidCallback? onPressed,
+  }) {
+    return show<void>(
+      context: context,
+      title: title,
+      description: description,
+      actions: <LiqAlertAction>[
+        LiqAlertAction(
+          label: buttonText,
+          style: LiqAlertActionStyle.destructive,
+          onPressed: () {
+            Navigator.of(context).pop();
+            onPressed?.call();
+          },
+        ),
+      ],
+    );
+  }
+
+  /// Convenience: two-button confirmation alert. Resolves to `true` if
+  /// the user taps the confirm action, `false` if the cancel action,
+  /// `null` if dismissed.
+  static Future<bool?> showConfirmation({
+    required BuildContext context,
+    required String title,
+    String? description,
+    String confirmText = 'OK',
+    String cancelText = 'Cancel',
+    bool isDestructive = false,
+    LiqAlertActionLayout layout = LiqAlertActionLayout.sideBySide,
+  }) {
+    return show<bool>(
+      context: context,
+      title: title,
+      description: description,
+      layout: layout,
+      actions: <LiqAlertAction>[
+        LiqAlertAction(
+          label: cancelText,
+          onPressed: () => Navigator.of(context).pop<bool>(false),
+        ),
+        LiqAlertAction(
+          label: confirmText,
+          style: isDestructive
+              ? LiqAlertActionStyle.destructive
+              : LiqAlertActionStyle.filled,
+          onPressed: () => Navigator.of(context).pop<bool>(true),
+        ),
+      ],
+    );
+  }
 
   /// Bold centered title.
   final String title;
 
   /// Optional description below the title.
   final String? description;
+
+  /// Optional custom widget rendered below the description and above
+  /// the action row (e.g. a text field, a chart, an indicator stack).
+  final Widget? content;
 
   /// Action buttons (≥1).
   final List<LiqAlertAction> actions;
@@ -143,6 +259,10 @@ final class LiqAlert extends StatelessWidget {
                             ),
                             textDirection: TextDirection.ltr,
                           ),
+                        ],
+                        if (content != null) ...<Widget>[
+                          const SizedBox(height: 16),
+                          content!,
                         ],
                       ],
                     ),
@@ -249,6 +369,63 @@ class _LiqAlertActionButton extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Modal route for [LiqAlert.show].
+class _LiqAlertRoute<T> extends ModalRoute<T> {
+  _LiqAlertRoute({
+    required this.title,
+    required this.actions,
+    required this.layout,
+    this.description,
+    this.content,
+    bool barrierDismissible = true,
+  }) : _barrierDismissible = barrierDismissible;
+
+  final String title;
+  final String? description;
+  final Widget? content;
+  final List<LiqAlertAction> actions;
+  final LiqAlertActionLayout layout;
+  final bool _barrierDismissible;
+
+  @override
+  Color? get barrierColor => const Color(0x80000000);
+  @override
+  bool get barrierDismissible => _barrierDismissible;
+  @override
+  String? get barrierLabel => 'alert';
+  @override
+  bool get opaque => false;
+  @override
+  bool get maintainState => true;
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 220);
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return FadeTransition(
+      opacity: animation,
+      child: ScaleTransition(
+        scale: Tween<double>(begin: 0.92, end: 1).animate(
+          CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+        ),
+        child: Center(
+          child: LiqAlert(
+            title: title,
+            description: description,
+            content: content,
+            actions: actions,
+            layout: layout,
           ),
         ),
       ),

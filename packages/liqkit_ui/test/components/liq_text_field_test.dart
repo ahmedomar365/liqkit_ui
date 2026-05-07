@@ -188,5 +188,37 @@ void main() {
 
       expect(find.text('Type here'), findsOneWidget);
     });
+
+    testWidgets('dark filled field keeps placeholder legible', (tester) async {
+      final controller = TextEditingController();
+      addTearDown(controller.dispose);
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.dark,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: SizedBox(
+                width: 240,
+                child: LiqTextField(
+                  controller: controller,
+                  placeholder: 'Placeholder',
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final placeholder = tester.widget<Text>(find.text('Placeholder'));
+      expect(placeholder.style?.color, const Color(0x99EBEBF5));
+
+      final container = tester.widget<AnimatedContainer>(
+        find.byType(AnimatedContainer),
+      );
+      final decoration = container.decoration! as BoxDecoration;
+      expect(decoration.color, const Color(0x3D767680));
+      expect(decoration.borderRadius, BorderRadius.circular(14));
+    });
   });
 }

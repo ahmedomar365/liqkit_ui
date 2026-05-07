@@ -182,6 +182,17 @@ class _LiqCarouselState extends State<LiqCarousel> {
     setState(() => _currentIndex = index);
   }
 
+  void _handleIndicatorPageChanged(int index) {
+    if (index == _currentIndex || !_controller.hasClients) return;
+    _pauseAutoplay();
+    _controller.animateToPage(
+      index,
+      duration: LiqCarousel.pageDuration,
+      curve: LiqCarousel.pageCurve,
+    );
+    _scheduleResumeAutoplay();
+  }
+
   void _handlePointerDown(PointerDownEvent event) {
     _pauseAutoplay();
     if (_dragging) return;
@@ -240,6 +251,7 @@ class _LiqCarouselState extends State<LiqCarousel> {
           LiqPageControl(
             count: widget.items.length,
             activeIndex: _currentIndex.clamp(0, widget.items.length - 1),
+            onPageChanged: _handleIndicatorPageChanged,
           ),
         ],
       ],

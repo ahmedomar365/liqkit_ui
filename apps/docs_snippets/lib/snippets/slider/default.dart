@@ -6,16 +6,12 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 /// Snippet builder consumed by `apps/docs_snippets/lib/src/routes.g.dart`.
 Widget sliderDefaultBuilder(BuildContext context) {
   return SnippetFrame(
-    surface: SnippetFrameSurface.light,
+    surface: SnippetFrameSurface.themed,
     child: LiqDemo<double>(
       initial: 0.4,
       builder: (v, set) {
         // {@highlight}
-        return LiqSlider(
-          value: v,
-          onChanged: set,
-          brightness: Brightness.light,
-        );
+        return LiqSlider(value: v, onChanged: set);
         // {@endhighlight}
       },
     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -22,9 +23,20 @@ final class LiqSlider extends StatefulWidget {
     required this.onChanged,
     this.min = 0,
     this.max = 1,
+    this.divisions,
     this.brightness,
+    this.activeColor,
+    this.inactiveColor,
+    this.thumbColor,
+    this.trackHeight,
+    this.thumbWidth,
+    this.thumbHeight,
+    this.enableHaptics = true,
+    this.onChangeStart,
+    this.onChangeEnd,
     super.key,
-  });
+  }) : assert(divisions == null || divisions > 0,
+            'divisions must be > 0 when provided');
 
   /// Current value, clamped to `[min, max]`.
   final double value;
@@ -32,14 +44,45 @@ final class LiqSlider extends StatefulWidget {
   /// Tap/drag callback. When `null` the slider is rendered disabled.
   final ValueChanged<double>? onChanged;
 
+  /// Called when the user starts dragging.
+  final ValueChanged<double>? onChangeStart;
+
+  /// Called when the user releases the slider.
+  final ValueChanged<double>? onChangeEnd;
+
   /// Minimum value of the range.
   final double min;
 
   /// Maximum value of the range.
   final double max;
 
+  /// Optional discrete-step count. When set, [value] snaps to the
+  /// nearest of `divisions + 1` evenly-spaced positions in `[min, max]`.
+  final int? divisions;
+
   /// Surface brightness. Defaults to the nearest liq theme brightness.
   final Brightness? brightness;
+
+  /// Optional override for the filled (left-of-knob) track color.
+  final Color? activeColor;
+
+  /// Optional override for the inactive (right-of-knob) track color.
+  final Color? inactiveColor;
+
+  /// Optional override for the knob color.
+  final Color? thumbColor;
+
+  /// Optional override for the track height. Defaults to 6pt.
+  final double? trackHeight;
+
+  /// Optional override for the knob width. Defaults to 38pt.
+  final double? thumbWidth;
+
+  /// Optional override for the knob height. Defaults to 24pt.
+  final double? thumbHeight;
+
+  /// Whether tap-down / change-end fire `HapticFeedback.lightImpact()`.
+  final bool enableHaptics;
 
   static const double _trackHeight = 6;
   static const double _knobWidth = 38;
@@ -68,16 +111,30 @@ class _LiqSliderState extends State<LiqSlider> {
   double _denormalize(double t) =>
       widget.min + t.clamp(0.0, 1.0) * (widget.max - widget.min);
 
+  double _snap(double v) {
+    final divisions = widget.divisions;
+    if (divisions == null) return v;
+    final span = widget.max - widget.min;
+    if (span <= 0) return v;
+    final step = span / divisions;
+    final stepped = ((v - widget.min) / step).round() * step + widget.min;
+    return stepped.clamp(widget.min, widget.max);
+  }
+
   void _emitFromX(double x, double width) {
     if (widget.onChanged == null) return;
     final usable = (width - 2 * LiqSlider._hInset).clamp(1.0, double.infinity);
     final t = ((x - LiqSlider._hInset) / usable).clamp(0.0, 1.0);
-    widget.onChanged!(_denormalize(t));
+    widget.onChanged!(_snap(_denormalize(t)));
   }
 
   void _setPressed(bool value) {
     if (_pressed == value) return;
     setState(() => _pressed = value);
+  }
+
+  void _haptic() {
+    if (widget.enableHaptics) HapticFeedback.lightImpact();
   }
 
   @override
@@ -86,6 +143,15 @@ class _LiqSliderState extends State<LiqSlider> {
     final t = _normalize(widget.value);
     final isDark =
         (widget.brightness ?? context.liqBrightness) == Brightness.dark;
+    final trackHeight = widget.trackHeight ?? LiqSlider._trackHeight;
+    final knobW = widget.thumbWidth ?? LiqSlider._knobWidth;
+    final knobH = widget.thumbHeight ?? LiqSlider._knobHeight;
+    final rowHeight = knobH > LiqSlider._rowHeight ? knobH : LiqSlider._rowHeight;
+    final activeColor = widget.activeColor ?? LiqSlider._fill;
+    final inactiveColor = widget.inactiveColor ??
+        (isDark ? LiqSlider._trackDark : LiqSlider._trackLight);
+    final thumbColor = widget.thumbColor ??
+        (isDark ? LiqSlider._knobDark : LiqSlider._knobLight);
     return Semantics(
       slider: true,
       enabled: !disabled,
@@ -102,25 +168,36 @@ class _LiqSliderState extends State<LiqSlider> {
               onPointerCancel: disabled ? null : (_) => _setPressed(false),
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTapDown:
-                    disabled
-                        ? null
-                        : (details) =>
-                            _emitFromX(details.localPosition.dx, width),
-                onHorizontalDragUpdate:
-                    disabled
-                        ? null
-                        : (details) =>
-                            _emitFromX(details.localPosition.dx, width),
-                onHorizontalDragEnd:
-                    disabled ? null : (_) => _setPressed(false),
+                onTapDown: disabled
+                    ? null
+                    : (details) {
+                        _haptic();
+                        _emitFromX(details.localPosition.dx, width);
+                      },
+                onHorizontalDragStart: disabled
+                    ? null
+                    : (_) {
+                        widget.onChangeStart?.call(widget.value);
+                        _haptic();
+                      },
+                onHorizontalDragUpdate: disabled
+                    ? null
+                    : (details) =>
+                        _emitFromX(details.localPosition.dx, width),
+                onHorizontalDragEnd: disabled
+                    ? null
+                    : (_) {
+                        _setPressed(false);
+                        widget.onChangeEnd?.call(widget.value);
+                        _haptic();
+                      },
                 onHorizontalDragCancel:
                     disabled ? null : () => _setPressed(false),
                 child: Opacity(
                   opacity: disabled ? 0.5 : 1,
                   child: SizedBox(
                     width: width,
-                    height: LiqSlider._rowHeight,
+                    height: rowHeight,
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: <Widget>[
@@ -128,18 +205,13 @@ class _LiqSliderState extends State<LiqSlider> {
                         Positioned(
                           left: LiqSlider._hInset,
                           right: LiqSlider._hInset,
-                          top:
-                              (LiqSlider._rowHeight - LiqSlider._trackHeight) /
-                              2,
+                          top: (rowHeight - trackHeight) / 2,
                           child: Container(
-                            height: LiqSlider._trackHeight,
+                            height: trackHeight,
                             decoration: BoxDecoration(
-                              color:
-                                  isDark
-                                      ? LiqSlider._trackDark
-                                      : LiqSlider._trackLight,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(3),
+                              color: inactiveColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(trackHeight / 2),
                               ),
                             ),
                           ),
@@ -147,31 +219,25 @@ class _LiqSliderState extends State<LiqSlider> {
                         // Filled portion left of the knob.
                         Positioned(
                           left: LiqSlider._hInset,
-                          right:
-                              LiqSlider._hInset +
+                          right: LiqSlider._hInset +
                               (1 - t) * (width - 2 * LiqSlider._hInset),
-                          top:
-                              (LiqSlider._rowHeight - LiqSlider._trackHeight) /
-                              2,
+                          top: (rowHeight - trackHeight) / 2,
                           child: Container(
-                            height: LiqSlider._trackHeight,
-                            decoration: const BoxDecoration(
-                              color: LiqSlider._fill,
+                            height: trackHeight,
+                            decoration: BoxDecoration(
+                              color: activeColor,
                               borderRadius: BorderRadius.all(
-                                Radius.circular(3),
+                                Radius.circular(trackHeight / 2),
                               ),
                             ),
                           ),
                         ),
                         // Knob — centered on the value's pixel position.
                         Positioned(
-                          left:
-                              LiqSlider._hInset +
+                          left: LiqSlider._hInset +
                               t * (width - 2 * LiqSlider._hInset) -
-                              LiqSlider._knobWidth / 2,
-                          top:
-                              (LiqSlider._rowHeight - LiqSlider._knobHeight) /
-                              2,
+                              knobW / 2,
+                          top: (rowHeight - knobH) / 2,
                           child: AnimatedScale(
                             scale: _pressed ? 1.08 : 1,
                             duration: context.liqMotionDuration(LiqMotion.fast),
@@ -181,13 +247,10 @@ class _LiqSliderState extends State<LiqSlider> {
                                 LiqMotion.fast,
                               ),
                               curve: LiqMotion.snappy,
-                              width: LiqSlider._knobWidth,
-                              height: LiqSlider._knobHeight,
+                              width: knobW,
+                              height: knobH,
                               decoration: BoxDecoration(
-                                color:
-                                    isDark
-                                        ? LiqSlider._knobDark
-                                        : LiqSlider._knobLight,
+                                color: thumbColor,
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),

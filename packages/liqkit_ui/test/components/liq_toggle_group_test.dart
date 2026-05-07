@@ -176,6 +176,78 @@ void main() {
       expect(find.byIcon(Icons.format_bold), findsOneWidget);
     });
 
+    testWidgets('visual track hugs content inside wide tight parents', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(
+            width: 420,
+            child: LiqToggleGroup<String>(
+              selected: const <String>{'mon', 'wed'},
+              onChanged: (_) {},
+              items: const <LiqToggleGroupItem<String>>[
+                LiqToggleGroupItem(value: 'mon', label: 'Mon'),
+                LiqToggleGroupItem(value: 'tue', label: 'Tue'),
+                LiqToggleGroupItem(value: 'wed', label: 'Wed'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      final track = find.byWidgetPredicate(
+        (widget) =>
+            widget is Container &&
+            widget.decoration is BoxDecoration &&
+            (widget.decoration! as BoxDecoration).borderRadius ==
+                const BorderRadius.all(
+                  Radius.circular(LiqToggleGroup.trackRadius),
+                ),
+      );
+
+      expect(track, findsOneWidget);
+      expect(tester.getSize(track).width, lessThan(260));
+      expect(tester.getCenter(track).dx, closeTo(400, 1));
+    });
+
+    testWidgets('wide groups scroll instead of overflowing narrow parents', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        wrap(
+          SizedBox(
+            width: 160,
+            child: LiqToggleGroup<String>(
+              selected: const <String>{'mon', 'wed', 'fri'},
+              onChanged: (_) {},
+              items: const <LiqToggleGroupItem<String>>[
+                LiqToggleGroupItem(value: 'mon', label: 'Mon'),
+                LiqToggleGroupItem(value: 'tue', label: 'Tue'),
+                LiqToggleGroupItem(value: 'wed', label: 'Wed'),
+                LiqToggleGroupItem(value: 'thu', label: 'Thu'),
+                LiqToggleGroupItem(value: 'fri', label: 'Fri'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      final track = find.byWidgetPredicate(
+        (widget) =>
+            widget is Container &&
+            widget.decoration is BoxDecoration &&
+            (widget.decoration! as BoxDecoration).borderRadius ==
+                const BorderRadius.all(
+                  Radius.circular(LiqToggleGroup.trackRadius),
+                ),
+      );
+
+      expect(track, findsOneWidget);
+      expect(tester.getSize(track).width, greaterThan(160));
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('uses dark theme colors for active and inactive labels', (
       tester,
     ) async {

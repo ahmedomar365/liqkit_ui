@@ -5,6 +5,7 @@ description: Side-anchored panel — slides in from the leading or trailing scre
 
 import drawerLeftSnippet from '@/snippets/drawer/left.json';
 import drawerRightSnippet from '@/snippets/drawer/right.json';
+import drawerCollapsedSnippet from '@/snippets/drawer/collapsed.json';
 
 `LiqDrawer` is the iOS 26 side-anchored panel surface. It slides in
 from the left or right screen edge over a dimmed scrim and is typically
@@ -32,3 +33,13 @@ secondary content that complements the main view.
 <LiqPreview component="drawer" variant="right" />
 
 <CodeSnippet snippet={drawerRightSnippet} />
+
+## Collapsed
+
+Use `collapsed` to render an icon-only rail while preserving the same
+Liquid Glass drawer surface. Pair it with the expanded drawer in adaptive
+layouts where the side panel compresses instead of disappearing.
+
+<LiqPreview component="drawer" variant="collapsed" />
+
+<CodeSnippet snippet={drawerCollapsedSnippet} />

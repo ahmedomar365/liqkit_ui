@@ -132,6 +132,8 @@ import 'package:docs_snippets/snippets/divider/vertical.dart'
     show dividerVerticalBuilder;
 import 'package:docs_snippets/snippets/divider/with-label.dart'
     show dividerWithLabelBuilder;
+import 'package:docs_snippets/snippets/drawer/collapsed.dart'
+    show drawerCollapsedBuilder;
 import 'package:docs_snippets/snippets/drawer/left.dart' show drawerLeftBuilder;
 import 'package:docs_snippets/snippets/drawer/right.dart'
     show drawerRightBuilder;
@@ -430,6 +432,7 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/divider/horizontal': dividerHorizontalBuilder,
   '/divider/vertical': dividerVerticalBuilder,
   '/divider/with-label': dividerWithLabelBuilder,
+  '/drawer/collapsed': drawerCollapsedBuilder,
   '/drawer/left': drawerLeftBuilder,
   '/drawer/right': drawerRightBuilder,
   '/empty-state/default': emptyStateDefaultBuilder,

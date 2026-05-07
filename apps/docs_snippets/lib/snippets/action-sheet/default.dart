@@ -24,7 +24,7 @@ class _ActionSheetDefaultDemoState extends State<_ActionSheetDefaultDemo> {
     return SnippetFrame(
       maxWidth: 420,
       height: 410,
-      surface: SnippetFrameSurface.liquidLight,
+      surface: SnippetFrameSurface.liquidThemed,
       surfacePadding: EdgeInsets.zero,
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -73,31 +73,40 @@ class _ShareSource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Text(
+          Text(
             'Design Notes',
             textDirection: TextDirection.ltr,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: isDark ? const Color(0xFFF5F5F7) : const Color(0xFF000000),
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 12),
-          const Expanded(
+          Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Color(0xCCFFFFFF),
-                borderRadius: BorderRadius.all(Radius.circular(22)),
+                color:
+                    isDark ? const Color(0xCC1C1C1E) : const Color(0xCCFFFFFF),
+                borderRadius: const BorderRadius.all(Radius.circular(22)),
               ),
               child: Padding(
-                padding: EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 child: Text(
                   'A short document preview stays visible underneath the '
                   'action sheet.',
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
-                    color: Color(0xFF6E6E73),
+                    color:
+                        isDark
+                            ? const Color(0xB2EBEBF5)
+                            : const Color(0xFF6E6E73),
                     fontSize: 15,
                     height: 1.35,
                   ),

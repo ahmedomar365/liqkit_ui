@@ -153,6 +153,33 @@ void main() {
       expect(find.byType(LiqPageControl), findsOneWidget);
     });
 
+    testWidgets('tapping an indicator dot animates to that page', (
+      tester,
+    ) async {
+      final controller = PageController(viewportFraction: 0.92);
+      addTearDown(controller.dispose);
+      await tester.pumpWidget(
+        _wrap(
+          Center(
+            child: SizedBox(
+              width: 360,
+              child: LiqCarousel(controller: controller, items: _slides()),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      expect(find.text('Slide 1'), findsOneWidget);
+
+      final indicatorRect = tester.getRect(find.byType(LiqPageControl));
+      await tester.tapAt(indicatorRect.center + const Offset(16, 0));
+      await tester.pumpAndSettle();
+
+      expect(controller.page!.round(), 2);
+      expect(find.text('Slide 3'), findsOneWidget);
+    });
+
     testWidgets('autoplay advances the page on each tick', (tester) async {
       final controller = PageController(viewportFraction: 0.92);
       addTearDown(controller.dispose);

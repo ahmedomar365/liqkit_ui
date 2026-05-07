@@ -7,7 +7,7 @@ Widget buttonGlassBuilder(BuildContext context) {
   return SnippetFrame(
     maxWidth: 560,
     height: 172,
-    surface: SnippetFrameSurface.liquidLight,
+    surface: SnippetFrameSurface.liquidThemed,
     // {@highlight}
     child: LiqButton(
       label: 'Glass',

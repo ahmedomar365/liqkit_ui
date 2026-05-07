@@ -9,11 +9,11 @@ Widget dividerHorizontalBuilder(BuildContext context) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Section A'),
+        SnippetLabel('Section A'),
         SizedBox(height: 12),
         LiqDivider(),
         SizedBox(height: 12),
-        Text('Section B'),
+        SnippetLabel('Section B'),
       ],
     ),
     // {@endhighlight}

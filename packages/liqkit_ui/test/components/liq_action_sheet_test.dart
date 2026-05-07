@@ -1,11 +1,22 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liqkit_ui/components.dart';
+import 'package:liqkit_ui/src/components/action_sheets/liq_action_sheet.dart';
+import 'package:liqkit_ui/src/components/alerts/liq_alert.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/theme/liq_theme.dart';
+import 'package:liqkit_ui/src/theme/liq_theme_data.dart';
 
-Widget _wrap(Widget child, {MediaQueryData media = const MediaQueryData()}) {
+Widget _wrap(
+  Widget child, {
+  MediaQueryData media = const MediaQueryData(),
+  LiqThemeData theme = LiqThemeData.light,
+}) {
   return Directionality(
     textDirection: TextDirection.ltr,
-    child: MediaQuery(data: media, child: Center(child: child)),
+    child: LiqTheme(
+      data: theme,
+      child: MediaQuery(data: media, child: Center(child: child)),
+    ),
   );
 }
 
@@ -97,6 +108,36 @@ void main() {
     expect(
       tester.widget<AnimatedContainer>(find.byType(AnimatedContainer)).duration,
       Duration.zero,
+    );
+  });
+
+  testWidgets('action sheet resolves dark glass and label colors', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        const LiqActionSheet(
+          title: 'Share',
+          description: 'Choose a destination.',
+          actions: <LiqAlertAction>[LiqAlertAction(label: 'Copy Link')],
+          cancelAction: LiqAlertAction(label: 'Cancel'),
+        ),
+        theme: LiqThemeData.dark,
+      ),
+    );
+
+    expect(find.byType(LiqGlassSurface), findsNWidgets(2));
+    expect(
+      tester.widget<Text>(find.text('Share')).style?.color,
+      const Color(0xFFFFFFFF),
+    );
+    expect(
+      tester.widget<Text>(find.text('Copy Link')).style?.color,
+      const Color(0xFFFFFFFF),
+    );
+    expect(
+      tester.widget<Text>(find.text('Cancel')).style?.color,
+      const Color(0xFF0088FF),
     );
   });
 }

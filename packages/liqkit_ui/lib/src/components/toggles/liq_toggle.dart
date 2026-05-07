@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -16,13 +17,39 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 /// expanded to 64x44 for comfortable iOS hit testing.
 final class LiqToggle extends StatelessWidget {
   /// Creates a toggle.
-  const LiqToggle({required this.value, required this.onChanged, super.key});
+  const LiqToggle({
+    required this.value,
+    required this.onChanged,
+    this.activeColor,
+    this.inactiveColor,
+    this.thumbColor,
+    this.scale = 1,
+    this.enableHaptics = true,
+    super.key,
+  }) : assert(scale > 0, 'scale must be > 0');
 
   /// Current on/off state.
   final bool value;
 
   /// Tap callback. When `null` the toggle is disabled.
   final ValueChanged<bool>? onChanged;
+
+  /// Optional override for the on-state track color (default
+  /// `#34C759`).
+  final Color? activeColor;
+
+  /// Optional override for the off-state track color.
+  final Color? inactiveColor;
+
+  /// Optional override for the knob color (default white).
+  final Color? thumbColor;
+
+  /// Linear scale factor for the entire toggle. Defaults to 1.0.
+  final double scale;
+
+  /// Whether to fire `HapticFeedback.lightImpact()` on toggle. Default
+  /// `true`.
+  final bool enableHaptics;
 
   static const double _trackWidth = 64;
   static const double _trackHeight = 28;
@@ -50,16 +77,24 @@ final class LiqToggle extends StatelessWidget {
     final disabled = onChanged == null;
     final effectiveValue = value;
     final isDark = context.liqIsDark;
-    final offBg = isDark ? _offBgDark : _offBg;
+    final offBg = inactiveColor ?? (isDark ? _offBgDark : _offBg);
     final offRing = isDark ? _offRingDark : _offRing;
-    return Semantics(
+    final onBg = activeColor ?? _onBg;
+    final knobColor = thumbColor ?? _knob;
+
+    void handleTap() {
+      if (enableHaptics) HapticFeedback.lightImpact();
+      onChanged!(!value);
+    }
+
+    final core = Semantics(
       toggled: effectiveValue,
       enabled: !disabled,
       label: 'toggle',
       child: LiqPointerCursor(
         enabled: !disabled,
         child: GestureDetector(
-          onTap: disabled ? null : () => onChanged!(!value),
+          onTap: disabled ? null : handleTap,
           child: Opacity(
             opacity: disabled ? 0.4 : 1,
             child: SizedBox(
@@ -73,7 +108,7 @@ final class LiqToggle extends StatelessWidget {
                   height: _trackHeight,
                   padding: const EdgeInsets.all(_trackPadding),
                   decoration: BoxDecoration(
-                    color: effectiveValue ? _onBg : offBg,
+                    color: effectiveValue ? onBg : offBg,
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
                   ),
                   child: Stack(
@@ -88,9 +123,9 @@ final class LiqToggle extends StatelessWidget {
                         child: Container(
                           width: _knobWidth,
                           height: _knobHeight,
-                          decoration: const BoxDecoration(
-                            color: _knob,
-                            borderRadius: BorderRadius.all(
+                          decoration: BoxDecoration(
+                            color: knobColor,
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(100),
                             ),
                           ),
@@ -108,9 +143,9 @@ final class LiqToggle extends StatelessWidget {
                                 ? Container(
                                   width: 2,
                                   height: 10,
-                                  decoration: const BoxDecoration(
-                                    color: _knob,
-                                    borderRadius: BorderRadius.all(
+                                  decoration: BoxDecoration(
+                                    color: knobColor,
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(2),
                                     ),
                                   ),
@@ -138,6 +173,9 @@ final class LiqToggle extends StatelessWidget {
         ),
       ),
     );
+
+    if (scale == 1.0) return core;
+    return Transform.scale(scale: scale, child: core);
   }
 
   @override
@@ -145,6 +183,17 @@ final class LiqToggle extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(FlagProperty('value', value: value, ifTrue: 'on', ifFalse: 'off'))
+      ..add(ColorProperty('activeColor', activeColor, defaultValue: null))
+      ..add(ColorProperty('inactiveColor', inactiveColor, defaultValue: null))
+      ..add(ColorProperty('thumbColor', thumbColor, defaultValue: null))
+      ..add(DoubleProperty('scale', scale, defaultValue: 1.0))
+      ..add(
+        FlagProperty(
+          'enableHaptics',
+          value: enableHaptics,
+          ifTrue: 'haptics',
+        ),
+      )
       ..add(
         FlagProperty(
           'enabled',

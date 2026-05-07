@@ -23,8 +23,9 @@ class _SheetInspectorDemoState extends State<_SheetInspectorDemo> {
       maxWidth: 430,
       height: 540,
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      surface: SnippetFrameSurface.liquidLight,
+      surface: SnippetFrameSurface.liquidThemed,
       surfacePadding: EdgeInsets.zero,
+      surfaceScrimOpacity: 0.12,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
@@ -75,10 +76,10 @@ class _InspectorCanvas extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Text(
+          const SnippetLabel(
             'Photo',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
           ),
           const SizedBox(height: 14),
           const Expanded(
@@ -113,21 +114,22 @@ class _InspectorSheetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(22, 4, 22, 20),
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(22, 4, 22, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          _InspectorControl(label: 'Exposure', value: '+0.4'),
-          _InspectorControl(label: 'Contrast', value: '18%'),
-          _InspectorControl(label: 'Warmth', value: 'Neutral'),
-          SizedBox(height: 12),
+          const _InspectorControl(label: 'Exposure', value: '+0.4'),
+          const _InspectorControl(label: 'Contrast', value: '18%'),
+          const _InspectorControl(label: 'Warmth', value: 'Neutral'),
+          const SizedBox(height: 12),
           Text(
             'Inspector sheets float over the content they adjust, using a '
             'glass surface so the edited object remains visible.',
             textDirection: TextDirection.ltr,
             style: TextStyle(
-              color: Color(0xFF6E6E73),
+              color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF6E6E73),
               fontSize: 15,
               height: 1.35,
             ),
@@ -146,12 +148,13 @@ class _InspectorControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: const BoxDecoration(
-        color: Color(0x4DFFFFFF),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0x3DFFFFFF) : const Color(0x4DFFFFFF),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: Row(
         children: <Widget>[
@@ -159,13 +162,21 @@ class _InspectorControl extends StatelessWidget {
             child: Text(
               label,
               textDirection: TextDirection.ltr,
-              style: const TextStyle(fontSize: 15),
+              style: TextStyle(
+                color:
+                    isDark ? const Color(0xFFF5F5F7) : const Color(0xFF1A1A1A),
+                fontSize: 15,
+              ),
             ),
           ),
           Text(
             value,
             textDirection: TextDirection.ltr,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: isDark ? const Color(0xFFF5F5F7) : const Color(0xFF1A1A1A),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),

@@ -62,23 +62,42 @@ final class LiqListGroup extends StatelessWidget {
 /// A single row inside a [LiqListGroup].
 final class LiqListRow extends StatelessWidget {
   /// Creates a list row.
+  ///
+  /// Provide either [title] (a string) or [titleWidget] (custom content)
+  /// — at least one must be non-null.
   const LiqListRow({
-    required this.title,
+    this.title,
+    this.titleWidget,
     this.subtitle,
+    this.subtitleWidget,
     this.leading,
     this.trailing,
     this.detail,
     this.showChevron = false,
     this.onTap,
     this.brightness,
+    this.enabled = true,
+    this.selected = false,
+    this.contentPadding,
     super.key,
-  });
+  }) : assert(
+          title != null || titleWidget != null,
+          'Either title or titleWidget must be provided',
+        );
 
-  /// Primary title text.
-  final String title;
+  /// Primary title text. Mutually exclusive with [titleWidget].
+  final String? title;
+
+  /// Custom widget rendered in the title slot. When provided, [title]
+  /// is ignored. Use this for stylized or composed titles.
+  final Widget? titleWidget;
 
   /// Optional secondary text shown beneath the title.
   final String? subtitle;
+
+  /// Custom widget rendered in the subtitle slot. When provided,
+  /// [subtitle] is ignored.
+  final Widget? subtitleWidget;
 
   /// Optional leading widget (icon, avatar, etc.).
   final Widget? leading;
@@ -93,24 +112,43 @@ final class LiqListRow extends StatelessWidget {
   /// When true, shows the iOS 26 chevron at the row's far right.
   final bool showChevron;
 
-  /// Tap callback. When null, the row is non-interactive.
+  /// Tap callback. When null (or [enabled] is false), the row is
+  /// non-interactive.
   final VoidCallback? onTap;
 
   /// Surface brightness. Defaults to the nearest liq theme brightness.
   final Brightness? brightness;
+
+  /// When false, dims the title/subtitle text and suppresses [onTap].
+  final bool enabled;
+
+  /// When true, renders a highlighted background to indicate selection.
+  final bool selected;
+
+  /// Optional padding override. Defaults to the iOS-16-pt horizontal,
+  /// 8-pt vertical inset.
+  final EdgeInsetsGeometry? contentPadding;
 
   static const Color _titleLight = Color(0xFF000000);
   static const Color _titleDark = Color(0xFFFFFFFF);
   static const Color _subtitleLight = Color(0x993C3C43);
   static const Color _subtitleDark = Color(0x99EBEBF5);
   static const Color _chevron = Color(0x4D3C3C43);
+  static const Color _selectedBgLight = Color(0x140A84FF);
+  static const Color _selectedBgDark = Color(0x290A84FF);
 
   @override
   Widget build(BuildContext context) {
     final isDark = (brightness ?? context.liqBrightness) == Brightness.dark;
-    final tall = subtitle != null;
-    final titleColor = isDark ? _titleDark : _titleLight;
-    final subtitleColor = isDark ? _subtitleDark : _subtitleLight;
+    final hasSubtitle = subtitle != null || subtitleWidget != null;
+    final tall = hasSubtitle;
+    final tappable = onTap != null && enabled;
+
+    final activeTitleColor = isDark ? _titleDark : _titleLight;
+    final activeSubtitleColor = isDark ? _subtitleDark : _subtitleLight;
+    final disabledColor = isDark ? _subtitleDark : _subtitleLight;
+    final titleColor = enabled ? activeTitleColor : disabledColor;
+    final subtitleColor = enabled ? activeSubtitleColor : disabledColor;
 
     final titleStyle = TextStyle(
       fontFamily: 'SF Pro Text',
@@ -128,19 +166,44 @@ final class LiqListRow extends StatelessWidget {
       letterSpacing: -0.23,
       color: subtitleColor,
     );
-    final detailStyle = titleStyle.copyWith(color: subtitleColor);
+    final detailStyle = titleStyle.copyWith(color: activeSubtitleColor);
+
+    final selectedBg = isDark ? _selectedBgDark : _selectedBgLight;
+
+    final titleSlot = titleWidget ??
+        Text(
+          title!,
+          style: titleStyle,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textDirection: TextDirection.ltr,
+        );
+
+    final subtitleSlot = subtitleWidget ??
+        (subtitle != null
+            ? Text(
+                subtitle!,
+                style: subtitleStyle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textDirection: TextDirection.ltr,
+              )
+            : null);
 
     return Semantics(
-      button: onTap != null,
+      button: tappable,
+      enabled: enabled,
       label: title,
       child: LiqPointerCursor(
-        enabled: onTap != null,
+        enabled: tappable,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: onTap,
+          onTap: tappable ? onTap : null,
           child: Container(
             constraints: BoxConstraints(minHeight: tall ? 68 : 52),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            color: selected ? selectedBg : null,
+            padding: contentPadding ??
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               children: <Widget>[
                 if (leading != null) ...<Widget>[
@@ -152,22 +215,16 @@ final class LiqListRow extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        title,
+                      DefaultTextStyle.merge(
                         style: titleStyle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textDirection: TextDirection.ltr,
+                        child: titleSlot,
                       ),
-                      if (subtitle != null)
+                      if (subtitleSlot != null)
                         Padding(
                           padding: const EdgeInsets.only(top: 2),
-                          child: Text(
-                            subtitle!,
+                          child: DefaultTextStyle.merge(
                             style: subtitleStyle,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textDirection: TextDirection.ltr,
+                            child: subtitleSlot,
                           ),
                         ),
                     ],
@@ -202,15 +259,17 @@ final class LiqListRow extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('title', title))
+      ..add(StringProperty('title', title, defaultValue: null))
       ..add(StringProperty('subtitle', subtitle, defaultValue: null))
       ..add(StringProperty('detail', detail, defaultValue: null))
       ..add(FlagProperty('showChevron', value: showChevron, ifTrue: 'chevron'))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty<Brightness>('brightness', brightness))
       ..add(
         FlagProperty(
           'tappable',
-          value: onTap != null,
+          value: onTap != null && enabled,
           ifTrue: 'tappable',
           ifFalse: 'static',
         ),

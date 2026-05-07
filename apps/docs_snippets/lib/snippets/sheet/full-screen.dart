@@ -24,8 +24,9 @@ class _SheetFullScreenDemoState extends State<_SheetFullScreenDemo> {
       maxWidth: 430,
       height: 500,
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      surface: SnippetFrameSurface.light,
+      surface: SnippetFrameSurface.liquidThemed,
       surfacePadding: EdgeInsets.zero,
+      surfaceScrimOpacity: 0.18,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
@@ -76,10 +77,10 @@ class _SheetDemoPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Text(
+          const SnippetLabel(
             'Account',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
           ),
           const SizedBox(height: 12),
           const _DemoRow(label: 'Name', value: 'Ava Chen'),
@@ -98,21 +99,22 @@ class _ProfileSheetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(22, 8, 22, 22),
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(22, 8, 22, 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          _DemoRow(label: 'Display name', value: 'Ava Chen'),
-          _DemoRow(label: 'Email', value: 'ava@example.com'),
-          _DemoRow(label: 'Status', value: 'Available'),
-          SizedBox(height: 18),
+          const _DemoRow(label: 'Display name', value: 'Ava Chen'),
+          const _DemoRow(label: 'Email', value: 'ava@example.com'),
+          const _DemoRow(label: 'Status', value: 'Available'),
+          const SizedBox(height: 18),
           Text(
             'Full-screen sheets keep focus on one modal task while retaining '
             'the native grabber and control row.',
             textDirection: TextDirection.ltr,
             style: TextStyle(
-              color: Color(0xFF6E6E73),
+              color: isDark ? const Color(0xFFA1A1AA) : const Color(0xFF6E6E73),
               fontSize: 15,
               height: 1.35,
             ),
@@ -131,12 +133,13 @@ class _DemoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = LiqTheme.maybeOf(context)?.brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
       margin: const EdgeInsets.only(bottom: 8),
-      decoration: const BoxDecoration(
-        color: Color(0xFFF2F2F7),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF2C2C2E) : const Color(0xFFF2F2F7),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: Row(
         children: <Widget>[
@@ -144,13 +147,21 @@ class _DemoRow extends StatelessWidget {
             child: Text(
               label,
               textDirection: TextDirection.ltr,
-              style: const TextStyle(fontSize: 15, color: Color(0xFF6E6E73)),
+              style: TextStyle(
+                fontSize: 15,
+                color:
+                    isDark ? const Color(0xFFA1A1AA) : const Color(0xFF6E6E73),
+              ),
             ),
           ),
           Text(
             value,
             textDirection: TextDirection.ltr,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: isDark ? const Color(0xFFF5F5F7) : const Color(0xFF1A1A1A),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),

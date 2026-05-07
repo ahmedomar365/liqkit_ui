@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -235,5 +237,151 @@ final class LiqNotification extends StatelessWidget {
       ..add(StringProperty('time', time))
       ..add(DoubleProperty('width', width))
       ..add(EnumProperty<Brightness?>('brightness', brightness));
+  }
+}
+
+/// Overlay helper for [LiqNotification] — slides a banner in from the
+/// top of the screen, holds for [duration], then slides out.
+final class LiqNotificationOverlay {
+  LiqNotificationOverlay._();
+
+  /// Default present-and-dismiss timing.
+  static const Duration animationDuration = Duration(milliseconds: 280);
+
+  static OverlayEntry? _current;
+
+  /// Show a notification banner. If one is already visible it is
+  /// replaced. Returns when the dismiss animation has completed.
+  static Future<void> show(
+    BuildContext context, {
+    required String title,
+    required String body,
+    required LiqNotificationIcon icon,
+    String? time,
+    Duration duration = const Duration(seconds: 4),
+    VoidCallback? onTap,
+    Brightness? brightness,
+  }) async {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    _current?.remove();
+    _current = null;
+
+    final completer = Completer<void>();
+    late OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (ctx) => _LiqNotificationOverlayBody(
+        title: title,
+        body: body,
+        icon: icon,
+        time: time,
+        duration: duration,
+        onTap: onTap,
+        brightness: brightness,
+        onDismissed: () {
+          if (entry.mounted) entry.remove();
+          if (!completer.isCompleted) completer.complete();
+          if (identical(_current, entry)) _current = null;
+        },
+      ),
+    );
+    _current = entry;
+    overlay.insert(entry);
+    return completer.future;
+  }
+}
+
+class _LiqNotificationOverlayBody extends StatefulWidget {
+  const _LiqNotificationOverlayBody({
+    required this.title,
+    required this.body,
+    required this.icon,
+    required this.time,
+    required this.duration,
+    required this.onDismissed,
+    this.onTap,
+    this.brightness,
+  });
+
+  final String title;
+  final String body;
+  final LiqNotificationIcon icon;
+  final String? time;
+  final Duration duration;
+  final VoidCallback onDismissed;
+  final VoidCallback? onTap;
+  final Brightness? brightness;
+
+  @override
+  State<_LiqNotificationOverlayBody> createState() =>
+      _LiqNotificationOverlayBodyState();
+}
+
+class _LiqNotificationOverlayBodyState
+    extends State<_LiqNotificationOverlayBody>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  Timer? _autoDismissTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: LiqNotificationOverlay.animationDuration,
+    )..forward();
+    _autoDismissTimer = Timer(widget.duration, _dismiss);
+  }
+
+  Future<void> _dismiss() async {
+    _autoDismissTimer?.cancel();
+    if (!mounted) return;
+    await _controller.reverse();
+    if (mounted) widget.onDismissed();
+  }
+
+  @override
+  void dispose() {
+    _autoDismissTimer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    return Positioned(
+      top: mediaQuery.padding.top + 8,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, -1.4),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
+          ),
+          child: FadeTransition(
+            opacity: _controller,
+            child: GestureDetector(
+              onTap: () {
+                widget.onTap?.call();
+                _dismiss();
+              },
+              onVerticalDragEnd: (details) {
+                if ((details.primaryVelocity ?? 0) < -200) _dismiss();
+              },
+              child: LiqNotification(
+                title: widget.title,
+                body: widget.body,
+                icon: widget.icon,
+                time: widget.time,
+                brightness: widget.brightness,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

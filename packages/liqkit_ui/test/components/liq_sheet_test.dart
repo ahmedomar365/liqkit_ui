@@ -26,6 +26,16 @@ void main() {
     expect(find.byType(LiqSheetTopButton), findsNWidgets(2));
   });
 
+  testWidgets('LiqSheet follows explicit dark brightness', (tester) async {
+    await tester.pumpWidget(
+      _wrap(const LiqSheet(title: 'Dark Sheet', brightness: Brightness.dark)),
+    );
+
+    final title = tester.widget<Text>(find.text('Dark Sheet'));
+    expect(title.style?.color, const Color(0xFFF5F5F7));
+    expect(find.byType(LiqGlassSurface), findsOneWidget);
+  });
+
   testWidgets('LiqSheet shrinks to fit narrow constraints', (tester) async {
     await tester.pumpWidget(
       _wrap(

@@ -8,7 +8,7 @@ Widget notificationMailBuilder(BuildContext context) {
   return const SnippetFrame(
     maxWidth: 420,
     height: 190,
-    surface: SnippetFrameSurface.liquidLight,
+    surface: SnippetFrameSurface.liquidThemed,
     surfacePadding: EdgeInsets.all(20),
     child: LiqNotification(
       title: 'Mail',

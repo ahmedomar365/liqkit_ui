@@ -15,10 +15,34 @@ final class LiqProgressBar extends StatelessWidget {
   ///
   /// [value] in `[0, 1]`. When null the bar renders as fully empty —
   /// indeterminate animation is reserved for [LiqSpinner].
-  const LiqProgressBar({this.value, super.key});
+  const LiqProgressBar({
+    this.value,
+    this.height,
+    this.backgroundColor,
+    this.progressColor,
+    this.label,
+    this.showLabel = false,
+    super.key,
+  });
 
   /// Determinate progress in `[0, 1]`. Pass null for empty.
   final double? value;
+
+  /// Optional override for the bar height (default 4pt).
+  final double? height;
+
+  /// Optional override for the unfilled track color.
+  final Color? backgroundColor;
+
+  /// Optional override for the filled portion color.
+  final Color? progressColor;
+
+  /// Optional label text rendered above the bar when [showLabel] is
+  /// true. The current percentage is also shown to the right.
+  final String? label;
+
+  /// Whether to render the label / percentage row above the bar.
+  final bool showLabel;
 
   static const double _trackHeight = 4;
   static const Color _trackColor = Color(0x33787878);
@@ -28,7 +52,11 @@ final class LiqProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = _ProgressPalette.resolve(context);
     final v = (value ?? 0).clamp(0.0, 1.0);
-    return Semantics(
+    final h = height ?? _trackHeight;
+    final track = backgroundColor ?? palette.track;
+    final fill = progressColor ?? palette.fill;
+
+    final bar = Semantics(
       label: 'progress',
       value: '${(v * 100).round()}%',
       child: LayoutBuilder(
@@ -37,23 +65,21 @@ final class LiqProgressBar extends StatelessWidget {
               constraints.hasBoundedWidth ? constraints.maxWidth : 240.0;
           return SizedBox(
             width: width,
-            height: _trackHeight,
+            height: h,
             child: Stack(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                    color: palette.track,
-                    borderRadius: const BorderRadius.all(Radius.circular(999)),
+                    color: track,
+                    borderRadius: BorderRadius.all(Radius.circular(h)),
                   ),
                 ),
                 FractionallySizedBox(
                   widthFactor: v,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: palette.fill,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(999),
-                      ),
+                      color: fill,
+                      borderRadius: BorderRadius.all(Radius.circular(h)),
                     ),
                   ),
                 ),
@@ -63,12 +89,51 @@ final class LiqProgressBar extends StatelessWidget {
         },
       ),
     );
+
+    if (!showLabel) return bar;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            if (label != null)
+              Text(
+                label!,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: 'SF Pro Text',
+                  color: fill.withValues(alpha: 0.9),
+                ),
+              )
+            else
+              const SizedBox.shrink(),
+            Text(
+              '${(v * 100).round()}%',
+              style: TextStyle(
+                fontSize: 13,
+                fontFamily: 'SF Pro Text',
+                color: fill.withValues(alpha: 0.7),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        bar,
+      ],
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
+    properties
+      ..add(DoubleProperty('value', value))
+      ..add(DoubleProperty('height', height, defaultValue: null))
+      ..add(ColorProperty('progressColor', progressColor, defaultValue: null))
+      ..add(StringProperty('label', label, defaultValue: null))
+      ..add(FlagProperty('showLabel', value: showLabel, ifTrue: 'showLabel'));
   }
 }
 

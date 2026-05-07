@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 /// Visual state of a [LiqFaceIdBezel].
 enum LiqFaceIdState {
+  /// Idle, no scanning in progress (dim glyph).
+  idle,
+
   /// Face ID glyph (squircle outline + cross-hair lines).
   scanning,
 
@@ -23,6 +26,7 @@ final class LiqFaceIdBezel extends StatelessWidget {
   const LiqFaceIdBezel({
     this.state = LiqFaceIdState.scanning,
     this.size = 145,
+    this.glyphColor,
     super.key,
   });
 
@@ -32,6 +36,10 @@ final class LiqFaceIdBezel extends StatelessWidget {
   /// Bezel size (square).
   final double size;
 
+  /// Optional override for the centered glyph color. Defaults to the
+  /// classic iOS Face ID green.
+  final Color? glyphColor;
+
   static const Color _bezel = Color(0xFF000000);
   static const Color _glyph = Color(0xFF87FA89);
   static const Color _shadow = Color(0x38000000);
@@ -40,6 +48,9 @@ final class LiqFaceIdBezel extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = size * (40 / 145);
     final glyphSize = size * (70 / 145);
+    final color = glyphColor ?? _glyph;
+    final activeColor =
+        state == LiqFaceIdState.idle ? color.withValues(alpha: 0.35) : color;
     return SizedBox(
       width: size,
       height: size,
@@ -56,7 +67,13 @@ final class LiqFaceIdBezel extends StatelessWidget {
             width: glyphSize,
             height: glyphSize,
             child: CustomPaint(
-              painter: _FaceIdGlyphPainter(state: state, color: _glyph),
+              painter: _FaceIdGlyphPainter(
+                state:
+                    state == LiqFaceIdState.idle
+                        ? LiqFaceIdState.scanning
+                        : state,
+                color: activeColor,
+              ),
             ),
           ),
         ),
@@ -89,6 +106,7 @@ class _FaceIdGlyphPainter extends CustomPainter {
           ..strokeWidth = size.width * 0.07;
     final s = size.width / 70;
     switch (state) {
+      case LiqFaceIdState.idle:
       case LiqFaceIdState.scanning:
         _paintFaceIdGlyph(canvas, size, stroke, s);
       case LiqFaceIdState.fail:

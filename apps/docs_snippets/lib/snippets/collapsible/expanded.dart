@@ -7,6 +7,7 @@ import 'package:liqkit_ui/liqkit_ui.dart';
 Widget collapsibleExpandedBuilder(BuildContext context) {
   return const SnippetFrame(
     maxWidth: 360,
+    height: 170,
     // {@highlight}
     child: LiqCollapsible(
       initiallyExpanded: true,

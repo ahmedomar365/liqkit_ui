@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -223,6 +224,207 @@ void main() {
     final inactive = tester.widget<Text>(find.text('Spectrum'));
     expect(inactive.style?.color, const Color(0xB2EBEBF5));
   });
+
+  testWidgets(
+    'spectrum taps move the selected color instead of staying centered',
+    (tester) async {
+      _useLargeViewport(tester);
+      var color = const Color(0xFFAF52DE);
+
+      await tester.pumpWidget(
+        _wrap(
+          StatefulBuilder(
+            builder:
+                (context, setState) => LiqColorPickerPanel(
+                  color: color,
+                  onChanged: (next) => setState(() => color = next),
+                ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Spectrum'));
+      await tester.pumpAndSettle();
+
+      final spectrum = find.byWidgetPredicate(
+        (widget) =>
+            widget is CustomPaint &&
+            widget.painter.runtimeType.toString() == '_SpectrumPainter',
+      );
+      expect(spectrum, findsOneWidget);
+
+      final rect = tester.getRect(spectrum);
+      await tester.tapAt(rect.topLeft + const Offset(20, 40));
+      await tester.pump();
+
+      final hsl = HSLColor.fromColor(color);
+      expect(hsl.hue, lessThan(30));
+      expect(hsl.lightness, greaterThan(0.7));
+    },
+  );
+
+  testWidgets('RGB sliders commit the tapped position', (tester) async {
+    _useLargeViewport(tester);
+    var color = const Color(0xFFFF0000);
+
+    await tester.pumpWidget(
+      _wrap(
+        StatefulBuilder(
+          builder:
+              (context, setState) => LiqColorPickerPanel(
+                color: color,
+                onChanged: (next) => setState(() => color = next),
+              ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Sliders'));
+    await tester.pumpAndSettle();
+
+    final blueLabel = tester.getCenter(find.text('Blue'));
+    final panel = tester.getRect(find.byType(LiqColorPickerPanel));
+    await tester.tapAt(Offset(panel.right - 42, blueLabel.dy));
+    await tester.pump();
+
+    expect(color.b, greaterThan(0.85));
+  });
+
+  testWidgets('opacity slider and percentage field update alpha', (
+    tester,
+  ) async {
+    _useLargeViewport(tester);
+    var color = const Color(0xFFFF0000);
+
+    await tester.pumpWidget(
+      _wrap(
+        StatefulBuilder(
+          builder:
+              (context, setState) => LiqColorPickerPanel(
+                color: color,
+                onChanged: (next) => setState(() => color = next),
+              ),
+        ),
+      ),
+    );
+
+    final opacitySlider = find.byWidgetPredicate(
+      (widget) =>
+          widget is CustomPaint &&
+          widget.painter.runtimeType.toString() == '_OpacitySliderPainter',
+    );
+    expect(opacitySlider, findsOneWidget);
+
+    final rect = tester.getRect(opacitySlider);
+    await tester.tapAt(Offset(rect.left + rect.width * 0.25, rect.center.dy));
+    await tester.pump();
+
+    expect(color.a, closeTo(0.25, 0.08));
+
+    await tester.tap(find.byType(EditableText));
+    await tester.enterText(find.byType(EditableText), '42');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+
+    expect(color.a, closeTo(0.42, 0.01));
+  });
+
+  testWidgets('saved swatch plus adds current color to the second page', (
+    tester,
+  ) async {
+    _useLargeViewport(tester);
+    var color = const Color(0xFF123456);
+
+    await tester.pumpWidget(
+      _wrap(
+        StatefulBuilder(
+          builder:
+              (context, setState) => LiqColorPickerPanel(
+                color: color,
+                onChanged: (next) => setState(() => color = next),
+              ),
+        ),
+      ),
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is LiqColorDot && widget.color == const Color(0xFF123456),
+      ),
+      findsNothing,
+    );
+
+    final plus = find.byWidgetPredicate(
+      (widget) =>
+          widget is CustomPaint &&
+          widget.painter.runtimeType.toString() == '_PlusPainter',
+    );
+    expect(plus, findsOneWidget);
+
+    await tester.tap(plus);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is LiqColorDot && widget.color == const Color(0xFF123456),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('saved swatch page dots switch pages', (tester) async {
+    _useLargeViewport(tester);
+    var color = const Color(0xFF000000);
+    const secondPageColor = Color(0xFF123456);
+
+    await tester.pumpWidget(
+      _wrap(
+        StatefulBuilder(
+          builder:
+              (context, setState) => LiqColorPickerPanel(
+                color: color,
+                savedColors: const <Color>[
+                  ...liqDefaultColorPickerColors,
+                  secondPageColor,
+                ],
+                onChanged: (next) => setState(() => color = next),
+              ),
+        ),
+      ),
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is LiqColorDot && widget.color == secondPageColor,
+      ),
+      findsNothing,
+    );
+
+    final dots = find.byWidgetPredicate(
+      (widget) => widget.runtimeType.toString() == '_PageDots',
+    );
+    expect(dots, findsOneWidget);
+
+    final dotsRect = tester.getRect(dots);
+    await tester.tapAt(Offset(dotsRect.center.dx + 11, dotsRect.center.dy));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is LiqColorDot && widget.color == secondPageColor,
+      ),
+      findsOneWidget,
+    );
+  });
 }
 
 void _noop(Color color) {}
+
+void _useLargeViewport(WidgetTester tester) {
+  tester.view.physicalSize = const Size(900, 1000);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+}

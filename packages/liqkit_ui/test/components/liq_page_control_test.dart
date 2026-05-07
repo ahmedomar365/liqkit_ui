@@ -164,5 +164,29 @@ void main() {
         everyElement(Duration.zero),
       );
     });
+
+    testWidgets('tap-enabled dots report the selected page', (tester) async {
+      var selected = -1;
+      await tester.pumpWidget(
+        LiqTheme(
+          data: LiqThemeData.light,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Center(
+              child: LiqPageControl(
+                count: 3,
+                activeIndex: 0,
+                onPageChanged: (index) => selected = index,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final indicatorRect = tester.getRect(find.byType(LiqPageControl));
+      await tester.tapAt(indicatorRect.center + const Offset(16, 0));
+
+      expect(selected, 2);
+    });
   });
 }

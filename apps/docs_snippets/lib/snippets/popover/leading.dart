@@ -8,7 +8,7 @@ Widget popoverLeadingBuilder(BuildContext context) {
   return const SnippetFrame(
     maxWidth: 300,
     height: 150,
-    surface: SnippetFrameSurface.liquidLight,
+    surface: SnippetFrameSurface.liquidThemed,
     child: LiqPopover(
       side: LiqPopoverSide.leading,
       child: SnippetLabel('Tip on leading'),

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/alerts/liq_alert.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -25,6 +26,31 @@ final class LiqActionSheet extends StatelessWidget {
     super.key,
   });
 
+  /// Show this action sheet as a modal overlay anchored to the bottom
+  /// of the screen, with a translucent scrim behind it.
+  ///
+  /// Returns whatever value an action's `onPressed` pops the route
+  /// with (typically via `Navigator.of(ctx).pop(value)`), or `null`
+  /// if dismissed via the scrim or cancel.
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required List<LiqAlertAction> actions,
+    String? title,
+    String? description,
+    LiqAlertAction? cancelAction,
+    bool barrierDismissible = true,
+  }) {
+    return Navigator.of(context).push<T>(
+      _LiqActionSheetRoute<T>(
+        actions: actions,
+        title: title,
+        description: description,
+        cancelAction: cancelAction,
+        barrierDismissible: barrierDismissible,
+      ),
+    );
+  }
+
   /// Optional bold title.
   final String? title;
 
@@ -39,11 +65,11 @@ final class LiqActionSheet extends StatelessWidget {
 
   static const Color _surfaceFill = Color(0x99F5F5F5);
   static const Color _surfaceFillDark = Color(0xCC1C1C1E);
-  static const Color _innerScrim = Color(0x14000000);
-  static const Color _innerScrimDark = Color(0x24FFFFFF);
   static const Color _cancelBg = Color(0xCCFFFFFF);
   static const Color _cancelBgDark = Color(0xE62C2C2E);
   static const Color _cancelFg = Color(0xFF0088FF);
+  static const Color _lightRim = Color(0x1F000000);
+  static const Color _darkRim = Color(0x24FFFFFF);
   static const double _surfaceWidth = 300;
   static const double _surfaceRadius = 34;
 
@@ -58,85 +84,74 @@ final class LiqActionSheet extends StatelessWidget {
       children: <Widget>[
         SizedBox(
           width: _surfaceWidth,
-          child: ClipRRect(
+          child: LiqGlassSurface(
+            tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
+            elevation: LiqGlassElevation.modal,
             borderRadius: const BorderRadius.all(
               Radius.circular(_surfaceRadius),
             ),
-            child: Stack(
+            padding: const EdgeInsets.all(14),
+            blurSigma: 20,
+            baseFill: isDark ? _surfaceFillDark : _surfaceFill,
+            rimColor: isDark ? _darkRim : _lightRim,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Positioned.fill(
-                  child: ColoredBox(
-                    color: isDark ? _innerScrimDark : _innerScrim,
-                  ),
-                ),
-                Positioned.fill(
-                  child: ColoredBox(
-                    color: isDark ? _surfaceFillDark : _surfaceFill,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      if (title != null || description != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              if (title != null)
-                                Text(
-                                  title!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Text',
-                                    fontFamilyFallback: const <String>[
-                                      'SF Pro',
-                                      'sans-serif',
-                                    ],
-                                    fontSize: 17,
-                                    height: 22 / 17,
-                                    letterSpacing: -0.43,
-                                    fontWeight: FontWeight.w600,
-                                    color: titleColor,
-                                  ),
-                                  textDirection: TextDirection.ltr,
-                                ),
-                              if (title != null && description != null)
-                                const SizedBox(height: 10),
-                              if (description != null)
-                                Text(
-                                  description!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: 'SF Pro Text',
-                                    fontFamilyFallback: const <String>[
-                                      'SF Pro',
-                                      'sans-serif',
-                                    ],
-                                    fontSize: 17,
-                                    height: 22 / 17,
-                                    letterSpacing: -0.43,
-                                    fontWeight: FontWeight.w400,
-                                    color: titleColor,
-                                  ),
-                                  textDirection: TextDirection.ltr,
-                                ),
-                            ],
+                if (title != null || description != null)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        if (title != null)
+                          Text(
+                            title!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'SF Pro Text',
+                              fontFamilyFallback: const <String>[
+                                'SF Pro',
+                                'sans-serif',
+                              ],
+                              fontSize: 17,
+                              height: 22 / 17,
+                              letterSpacing: -0.43,
+                              fontWeight: FontWeight.w600,
+                              color: titleColor,
+                            ),
+                            textDirection: TextDirection.ltr,
                           ),
-                        ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          for (var i = 0; i < actions.length; i++) ...<Widget>[
-                            if (i > 0) const SizedBox(height: 10),
-                            _ActionButton(action: actions[i]),
-                          ],
-                        ],
-                      ),
-                    ],
+                        if (title != null && description != null)
+                          const SizedBox(height: 10),
+                        if (description != null)
+                          Text(
+                            description!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'SF Pro Text',
+                              fontFamilyFallback: const <String>[
+                                'SF Pro',
+                                'sans-serif',
+                              ],
+                              fontSize: 17,
+                              height: 22 / 17,
+                              letterSpacing: -0.43,
+                              fontWeight: FontWeight.w400,
+                              color: titleColor,
+                            ),
+                            textDirection: TextDirection.ltr,
+                          ),
+                      ],
+                    ),
                   ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    for (var i = 0; i < actions.length; i++) ...<Widget>[
+                      if (i > 0) const SizedBox(height: 10),
+                      _ActionButton(action: actions[i]),
+                    ],
+                  ],
                 ),
               ],
             ),
@@ -146,20 +161,19 @@ final class LiqActionSheet extends StatelessWidget {
           const SizedBox(height: 8),
           SizedBox(
             width: _surfaceWidth,
-            child: ClipRRect(
+            child: LiqGlassSurface(
+              tint: isDark ? LiqGlassTint.dark : LiqGlassTint.light,
               borderRadius: const BorderRadius.all(
                 Radius.circular(_surfaceRadius),
               ),
-              child: ColoredBox(
-                color: isDark ? _cancelBgDark : _cancelBg,
-                child: Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: _ActionButton(
-                    action: cancelAction!,
-                    boldOverride: true,
-                    fgOverride: _cancelFg,
-                  ),
-                ),
+              padding: const EdgeInsets.all(14),
+              blurSigma: 20,
+              baseFill: isDark ? _cancelBgDark : _cancelBg,
+              rimColor: isDark ? _darkRim : _lightRim,
+              child: _ActionButton(
+                action: cancelAction!,
+                boldOverride: true,
+                fgOverride: _cancelFg,
               ),
             ),
           ),
@@ -269,23 +283,121 @@ class _ActionButtonState extends State<_ActionButton> {
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                 ),
                 alignment: Alignment.center,
-                child: Text(
-                  widget.action.label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
-                    fontSize: 17,
-                    height: 22 / 17,
-                    letterSpacing: -0.43,
-                    fontWeight:
-                        widget.boldOverride ? FontWeight.w600 : FontWeight.w500,
-                    color: fg,
-                  ),
+                child: _ActionLabel(
+                  label: widget.action.label,
+                  icon: widget.action.icon,
+                  bold: widget.boldOverride,
+                  color: fg,
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ActionLabel extends StatelessWidget {
+  const _ActionLabel({
+    required this.label,
+    required this.bold,
+    required this.color,
+    this.icon,
+  });
+
+  final String label;
+  final IconData? icon;
+  final bool bold;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      fontFamily: 'SF Pro Text',
+      fontFamilyFallback: const <String>['SF Pro', 'sans-serif'],
+      fontSize: 17,
+      height: 22 / 17,
+      letterSpacing: -0.43,
+      fontWeight: bold ? FontWeight.w600 : FontWeight.w500,
+      color: color,
+    );
+    final text = Text(
+      label,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      textDirection: TextDirection.ltr,
+      style: textStyle,
+    );
+    if (icon == null) return text;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(icon, size: 20, color: color),
+        const SizedBox(width: 8),
+        text,
+      ],
+    );
+  }
+}
+
+/// Modal route for [LiqActionSheet.show].
+class _LiqActionSheetRoute<T> extends ModalRoute<T> {
+  _LiqActionSheetRoute({
+    required this.actions,
+    this.title,
+    this.description,
+    this.cancelAction,
+    bool barrierDismissible = true,
+  }) : _barrierDismissible = barrierDismissible;
+
+  final List<LiqAlertAction> actions;
+  final String? title;
+  final String? description;
+  final LiqAlertAction? cancelAction;
+  final bool _barrierDismissible;
+
+  @override
+  Color? get barrierColor => const Color(0x66000000);
+
+  @override
+  bool get barrierDismissible => _barrierDismissible;
+
+  @override
+  String? get barrierLabel => 'action sheet';
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 220);
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: Offset.zero,
+      ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: LiqActionSheet(
+              actions: actions,
+              title: title,
+              description: description,
+              cancelAction: cancelAction,
             ),
           ),
         ),
