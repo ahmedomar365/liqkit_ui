@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
@@ -564,7 +564,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
             children: <Widget>[
               _ToolbarButton(
                 semanticLabel: 'Bold',
-                icon: Icons.format_bold,
+                icon: LucideIcons.bold,
                 isActive: _isFormatActive(LiqRichFormat.bold),
                 palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.bold),
@@ -572,7 +572,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
               const SizedBox(width: LiqRichEditor.buttonGap),
               _ToolbarButton(
                 semanticLabel: 'Italic',
-                icon: Icons.format_italic,
+                icon: LucideIcons.italic,
                 isActive: _isFormatActive(LiqRichFormat.italic),
                 palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.italic),
@@ -580,7 +580,7 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
               const SizedBox(width: LiqRichEditor.buttonGap),
               _ToolbarButton(
                 semanticLabel: 'Underline',
-                icon: Icons.format_underlined,
+                icon: LucideIcons.underline,
                 isActive: _isFormatActive(LiqRichFormat.underline),
                 palette: palette,
                 onPressed: () => _toggleFormat(LiqRichFormat.underline),

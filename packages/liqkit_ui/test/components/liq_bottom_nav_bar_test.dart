@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 const List<LiqBottomNavItem> _fourItems = <LiqBottomNavItem>[
-  LiqBottomNavItem(icon: Icons.home_filled, label: 'Home'),
-  LiqBottomNavItem(icon: Icons.search, label: 'Search'),
-  LiqBottomNavItem(icon: Icons.notifications, label: 'Inbox'),
-  LiqBottomNavItem(icon: Icons.person_outline, label: 'Profile'),
+  LiqBottomNavItem(icon: LucideIcons.house, label: 'Home'),
+  LiqBottomNavItem(icon: LucideIcons.search, label: 'Search'),
+  LiqBottomNavItem(icon: LucideIcons.bell, label: 'Inbox'),
+  LiqBottomNavItem(icon: LucideIcons.user, label: 'Profile'),
 ];
 
 Widget _wrap(Widget child) => Directionality(
@@ -66,13 +67,13 @@ void main() {
         ),
       );
 
-      final activeIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
+      final activeIcon = tester.widget<Icon>(find.byIcon(LucideIcons.bell));
       expect(activeIcon.color, LiqBottomNavBar.activeColor);
 
       final activeLabel = tester.widget<Text>(find.text('Inbox'));
       expect(activeLabel.style?.color, LiqBottomNavBar.activeColor);
 
-      final inactiveIcon = tester.widget<Icon>(find.byIcon(Icons.home_filled));
+      final inactiveIcon = tester.widget<Icon>(find.byIcon(LucideIcons.house));
       expect(inactiveIcon.color, const Color(0xFF1A1A1A));
 
       final inactiveLabel = tester.widget<Text>(find.text('Home'));
@@ -95,13 +96,13 @@ void main() {
       const darkActive = Color(0xFF0091FF);
       const darkInactive = Color(0xE6F5F5F5);
 
-      final activeIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
+      final activeIcon = tester.widget<Icon>(find.byIcon(LucideIcons.bell));
       expect(activeIcon.color, darkActive);
 
       final activeLabel = tester.widget<Text>(find.text('Inbox'));
       expect(activeLabel.style?.color, darkActive);
 
-      final inactiveIcon = tester.widget<Icon>(find.byIcon(Icons.home_filled));
+      final inactiveIcon = tester.widget<Icon>(find.byIcon(LucideIcons.house));
       expect(inactiveIcon.color, darkInactive);
 
       final inactiveLabel = tester.widget<Text>(find.text('Home'));
@@ -169,7 +170,7 @@ void main() {
       await tester.pump();
 
       expect(lastIndex, -1);
-      final previewIcon = tester.widget<Icon>(find.byIcon(Icons.notifications));
+      final previewIcon = tester.widget<Icon>(find.byIcon(LucideIcons.bell));
       expect(previewIcon.color, LiqBottomNavBar.activeColor);
 
       await gesture.up();
@@ -196,7 +197,7 @@ void main() {
       expect(
         () => LiqBottomNavBar(
           items: const <LiqBottomNavItem>[
-            LiqBottomNavItem(icon: Icons.home, label: 'Only'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'Only'),
           ],
           currentIndex: 0,
           onChanged: (_) {},
@@ -209,12 +210,12 @@ void main() {
       expect(
         () => LiqBottomNavBar(
           items: const <LiqBottomNavItem>[
-            LiqBottomNavItem(icon: Icons.home, label: 'A'),
-            LiqBottomNavItem(icon: Icons.home, label: 'B'),
-            LiqBottomNavItem(icon: Icons.home, label: 'C'),
-            LiqBottomNavItem(icon: Icons.home, label: 'D'),
-            LiqBottomNavItem(icon: Icons.home, label: 'E'),
-            LiqBottomNavItem(icon: Icons.home, label: 'F'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'A'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'B'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'C'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'D'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'E'),
+            LiqBottomNavItem(icon: LucideIcons.house, label: 'F'),
           ],
           currentIndex: 0,
           onChanged: (_) {},

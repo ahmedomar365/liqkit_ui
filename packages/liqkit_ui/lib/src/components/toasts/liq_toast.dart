@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
@@ -57,13 +57,13 @@ final class LiqToast extends StatelessWidget {
   static const Color foregroundColor = Color(0xFFFFFFFF);
 
   /// Default icon for [LiqToastVariant.success].
-  static const IconData successIcon = Icons.check_circle_outline;
+  static const IconData successIcon = LucideIcons.circleCheck;
 
   /// Default icon for [LiqToastVariant.error].
-  static const IconData errorIcon = Icons.error_outline;
+  static const IconData errorIcon = LucideIcons.circleAlert;
 
   /// Default icon for [LiqToastVariant.info].
-  static const IconData infoIcon = Icons.info_outline;
+  static const IconData infoIcon = LucideIcons.info;
 
   /// Pill internal padding.
   static const EdgeInsets padding = EdgeInsets.symmetric(

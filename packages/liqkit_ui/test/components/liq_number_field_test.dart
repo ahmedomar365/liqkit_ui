@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -37,7 +37,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await tester.tap(find.byIcon(Icons.add));
+      await tester.tap(find.byIcon(LucideIcons.plus));
       await tester.pumpAndSettle();
       expect(received, 7);
     });
@@ -69,7 +69,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await tester.tap(find.byIcon(Icons.remove));
+      await tester.tap(find.byIcon(LucideIcons.minus));
       await tester.pumpAndSettle();
       expect(received, 3);
     });
@@ -86,13 +86,13 @@ void main() {
       // The + button is wrapped in an Opacity with opacity 0.4 when disabled.
       final addOpacity = tester.widget<Opacity>(
         find.ancestor(
-          of: find.byIcon(Icons.add),
+          of: find.byIcon(LucideIcons.plus),
           matching: find.byType(Opacity),
         ),
       );
       expect(addOpacity.opacity, 0.4);
 
-      await tester.tap(find.byIcon(Icons.add));
+      await tester.tap(find.byIcon(LucideIcons.plus));
       await tester.pumpAndSettle();
       expect(fired, 0);
     });
@@ -108,13 +108,13 @@ void main() {
 
       final removeOpacity = tester.widget<Opacity>(
         find.ancestor(
-          of: find.byIcon(Icons.remove),
+          of: find.byIcon(LucideIcons.minus),
           matching: find.byType(Opacity),
         ),
       );
       expect(removeOpacity.opacity, 0.4);
 
-      await tester.tap(find.byIcon(Icons.remove));
+      await tester.tap(find.byIcon(LucideIcons.minus));
       await tester.pumpAndSettle();
       expect(fired, 0);
     });
@@ -160,8 +160,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.add), findsNothing);
-      expect(find.byIcon(Icons.remove), findsNothing);
+      expect(find.byIcon(LucideIcons.plus), findsNothing);
+      expect(find.byIcon(LucideIcons.minus), findsNothing);
     });
 
     testWidgets('uses dark theme colors for field and steppers', (
@@ -199,7 +199,7 @@ void main() {
         isTrue,
       );
 
-      final addIcon = tester.widget<Icon>(find.byIcon(Icons.add));
+      final addIcon = tester.widget<Icon>(find.byIcon(LucideIcons.plus));
       expect(addIcon.color, const Color(0xFFFFFFFF));
     });
 

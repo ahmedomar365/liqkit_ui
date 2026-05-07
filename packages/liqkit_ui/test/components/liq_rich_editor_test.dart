@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -110,9 +110,9 @@ void main() {
         ),
       );
 
-      expect(find.byIcon(Icons.format_bold), findsOneWidget);
-      expect(find.byIcon(Icons.format_italic), findsOneWidget);
-      expect(find.byIcon(Icons.format_underlined), findsOneWidget);
+      expect(find.byIcon(LucideIcons.bold), findsOneWidget);
+      expect(find.byIcon(LucideIcons.italic), findsOneWidget);
+      expect(find.byIcon(LucideIcons.underline), findsOneWidget);
     });
 
     testWidgets('toolbar buttons keep 44pt tap targets', (tester) async {
@@ -126,9 +126,9 @@ void main() {
       );
 
       for (final icon in <IconData>[
-        Icons.format_bold,
-        Icons.format_italic,
-        Icons.format_underlined,
+        LucideIcons.bold,
+        LucideIcons.italic,
+        LucideIcons.underline,
       ]) {
         final button = find.ancestor(
           of: find.byIcon(icon),

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -294,7 +294,7 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _StepperButton(
-            icon: Icons.remove,
+            icon: LucideIcons.minus,
             enabled: _canDecrement,
             onTap: _canDecrement ? _decrement : null,
             backgroundColor: palette.buttonBackground,
@@ -304,7 +304,7 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
           Expanded(child: field),
           const SizedBox(width: LiqNumberField.buttonSpacing),
           _StepperButton(
-            icon: Icons.add,
+            icon: LucideIcons.plus,
             enabled: _canIncrement,
             onTap: _canIncrement ? _increment : null,
             backgroundColor: palette.buttonBackground,

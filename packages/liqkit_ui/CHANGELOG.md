@@ -3,7 +3,28 @@
 ## 0.3.0
 
 Final batch of primitives so consumers can build a full iOS 26 app
-without ever importing `package:flutter/material.dart`.
+without ever importing `package:flutter/material.dart` — and the
+library itself no longer imports it either.
+
+### Internal: package is now Material-free
+
+Replaced every internal `Icons.X` literal in liqkit_ui with the
+matching `LucideIcons.X` glyph from `lucide_icons_flutter` (added
+as a direct dep). Affects 11 files: `liq_calendar`, `liq_chip`,
+`liq_collapsible`, `liq_combobox`, `liq_command_palette`,
+`liq_date_picker_field`, `liq_number_field`, `liq_pagination`,
+`liq_rich_editor`, `liq_toast`, `liq_tree_view`. Pure visual swap;
+no API change. Glyphs map closely (Material `chevron_right` →
+Lucide `chevronRight`, `check_circle_outline` → `circleCheck`,
+`format_bold` → `bold`, etc.).
+
+Net effect: a consumer who imports only `package:liqkit_ui` and
+`package:liqkit_ui_icons` no longer transitively pulls Material
+into their bundle (the ~1.6 MB `MaterialIcons-Regular.otf` font is
+no longer referenced and is fully tree-shaken away — previously
+8.8 KB still leaked through). The new `LiqTimerPickerMode`
+typedef in `liq_picker_extras.dart` lets callers pass timer modes
+without a `package:flutter/cupertino.dart` import either.
 
 ### New components
 

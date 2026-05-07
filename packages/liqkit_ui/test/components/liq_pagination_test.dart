@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -120,11 +120,11 @@ void main() {
         matching: find.byType(GestureDetector),
       );
       final previous = find.ancestor(
-        of: find.byIcon(Icons.chevron_left),
+        of: find.byIcon(LucideIcons.chevronLeft),
         matching: find.byType(GestureDetector),
       );
       final next = find.ancestor(
-        of: find.byIcon(Icons.chevron_right),
+        of: find.byIcon(LucideIcons.chevronRight),
         matching: find.byType(GestureDetector),
       );
 
@@ -161,7 +161,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byIcon(Icons.chevron_left));
+      await tester.tap(find.byIcon(LucideIcons.chevronLeft));
       await tester.pumpAndSettle();
       expect(received, 1);
     });
@@ -180,7 +180,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byIcon(Icons.chevron_right));
+        await tester.tap(find.byIcon(LucideIcons.chevronRight));
         await tester.pumpAndSettle();
         expect(received, 3);
       },

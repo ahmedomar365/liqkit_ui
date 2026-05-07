@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,19 +34,19 @@ List<LiqCommand> _flatCommands(VoidCallback onNew) {
   return <LiqCommand>[
     LiqCommand(
       label: 'New project',
-      icon: Icons.add,
+      icon: LucideIcons.plus,
       shortcut: '⌘N',
       onSelected: onNew,
     ),
     LiqCommand(
       label: 'Open recent',
-      icon: Icons.folder_open,
+      icon: LucideIcons.folderOpen,
       shortcut: '⌘O',
       onSelected: () {},
     ),
     LiqCommand(
       label: 'Settings',
-      icon: Icons.settings,
+      icon: LucideIcons.settings,
       shortcut: '⌘,',
       onSelected: () {},
     ),
@@ -337,7 +337,7 @@ void main() {
       final label = tester.widget<Text>(find.text('New project'));
       expect(label.style?.color, const Color(0xFFFFFFFF));
 
-      final searchIcon = tester.widget<Icon>(find.byIcon(Icons.search));
+      final searchIcon = tester.widget<Icon>(find.byIcon(LucideIcons.search));
       expect(searchIcon.color, const Color(0xB2EBEBF5));
 
       final activeRow = tester.widget<Container>(

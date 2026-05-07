@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
@@ -472,7 +472,7 @@ class _SearchField extends StatelessWidget {
         children: <Widget>[
           const SizedBox(width: LiqCommandPalette.searchFieldHorizontalPadding),
           Icon(
-            Icons.search,
+            LucideIcons.search,
             size: LiqCommandPalette.searchIconSize,
             color: palette.tertiary,
             textDirection: TextDirection.ltr,
@@ -505,7 +505,7 @@ class _SearchField extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Icon(
-                    Icons.close,
+                    LucideIcons.x,
                     size: LiqCommandPalette.clearIconSize,
                     color: palette.tertiary,
                     textDirection: TextDirection.ltr,

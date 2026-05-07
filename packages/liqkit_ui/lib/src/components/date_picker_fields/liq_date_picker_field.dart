@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/calendars/liq_calendar.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
@@ -277,7 +277,7 @@ class _LiqDatePickerFieldState extends State<LiqDatePickerField> {
                         duration: context.liqMotionDuration(LiqMotion.fast),
                         curve: LiqMotion.standard,
                         child: Icon(
-                          Icons.keyboard_arrow_down,
+                          LucideIcons.chevronDown,
                           size: 18,
                           color: palette.chevron,
                           textDirection: TextDirection.ltr,

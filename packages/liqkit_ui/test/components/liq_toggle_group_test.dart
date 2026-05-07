@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -167,13 +167,13 @@ void main() {
             selected: const <String>{},
             onChanged: (_) {},
             items: const <LiqToggleGroupItem<String>>[
-              LiqToggleGroupItem(value: 'b', icon: Icons.format_bold),
+              LiqToggleGroupItem(value: 'b', icon: LucideIcons.bold),
             ],
           ),
         ),
       );
 
-      expect(find.byIcon(Icons.format_bold), findsOneWidget);
+      expect(find.byIcon(LucideIcons.bold), findsOneWidget);
     });
 
     testWidgets('visual track hugs content inside wide tight parents', (

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -228,13 +228,13 @@ class _LiqCalendarState extends State<LiqCalendar> {
           ),
         ),
         _ChevronButton(
-          icon: Icons.chevron_left,
+          icon: LucideIcons.chevronLeft,
           semanticLabel: 'Previous month',
           onTap: () => _shiftMonth(-1),
         ),
         const SizedBox(width: LiqCalendar.cellSpacing),
         _ChevronButton(
-          icon: Icons.chevron_right,
+          icon: LucideIcons.chevronRight,
           semanticLabel: 'Next month',
           onTap: () => _shiftMonth(1),
         ),

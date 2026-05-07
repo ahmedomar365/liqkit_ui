@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -282,7 +282,7 @@ class _TreeRow extends StatelessWidget {
           curve: LiqTreeView.curve,
           turns: isExpanded ? 0.25 : 0,
           child: Icon(
-            Icons.chevron_right,
+            LucideIcons.chevronRight,
             size: LiqTreeView.chevronSize,
             color: palette.glyph,
           ),

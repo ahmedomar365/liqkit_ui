@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -21,7 +21,7 @@ import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 ///   - disabled (both `onPressed` and `onDeleted` null): 40% opacity
 ///   - leading icon: 14×14 matching label color, 4pt right padding to
 ///     label
-///   - delete affordance: 14×14 round button with `Icons.close` 10pt,
+///   - delete affordance: 14×14 round button with `LucideIcons.x` 10pt,
 ///     6pt left padding from label, taps fire `onDeleted` (NOT
 ///     `onPressed`)
 /// The visible pill remains compact; interactive chips expand their
@@ -102,7 +102,7 @@ final class LiqChip extends StatelessWidget {
   /// Delete affordance side length.
   static const double deleteSize = 14;
 
-  /// `Icons.close` glyph size inside the delete affordance.
+  /// `LucideIcons.x` glyph size inside the delete affordance.
   static const double deleteIconSize = 10;
 
   /// Padding between label and delete affordance.
@@ -198,7 +198,7 @@ final class LiqChip extends StatelessWidget {
                   dimension: deleteSize,
                   child: Center(
                     child: Icon(
-                      Icons.close,
+                      LucideIcons.x,
                       size: deleteIconSize,
                       color: foreground,
                       textDirection: TextDirection.ltr,

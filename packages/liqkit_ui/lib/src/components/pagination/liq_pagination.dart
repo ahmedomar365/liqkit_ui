@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -206,7 +206,7 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
     final prevEnabled = enabled && currentPage > 1;
     children.add(
       _ChevronButton(
-        icon: Icons.chevron_left,
+        icon: LucideIcons.chevronLeft,
         enabled: enabled,
         atBoundary: currentPage <= 1,
         semanticLabel: 'Previous page',
@@ -251,7 +251,7 @@ final class LiqPagination extends StatelessWidget with Diagnosticable {
     final nextEnabled = enabled && currentPage < totalPages;
     children.add(
       _ChevronButton(
-        icon: Icons.chevron_right,
+        icon: LucideIcons.chevronRight,
         enabled: enabled,
         atBoundary: currentPage >= totalPages,
         semanticLabel: 'Next page',

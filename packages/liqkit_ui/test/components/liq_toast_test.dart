@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -50,7 +50,7 @@ void main() {
         ),
       );
       final icon = tester.widget<Icon>(find.byType(Icon));
-      expect(icon.icon, Icons.check_circle_outline);
+      expect(icon.icon, LucideIcons.circleCheck);
     });
 
     testWidgets('default icon for error is error_outline', (tester) async {
@@ -62,7 +62,7 @@ void main() {
         ),
       );
       final icon = tester.widget<Icon>(find.byType(Icon));
-      expect(icon.icon, Icons.error_outline);
+      expect(icon.icon, LucideIcons.circleAlert);
     });
 
     testWidgets('default icon for info is info_outline', (tester) async {
@@ -70,17 +70,17 @@ void main() {
         _wrap(const Center(child: LiqToast(message: 'fyi'))),
       );
       final icon = tester.widget<Icon>(find.byType(Icon));
-      expect(icon.icon, Icons.info_outline);
+      expect(icon.icon, LucideIcons.info);
     });
 
     testWidgets('custom icon overrides default', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          const Center(child: LiqToast(message: 'custom', icon: Icons.star)),
+          const Center(child: LiqToast(message: 'custom', icon: LucideIcons.star)),
         ),
       );
       final icon = tester.widget<Icon>(find.byType(Icon));
-      expect(icon.icon, Icons.star);
+      expect(icon.icon, LucideIcons.star);
     });
   });
 

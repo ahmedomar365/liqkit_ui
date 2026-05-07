@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
@@ -368,8 +368,8 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                     ),
                     child: Icon(
                       isOpen
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
+                          ? LucideIcons.chevronUp
+                          : LucideIcons.chevronDown,
                       size: 18,
                       color: palette.secondary,
                       textDirection: TextDirection.ltr,
@@ -531,7 +531,7 @@ class _OptionRowState<T> extends State<_OptionRow<T>> {
               ),
               if (widget.selected)
                 Icon(
-                  Icons.check,
+                  LucideIcons.check,
                   size: 18,
                   color: palette.activeBorder,
                   textDirection: TextDirection.ltr,

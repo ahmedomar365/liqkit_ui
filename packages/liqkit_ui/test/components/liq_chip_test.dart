@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show Icons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/components.dart';
@@ -105,21 +105,21 @@ void main() {
 
     testWidgets('renders the optional leading icon', (tester) async {
       await tester.pumpWidget(
-        _wrap(const LiqChip(label: 'starred', icon: Icons.star)),
+        _wrap(const LiqChip(label: 'starred', icon: LucideIcons.star)),
       );
-      expect(find.byIcon(Icons.star), findsOneWidget);
+      expect(find.byIcon(LucideIcons.star), findsOneWidget);
     });
 
     testWidgets('delete affordance only renders when onDeleted is non-null', (
       tester,
     ) async {
       await tester.pumpWidget(_wrap(const LiqChip(label: 'no-x')));
-      expect(find.byIcon(Icons.close), findsNothing);
+      expect(find.byIcon(LucideIcons.x), findsNothing);
 
       await tester.pumpWidget(
         _wrap(LiqChip(label: 'with-x', onDeleted: () {})),
       );
-      expect(find.byIcon(Icons.close), findsOneWidget);
+      expect(find.byIcon(LucideIcons.x), findsOneWidget);
     });
 
     testWidgets(
@@ -136,7 +136,7 @@ void main() {
             ),
           ),
         );
-        await tester.tap(find.byIcon(Icons.close));
+        await tester.tap(find.byIcon(LucideIcons.x));
         expect(deleted, 1);
         expect(pressed, 0);
       },
@@ -148,7 +148,7 @@ void main() {
       await tester.pumpWidget(_wrap(LiqChip(label: 'tag', onDeleted: () {})));
 
       final deleteTarget = find.ancestor(
-        of: find.byIcon(Icons.close),
+        of: find.byIcon(LucideIcons.x),
         matching: find.byType(GestureDetector),
       );
 
