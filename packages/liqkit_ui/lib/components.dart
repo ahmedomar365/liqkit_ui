@@ -11,6 +11,7 @@ export 'src/components/alerts/liq_alert.dart';
 export 'src/components/alerts/liq_text_input_dialog.dart';
 export 'src/components/app_icons/liq_app_icon.dart';
 export 'src/components/app_icons/liq_app_icon_extras.dart';
+export 'src/components/app_icons/liq_home_app_icon.dart';
 export 'src/components/avatars/liq_avatar.dart';
 export 'src/components/badges/liq_badge.dart';
 export 'src/components/bezels/liq_device_bezel.dart';
