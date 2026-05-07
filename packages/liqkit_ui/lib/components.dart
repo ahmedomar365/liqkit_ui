@@ -110,4 +110,5 @@ export 'src/components/top_bars/liq_top_bar.dart';
 export 'src/components/tree_views/liq_tree_view.dart';
 export 'src/components/wallpapers/liq_wallpaper.dart';
 export 'src/components/widgets/liq_widget_card.dart';
+export 'src/components/widgets/liq_home_widgets.dart';
 export 'src/components/windows/liq_window.dart';
