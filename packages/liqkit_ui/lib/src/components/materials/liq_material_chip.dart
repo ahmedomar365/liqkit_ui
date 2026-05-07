@@ -1,8 +1,7 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 material thickness presets.
@@ -217,48 +216,31 @@ final class LiqMaterialChip extends StatelessWidget {
         ? blendedFill
         : _shiftBrightness(blendedFill, brightnessShift);
 
-    final chip = SizedBox.fromSize(
+    // Real LiqGlassSurface (shader on Impeller, BackdropFilter fallback on
+    // web) — no longer a competing manual `BackdropFilter` implementation.
+    // The `style` / `brightness` / `LiqMaterialConfig` parameters now feed
+    // into the LiqGlassSurface tint + blur via baseFill/blurSigma so each
+    // material variant still renders distinctly while sharing the single
+    // glass pipeline.
+    return SizedBox.fromSize(
       size: size,
-      child: ClipRRect(
+      child: LiqGlassSurface(
+        baseFill: fillColor,
+        rimColor: borderColor,
+        highlightStart: showInnerHighlight ? innerHighlight : null,
+        blurSigma: blurSigma,
         borderRadius: borderRadius,
-        child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: borderRadius,
-                  color: fillColor,
-                  border: Border.all(
-                    color: borderColor,
-                    width: increasedContrast ? 1.5 : 1,
-                  ),
-                ),
-              ),
-              if (showInnerHighlight)
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadius,
-                    border: Border.all(color: innerHighlight),
-                  ),
-                ),
-              if (child case final foreground?)
-                Padding(padding: padding, child: foreground),
-            ],
+        padding: padding,
+        elevation: LiqGlassElevation.modal,
+        shadows: <BoxShadow>[
+          BoxShadow(
+            color: shadow,
+            offset: const Offset(0, 16),
+            blurRadius: 30,
           ),
-        ),
-      ),
-    );
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: borderRadius,
-        boxShadow: <BoxShadow>[
-          BoxShadow(color: shadow, offset: const Offset(0, 16), blurRadius: 30),
         ],
+        child: child ?? const SizedBox.shrink(),
       ),
-      child: chip,
     );
   }
 

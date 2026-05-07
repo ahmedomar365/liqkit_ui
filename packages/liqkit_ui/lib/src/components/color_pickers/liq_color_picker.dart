@@ -1,10 +1,10 @@
 import 'dart:math' as math;
-import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
@@ -360,34 +360,19 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
         );
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(34)),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
-              child: Container(
-                width: panelWidth,
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
-                decoration: BoxDecoration(
-                  color:
-                      isDark
-                          ? const Color(0xE61C1C1E)
-                          : const Color(0xE0F5F5F5),
-                  borderRadius: const BorderRadius.all(Radius.circular(34)),
-                  border: Border.fromBorderSide(
-                    BorderSide(
-                      color:
-                          isDark ? LiqSeparator.dark : const Color(0xD1D6D9DE),
-                    ),
-                  ),
-                  boxShadow: const <BoxShadow>[
-                    BoxShadow(
-                      color: Color(0x29000000),
-                      blurRadius: 40,
-                      offset: Offset(0, 18),
-                    ),
-                  ],
-                ),
-                child: Column(
+          child: SizedBox(
+            width: panelWidth,
+            child: LiqGlassSurface(
+              baseFill: isDark
+                  ? const Color(0xE61C1C1E)
+                  : const Color(0xE0F5F5F5),
+              rimColor: isDark
+                  ? LiqSeparator.dark
+                  : const Color(0xD1D6D9DE),
+              elevation: LiqGlassElevation.modal,
+              borderRadius: const BorderRadius.all(Radius.circular(34)),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     _PickerTopBar(
@@ -448,7 +433,6 @@ class _LiqColorPickerPanelState extends State<LiqColorPickerPanel> {
                     ),
                   ],
                 ),
-              ),
             ),
           ),
         );
