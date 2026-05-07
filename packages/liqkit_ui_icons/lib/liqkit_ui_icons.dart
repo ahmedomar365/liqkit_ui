@@ -9,3 +9,4 @@
 library;
 
 export 'src/liq_icons.dart' show LiqIcons;
+export 'src/liq_material_icons.dart' show LiqMaterialIcons;

@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.0
+
+Adds the missing primitives the showcase needed so an iOS 26 app can
+build entirely against `package:liqkit_ui` + `package:liqkit_ui_icons`,
+with no `package:flutter/material.dart` import in consumer code.
+
+### New foundation
+
+- `LiqColors` — Material-style color palette mapped to iOS 26 system
+  tones. Drop-in replacement for `Colors.X` (white/black/transparent
+  greyscale + the named iOS system tones + a `greyRamp.shade(N)`
+  accessor). Lives in `package:liqkit_ui` (foundation export).
+
+### New components
+
+- `LiqDismissible` — swipe-to-dismiss row, alias for `Dismissible`
+  from `package:flutter/widgets.dart` (no Material dependency).
+- `LiqPageRoute` — iOS-style push route (subclass of
+  `CupertinoPageRoute`). Drop-in replacement for `MaterialPageRoute`.
+- `LiqReorderableList` — drag-to-reorder vertical list backed by
+  `SliverReorderableList`. Replaces `ReorderableListView`.
+- `LiqRefreshIndicator` — pull-to-refresh wrapper rendering a
+  `LiqSpinner` instead of Material's circular progress glyph.
+
+### Companion package
+
+- `liqkit_ui_icons` 0.2.0 adds `LiqMaterialIcons` — 315 verbose-name
+  aliases (`LiqMaterialIcons.accountCircle`, `errorOutline`, …) for
+  drop-in migration off `Icons.X`. The curated short-name surface on
+  `LiqIcons` is unchanged.
+
 ## 0.1.0
 
 First real release. Comprehensive iOS 26 Liquid Glass design system.
