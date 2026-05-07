@@ -263,20 +263,16 @@ void main() {
       );
       expect(bodyDefault.style.color, const Color(0xFFFFFFFF));
 
-      final tableDecorations =
-          tester
-              .widgetList<DecoratedBox>(
-                find.descendant(
-                  of: find.byType(LiqDataTable),
-                  matching: find.byType(DecoratedBox),
-                ),
-              )
-              .map((box) => box.decoration)
-              .whereType<BoxDecoration>();
+      final fills = tester
+          .widgetList<LiqGlassSurface>(
+            find.descendant(
+              of: find.byType(LiqDataTable),
+              matching: find.byType(LiqGlassSurface),
+            ),
+          )
+          .map((s) => s.baseFill);
       expect(
-        tableDecorations.any(
-          (decoration) => decoration.color == const Color(0xFF000000),
-        ),
+        fills.any((fill) => fill == const Color(0xFF000000)),
         isTrue,
       );
     });

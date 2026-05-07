@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -30,12 +31,11 @@ final class LiqListGroup extends StatelessWidget {
     final bg = isDark ? _bgDark : _bgLight;
     final border = isDark ? _borderDark : _borderLight;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: const BorderRadius.all(Radius.circular(_radius)),
-        border: Border.all(color: border),
-      ),
+    return LiqGlassSurface(
+      baseFill: bg,
+      rimColor: border,
+      borderRadius: const BorderRadius.all(Radius.circular(_radius)),
+      padding: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
       child: Column(
         mainAxisSize: MainAxisSize.min,

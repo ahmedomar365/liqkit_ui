@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -251,29 +252,26 @@ final class LiqDataTable extends StatelessWidget {
       return true;
     }(), 'every row must have exactly columns.length cells');
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: palette.bodyBackground,
-        borderRadius: const BorderRadius.all(Radius.circular(radius)),
-        border: Border.all(color: palette.border, width: borderThickness),
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(radius)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _buildHeader(palette),
-            for (var i = 0; i < rows.length; i++) ...<Widget>[
-              if (i > 0)
-                SizedBox(
-                  height: rowDividerThickness,
-                  child: ColoredBox(color: palette.divider),
-                ),
-              _buildBodyRow(rows[i], palette),
-            ],
+    return LiqGlassSurface(
+      baseFill: palette.bodyBackground,
+      rimColor: palette.border,
+      borderRadius: const BorderRadius.all(Radius.circular(radius)),
+      padding: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          _buildHeader(palette),
+          for (var i = 0; i < rows.length; i++) ...<Widget>[
+            if (i > 0)
+              SizedBox(
+                height: rowDividerThickness,
+                child: ColoredBox(color: palette.divider),
+              ),
+            _buildBodyRow(rows[i], palette),
           ],
-        ),
+        ],
       ),
     );
   }

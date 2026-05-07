@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -527,14 +528,13 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
         context.liqIsDark
             ? const _RichEditorPalette.dark()
             : const _RichEditorPalette.light();
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: palette.surfaceBackground,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(LiqRichEditor.surfaceRadius),
-        ),
-        border: Border.all(color: palette.surfaceBorder),
+    return LiqGlassSurface(
+      baseFill: palette.surfaceBackground,
+      rimColor: palette.surfaceBorder,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(LiqRichEditor.surfaceRadius),
       ),
+      padding: EdgeInsets.zero,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

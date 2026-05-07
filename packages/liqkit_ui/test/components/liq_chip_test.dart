@@ -14,16 +14,15 @@ Widget _wrap(Widget child) {
 }
 
 Color _backgroundOf(WidgetTester tester) {
-  final container = tester.widget<AnimatedContainer>(
+  final glass = tester.widget<LiqGlassSurface>(
     find
         .descendant(
           of: find.byType(LiqChip),
-          matching: find.byType(AnimatedContainer),
+          matching: find.byType(LiqGlassSurface),
         )
         .first,
   );
-  final decoration = container.decoration! as BoxDecoration;
-  return decoration.color!;
+  return glass.baseFill!;
 }
 
 Color _labelColorOf(WidgetTester tester, String label) {
@@ -82,7 +81,7 @@ void main() {
         find
             .descendant(
               of: find.byType(LiqChip),
-              matching: find.byType(AnimatedContainer),
+              matching: find.byType(LiqGlassSurface),
             )
             .first,
       );

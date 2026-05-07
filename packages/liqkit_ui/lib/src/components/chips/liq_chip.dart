@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -131,18 +132,16 @@ final class LiqChip extends StatelessWidget {
     final foreground =
         selected ? selectedLabelColor : (isDark ? labelColorDark : labelColor);
 
-    final visualChip = AnimatedContainer(
-      duration: animationDuration,
+    final visualChip = ConstrainedBox(
       constraints: const BoxConstraints(minHeight: minHeight),
-      decoration: BoxDecoration(
-        color: background,
+      child: LiqGlassSurface(
+        baseFill: background,
         borderRadius: BorderRadius.circular(radius),
-      ),
-      padding: const EdgeInsets.symmetric(
-        vertical: verticalPadding,
-        horizontal: horizontalPadding,
-      ),
-      child: Row(
+        padding: const EdgeInsets.symmetric(
+          vertical: verticalPadding,
+          horizontal: horizontalPadding,
+        ),
+        child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           if (icon != null) ...<Widget>[
@@ -169,17 +168,17 @@ final class LiqChip extends StatelessWidget {
           ],
         ],
       ),
+      ),
     );
 
-    var chip =
-        isInteractive
-            ? Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: (hitHeight - minHeight) / 2,
-              ),
-              child: visualChip,
-            )
-            : visualChip;
+    Widget chip = isInteractive
+        ? Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: (hitHeight - minHeight) / 2,
+            ),
+            child: visualChip,
+          )
+        : visualChip;
 
     if (onDeleted != null) {
       chip = Stack(
