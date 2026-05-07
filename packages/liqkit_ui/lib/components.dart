@@ -71,6 +71,7 @@ export 'src/components/pickers/liq_picker_extras.dart';
 export 'src/components/pickers/liq_wheel_date_picker.dart';
 export 'src/components/pickers/liq_wheel_picker.dart';
 export 'src/components/popovers/liq_popover.dart';
+export 'src/components/popovers/liq_popover_area.dart';
 export 'src/components/popup_buttons/liq_dropdown.dart';
 export 'src/components/popup_buttons/liq_popup_button.dart';
 export 'src/components/progress/liq_progress_extras.dart';
