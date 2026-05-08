@@ -399,12 +399,13 @@ class _LiqTextFieldState extends State<LiqTextField> {
           );
           if (!filled) return inner;
           return LiqGlassSurface(
-            // Opaque path — input fields render their own placeholder /
+            // Opaque + flat — input fields render their own placeholder /
             // value text, so the BackdropFilter shader path would sample
             // the surrounding label widgets and bleed them into the
             // field as ghost text. iOS 26's text fields are solid
-            // translucent, never glass.
+            // translucent with no drop shadow.
             tint: LiqGlassTint.opaque,
+            elevation: LiqGlassElevation.flat,
             borderRadius: LiqTextField._radius,
             padding: EdgeInsets.zero,
             baseFill: bg,

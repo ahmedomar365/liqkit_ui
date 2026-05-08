@@ -280,10 +280,10 @@ class _OtpBox extends StatelessWidget {
       width: LiqOtpInput.boxWidth,
       height: LiqOtpInput.boxHeight,
       child: LiqGlassSurface(
-        // Opaque path — OTP cells render the typed digit / obscure dot
-        // inside themselves, so a BackdropFilter would ghost the cell's
-        // own glyph + neighbours through.
+        // Opaque + flat — OTP cells are solid translucent with no
+        // drop shadow.
         tint: LiqGlassTint.opaque,
+        elevation: LiqGlassElevation.flat,
         baseFill: palette.background,
         rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqOtpInput.boxRadius),

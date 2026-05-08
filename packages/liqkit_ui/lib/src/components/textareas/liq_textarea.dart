@@ -277,9 +277,10 @@ class _LiqTextareaState extends State<LiqTextarea> {
     }
 
     final field = LiqGlassSurface(
-      // Opaque path — see LiqTextField rationale (BackdropFilter would
-      // sample surrounding labels and ghost them into the field).
+      // Opaque + flat — input fields are solid translucent with no
+      // drop shadow (iOS native pattern).
       tint: LiqGlassTint.opaque,
+      elevation: LiqGlassElevation.flat,
       baseFill: palette.background,
       rimColor: borderColor,
       borderRadius: BorderRadius.circular(LiqTextarea.fieldRadius),

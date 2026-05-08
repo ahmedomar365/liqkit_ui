@@ -343,8 +343,10 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
     final field = SizedBox(
       height: LiqTimeField.fieldHeight,
       child: LiqGlassSurface(
-        // Opaque path — see LiqTextField rationale.
+        // Opaque + flat — input fields are solid translucent with no
+        // drop shadow (iOS native pattern).
         tint: LiqGlassTint.opaque,
+        elevation: LiqGlassElevation.flat,
         baseFill: palette.background,
         rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqTimeField.fieldRadius),

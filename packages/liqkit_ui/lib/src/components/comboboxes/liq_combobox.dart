@@ -459,9 +459,10 @@ class _DropdownPanel<T> extends StatelessWidget {
         height: height,
         child: LiqGlassSurface(
           borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
-          // Opaque path — option rows render text inside, and the glass
-          // would ghost the field's own value text into the dropdown.
+          // Opaque + flat — combobox dropdown is a solid surface with
+          // no drop shadow (iOS popover pattern).
           tint: LiqGlassTint.opaque,
+          elevation: LiqGlassElevation.flat,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(LiqCombobox.fieldRadius),
             child:

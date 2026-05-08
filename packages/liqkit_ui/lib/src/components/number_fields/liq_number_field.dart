@@ -228,8 +228,10 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
     final field = SizedBox(
       height: LiqNumberField.fieldHeight,
       child: LiqGlassSurface(
-        // Opaque path — see LiqTextField rationale.
+        // Opaque + flat — input fields are solid translucent with no
+        // drop shadow (iOS native pattern).
         tint: LiqGlassTint.opaque,
+        elevation: LiqGlassElevation.flat,
         baseFill: palette.background,
         rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqNumberField.fieldRadius),
