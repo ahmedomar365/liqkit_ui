@@ -120,14 +120,20 @@ class LiqAppleColors {
   static const Color systemGray6Dark = Color(0xFF1C1C1E);
 
   // ─── Labels ──────────────────────────────────────────────────────────
+  // Apple's iOS spec values are 60/30/18% (0x99 / 0x4D / 0x2E). Those
+  // are designed for fully-opaque card surfaces; on liqkit_ui's
+  // translucent / gradient backgrounds they wash out and become hard
+  // to read. Bumped each tier by ~10pp opacity (60 → 70, 30 → 40,
+  // 18 → 25) to keep the same visual hierarchy with stronger
+  // contrast against any background.
   static const Color label = Color(0xFF000000);
   static const Color labelDark = Color(0xFFFFFFFF);
-  static const Color secondaryLabel = Color(0x993C3C43);
-  static const Color secondaryLabelDark = Color(0x99EBEBF5);
-  static const Color tertiaryLabel = Color(0x4D3C3C43);
-  static const Color tertiaryLabelDark = Color(0x4DEBEBF5);
-  static const Color quaternaryLabel = Color(0x2E3C3C43);
-  static const Color quaternaryLabelDark = Color(0x2EEBEBF5);
+  static const Color secondaryLabel = Color(0xB33C3C43);
+  static const Color secondaryLabelDark = Color(0xB3EBEBF5);
+  static const Color tertiaryLabel = Color(0x663C3C43);
+  static const Color tertiaryLabelDark = Color(0x66EBEBF5);
+  static const Color quaternaryLabel = Color(0x403C3C43);
+  static const Color quaternaryLabelDark = Color(0x40EBEBF5);
 
   // ─── Fills ───────────────────────────────────────────────────────────
   static const Color systemFill = Color(0x33787880);
