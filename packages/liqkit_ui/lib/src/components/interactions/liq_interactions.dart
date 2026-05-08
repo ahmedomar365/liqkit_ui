@@ -90,11 +90,11 @@ class LiqPageRoute<T> extends PageRoute<T> {
   String? get barrierLabel => null;
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 320);
+  Duration get transitionDuration => const Duration(milliseconds: 260);
 
   @override
   Duration get reverseTransitionDuration =>
-      const Duration(milliseconds: 280);
+      const Duration(milliseconds: 200);
 
   @override
   bool get opaque => true;
@@ -125,22 +125,28 @@ class LiqPageRoute<T> extends PageRoute<T> {
         ).animate(
           CurvedAnimation(
             parent: animation,
-            curve: Curves.easeOutCubic,
-            reverseCurve: Curves.easeInCubic,
+            curve: Curves.easeOutQuart,
+            reverseCurve: Curves.easeInQuart,
           ),
         ),
         child: child,
       );
     }
+    // Direction-aware push: in LTR the incoming page slides from the
+    // right edge; in RTL it slides from the left. The outgoing page
+    // parallaxes to the opposite edge.
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final incomingBeginX = isRtl ? -1.0 : 1.0;
+    final outgoingEndX = isRtl ? 0.33 : -0.33;
     final incoming = SlideTransition(
       position: Tween<Offset>(
-        begin: const Offset(1, 0),
+        begin: Offset(incomingBeginX, 0),
         end: Offset.zero,
       ).animate(
         CurvedAnimation(
           parent: animation,
-          curve: Curves.easeOutCubic,
-          reverseCurve: Curves.easeInCubic,
+          curve: Curves.easeOutQuart,
+          reverseCurve: Curves.easeInQuart,
         ),
       ),
       child: child,
@@ -148,12 +154,12 @@ class LiqPageRoute<T> extends PageRoute<T> {
     final parallax = SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
-        end: const Offset(-0.33, 0),
+        end: Offset(outgoingEndX, 0),
       ).animate(
         CurvedAnimation(
           parent: secondaryAnimation,
-          curve: Curves.easeOutCubic,
-          reverseCurve: Curves.easeInCubic,
+          curve: Curves.easeOutQuart,
+          reverseCurve: Curves.easeInQuart,
         ),
       ),
       child: incoming,
@@ -206,7 +212,10 @@ class _LiqBackGestureController<T> {
   }
 
   void dragEnd(double velocity) {
-    const Curve animationCurve = Curves.easeOutCubic;
+    // Snappier than easeOutCubic; matches the feel of the iOS native
+    // pop animation where the page accelerates the rest of the way
+    // out instead of easing in.
+    const Curve animationCurve = Curves.easeOutQuart;
     final bool animateForward;
     if (velocity.abs() >= 1) {
       animateForward = velocity <= 0;
@@ -215,9 +224,11 @@ class _LiqBackGestureController<T> {
     }
 
     if (animateForward) {
+      // Snap-back when the user didn't drag far enough — short and
+      // immediate so the page returns to its rest position quickly.
       final ms = math.min(
-        lerpDouble(800, 0, controller.value)!.floor(),
-        300,
+        lerpDouble(180, 0, controller.value)!.floor(),
+        160,
       );
       controller.animateTo(
         1,
@@ -225,9 +236,14 @@ class _LiqBackGestureController<T> {
         curve: animationCurve,
       );
     } else {
+      // Commit-pop — finish the slide-out promptly. Cap at 200ms so
+      // the navigation feels instant on release.
       navigator.pop();
       if (controller.isAnimating) {
-        final ms = lerpDouble(0, 800, controller.value)!.floor();
+        final ms = math.min(
+          lerpDouble(0, 200, controller.value)!.floor(),
+          200,
+        );
         controller.animateBack(
           0,
           duration: Duration(milliseconds: ms),
