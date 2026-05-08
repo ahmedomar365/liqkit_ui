@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart' show CupertinoPicker;
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
-import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
-import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
+import 'package:liqkit_ui/src/components/pickers/liq_wheel_column.dart';
 
 /// One option in a [LiqWheelPicker].
 @immutable
@@ -26,9 +23,7 @@ class LiqWheelPickerItem<T> {
 /// option set is small enough to scroll through (typically ≤ 50 items)
 /// and you want the canonical iOS wheel UX.
 ///
-/// For dates and times specifically, prefer [LiqWheelDatePicker] —
-/// which delegates to `CupertinoDatePicker` for full multi-column
-/// date/time interactions.
+/// Built on `ListWheelScrollView` from `flutter/widgets`. No Cupertino.
 ///
 /// ```dart
 /// LiqWheelPicker<String>(
@@ -48,9 +43,9 @@ final class LiqWheelPicker<T> extends StatefulWidget {
     required this.onValueChanged,
     this.selectedValue,
     this.height = 216,
-    this.itemExtent = 32,
+    this.itemExtent = 36,
     this.diameterRatio = 1.07,
-    this.squeeze = 1.45,
+    this.squeeze = 1.25,
     this.enableHaptics = true,
     this.tint = LiqGlassTint.opaque,
     this.brightness,
@@ -76,7 +71,7 @@ final class LiqWheelPicker<T> extends StatefulWidget {
   /// Cylinder bend ratio. iOS canonical is 1.07.
   final double diameterRatio;
 
-  /// Edge squeeze factor. iOS canonical is 1.45.
+  /// Edge squeeze factor.
   final double squeeze;
 
   /// Whether `HapticFeedback.selectionClick()` fires on each tick.
@@ -115,8 +110,7 @@ class _LiqWheelPickerState<T> extends State<LiqWheelPicker<T>> {
   @override
   void initState() {
     super.initState();
-    _controller =
-        FixedExtentScrollController(initialItem: _initialIndex);
+    _controller = FixedExtentScrollController(initialItem: _initialIndex);
   }
 
   @override
@@ -138,39 +132,31 @@ class _LiqWheelPickerState<T> extends State<LiqWheelPicker<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark =
-        (widget.brightness ?? context.liqBrightness) == Brightness.dark;
-    final labelColor = isDark
-        ? LiqAppleColors.labelDark
-        : LiqAppleColors.label;
+    final textStyle = LiqWheelTextStyle.resolve(context);
     return LiqGlassSurface(
       tint: widget.tint,
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       child: SizedBox(
         height: widget.height,
-        child: CupertinoPicker(
-          scrollController: _controller,
+        child: LiqWheelColumn(
+          controller: _controller,
+          itemCount: widget.items.length,
           itemExtent: widget.itemExtent,
           diameterRatio: widget.diameterRatio,
           squeeze: widget.squeeze,
-          backgroundColor: const Color(0x00000000),
+          enableHaptics: widget.enableHaptics,
           onSelectedItemChanged: (index) {
-            if (widget.enableHaptics) HapticFeedback.selectionClick();
             widget.onValueChanged(widget.items[index].value);
           },
-          children: <Widget>[
-            for (final item in widget.items)
-              Center(
-                child: Text(
-                  item.label,
-                  style: TextStyle(
-                    fontFamily: 'SF Pro Text',
-                    fontSize: 21,
-                    color: labelColor,
-                  ),
-                ),
+          itemBuilder: (context, index) {
+            return Center(
+              child: Text(
+                widget.items[index].label,
+                style: textStyle,
+                textDirection: TextDirection.ltr,
               ),
-          ],
+            );
+          },
         ),
       ),
     );

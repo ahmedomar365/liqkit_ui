@@ -1,18 +1,26 @@
-import 'package:flutter/cupertino.dart' show CupertinoPicker, CupertinoTimerPicker, CupertinoTimerPickerMode;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/buttons/liq_button.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/lists/liq_list.dart';
+import 'package:liqkit_ui/src/components/pickers/liq_wheel_column.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// Mode controlling which columns appear in [LiqTimerPicker].
 ///
-/// Re-export of `CupertinoTimerPickerMode` so consumers don't need a
-/// `package:flutter/cupertino.dart` import to pass `mode:` values.
-typedef LiqTimerPickerMode = CupertinoTimerPickerMode;
+/// Native to liqkit_ui — no Cupertino dependency.
+enum LiqTimerPickerMode {
+  /// Hours + minutes columns.
+  hm,
+
+  /// Minutes + seconds columns.
+  ms,
+
+  /// Hours + minutes + seconds columns.
+  hms,
+}
 
 /// One selectable entry in [LiqPickerButton] / [LiqMultiColumnPicker].
 @immutable
@@ -257,31 +265,26 @@ final class LiqNumberPicker extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
     final values = <int>[
       for (var v = minValue; v <= maxValue; v += step) v,
     ];
     final initialIndex =
         values.indexOf(selectedValue).clamp(0, values.length - 1);
+    final textStyle = LiqWheelTextStyle.resolve(context);
     return SizedBox(
       height: height,
-      child: CupertinoPicker.builder(
-        scrollController: FixedExtentScrollController(initialItem: initialIndex),
-        backgroundColor: isDark
-            ? const Color(0xCC1C1C1E)
-            : const Color(0xCCF5F5F7),
+      child: LiqWheelColumn(
+        initialIndex: initialIndex,
         itemExtent: itemExtent,
-        childCount: values.length,
+        itemCount: values.length,
+        onSelectedItemChanged: (index) => onValueChanged(values[index]),
         itemBuilder: (context, index) => Center(
           child: Text(
             values[index].toString(),
-            style: LiqAppleTypography.body(
-              isDark ? Brightness.dark : Brightness.light,
-            ),
+            style: textStyle,
+            textDirection: TextDirection.ltr,
           ),
         ),
-        onSelectedItemChanged: (index) =>
-            onValueChanged(values[index]),
       ),
     );
   }
@@ -321,7 +324,6 @@ final class LiqMeasurementPicker extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
     final values = <double>[];
     for (var v = minValue; v <= maxValue + 0.0001; v += step) {
       values.add(double.parse(v.toStringAsFixed(2)));
@@ -329,25 +331,20 @@ final class LiqMeasurementPicker extends StatelessWidget
     final initialIndex = values
         .indexWhere((v) => (v - value).abs() < step / 2)
         .clamp(0, values.length - 1);
+    final textStyle = LiqWheelTextStyle.resolve(context);
     return SizedBox(
       height: height,
-      child: CupertinoPicker.builder(
-        scrollController:
-            FixedExtentScrollController(initialItem: initialIndex),
-        backgroundColor: isDark
-            ? const Color(0xCC1C1C1E)
-            : const Color(0xCCF5F5F7),
-        itemExtent: 32,
-        childCount: values.length,
+      child: LiqWheelColumn(
+        initialIndex: initialIndex,
+        itemCount: values.length,
+        onSelectedItemChanged: (index) => onValueChanged(values[index]),
         itemBuilder: (context, index) => Center(
           child: Text(
             '${values[index].toStringAsFixed(1)} $unit',
-            style: LiqAppleTypography.body(
-              isDark ? Brightness.dark : Brightness.light,
-            ),
+            style: textStyle,
+            textDirection: TextDirection.ltr,
           ),
         ),
-        onSelectedItemChanged: (index) => onValueChanged(values[index]),
       ),
     );
   }
@@ -427,48 +424,161 @@ final class LiqDateRangePicker extends StatelessWidget with Diagnosticable {
   }
 }
 
-/// Wraps `CupertinoTimerPicker` to surface a `Duration` selector with
-/// the liqkit_ui glass-surface styling.
-final class LiqTimerPicker extends StatelessWidget with Diagnosticable {
+/// iOS-26 timer/duration picker built from stacked liqkit_ui wheel
+/// columns. No Cupertino dependency.
+///
+/// Each numeric column is followed by a unit label (`hours` / `min` /
+/// `sec`) so users see "1 hour 30 min" instead of bare numbers.
+final class LiqTimerPicker extends StatefulWidget with Diagnosticable {
   /// Creates a timer picker.
   const LiqTimerPicker({
     required this.initialDuration,
     required this.onDurationChanged,
-    this.mode = CupertinoTimerPickerMode.hms,
+    this.mode = LiqTimerPickerMode.hms,
     this.minuteInterval = 1,
+    this.secondInterval = 1,
     this.height = 216,
     super.key,
   });
 
+  /// Starting duration. The wheels rest on the matching rows.
   final Duration initialDuration;
+
+  /// Selection callback fired each time any wheel settles.
   final ValueChanged<Duration> onDurationChanged;
-  final CupertinoTimerPickerMode mode;
+
+  /// Which columns to display.
+  final LiqTimerPickerMode mode;
+
+  /// Step between minute rows.
   final int minuteInterval;
+
+  /// Step between second rows.
+  final int secondInterval;
+
+  /// Total picker height.
   final double height;
 
   @override
-  Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
-    return SizedBox(
-      height: height,
-      child: CupertinoTimerPicker(
-        mode: mode,
-        initialTimerDuration: initialDuration,
-        minuteInterval: minuteInterval,
-        backgroundColor: isDark
-            ? const Color(0xCC1C1C1E)
-            : const Color(0xCCF5F5F7),
-        onTimerDurationChanged: onDurationChanged,
-      ),
-    );
-  }
+  State<LiqTimerPicker> createState() => _LiqTimerPickerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<Duration>('initialDuration', initialDuration))
-      ..add(EnumProperty<CupertinoTimerPickerMode>('mode', mode));
+      ..add(EnumProperty<LiqTimerPickerMode>('mode', mode));
+  }
+}
+
+class _LiqTimerPickerState extends State<LiqTimerPicker> {
+  late int _hour;
+  late int _minute;
+  late int _second;
+
+  @override
+  void initState() {
+    super.initState();
+    _hour = widget.initialDuration.inHours;
+    _minute = widget.initialDuration.inMinutes.remainder(60);
+    _second = widget.initialDuration.inSeconds.remainder(60);
+  }
+
+  void _emit() {
+    widget.onDurationChanged(
+      Duration(hours: _hour, minutes: _minute, seconds: _second),
+    );
+  }
+
+  Widget _column({
+    required int valueCount,
+    required int step,
+    required int initial,
+    required String unitShort,
+    required ValueChanged<int> onChanged,
+    required TextStyle textStyle,
+  }) {
+    final values = <int>[for (var v = 0; v < valueCount; v += step) v];
+    final initialIndex =
+        (initial ~/ step).clamp(0, values.length - 1);
+    return Expanded(
+      child: LiqWheelColumn(
+        initialIndex: initialIndex,
+        itemCount: values.length,
+        itemExtent: 36,
+        onSelectedItemChanged: (index) {
+          onChanged(values[index]);
+          _emit();
+        },
+        itemBuilder: (context, index) => Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  values[index].toString().padLeft(2, '0'),
+                  style: textStyle,
+                  textDirection: TextDirection.ltr,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  unitShort,
+                  style: textStyle.copyWith(
+                    fontSize: textStyle.fontSize! - 4,
+                    color: textStyle.color!.withValues(alpha: 0.6),
+                  ),
+                  textDirection: TextDirection.ltr,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = LiqWheelTextStyle.resolve(context);
+    final showHours = widget.mode == LiqTimerPickerMode.hm ||
+        widget.mode == LiqTimerPickerMode.hms;
+    final showSeconds = widget.mode == LiqTimerPickerMode.ms ||
+        widget.mode == LiqTimerPickerMode.hms;
+    return SizedBox(
+      height: widget.height,
+      child: Row(
+        children: <Widget>[
+          if (showHours)
+            _column(
+              valueCount: 24,
+              step: 1,
+              initial: _hour,
+              unitShort: 'hour',
+              textStyle: textStyle,
+              onChanged: (v) => _hour = v,
+            ),
+          _column(
+            valueCount: 60,
+            step: widget.minuteInterval,
+            initial: _minute,
+            unitShort: 'min',
+            textStyle: textStyle,
+            onChanged: (v) => _minute = v,
+          ),
+          if (showSeconds)
+            _column(
+              valueCount: 60,
+              step: widget.secondInterval,
+              initial: _second,
+              unitShort: 'sec',
+              textStyle: textStyle,
+              onChanged: (v) => _second = v,
+            ),
+        ],
+      ),
+    );
   }
 }
 
@@ -495,9 +605,9 @@ final class LiqMultiColumnPicker extends StatelessWidget with Diagnosticable {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.liqIsDark;
-    final ratios = columnWidthRatios ??
-        List<double>.filled(columns.length, 1);
+    final ratios =
+        columnWidthRatios ?? List<double>.filled(columns.length, 1);
+    final textStyle = LiqWheelTextStyle.resolve(context);
     return SizedBox(
       height: height,
       child: Row(
@@ -505,28 +615,24 @@ final class LiqMultiColumnPicker extends StatelessWidget with Diagnosticable {
           for (var c = 0; c < columns.length; c++)
             Expanded(
               flex: (ratios[c] * 10).toInt(),
-              child: CupertinoPicker.builder(
-                scrollController: FixedExtentScrollController(
-                  initialItem: selectedIndices[c]
-                      .clamp(0, columns[c].length - 1),
+              child: LiqWheelColumn(
+                initialIndex: selectedIndices[c].clamp(
+                  0,
+                  columns[c].length - 1,
                 ),
-                backgroundColor: isDark
-                    ? const Color(0xCC1C1C1E)
-                    : const Color(0xCCF5F5F7),
+                itemCount: columns[c].length,
                 itemExtent: itemExtent,
-                childCount: columns[c].length,
-                itemBuilder: (context, index) => Center(
-                  child: Text(
-                    columns[c][index].label,
-                    style: LiqAppleTypography.body(
-                      isDark ? Brightness.dark : Brightness.light,
-                    ),
-                  ),
-                ),
                 onSelectedItemChanged: (index) {
                   final next = List<int>.from(selectedIndices)..[c] = index;
                   onSelectionChanged(next);
                 },
+                itemBuilder: (context, index) => Center(
+                  child: Text(
+                    columns[c][index].label,
+                    style: textStyle,
+                    textDirection: TextDirection.ltr,
+                  ),
+                ),
               ),
             ),
         ],
