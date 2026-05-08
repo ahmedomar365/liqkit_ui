@@ -125,7 +125,7 @@ void main() {
           matching: find.byType(LiqGlassSurface),
         ),
       );
-      expect(surface.tint, LiqGlassTint.light);
+      expect(surface.tint, LiqGlassTint.opaque);
       expect(surface.elevation, LiqGlassElevation.floating);
     });
 

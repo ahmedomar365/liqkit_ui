@@ -1,7 +1,6 @@
-import 'dart:ui' show Color, ImageFilter;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/theme/liq_material.dart';
 import 'package:liqkit_ui/src/theme/liq_quality.dart';
 import 'package:liqkit_ui/src/theme/liq_theme.dart';
@@ -59,31 +58,25 @@ final class LiqMaterialSurface extends StatelessWidget {
           ),
         );
 
-    if (theme.quality == LiqQuality.minimal || material.blurRadius == 0) {
-      return _solid(clipShape, tint);
-    }
-
+    // The previous implementation rolled its own
+    // `BackdropFilter(ImageFilter.blur)` + `ColoredBox(tint)` — a second
+    // glass implementation competing with `LiqGlassSurface`. Per the
+    // no-fakes rule, every glass surface in liqkit_ui delegates to the
+    // canonical `LiqGlassSurface` shader pipeline.
+    final isOpaque =
+        theme.quality == LiqQuality.minimal || material.blurRadius == 0;
     return ClipPath(
       clipper: ShapeBorderClipper(shape: clipShape),
-      child: Stack(
-        children: <Widget>[
-          BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: material.blurRadius,
-              sigmaY: material.blurRadius,
-            ),
-            child: ColoredBox(color: tint),
-          ),
-          child,
-        ],
+      child: LiqGlassSurface(
+        tint: isOpaque ? LiqGlassTint.opaque : LiqGlassTint.light,
+        baseFill: tint,
+        blurSigma: material.blurRadius,
+        borderRadius: BorderRadius.zero,
+        padding: EdgeInsets.zero,
+        child: child,
       ),
     );
   }
-
-  Widget _solid(ShapeBorder shape, Color tint) => ClipPath(
-    clipper: ShapeBorderClipper(shape: shape),
-    child: ColoredBox(color: tint, child: child),
-  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

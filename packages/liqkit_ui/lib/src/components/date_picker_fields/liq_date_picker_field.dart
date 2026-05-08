@@ -419,6 +419,10 @@ class _DatePickerPanel extends StatelessWidget {
     return SizedBox(
       width: width > 0 ? width : null,
       child: LiqGlassSurface(
+        // Opaque path — the calendar inside renders day numbers, and
+        // the surrounding trigger pill renders the formatted date right
+        // above; the shader path would ghost both into the popover.
+        tint: LiqGlassTint.opaque,
         borderRadius: BorderRadius.circular(LiqDatePickerField.panelRadius),
         padding: const EdgeInsets.all(LiqDatePickerField.panelPadding),
         child: LiqCalendar(
