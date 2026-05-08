@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:liqkit_ui/src/components/buttons/liq_button.dart';
 import 'package:liqkit_ui/src/components/steppers/liq_stepper.dart';
@@ -155,10 +156,8 @@ class _StepBadge extends StatelessWidget {
 }
 
 class _StepGlyphs {
-  static const IconData check = IconData(0xf383,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
-  static const IconData close = IconData(0xf36b,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  static const IconData check = LucideIcons.check;
+  static const IconData close = LucideIcons.x;
 }
 
 /// Vertical wizard stepper — column of step badges connected by a

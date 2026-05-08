@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
@@ -38,16 +39,12 @@ class _LiqBannerPalette {
 }
 
 /// Icon glyphs used by the four predefined [LiqBannerStyle] values.
-/// These are the Cupertino glyph code points; consumers can override
-/// per-banner via [LiqBanner.icon].
-const IconData _infoIcon = IconData(0xf44c, fontFamily: 'CupertinoIcons',
-    fontPackage: 'cupertino_icons');
-const IconData _successIcon = IconData(0xf3fe,
-    fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
-const IconData _warningIcon = IconData(0xf42d,
-    fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
-const IconData _errorIcon = IconData(0xf36b,
-    fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+/// These resolve to Lucide glyphs (already bundled with the kit) — no
+/// `cupertino_icons` font dependency.
+const IconData _infoIcon = LucideIcons.info;
+const IconData _successIcon = LucideIcons.circleCheck;
+const IconData _warningIcon = LucideIcons.triangleAlert;
+const IconData _errorIcon = LucideIcons.circleX;
 
 /// Inline dismissable banner used to surface contextual info above
 /// content. Renders a tinted left strip + icon + title/body, with

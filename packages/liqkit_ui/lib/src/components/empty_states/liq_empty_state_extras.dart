@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:liqkit_ui/src/components/empty_states/liq_empty_state.dart';
 import 'package:liqkit_ui/src/components/progress/liq_progress_indicator.dart';
@@ -26,31 +27,27 @@ enum LiqEmptyStateType {
   custom,
 }
 
-/// Glyph + accent color preset for a [LiqEmptyStateType]. Resolved
-/// using only Cupertino-glyph IconData to avoid Material font deps.
+/// Glyph + accent color preset for a [LiqEmptyStateType]. Uses Lucide
+/// glyphs (already bundled with liqkit_ui_icons) — no `cupertino_icons`
+/// font dependency.
 @immutable
 class LiqEmptyStatePresets {
   const LiqEmptyStatePresets._();
 
   /// Inbox tray glyph.
-  static const IconData noDataIcon = IconData(0xf3a4,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  static const IconData noDataIcon = LucideIcons.inbox;
 
-  /// Exclamation mark in triangle.
-  static const IconData errorIcon = IconData(0xf42d,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  /// Triangle-with-exclamation glyph.
+  static const IconData errorIcon = LucideIcons.triangleAlert;
 
   /// Wifi-slash glyph.
-  static const IconData noConnectionIcon = IconData(0xf473,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  static const IconData noConnectionIcon = LucideIcons.wifiOff;
 
-  /// Magnifying-glass glyph.
-  static const IconData noResultsIcon = IconData(0xf4a5,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  /// Magnifying-glass with X.
+  static const IconData noResultsIcon = LucideIcons.searchX;
 
   /// Default star/sparkles glyph for `custom`.
-  static const IconData customIcon = IconData(0xf4ac,
-      fontFamily: 'CupertinoIcons', fontPackage: 'cupertino_icons');
+  static const IconData customIcon = LucideIcons.sparkles;
 
   /// Returns the default icon for [type].
   static IconData iconFor(LiqEmptyStateType type) => switch (type) {
