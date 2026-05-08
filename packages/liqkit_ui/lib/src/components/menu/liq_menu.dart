@@ -554,9 +554,15 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
     return LayoutBuilder(
       builder: (context, constraints) {
         const margin = 16.0;
-        // Estimated max menu height — clamped further by the inner
-        // SingleChildScrollView once content lays out.
-        const estimatedMaxHeight = 480.0;
+        // Estimate the real menu height from item count (~44pt per
+        // LiqMenuItem, plus the optional quick-actions row at ~56pt).
+        // Hardcoding 480 caused buttons low on the screen to flip
+        // above and land at the top edge — the menu thought it
+        // wouldn't fit even when it would.
+        final estimatedMaxHeight = (children.length * 44.0 +
+                (quickActions.isEmpty ? 0.0 : 56.0) +
+                16.0)
+            .clamp(60.0, 480.0);
         var left = position.dx;
         var top = position.dy;
         if (left + width > constraints.maxWidth - margin) {
@@ -564,7 +570,9 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
         }
         if (left < margin) left = margin;
         if (top + estimatedMaxHeight > constraints.maxHeight - margin) {
-          // Try anchoring above the trigger.
+          // Not enough room below the trigger — flip so the menu's
+          // bottom edge sits just above `position.dy` (which the caller
+          // set to the bottom of the trigger button + a small gap).
           final flipped = position.dy - estimatedMaxHeight - 8;
           top = flipped > margin
               ? flipped

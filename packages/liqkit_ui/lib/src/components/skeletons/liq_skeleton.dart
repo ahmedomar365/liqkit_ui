@@ -55,17 +55,21 @@ final class LiqSkeleton extends StatefulWidget {
   /// uses 4pt, [LiqSkeletonShape.circle] ignores this.
   final BorderRadius? borderRadius;
 
-  /// Base color: iOS 26 light surface fill.
-  static const Color baseColor = Color(0xFFE5E5EA);
+  /// Base color: a step darker than `systemGray5` so placeholders read
+  /// as solid blocks on any background (cards, gradients, white) and
+  /// the shimmer band is clearly visible.
+  static const Color baseColor = Color(0xFFD6D6DB);
 
-  /// Highlight color: iOS 26 brighter shimmer band.
-  static const Color highlightColor = Color(0xFFF5F5F7);
+  /// Highlight color: pure white shimmer band for maximum pop against
+  /// the base.
+  static const Color highlightColor = Color(0xFFFFFFFF);
 
-  /// Dark-mode base color for shimmer placeholders.
-  static const Color darkBaseColor = Color(0xFF2C2C2E);
+  /// Dark-mode base color: a step lighter than `systemGray6Dark` so
+  /// placeholders are visible against dark backgrounds.
+  static const Color darkBaseColor = Color(0xFF3A3A3C);
 
   /// Dark-mode highlight color for the moving shimmer band.
-  static const Color darkHighlightColor = Color(0xFF3A3A3C);
+  static const Color darkHighlightColor = Color(0xFF545458);
 
   /// Duration of one full shimmer sweep.
   static const Duration period = Duration(milliseconds: 1400);

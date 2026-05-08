@@ -284,13 +284,11 @@ final class _BottomNavPalette {
         inactive: Color(0xFF1A1A1A),
         selection: Color(0xFFEDEDED),
         tint: LiqGlassTint.light,
-        shadows: <BoxShadow>[
-          BoxShadow(
-            color: Color(0x1F000000),
-            offset: Offset(0, 10),
-            blurRadius: 24,
-          ),
-        ],
+        // No drop shadow on the bar itself — iOS native tab bars use a
+        // hairline rim against the surface, not a soft halo. The big
+        // 24pt blurRadius shadow used to make the bar look fuzzy/dirty
+        // against the page below.
+        shadows: <BoxShadow>[],
       );
     }
 
@@ -299,13 +297,7 @@ final class _BottomNavPalette {
       inactive: const Color(0xE6F5F5F5),
       selection: const Color(0x1AFFFFFF),
       tint: LiqGlassTint.dark,
-      shadows: <BoxShadow>[
-        const BoxShadow(
-          color: Color(0x66000000),
-          offset: Offset(0, 16),
-          blurRadius: 34,
-        ),
-      ],
+      shadows: const <BoxShadow>[],
     );
   }
 
