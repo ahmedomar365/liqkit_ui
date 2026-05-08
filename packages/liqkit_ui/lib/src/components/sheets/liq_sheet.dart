@@ -114,12 +114,10 @@ final class LiqSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final resolvedBrightness = brightness ?? context.liqBrightness;
     final isDark = resolvedBrightness == Brightness.dark;
-    final surfaceTint =
-        isDark
-            ? LiqGlassTint.dark
-            : variant == LiqSheetVariant.inspector
-            ? LiqGlassTint.light
-            : null;
+    // Every variant routes through LiqGlassSurface — fullScreen used to
+    // fall through to a solid DecoratedBox, which made it visibly opaque
+    // and inconsistent with the rest of the kit. All sheets are glass.
+    final surfaceTint = isDark ? LiqGlassTint.dark : LiqGlassTint.light;
     final controls = _SheetTopBar(
       title: title,
       brightness: resolvedBrightness,
@@ -206,14 +204,14 @@ class _SheetSurface extends StatelessWidget {
     required this.background,
     required this.child,
     required this.body,
-    this.tint,
+    required this.tint,
   });
 
   final BorderRadius radius;
   final Color background;
   final Widget child;
   final Widget? body;
-  final LiqGlassTint? tint;
+  final LiqGlassTint tint;
 
   @override
   Widget build(BuildContext context) {
@@ -225,36 +223,18 @@ class _SheetSurface extends StatelessWidget {
       ),
     );
 
-    final glassTint = tint;
-    if (glassTint != null) {
-      return LiqGlassSurface(
-        tint: glassTint,
-        elevation: LiqGlassElevation.modal,
-        borderRadius: radius,
-        blurSigma: 20,
-        shadows: const <BoxShadow>[
-          BoxShadow(
-            color: LiqSheet._shadow18,
-            offset: Offset(0, 15),
-            blurRadius: 75,
-          ),
-        ],
-        child: content,
-      );
-    }
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: radius,
-        boxShadow: const <BoxShadow>[
-          BoxShadow(
-            color: LiqSheet._shadow18,
-            offset: Offset(0, 15),
-            blurRadius: 75,
-          ),
-        ],
-      ),
+    return LiqGlassSurface(
+      tint: tint,
+      elevation: LiqGlassElevation.modal,
+      borderRadius: radius,
+      blurSigma: 20,
+      shadows: const <BoxShadow>[
+        BoxShadow(
+          color: LiqSheet._shadow18,
+          offset: Offset(0, 15),
+          blurRadius: 75,
+        ),
+      ],
       child: content,
     );
   }
@@ -568,9 +548,10 @@ class _LiqSheetCloseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LiqSheetTopButton(
+    return LiqSheetTopButton(
       semanticsLabel: 'Close',
-      child: _SheetCloseGlyph(),
+      onPressed: () => Navigator.of(context).maybePop(),
+      child: const _SheetCloseGlyph(),
     );
   }
 }
@@ -580,10 +561,11 @@ class _LiqSheetConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LiqSheetTopButton(
+    return LiqSheetTopButton(
       style: LiqSheetTopButtonStyle.primary,
       semanticsLabel: 'Confirm',
-      child: _SheetCheckGlyph(),
+      onPressed: () => Navigator.of(context).maybePop(),
+      child: const _SheetCheckGlyph(),
     );
   }
 }

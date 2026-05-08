@@ -109,20 +109,27 @@ final class LiqHomeAppIcon extends StatefulWidget with Diagnosticable {
 
 class _LiqHomeAppIconState extends State<LiqHomeAppIcon>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _jiggleController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 100),
-  );
-  late final Animation<double> _jiggle = Tween<double>(
-    begin: -0.02,
-    end: 0.02,
-  ).animate(
-    CurvedAnimation(parent: _jiggleController, curve: Curves.easeInOut),
-  );
+  late final AnimationController _jiggleController;
+  late final Animation<double> _jiggle;
 
   @override
   void initState() {
     super.initState();
+    // Eagerly construct the controller (don't rely on a `late final`
+    // initializer). If isJiggling is false on first build the field is
+    // never read, and then dispose() would lazily construct it AFTER
+    // the element is deactivated — triggering the framework assertion
+    // about ancestor lookup on a deactivated widget.
+    _jiggleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    _jiggle = Tween<double>(
+      begin: -0.02,
+      end: 0.02,
+    ).animate(
+      CurvedAnimation(parent: _jiggleController, curve: Curves.easeInOut),
+    );
     if (widget.isJiggling) _jiggleController.repeat(reverse: true);
   }
 

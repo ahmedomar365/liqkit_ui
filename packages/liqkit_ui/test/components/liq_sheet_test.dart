@@ -46,7 +46,10 @@ void main() {
     expect(tester.getSize(find.byType(LiqSheet)), const Size(320, 360));
     expect(
       find.byWidgetPredicate(
-        (widget) => widget is SizedBox && (widget.width ?? 0) > 320,
+        (widget) =>
+            widget is SizedBox &&
+            (widget.width ?? 0).isFinite &&
+            (widget.width ?? 0) > 320,
       ),
       findsNothing,
     );
