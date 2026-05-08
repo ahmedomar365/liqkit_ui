@@ -85,9 +85,12 @@ final class LiqAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (effectiveLeading == null &&
         automaticallyImplyLeading &&
         Navigator.canPop(context)) {
+      // iOS native nav back: just a chevron in tint, no gray pill chrome.
+      // Keep the 44pt hit target for HIG accessibility.
       effectiveLeading = LiqIconButton(
         icon: LucideIcons.chevronLeft,
-        iconSize: 28,
+        style: LiqIconButtonStyle.borderless,
+        iconSize: 24,
         onPressed: () => Navigator.maybePop(context),
         semanticLabel: 'Back',
       );
