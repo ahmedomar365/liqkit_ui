@@ -1,4 +1,7 @@
-import 'package:flutter/gestures.dart' show DragStartBehavior;
+import 'dart:math' as math;
+import 'dart:ui' show lerpDouble;
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:liqkit_ui/src/components/progress/liq_progress_indicator.dart';
@@ -113,7 +116,8 @@ class LiqPageRoute<T> extends PageRoute<T> {
     Widget child,
   ) {
     if (fullscreenDialog) {
-      // Fullscreen dialogs slide up from the bottom.
+      // Fullscreen dialogs slide up from the bottom and don't get the
+      // edge back-swipe (iOS reserves that for stack pushes).
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(0, 1),
@@ -141,7 +145,7 @@ class LiqPageRoute<T> extends PageRoute<T> {
       ),
       child: child,
     );
-    return SlideTransition(
+    final parallax = SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
         end: const Offset(-0.33, 0),
@@ -153,6 +157,188 @@ class LiqPageRoute<T> extends PageRoute<T> {
         ),
       ),
       child: incoming,
+    );
+    return _LiqBackGestureDetector<T>(
+      enabledCallback: () => _isPopGestureEnabled,
+      onStartPopGesture: () => _startPopGesture(),
+      child: parallax,
+    );
+  }
+
+  // ─── back-swipe-to-pop ────────────────────────────────────────────
+  // Lifted from `CupertinoRouteTransitionMixin` semantics, rebuilt from
+  // scratch on `flutter/widgets` + `flutter/gestures` so liqkit_ui
+  // doesn't have to import `flutter/cupertino.dart`. Drags that begin
+  // within ~20pt of the leading edge drive `controller.value` from 1.0
+  // toward 0.0; on release we either commit the pop or animate back to
+  // the incoming position.
+  bool get _isPopGestureEnabled {
+    if (isFirst) return false;
+    if (willHandlePopInternally) return false;
+    if (popDisposition == RoutePopDisposition.doNotPop) return false;
+    if (fullscreenDialog) return false;
+    if (animation!.status != AnimationStatus.completed) return false;
+    if (secondaryAnimation!.status != AnimationStatus.dismissed) return false;
+    if (navigator!.userGestureInProgress) return false;
+    return true;
+  }
+
+  _LiqBackGestureController<T> _startPopGesture() {
+    return _LiqBackGestureController<T>(
+      navigator: navigator!,
+      controller: controller!,
+    );
+  }
+}
+
+/// Internal — drives the route's animation controller during a
+/// left-edge drag and commits or cancels the pop on release.
+class _LiqBackGestureController<T> {
+  _LiqBackGestureController({required this.navigator, required this.controller}) {
+    navigator.didStartUserGesture();
+  }
+
+  final NavigatorState navigator;
+  final AnimationController controller;
+
+  void dragUpdate(double delta) {
+    controller.value -= delta;
+  }
+
+  void dragEnd(double velocity) {
+    const Curve animationCurve = Curves.easeOutCubic;
+    final bool animateForward;
+    if (velocity.abs() >= 1) {
+      animateForward = velocity <= 0;
+    } else {
+      animateForward = controller.value > 0.5;
+    }
+
+    if (animateForward) {
+      final ms = math.min(
+        lerpDouble(800, 0, controller.value)!.floor(),
+        300,
+      );
+      controller.animateTo(
+        1,
+        duration: Duration(milliseconds: ms),
+        curve: animationCurve,
+      );
+    } else {
+      navigator.pop();
+      if (controller.isAnimating) {
+        final ms = lerpDouble(0, 800, controller.value)!.floor();
+        controller.animateBack(
+          0,
+          duration: Duration(milliseconds: ms),
+          curve: animationCurve,
+        );
+      }
+    }
+
+    if (controller.isAnimating) {
+      late AnimationStatusListener cb;
+      cb = (status) {
+        navigator.didStopUserGesture();
+        controller.removeStatusListener(cb);
+      };
+      controller.addStatusListener(cb);
+    } else {
+      navigator.didStopUserGesture();
+    }
+  }
+}
+
+/// Internal — installs an invisible left-edge drag detector that
+/// initiates a back-swipe when the user drags from the leading edge.
+class _LiqBackGestureDetector<T> extends StatefulWidget {
+  const _LiqBackGestureDetector({
+    required this.enabledCallback,
+    required this.onStartPopGesture,
+    required this.child,
+  });
+
+  final ValueGetter<bool> enabledCallback;
+  final ValueGetter<_LiqBackGestureController<T>> onStartPopGesture;
+  final Widget child;
+
+  @override
+  State<_LiqBackGestureDetector<T>> createState() =>
+      _LiqBackGestureDetectorState<T>();
+}
+
+class _LiqBackGestureDetectorState<T>
+    extends State<_LiqBackGestureDetector<T>> {
+  _LiqBackGestureController<T>? _controller;
+  late HorizontalDragGestureRecognizer _recognizer;
+
+  @override
+  void initState() {
+    super.initState();
+    _recognizer = HorizontalDragGestureRecognizer(debugOwner: this)
+      ..onStart = _handleDragStart
+      ..onUpdate = _handleDragUpdate
+      ..onEnd = _handleDragEnd
+      ..onCancel = _handleDragCancel;
+  }
+
+  @override
+  void dispose() {
+    _recognizer.dispose();
+    super.dispose();
+  }
+
+  void _handleDragStart(DragStartDetails details) {
+    _controller = widget.onStartPopGesture();
+  }
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    final width = context.size!.width;
+    _controller!.dragUpdate(_logical(details.primaryDelta! / width));
+  }
+
+  void _handleDragEnd(DragEndDetails details) {
+    final width = context.size!.width;
+    _controller!.dragEnd(
+      _logical(details.velocity.pixelsPerSecond.dx / width),
+    );
+    _controller = null;
+  }
+
+  void _handleDragCancel() {
+    _controller?.dragEnd(0);
+    _controller = null;
+  }
+
+  void _handlePointerDown(PointerDownEvent event) {
+    if (widget.enabledCallback()) _recognizer.addPointer(event);
+  }
+
+  double _logical(double value) {
+    return Directionality.of(context) == TextDirection.rtl ? -value : value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final padding = MediaQuery.paddingOf(context);
+    final dragAreaWidth = Directionality.of(context) == TextDirection.ltr
+        ? padding.left + 20
+        : padding.right + 20;
+    return Stack(
+      fit: StackFit.passthrough,
+      children: <Widget>[
+        widget.child,
+        PositionedDirectional(
+          start: 0,
+          top: 0,
+          bottom: 0,
+          width: dragAreaWidth,
+          child: Listener(
+            onPointerDown: _handlePointerDown,
+            behavior: HitTestBehavior.translucent,
+          ),
+        ),
+      ],
     );
   }
 }
