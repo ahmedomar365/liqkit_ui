@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -56,7 +57,7 @@ final class LiqDatePicker extends StatefulWidget {
   static const Color _bgDark = Color(0xFF1C1C1E);
   static const Color _rim = Color(0x140F141C);
   static const Color _rimDark = LiqSeparator.dark;
-  static const Color _shadow = Color(0x1F131925);
+  // Shadow now handled by LiqGlassSurface elevation.
   static const Color _title = Color(0xFF000000);
   static const Color _titleDark = Color(0xFFFFFFFF);
   static const Color _accent = Color(0xFF0088FF);
@@ -171,33 +172,23 @@ class _LiqDatePickerState extends State<LiqDatePicker> {
 
     return SizedBox(
       width: 370,
-      child: ClipRRect(
+      child: LiqGlassSurface(
+        // Opaque path — the calendar grid renders day numbers; shader
+        // would ghost the surrounding header and selected date through.
+        tint: LiqGlassTint.opaque,
+        baseFill: palette.background,
+        rimColor: palette.rim,
         borderRadius: const BorderRadius.all(Radius.circular(13)),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: palette.background,
-            borderRadius: const BorderRadius.all(Radius.circular(13)),
-            border: Border.fromBorderSide(BorderSide(color: palette.rim)),
-            boxShadow: const <BoxShadow>[
-              BoxShadow(
-                color: LiqDatePicker._shadow,
-                offset: Offset(0, 10),
-                blurRadius: 40,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 6, 0, 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                _buildHeader(palette),
-                _buildWeekdays(palette),
-                const SizedBox(height: 10),
-                _buildGrid(cells, palette),
-              ],
-            ),
-          ),
+        elevation: LiqGlassElevation.modal,
+        padding: const EdgeInsets.fromLTRB(0, 6, 0, 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _buildHeader(palette),
+            _buildWeekdays(palette),
+            const SizedBox(height: 10),
+            _buildGrid(cells, palette),
+          ],
         ),
       ),
     );
