@@ -97,7 +97,7 @@ void main() {
       final editable = tester.widget<EditableText>(find.byType(EditableText));
       expect(editable.rendererIgnoresPointer, isTrue);
       expect(editable.enableInteractiveSelection, isTrue);
-      expect(editable.selectionControls, isNotNull);
+      expect(editable.selectionControls, isNull);
     });
 
     testWidgets('double-click selects the word under the pointer', (

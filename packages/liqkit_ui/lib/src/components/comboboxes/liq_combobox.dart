@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_motion.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -335,12 +336,11 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                 children: <Widget>[
                   const SizedBox(width: LiqCombobox.horizontalPadding),
                   Expanded(
-                    child: CupertinoTextField.borderless(
+                    child: LiqEditableTextRun(
                       controller: _controller,
                       focusNode: _focusNode,
                       readOnly: disabled,
                       enabled: !disabled,
-                      padding: EdgeInsets.zero,
                       placeholder: widget.placeholder,
                       placeholderStyle: LiqCombobox.textStyle.copyWith(
                         color: palette.placeholder,
@@ -349,6 +349,7 @@ class _LiqComboboxState<T> extends State<LiqCombobox<T>> {
                         color: palette.text,
                       ),
                       cursorColor: palette.activeBorder,
+                      backgroundCursorColor: palette.placeholder,
                       cursorRadius: const Radius.circular(1),
                       onChanged: (_) {
                         if (_suppressEmit) return;

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
@@ -55,7 +55,7 @@ void main() {
       expect(controller.value.text, 'hello');
     });
 
-    testWidgets('editable area uses Cupertino text selection gestures', (
+    testWidgets('editable area has no Cupertino selection controls (iOS-26 native)', (
       tester,
     ) async {
       final controller = LiqRichEditorController(
@@ -70,12 +70,12 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
       expect(find.byType(EditableText), findsOneWidget);
       final editable = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editable.rendererIgnoresPointer, isTrue);
+      
       expect(editable.enableInteractiveSelection, isTrue);
-      expect(editable.selectionControls, isNotNull);
+      expect(editable.selectionControls, isNull);
     });
 
     testWidgets('placeholder is rendered by the platform text field', (
@@ -96,7 +96,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
       expect(find.text('Compose'), findsOneWidget);
     });
 

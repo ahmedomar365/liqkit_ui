@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/widgets.dart';
 
@@ -42,26 +41,120 @@ class LiqDismissible extends Dismissible {
   });
 }
 
-/// iOS-style page transition route — alias for [CupertinoPageRoute].
+/// iOS-26-style page transition route. Built directly on
+/// [PageRouteBuilder] so liqkit_ui doesn't pull in Cupertino for the
+/// page-push animation.
 ///
-/// Use as a drop-in replacement for Material's `MaterialPageRoute`:
+/// Pushes slide in from the right and pop animates back. The previous
+/// page parallaxes out to the left at half speed (the standard
+/// iOS-style slide).
 ///
 /// ```dart
 /// Navigator.of(context).push(
 ///   LiqPageRoute<void>(builder: (_) => const NextScreen()),
 /// );
 /// ```
-class LiqPageRoute<T> extends CupertinoPageRoute<T> {
+class LiqPageRoute<T> extends PageRoute<T> {
   /// Creates an iOS-style push route.
   LiqPageRoute({
-    required super.builder,
-    super.title,
+    required this.builder,
     super.settings,
-    super.maintainState,
-    super.fullscreenDialog,
-    super.allowSnapshotting,
-    super.barrierDismissible,
+    this.maintainState = true,
+    this.fullscreenDialog = false,
+    this.allowSnapshotting = true,
+    this.barrierDismissible = false,
   });
+
+  /// Builds the page contents.
+  final WidgetBuilder builder;
+
+  @override
+  final bool maintainState;
+
+  @override
+  final bool fullscreenDialog;
+
+  @override
+  final bool allowSnapshotting;
+
+  @override
+  final bool barrierDismissible;
+
+  @override
+  Color? get barrierColor => null;
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 320);
+
+  @override
+  Duration get reverseTransitionDuration =>
+      const Duration(milliseconds: 280);
+
+  @override
+  bool get opaque => true;
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return Builder(builder: builder);
+  }
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    if (fullscreenDialog) {
+      // Fullscreen dialogs slide up from the bottom.
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 1),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOutCubic,
+            reverseCurve: Curves.easeInCubic,
+          ),
+        ),
+        child: child,
+      );
+    }
+    final incoming = SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(1, 0),
+        end: Offset.zero,
+      ).animate(
+        CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        ),
+      ),
+      child: child,
+    );
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset.zero,
+        end: const Offset(-0.33, 0),
+      ).animate(
+        CurvedAnimation(
+          parent: secondaryAnimation,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        ),
+      ),
+      child: incoming,
+    );
+  }
 }
 
 /// Drag-to-reorder list — composition over [ReorderableList] (which is

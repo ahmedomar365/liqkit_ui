@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/foundation/liq_separator.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
@@ -596,16 +598,16 @@ class _LiqRichEditorState extends State<LiqRichEditor> {
     final baseStyle = LiqRichEditor.baseTextStyle.copyWith(color: palette.text);
     return Padding(
       padding: const EdgeInsets.all(LiqRichEditor.editorPadding),
-      child: CupertinoTextField.borderless(
+      child: LiqEditableTextRun(
         controller: _editingController,
         focusNode: _focusNode,
-        padding: EdgeInsets.zero,
         placeholder: widget.placeholder,
         placeholderStyle: LiqRichEditor.placeholderTextStyle.copyWith(
           color: palette.placeholder,
         ),
         style: baseStyle,
         cursorColor: LiqRichEditor.cursorColor,
+        backgroundCursorColor: palette.placeholder,
         cursorRadius: const Radius.circular(1),
         minLines: widget.minLines,
         maxLines: widget.maxLines,

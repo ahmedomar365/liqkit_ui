@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -359,16 +360,16 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: CupertinoTextField.borderless(
+              child: LiqEditableTextRun(
                 controller: _controller,
                 focusNode: _focusNode,
-                padding: EdgeInsets.zero,
                 placeholder: _placeholder,
                 placeholderStyle: LiqTimeField.textStyle.copyWith(
                   color: palette.placeholder,
                 ),
                 style: LiqTimeField.textStyle.copyWith(color: palette.text),
                 cursorColor: palette.activeBorder,
+                backgroundCursorColor: palette.placeholder,
                 cursorRadius: const Radius.circular(1),
                 keyboardType: TextInputType.datetime,
                 inputFormatters: inputFormatters,

@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
 /// iOS 26 multi-line text input.
@@ -238,17 +239,17 @@ class _LiqTextareaState extends State<LiqTextarea> {
 
     final text = _controller.text;
 
-    final editor = CupertinoTextField.borderless(
+    final editor = LiqEditableTextRun(
       controller: _controller,
       focusNode: _focusNode,
       autofocus: widget.autofocus,
-      padding: EdgeInsets.zero,
       placeholder: widget.placeholder,
       placeholderStyle: LiqTextarea.textStyle.copyWith(
         color: palette.placeholder,
       ),
       style: LiqTextarea.textStyle.copyWith(color: palette.text),
       cursorColor: palette.activeBorder,
+      backgroundCursorColor: palette.placeholder,
       cursorRadius: const Radius.circular(1),
       minLines: widget.minLines,
       maxLines: widget.maxLines,

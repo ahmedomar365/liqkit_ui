@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
@@ -479,10 +480,9 @@ class _SearchField extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: CupertinoTextField.borderless(
+            child: LiqEditableTextRun(
               controller: controller,
               focusNode: focusNode,
-              padding: EdgeInsets.zero,
               placeholder: placeholder,
               placeholderStyle: LiqCommandPalette.searchTextStyle.copyWith(
                 color: palette.tertiary,
@@ -491,6 +491,7 @@ class _SearchField extends StatelessWidget {
                 color: palette.label,
               ),
               cursorColor: palette.label,
+              backgroundCursorColor: palette.tertiary,
               cursorRadius: const Radius.circular(1),
               enableSuggestions: false,
               autocorrect: false,

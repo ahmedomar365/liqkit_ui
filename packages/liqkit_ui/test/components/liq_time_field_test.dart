@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -218,7 +218,7 @@ void main() {
       );
     });
 
-    testWidgets('uses Cupertino text selection gestures', (tester) async {
+    testWidgets('has no Cupertino selection controls (iOS-26 native)', (tester) async {
       await tester.pumpWidget(
         _wrap(
           LiqTimeField(
@@ -229,12 +229,12 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
       expect(find.byType(EditableText), findsOneWidget);
       final editable = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editable.rendererIgnoresPointer, isTrue);
+      
       expect(editable.enableInteractiveSelection, isTrue);
-      expect(editable.selectionControls, isNotNull);
+      expect(editable.selectionControls, isNull);
     });
 
     test('throws AssertionError when hour out of range', () {

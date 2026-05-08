@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
 
@@ -143,16 +143,16 @@ void main() {
       expect(glass.baseFill, const Color(0xFF000000));
     });
 
-    testWidgets('uses Cupertino text selection gestures', (tester) async {
+    testWidgets('has no Cupertino selection controls (iOS-26 native)', (tester) async {
       await tester.pumpWidget(_wrap(const LiqTextarea(value: 'hello world')));
       await tester.pumpAndSettle();
 
-      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
       expect(find.byType(EditableText), findsOneWidget);
       final editable = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editable.rendererIgnoresPointer, isTrue);
+      
       expect(editable.enableInteractiveSelection, isTrue);
-      expect(editable.selectionControls, isNotNull);
+      expect(editable.selectionControls, isNull);
     });
 
     testWidgets('placeholder is rendered by the platform text field', (
@@ -163,7 +163,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(CupertinoTextField), findsOneWidget);
+      expect(find.byType(EditableText), findsOneWidget);
       expect(find.text('Tell us what you think'), findsOneWidget);
     });
 

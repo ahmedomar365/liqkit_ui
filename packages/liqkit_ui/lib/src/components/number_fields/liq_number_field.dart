@@ -1,10 +1,11 @@
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
+import 'package:liqkit_ui/src/components/shared/liq_editable_text_run.dart';
 import 'package:liqkit_ui/src/components/shared/liq_pointer_cursor.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -243,16 +244,16 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: CupertinoTextField.borderless(
+              child: LiqEditableTextRun(
                 controller: _controller,
                 focusNode: _focusNode,
-                padding: EdgeInsets.zero,
                 placeholder: widget.placeholder,
                 placeholderStyle: LiqNumberField.textStyle.copyWith(
                   color: palette.placeholder,
                 ),
                 style: LiqNumberField.textStyle.copyWith(color: palette.text),
                 cursorColor: palette.activeBorder,
+                backgroundCursorColor: palette.placeholder,
                 cursorRadius: const Radius.circular(1),
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: true,

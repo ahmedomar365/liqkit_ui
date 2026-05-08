@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart' show cupertinoTextSelectionControls;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -371,7 +370,6 @@ class _LiqTextFieldState extends State<LiqTextField> {
                             cursorColor: accent,
                             backgroundCursorColor: placeholder,
                             selectionColor: accent.withValues(alpha: 0.25),
-                            selectionControls: cupertinoTextSelectionControls,
                             rendererIgnoresPointer: true,
                             inputFormatters: <TextInputFormatter>[
                               if (widget.maxLength != null)
