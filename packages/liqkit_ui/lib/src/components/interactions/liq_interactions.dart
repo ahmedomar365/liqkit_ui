@@ -1,6 +1,3 @@
-import 'dart:math' as math;
-import 'dart:ui' show lerpDouble;
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
@@ -44,13 +41,37 @@ class LiqDismissible extends Dismissible {
   });
 }
 
-/// iOS-26-style page transition route. Built directly on
-/// [PageRouteBuilder] so liqkit_ui doesn't pull in Cupertino for the
-/// page-push animation.
+/// Constants matching `CupertinoPageRoute`.
+const Duration _kLiqPushDuration = Duration(milliseconds: 500);
+const Duration _kLiqDroppedSwipeDuration = Duration(milliseconds: 350);
+const double _kLiqBackGestureWidth = 20;
+const double _kLiqMinFlingVelocity = 1; // screen-widths per second
+
+/// Tween used by every `LiqPageRoute` for the incoming page (slides
+/// in from the trailing edge to rest position). The actual leading
+/// vs. trailing direction is resolved by `SlideTransition.textDirection`.
+final Animatable<Offset> _kLiqRightMiddleTween = Tween<Offset>(
+  begin: const Offset(1, 0),
+  end: Offset.zero,
+);
+
+/// Tween used for the parallax of the page below — when something is
+/// pushed on top of it the page slides 1/3 of the way to the leading
+/// edge. Reversed during pop.
+final Animatable<Offset> _kLiqMiddleLeftTween = Tween<Offset>(
+  begin: Offset.zero,
+  end: const Offset(-1 / 3, 0),
+);
+
+/// iOS-26-style page transition route. Mirrors `CupertinoPageRoute`
+/// pixel-for-pixel — same constants, curves, gesture semantics — but
+/// rebuilt on `flutter/widgets` + `flutter/gestures` so liqkit_ui
+/// imports zero Cupertino.
 ///
-/// Pushes slide in from the right and pop animates back. The previous
-/// page parallaxes out to the left at half speed (the standard
-/// iOS-style slide).
+/// During an interactive back-swipe the position is mapped linearly so
+/// the page tracks the finger 1:1; the curve only applies to automatic
+/// push/pop and to the post-release animation (where the curve is
+/// passed at the controller level via `animateTo`).
 ///
 /// ```dart
 /// Navigator.of(context).push(
@@ -90,11 +111,7 @@ class LiqPageRoute<T> extends PageRoute<T> {
   String? get barrierLabel => null;
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 260);
-
-  @override
-  Duration get reverseTransitionDuration =>
-      const Duration(milliseconds: 200);
+  Duration get transitionDuration => _kLiqPushDuration;
 
   @override
   bool get opaque => true;
@@ -125,49 +142,28 @@ class LiqPageRoute<T> extends PageRoute<T> {
         ).animate(
           CurvedAnimation(
             parent: animation,
-            curve: Curves.easeOutQuart,
-            reverseCurve: Curves.easeInQuart,
+            curve: Curves.fastEaseInToSlowEaseOut,
+            reverseCurve: Curves.fastEaseInToSlowEaseOut.flipped,
           ),
         ),
         child: child,
       );
     }
-    // Direction-aware push: in LTR the incoming page slides from the
-    // right edge; in RTL it slides from the left. The outgoing page
-    // parallaxes to the opposite edge.
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
-    final incomingBeginX = isRtl ? -1.0 : 1.0;
-    final outgoingEndX = isRtl ? 0.33 : -0.33;
-    final incoming = SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset(incomingBeginX, 0),
-        end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutQuart,
-          reverseCurve: Curves.easeInQuart,
-        ),
-      ),
+    // While the user is dragging the page, position must map linearly
+    // to controller value — the page should track the finger 1:1.
+    // For automatic push/pop the curves kick in. The flag flips when
+    // `_LiqPageTransition`'s state sees `linearTransition` change in
+    // `didUpdateWidget`, mirroring `CupertinoPageTransition`.
+    final transition = _LiqPageTransition(
+      primaryRouteAnimation: animation,
+      secondaryRouteAnimation: secondaryAnimation,
+      linearTransition: navigator?.userGestureInProgress ?? false,
       child: child,
-    );
-    final parallax = SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset.zero,
-        end: Offset(outgoingEndX, 0),
-      ).animate(
-        CurvedAnimation(
-          parent: secondaryAnimation,
-          curve: Curves.easeOutQuart,
-          reverseCurve: Curves.easeInQuart,
-        ),
-      ),
-      child: incoming,
     );
     return _LiqBackGestureDetector<T>(
       enabledCallback: () => _isPopGestureEnabled,
       onStartPopGesture: () => _startPopGesture(),
-      child: parallax,
+      child: transition,
     );
   }
 
@@ -212,47 +208,44 @@ class _LiqBackGestureController<T> {
   }
 
   void dragEnd(double velocity) {
-    // Snappier than easeOutCubic; matches the feel of the iOS native
-    // pop animation where the page accelerates the rest of the way
-    // out instead of easing in.
-    const Curve animationCurve = Curves.easeOutQuart;
+    // Curve eyeballed against native iOS — same one Cupertino uses for
+    // its dropped-swipe completion.
+    const Curve animationCurve = Curves.fastEaseInToSlowEaseOut;
     final bool animateForward;
-    if (velocity.abs() >= 1) {
+    if (velocity.abs() >= _kLiqMinFlingVelocity) {
+      // Fling: dragging right (positive velocity in LTR after `_logical`
+      // normalization) means commit-pop; left flick means snap back.
       animateForward = velocity <= 0;
     } else {
+      // No fling — past the halfway point counts as commit-pop.
       animateForward = controller.value > 0.5;
     }
 
+    // Native iOS uses a single FIXED duration for the post-release
+    // animation regardless of how much is left. Scaling by remaining
+    // distance (which the previous version did) makes partial drags
+    // snap visibly fast and feels broken — the spec is 350ms flat.
     if (animateForward) {
-      // Snap-back when the user didn't drag far enough — short and
-      // immediate so the page returns to its rest position quickly.
-      final ms = math.min(
-        lerpDouble(180, 0, controller.value)!.floor(),
-        160,
-      );
       controller.animateTo(
         1,
-        duration: Duration(milliseconds: ms),
+        duration: _kLiqDroppedSwipeDuration,
         curve: animationCurve,
       );
     } else {
-      // Commit-pop — finish the slide-out promptly. Cap at 200ms so
-      // the navigation feels instant on release.
       navigator.pop();
       if (controller.isAnimating) {
-        final ms = math.min(
-          lerpDouble(0, 200, controller.value)!.floor(),
-          200,
-        );
         controller.animateBack(
           0,
-          duration: Duration(milliseconds: ms),
+          duration: _kLiqDroppedSwipeDuration,
           curve: animationCurve,
         );
       }
     }
 
     if (controller.isAnimating) {
+      // Keep userGestureInProgress true so `_LiqPageTransition` doesn't
+      // re-curve the position mid-flight — the controller's curve is
+      // already driving the easing.
       late AnimationStatusListener cb;
       cb = (status) {
         navigator.didStopUserGesture();
@@ -262,6 +255,111 @@ class _LiqBackGestureController<T> {
     } else {
       navigator.didStopUserGesture();
     }
+  }
+}
+
+/// Internal — paints the actual slide / parallax / shadow for a
+/// `LiqPageRoute`. Mirrors `CupertinoPageTransition`'s state lifecycle:
+/// holds `CurvedAnimation`s as state, recreates them when
+/// `linearTransition` or the parent animations change, and disposes
+/// them on widget unmount.
+class _LiqPageTransition extends StatefulWidget {
+  const _LiqPageTransition({
+    required this.primaryRouteAnimation,
+    required this.secondaryRouteAnimation,
+    required this.linearTransition,
+    required this.child,
+  });
+
+  final Animation<double> primaryRouteAnimation;
+  final Animation<double> secondaryRouteAnimation;
+  final bool linearTransition;
+  final Widget child;
+
+  @override
+  State<_LiqPageTransition> createState() => _LiqPageTransitionState();
+}
+
+class _LiqPageTransitionState extends State<_LiqPageTransition> {
+  // Slides the incoming page from the trailing edge to rest.
+  late Animation<Offset> _primaryPositionAnimation;
+  // Parallaxes the page below 1/3 of the way to the leading edge.
+  late Animation<Offset> _secondaryPositionAnimation;
+
+  CurvedAnimation? _primaryCurve;
+  CurvedAnimation? _secondaryCurve;
+
+  @override
+  void initState() {
+    super.initState();
+    _setupAnimations();
+  }
+
+  @override
+  void didUpdateWidget(covariant _LiqPageTransition oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.primaryRouteAnimation != widget.primaryRouteAnimation ||
+        oldWidget.secondaryRouteAnimation !=
+            widget.secondaryRouteAnimation ||
+        oldWidget.linearTransition != widget.linearTransition) {
+      _disposeCurves();
+      _setupAnimations();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposeCurves();
+    super.dispose();
+  }
+
+  void _disposeCurves() {
+    _primaryCurve?.dispose();
+    _secondaryCurve?.dispose();
+    _primaryCurve = null;
+    _secondaryCurve = null;
+  }
+
+  void _setupAnimations() {
+    if (!widget.linearTransition) {
+      // Same curves Cupertino uses — chosen to match the native iOS
+      // push feel (snappy start, smooth end on the incoming page;
+      // gentle parallax on the outgoing page).
+      _primaryCurve = CurvedAnimation(
+        parent: widget.primaryRouteAnimation,
+        curve: Curves.fastEaseInToSlowEaseOut,
+        reverseCurve: Curves.fastEaseInToSlowEaseOut.flipped,
+      );
+      _secondaryCurve = CurvedAnimation(
+        parent: widget.secondaryRouteAnimation,
+        curve: Curves.linearToEaseOut,
+        reverseCurve: Curves.easeInToLinear,
+      );
+    }
+    _primaryPositionAnimation = (_primaryCurve ?? widget.primaryRouteAnimation)
+        .drive(_kLiqRightMiddleTween);
+    _secondaryPositionAnimation =
+        (_secondaryCurve ?? widget.secondaryRouteAnimation)
+            .drive(_kLiqMiddleLeftTween);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final textDirection = Directionality.of(context);
+    return SlideTransition(
+      // The outermost slide is the parallax of THIS page when something
+      // is pushed on top of us. `textDirection` flips the offset for
+      // RTL automatically — left becomes right.
+      position: _secondaryPositionAnimation,
+      textDirection: textDirection,
+      transformHitTests: false,
+      child: SlideTransition(
+        // The inner slide is the page's own incoming/outgoing motion.
+        position: _primaryPositionAnimation,
+        textDirection: textDirection,
+        child: widget.child,
+      ),
+    );
   }
 }
 
@@ -338,8 +436,8 @@ class _LiqBackGestureDetectorState<T>
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
     final dragAreaWidth = Directionality.of(context) == TextDirection.ltr
-        ? padding.left + 20
-        : padding.right + 20;
+        ? padding.left + _kLiqBackGestureWidth
+        : padding.right + _kLiqBackGestureWidth;
     return Stack(
       fit: StackFit.passthrough,
       children: <Widget>[
