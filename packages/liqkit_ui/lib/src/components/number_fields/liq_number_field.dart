@@ -228,6 +228,8 @@ class _LiqNumberFieldState extends State<LiqNumberField> {
     final field = SizedBox(
       height: LiqNumberField.fieldHeight,
       child: LiqGlassSurface(
+        // Opaque path — see LiqTextField rationale.
+        tint: LiqGlassTint.opaque,
         baseFill: palette.background,
         rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqNumberField.fieldRadius),

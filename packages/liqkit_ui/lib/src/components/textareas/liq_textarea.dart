@@ -277,6 +277,9 @@ class _LiqTextareaState extends State<LiqTextarea> {
     }
 
     final field = LiqGlassSurface(
+      // Opaque path — see LiqTextField rationale (BackdropFilter would
+      // sample surrounding labels and ghost them into the field).
+      tint: LiqGlassTint.opaque,
       baseFill: palette.background,
       rimColor: borderColor,
       borderRadius: BorderRadius.circular(LiqTextarea.fieldRadius),

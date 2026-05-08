@@ -343,6 +343,8 @@ class _LiqTimeFieldState extends State<LiqTimeField> {
     final field = SizedBox(
       height: LiqTimeField.fieldHeight,
       child: LiqGlassSurface(
+        // Opaque path — see LiqTextField rationale.
+        tint: LiqGlassTint.opaque,
         baseFill: palette.background,
         rimColor: borderColor,
         borderRadius: BorderRadius.circular(LiqTimeField.fieldRadius),
