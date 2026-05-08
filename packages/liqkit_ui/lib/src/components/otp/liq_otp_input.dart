@@ -258,10 +258,6 @@ class _OtpBox extends StatelessWidget {
     final palette = _OtpPalette.resolve(context);
     final hasDigit = digit.isNotEmpty;
     final borderColor = isActive ? palette.activeBorder : palette.border;
-    final borderWidth =
-        isActive
-            ? LiqOtpInput.activeBorderWidth
-            : LiqOtpInput.inactiveBorderWidth;
 
     Widget? child;
     if (hasDigit) {
