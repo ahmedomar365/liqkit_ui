@@ -9,10 +9,22 @@ import 'package:docs_snippets/snippets/accordion/multiple.dart'
     show accordionMultipleBuilder;
 import 'package:docs_snippets/snippets/accordion/single.dart'
     show accordionSingleBuilder;
+import 'package:docs_snippets/snippets/action-sheet/compact.dart'
+    show actionSheetCompactBuilder;
 import 'package:docs_snippets/snippets/action-sheet/default.dart'
     show actionSheetDefaultBuilder;
+import 'package:docs_snippets/snippets/action-sheet/destructive.dart'
+    show actionSheetDestructiveBuilder;
+import 'package:docs_snippets/snippets/action-sheet/scrollable.dart'
+    show actionSheetScrollableBuilder;
+import 'package:docs_snippets/snippets/action-sheet/standard.dart'
+    show actionSheetStandardBuilder;
 import 'package:docs_snippets/snippets/action-sheet/with-cancel.dart'
     show actionSheetWithCancelBuilder;
+import 'package:docs_snippets/snippets/action-sheet/with-icons.dart'
+    show actionSheetWithIconsBuilder;
+import 'package:docs_snippets/snippets/action-sheet/with-title.dart'
+    show actionSheetWithTitleBuilder;
 import 'package:docs_snippets/snippets/activity-view/default.dart'
     show activityViewDefaultBuilder;
 import 'package:docs_snippets/snippets/alert/destructive.dart'
@@ -147,12 +159,20 @@ import 'package:docs_snippets/snippets/examples/panel.dart'
     show examplesPanelBuilder;
 import 'package:docs_snippets/snippets/examples/section.dart'
     show examplesSectionBuilder;
+import 'package:docs_snippets/snippets/face-id/bezel-states.dart'
+    show faceIdBezelStatesBuilder;
 import 'package:docs_snippets/snippets/face-id/fail.dart'
     show faceIdFailBuilder;
+import 'package:docs_snippets/snippets/face-id/inline.dart'
+    show faceIdInlineBuilder;
 import 'package:docs_snippets/snippets/face-id/scanning.dart'
     show faceIdScanningBuilder;
 import 'package:docs_snippets/snippets/face-id/success.dart'
     show faceIdSuccessBuilder;
+import 'package:docs_snippets/snippets/face-id/theme-colors.dart'
+    show faceIdThemeColorsBuilder;
+import 'package:docs_snippets/snippets/face-id/touch-id.dart'
+    show faceIdTouchIdBuilder;
 import 'package:docs_snippets/snippets/glass-surface/dark.dart'
     show glassSurfaceDarkBuilder;
 import 'package:docs_snippets/snippets/glass-surface/flat.dart'
@@ -190,12 +210,25 @@ import 'package:docs_snippets/snippets/line-chart/sparkline.dart'
 import 'package:docs_snippets/snippets/list/dark.dart' show listDarkBuilder;
 import 'package:docs_snippets/snippets/list/grouped.dart'
     show listGroupedBuilder;
+import 'package:docs_snippets/snippets/materials/all-styles.dart'
+    show materialsAllStylesBuilder;
+import 'package:docs_snippets/snippets/materials/custom-config.dart'
+    show materialsCustomConfigBuilder;
 import 'package:docs_snippets/snippets/materials/dark.dart'
     show materialsDarkBuilder;
 import 'package:docs_snippets/snippets/materials/light.dart'
     show materialsLightBuilder;
+import 'package:docs_snippets/snippets/materials/vibrancy-off.dart'
+    show materialsVibrancyOffBuilder;
+import 'package:docs_snippets/snippets/menu/context.dart'
+    show menuContextBuilder;
 import 'package:docs_snippets/snippets/menu/default.dart'
     show menuDefaultBuilder;
+import 'package:docs_snippets/snippets/menu/dropdown.dart'
+    show menuDropdownBuilder;
+import 'package:docs_snippets/snippets/menu/inline.dart' show menuInlineBuilder;
+import 'package:docs_snippets/snippets/menu/menu-bar.dart'
+    show menuMenuBarBuilder;
 import 'package:docs_snippets/snippets/menu/with-section.dart'
     show menuWithSectionBuilder;
 import 'package:docs_snippets/snippets/motion/default.dart'
@@ -437,8 +470,14 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/accordion/default': accordionDefaultBuilder,
   '/accordion/multiple': accordionMultipleBuilder,
   '/accordion/single': accordionSingleBuilder,
+  '/action-sheet/compact': actionSheetCompactBuilder,
   '/action-sheet/default': actionSheetDefaultBuilder,
+  '/action-sheet/destructive': actionSheetDestructiveBuilder,
+  '/action-sheet/scrollable': actionSheetScrollableBuilder,
+  '/action-sheet/standard': actionSheetStandardBuilder,
   '/action-sheet/with-cancel': actionSheetWithCancelBuilder,
+  '/action-sheet/with-icons': actionSheetWithIconsBuilder,
+  '/action-sheet/with-title': actionSheetWithTitleBuilder,
   '/activity-view/default': activityViewDefaultBuilder,
   '/alert/destructive': alertDestructiveBuilder,
   '/alert/side-by-side': alertSideBySideBuilder,
@@ -508,9 +547,13 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/examples/item': examplesItemBuilder,
   '/examples/panel': examplesPanelBuilder,
   '/examples/section': examplesSectionBuilder,
+  '/face-id/bezel-states': faceIdBezelStatesBuilder,
   '/face-id/fail': faceIdFailBuilder,
+  '/face-id/inline': faceIdInlineBuilder,
   '/face-id/scanning': faceIdScanningBuilder,
   '/face-id/success': faceIdSuccessBuilder,
+  '/face-id/theme-colors': faceIdThemeColorsBuilder,
+  '/face-id/touch-id': faceIdTouchIdBuilder,
   '/glass-surface/dark': glassSurfaceDarkBuilder,
   '/glass-surface/flat': glassSurfaceFlatBuilder,
   '/glass-surface/floating': glassSurfaceFloatingBuilder,
@@ -530,9 +573,16 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/line-chart/sparkline': lineChartSparklineBuilder,
   '/list/dark': listDarkBuilder,
   '/list/grouped': listGroupedBuilder,
+  '/materials/all-styles': materialsAllStylesBuilder,
+  '/materials/custom-config': materialsCustomConfigBuilder,
   '/materials/dark': materialsDarkBuilder,
   '/materials/light': materialsLightBuilder,
+  '/materials/vibrancy-off': materialsVibrancyOffBuilder,
+  '/menu/context': menuContextBuilder,
   '/menu/default': menuDefaultBuilder,
+  '/menu/dropdown': menuDropdownBuilder,
+  '/menu/inline': menuInlineBuilder,
+  '/menu/menu-bar': menuMenuBarBuilder,
   '/menu/with-section': menuWithSectionBuilder,
   '/motion/default': motionDefaultBuilder,
   '/notification/mail': notificationMailBuilder,
