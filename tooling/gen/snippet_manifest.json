@@ -488,6 +488,41 @@
           "variant": "dark",
           "displayName": "Dark",
           "dartFile": "apps/docs_snippets/lib/snippets/slider/dark.dart"
+        },
+        {
+          "variant": "basic",
+          "displayName": "Basic",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/basic.dart"
+        },
+        {
+          "variant": "range",
+          "displayName": "Range",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/range.dart"
+        },
+        {
+          "variant": "discrete",
+          "displayName": "Discrete",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/discrete.dart"
+        },
+        {
+          "variant": "labeled",
+          "displayName": "Labeled",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/labeled.dart"
+        },
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/vertical.dart"
+        },
+        {
+          "variant": "custom-colors",
+          "displayName": "Custom Colors",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/custom-colors.dart"
+        },
+        {
+          "variant": "size-variations",
+          "displayName": "Size Variations",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/size-variations.dart"
         }
       ]
     },
@@ -1904,6 +1939,48 @@
           "variant": "optional",
           "displayName": "Optional",
           "dartFile": "apps/docs_snippets/lib/snippets/label/optional.dart"
+        }
+      ]
+    },
+    {
+      "component": "segmented-control",
+      "displayName": "Segmented Controls",
+      "group": "inputs",
+      "variants": [
+        {
+          "variant": "standard",
+          "displayName": "Standard",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/standard.dart"
+        },
+        {
+          "variant": "with-icons",
+          "displayName": "With Icons",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/with-icons.dart"
+        },
+        {
+          "variant": "tab-style",
+          "displayName": "Tab Style",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/tab-style.dart"
+        },
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/vertical.dart"
+        },
+        {
+          "variant": "custom-indicator-color",
+          "displayName": "Custom Indicator Color",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/custom-indicator-color.dart"
+        },
+        {
+          "variant": "custom-vertical-color",
+          "displayName": "Custom Vertical Color",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/custom-vertical-color.dart"
+        },
+        {
+          "variant": "disabled",
+          "displayName": "Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented-control/disabled.dart"
         }
       ]
     }
