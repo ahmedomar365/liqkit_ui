@@ -405,6 +405,21 @@
           "variant": "dark",
           "displayName": "Dark",
           "dartFile": "apps/docs_snippets/lib/snippets/materials/dark.dart"
+        },
+        {
+          "variant": "all-styles",
+          "displayName": "All Material Styles",
+          "dartFile": "apps/docs_snippets/lib/snippets/materials/all-styles.dart"
+        },
+        {
+          "variant": "custom-config",
+          "displayName": "Custom Configuration",
+          "dartFile": "apps/docs_snippets/lib/snippets/materials/custom-config.dart"
+        },
+        {
+          "variant": "vibrancy-off",
+          "displayName": "Vibrancy Off",
+          "dartFile": "apps/docs_snippets/lib/snippets/materials/vibrancy-off.dart"
         }
       ]
     },
@@ -760,6 +775,36 @@
           "variant": "with-cancel",
           "displayName": "With Cancel",
           "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-cancel.dart"
+        },
+        {
+          "variant": "standard",
+          "displayName": "Standard",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/standard.dart"
+        },
+        {
+          "variant": "with-title",
+          "displayName": "With Title",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-title.dart"
+        },
+        {
+          "variant": "destructive",
+          "displayName": "Destructive",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/destructive.dart"
+        },
+        {
+          "variant": "with-icons",
+          "displayName": "With Icons",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-icons.dart"
+        },
+        {
+          "variant": "scrollable",
+          "displayName": "Scrollable",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/scrollable.dart"
+        },
+        {
+          "variant": "compact",
+          "displayName": "Compact",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/compact.dart"
         }
       ]
     },
@@ -1410,6 +1455,26 @@
           "variant": "fail",
           "displayName": "Fail",
           "dartFile": "apps/docs_snippets/lib/snippets/face-id/fail.dart"
+        },
+        {
+          "variant": "inline",
+          "displayName": "Inline",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/inline.dart"
+        },
+        {
+          "variant": "touch-id",
+          "displayName": "Touch ID",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/touch-id.dart"
+        },
+        {
+          "variant": "bezel-states",
+          "displayName": "Bezel States",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/bezel-states.dart"
+        },
+        {
+          "variant": "theme-colors",
+          "displayName": "Theme Colors",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/theme-colors.dart"
         }
       ]
     },

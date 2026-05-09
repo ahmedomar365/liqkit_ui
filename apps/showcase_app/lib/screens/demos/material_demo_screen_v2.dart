@@ -1,8 +1,7 @@
-import 'package:liqkit_ui_icons/liqkit_ui_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:liqkit_ui/examples.dart';
 import 'package:liqkit_ui/liqkit_ui.dart';
-
 
 class MaterialDemoScreenV2 extends ConsumerStatefulWidget {
   const MaterialDemoScreenV2({super.key});
@@ -13,61 +12,6 @@ class MaterialDemoScreenV2 extends ConsumerStatefulWidget {
 }
 
 class _MaterialDemoScreenV2State extends ConsumerState<MaterialDemoScreenV2> {
-  static const List<({LiqMaterialStyle value, String label, String desc})>
-      _materialOptions = <({
-    LiqMaterialStyle value,
-    String label,
-    String desc,
-  })>[
-    (
-      value: LiqMaterialStyle.ultraThin,
-      label: 'Ultra Thin',
-      desc: 'Minimal blur'
-    ),
-    (value: LiqMaterialStyle.thin, label: 'Thin', desc: 'Light blur'),
-    (
-      value: LiqMaterialStyle.regular,
-      label: 'Regular',
-      desc: 'Standard blur'
-    ),
-    (value: LiqMaterialStyle.thick, label: 'Thick', desc: 'Heavy blur'),
-    (value: LiqMaterialStyle.chrome, label: 'Chrome', desc: 'Heaviest blur'),
-    (
-      value: LiqMaterialStyle.sidebar,
-      label: 'Sidebar',
-      desc: 'Sidebar surface'
-    ),
-    (
-      value: LiqMaterialStyle.headerBlur,
-      label: 'Header Blur',
-      desc: 'Header / toolbar'
-    ),
-    (
-      value: LiqMaterialStyle.fullScreenUI,
-      label: 'Full Screen UI',
-      desc: 'Full overlay'
-    ),
-    (
-      value: LiqMaterialStyle.hudWindow,
-      label: 'HUD Window',
-      desc: 'High contrast'
-    ),
-    (value: LiqMaterialStyle.tooltip, label: 'Tooltip', desc: 'Tooltips'),
-    (value: LiqMaterialStyle.menu, label: 'Menu', desc: 'Dropdown menus'),
-    (value: LiqMaterialStyle.popover, label: 'Popover', desc: 'Popovers'),
-    (value: LiqMaterialStyle.sheet, label: 'Sheet', desc: 'Modal sheets'),
-    (
-      value: LiqMaterialStyle.windowBackground,
-      label: 'Window Background',
-      desc: 'Window backgrounds'
-    ),
-    (
-      value: LiqMaterialStyle.contentBackground,
-      label: 'Content Background',
-      desc: 'Content areas'
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return LiqScaffold(
@@ -76,128 +20,23 @@ class _MaterialDemoScreenV2State extends ConsumerState<MaterialDemoScreenV2> {
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: const <Widget>[
             _Section(
               title: 'All Material Styles',
               description:
                   'Each preset rendered over a colorful gradient background to show its translucency.',
-              child: Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                alignment: WrapAlignment.center,
-                children: <Widget>[
-                  for (final opt in _materialOptions)
-                    _MaterialPreview(
-                      style: opt.value,
-                      label: opt.label,
-                      description: opt.desc,
-                    ),
-                ],
-              ),
+              child: MaterialsAllStylesExample(),
             ),
             _Section(
               title: 'Custom Configuration',
               description:
                   'A regular material with explicit blur, opacity, and tint overrides.',
-              child: _MaterialPreview(
-                style: LiqMaterialStyle.regular,
-                label: 'Custom',
-                description: 'blur: 30 · tint: 0.4 · saturation: 1.5',
-                config: const LiqMaterialConfig(
-                  blurRadius: 30,
-                  tintOpacity: 0.4,
-                  saturation: 1.5,
-                ),
-              ),
+              child: MaterialsCustomConfigurationExample(),
             ),
             _Section(
               title: 'Vibrancy Off',
               description: 'Same regular material with vibrancy disabled.',
-              child: _MaterialPreview(
-                style: LiqMaterialStyle.regular,
-                label: 'No Vibrancy',
-                description: 'vibrancy: false',
-                config: const LiqMaterialConfig(vibrancy: false),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _MaterialPreview extends StatelessWidget {
-  const _MaterialPreview({
-    required this.style,
-    required this.label,
-    required this.description,
-    this.config,
-  });
-
-  final LiqMaterialStyle style;
-  final String label;
-  final String description;
-  final LiqMaterialConfig? config;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 240,
-      height: 220,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                      context.appleColors.blue.withValues(alpha: 0.5),
-                      context.appleColors.purple.withValues(alpha: 0.5),
-                      context.appleColors.pink.withValues(alpha: 0.5),
-                      context.appleColors.orange.withValues(alpha: 0.5),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: LiqMaterialChip(
-                  style: style,
-                  config: config,
-                  borderRadius:
-                      const BorderRadius.all(Radius.circular(16)),
-                  size: const Size(200, 180),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(LiqIcons.layers,
-                          size: 32, color: context.appleColors.label),
-                      const SizedBox(height: 12),
-                      Text(
-                        label,
-                        style: context.textStyles.headline.copyWith(
-                          fontWeight: LiqAppleTypography.semibold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        description,
-                        style: context.textStyles.caption1.secondary,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              child: MaterialsVibrancyOffExample(),
             ),
           ],
         ),

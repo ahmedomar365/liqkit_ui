@@ -22,7 +22,7 @@ library liqkit_ui_examples;
 // Component examples — alphabetical.
 // (Each export gets uncommented as the corresponding file lands.)
 
-// export 'src/examples/action_sheet.dart';
+export 'src/examples/action_sheet.dart';
 // export 'src/examples/activity_view.dart';
 // export 'src/examples/alert.dart';
 // export 'src/examples/animations.dart';
@@ -33,10 +33,10 @@ library liqkit_ui_examples;
 // export 'src/examples/context_menu.dart';
 // export 'src/examples/device_bezel.dart';
 // export 'src/examples/empty_state.dart';
-// export 'src/examples/face_id.dart';
+export 'src/examples/face_id.dart';
 // export 'src/examples/keyboard.dart';
 // export 'src/examples/list.dart';
-// export 'src/examples/materials.dart';
+export 'src/examples/materials.dart';
 // export 'src/examples/menu.dart';
 // export 'src/examples/notification.dart';
 // export 'src/examples/page_control.dart';
