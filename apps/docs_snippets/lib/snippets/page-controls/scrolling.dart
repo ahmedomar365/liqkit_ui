@@ -3,6 +3,6 @@ import 'package:docs_snippets/src/snippet_frame.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liqkit_ui/examples.dart';
 
-Widget progressLinearBuilder(BuildContext context) {
-  return const SnippetFrame(child: ProgressLinearExample());
+Widget pageControlsScrollingBuilder(BuildContext context) {
+  return const SnippetFrame(child: PageControlScrollingExample());
 }

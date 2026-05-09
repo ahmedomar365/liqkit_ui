@@ -544,6 +544,36 @@
           "variant": "dark",
           "displayName": "Dark",
           "dartFile": "apps/docs_snippets/lib/snippets/page-controls/dark.dart"
+        },
+        {
+          "variant": "dots",
+          "displayName": "Dots",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/dots.dart"
+        },
+        {
+          "variant": "progress",
+          "displayName": "Progress",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/progress.dart"
+        },
+        {
+          "variant": "numbered",
+          "displayName": "Numbered",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/numbered.dart"
+        },
+        {
+          "variant": "sized-outlined",
+          "displayName": "Sized Outlined",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/sized-outlined.dart"
+        },
+        {
+          "variant": "scrolling",
+          "displayName": "Scrolling",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/scrolling.dart"
+        },
+        {
+          "variant": "custom-colors",
+          "displayName": "Custom Colors",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/custom-colors.dart"
         }
       ]
     },
@@ -1448,6 +1478,36 @@
           "variant": "spinner",
           "displayName": "Spinner",
           "dartFile": "apps/docs_snippets/lib/snippets/progress/spinner.dart"
+        },
+        {
+          "variant": "circular",
+          "displayName": "Circular",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/circular.dart"
+        },
+        {
+          "variant": "activity-indicators",
+          "displayName": "Activity Indicators",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/activity-indicators.dart"
+        },
+        {
+          "variant": "custom-colored-circular",
+          "displayName": "Custom-Colored Circular",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/custom-colored-circular.dart"
+        },
+        {
+          "variant": "loading-overlay",
+          "displayName": "Loading Overlay",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/loading-overlay.dart"
+        },
+        {
+          "variant": "cards",
+          "displayName": "Progress Cards",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/cards.dart"
+        },
+        {
+          "variant": "skeleton-loaders",
+          "displayName": "Skeleton Loaders",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/skeleton-loaders.dart"
         }
       ]
     },
