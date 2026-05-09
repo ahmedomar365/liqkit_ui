@@ -1,5 +1,55 @@
 # Changelog
 
+## 0.4.0
+
+Cupertino-free, native-feeling iOS 26 — the visible chrome of every
+component is now driven by liqkit_ui primitives only, with no
+`package:flutter/cupertino.dart` imports anywhere in `lib/` or `test/`.
+
+### Highlights
+
+- **No more Cupertino visible widgets.** Pickers, wheels, text fields,
+  pull-down menus, and route transitions are all reimplemented on
+  `flutter/widgets` + liqkit_ui glass — none of the iOS-13-era
+  Cupertino chrome remains.
+- **Native iOS edge-swipe-to-pop on `LiqPageRoute`.** Constants and
+  curves match `_CupertinoPageTransitionState` exactly
+  (`_kLiqPushDuration=500ms`, `_kLiqDroppedSwipeDuration=350ms`,
+  `fastEaseInToSlowEaseOut`/`linearToEaseOut`/`easeInToLinear`), with
+  RTL-aware push direction and gesture-driven `linearTransition` flag.
+- **Glass surfaces paint glass on frame one.** Added
+  `LiqGlassSurface.precacheShader()` to warm the static fragment-program
+  cache at app startup; when warm, new mounts bind the shader
+  synchronously in `initState` instead of `setState`-ing into it after
+  an async load. Eliminates the "flat then glass" pop on first paint.
+- **`LiqMenu` route no longer fades.** `BackdropFilter` cannot sample
+  the real backdrop through an opacity layer (the parent's `saveLayer`
+  hides it), so the popup menu used to render flat for the entire
+  fade-in. Dropped `FadeTransition` and rely on `ScaleTransition` only
+  (0.92 → 1.0, easeOutCubic open / easeInCubic close), matching native
+  iOS `UIMenu` behaviour. Push 220ms / pop 150ms; alignment flips to
+  `bottomCenter` when the menu opens upward.
+- **`LiqBottomNavBar` no longer double-counts safe area.** Removed the
+  manual `MediaQuery.padding.bottom` add that stacked on top of the
+  outer `SafeArea`, which had been leaving ~93pt of empty space below
+  the floating pill on notched devices. Tightened `_outerPadding` to
+  `(16, 8, 16, 8)` to match the native iOS 26 floating tab-bar gap.
+- **`LiqFloatingActionButton` icon centering fix.** Wrapped the inner
+  glyph in `Center(...)`; previously it inherited
+  `EdgeInsets.zero` from `LiqGlassSurface` and rendered top-left.
+- **Readability tune-up.** Bumped secondary / tertiary / quaternary
+  label opacities by ~10pp so neutral-on-glass text holds contrast at
+  every elevation. Three raw `const TextStyle(...)` spots in
+  `liq_picker_extras.dart` (`LiqListRow.trailing`) gained explicit
+  `secondaryLabel` colors so wrapping `LiqListRow.trailing` doesn't
+  inherit white-on-white.
+
+### Drops
+
+- All Cupertino-era widget references retired from internal code paths.
+- `cupertino_icons` font: zero remaining references; bundle no longer
+  pulls in the `CupertinoIcons` font even for fallback glyphs.
+
 ## 0.3.0
 
 Final batch of primitives so consumers can build a full iOS 26 app

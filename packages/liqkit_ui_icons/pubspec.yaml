@@ -1,6 +1,6 @@
 name: liqkit_ui_icons
 description: Optional Lucide-backed icon set for liqkit_ui (the iOS 26 Liquid Glass design system for Flutter). Exposes a curated `LiqIcons` namespace for use in liqkit_ui components.
-version: 0.3.0
+version: 0.4.0
 homepage: https://github.com/ahmedomar365/liqkit_ui
 repository: https://github.com/ahmedomar365/liqkit_ui
 issue_tracker: https://github.com/ahmedomar365/liqkit_ui/issues
@@ -20,7 +20,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  liqkit_ui: ^0.3.0
+  liqkit_ui: ^0.4.0
   lucide_icons_flutter: ^3.1.13
 
 dev_dependencies:
