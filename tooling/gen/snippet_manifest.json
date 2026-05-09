@@ -910,6 +910,26 @@
           "variant": "with-section",
           "displayName": "With Section",
           "dartFile": "apps/docs_snippets/lib/snippets/menu/with-section.dart"
+        },
+        {
+          "variant": "dropdown",
+          "displayName": "Dropdown",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/dropdown.dart"
+        },
+        {
+          "variant": "context",
+          "displayName": "Context",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/context.dart"
+        },
+        {
+          "variant": "menu-bar",
+          "displayName": "Menu Bar",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/menu-bar.dart"
+        },
+        {
+          "variant": "inline",
+          "displayName": "Inline",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/inline.dart"
         }
       ]
     },

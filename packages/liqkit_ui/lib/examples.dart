@@ -37,7 +37,7 @@ export 'src/examples/face_id.dart';
 // export 'src/examples/keyboard.dart';
 // export 'src/examples/list.dart';
 export 'src/examples/materials.dart';
-// export 'src/examples/menu.dart';
+export 'src/examples/menu.dart';
 // export 'src/examples/notification.dart';
 // export 'src/examples/page_control.dart';
 export 'src/examples/picker.dart';
