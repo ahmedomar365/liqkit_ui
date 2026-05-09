@@ -144,6 +144,29 @@ final class LiqGlassSurface extends StatelessWidget with Diagnosticable {
   /// Backdrop blur sigma. Matches `UIBlurEffect.systemMaterial`.
   static const double defaultBlurSigma = 30;
 
+  /// Eagerly loads the liquid-glass fragment program once, so the very
+  /// first [LiqGlassSurface] mounted in the app session can render the
+  /// real shader on its first frame instead of briefly flashing the
+  /// blur+tint fallback. Safe to call multiple times — after the first
+  /// success it's a no-op.
+  ///
+  /// Call once at app startup, after `WidgetsFlutterBinding
+  /// .ensureInitialized()` and before `runApp`.
+  static Future<void> precacheShader() async {
+    if (kIsWeb) return;
+    if (_LiquidGlassMaterialState._program != null) return;
+    try {
+      _LiquidGlassMaterialState._program ??=
+          await (_LiquidGlassMaterialState._programLoading ??=
+              ui.FragmentProgram.fromAsset(
+                'packages/liqkit_ui/shaders/liq_liquid_glass.frag',
+              ));
+      _LiquidGlassMaterialState._programLoading = null;
+    } catch (_) {
+      // Swallow — fallback path will kick in.
+    }
+  }
+
   /// Floating drop shadow.
   static const BoxShadow floatingShadow = BoxShadow(
     color: Color(0x33000000),
@@ -352,9 +375,17 @@ class _LiquidGlassMaterialState extends State<_LiquidGlassMaterial> {
     super.initState();
     if (kIsWeb) {
       _shaderUnavailable = true;
-    } else {
-      unawaited(_loadShader());
+      return;
     }
+    final cached = _program;
+    if (cached != null) {
+      // Program already loaded — bind the shader synchronously so the
+      // FIRST frame paints real glass. No setState, no fallback flash,
+      // no two-stage "blur then shader" pop.
+      _shader = cached.fragmentShader();
+      return;
+    }
+    unawaited(_loadShader());
   }
 
   Future<void> _loadShader() async {

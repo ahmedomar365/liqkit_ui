@@ -534,7 +534,10 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
   final bool _barrierDismissible;
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 180);
+  Duration get transitionDuration => const Duration(milliseconds: 220);
+
+  @override
+  Duration get reverseTransitionDuration => const Duration(milliseconds: 150);
 
   @override
   bool get barrierDismissible => _barrierDismissible;
@@ -554,31 +557,35 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
     return LayoutBuilder(
       builder: (context, constraints) {
         const margin = 16.0;
-        // Estimate the real menu height from item count (~44pt per
-        // LiqMenuItem, plus the optional quick-actions row at ~56pt).
-        // Hardcoding 480 caused buttons low on the screen to flip
-        // above and land at the top edge — the menu thought it
-        // wouldn't fit even when it would.
         final estimatedMaxHeight = (children.length * 44.0 +
                 (quickActions.isEmpty ? 0.0 : 56.0) +
                 16.0)
             .clamp(60.0, 480.0);
         var left = position.dx;
         var top = position.dy;
+        var openFromBottom = false;
         if (left + width > constraints.maxWidth - margin) {
           left = constraints.maxWidth - width - margin;
         }
         if (left < margin) left = margin;
         if (top + estimatedMaxHeight > constraints.maxHeight - margin) {
-          // Not enough room below the trigger — flip so the menu's
-          // bottom edge sits just above `position.dy` (which the caller
-          // set to the bottom of the trigger button + a small gap).
           final flipped = position.dy - estimatedMaxHeight - 8;
-          top = flipped > margin
-              ? flipped
-              : constraints.maxHeight - estimatedMaxHeight - margin;
+          if (flipped > margin) {
+            top = flipped;
+            openFromBottom = true;
+          } else {
+            top = constraints.maxHeight - estimatedMaxHeight - margin;
+          }
         }
         if (top < margin) top = margin;
+
+        // Single curved animation drives both fade and scale so they
+        // stay in lock-step, no off-by-a-frame "two-stage" feel.
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        );
 
         return Stack(
           children: <Widget>[
@@ -594,12 +601,12 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
               left: left,
               top: top,
               child: FadeTransition(
-                opacity: animation,
+                opacity: curved,
                 child: ScaleTransition(
-                  scale: Tween<double>(begin: 0.96, end: 1).animate(
-                    CurvedAnimation(parent: animation, curve: Curves.easeOut),
-                  ),
-                  alignment: Alignment.topCenter,
+                  scale: Tween<double>(begin: 0.92, end: 1).animate(curved),
+                  alignment: openFromBottom
+                      ? Alignment.bottomCenter
+                      : Alignment.topCenter,
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       maxHeight: constraints.maxHeight - top - margin,

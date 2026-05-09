@@ -5,6 +5,7 @@ import 'package:liqkit_ui/src/components/buttons/liq_button.dart';
 import 'package:liqkit_ui/src/components/glass/liq_glass_surface.dart';
 import 'package:liqkit_ui/src/components/lists/liq_list.dart';
 import 'package:liqkit_ui/src/components/pickers/liq_wheel_column.dart';
+import 'package:liqkit_ui/src/foundation/liq_apple_colors.dart';
 import 'package:liqkit_ui/src/foundation/liq_apple_typography.dart';
 import 'package:liqkit_ui/src/theme/liq_theme_resolver.dart';
 
@@ -73,7 +74,10 @@ final class LiqPickerButton<T> extends StatelessWidget with Diagnosticable {
         children: <Widget>[
           Text(
             selectedValue == null ? placeholder : selectedItem.label,
-            style: const TextStyle(fontSize: 15),
+            style: TextStyle(
+              fontSize: 15,
+              color: context.appleColors.secondaryLabel,
+            ),
           ),
         ],
       ),
@@ -387,7 +391,10 @@ final class LiqDateRangePicker extends StatelessWidget with Diagnosticable {
             startDate == null
                 ? 'Pick a date'
                 : _formatDate(startDate!),
-            style: const TextStyle(fontSize: 15),
+            style: TextStyle(
+              fontSize: 15,
+              color: context.appleColors.secondaryLabel,
+            ),
           ),
           showChevron: true,
           onTap: () {
@@ -400,7 +407,10 @@ final class LiqDateRangePicker extends StatelessWidget with Diagnosticable {
           title: endLabel,
           trailing: Text(
             endDate == null ? 'Pick a date' : _formatDate(endDate!),
-            style: const TextStyle(fontSize: 15),
+            style: TextStyle(
+              fontSize: 15,
+              color: context.appleColors.secondaryLabel,
+            ),
           ),
           showChevron: true,
           onTap: () {
