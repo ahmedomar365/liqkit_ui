@@ -42,7 +42,7 @@ library liqkit_ui_examples;
 // export 'src/examples/page_control.dart';
 export 'src/examples/picker.dart';
 // export 'src/examples/popover.dart';
-// export 'src/examples/popup_button.dart';
+export 'src/examples/popup_button.dart';
 // export 'src/examples/progress.dart';
 // export 'src/examples/segmented_control.dart';
 // export 'src/examples/sheet.dart';
