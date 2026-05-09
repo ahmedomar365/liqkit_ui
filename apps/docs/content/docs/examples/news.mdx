@@ -1,0 +1,48 @@
+---
+title: News
+description: Article reader with bookmarks, breaking-news banner, and category chips.
+---
+
+A news/reader app: breaking-news carousel, category chips, scrollable
+article list, immersive article-detail view with a sliver-collapse
+hero, and a bookmarks library.
+
+## What it shows
+
+- **Breaking-news banner** as a `LiqCarousel` with auto-advance
+- **Weather widget** glass card with icon + temperature + location
+- **Category chips** as horizontal-scroll `LiqChip`s for topic
+  filtering
+- **Article cards** with thumbnail, headline, author + read-time, tap
+  to open detail
+- **Article detail** with `LiqSliverAppBar` + `LiqFlexibleSpaceBar`
+  hero image, `Image.network` body, related-articles strip
+- **Bookmarks** as `LiqDismissible` rows for unbookmark-on-swipe
+- **Search** with `LiqTextField` + recent-searches pill row
+
+## Components emphasized
+
+`LiqAppBar` · `LiqSliverAppBar` · `LiqFlexibleSpaceBar` · `LiqCarousel` ·
+`LiqChip` · `LiqCard` · `LiqAvatar` · `LiqDismissible` · `LiqTextField`
+
+## Source
+
+[`apps/showcase_app/lib/demos/news/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app/lib/demos/news)
+
+```
+news/
+├── news_demo.dart
+├── models/
+│   ├── news_models.dart
+│   └── news_providers.dart
+├── screens/
+│   ├── news_home_screen.dart
+│   ├── article_detail_screen.dart
+│   ├── bookmarks_screen.dart
+│   └── search_screen.dart
+└── widgets/
+    ├── article_card.dart
+    ├── breaking_news_banner.dart
+    ├── category_chips.dart
+    └── weather_widget.dart
+```

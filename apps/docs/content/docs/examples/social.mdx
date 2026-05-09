@@ -1,0 +1,53 @@
+---
+title: Social
+description: Feed, profile, messages, and post creation — Instagram-shaped.
+---
+
+A social-feed app structured like a typical photo-sharing product:
+stories bar, scrollable feed with rich post cards, profile grid,
+notifications, message threads, and a create-post sheet.
+
+## What it shows
+
+- **Feed** with `LiqCard`-shaped post cards, image header, author row
+  with `LiqAvatar`, `RichText` caption with `@mentions`,
+  like/comment/share row of `LiqIconButton`s
+- **Stories bar** — horizontal `ListView` of avatar rings using
+  `LiqAvatar` + gradient ring
+- **Profile screen** with sliver app bar, tab-strip via
+  `LiqSegmentedControl`, photo grid via `SliverGrid`
+- **Notifications** with `Text.rich` cascading colored read-state
+  styles
+- **Create post** as a modal `LiqSheet` with image picker, caption
+  field, location chip, post button
+- **Messages** as a list of `LiqListRow`s opening into a threaded
+  chat
+
+## Components emphasized
+
+`LiqCard` · `LiqAvatar` · `LiqIconButton` · `LiqSegmentedControl` ·
+`LiqChip` · `LiqContextMenu` · `LiqSheet` · `LiqTextField` ·
+`LiqFloatingActionButton` · `LiqBadge` · `LiqList`
+
+## Source
+
+[`apps/showcase_app/lib/demos/social/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app/lib/demos/social)
+
+```
+social/
+├── social_demo.dart
+├── models/
+│   ├── social_models.dart
+│   └── social_providers.dart
+├── screens/
+│   ├── social_home_screen.dart
+│   ├── feed_screen.dart
+│   ├── explore_screen.dart
+│   ├── profile_screen.dart
+│   ├── messages_screen.dart
+│   ├── notifications_screen.dart
+│   └── create_post_screen.dart
+└── widgets/
+    ├── post_card.dart
+    └── story_bar.dart
+```

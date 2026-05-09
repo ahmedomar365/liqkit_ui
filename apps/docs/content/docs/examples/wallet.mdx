@@ -1,0 +1,53 @@
+---
+title: Wallet
+description: Payment cards, transaction history, and money-transfer flows.
+---
+
+A digital-wallet app — fintech surfaces are where Liquid Glass earns
+its keep, with translucent cards layering over rich background tints.
+
+## What it shows
+
+- **Card stack** as horizontally swiping `LiqCard`s with gradient
+  backgrounds, embossed bank logos, and last-4-digits in monospace
+- **Quick actions grid** — Send / Receive / Pay Bills / Top Up as 4
+  glass tiles, each opening its own dedicated screen
+- **Balance overview** with deposit/withdraw split bars
+- **Transaction list** as `LiqList` rows grouped by date, with
+  `LiqDismissible` swipe-to-categorize
+- **Send / Receive flows** with placeholder-inside `LiqTextField`,
+  `LiqAlert` for confirmation, `LiqToastOverlay` for success
+- **Bills + Savings + Top-up** as separate sub-screens accessed from
+  the quick-actions grid
+
+## Components emphasized
+
+`LiqGlassSurface` · `LiqCard` · `LiqList` · `LiqTextField` ·
+`LiqDismissible` · `LiqAlert` · `LiqToastOverlay` ·
+`LiqIconButton` · `LiqDropdownButton`
+
+## Source
+
+[`apps/showcase_app/lib/demos/wallet/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app/lib/demos/wallet)
+
+```
+wallet/
+├── wallet_demo.dart
+├── models/
+│   ├── wallet_models.dart
+│   └── wallet_providers.dart
+├── screens/
+│   ├── wallet_home_screen.dart
+│   ├── send_screen.dart
+│   ├── receive_screen.dart
+│   ├── transactions_screen.dart
+│   ├── bills_screen.dart
+│   ├── savings_screen.dart
+│   ├── topup_screen.dart
+│   └── cards_screen.dart
+└── widgets/
+    ├── balance_overview.dart
+    ├── payment_card_widget.dart
+    ├── quick_actions_grid.dart
+    └── transaction_list_item.dart
+```

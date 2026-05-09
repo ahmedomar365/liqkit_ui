@@ -1,0 +1,51 @@
+---
+title: Travel
+description: Destination browser with booking flow, favorites, and search.
+---
+
+A travel-booking demo: home with featured destinations and trending
+packages, search with date-range filters, destination detail with
+amenities and reviews, multi-step booking flow, and saved-destinations
+favorites tab.
+
+## What it shows
+
+- **Featured destinations** as a `LiqCarousel` of high-resolution
+  cards with rating + price overlay
+- **Trending packages** in a horizontal `ListView` of glass cards
+- **Search** with `LiqTextField` query + `LiqDatePickerField` date
+  range + `LiqDropdownButton` for traveler count
+- **Destination detail** with `LiqSliverAppBar` hero, amenities row of
+  `LiqChip`s, weather card, reviews list of `LiqCard`s with
+  `LiqAvatar` reviewers
+- **Booking flow** as a multi-step sheet: dates → travelers → payment
+  → confirmation
+- **Favorites** as a `SliverGrid` of bookmarked destinations
+
+## Components emphasized
+
+`LiqAppBar` · `LiqCarousel` · `LiqCard` · `LiqDatePickerField` ·
+`LiqDropdownButton` · `LiqChip` · `LiqAvatar` · `LiqSheet` ·
+`LiqStepper` · `LiqTextField`
+
+## Source
+
+[`apps/showcase_app/lib/demos/travel/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app/lib/demos/travel)
+
+```
+travel/
+├── travel_demo.dart
+├── models/
+│   ├── travel_models.dart
+│   └── travel_providers.dart
+├── screens/
+│   ├── travel_home_screen.dart
+│   ├── destination_detail_screen.dart
+│   ├── booking_screen.dart
+│   ├── favorites_screen.dart
+│   └── search_screen.dart
+└── widgets/
+    ├── destination_card.dart
+    ├── search_suggestions.dart
+    └── travel_package_card.dart
+```

@@ -1,0 +1,45 @@
+---
+title: Sample apps
+description: Five fully-working real-world demos shipped inside the showcase app.
+---
+
+The reference app at [`apps/showcase_app/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app)
+ships **five complete sample apps** alongside the per-component demos —
+each one a small but realistic product built end-to-end on liqkit_ui
+primitives.
+
+These exist for two reasons:
+
+1. **Proof of practical fit.** A button looks great in isolation; what
+   matters is whether `LiqAppBar` + `LiqCard` + `LiqBottomNavBar` +
+   `LiqGlassSurface` actually compose cleanly when you string them
+   together into a multi-screen app.
+2. **Copy-paste starting points.** Each sample lays down the
+   conventional architecture for that vertical (Riverpod state,
+   `LiqPageRoute` navigation, `LiqDemoSplitLayout` for tablet),
+   so you can fork the relevant demo as a skeleton.
+
+## The five demos
+
+| Demo | Focus | Components emphasized |
+| --- | --- | --- |
+| [E-commerce](/docs/examples/ecommerce) | Storefront + cart + checkout | `LiqCard`, `LiqDropdownButton`, `LiqStepper`, `LiqAlert` |
+| [Social](/docs/examples/social) | Feed + profile + create-post | `LiqAvatar`, `LiqChip`, `LiqContextMenu`, `LiqFloatingActionButton` |
+| [News](/docs/examples/news) | Article reader + bookmarks + search | `LiqSliverAppBar`, `LiqCarousel`, `LiqFlexibleSpaceBar` |
+| [Travel](/docs/examples/travel) | Destination browse + booking | `LiqAppBar`, `LiqCard`, `LiqDatePickerField`, `LiqSheet` |
+| [Wallet](/docs/examples/wallet) | Cards + transactions + transfers | `LiqGlassSurface`, `LiqList`, `LiqTextField`, `LiqAlert` |
+
+## How to run them
+
+The demos are wired into the showcase app's home screen — install the
+[live app](https://apps.apple.com/us/app/flutter-liquid-glass-kit/id6749166422)
+or pull the repo:
+
+```bash
+git clone https://github.com/ahmedomar365/liqkit_ui
+cd liqkit_ui/apps/showcase_app
+flutter run
+```
+
+Open the **Demos** section from the home screen and pick any of the
+five.

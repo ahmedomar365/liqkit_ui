@@ -1,0 +1,48 @@
+---
+title: E-commerce
+description: Storefront, product detail, cart, and checkout — built on liqkit_ui.
+---
+
+A small but complete shopping app: home with category chips and a
+featured banner, 2-column product grid, detail page with color/size
+picker and quantity stepper, cart with line items, and a multi-step
+checkout flow.
+
+## What it shows
+
+- **Product grid** with `LiqCard`, deterministic category-tinted
+  gradient placeholder, favorite-toggle overlay
+- **Category chips** as a horizontal scroll of `LiqButton`
+  (`borderedSecondary` ↔ `borderedProminent`)
+- **Featured banner** — gradient `Container` with overlay text + CTA
+  `LiqButton`
+- **Product detail** with `LiqSliverAppBar` + `LiqFlexibleSpaceBar`,
+  `LiqStepper` for quantity, `LiqDropdownButton` for color/size
+- **Cart** with swipe-to-delete via `LiqDismissible`
+- **Checkout** with `LiqStepper`-style progress, `LiqTextField` for
+  shipping/payment, `LiqAlert` for confirmation
+
+## Components emphasized
+
+`LiqCard` · `LiqAppBar` · `LiqSliverAppBar` · `LiqFlexibleSpaceBar` ·
+`LiqButton` · `LiqDropdownButton` · `LiqStepper` · `LiqTextField` ·
+`LiqAlert` · `LiqDismissible` · `LiqIconButton` · `LiqBadge`
+
+## Source
+
+[`apps/showcase_app/lib/demos/ecommerce/`](https://github.com/ahmedomar365/liqkit_ui/tree/main/apps/showcase_app/lib/demos/ecommerce)
+
+```
+ecommerce/
+├── ecommerce_demo.dart            # routes the demo
+├── models/
+│   ├── product_model.dart         # Product + sample data
+│   └── ecommerce_providers.dart   # Riverpod providers
+├── screens/
+│   ├── ecommerce_home_screen.dart
+│   ├── product_detail_screen.dart
+│   ├── cart_screen.dart
+│   └── checkout_screen.dart
+└── widgets/
+    └── product_card.dart
+```

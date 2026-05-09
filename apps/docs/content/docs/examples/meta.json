@@ -1,0 +1,11 @@
+{
+  "title": "Sample apps",
+  "pages": [
+    "index",
+    "ecommerce",
+    "social",
+    "news",
+    "travel",
+    "wallet"
+  ]
+}
