@@ -579,8 +579,14 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
         }
         if (top < margin) top = margin;
 
-        // Single curved animation drives both fade and scale so they
-        // stay in lock-step, no off-by-a-frame "two-stage" feel.
+        // Native iOS UIMenu is scale-only; no fade. We deliberately
+        // drop FadeTransition here because it forces a saveLayer
+        // (opacity < 1) which makes the BackdropFilter inside
+        // LiqGlassSurface sample an empty offscreen layer instead of
+        // the real backdrop — producing the visible "flat for 220ms,
+        // then glass" pop. Pure scale + spring keeps the surface
+        // fully opaque so the shader has a real backdrop to refract
+        // every frame.
         final curved = CurvedAnimation(
           parent: animation,
           curve: Curves.easeOutCubic,
@@ -600,23 +606,20 @@ class _LiqMenuPopupRoute<T> extends PopupRoute<T> {
             Positioned(
               left: left,
               top: top,
-              child: FadeTransition(
-                opacity: curved,
-                child: ScaleTransition(
-                  scale: Tween<double>(begin: 0.92, end: 1).animate(curved),
-                  alignment: openFromBottom
-                      ? Alignment.bottomCenter
-                      : Alignment.topCenter,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: constraints.maxHeight - top - margin,
-                    ),
-                    child: SingleChildScrollView(
-                      child: LiqMenu(
-                        quickActions: quickActions,
-                        width: width,
-                        children: children,
-                      ),
+              child: ScaleTransition(
+                scale: Tween<double>(begin: 0.92, end: 1).animate(curved),
+                alignment: openFromBottom
+                    ? Alignment.bottomCenter
+                    : Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: constraints.maxHeight - top - margin,
+                  ),
+                  child: SingleChildScrollView(
+                    child: LiqMenu(
+                      quickActions: quickActions,
+                      width: width,
+                      children: children,
                     ),
                   ),
                 ),
