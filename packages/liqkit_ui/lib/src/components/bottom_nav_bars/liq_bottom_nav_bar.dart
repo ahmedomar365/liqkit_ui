@@ -73,7 +73,11 @@ final class LiqBottomNavBar extends StatefulWidget {
   static const double disabledOpacity = 0.4;
 
   static const BorderRadius _radius = BorderRadius.all(Radius.circular(999));
-  static const EdgeInsets _outerPadding = EdgeInsets.fromLTRB(25, 16, 25, 25);
+  // Floating-pill margins. The bottom is intentionally small (8pt) — the
+  // outer SafeArea adds the home-indicator inset on top, so the pill ends
+  // up sitting ~8pt above the safe-area edge, matching the native iOS 26
+  // floating tab bar's tight bottom gap.
+  static const EdgeInsets _outerPadding = EdgeInsets.fromLTRB(16, 8, 16, 8);
   static const EdgeInsets _surfacePadding = EdgeInsets.fromLTRB(2, 0, 10, 0);
 
   @override
@@ -140,14 +144,16 @@ final class _LiqBottomNavBarState extends State<LiqBottomNavBar> {
   Widget build(BuildContext context) {
     final palette = _BottomNavPalette.resolve(context);
     final disabled = widget.onChanged == null;
-    final bottomInset = MediaQuery.maybeOf(context)?.padding.bottom ?? 0;
     final selectedIndex = _previewIndex ?? _clampedCurrentIndex;
     final duration = context.liqMotionDuration(LiqMotion.normal);
 
+    // The home-indicator inset is added by the outer SafeArea below;
+    // we only apply the design margin here. (Previously this padding
+    // also added MediaQuery.padding.bottom on top of SafeArea, which
+    // double-counted the home indicator and left ~93pt of empty space
+    // below the pill on notched devices.)
     final bar = Padding(
-      padding: LiqBottomNavBar._outerPadding.add(
-        EdgeInsets.only(bottom: bottomInset),
-      ),
+      padding: LiqBottomNavBar._outerPadding,
       child: LiqGlassSurface(
         elevation: LiqGlassElevation.flat,
         borderRadius: LiqBottomNavBar._radius,

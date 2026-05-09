@@ -54,7 +54,11 @@ final class LiqFloatingActionButton extends StatelessWidget {
             child: LiqGlassSurface(
               tint: tint,
               borderRadius: radius,
-              child: child,
+              // Center the inner glyph — LiqGlassSurface's default
+              // EdgeInsets.zero padding leaves children at the top-left
+              // otherwise, which made FAB icons render in the corner
+              // instead of the visual center.
+              child: Center(child: child),
             ),
           ),
         ),
