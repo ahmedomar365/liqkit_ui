@@ -1,29 +1,158 @@
 ---
 title: Popup Buttons
-description: iOS 26 inline popup button with a trailing chevron-down indicator.
+description: Popup, pull-down, and split buttons — every variant from the showcase app.
 ---
 
 import popupButtonRegularSnippet from '@/snippets/popup-button/regular.json';
 import popupButtonLargeSnippet from '@/snippets/popup-button/large.json';
+import popupStylesSnippet from '@/snippets/popup-button/popup-styles.json';
+import popupSizesSnippet from '@/snippets/popup-button/popup-sizes.json';
+import popupFullWidthSnippet from '@/snippets/popup-button/popup-full-width.json';
+import popupWithIconsSnippet from '@/snippets/popup-button/popup-with-icons.json';
+import popupWithoutIconsSnippet from '@/snippets/popup-button/popup-without-icons.json';
+import popupDisabledSnippet from '@/snippets/popup-button/popup-disabled.json';
+import popupPreSelectedSnippet from '@/snippets/popup-button/popup-pre-selected.json';
+import pulldownStylesSnippet from '@/snippets/popup-button/pulldown-styles.json';
+import pulldownSizesSnippet from '@/snippets/popup-button/pulldown-sizes.json';
+import pulldownWithLeadingSnippet from '@/snippets/popup-button/pulldown-with-leading.json';
+import pulldownWithoutIconSnippet from '@/snippets/popup-button/pulldown-without-icon.json';
+import pulldownFullWidthSnippet from '@/snippets/popup-button/pulldown-full-width.json';
+import pulldownDisabledSnippet from '@/snippets/popup-button/pulldown-disabled.json';
+import splitStylesSnippet from '@/snippets/popup-button/split-styles.json';
+import splitSizesSnippet from '@/snippets/popup-button/split-sizes.json';
+import splitWithLeadingSnippet from '@/snippets/popup-button/split-with-leading.json';
+import splitWithoutLeadingSnippet from '@/snippets/popup-button/split-without-leading.json';
+import splitDisabledPrimarySnippet from '@/snippets/popup-button/split-disabled-primary.json';
+import commonUseCasesSnippet from '@/snippets/popup-button/common-use-cases.json';
 
-`LiqPopupButton` renders a 32pt label in system blue with a 14pt chevron-down
-icon. When `onPressed` is null the button is rendered in the disabled
-`rgba(60,60,67,0.3)` colour. Typically used inline to surface a picker or
-action sheet.
+The popup-button family covers three patterns: a value-selecting popup
+(`LiqDropdownButton`), an action-only pull-down (`LiqPullDownButton`),
+and a split button with a primary action plus a chevron menu
+(`LiqSplitButton`). Every variant below is the same widget the
+showcase app uses — sourced from `package:liqkit_ui/examples.dart`.
 
-## Regular
+## LiqPopupButton
 
-A popup button label with the default enabled appearance.
+Inline label with chevron — minimal trigger surface.
 
 <LiqPreview component="popup-button" variant="regular" />
 
 <CodeSnippet snippet={popupButtonRegularSnippet} />
 
-## Large
-
-A second popup button instance demonstrating the same component with a
-longer label string.
-
 <LiqPreview component="popup-button" variant="large" />
 
 <CodeSnippet snippet={popupButtonLargeSnippet} />
+
+## Popup — Styles
+
+<LiqPreview component="popup-button" variant="popup-styles" />
+
+<CodeSnippet snippet={popupStylesSnippet} />
+
+## Popup — Sizes
+
+<LiqPreview component="popup-button" variant="popup-sizes" />
+
+<CodeSnippet snippet={popupSizesSnippet} />
+
+## Popup — Full Width
+
+<LiqPreview component="popup-button" variant="popup-full-width" />
+
+<CodeSnippet snippet={popupFullWidthSnippet} />
+
+## Popup — With Item Icons
+
+<LiqPreview component="popup-button" variant="popup-with-icons" />
+
+<CodeSnippet snippet={popupWithIconsSnippet} />
+
+## Popup — Without Item Icons
+
+<LiqPreview component="popup-button" variant="popup-without-icons" />
+
+<CodeSnippet snippet={popupWithoutIconsSnippet} />
+
+## Popup — Disabled
+
+<LiqPreview component="popup-button" variant="popup-disabled" />
+
+<CodeSnippet snippet={popupDisabledSnippet} />
+
+## Popup — Pre-Selected
+
+<LiqPreview component="popup-button" variant="popup-pre-selected" />
+
+<CodeSnippet snippet={popupPreSelectedSnippet} />
+
+## Pull Down — Styles
+
+<LiqPreview component="popup-button" variant="pulldown-styles" />
+
+<CodeSnippet snippet={pulldownStylesSnippet} />
+
+## Pull Down — Sizes
+
+<LiqPreview component="popup-button" variant="pulldown-sizes" />
+
+<CodeSnippet snippet={pulldownSizesSnippet} />
+
+## Pull Down — With Leading Icon
+
+<LiqPreview component="popup-button" variant="pulldown-with-leading" />
+
+<CodeSnippet snippet={pulldownWithLeadingSnippet} />
+
+## Pull Down — Without Icon
+
+<LiqPreview component="popup-button" variant="pulldown-without-icon" />
+
+<CodeSnippet snippet={pulldownWithoutIconSnippet} />
+
+## Pull Down — Full Width
+
+<LiqPreview component="popup-button" variant="pulldown-full-width" />
+
+<CodeSnippet snippet={pulldownFullWidthSnippet} />
+
+## Pull Down — Disabled
+
+<LiqPreview component="popup-button" variant="pulldown-disabled" />
+
+<CodeSnippet snippet={pulldownDisabledSnippet} />
+
+## Split — Styles
+
+<LiqPreview component="popup-button" variant="split-styles" />
+
+<CodeSnippet snippet={splitStylesSnippet} />
+
+## Split — Sizes
+
+<LiqPreview component="popup-button" variant="split-sizes" />
+
+<CodeSnippet snippet={splitSizesSnippet} />
+
+## Split — With Leading Icon
+
+<LiqPreview component="popup-button" variant="split-with-leading" />
+
+<CodeSnippet snippet={splitWithLeadingSnippet} />
+
+## Split — Without Leading Icon
+
+<LiqPreview component="popup-button" variant="split-without-leading" />
+
+<CodeSnippet snippet={splitWithoutLeadingSnippet} />
+
+## Split — Disabled Primary, Active Menu
+
+<LiqPreview component="popup-button" variant="split-disabled-primary" />
+
+<CodeSnippet snippet={splitDisabledPrimarySnippet} />
+
+## Common Use Cases
+
+<LiqPreview component="popup-button" variant="common-use-cases" />
+
+<CodeSnippet snippet={commonUseCasesSnippet} />
