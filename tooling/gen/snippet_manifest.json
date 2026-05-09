@@ -1179,6 +1179,101 @@
           "variant": "large",
           "displayName": "Large",
           "dartFile": "apps/docs_snippets/lib/snippets/popup-button/large.dart"
+        },
+        {
+          "variant": "popup-styles",
+          "displayName": "Popup \u2014 Styles",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-styles.dart"
+        },
+        {
+          "variant": "popup-sizes",
+          "displayName": "Popup \u2014 Sizes",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-sizes.dart"
+        },
+        {
+          "variant": "popup-full-width",
+          "displayName": "Popup \u2014 Full Width",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-full-width.dart"
+        },
+        {
+          "variant": "popup-with-icons",
+          "displayName": "Popup \u2014 With Item Icons",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-with-icons.dart"
+        },
+        {
+          "variant": "popup-without-icons",
+          "displayName": "Popup \u2014 Without Icons",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-without-icons.dart"
+        },
+        {
+          "variant": "popup-disabled",
+          "displayName": "Popup \u2014 Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-disabled.dart"
+        },
+        {
+          "variant": "popup-pre-selected",
+          "displayName": "Popup \u2014 Pre-Selected",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/popup-pre-selected.dart"
+        },
+        {
+          "variant": "pulldown-styles",
+          "displayName": "Pull Down \u2014 Styles",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-styles.dart"
+        },
+        {
+          "variant": "pulldown-sizes",
+          "displayName": "Pull Down \u2014 Sizes",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-sizes.dart"
+        },
+        {
+          "variant": "pulldown-with-leading",
+          "displayName": "Pull Down \u2014 Leading Icon",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-with-leading.dart"
+        },
+        {
+          "variant": "pulldown-without-icon",
+          "displayName": "Pull Down \u2014 No Icon",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-without-icon.dart"
+        },
+        {
+          "variant": "pulldown-full-width",
+          "displayName": "Pull Down \u2014 Full Width",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-full-width.dart"
+        },
+        {
+          "variant": "pulldown-disabled",
+          "displayName": "Pull Down \u2014 Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/pulldown-disabled.dart"
+        },
+        {
+          "variant": "split-styles",
+          "displayName": "Split \u2014 Styles",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/split-styles.dart"
+        },
+        {
+          "variant": "split-sizes",
+          "displayName": "Split \u2014 Sizes",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/split-sizes.dart"
+        },
+        {
+          "variant": "split-with-leading",
+          "displayName": "Split \u2014 Leading Icon",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/split-with-leading.dart"
+        },
+        {
+          "variant": "split-without-leading",
+          "displayName": "Split \u2014 No Leading Icon",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/split-without-leading.dart"
+        },
+        {
+          "variant": "split-disabled-primary",
+          "displayName": "Split \u2014 Disabled Primary",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/split-disabled-primary.dart"
+        },
+        {
+          "variant": "common-use-cases",
+          "displayName": "Common Use Cases",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/common-use-cases.dart"
         }
       ]
     },

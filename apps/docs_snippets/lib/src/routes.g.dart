@@ -261,10 +261,48 @@ import 'package:docs_snippets/snippets/popover/leading.dart'
 import 'package:docs_snippets/snippets/popover/top.dart' show popoverTopBuilder;
 import 'package:docs_snippets/snippets/popover/trailing.dart'
     show popoverTrailingBuilder;
+import 'package:docs_snippets/snippets/popup-button/common-use-cases.dart'
+    show popupButtonCommonUseCasesBuilder;
 import 'package:docs_snippets/snippets/popup-button/large.dart'
     show popupButtonLargeBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-disabled.dart'
+    show popupButtonPopupDisabledBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-full-width.dart'
+    show popupButtonPopupFullWidthBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-pre-selected.dart'
+    show popupButtonPopupPreSelectedBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-sizes.dart'
+    show popupButtonPopupSizesBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-styles.dart'
+    show popupButtonPopupStylesBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-with-icons.dart'
+    show popupButtonPopupWithIconsBuilder;
+import 'package:docs_snippets/snippets/popup-button/popup-without-icons.dart'
+    show popupButtonPopupWithoutIconsBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-disabled.dart'
+    show popupButtonPulldownDisabledBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-full-width.dart'
+    show popupButtonPulldownFullWidthBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-sizes.dart'
+    show popupButtonPulldownSizesBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-styles.dart'
+    show popupButtonPulldownStylesBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-with-leading.dart'
+    show popupButtonPulldownWithLeadingBuilder;
+import 'package:docs_snippets/snippets/popup-button/pulldown-without-icon.dart'
+    show popupButtonPulldownWithoutIconBuilder;
 import 'package:docs_snippets/snippets/popup-button/regular.dart'
     show popupButtonRegularBuilder;
+import 'package:docs_snippets/snippets/popup-button/split-disabled-primary.dart'
+    show popupButtonSplitDisabledPrimaryBuilder;
+import 'package:docs_snippets/snippets/popup-button/split-sizes.dart'
+    show popupButtonSplitSizesBuilder;
+import 'package:docs_snippets/snippets/popup-button/split-styles.dart'
+    show popupButtonSplitStylesBuilder;
+import 'package:docs_snippets/snippets/popup-button/split-with-leading.dart'
+    show popupButtonSplitWithLeadingBuilder;
+import 'package:docs_snippets/snippets/popup-button/split-without-leading.dart'
+    show popupButtonSplitWithoutLeadingBuilder;
 import 'package:docs_snippets/snippets/progress/linear.dart'
     show progressLinearBuilder;
 import 'package:docs_snippets/snippets/progress/spinner.dart'
@@ -529,8 +567,27 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/popover/leading': popoverLeadingBuilder,
   '/popover/top': popoverTopBuilder,
   '/popover/trailing': popoverTrailingBuilder,
+  '/popup-button/common-use-cases': popupButtonCommonUseCasesBuilder,
   '/popup-button/large': popupButtonLargeBuilder,
+  '/popup-button/popup-disabled': popupButtonPopupDisabledBuilder,
+  '/popup-button/popup-full-width': popupButtonPopupFullWidthBuilder,
+  '/popup-button/popup-pre-selected': popupButtonPopupPreSelectedBuilder,
+  '/popup-button/popup-sizes': popupButtonPopupSizesBuilder,
+  '/popup-button/popup-styles': popupButtonPopupStylesBuilder,
+  '/popup-button/popup-with-icons': popupButtonPopupWithIconsBuilder,
+  '/popup-button/popup-without-icons': popupButtonPopupWithoutIconsBuilder,
+  '/popup-button/pulldown-disabled': popupButtonPulldownDisabledBuilder,
+  '/popup-button/pulldown-full-width': popupButtonPulldownFullWidthBuilder,
+  '/popup-button/pulldown-sizes': popupButtonPulldownSizesBuilder,
+  '/popup-button/pulldown-styles': popupButtonPulldownStylesBuilder,
+  '/popup-button/pulldown-with-leading': popupButtonPulldownWithLeadingBuilder,
+  '/popup-button/pulldown-without-icon': popupButtonPulldownWithoutIconBuilder,
   '/popup-button/regular': popupButtonRegularBuilder,
+  '/popup-button/split-disabled-primary': popupButtonSplitDisabledPrimaryBuilder,
+  '/popup-button/split-sizes': popupButtonSplitSizesBuilder,
+  '/popup-button/split-styles': popupButtonSplitStylesBuilder,
+  '/popup-button/split-with-leading': popupButtonSplitWithLeadingBuilder,
+  '/popup-button/split-without-leading': popupButtonSplitWithoutLeadingBuilder,
   '/progress/linear': progressLinearBuilder,
   '/progress/spinner': progressSpinnerBuilder,
   '/radio/group': radioGroupBuilder,
