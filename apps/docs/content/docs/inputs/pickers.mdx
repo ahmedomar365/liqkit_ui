@@ -1,18 +1,161 @@
 ---
 title: Pickers
-description: Inline calendar date picker.
+description: Single/multi-column, number, measurement, wheel-date, date-range, and timer pickers — every variant from the showcase app.
 ---
 
 import pickerInlineCalendarSnippet from '@/snippets/picker/inline-calendar.json';
+import pickerSingleColumnSnippet from '@/snippets/picker/single-column.json';
+import pickerMultiColumnSnippet from '@/snippets/picker/multi-column.json';
+import pickerNumberSnippet from '@/snippets/picker/number.json';
+import pickerMeasurementSnippet from '@/snippets/picker/measurement.json';
+import pickerWheelDateSnippet from '@/snippets/picker/wheel-date.json';
+import pickerWheelTimeSnippet from '@/snippets/picker/wheel-time.json';
+import pickerWheelDateTimeSnippet from '@/snippets/picker/wheel-date-time.json';
+import pickerWheelMonthYearSnippet from '@/snippets/picker/wheel-month-year.json';
+import pickerWheelTime24hSnippet from '@/snippets/picker/wheel-time-24h.json';
+import pickerTriggerButtonsSnippet from '@/snippets/picker/trigger-buttons.json';
+import pickerDateRangeSnippet from '@/snippets/picker/date-range.json';
+import pickerTimerHmsSnippet from '@/snippets/picker/timer-hms.json';
+import pickerTimerHmSnippet from '@/snippets/picker/timer-hm.json';
+import pickerTimerMsSnippet from '@/snippets/picker/timer-ms.json';
+import pickerTimerIntervalSnippet from '@/snippets/picker/timer-interval.json';
 
-`LiqDatePicker` renders an iOS 26 inline month calendar. It shows a
-header with previous/next arrows, a weekday row, and a 7-column day grid.
-Today's date gets a blue ring; the selected day gets a tinted fill.
+The picker family gives you a single-column tap-to-open sheet, multi-column
+wheel pickers, number / measurement steppers, inline wheel-style date and
+time pickers (5 modes), trigger-button list rows that open a wheel sheet,
+date-range coupling, and four timer-picker modes for countdowns.
+
+Every variant below is the same widget the showcase app on the App Store
+uses — sourced from `package:liqkit_ui/examples.dart` so the docs and the
+mobile app stay in sync.
 
 ## Inline Calendar
 
-A static calendar for April 2026 — day 27 is today, day 15 is selected.
+`LiqDatePicker` renders an iOS 26 inline month calendar with prev/next
+arrows, a weekday row, and a 7-column day grid. Today's date gets a blue
+ring; the selected day gets a tinted fill.
 
 <LiqPreview component="picker" variant="inline-calendar" />
 
 <CodeSnippet snippet={pickerInlineCalendarSnippet} />
+
+## Single Column
+
+Tap to open a sheet that lets the user pick a single value from a list.
+
+<LiqPreview component="picker" variant="single-column" />
+
+<CodeSnippet snippet={pickerSingleColumnSnippet} />
+
+## Multi Column
+
+Select related values across multiple columns (month / day / year).
+
+<LiqPreview component="picker" variant="multi-column" initialHeight={320} />
+
+<CodeSnippet snippet={pickerMultiColumnSnippet} />
+
+## Number
+
+Stepper-style number picker with configurable min/max/step.
+
+<LiqPreview component="picker" variant="number" />
+
+<CodeSnippet snippet={pickerNumberSnippet} />
+
+## Measurement
+
+Decimal-precision pickers for measurements with units (kg, cm, etc.).
+
+<LiqPreview component="picker" variant="measurement" initialHeight={280} />
+
+<CodeSnippet snippet={pickerMeasurementSnippet} />
+
+## Inline Date Wheel — Date Mode
+
+Wheel-style date picker rendered inline (month / day / year columns).
+
+<LiqPreview component="picker" variant="wheel-date" initialHeight={300} />
+
+<CodeSnippet snippet={pickerWheelDateSnippet} />
+
+## Inline Date Wheel — Time Mode
+
+Hour / minute (and AM/PM) columns only.
+
+<LiqPreview component="picker" variant="wheel-time" initialHeight={300} />
+
+<CodeSnippet snippet={pickerWheelTimeSnippet} />
+
+## Inline Date Wheel — Date & Time Mode
+
+Combined date columns + hour / minute columns.
+
+<LiqPreview component="picker" variant="wheel-date-time" initialHeight={300} />
+
+<CodeSnippet snippet={pickerWheelDateTimeSnippet} />
+
+## Inline Date Wheel — Month + Year Mode
+
+Month + year only — common for credit-card expiry pickers.
+
+<LiqPreview component="picker" variant="wheel-month-year" initialHeight={300} />
+
+<CodeSnippet snippet={pickerWheelMonthYearSnippet} />
+
+## Inline Date Wheel — 24-Hour Format
+
+Pass `use24hFormat: true` to drop AM/PM.
+
+<LiqPreview component="picker" variant="wheel-time-24h" initialHeight={300} />
+
+<CodeSnippet snippet={pickerWheelTime24hSnippet} />
+
+## Date / Time / Date+Time Triggers
+
+List-row triggers that open a date wheel sheet from the bottom.
+
+<LiqPreview component="picker" variant="trigger-buttons" initialHeight={260} />
+
+<CodeSnippet snippet={pickerTriggerButtonsSnippet} />
+
+## Date Range
+
+Two coupled date pickers selecting a start and end.
+
+<LiqPreview component="picker" variant="date-range" initialHeight={220} />
+
+<CodeSnippet snippet={pickerDateRangeSnippet} />
+
+## Timer — Hours + Minutes + Seconds
+
+Countdown duration picker with `LiqTimerPickerMode.hms`.
+
+<LiqPreview component="picker" variant="timer-hms" initialHeight={280} />
+
+<CodeSnippet snippet={pickerTimerHmsSnippet} />
+
+## Timer — Hours + Minutes
+
+`LiqTimerPickerMode.hm` — when seconds aren't relevant (cooking, focus
+timers).
+
+<LiqPreview component="picker" variant="timer-hm" initialHeight={260} />
+
+<CodeSnippet snippet={pickerTimerHmSnippet} />
+
+## Timer — Minutes + Seconds
+
+`LiqTimerPickerMode.ms` — short stopwatch-style durations.
+
+<LiqPreview component="picker" variant="timer-ms" initialHeight={260} />
+
+<CodeSnippet snippet={pickerTimerMsSnippet} />
+
+## Timer — Custom Minute Interval
+
+Pass `minuteInterval: 5` (or 15 / 30) to step minutes.
+
+<LiqPreview component="picker" variant="timer-interval" initialHeight={260} />
+
+<CodeSnippet snippet={pickerTimerIntervalSnippet} />

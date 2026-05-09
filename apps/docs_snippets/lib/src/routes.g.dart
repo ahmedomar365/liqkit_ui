@@ -222,8 +222,38 @@ import 'package:docs_snippets/snippets/pagination/compact.dart'
     show paginationCompactBuilder;
 import 'package:docs_snippets/snippets/pagination/default.dart'
     show paginationDefaultBuilder;
+import 'package:docs_snippets/snippets/picker/date-range.dart'
+    show pickerDateRangeBuilder;
 import 'package:docs_snippets/snippets/picker/inline-calendar.dart'
     show pickerInlineCalendarBuilder;
+import 'package:docs_snippets/snippets/picker/measurement.dart'
+    show pickerMeasurementBuilder;
+import 'package:docs_snippets/snippets/picker/multi-column.dart'
+    show pickerMultiColumnBuilder;
+import 'package:docs_snippets/snippets/picker/number.dart'
+    show pickerNumberBuilder;
+import 'package:docs_snippets/snippets/picker/single-column.dart'
+    show pickerSingleColumnBuilder;
+import 'package:docs_snippets/snippets/picker/timer-hm.dart'
+    show pickerTimerHmBuilder;
+import 'package:docs_snippets/snippets/picker/timer-hms.dart'
+    show pickerTimerHmsBuilder;
+import 'package:docs_snippets/snippets/picker/timer-interval.dart'
+    show pickerTimerIntervalBuilder;
+import 'package:docs_snippets/snippets/picker/timer-ms.dart'
+    show pickerTimerMsBuilder;
+import 'package:docs_snippets/snippets/picker/trigger-buttons.dart'
+    show pickerTriggerButtonsBuilder;
+import 'package:docs_snippets/snippets/picker/wheel-date-time.dart'
+    show pickerWheelDateTimeBuilder;
+import 'package:docs_snippets/snippets/picker/wheel-date.dart'
+    show pickerWheelDateBuilder;
+import 'package:docs_snippets/snippets/picker/wheel-month-year.dart'
+    show pickerWheelMonthYearBuilder;
+import 'package:docs_snippets/snippets/picker/wheel-time-24h.dart'
+    show pickerWheelTime24hBuilder;
+import 'package:docs_snippets/snippets/picker/wheel-time.dart'
+    show pickerWheelTimeBuilder;
 import 'package:docs_snippets/snippets/popover/bottom.dart'
     show popoverBottomBuilder;
 import 'package:docs_snippets/snippets/popover/leading.dart'
@@ -479,7 +509,22 @@ const Map<String, WidgetBuilder> snippetRoutes = <String, WidgetBuilder>{
   '/page-controls/light': pageControlsLightBuilder,
   '/pagination/compact': paginationCompactBuilder,
   '/pagination/default': paginationDefaultBuilder,
+  '/picker/date-range': pickerDateRangeBuilder,
   '/picker/inline-calendar': pickerInlineCalendarBuilder,
+  '/picker/measurement': pickerMeasurementBuilder,
+  '/picker/multi-column': pickerMultiColumnBuilder,
+  '/picker/number': pickerNumberBuilder,
+  '/picker/single-column': pickerSingleColumnBuilder,
+  '/picker/timer-hm': pickerTimerHmBuilder,
+  '/picker/timer-hms': pickerTimerHmsBuilder,
+  '/picker/timer-interval': pickerTimerIntervalBuilder,
+  '/picker/timer-ms': pickerTimerMsBuilder,
+  '/picker/trigger-buttons': pickerTriggerButtonsBuilder,
+  '/picker/wheel-date': pickerWheelDateBuilder,
+  '/picker/wheel-date-time': pickerWheelDateTimeBuilder,
+  '/picker/wheel-month-year': pickerWheelMonthYearBuilder,
+  '/picker/wheel-time': pickerWheelTimeBuilder,
+  '/picker/wheel-time-24h': pickerWheelTime24hBuilder,
   '/popover/bottom': popoverBottomBuilder,
   '/popover/leading': popoverLeadingBuilder,
   '/popover/top': popoverTopBuilder,

@@ -6,9 +6,21 @@
       "displayName": "Accordion",
       "group": "containers",
       "variants": [
-        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/accordion/default.dart" },
-        { "variant": "single",   "displayName": "Single",   "dartFile": "apps/docs_snippets/lib/snippets/accordion/single.dart" },
-        { "variant": "multiple", "displayName": "Multiple", "dartFile": "apps/docs_snippets/lib/snippets/accordion/multiple.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/accordion/default.dart"
+        },
+        {
+          "variant": "single",
+          "displayName": "Single",
+          "dartFile": "apps/docs_snippets/lib/snippets/accordion/single.dart"
+        },
+        {
+          "variant": "multiple",
+          "displayName": "Multiple",
+          "dartFile": "apps/docs_snippets/lib/snippets/accordion/multiple.dart"
+        }
       ]
     },
     {
@@ -16,9 +28,21 @@
       "displayName": "Avatar",
       "group": "foundation",
       "variants": [
-        { "variant": "initials", "displayName": "Initials", "dartFile": "apps/docs_snippets/lib/snippets/avatar/initials.dart" },
-        { "variant": "image",    "displayName": "Image",    "dartFile": "apps/docs_snippets/lib/snippets/avatar/image.dart" },
-        { "variant": "group",    "displayName": "Group",    "dartFile": "apps/docs_snippets/lib/snippets/avatar/group.dart" }
+        {
+          "variant": "initials",
+          "displayName": "Initials",
+          "dartFile": "apps/docs_snippets/lib/snippets/avatar/initials.dart"
+        },
+        {
+          "variant": "image",
+          "displayName": "Image",
+          "dartFile": "apps/docs_snippets/lib/snippets/avatar/image.dart"
+        },
+        {
+          "variant": "group",
+          "displayName": "Group",
+          "dartFile": "apps/docs_snippets/lib/snippets/avatar/group.dart"
+        }
       ]
     },
     {
@@ -26,9 +50,21 @@
       "displayName": "Badge",
       "group": "status",
       "variants": [
-        { "variant": "counter", "displayName": "Counter", "dartFile": "apps/docs_snippets/lib/snippets/badge/counter.dart" },
-        { "variant": "status",  "displayName": "Status",  "dartFile": "apps/docs_snippets/lib/snippets/badge/status.dart" },
-        { "variant": "dot",     "displayName": "Dot",     "dartFile": "apps/docs_snippets/lib/snippets/badge/dot.dart" }
+        {
+          "variant": "counter",
+          "displayName": "Counter",
+          "dartFile": "apps/docs_snippets/lib/snippets/badge/counter.dart"
+        },
+        {
+          "variant": "status",
+          "displayName": "Status",
+          "dartFile": "apps/docs_snippets/lib/snippets/badge/status.dart"
+        },
+        {
+          "variant": "dot",
+          "displayName": "Dot",
+          "dartFile": "apps/docs_snippets/lib/snippets/badge/dot.dart"
+        }
       ]
     },
     {
@@ -36,9 +72,21 @@
       "displayName": "Bar Chart",
       "group": "status",
       "variants": [
-        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/default.dart" },
-        { "variant": "multi-color", "displayName": "Multi-color", "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/multi-color.dart" },
-        { "variant": "no-labels",   "displayName": "No labels",   "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/no-labels.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/default.dart"
+        },
+        {
+          "variant": "multi-color",
+          "displayName": "Multi-color",
+          "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/multi-color.dart"
+        },
+        {
+          "variant": "no-labels",
+          "displayName": "No labels",
+          "dartFile": "apps/docs_snippets/lib/snippets/bar-chart/no-labels.dart"
+        }
       ]
     },
     {
@@ -46,8 +94,16 @@
       "displayName": "Bottom Navigation",
       "group": "navigation",
       "variants": [
-        { "variant": "four-tabs", "displayName": "Four tabs", "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/four-tabs.dart" },
-        { "variant": "five-tabs", "displayName": "Five tabs", "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/five-tabs.dart" }
+        {
+          "variant": "four-tabs",
+          "displayName": "Four tabs",
+          "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/four-tabs.dart"
+        },
+        {
+          "variant": "five-tabs",
+          "displayName": "Five tabs",
+          "dartFile": "apps/docs_snippets/lib/snippets/bottom-nav/five-tabs.dart"
+        }
       ]
     },
     {
@@ -55,8 +111,16 @@
       "displayName": "Breadcrumb",
       "group": "navigation",
       "variants": [
-        { "variant": "default",        "displayName": "Default",        "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/default.dart" },
-        { "variant": "with-separator", "displayName": "With separator", "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/with-separator.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/default.dart"
+        },
+        {
+          "variant": "with-separator",
+          "displayName": "With separator",
+          "dartFile": "apps/docs_snippets/lib/snippets/breadcrumb/with-separator.dart"
+        }
       ]
     },
     {
@@ -86,8 +150,16 @@
       "displayName": "Calendar",
       "group": "inputs",
       "variants": [
-        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/calendar/default.dart" },
-        { "variant": "with-bounds",  "displayName": "With bounds",  "dartFile": "apps/docs_snippets/lib/snippets/calendar/with-bounds.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/calendar/default.dart"
+        },
+        {
+          "variant": "with-bounds",
+          "displayName": "With bounds",
+          "dartFile": "apps/docs_snippets/lib/snippets/calendar/with-bounds.dart"
+        }
       ]
     },
     {
@@ -95,9 +167,21 @@
       "displayName": "Card",
       "group": "containers",
       "variants": [
-        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/card/default.dart" },
-        { "variant": "with-header", "displayName": "With header", "dartFile": "apps/docs_snippets/lib/snippets/card/with-header.dart" },
-        { "variant": "with-footer", "displayName": "With footer", "dartFile": "apps/docs_snippets/lib/snippets/card/with-footer.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/card/default.dart"
+        },
+        {
+          "variant": "with-header",
+          "displayName": "With header",
+          "dartFile": "apps/docs_snippets/lib/snippets/card/with-header.dart"
+        },
+        {
+          "variant": "with-footer",
+          "displayName": "With footer",
+          "dartFile": "apps/docs_snippets/lib/snippets/card/with-footer.dart"
+        }
       ]
     },
     {
@@ -105,9 +189,21 @@
       "displayName": "Carousel",
       "group": "containers",
       "variants": [
-        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/carousel/default.dart" },
-        { "variant": "autoplay",     "displayName": "Autoplay",     "dartFile": "apps/docs_snippets/lib/snippets/carousel/autoplay.dart" },
-        { "variant": "no-indicator", "displayName": "No indicator", "dartFile": "apps/docs_snippets/lib/snippets/carousel/no-indicator.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/carousel/default.dart"
+        },
+        {
+          "variant": "autoplay",
+          "displayName": "Autoplay",
+          "dartFile": "apps/docs_snippets/lib/snippets/carousel/autoplay.dart"
+        },
+        {
+          "variant": "no-indicator",
+          "displayName": "No indicator",
+          "dartFile": "apps/docs_snippets/lib/snippets/carousel/no-indicator.dart"
+        }
       ]
     },
     {
@@ -115,9 +211,21 @@
       "displayName": "Line Chart",
       "group": "status",
       "variants": [
-        { "variant": "default",   "displayName": "Default",   "dartFile": "apps/docs_snippets/lib/snippets/line-chart/default.dart" },
-        { "variant": "dots",      "displayName": "With dots", "dartFile": "apps/docs_snippets/lib/snippets/line-chart/dots.dart" },
-        { "variant": "sparkline", "displayName": "Sparkline", "dartFile": "apps/docs_snippets/lib/snippets/line-chart/sparkline.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/line-chart/default.dart"
+        },
+        {
+          "variant": "dots",
+          "displayName": "With dots",
+          "dartFile": "apps/docs_snippets/lib/snippets/line-chart/dots.dart"
+        },
+        {
+          "variant": "sparkline",
+          "displayName": "Sparkline",
+          "dartFile": "apps/docs_snippets/lib/snippets/line-chart/sparkline.dart"
+        }
       ]
     },
     {
@@ -125,9 +233,21 @@
       "displayName": "Checkbox",
       "group": "inputs",
       "variants": [
-        { "variant": "unchecked",     "displayName": "Unchecked",     "dartFile": "apps/docs_snippets/lib/snippets/checkbox/unchecked.dart" },
-        { "variant": "checked",       "displayName": "Checked",       "dartFile": "apps/docs_snippets/lib/snippets/checkbox/checked.dart" },
-        { "variant": "indeterminate", "displayName": "Indeterminate", "dartFile": "apps/docs_snippets/lib/snippets/checkbox/indeterminate.dart" }
+        {
+          "variant": "unchecked",
+          "displayName": "Unchecked",
+          "dartFile": "apps/docs_snippets/lib/snippets/checkbox/unchecked.dart"
+        },
+        {
+          "variant": "checked",
+          "displayName": "Checked",
+          "dartFile": "apps/docs_snippets/lib/snippets/checkbox/checked.dart"
+        },
+        {
+          "variant": "indeterminate",
+          "displayName": "Indeterminate",
+          "dartFile": "apps/docs_snippets/lib/snippets/checkbox/indeterminate.dart"
+        }
       ]
     },
     {
@@ -135,9 +255,21 @@
       "displayName": "Chip",
       "group": "inputs",
       "variants": [
-        { "variant": "single",      "displayName": "Single",      "dartFile": "apps/docs_snippets/lib/snippets/chip/single.dart" },
-        { "variant": "group",       "displayName": "Group",       "dartFile": "apps/docs_snippets/lib/snippets/chip/group.dart" },
-        { "variant": "dismissible", "displayName": "Dismissible", "dartFile": "apps/docs_snippets/lib/snippets/chip/dismissible.dart" }
+        {
+          "variant": "single",
+          "displayName": "Single",
+          "dartFile": "apps/docs_snippets/lib/snippets/chip/single.dart"
+        },
+        {
+          "variant": "group",
+          "displayName": "Group",
+          "dartFile": "apps/docs_snippets/lib/snippets/chip/group.dart"
+        },
+        {
+          "variant": "dismissible",
+          "displayName": "Dismissible",
+          "dartFile": "apps/docs_snippets/lib/snippets/chip/dismissible.dart"
+        }
       ]
     },
     {
@@ -145,7 +277,11 @@
       "displayName": "Colors",
       "group": "foundation",
       "variants": [
-        { "variant": "swatch-grid", "displayName": "Swatch grid", "dartFile": "apps/docs_snippets/lib/snippets/colors/swatch-grid.dart" }
+        {
+          "variant": "swatch-grid",
+          "displayName": "Swatch grid",
+          "dartFile": "apps/docs_snippets/lib/snippets/colors/swatch-grid.dart"
+        }
       ]
     },
     {
@@ -153,8 +289,16 @@
       "displayName": "Collapsible",
       "group": "containers",
       "variants": [
-        { "variant": "default",   "displayName": "Default",   "dartFile": "apps/docs_snippets/lib/snippets/collapsible/default.dart" },
-        { "variant": "expanded",  "displayName": "Expanded",  "dartFile": "apps/docs_snippets/lib/snippets/collapsible/expanded.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/collapsible/default.dart"
+        },
+        {
+          "variant": "expanded",
+          "displayName": "Expanded",
+          "dartFile": "apps/docs_snippets/lib/snippets/collapsible/expanded.dart"
+        }
       ]
     },
     {
@@ -162,8 +306,16 @@
       "displayName": "Combobox",
       "group": "inputs",
       "variants": [
-        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/combobox/default.dart" },
-        { "variant": "preselected", "displayName": "Preselected", "dartFile": "apps/docs_snippets/lib/snippets/combobox/preselected.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/combobox/default.dart"
+        },
+        {
+          "variant": "preselected",
+          "displayName": "Preselected",
+          "dartFile": "apps/docs_snippets/lib/snippets/combobox/preselected.dart"
+        }
       ]
     },
     {
@@ -171,8 +323,16 @@
       "displayName": "Command Palette",
       "group": "navigation",
       "variants": [
-        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/command-palette/default.dart" },
-        { "variant": "sections", "displayName": "Sections", "dartFile": "apps/docs_snippets/lib/snippets/command-palette/sections.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/command-palette/default.dart"
+        },
+        {
+          "variant": "sections",
+          "displayName": "Sections",
+          "dartFile": "apps/docs_snippets/lib/snippets/command-palette/sections.dart"
+        }
       ]
     },
     {
@@ -180,8 +340,16 @@
       "displayName": "Text Styles",
       "group": "foundation",
       "variants": [
-        { "variant": "dynamic", "displayName": "Dynamic Type", "dartFile": "apps/docs_snippets/lib/snippets/text-styles/dynamic.dart" },
-        { "variant": "accessibility", "displayName": "Accessibility sizes", "dartFile": "apps/docs_snippets/lib/snippets/text-styles/accessibility.dart" }
+        {
+          "variant": "dynamic",
+          "displayName": "Dynamic Type",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-styles/dynamic.dart"
+        },
+        {
+          "variant": "accessibility",
+          "displayName": "Accessibility sizes",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-styles/accessibility.dart"
+        }
       ]
     },
     {
@@ -189,8 +357,16 @@
       "displayName": "Time Field",
       "group": "inputs",
       "variants": [
-        { "variant": "twelve-hour",      "displayName": "12-hour", "dartFile": "apps/docs_snippets/lib/snippets/time-field/twelve-hour.dart" },
-        { "variant": "twenty-four-hour", "displayName": "24-hour", "dartFile": "apps/docs_snippets/lib/snippets/time-field/twenty-four-hour.dart" }
+        {
+          "variant": "twelve-hour",
+          "displayName": "12-hour",
+          "dartFile": "apps/docs_snippets/lib/snippets/time-field/twelve-hour.dart"
+        },
+        {
+          "variant": "twenty-four-hour",
+          "displayName": "24-hour",
+          "dartFile": "apps/docs_snippets/lib/snippets/time-field/twenty-four-hour.dart"
+        }
       ]
     },
     {
@@ -198,9 +374,21 @@
       "displayName": "Time Picker",
       "group": "inputs",
       "variants": [
-        { "variant": "12-hour",   "displayName": "12-hour",  "dartFile": "apps/docs_snippets/lib/snippets/time-picker/12-hour.dart" },
-        { "variant": "24-hour",   "displayName": "24-hour",  "dartFile": "apps/docs_snippets/lib/snippets/time-picker/24-hour.dart" },
-        { "variant": "intervals", "displayName": "Intervals","dartFile": "apps/docs_snippets/lib/snippets/time-picker/intervals.dart" }
+        {
+          "variant": "12-hour",
+          "displayName": "12-hour",
+          "dartFile": "apps/docs_snippets/lib/snippets/time-picker/12-hour.dart"
+        },
+        {
+          "variant": "24-hour",
+          "displayName": "24-hour",
+          "dartFile": "apps/docs_snippets/lib/snippets/time-picker/24-hour.dart"
+        },
+        {
+          "variant": "intervals",
+          "displayName": "Intervals",
+          "dartFile": "apps/docs_snippets/lib/snippets/time-picker/intervals.dart"
+        }
       ]
     },
     {
@@ -208,8 +396,16 @@
       "displayName": "Materials",
       "group": "foundation",
       "variants": [
-        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/materials/light.dart" },
-        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/materials/dark.dart" }
+        {
+          "variant": "light",
+          "displayName": "Light",
+          "dartFile": "apps/docs_snippets/lib/snippets/materials/light.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/materials/dark.dart"
+        }
       ]
     },
     {
@@ -217,7 +413,11 @@
       "displayName": "Motion",
       "group": "foundation",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/motion/default.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/motion/default.dart"
+        }
       ]
     },
     {
@@ -225,9 +425,21 @@
       "displayName": "Toggles",
       "group": "inputs",
       "variants": [
-        { "variant": "on", "displayName": "On", "dartFile": "apps/docs_snippets/lib/snippets/toggle/on.dart" },
-        { "variant": "off", "displayName": "Off", "dartFile": "apps/docs_snippets/lib/snippets/toggle/off.dart" },
-        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/toggle/disabled.dart" }
+        {
+          "variant": "on",
+          "displayName": "On",
+          "dartFile": "apps/docs_snippets/lib/snippets/toggle/on.dart"
+        },
+        {
+          "variant": "off",
+          "displayName": "Off",
+          "dartFile": "apps/docs_snippets/lib/snippets/toggle/off.dart"
+        },
+        {
+          "variant": "disabled",
+          "displayName": "Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/toggle/disabled.dart"
+        }
       ]
     },
     {
@@ -235,8 +447,16 @@
       "displayName": "Toggle Group",
       "group": "inputs",
       "variants": [
-        { "variant": "text-style", "displayName": "Text style", "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/text-style.dart" },
-        { "variant": "labels",     "displayName": "Labels",     "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/labels.dart" }
+        {
+          "variant": "text-style",
+          "displayName": "Text style",
+          "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/text-style.dart"
+        },
+        {
+          "variant": "labels",
+          "displayName": "Labels",
+          "dartFile": "apps/docs_snippets/lib/snippets/toggle-group/labels.dart"
+        }
       ]
     },
     {
@@ -244,8 +464,16 @@
       "displayName": "Sliders",
       "group": "inputs",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/slider/default.dart" },
-        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/slider/dark.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/default.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/slider/dark.dart"
+        }
       ]
     },
     {
@@ -253,8 +481,16 @@
       "displayName": "Steppers",
       "group": "inputs",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/stepper/default.dart" },
-        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/stepper/disabled.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/default.dart"
+        },
+        {
+          "variant": "disabled",
+          "displayName": "Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/disabled.dart"
+        }
       ]
     },
     {
@@ -262,9 +498,21 @@
       "displayName": "Segmented Controls",
       "group": "inputs",
       "variants": [
-        { "variant": "two", "displayName": "Two Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/two.dart" },
-        { "variant": "three", "displayName": "Three Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/three.dart" },
-        { "variant": "four", "displayName": "Four Segments", "dartFile": "apps/docs_snippets/lib/snippets/segmented/four.dart" }
+        {
+          "variant": "two",
+          "displayName": "Two Segments",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented/two.dart"
+        },
+        {
+          "variant": "three",
+          "displayName": "Three Segments",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented/three.dart"
+        },
+        {
+          "variant": "four",
+          "displayName": "Four Segments",
+          "dartFile": "apps/docs_snippets/lib/snippets/segmented/four.dart"
+        }
       ]
     },
     {
@@ -272,8 +520,16 @@
       "displayName": "Page Controls",
       "group": "inputs",
       "variants": [
-        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/page-controls/light.dart" },
-        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/page-controls/dark.dart" }
+        {
+          "variant": "light",
+          "displayName": "Light",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/light.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/page-controls/dark.dart"
+        }
       ]
     },
     {
@@ -281,8 +537,16 @@
       "displayName": "Pagination",
       "group": "navigation",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/pagination/default.dart" },
-        { "variant": "compact", "displayName": "Compact", "dartFile": "apps/docs_snippets/lib/snippets/pagination/compact.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/pagination/default.dart"
+        },
+        {
+          "variant": "compact",
+          "displayName": "Compact",
+          "dartFile": "apps/docs_snippets/lib/snippets/pagination/compact.dart"
+        }
       ]
     },
     {
@@ -290,9 +554,21 @@
       "displayName": "Color Pickers",
       "group": "inputs",
       "variants": [
-        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/large.dart" },
-        { "variant": "small", "displayName": "Small", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/small.dart" },
-        { "variant": "grid", "displayName": "Grid", "dartFile": "apps/docs_snippets/lib/snippets/color-picker/grid.dart" }
+        {
+          "variant": "large",
+          "displayName": "Large",
+          "dartFile": "apps/docs_snippets/lib/snippets/color-picker/large.dart"
+        },
+        {
+          "variant": "small",
+          "displayName": "Small",
+          "dartFile": "apps/docs_snippets/lib/snippets/color-picker/small.dart"
+        },
+        {
+          "variant": "grid",
+          "displayName": "Grid",
+          "dartFile": "apps/docs_snippets/lib/snippets/color-picker/grid.dart"
+        }
       ]
     },
     {
@@ -300,7 +576,86 @@
       "displayName": "Pickers",
       "group": "inputs",
       "variants": [
-        { "variant": "inline-calendar", "displayName": "Inline Calendar", "dartFile": "apps/docs_snippets/lib/snippets/picker/inline-calendar.dart" }
+        {
+          "variant": "inline-calendar",
+          "displayName": "Inline Calendar",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/inline-calendar.dart"
+        },
+        {
+          "variant": "single-column",
+          "displayName": "Single Column",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/single-column.dart"
+        },
+        {
+          "variant": "multi-column",
+          "displayName": "Multi Column",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/multi-column.dart"
+        },
+        {
+          "variant": "number",
+          "displayName": "Number",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/number.dart"
+        },
+        {
+          "variant": "measurement",
+          "displayName": "Measurement",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/measurement.dart"
+        },
+        {
+          "variant": "wheel-date",
+          "displayName": "Wheel \u2014 Date",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/wheel-date.dart"
+        },
+        {
+          "variant": "wheel-time",
+          "displayName": "Wheel \u2014 Time",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/wheel-time.dart"
+        },
+        {
+          "variant": "wheel-date-time",
+          "displayName": "Wheel \u2014 Date & Time",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/wheel-date-time.dart"
+        },
+        {
+          "variant": "wheel-month-year",
+          "displayName": "Wheel \u2014 Month + Year",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/wheel-month-year.dart"
+        },
+        {
+          "variant": "wheel-time-24h",
+          "displayName": "Wheel \u2014 24-Hour",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/wheel-time-24h.dart"
+        },
+        {
+          "variant": "trigger-buttons",
+          "displayName": "Date / Time / Date+Time Triggers",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/trigger-buttons.dart"
+        },
+        {
+          "variant": "date-range",
+          "displayName": "Date Range",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/date-range.dart"
+        },
+        {
+          "variant": "timer-hms",
+          "displayName": "Timer \u2014 H/M/S",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/timer-hms.dart"
+        },
+        {
+          "variant": "timer-hm",
+          "displayName": "Timer \u2014 H/M",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/timer-hm.dart"
+        },
+        {
+          "variant": "timer-ms",
+          "displayName": "Timer \u2014 M/S",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/timer-ms.dart"
+        },
+        {
+          "variant": "timer-interval",
+          "displayName": "Timer \u2014 Custom Minute Interval",
+          "dartFile": "apps/docs_snippets/lib/snippets/picker/timer-interval.dart"
+        }
       ]
     },
     {
@@ -308,10 +663,26 @@
       "displayName": "Text Fields",
       "group": "inputs",
       "variants": [
-        { "variant": "empty", "displayName": "Empty", "dartFile": "apps/docs_snippets/lib/snippets/text-field/empty.dart" },
-        { "variant": "filled", "displayName": "Filled", "dartFile": "apps/docs_snippets/lib/snippets/text-field/filled.dart" },
-        { "variant": "obscured", "displayName": "Obscured", "dartFile": "apps/docs_snippets/lib/snippets/text-field/obscured.dart" },
-        { "variant": "disabled", "displayName": "Disabled", "dartFile": "apps/docs_snippets/lib/snippets/text-field/disabled.dart" }
+        {
+          "variant": "empty",
+          "displayName": "Empty",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-field/empty.dart"
+        },
+        {
+          "variant": "filled",
+          "displayName": "Filled",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-field/filled.dart"
+        },
+        {
+          "variant": "obscured",
+          "displayName": "Obscured",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-field/obscured.dart"
+        },
+        {
+          "variant": "disabled",
+          "displayName": "Disabled",
+          "dartFile": "apps/docs_snippets/lib/snippets/text-field/disabled.dart"
+        }
       ]
     },
     {
@@ -319,8 +690,16 @@
       "displayName": "Textarea",
       "group": "inputs",
       "variants": [
-        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/textarea/default.dart" },
-        { "variant": "with-counter", "displayName": "With counter", "dartFile": "apps/docs_snippets/lib/snippets/textarea/with-counter.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/textarea/default.dart"
+        },
+        {
+          "variant": "with-counter",
+          "displayName": "With counter",
+          "dartFile": "apps/docs_snippets/lib/snippets/textarea/with-counter.dart"
+        }
       ]
     },
     {
@@ -328,9 +707,21 @@
       "displayName": "Sheets",
       "group": "containers",
       "variants": [
-        { "variant": "full-screen", "displayName": "Full Screen", "dartFile": "apps/docs_snippets/lib/snippets/sheet/full-screen.dart" },
-        { "variant": "stacked", "displayName": "Stacked", "dartFile": "apps/docs_snippets/lib/snippets/sheet/stacked.dart" },
-        { "variant": "inspector", "displayName": "Inspector", "dartFile": "apps/docs_snippets/lib/snippets/sheet/inspector.dart" }
+        {
+          "variant": "full-screen",
+          "displayName": "Full Screen",
+          "dartFile": "apps/docs_snippets/lib/snippets/sheet/full-screen.dart"
+        },
+        {
+          "variant": "stacked",
+          "displayName": "Stacked",
+          "dartFile": "apps/docs_snippets/lib/snippets/sheet/stacked.dart"
+        },
+        {
+          "variant": "inspector",
+          "displayName": "Inspector",
+          "dartFile": "apps/docs_snippets/lib/snippets/sheet/inspector.dart"
+        }
       ]
     },
     {
@@ -338,9 +729,21 @@
       "displayName": "Alerts",
       "group": "containers",
       "variants": [
-        { "variant": "stacked", "displayName": "Stacked", "dartFile": "apps/docs_snippets/lib/snippets/alert/stacked.dart" },
-        { "variant": "side-by-side", "displayName": "Side by Side", "dartFile": "apps/docs_snippets/lib/snippets/alert/side-by-side.dart" },
-        { "variant": "destructive", "displayName": "Destructive", "dartFile": "apps/docs_snippets/lib/snippets/alert/destructive.dart" }
+        {
+          "variant": "stacked",
+          "displayName": "Stacked",
+          "dartFile": "apps/docs_snippets/lib/snippets/alert/stacked.dart"
+        },
+        {
+          "variant": "side-by-side",
+          "displayName": "Side by Side",
+          "dartFile": "apps/docs_snippets/lib/snippets/alert/side-by-side.dart"
+        },
+        {
+          "variant": "destructive",
+          "displayName": "Destructive",
+          "dartFile": "apps/docs_snippets/lib/snippets/alert/destructive.dart"
+        }
       ]
     },
     {
@@ -348,8 +751,16 @@
       "displayName": "Action Sheets",
       "group": "containers",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/default.dart" },
-        { "variant": "with-cancel", "displayName": "With Cancel", "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-cancel.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/default.dart"
+        },
+        {
+          "variant": "with-cancel",
+          "displayName": "With Cancel",
+          "dartFile": "apps/docs_snippets/lib/snippets/action-sheet/with-cancel.dart"
+        }
       ]
     },
     {
@@ -357,8 +768,16 @@
       "displayName": "Notifications",
       "group": "containers",
       "variants": [
-        { "variant": "mail", "displayName": "Mail", "dartFile": "apps/docs_snippets/lib/snippets/notification/mail.dart" },
-        { "variant": "reminders", "displayName": "Reminders", "dartFile": "apps/docs_snippets/lib/snippets/notification/reminders.dart" }
+        {
+          "variant": "mail",
+          "displayName": "Mail",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/mail.dart"
+        },
+        {
+          "variant": "reminders",
+          "displayName": "Reminders",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/reminders.dart"
+        }
       ]
     },
     {
@@ -366,9 +785,21 @@
       "displayName": "Number Field",
       "group": "inputs",
       "variants": [
-        { "variant": "default",     "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/number-field/default.dart" },
-        { "variant": "with-suffix", "displayName": "With suffix", "dartFile": "apps/docs_snippets/lib/snippets/number-field/with-suffix.dart" },
-        { "variant": "no-buttons",  "displayName": "No buttons",  "dartFile": "apps/docs_snippets/lib/snippets/number-field/no-buttons.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/number-field/default.dart"
+        },
+        {
+          "variant": "with-suffix",
+          "displayName": "With suffix",
+          "dartFile": "apps/docs_snippets/lib/snippets/number-field/with-suffix.dart"
+        },
+        {
+          "variant": "no-buttons",
+          "displayName": "No buttons",
+          "dartFile": "apps/docs_snippets/lib/snippets/number-field/no-buttons.dart"
+        }
       ]
     },
     {
@@ -376,9 +807,21 @@
       "displayName": "OTP Input",
       "group": "inputs",
       "variants": [
-        { "variant": "default",    "displayName": "Default",     "dartFile": "apps/docs_snippets/lib/snippets/otp/default.dart" },
-        { "variant": "four-digit", "displayName": "Four digits", "dartFile": "apps/docs_snippets/lib/snippets/otp/four-digit.dart" },
-        { "variant": "obscure",    "displayName": "Obscure",     "dartFile": "apps/docs_snippets/lib/snippets/otp/obscure.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/otp/default.dart"
+        },
+        {
+          "variant": "four-digit",
+          "displayName": "Four digits",
+          "dartFile": "apps/docs_snippets/lib/snippets/otp/four-digit.dart"
+        },
+        {
+          "variant": "obscure",
+          "displayName": "Obscure",
+          "dartFile": "apps/docs_snippets/lib/snippets/otp/obscure.dart"
+        }
       ]
     },
     {
@@ -386,10 +829,26 @@
       "displayName": "Popovers",
       "group": "containers",
       "variants": [
-        { "variant": "top", "displayName": "Top", "dartFile": "apps/docs_snippets/lib/snippets/popover/top.dart" },
-        { "variant": "bottom", "displayName": "Bottom", "dartFile": "apps/docs_snippets/lib/snippets/popover/bottom.dart" },
-        { "variant": "leading", "displayName": "Leading", "dartFile": "apps/docs_snippets/lib/snippets/popover/leading.dart" },
-        { "variant": "trailing", "displayName": "Trailing", "dartFile": "apps/docs_snippets/lib/snippets/popover/trailing.dart" }
+        {
+          "variant": "top",
+          "displayName": "Top",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/top.dart"
+        },
+        {
+          "variant": "bottom",
+          "displayName": "Bottom",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/bottom.dart"
+        },
+        {
+          "variant": "leading",
+          "displayName": "Leading",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/leading.dart"
+        },
+        {
+          "variant": "trailing",
+          "displayName": "Trailing",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/trailing.dart"
+        }
       ]
     },
     {
@@ -397,8 +856,16 @@
       "displayName": "Menu",
       "group": "containers",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/menu/default.dart" },
-        { "variant": "with-section", "displayName": "With Section", "dartFile": "apps/docs_snippets/lib/snippets/menu/with-section.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/default.dart"
+        },
+        {
+          "variant": "with-section",
+          "displayName": "With Section",
+          "dartFile": "apps/docs_snippets/lib/snippets/menu/with-section.dart"
+        }
       ]
     },
     {
@@ -406,9 +873,21 @@
       "displayName": "Context Menu",
       "group": "containers",
       "variants": [
-        { "variant": "below-leading", "displayName": "Below Leading", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-leading.dart" },
-        { "variant": "below-trailing", "displayName": "Below Trailing", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-trailing.dart" },
-        { "variant": "beside-leading", "displayName": "Beside Leading", "dartFile": "apps/docs_snippets/lib/snippets/context-menu/beside-leading.dart" }
+        {
+          "variant": "below-leading",
+          "displayName": "Below Leading",
+          "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-leading.dart"
+        },
+        {
+          "variant": "below-trailing",
+          "displayName": "Below Trailing",
+          "dartFile": "apps/docs_snippets/lib/snippets/context-menu/below-trailing.dart"
+        },
+        {
+          "variant": "beside-leading",
+          "displayName": "Beside Leading",
+          "dartFile": "apps/docs_snippets/lib/snippets/context-menu/beside-leading.dart"
+        }
       ]
     },
     {
@@ -416,8 +895,16 @@
       "displayName": "Data Table",
       "group": "containers",
       "variants": [
-        { "variant": "default",  "displayName": "Default",  "dartFile": "apps/docs_snippets/lib/snippets/data-table/default.dart" },
-        { "variant": "sortable", "displayName": "Sortable", "dartFile": "apps/docs_snippets/lib/snippets/data-table/sortable.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/data-table/default.dart"
+        },
+        {
+          "variant": "sortable",
+          "displayName": "Sortable",
+          "dartFile": "apps/docs_snippets/lib/snippets/data-table/sortable.dart"
+        }
       ]
     },
     {
@@ -425,8 +912,16 @@
       "displayName": "Date Picker Field",
       "group": "inputs",
       "variants": [
-        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/default.dart" },
-        { "variant": "preselected",  "displayName": "Preselected",  "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/preselected.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/default.dart"
+        },
+        {
+          "variant": "preselected",
+          "displayName": "Preselected",
+          "dartFile": "apps/docs_snippets/lib/snippets/date-picker-field/preselected.dart"
+        }
       ]
     },
     {
@@ -434,9 +929,21 @@
       "displayName": "Divider",
       "group": "foundation",
       "variants": [
-        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/divider/horizontal.dart" },
-        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/divider/vertical.dart" },
-        { "variant": "with-label", "displayName": "With label", "dartFile": "apps/docs_snippets/lib/snippets/divider/with-label.dart" }
+        {
+          "variant": "horizontal",
+          "displayName": "Horizontal",
+          "dartFile": "apps/docs_snippets/lib/snippets/divider/horizontal.dart"
+        },
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/divider/vertical.dart"
+        },
+        {
+          "variant": "with-label",
+          "displayName": "With label",
+          "dartFile": "apps/docs_snippets/lib/snippets/divider/with-label.dart"
+        }
       ]
     },
     {
@@ -444,8 +951,16 @@
       "displayName": "Dialog",
       "group": "containers",
       "variants": [
-        { "variant": "default",      "displayName": "Default",      "dartFile": "apps/docs_snippets/lib/snippets/dialog/default.dart" },
-        { "variant": "with-actions", "displayName": "With actions", "dartFile": "apps/docs_snippets/lib/snippets/dialog/with-actions.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/dialog/default.dart"
+        },
+        {
+          "variant": "with-actions",
+          "displayName": "With actions",
+          "dartFile": "apps/docs_snippets/lib/snippets/dialog/with-actions.dart"
+        }
       ]
     },
     {
@@ -453,9 +968,21 @@
       "displayName": "Drawer",
       "group": "containers",
       "variants": [
-        { "variant": "left",  "displayName": "Left",  "dartFile": "apps/docs_snippets/lib/snippets/drawer/left.dart" },
-        { "variant": "right", "displayName": "Right", "dartFile": "apps/docs_snippets/lib/snippets/drawer/right.dart" },
-        { "variant": "collapsed", "displayName": "Collapsed", "dartFile": "apps/docs_snippets/lib/snippets/drawer/collapsed.dart" }
+        {
+          "variant": "left",
+          "displayName": "Left",
+          "dartFile": "apps/docs_snippets/lib/snippets/drawer/left.dart"
+        },
+        {
+          "variant": "right",
+          "displayName": "Right",
+          "dartFile": "apps/docs_snippets/lib/snippets/drawer/right.dart"
+        },
+        {
+          "variant": "collapsed",
+          "displayName": "Collapsed",
+          "dartFile": "apps/docs_snippets/lib/snippets/drawer/collapsed.dart"
+        }
       ]
     },
     {
@@ -463,8 +990,16 @@
       "displayName": "Empty States",
       "group": "containers",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/default.dart" },
-        { "variant": "with-cta", "displayName": "With CTA", "dartFile": "apps/docs_snippets/lib/snippets/empty-state/with-cta.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/empty-state/default.dart"
+        },
+        {
+          "variant": "with-cta",
+          "displayName": "With CTA",
+          "dartFile": "apps/docs_snippets/lib/snippets/empty-state/with-cta.dart"
+        }
       ]
     },
     {
@@ -472,9 +1007,21 @@
       "displayName": "Glass Surface",
       "group": "foundation",
       "variants": [
-        { "variant": "floating", "displayName": "Floating", "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/floating.dart" },
-        { "variant": "flat",     "displayName": "Flat",     "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/flat.dart" },
-        { "variant": "dark",     "displayName": "Dark",     "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/dark.dart" }
+        {
+          "variant": "floating",
+          "displayName": "Floating",
+          "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/floating.dart"
+        },
+        {
+          "variant": "flat",
+          "displayName": "Flat",
+          "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/flat.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/glass-surface/dark.dart"
+        }
       ]
     },
     {
@@ -482,8 +1029,16 @@
       "displayName": "Hover Card",
       "group": "status",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/hover-card/default.dart" },
-        { "variant": "bottom",  "displayName": "Bottom",  "dartFile": "apps/docs_snippets/lib/snippets/hover-card/bottom.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/hover-card/default.dart"
+        },
+        {
+          "variant": "bottom",
+          "displayName": "Bottom",
+          "dartFile": "apps/docs_snippets/lib/snippets/hover-card/bottom.dart"
+        }
       ]
     },
     {
@@ -491,8 +1046,16 @@
       "displayName": "Kanban",
       "group": "containers",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/kanban/default.dart" },
-        { "variant": "dense",   "displayName": "Dense",   "dartFile": "apps/docs_snippets/lib/snippets/kanban/dense.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/kanban/default.dart"
+        },
+        {
+          "variant": "dense",
+          "displayName": "Dense",
+          "dartFile": "apps/docs_snippets/lib/snippets/kanban/dense.dart"
+        }
       ]
     },
     {
@@ -500,8 +1063,16 @@
       "displayName": "Top Bars",
       "group": "navigation",
       "variants": [
-        { "variant": "with-title", "displayName": "With Title", "dartFile": "apps/docs_snippets/lib/snippets/top-bar/with-title.dart" },
-        { "variant": "large-title", "displayName": "Large Title", "dartFile": "apps/docs_snippets/lib/snippets/top-bar/large-title.dart" }
+        {
+          "variant": "with-title",
+          "displayName": "With Title",
+          "dartFile": "apps/docs_snippets/lib/snippets/top-bar/with-title.dart"
+        },
+        {
+          "variant": "large-title",
+          "displayName": "Large Title",
+          "dartFile": "apps/docs_snippets/lib/snippets/top-bar/large-title.dart"
+        }
       ]
     },
     {
@@ -509,8 +1080,16 @@
       "displayName": "Toolbars",
       "group": "navigation",
       "variants": [
-        { "variant": "actions", "displayName": "Actions", "dartFile": "apps/docs_snippets/lib/snippets/toolbar/actions.dart" },
-        { "variant": "chips", "displayName": "Chips", "dartFile": "apps/docs_snippets/lib/snippets/toolbar/chips.dart" }
+        {
+          "variant": "actions",
+          "displayName": "Actions",
+          "dartFile": "apps/docs_snippets/lib/snippets/toolbar/actions.dart"
+        },
+        {
+          "variant": "chips",
+          "displayName": "Chips",
+          "dartFile": "apps/docs_snippets/lib/snippets/toolbar/chips.dart"
+        }
       ]
     },
     {
@@ -518,8 +1097,16 @@
       "displayName": "Tree View",
       "group": "navigation",
       "variants": [
-        { "variant": "files",   "displayName": "File explorer", "dartFile": "apps/docs_snippets/lib/snippets/tree-view/files.dart" },
-        { "variant": "outline", "displayName": "Outline",       "dartFile": "apps/docs_snippets/lib/snippets/tree-view/outline.dart" }
+        {
+          "variant": "files",
+          "displayName": "File explorer",
+          "dartFile": "apps/docs_snippets/lib/snippets/tree-view/files.dart"
+        },
+        {
+          "variant": "outline",
+          "displayName": "Outline",
+          "dartFile": "apps/docs_snippets/lib/snippets/tree-view/outline.dart"
+        }
       ]
     },
     {
@@ -527,8 +1114,16 @@
       "displayName": "Sidebars",
       "group": "navigation",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/sidebar/default.dart" },
-        { "variant": "with-search", "displayName": "With Search", "dartFile": "apps/docs_snippets/lib/snippets/sidebar/with-search.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/sidebar/default.dart"
+        },
+        {
+          "variant": "with-search",
+          "displayName": "With Search",
+          "dartFile": "apps/docs_snippets/lib/snippets/sidebar/with-search.dart"
+        }
       ]
     },
     {
@@ -536,9 +1131,21 @@
       "displayName": "Skeleton",
       "group": "status",
       "variants": [
-        { "variant": "rect",   "displayName": "Rectangle", "dartFile": "apps/docs_snippets/lib/snippets/skeleton/rect.dart" },
-        { "variant": "circle", "displayName": "Circle",    "dartFile": "apps/docs_snippets/lib/snippets/skeleton/circle.dart" },
-        { "variant": "text",   "displayName": "Text",      "dartFile": "apps/docs_snippets/lib/snippets/skeleton/text.dart" }
+        {
+          "variant": "rect",
+          "displayName": "Rectangle",
+          "dartFile": "apps/docs_snippets/lib/snippets/skeleton/rect.dart"
+        },
+        {
+          "variant": "circle",
+          "displayName": "Circle",
+          "dartFile": "apps/docs_snippets/lib/snippets/skeleton/circle.dart"
+        },
+        {
+          "variant": "text",
+          "displayName": "Text",
+          "dartFile": "apps/docs_snippets/lib/snippets/skeleton/text.dart"
+        }
       ]
     },
     {
@@ -546,8 +1153,16 @@
       "displayName": "Lists",
       "group": "navigation",
       "variants": [
-        { "variant": "grouped", "displayName": "Grouped", "dartFile": "apps/docs_snippets/lib/snippets/list/grouped.dart" },
-        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/list/dark.dart" }
+        {
+          "variant": "grouped",
+          "displayName": "Grouped",
+          "dartFile": "apps/docs_snippets/lib/snippets/list/grouped.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/list/dark.dart"
+        }
       ]
     },
     {
@@ -555,8 +1170,16 @@
       "displayName": "Popup Buttons",
       "group": "navigation",
       "variants": [
-        { "variant": "regular", "displayName": "Regular", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/regular.dart" },
-        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/popup-button/large.dart" }
+        {
+          "variant": "regular",
+          "displayName": "Regular",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/regular.dart"
+        },
+        {
+          "variant": "large",
+          "displayName": "Large",
+          "dartFile": "apps/docs_snippets/lib/snippets/popup-button/large.dart"
+        }
       ]
     },
     {
@@ -564,8 +1187,16 @@
       "displayName": "Status Bars",
       "group": "status",
       "variants": [
-        { "variant": "light", "displayName": "Light", "dartFile": "apps/docs_snippets/lib/snippets/status-bar/light.dart" },
-        { "variant": "dark", "displayName": "Dark", "dartFile": "apps/docs_snippets/lib/snippets/status-bar/dark.dart" }
+        {
+          "variant": "light",
+          "displayName": "Light",
+          "dartFile": "apps/docs_snippets/lib/snippets/status-bar/light.dart"
+        },
+        {
+          "variant": "dark",
+          "displayName": "Dark",
+          "dartFile": "apps/docs_snippets/lib/snippets/status-bar/dark.dart"
+        }
       ]
     },
     {
@@ -573,8 +1204,16 @@
       "displayName": "Progress",
       "group": "status",
       "variants": [
-        { "variant": "linear", "displayName": "Linear", "dartFile": "apps/docs_snippets/lib/snippets/progress/linear.dart" },
-        { "variant": "spinner", "displayName": "Spinner", "dartFile": "apps/docs_snippets/lib/snippets/progress/spinner.dart" }
+        {
+          "variant": "linear",
+          "displayName": "Linear",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/linear.dart"
+        },
+        {
+          "variant": "spinner",
+          "displayName": "Spinner",
+          "dartFile": "apps/docs_snippets/lib/snippets/progress/spinner.dart"
+        }
       ]
     },
     {
@@ -582,8 +1221,16 @@
       "displayName": "Radio",
       "group": "inputs",
       "variants": [
-        { "variant": "single", "displayName": "Single", "dartFile": "apps/docs_snippets/lib/snippets/radio/single.dart" },
-        { "variant": "group",  "displayName": "Group",  "dartFile": "apps/docs_snippets/lib/snippets/radio/group.dart" }
+        {
+          "variant": "single",
+          "displayName": "Single",
+          "dartFile": "apps/docs_snippets/lib/snippets/radio/single.dart"
+        },
+        {
+          "variant": "group",
+          "displayName": "Group",
+          "dartFile": "apps/docs_snippets/lib/snippets/radio/group.dart"
+        }
       ]
     },
     {
@@ -591,8 +1238,16 @@
       "displayName": "Resizable",
       "group": "containers",
       "variants": [
-        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/resizable/horizontal.dart" },
-        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/resizable/vertical.dart" }
+        {
+          "variant": "horizontal",
+          "displayName": "Horizontal",
+          "dartFile": "apps/docs_snippets/lib/snippets/resizable/horizontal.dart"
+        },
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/resizable/vertical.dart"
+        }
       ]
     },
     {
@@ -600,8 +1255,16 @@
       "displayName": "Scroll Area",
       "group": "containers",
       "variants": [
-        { "variant": "vertical",   "displayName": "Vertical",   "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/vertical.dart" },
-        { "variant": "horizontal", "displayName": "Horizontal", "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/horizontal.dart" }
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/vertical.dart"
+        },
+        {
+          "variant": "horizontal",
+          "displayName": "Horizontal",
+          "dartFile": "apps/docs_snippets/lib/snippets/scroll-area/horizontal.dart"
+        }
       ]
     },
     {
@@ -609,8 +1272,16 @@
       "displayName": "Rich Editor",
       "group": "inputs",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/default.dart" },
-        { "variant": "empty",   "displayName": "Empty",   "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/empty.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/default.dart"
+        },
+        {
+          "variant": "empty",
+          "displayName": "Empty",
+          "dartFile": "apps/docs_snippets/lib/snippets/rich-editor/empty.dart"
+        }
       ]
     },
     {
@@ -618,7 +1289,11 @@
       "displayName": "Activity Views",
       "group": "status",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/activity-view/default.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/activity-view/default.dart"
+        }
       ]
     },
     {
@@ -626,9 +1301,21 @@
       "displayName": "Face ID",
       "group": "status",
       "variants": [
-        { "variant": "scanning", "displayName": "Scanning", "dartFile": "apps/docs_snippets/lib/snippets/face-id/scanning.dart" },
-        { "variant": "success", "displayName": "Success", "dartFile": "apps/docs_snippets/lib/snippets/face-id/success.dart" },
-        { "variant": "fail", "displayName": "Fail", "dartFile": "apps/docs_snippets/lib/snippets/face-id/fail.dart" }
+        {
+          "variant": "scanning",
+          "displayName": "Scanning",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/scanning.dart"
+        },
+        {
+          "variant": "success",
+          "displayName": "Success",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/success.dart"
+        },
+        {
+          "variant": "fail",
+          "displayName": "Fail",
+          "dartFile": "apps/docs_snippets/lib/snippets/face-id/fail.dart"
+        }
       ]
     },
     {
@@ -636,9 +1323,21 @@
       "displayName": "App Icons",
       "group": "decoration",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/default.dart" },
-        { "variant": "with-badge", "displayName": "With Badge", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-badge.dart" },
-        { "variant": "with-caption", "displayName": "With Caption", "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-caption.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/app-icon/default.dart"
+        },
+        {
+          "variant": "with-badge",
+          "displayName": "With Badge",
+          "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-badge.dart"
+        },
+        {
+          "variant": "with-caption",
+          "displayName": "With Caption",
+          "dartFile": "apps/docs_snippets/lib/snippets/app-icon/with-caption.dart"
+        }
       ]
     },
     {
@@ -646,8 +1345,16 @@
       "displayName": "Bezels",
       "group": "decoration",
       "variants": [
-        { "variant": "with-island", "displayName": "With Island", "dartFile": "apps/docs_snippets/lib/snippets/bezel/with-island.dart" },
-        { "variant": "no-island", "displayName": "No Island", "dartFile": "apps/docs_snippets/lib/snippets/bezel/no-island.dart" }
+        {
+          "variant": "with-island",
+          "displayName": "With Island",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/with-island.dart"
+        },
+        {
+          "variant": "no-island",
+          "displayName": "No Island",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/no-island.dart"
+        }
       ]
     },
     {
@@ -655,8 +1362,16 @@
       "displayName": "Keyboards",
       "group": "decoration",
       "variants": [
-        { "variant": "qwerty", "displayName": "QWERTY", "dartFile": "apps/docs_snippets/lib/snippets/keyboard/qwerty.dart" },
-        { "variant": "numbers", "displayName": "Numbers", "dartFile": "apps/docs_snippets/lib/snippets/keyboard/numbers.dart" }
+        {
+          "variant": "qwerty",
+          "displayName": "QWERTY",
+          "dartFile": "apps/docs_snippets/lib/snippets/keyboard/qwerty.dart"
+        },
+        {
+          "variant": "numbers",
+          "displayName": "Numbers",
+          "dartFile": "apps/docs_snippets/lib/snippets/keyboard/numbers.dart"
+        }
       ]
     },
     {
@@ -664,10 +1379,26 @@
       "displayName": "Widgets",
       "group": "decoration",
       "variants": [
-        { "variant": "small", "displayName": "Small", "dartFile": "apps/docs_snippets/lib/snippets/widget/small.dart" },
-        { "variant": "medium", "displayName": "Medium", "dartFile": "apps/docs_snippets/lib/snippets/widget/medium.dart" },
-        { "variant": "large", "displayName": "Large", "dartFile": "apps/docs_snippets/lib/snippets/widget/large.dart" },
-        { "variant": "extra-large", "displayName": "Extra Large", "dartFile": "apps/docs_snippets/lib/snippets/widget/extra-large.dart" }
+        {
+          "variant": "small",
+          "displayName": "Small",
+          "dartFile": "apps/docs_snippets/lib/snippets/widget/small.dart"
+        },
+        {
+          "variant": "medium",
+          "displayName": "Medium",
+          "dartFile": "apps/docs_snippets/lib/snippets/widget/medium.dart"
+        },
+        {
+          "variant": "large",
+          "displayName": "Large",
+          "dartFile": "apps/docs_snippets/lib/snippets/widget/large.dart"
+        },
+        {
+          "variant": "extra-large",
+          "displayName": "Extra Large",
+          "dartFile": "apps/docs_snippets/lib/snippets/widget/extra-large.dart"
+        }
       ]
     },
     {
@@ -675,8 +1406,16 @@
       "displayName": "Windows",
       "group": "decoration",
       "variants": [
-        { "variant": "default", "displayName": "Default", "dartFile": "apps/docs_snippets/lib/snippets/window/default.dart" },
-        { "variant": "inactive-controls", "displayName": "Inactive Controls", "dartFile": "apps/docs_snippets/lib/snippets/window/inactive-controls.dart" }
+        {
+          "variant": "default",
+          "displayName": "Default",
+          "dartFile": "apps/docs_snippets/lib/snippets/window/default.dart"
+        },
+        {
+          "variant": "inactive-controls",
+          "displayName": "Inactive Controls",
+          "dartFile": "apps/docs_snippets/lib/snippets/window/inactive-controls.dart"
+        }
       ]
     },
     {
@@ -684,9 +1423,21 @@
       "displayName": "System",
       "group": "decoration",
       "variants": [
-        { "variant": "home-indicator", "displayName": "Home Indicator", "dartFile": "apps/docs_snippets/lib/snippets/system/home-indicator.dart" },
-        { "variant": "action-pill", "displayName": "Action Pill", "dartFile": "apps/docs_snippets/lib/snippets/system/action-pill.dart" },
-        { "variant": "toggle-dot", "displayName": "Toggle Dot", "dartFile": "apps/docs_snippets/lib/snippets/system/toggle-dot.dart" }
+        {
+          "variant": "home-indicator",
+          "displayName": "Home Indicator",
+          "dartFile": "apps/docs_snippets/lib/snippets/system/home-indicator.dart"
+        },
+        {
+          "variant": "action-pill",
+          "displayName": "Action Pill",
+          "dartFile": "apps/docs_snippets/lib/snippets/system/action-pill.dart"
+        },
+        {
+          "variant": "toggle-dot",
+          "displayName": "Toggle Dot",
+          "dartFile": "apps/docs_snippets/lib/snippets/system/toggle-dot.dart"
+        }
       ]
     },
     {
@@ -694,9 +1445,21 @@
       "displayName": "Tabs",
       "group": "navigation",
       "variants": [
-        { "variant": "underline", "displayName": "Underline", "dartFile": "apps/docs_snippets/lib/snippets/tabs/underline.dart" },
-        { "variant": "pill",      "displayName": "Pill",      "dartFile": "apps/docs_snippets/lib/snippets/tabs/pill.dart" },
-        { "variant": "icons",     "displayName": "Icons only", "dartFile": "apps/docs_snippets/lib/snippets/tabs/icons.dart" }
+        {
+          "variant": "underline",
+          "displayName": "Underline",
+          "dartFile": "apps/docs_snippets/lib/snippets/tabs/underline.dart"
+        },
+        {
+          "variant": "pill",
+          "displayName": "Pill",
+          "dartFile": "apps/docs_snippets/lib/snippets/tabs/pill.dart"
+        },
+        {
+          "variant": "icons",
+          "displayName": "Icons only",
+          "dartFile": "apps/docs_snippets/lib/snippets/tabs/icons.dart"
+        }
       ]
     },
     {
@@ -704,9 +1467,21 @@
       "displayName": "Tooltip",
       "group": "status",
       "variants": [
-        { "variant": "top",         "displayName": "Top",         "dartFile": "apps/docs_snippets/lib/snippets/tooltip/top.dart" },
-        { "variant": "bottom",      "displayName": "Bottom",      "dartFile": "apps/docs_snippets/lib/snippets/tooltip/bottom.dart" },
-        { "variant": "with-arrow",  "displayName": "With arrow",  "dartFile": "apps/docs_snippets/lib/snippets/tooltip/with-arrow.dart" }
+        {
+          "variant": "top",
+          "displayName": "Top",
+          "dartFile": "apps/docs_snippets/lib/snippets/tooltip/top.dart"
+        },
+        {
+          "variant": "bottom",
+          "displayName": "Bottom",
+          "dartFile": "apps/docs_snippets/lib/snippets/tooltip/bottom.dart"
+        },
+        {
+          "variant": "with-arrow",
+          "displayName": "With arrow",
+          "dartFile": "apps/docs_snippets/lib/snippets/tooltip/with-arrow.dart"
+        }
       ]
     },
     {
@@ -714,9 +1489,21 @@
       "displayName": "Toast",
       "group": "status",
       "variants": [
-        { "variant": "success", "displayName": "Success", "dartFile": "apps/docs_snippets/lib/snippets/toast/success.dart" },
-        { "variant": "error",   "displayName": "Error",   "dartFile": "apps/docs_snippets/lib/snippets/toast/error.dart" },
-        { "variant": "info",    "displayName": "Info",    "dartFile": "apps/docs_snippets/lib/snippets/toast/info.dart" }
+        {
+          "variant": "success",
+          "displayName": "Success",
+          "dartFile": "apps/docs_snippets/lib/snippets/toast/success.dart"
+        },
+        {
+          "variant": "error",
+          "displayName": "Error",
+          "dartFile": "apps/docs_snippets/lib/snippets/toast/error.dart"
+        },
+        {
+          "variant": "info",
+          "displayName": "Info",
+          "dartFile": "apps/docs_snippets/lib/snippets/toast/info.dart"
+        }
       ]
     },
     {
@@ -724,9 +1511,21 @@
       "displayName": "Examples",
       "group": "decoration",
       "variants": [
-        { "variant": "panel", "displayName": "Panel", "dartFile": "apps/docs_snippets/lib/snippets/examples/panel.dart" },
-        { "variant": "section", "displayName": "Section", "dartFile": "apps/docs_snippets/lib/snippets/examples/section.dart" },
-        { "variant": "item", "displayName": "Item", "dartFile": "apps/docs_snippets/lib/snippets/examples/item.dart" }
+        {
+          "variant": "panel",
+          "displayName": "Panel",
+          "dartFile": "apps/docs_snippets/lib/snippets/examples/panel.dart"
+        },
+        {
+          "variant": "section",
+          "displayName": "Section",
+          "dartFile": "apps/docs_snippets/lib/snippets/examples/section.dart"
+        },
+        {
+          "variant": "item",
+          "displayName": "Item",
+          "dartFile": "apps/docs_snippets/lib/snippets/examples/item.dart"
+        }
       ]
     },
     {
@@ -734,9 +1533,21 @@
       "displayName": "Kit Helpers",
       "group": "decoration",
       "variants": [
-        { "variant": "header", "displayName": "Header", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/header.dart" },
-        { "variant": "mode-pill", "displayName": "Mode Pill", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-pill.dart" },
-        { "variant": "mode-labels", "displayName": "Mode Labels", "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-labels.dart" }
+        {
+          "variant": "header",
+          "displayName": "Header",
+          "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/header.dart"
+        },
+        {
+          "variant": "mode-pill",
+          "displayName": "Mode Pill",
+          "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-pill.dart"
+        },
+        {
+          "variant": "mode-labels",
+          "displayName": "Mode Labels",
+          "dartFile": "apps/docs_snippets/lib/snippets/kit-helpers/mode-labels.dart"
+        }
       ]
     },
     {
@@ -744,8 +1555,16 @@
       "displayName": "Label",
       "group": "foundation",
       "variants": [
-        { "variant": "required", "displayName": "Required", "dartFile": "apps/docs_snippets/lib/snippets/label/required.dart" },
-        { "variant": "optional", "displayName": "Optional", "dartFile": "apps/docs_snippets/lib/snippets/label/optional.dart" }
+        {
+          "variant": "required",
+          "displayName": "Required",
+          "dartFile": "apps/docs_snippets/lib/snippets/label/required.dart"
+        },
+        {
+          "variant": "optional",
+          "displayName": "Optional",
+          "dartFile": "apps/docs_snippets/lib/snippets/label/optional.dart"
+        }
       ]
     }
   ]
