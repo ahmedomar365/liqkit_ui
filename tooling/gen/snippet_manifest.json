@@ -1188,6 +1188,21 @@
           "variant": "with-search",
           "displayName": "With Search",
           "dartFile": "apps/docs_snippets/lib/snippets/sidebar/with-search.dart"
+        },
+        {
+          "variant": "standard",
+          "displayName": "Standard",
+          "dartFile": "apps/docs_snippets/lib/snippets/sidebar/standard.dart"
+        },
+        {
+          "variant": "mini",
+          "displayName": "Mini",
+          "dartFile": "apps/docs_snippets/lib/snippets/sidebar/mini.dart"
+        },
+        {
+          "variant": "custom-styled",
+          "displayName": "Custom Styled",
+          "dartFile": "apps/docs_snippets/lib/snippets/sidebar/custom-styled.dart"
         }
       ]
     },
@@ -1534,6 +1549,31 @@
           "variant": "no-island",
           "displayName": "No Island",
           "dartFile": "apps/docs_snippets/lib/snippets/bezel/no-island.dart"
+        },
+        {
+          "variant": "iphone",
+          "displayName": "iPhone",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/iphone.dart"
+        },
+        {
+          "variant": "ipad",
+          "displayName": "iPad",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/ipad.dart"
+        },
+        {
+          "variant": "mac",
+          "displayName": "Mac",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/mac.dart"
+        },
+        {
+          "variant": "apple-watch",
+          "displayName": "Apple Watch",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/apple-watch.dart"
+        },
+        {
+          "variant": "display-toggles",
+          "displayName": "Display Toggles",
+          "dartFile": "apps/docs_snippets/lib/snippets/bezel/display-toggles.dart"
         }
       ]
     },
