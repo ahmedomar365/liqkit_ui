@@ -822,6 +822,36 @@
           "variant": "reminders",
           "displayName": "Reminders",
           "dartFile": "apps/docs_snippets/lib/snippets/notification/reminders.dart"
+        },
+        {
+          "variant": "banners-all-styles",
+          "displayName": "Banners \u2014 All Styles",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/banners-all-styles.dart"
+        },
+        {
+          "variant": "banner-configurations",
+          "displayName": "Banner Configurations",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/banner-configurations.dart"
+        },
+        {
+          "variant": "toast-variants",
+          "displayName": "Toast Variants",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/toast-variants.dart"
+        },
+        {
+          "variant": "cards",
+          "displayName": "Cards",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/cards.dart"
+        },
+        {
+          "variant": "badges-all-variants",
+          "displayName": "Badges \u2014 All Variants",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/badges-all-variants.dart"
+        },
+        {
+          "variant": "badges-common-anchors",
+          "displayName": "Badges \u2014 Common Anchors",
+          "dartFile": "apps/docs_snippets/lib/snippets/notification/badges-common-anchors.dart"
         }
       ]
     },
@@ -893,6 +923,36 @@
           "variant": "trailing",
           "displayName": "Trailing",
           "dartFile": "apps/docs_snippets/lib/snippets/popover/trailing.dart"
+        },
+        {
+          "variant": "basic",
+          "displayName": "Basic",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/basic.dart"
+        },
+        {
+          "variant": "menu",
+          "displayName": "Menu",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/menu.dart"
+        },
+        {
+          "variant": "information",
+          "displayName": "Information",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/information.dart"
+        },
+        {
+          "variant": "custom-content",
+          "displayName": "Custom Content",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/custom-content.dart"
+        },
+        {
+          "variant": "tooltips",
+          "displayName": "Tooltips",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/tooltips.dart"
+        },
+        {
+          "variant": "direction-options",
+          "displayName": "Direction Options",
+          "dartFile": "apps/docs_snippets/lib/snippets/popover/direction-options.dart"
         }
       ]
     },
