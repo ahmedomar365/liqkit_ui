@@ -1,0 +1,14 @@
+# Goldens are CI-only test artifacts — consumers don't need them.
+test_goldens/
+
+# Local dev clutter that may slip past .gitignore.
+.claude/
+.playwright-mcp/
+*.png
+!example/**/*.png
+!shaders/**/*.png
+!lib/**/*.png
+
+# IDE state.
+.vscode/
+.idea/

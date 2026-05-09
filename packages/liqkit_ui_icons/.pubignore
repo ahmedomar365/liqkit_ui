@@ -1,0 +1,7 @@
+# Local dev clutter that may slip past .gitignore.
+.claude/
+.playwright-mcp/
+
+# IDE state.
+.vscode/
+.idea/

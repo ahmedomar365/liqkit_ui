@@ -1,0 +1,56 @@
+name: flutter_liquid_ui_kit
+description: "Premium Flutter UI Kit with Liquid Glass Effects based on Apple Design System"
+publish_to: 'none'
+version: 2.0.0+2
+
+resolution: workspace
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # liqkit_ui design system (local for now; switch to pub.dev once republished)
+  liqkit_ui:
+    path: ../../packages/liqkit_ui
+  liqkit_ui_icons:
+    path: ../../packages/liqkit_ui_icons
+
+  # State / i18n / utils
+  flutter_riverpod: ^2.5.1
+  intl: ^0.20.2
+  collection: ^1.18.0
+
+  # External links
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "icon.png"
+    background_color: "#6366F1"
+    theme_color: "#8B5CF6"
+  windows:
+    generate: true
+    image_path: "icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "icon.png"

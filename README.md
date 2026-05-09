@@ -12,7 +12,34 @@ showcase, and snippets app all live in a single workspace.
 
 - **Website:** <https://liqkit.com>
 - **GitHub:** <https://github.com/ahmedomar365/liqkit_ui>
-- **Package:** `liqkit_ui` on pub.dev once the first release is published.
+- **Package:** [`liqkit_ui`](https://pub.dev/packages/liqkit_ui) on pub.dev.
+
+## Live Demo
+
+The full reference app — every component, every variant, real navigation,
+real glass — is shipped as **Flutter Liquid Glass Kit**:
+
+[![Download on the App Store](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg)](https://apps.apple.com/us/app/flutter-liquid-glass-kit/id6749166422)
+&nbsp;
+[![Get the APK](https://img.shields.io/badge/Android-APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://drive.google.com/file/d/15B-KKhXHGgjAp5WvXKYXACfoUADZ7r7s/view?usp=share_link)
+
+Source lives in [`apps/showcase_app/`](apps/showcase_app/) — to run it
+locally:
+
+```bash
+cd apps/showcase_app
+flutter run
+```
+
+| iPhone | iPhone | iPhone |
+| :---: | :---: | :---: |
+| ![](apps/showcase_app/screenshots/iphone/IMG_1808.jpg) | ![](apps/showcase_app/screenshots/iphone/IMG_1810.jpg) | ![](apps/showcase_app/screenshots/iphone/IMG_1812.jpg) |
+| ![](apps/showcase_app/screenshots/iphone/IMG_1814.jpg) | ![](apps/showcase_app/screenshots/iphone/IMG_1816.jpg) | ![](apps/showcase_app/screenshots/iphone/IMG_1817.jpg) |
+
+| iPad | iPad |
+| :---: | :---: |
+| ![](apps/showcase_app/screenshots/ipad/IMG_0332.jpg) | ![](apps/showcase_app/screenshots/ipad/IMG_0334.jpg) |
+| ![](apps/showcase_app/screenshots/ipad/IMG_0336.jpg) | ![](apps/showcase_app/screenshots/ipad/IMG_0338.jpg) |
 
 ## Preview
 
@@ -73,9 +100,10 @@ showcase, and snippets app all live in a single workspace.
 │   ├── liqkit_ui_assets/      # SF Pro fonts + asset manifest
 │   └── liqkit_ui_design_data/ # frozen archive from upstream liqkit
 ├── apps/
-│   ├── docs/                  # Fumadocs Next.js docs site
+│   ├── docs/                  # Fumadocs Next.js docs site (liqkit.com)
 │   ├── docs_snippets/         # Flutter Web app iframed by docs previews
 │   ├── showcase/              # full-coverage Flutter Web demo
+│   ├── showcase_app/          # production iOS/Android app — App Store + Play
 │   └── playground/            # ad-hoc Flutter dev sandbox
 ├── tooling/
 │   └── gen/                   # token capture, snippet manifest, snippet codegen
