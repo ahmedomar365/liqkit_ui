@@ -1,3 +1,10 @@
+# Example compositions — single source of truth for the showcase app
+# and the liqkit.com previews, but not part of the published API
+# surface. Outside consumers depend on the primitives in lib/src/, not
+# these recipes.
+lib/examples.dart
+lib/src/examples/
+
 # Goldens are CI-only test artifacts — consumers don't need them.
 test_goldens/
 
