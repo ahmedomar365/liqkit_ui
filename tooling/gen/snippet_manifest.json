@@ -540,6 +540,41 @@
           "variant": "disabled",
           "displayName": "Disabled",
           "dartFile": "apps/docs_snippets/lib/snippets/stepper/disabled.dart"
+        },
+        {
+          "variant": "vertical",
+          "displayName": "Vertical",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/vertical.dart"
+        },
+        {
+          "variant": "horizontal",
+          "displayName": "Horizontal",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/horizontal.dart"
+        },
+        {
+          "variant": "numeric",
+          "displayName": "Numeric",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/numeric.dart"
+        },
+        {
+          "variant": "onboarding",
+          "displayName": "Onboarding",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/onboarding.dart"
+        },
+        {
+          "variant": "progress",
+          "displayName": "Progress",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/progress.dart"
+        },
+        {
+          "variant": "custom-colors",
+          "displayName": "Custom Colors",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/custom-colors.dart"
+        },
+        {
+          "variant": "error-state",
+          "displayName": "Error State",
+          "dartFile": "apps/docs_snippets/lib/snippets/stepper/error-state.dart"
         }
       ]
     },

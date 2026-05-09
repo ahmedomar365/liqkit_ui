@@ -49,7 +49,7 @@ export 'src/examples/segmented_control.dart';
 export 'src/examples/sidebar.dart';
 export 'src/examples/slider.dart';
 // export 'src/examples/status_bar.dart';
-// export 'src/examples/stepper.dart';
+export 'src/examples/stepper.dart';
 // export 'src/examples/text_field.dart';
 // export 'src/examples/text_styles.dart';
 // export 'src/examples/toggle.dart';
